@@ -1,9 +1,11 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
+import { StructureEditorContent } from '@site/src/components/StructureEditor';
 
 /* ── Inline icons (Lucide-style, stroke-based) ───────────── */
 const IconKey = () => (
@@ -86,6 +88,7 @@ const FEATURES = [
 ];
 
 export default function ContributeOnline() {
+  const [editorOpen, setEditorOpen] = useState(false);
   return (
     <Layout
       title="Contribute Online"
@@ -363,7 +366,243 @@ export default function ContributeOnline() {
             </article>
           </div>
 
-          {/* Detailed step sections will be added in subsequent commits */}
+          {/* ── Step 4: Upload Documents ───────────────────────── */}
+          <div className={styles.cfcSubhead} id="step-upload">
+            <Heading as="h2" className={styles.cfcSubheadTitle}>
+              Step 4 — Upload documents
+            </Heading>
+            <p className={styles.cfcSubheadLead}>
+              Import existing content from PDF, Word, or Markdown files. The
+              editor extracts text and images automatically — no copy-pasting
+              required.
+            </p>
+          </div>
+
+          {/* Supported formats */}
+          <div className={styles.scopeGrid}>
+            <article className={styles.scopeCard}>
+              <h3 className={styles.scopeName}>PDF</h3>
+              <p className={styles.scopeIntro}>
+                Text and embedded images are extracted. Each page of text
+                becomes a paragraph; images are embedded inline as data URLs.
+              </p>
+              <ul className={styles.scopeList}>
+                <li>Scanned PDFs (image-only) are not supported — the file must contain selectable text</li>
+                <li>Large PDFs may take a few seconds to process in-browser</li>
+              </ul>
+            </article>
+            <article className={styles.scopeCard}>
+              <h3 className={styles.scopeName}>Word (.docx)</h3>
+              <p className={styles.scopeIntro}>
+                Converted to HTML via Mammoth, then to Markdown. Headings,
+                lists, bold, and italic are preserved.
+              </p>
+              <ul className={styles.scopeList}>
+                <li>Complex layouts (tables, text boxes) may be simplified</li>
+                <li>Embedded images are extracted and embedded inline</li>
+              </ul>
+            </article>
+            <article className={styles.scopeCard}>
+              <h3 className={styles.scopeName}>Markdown / Text / HTML</h3>
+              <p className={styles.scopeIntro}>
+                Uploaded as-is with frontmatter added automatically. Accepted
+                extensions: <code>.md</code>, <code>.mdx</code>, <code>.txt</code>,{' '}
+                <code>.html</code>, <code>.htm</code>.
+              </p>
+              <ul className={styles.scopeList}>
+                <li>Existing frontmatter in the file is preserved</li>
+                <li>Plain text files are wrapped in a basic Markdown template</li>
+              </ul>
+            </article>
+          </div>
+
+          {/* Upload workflow */}
+          <div className={styles.cfcSubhead} style={{ marginTop: '2rem', textAlign: 'left' }}>
+            <Heading as="h3" className={styles.cfcSubheadTitle} style={{ fontSize: '1.2rem' }}>
+              Upload workflow
+            </Heading>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            {[
+              { num: '01', title: 'Click the upload button', body: 'In the left panel header, click the upload (↑) icon. A file picker opens.' },
+              { num: '02', title: 'Select your file', body: 'Choose a PDF, DOCX, MD, MDX, TXT, HTML, or HTM file from your device.' },
+              { num: '03', title: 'Extraction runs in-browser', body: 'Text and images are extracted locally — nothing is uploaded to any server at this stage.' },
+              { num: '04', title: 'Choose placement', body: 'A dialog asks where to place the content: as a new top-level page, inside an existing section, or as a subsection under an existing page. Select the destination and confirm.' },
+              { num: '05', title: 'Review and edit', body: 'The extracted content opens in the right panel editor. Review it, fix any formatting issues, and click Save to stage the change.' },
+            ].map((s) => (
+              <div key={s.num} className={styles.processStep}>
+                <div className={styles.processNum}>{s.num}</div>
+                <h4 className={styles.processTitle}>{s.title}</h4>
+                <p className={styles.processBody}>{s.body}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* ── Step 5: Translate ──────────────────────────────── */}
+          <div className={styles.cfcSubhead} id="step-translate">
+            <Heading as="h2" className={styles.cfcSubheadTitle}>
+              Step 5 — Translate a page
+            </Heading>
+            <p className={styles.cfcSubheadLead}>
+              Every Playbook page can be translated into five African and
+              international languages directly in the editor, with automatic
+              translation as a starting point.
+            </p>
+          </div>
+
+          {/* Language list */}
+          <article className={styles.requirementsCard} style={{ marginBottom: '1.5rem' }}>
+            <div className={styles.requirementsHeader}>
+              <h4 className={styles.requirementsTitle}>Supported translation languages</h4>
+            </div>
+            <ul className={styles.requirementsList}>
+              {[
+                ['ha', 'Hausa'],
+                ['am', 'Amharic'],
+                ['sw', 'Swahili'],
+                ['fr', 'Français'],
+                ['pt', 'Português'],
+              ].map(([code, name]) => (
+                <li key={code}>
+                  <span className={styles.requirementsBullet}>
+                    <code style={{ fontSize: '0.8em' }}>{code}</code>
+                  </span>
+                  <span>{name}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          {/* Translation workflow */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            {[
+              { num: '01', title: 'Select a page', body: 'Click the translate icon next to any page in the left panel tree.' },
+              { num: '02', title: 'Choose a target language', body: 'Use the language dropdown in the right panel to pick the language you want to translate into.' },
+              { num: '03', title: 'Auto-translate', body: 'Click Auto-translate. The editor splits into two panes: the original English on the left and the machine-translated text on the right. African languages (Hausa, Amharic, Swahili) use the MyMemory API; European languages (French, Portuguese) use Helsinki-NLP. Block-level formatting is preserved.' },
+              { num: '04', title: 'Alternatively — Google Translate', body: 'Click the Google Translate button to use Google\'s translation service as an alternative. Results appear in the same right-hand pane.' },
+              { num: '05', title: 'Refine the translation', body: 'Edit the right-hand pane directly. The left pane (original) stays fixed for reference. Use the same rich-text toolbar for formatting.' },
+              { num: '06', title: 'Save', body: 'Click Save. The translation is staged as a new file at i18n/{lang}/docusaurus-plugin-content-docs/current/{original-path}.' },
+            ].map((s) => (
+              <div key={s.num} className={styles.processStep}>
+                <div className={styles.processNum}>{s.num}</div>
+                <h4 className={styles.processTitle}>{s.title}</h4>
+                <p className={styles.processBody}>{s.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <article className={styles.requirementsCard} style={{ marginTop: '1.5rem' }}>
+            <ul className={styles.requirementsList}>
+              <li>
+                <span className={styles.requirementsBullet}>✓</span>
+                <span>Auto-translation is a <strong>starting point</strong>, not a finished product. Always review and refine before saving.</span>
+              </li>
+              <li>
+                <span className={styles.requirementsBullet}>✓</span>
+                <span>Uploaded documents can also be translated — upload first, then open the translation tab for the new page.</span>
+              </li>
+              <li>
+                <span className={styles.requirementsBullet}>✓</span>
+                <span>The translation file path mirrors the English source exactly, so the site can serve both versions under the correct locale URL.</span>
+              </li>
+            </ul>
+          </article>
+
+          {/* ── Step 6: Review & Submit ───────────────────────── */}
+          <div className={styles.cfcSubhead} id="step-submit">
+            <Heading as="h2" className={styles.cfcSubheadTitle}>
+              Step 6 — Review changes and submit a Pull Request
+            </Heading>
+            <p className={styles.cfcSubheadLead}>
+              Every edit, upload, and translation is staged locally before
+              anything is sent to GitHub. Review your changes, undo anything
+              you don't need, then submit — all as one Pull Request.
+            </p>
+          </div>
+
+          {/* Pending changes panel */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
+            {[
+              {
+                num: '01',
+                title: 'Open the changes panel',
+                body: 'The left panel shows a "Pending changes" count badge. Click it to expand the list. Each staged change shows its file path and operation type: + (create), ~ (edit), or − (delete).',
+              },
+              {
+                num: '02',
+                title: 'Review and undo if needed',
+                body: 'Each change has an undo button (↩). Click it to remove that specific change from the queue. To discard everything and start over, click "Clear all changes" at the top of the panel.',
+              },
+              {
+                num: '03',
+                title: 'Click "Submit as Pull Request"',
+                body: 'When you are happy with the changes, click Submit. You must be authenticated (Step 1). The editor bundles all staged changes into a single commit on a new branch.',
+              },
+              {
+                num: '04',
+                title: 'Pull Request is created',
+                body: 'A PR is opened on the MasakhanePlaybook GitHub repository with a title and a body listing all changes. The editor shows a confirmation with a direct link to the PR.',
+              },
+              {
+                num: '05',
+                title: 'Wait for review',
+                body: 'A maintainer will review the PR, leave feedback if needed, and merge it when it meets the editorial guidelines. You will receive a GitHub notification when the PR is reviewed or merged.',
+              },
+            ].map((s) => (
+              <div key={s.num} className={styles.processStep}>
+                <div className={styles.processNum}>{s.num}</div>
+                <h4 className={styles.processTitle}>{s.title}</h4>
+                <p className={styles.processBody}>{s.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <article className={styles.requirementsCard}>
+            <ul className={styles.requirementsList}>
+              <li>
+                <span className={styles.requirementsBullet}>✓</span>
+                <span>PRs are always created on a new branch — never directly on <code>main</code>.</span>
+              </li>
+              <li>
+                <span className={styles.requirementsBullet}>✓</span>
+                <span>Branch names are auto-generated: <code>edit/{'{slug}-{timestamp}'}</code> for edits, <code>structure/edit-{'{timestamp}'}</code> for structural changes.</span>
+              </li>
+              <li>
+                <span className={styles.requirementsBullet}>✓</span>
+                <span>Your staged changes are saved in <strong>localStorage</strong> — closing the browser and coming back will restore your unsaved work.</span>
+              </li>
+            </ul>
+          </article>
+
+          {/* ── Launch CTA ────────────────────────────────────── */}
+          <div className={styles.cfcSubhead} id="launch" style={{ marginTop: '5rem' }}>
+            <Heading as="h2" className={styles.cfcSubheadTitle}>
+              Ready? Launch the editor
+            </Heading>
+            <p className={styles.cfcSubheadLead}>
+              Everything runs in your browser. Authenticate once with GitHub
+              and start contributing — no installation needed.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.75rem', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                className={clsx('button', styles.primaryButton)}
+                onClick={() => setEditorOpen(true)}
+              >
+                Start Contributing Online
+              </button>
+              <Link to="/contribute" className={clsx('button', styles.secondaryButton)}>
+                Prefer cloning? See GitHub guide
+              </Link>
+            </div>
+          </div>
+
+          {editorOpen && typeof window !== 'undefined' &&
+            ReactDOM.createPortal(
+              <StructureEditorContent onClose={() => setEditorOpen(false)} />,
+              document.body,
+            )
+          }
 
         </div>
       </section>
