@@ -1,0 +1,101 @@
+/* Accordion for /contribute-online */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-top: 2.5rem;
+}
+
+.accordionItem {
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.accordionItem:last-child {
+  border-bottom: none;
+}
+
+.accordionHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.1rem 1.5rem;
+  background: var(--ifm-background-color);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+  touch-action: manipulation;
+}
+
+.accordionHeader:hover {
+  background: rgba(var(--brand-rgb), 0.05);
+}
+
+.accordionHeaderOpen {
+  background: rgba(var(--brand-rgb), 0.07);
+}
+
+.stepBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(var(--brand-rgb), 0.12);
+  color: var(--ifm-color-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: var(--ifm-font-family-monospace);
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.stepBadgeOpen {
+  background: var(--ifm-color-primary);
+  color: #fff;
+}
+
+[data-theme='dark'] .stepBadgeOpen {
+  background: var(--ifm-color-primary);
+  color: #0a0a0a;
+}
+
+.accordionTitle {
+  flex: 1;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-900);
+  letter-spacing: -0.01em;
+}
+
+.accordionTitleOpen {
+  color: var(--ifm-color-primary);
+}
+
+.accordionChevron {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  transition: transform 0.2s ease, opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.accordionChevronOpen {
+  transform: rotate(180deg);
+  opacity: 1;
+  color: var(--ifm-color-primary);
+}
+
+.accordionBody {
+  border-top: 1px solid var(--ifm-color-emphasis-100);
+  padding: 1.75rem 1.5rem;
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .accordionBody {
+  background: var(--ifm-background-surface-color, var(--ifm-background-color));
+}
