@@ -2,6 +2,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
+  margin-left: 0.35rem;
 }
 
 .contributeBtn {
@@ -9,6 +10,7 @@
   align-items: center;
   gap: 0.4em;
   padding: 0.45rem 1rem;
+  touch-action: manipulation;
   border: none;
   border-radius: 20px;
   background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%);
@@ -106,4 +108,29 @@
 .dropdownItemIcon {
   opacity: 0.7;
   flex-shrink: 0;
+}
+
+/* On narrow screens collapse the button label; show only the pen icon */
+.btnLabel {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .btnLabel {
+    display: none;
+  }
+
+  .contributeBtn {
+    padding: 0.45rem 0.65rem;
+  }
+
+  .chevron {
+    display: none;
+  }
+
+  /* On mobile the dropdown opens to the left so it doesn't overflow the viewport */
+  .dropdown {
+    right: auto;
+    left: 0;
+  }
 }

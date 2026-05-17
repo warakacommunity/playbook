@@ -61,7 +61,7 @@ export default function ContributeButtonNavbarItem() {
         aria-expanded={dropdownOpen}
       >
         <PenIcon />
-        Start Contributing
+        <span className={styles.btnLabel}>Start Contributing</span>
         <span className={styles.chevron} aria-hidden="true">
           {dropdownOpen ? '▲' : '▼'}
         </span>
