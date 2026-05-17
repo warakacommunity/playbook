@@ -406,6 +406,10 @@ const config = {
             position: "left",
           },
           {
+            type: "custom-ContributeButtonNavbarItem",
+            position: "right",
+          },
+          {
             type: "html",
             position: "right",
             value:
