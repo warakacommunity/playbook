@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Footer from "@theme-original/DocItem/Footer";
 import Link from "@docusaurus/Link";
 import { useDoc } from "@docusaurus/plugin-content-docs/client";
-import ContributeButton from "@site/src/components/ContributeButton";
 
 const WORDS_PER_MINUTE = 220;
 
@@ -20,16 +19,9 @@ function useReadingTime() {
   return minutes;
 }
 
-function sourceToFilePath(source) {
-  // source is like "@site/docs/intro.md" → "docs/intro.md"
-  if (!source) return null;
-  return source.replace(/^@site\//, '');
-}
-
 export default function FooterWrapper(props) {
   const minutes = useReadingTime();
   const { metadata } = useDoc();
-  const filePath = sourceToFilePath(metadata.source);
 
   return (
     <>
@@ -67,10 +59,6 @@ export default function FooterWrapper(props) {
             {minutes} min read
           </span>
         )}
-        <ContributeButton
-          filePath={filePath}
-          pageTitle={metadata.title}
-        />
       </div>
       <Footer {...props} />
     </>
