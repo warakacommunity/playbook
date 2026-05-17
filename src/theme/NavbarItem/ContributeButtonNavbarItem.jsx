@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import Link from '@docusaurus/Link';
-import { StructureEditorContent } from '@site/src/components/StructureEditor';
 import styles from './ContributeButtonNavbarItem.module.css';
 
 const PenIcon = () => (
@@ -36,7 +34,6 @@ const CloneIcon = () => (
 
 export default function ContributeButtonNavbarItem() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [editorOpen, setEditorOpen] = useState(false);
   const wrapperRef = useRef(null);
 
   useEffect(() => {
@@ -69,18 +66,15 @@ export default function ContributeButtonNavbarItem() {
 
       {dropdownOpen && (
         <div className={styles.dropdown} role="menu">
-          <button
-            type="button"
+          <Link
+            to="/contribute-online"
             role="menuitem"
             className={styles.dropdownItem}
-            onClick={() => {
-              setEditorOpen(true);
-              setDropdownOpen(false);
-            }}
+            onClick={() => setDropdownOpen(false)}
           >
             <span className={styles.dropdownItemIcon}><OnlineIcon /></span>
             Online
-          </button>
+          </Link>
           <Link
             to="/contribute"
             role="menuitem"
@@ -93,11 +87,6 @@ export default function ContributeButtonNavbarItem() {
         </div>
       )}
 
-      {editorOpen &&
-        ReactDOM.createPortal(
-          <StructureEditorContent onClose={() => setEditorOpen(false)} />,
-          document.body,
-        )}
     </div>
   );
 }
