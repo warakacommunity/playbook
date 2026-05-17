@@ -369,45 +369,16 @@ const config = {
         hideOnScroll: false,
         items: [
           {
-            type: "dropdown",
-            label: "MasakhanePlaybook",
-            position: "left",
-            items: [
-              {
-                to: "/playbook/",
-                label: "Read online",
-              },
-              {
-                href: "/MasakhanePlaybook/downloads/masakhane-playbook.pdf",
-                label: "Download PDF",
-                target: "_blank",
-                rel: "noopener noreferrer",
-              },
-            ],
-          },
-          {
-            to: "/tool",
-            label: "MasakhaneTool",
+            type: "custom-PlaybookNavbarItem",
             position: "left",
           },
           {
-            type: "dropdown",
-            label: "About",
+            type: "custom-ToolNavbarItem",
             position: "left",
-            items: [
-              {
-                to: "/about",
-                label: "About Us",
-              },
-              {
-                to: "/blog",
-                label: "Blog",
-              },
-              {
-                to: "/newsletter",
-                label: "Newsletter",
-              },
-            ],
+          },
+          {
+            type: "custom-AboutNavbarItem",
+            position: "left",
           },
           {
             type: "custom-ContributeButtonNavbarItem",

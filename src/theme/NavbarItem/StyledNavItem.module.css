@@ -1,0 +1,140 @@
+/* Shared styles for Playbook, Tool, and About navbar items.
+   Visual design mirrors ContributeButtonNavbarItem intentionally. */
+
+/* ── Shared button base ───────────────────────────────────── */
+.playbookBtn,
+.toolBtn,
+.aboutBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.45rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #1a5276 0%, #2e86c1 100%);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(26, 82, 118, 0.35);
+  transition: opacity 0.15s, box-shadow 0.15s, transform 0.1s;
+  white-space: nowrap;
+  line-height: 1.4;
+  touch-action: manipulation;
+  text-decoration: none;
+}
+
+.playbookBtn:hover,
+.toolBtn:hover,
+.aboutBtn:hover {
+  opacity: 0.92;
+  box-shadow: 0 4px 14px rgba(26, 82, 118, 0.45);
+  transform: translateY(-1px);
+  color: #fff;
+  text-decoration: none;
+}
+
+.playbookBtn:active,
+.toolBtn:active,
+.aboutBtn:active {
+  transform: translateY(0);
+}
+
+[data-theme='dark'] .playbookBtn,
+[data-theme='dark'] .toolBtn,
+[data-theme='dark'] .aboutBtn {
+  background: linear-gradient(135deg, #2e86c1 0%, #5dade2 100%);
+}
+
+/* ── Shared wrapper + dropdown ────────────────────────────── */
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.chevron {
+  font-size: 0.6em;
+  margin-left: 0.15em;
+  opacity: 0.8;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 180px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  z-index: 1000;
+  animation: dropIn 0.12s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+[data-theme='dark'] .dropdown {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--ifm-color-emphasis-900);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.1s;
+  text-align: left;
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background: rgba(var(--brand-rgb), 0.07);
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .dropdownItem {
+  color: var(--ifm-color-emphasis-800);
+  border-bottom-color: var(--ifm-color-emphasis-200);
+}
+
+/* Hide label on narrow screens, icon only */
+.btnLabel {
+  display: inline;
+}
+
+@media (max-width: 996px) {
+  .btnLabel {
+    display: none;
+  }
+
+  .playbookBtn,
+  .toolBtn,
+  .aboutBtn {
+    padding: 0.45rem 0.65rem;
+  }
+
+  .chevron {
+    display: none;
+  }
+}
