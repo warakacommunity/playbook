@@ -42,12 +42,12 @@ const IconSend = () => (
 
 /* ── Feature overview cards ──────────────────────────────── */
 const FEATURES = [
-  { Icon: IconKey,    title: 'Authenticate',      body: 'Connect your GitHub account in seconds — via popup, device flow, or a personal access token. No local setup required.' },
+  { Icon: IconKey,    title: 'Authenticate',      body: 'Connect your GitHub account in seconds, via popup, device flow, or a personal access token. No local setup required.' },
   { Icon: IconEdit,   title: 'Edit content',       body: 'Open any existing Playbook page and make changes using a full rich-text editor with headings, lists, links, images, and video.' },
   { Icon: IconLayers, title: 'Manage structure',   body: 'Add new sections, pages, and subsections directly in the tree view. Rename, reorder, or delete items without touching the filesystem.' },
-  { Icon: IconUpload, title: 'Upload documents',   body: 'Import PDF, Word (.docx), or Markdown files. The tool extracts text and images automatically and places them in the right location.' },
-  { Icon: IconGlobe,  title: 'Translate',          body: 'Translate any page into Hausa, Amharic, Swahili, French, or Portuguese — auto-translated first, then refined in a side-by-side editor.' },
-  { Icon: IconSend,   title: 'Submit a PR',        body: 'All changes are staged locally, then submitted as a single Pull Request on GitHub. No direct commits to main — everything goes through review.' },
+  { Icon: IconUpload, title: 'Upload documents',   body: 'Import PDF, Word (.docx), HTML, txt, Markdown, and many more file types. The tool extracts text and images automatically and places them in the right location.' },
+  { Icon: IconGlobe,  title: 'Translate',          body: 'Translate any page into Hausa, Amharic, Swahili, French, or Portuguese, auto-translated first, then refined in a side-by-side editor.' },
+  { Icon: IconSend,   title: 'Submit a PR',        body: 'All changes are staged locally, then submitted as a single Pull Request on GitHub. No direct commits to main, everything goes through review.' },
 ];
 
 /* ── Accordion step content ──────────────────────────────── */
@@ -63,9 +63,9 @@ function StepAuth({ s }) {
           <p className={styles.scopeIntro}>Opens a GitHub authorization popup in a new window.</p>
           <ul className={styles.scopeList}>
             <li>Click <strong>Sign in with GitHub</strong> inside the editor</li>
-            <li>A GitHub popup opens — review the permissions</li>
+            <li>A GitHub popup opens, review the permissions</li>
             <li>Click <strong>Authorize</strong></li>
-            <li>The popup closes and your avatar appears — you are connected</li>
+            <li>The popup closes and your avatar appears, you are connected</li>
           </ul>
         </article>
         <article className={styles.scopeCard}>
@@ -92,7 +92,7 @@ function StepAuth({ s }) {
       </div>
       <article className={styles.requirementsCard} style={{ marginTop: '1.25rem' }}>
         <ul className={styles.requirementsList}>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Your token is stored in <strong>localStorage</strong> on your device only — never sent to any server other than GitHub.</span></li>
+          <li><span className={styles.requirementsBullet}>✓</span><span>Your token is stored in <strong>localStorage</strong> on your device only, never sent to any server other than GitHub.</span></li>
           <li><span className={styles.requirementsBullet}>✓</span><span>To sign out, click your avatar in the editor header and choose <strong>Sign out</strong>.</span></li>
           <li><span className={styles.requirementsBullet}>✓</span><span>Minimum required scope: <code>public_repo</code>. No admin or private-repo access is ever requested.</span></li>
         </ul>
@@ -110,7 +110,7 @@ function StepStructure() {
   ];
   return (
     <>
-      <Heading as="h3" style={{ fontSize: '1.05rem', marginBottom: '0.75rem' }}>Add a top-level section</Heading>
+      <Heading as="h3" style={{ fontSize: '1.05rem', marginBottom: '0.75rem' }}>Add a top-level section (or a chapter)</Heading>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
         {addSectionSteps.map((s) => (
           <div key={s.num} className={styles.processStep}>
@@ -125,7 +125,7 @@ function StepStructure() {
         <article className={styles.requirementsCard}>
           <div className={styles.requirementsHeader}><h4 className={styles.requirementsTitle}>Add a page inside a section</h4></div>
           <ul className={styles.requirementsList}>
-            <li><span className={styles.requirementsBullet}>1</span><span>Hover over any section name — a <strong>+ Page</strong> icon appears.</span></li>
+            <li><span className={styles.requirementsBullet}>1</span><span>Hover over any section name, a <strong>+ Page</strong> icon appears.</span></li>
             <li><span className={styles.requirementsBullet}>2</span><span>Click it, type the page title, confirm.</span></li>
             <li><span className={styles.requirementsBullet}>3</span><span>New page opens in the right panel. Staged: <code>docs/{'{section}/{slug}.md'}</code></span></li>
           </ul>
@@ -133,7 +133,7 @@ function StepStructure() {
         <article className={styles.requirementsCard}>
           <div className={styles.requirementsHeader}><h4 className={styles.requirementsTitle}>Add a subsection under a page</h4></div>
           <ul className={styles.requirementsList}>
-            <li><span className={styles.requirementsBullet}>1</span><span>Hover over any page — a <strong>+ Subsection</strong> icon appears.</span></li>
+            <li><span className={styles.requirementsBullet}>1</span><span>Hover over any page, a <strong>+ Subsection</strong> icon appears.</span></li>
             <li><span className={styles.requirementsBullet}>2</span><span>Click it and enter the subsection name.</span></li>
             <li><span className={styles.requirementsBullet}>3</span><span>Page becomes a parent folder. Staged: <code>_category_.json</code> + <code>index.md</code></span></li>
           </ul>
@@ -184,7 +184,7 @@ function StepEdit() {
           <ul className={styles.requirementsList}>
             <li><span className={styles.requirementsBullet}>🔗</span><span>Insert link (prompts for URL) / Remove link</span></li>
             <li><span className={styles.requirementsBullet}>🖼</span><span>Insert image from local file (embedded inline)</span></li>
-            <li><span className={styles.requirementsBullet}>▶</span><span>Insert video by URL — YouTube, Vimeo, or direct link</span></li>
+            <li><span className={styles.requirementsBullet}>▶</span><span>Insert video by URL, YouTube, Vimeo, or direct link</span></li>
             <li><span className={styles.requirementsBullet}>📎</span><span>Insert video from local file (max 10 MB)</span></li>
           </ul>
         </article>
@@ -197,7 +197,7 @@ function StepUpload() {
   const steps = [
     { num: '01', title: 'Click the upload button', body: 'In the left panel header, click the upload (↑) icon. A file picker opens.' },
     { num: '02', title: 'Select your file', body: 'Choose a PDF, DOCX, MD, MDX, TXT, or HTML file from your device.' },
-    { num: '03', title: 'Extraction runs in-browser', body: 'Text and images are extracted locally — nothing is uploaded to any server at this stage.' },
+    { num: '03', title: 'Extraction runs in-browser', body: 'Text and images are extracted locally,  nothing is uploaded to any server at this stage.' },
     { num: '04', title: 'Choose placement', body: 'Select where to place the content: as a new top-level page, inside an existing section, or as a subsection. Confirm.' },
     { num: '05', title: 'Review and edit', body: 'The extracted content opens in the right panel. Review, fix formatting, and click Save to stage the change.' },
   ];
@@ -247,7 +247,7 @@ function StepTranslate() {
     { num: '01', title: 'Select a page', body: 'Click the translate icon next to any page in the left panel tree.' },
     { num: '02', title: 'Choose a target language', body: 'Use the language dropdown in the right panel.' },
     { num: '03', title: 'Auto-translate', body: 'Click Auto-translate. The editor splits: original English on the left, machine-translated text on the right. African languages use MyMemory; European languages use Helsinki-NLP.' },
-    { num: '04', title: 'Alternatively — Google Translate', body: 'Click the Google Translate button as an alternative. Results appear in the same right-hand pane.' },
+    { num: '04', title: 'Alternatively, Google Translate', body: 'Click the Google Translate button as an alternative. Results appear in the same right-hand pane.' },
     { num: '05', title: 'Refine the translation', body: 'Edit the right-hand pane directly. The left pane stays fixed for reference. Use the same rich-text toolbar.' },
     { num: '06', title: 'Save', body: 'Click Save. The translation is staged as a new file at i18n/{lang}/docusaurus-plugin-content-docs/current/{original-path}.' },
   ];
@@ -275,8 +275,8 @@ function StepTranslate() {
       </div>
       <article className={styles.requirementsCard}>
         <ul className={styles.requirementsList}>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Auto-translation is a <strong>starting point</strong> — always review and refine before saving.</span></li>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Uploaded documents can also be translated — upload first, then open the translation tab.</span></li>
+          <li><span className={styles.requirementsBullet}>✓</span><span>Auto-translation is a <strong>starting point</strong>, always review and refine before saving.</span></li>
+          <li><span className={styles.requirementsBullet}>✓</span><span>Uploaded documents can also be translated, upload first, then open the translation tab.</span></li>
           <li><span className={styles.requirementsBullet}>✓</span><span>The translation file path mirrors the English source so the site serves both under the correct locale URL.</span></li>
         </ul>
       </article>
@@ -305,9 +305,9 @@ function StepSubmit() {
       </div>
       <article className={styles.requirementsCard}>
         <ul className={styles.requirementsList}>
-          <li><span className={styles.requirementsBullet}>✓</span><span>PRs are always created on a new branch — never directly on <code>main</code>.</span></li>
+          <li><span className={styles.requirementsBullet}>✓</span><span>PRs are always created on a new branch, never directly on <code>main</code>.</span></li>
           <li><span className={styles.requirementsBullet}>✓</span><span>Branch names are auto-generated: <code>edit/{'{slug}-{timestamp}'}</code> or <code>structure/edit-{'{timestamp}'}</code>.</span></li>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Staged changes are saved in <strong>localStorage</strong> — closing the browser and coming back restores your work.</span></li>
+          <li><span className={styles.requirementsBullet}>✓</span><span>Staged changes are saved in <strong>localStorage</strong>, closing the browser and coming back restores your work.</span></li>
         </ul>
       </article>
     </>
@@ -338,7 +338,7 @@ export default function ContributeOnline() {
   return (
     <Layout
       title="Contribute Online"
-      description="Step-by-step guide to contributing to the Masakhane Playbook directly in your browser — no local setup required."
+      description="Step-by-step guide to contributing to the Masakhane Playbook directly in your browser, no local setup required."
     >
       <section className={clsx(styles.section, styles.cfcSection, styles.cfcPageSection)}>
         <div className="container">
@@ -355,20 +355,8 @@ export default function ContributeOnline() {
               <p className={styles.cfcLead}>
                 No Git, no terminal, no local setup. Authenticate with GitHub,
                 use the built-in editor to add or improve content, and submit
-                your changes as a Pull Request — all without leaving the page.
+                your changes as a Pull Request, all without leaving the page.
               </p>
-            </div>
-            <div className={styles.cfcActions}>
-              <button
-                type="button"
-                className={clsx('button', styles.primaryButton)}
-                onClick={() => setEditorOpen(true)}
-              >
-                Start Contributing Online
-              </button>
-              <Link to="/contribute" className={clsx('button', styles.secondaryButton)}>
-                Prefer cloning? See GitHub guide
-              </Link>
             </div>
           </div>
 
@@ -376,7 +364,7 @@ export default function ContributeOnline() {
           <div className={styles.cfcSubhead}>
             <Heading as="h2" className={styles.cfcSubheadTitle}>What you can do</Heading>
             <p className={styles.cfcSubheadLead}>
-              The online editor covers the full contribution lifecycle — from
+              The online editor covers the full contribution lifecycle, from
               authentication through editing, uploading, translating, and submitting.
             </p>
           </div>
@@ -418,7 +406,7 @@ export default function ContributeOnline() {
           {/* Tab panel */}
           <div role="tabpanel" className={acc.tabPanel}>
             <Heading as="h3" style={{ fontSize: '1.3rem', marginBottom: '1.5rem' }}>
-              Step {activeTab + 1} — {title}
+              Step {activeTab + 1}, {title}
             </Heading>
             <Content />
 
@@ -437,15 +425,23 @@ export default function ContributeOnline() {
                   Next →
                 </button>
               ) : (
-                <button
-                  type="button"
-                  className={clsx(acc.navBtn, acc.navBtnPrimary)}
-                  onClick={() => setEditorOpen(true)}
-                >
-                  Start Contributing Online →
-                </button>
+                <span className={acc.navSpacer} />
               )}
             </div>
+          </div>
+
+          {/* ── Bottom CTA ─────────────────────────────────── */}
+          <div className={styles.cfcActions} style={{ marginTop: '2.5rem', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              className={clsx('button', styles.primaryButton)}
+              onClick={() => setEditorOpen(true)}
+            >
+              Start Contributing Online
+            </button>
+            <Link to="/contribute" className={clsx('button', styles.secondaryButton)}>
+              Prefer cloning? See GitHub guide
+            </Link>
           </div>
 
           {editorOpen && typeof window !== 'undefined' &&
