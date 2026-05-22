@@ -42,7 +42,7 @@ export default function WorkshopDetail({ workshop: w }) {
 
           {/* ── Hero ── */}
           <div style={{
-            marginBottom: '2.5rem',
+            marginBottom: '1.5rem',
             padding: '2.5rem 2rem',
             background: 'linear-gradient(135deg, #1e4976 0%, #2e86c1 60%, #5dade2 100%)',
             borderRadius: 16,
@@ -70,14 +70,22 @@ export default function WorkshopDetail({ workshop: w }) {
               padding: '0.7rem 1.1rem',
               background: 'rgba(255,255,255,0.1)',
               borderRadius: 8, fontSize: '1rem',
-              color: 'rgba(255,255,255,0.9)', marginBottom: '1.5rem',
+              color: 'rgba(255,255,255,0.9)',
               backdropFilter: 'blur(4px)',
             }}>
               <span>📅 {w.date}</span>
               <span>📍 {w.venue}{w.location && w.location !== w.venue ? ` — ${w.location}` : ''}</span>
               <span>⏱ {w.duration}</span>
             </div>
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.78)', margin: 0 }}>
+          </div>
+
+          {/* ── Description ── */}
+          <div style={{
+            border: '1px solid var(--ifm-color-emphasis-200)',
+            borderRadius: 10, padding: '1.1rem 1.4rem',
+            marginBottom: '2.5rem',
+          }}>
+            <p style={{ fontSize: '1.05rem', lineHeight: 1.8, color: 'var(--ifm-font-color-base)', margin: 0 }}>
               {w.description}
             </p>
           </div>
