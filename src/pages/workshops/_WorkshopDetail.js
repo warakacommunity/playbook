@@ -3,6 +3,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import Head from '@docusaurus/Head';
 import styles from '../index.module.css';
 
 const STATUS = {
@@ -35,7 +36,12 @@ export default function WorkshopDetail({ workshop: w }) {
 
   return (
     <Layout title={w.title} description={w.subtitle}>
-      <section className={clsx(styles.section, styles.cfcSection, styles.cfcPageSection)}>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+      </Head>
+      <section className={clsx(styles.section, styles.cfcSection, styles.cfcPageSection)} style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: '1.05rem' }}>
         <div className="container">
 
           <Link to="/workshops" className={styles.cfcBackLink}>← Back to Workshops</Link>
@@ -123,7 +129,7 @@ export default function WorkshopDetail({ workshop: w }) {
                       }}>{a.time}</span>
                     </div>
                     {a.detail && (
-                      <p style={{ fontSize: '0.975rem', color: 'var(--ifm-font-color-base)', margin: 0, lineHeight: 1.65 }}>
+                      <p style={{ fontSize: '1rem', color: 'var(--ifm-font-color-base)', margin: 0, lineHeight: 1.65 }}>
                         {a.detail}
                       </p>
                     )}
@@ -156,7 +162,7 @@ export default function WorkshopDetail({ workshop: w }) {
                           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                           fontSize: '0.7rem', fontWeight: 800, marginTop: '0.15rem',
                         }}>{i + 1}</span>
-                        <span style={{ fontSize: '0.95rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.55 }}>{o}</span>
+                        <span style={{ fontSize: '1rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.55 }}>{o}</span>
                       </div>
                     ))}
                   </div>
@@ -178,7 +184,7 @@ export default function WorkshopDetail({ workshop: w }) {
                         background: i % 2 === 0 ? 'rgba(5,150,105,0.06)' : 'transparent',
                       }}>
                         <span style={{ color: '#059669', flexShrink: 0, fontWeight: 700, fontSize: '0.9rem', marginTop: '0.1rem' }}>✓</span>
-                        <span style={{ fontSize: '0.95rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.55 }}>{o}</span>
+                        <span style={{ fontSize: '1rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.55 }}>{o}</span>
                       </div>
                     ))}
                   </div>
@@ -232,7 +238,7 @@ export default function WorkshopDetail({ workshop: w }) {
                           fontSize: '0.72rem', fontWeight: 800,
                         }}>{initials}</div>
                         <div>
-                          <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.2 }}>{name}</div>
+                          <div style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.2 }}>{name}</div>
                           {affil && <div style={{ fontSize: '0.82rem', color: 'var(--ifm-color-emphasis-700)' }}>{affil}</div>}
                         </div>
                       </div>
