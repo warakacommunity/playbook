@@ -250,33 +250,57 @@ export default function WorkshopDetail({ workshop: w }) {
           </div>
 
           {/* ── Registration ── */}
-          {w.registrationFormUrl && (
-            <div style={{ marginBottom: '2.5rem', border: '1px solid var(--ifm-color-emphasis-200)', borderRadius: 10, overflow: 'hidden' }}>
+          {w.registrationFormUrl && (() => {
+            const directUrl = w.registrationFormUrl.replace('?embedded=true', '');
+            return (
               <div style={{
-                padding: '0.7rem 1.1rem',
-                background: 'linear-gradient(135deg, #1e4976 0%, #2e86c1 100%)',
-                fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
-                letterSpacing: '0.08em', color: '#fff',
-                display: 'flex', alignItems: 'center', gap: '0.5rem',
+                marginBottom: '2.5rem',
+                border: '1px solid var(--ifm-color-emphasis-200)',
+                borderRadius: 10, overflow: 'hidden',
               }}>
-                ✍️ Register for this Workshop
+                <div style={{
+                  padding: '0.7rem 1.1rem',
+                  background: 'linear-gradient(135deg, #1e4976 0%, #2e86c1 100%)',
+                  fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
+                  letterSpacing: '0.08em', color: '#fff',
+                }}>
+                  Register for this Workshop
+                </div>
+                <div style={{
+                  padding: '2rem 1.5rem',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center',
+                  gap: '1rem', textAlign: 'center',
+                }}>
+                  <p style={{ margin: 0, fontSize: '1rem', color: 'var(--ifm-font-color-base)', maxWidth: '480px', lineHeight: 1.7 }}>
+                    Participation is free and open to everyone. Fill in the registration form to secure your spot and receive updates about the session.
+                  </p>
+                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    <Link
+                      href={directUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={clsx('button', styles.primaryButton)}
+                      style={{ fontSize: '1rem' }}
+                    >
+                      Register Now →
+                    </Link>
+                    <Link
+                      href={directUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={clsx('button', styles.secondaryButton)}
+                      style={{ fontSize: '1rem' }}
+                    >
+                      Edit my response
+                    </Link>
+                  </div>
+                  <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--ifm-color-emphasis-700)' }}>
+                    Opens in Google Forms — your progress is saved automatically.
+                  </p>
+                </div>
               </div>
-              <div style={{ padding: '1rem' }}>
-                <iframe
-                  src={w.registrationFormUrl}
-                  width="100%"
-                  height="700"
-                  frameBorder="0"
-                  marginHeight="0"
-                  marginWidth="0"
-                  title="Workshop Registration Form"
-                  style={{ border: 'none', borderRadius: 6, display: 'block' }}
-                >
-                  Loading…
-                </iframe>
-              </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* ── CTAs ── */}
           <div className={styles.cfcActions} style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
