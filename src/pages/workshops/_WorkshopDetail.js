@@ -235,6 +235,35 @@ export default function WorkshopDetail({ workshop: w }) {
             )}
           </div>
 
+          {/* ── Registration ── */}
+          {w.registrationFormUrl && (
+            <div style={{ marginBottom: '2.5rem', border: '1px solid var(--ifm-color-emphasis-200)', borderRadius: 10, overflow: 'hidden' }}>
+              <div style={{
+                padding: '0.7rem 1.1rem',
+                background: 'linear-gradient(135deg, #1e4976 0%, #2e86c1 100%)',
+                fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
+                letterSpacing: '0.08em', color: '#fff',
+                display: 'flex', alignItems: 'center', gap: '0.5rem',
+              }}>
+                ✍️ Register for this Workshop
+              </div>
+              <div style={{ padding: '1rem' }}>
+                <iframe
+                  src={w.registrationFormUrl}
+                  width="100%"
+                  height="700"
+                  frameBorder="0"
+                  marginHeight="0"
+                  marginWidth="0"
+                  title="Workshop Registration Form"
+                  style={{ border: 'none', borderRadius: 6, display: 'block' }}
+                >
+                  Loading…
+                </iframe>
+              </div>
+            </div>
+          )}
+
           {/* ── CTAs ── */}
           <div className={styles.cfcActions} style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/workshops" className={clsx('button', styles.secondaryButton)}>← All Workshops</Link>
