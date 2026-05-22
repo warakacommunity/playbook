@@ -10,6 +10,7 @@ export const WORKSHOPS = [
     date: '2–7 August 2026',
     duration: '1.5 hours',
     externalUrl: 'https://deeplearningindaba.com/2026/',
+    registrationFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSekOasAhQ7U4AkIaZUDbWaOwL_V0dkvanJKUwhbFD6hpnYnjw/viewform?embedded=true", // replace with your Google Form embed URL once created
     description:
       'Held at the Deep Learning Indaba 2026 (Pan-Atlantic University, Lagos, Nigeria, 2–7 August 2026), this session presents two major community-oriented infrastructure projects for African NLP: the AfricaNLP Dataset Creation Playbook and an open, mobile-first annotation platform tailored for low-resource African language contexts, funded by the Masakhane African Languages Hub. Through live demonstrations, hands-on exploration, and a facilitated community dialogue, participants will engage with tools designed to democratize data creation, support grassroots language communities, and strengthen the foundation for African AI research.',
     objectives: [
