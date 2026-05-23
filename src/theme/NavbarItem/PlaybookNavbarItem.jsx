@@ -86,20 +86,28 @@ export default function PlaybookNavbarItem() {
             <Link
               to="/playbook/"
               role="menuitem"
-              className={styles.dropdownItem}
+              className={styles.aboutMegaItem}
               onClick={close}
             >
-              <ReadIcon /> Read online
+              <span className={styles.aboutMegaItemIcon}><ReadIcon /></span>
+              <span className={styles.aboutMegaItemText}>
+                <span className={styles.aboutMegaItemTitle}>Read online</span>
+                <span className={styles.aboutMegaItemDesc}>Browse the chapters in your browser.</span>
+              </span>
             </Link>
             <a
               href="/MasakhanePlaybook/downloads/masakhane-playbook.pdf"
               role="menuitem"
-              className={styles.dropdownItem}
+              className={styles.aboutMegaItem}
               target="_blank"
               rel="noopener noreferrer"
               onClick={close}
             >
-              <DownloadIcon /> Download PDF
+              <span className={styles.aboutMegaItemIcon}><DownloadIcon /></span>
+              <span className={styles.aboutMegaItemText}>
+                <span className={styles.aboutMegaItemTitle}>Download PDF</span>
+                <span className={styles.aboutMegaItemDesc}>Get the full playbook as a single PDF.</span>
+              </span>
             </a>
           </div>
 
@@ -110,18 +118,26 @@ export default function PlaybookNavbarItem() {
             <Link
               to="/contribute-online"
               role="menuitem"
-              className={styles.dropdownItem}
+              className={styles.aboutMegaItem}
               onClick={close}
             >
-              <OnlineIcon /> Online
+              <span className={styles.aboutMegaItemIcon}><OnlineIcon /></span>
+              <span className={styles.aboutMegaItemText}>
+                <span className={styles.aboutMegaItemTitle}>Online</span>
+                <span className={styles.aboutMegaItemDesc}>Edit chapters directly in your browser, no setup.</span>
+              </span>
             </Link>
             <Link
               to="/contribute"
               role="menuitem"
-              className={styles.dropdownItem}
+              className={styles.aboutMegaItem}
               onClick={close}
             >
-              <CloneIcon /> By Cloning
+              <span className={styles.aboutMegaItemIcon}><CloneIcon /></span>
+              <span className={styles.aboutMegaItemText}>
+                <span className={styles.aboutMegaItemTitle}>By Cloning</span>
+                <span className={styles.aboutMegaItemDesc}>Clone the GitHub repo to work on it locally.</span>
+              </span>
             </Link>
           </div>
         </div>
