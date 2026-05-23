@@ -185,6 +185,36 @@
   max-width: 640px;
 }
 
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 1.15rem;
+  letter-spacing: 0.005em;
+}
+
+.heroEyebrowMark {
+  color: var(--ifm-color-primary);
+  font-size: 0.9rem;
+}
+
+.heroEyebrowLink {
+  color: var(--ifm-color-emphasis-900);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--brand-rgb), 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+
+.heroEyebrowLink:hover {
+  color: var(--ifm-color-primary);
+  text-decoration-color: var(--ifm-color-primary);
+}
+
 .heroTitle {
   font-size: clamp(2rem, 5vw, 4.2rem);
   line-height: 1.08;

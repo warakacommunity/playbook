@@ -12,6 +12,13 @@ export default function HeroSection() {
       <div className="container">
         <div className={styles.heroGrid}>
           <div className={styles.heroCopy}>
+            <p className={styles.heroEyebrow}>
+              <span className={styles.heroEyebrowMark} aria-hidden="true">✦</span>
+              From the creators of{' '}
+              <Link className={styles.heroEyebrowLink} to="#" rel="noopener noreferrer">AfriSenti</Link>
+              {' '}and{' '}
+              <Link className={styles.heroEyebrowLink} to="#" rel="noopener noreferrer">AfriHate</Link>
+            </p>
             <Heading as="h1" className={styles.heroTitle}>
               Build African language datasets,
               {' '}
