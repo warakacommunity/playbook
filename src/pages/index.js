@@ -7,6 +7,7 @@ import HeroSection from './_sections/HeroSection';
 import SupportedBySection from './_sections/SupportedBySection';
 import FeaturePlaybook from './_sections/FeaturePlaybook';
 import FeatureTool from './_sections/FeatureTool';
+import FeatureFinder from './_sections/FeatureFinder';
 import BlogTeaserSection from './_sections/BlogTeaserSection';
 import TestimonialsSection from './_sections/TestimonialsSection';
 import GetInvolvedSection from './_sections/GetInvolvedSection';
@@ -19,6 +20,7 @@ const SLIDES = [
   { id: 'hero',         label: 'Home' },
   { id: 'playbook',     label: 'The Playbook' },
   { id: 'tool',         label: 'The Tool' },
+  { id: 'finder',       label: 'AfriFinder' },
   { id: 'testimonials', label: 'Researchers say' },
   { id: 'blog',         label: 'From the Blog' },
   { id: 'join',         label: 'Get Involved' },
@@ -113,6 +115,7 @@ export default function Home() {
       <main>
         <FeaturePlaybook />
         <FeatureTool />
+        <FeatureFinder />
         <TestimonialsSection />
         <BlogTeaserSection />
         <GetInvolvedSection />
