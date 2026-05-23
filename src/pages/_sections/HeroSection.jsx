@@ -2,16 +2,11 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Heading from '@theme/Heading';
-import { IconBookOpen, IconWrench } from '@site/src/components/Icons';
+import { IconBookOpen, IconWrench, IconDiscord } from '@site/src/components/Icons';
 import styles from '../index.module.css';
 
 export default function HeroSection() {
   const heroPhotoUrl = useBaseUrl('/img/hero.jpg');
-  const haUrl = `pathname://${useBaseUrl('/ha/')}`;
-  const amUrl = `pathname://${useBaseUrl('/am/')}`;
-  const swUrl = `pathname://${useBaseUrl('/sw/')}`;
-  const frUrl = `pathname://${useBaseUrl('/fr/')}`;
-  const ptUrl = `pathname://${useBaseUrl('/pt/')}`;
   return (
     <header className={clsx(styles.hero, styles.snapSection)} data-snap-section="hero" data-visible="">
       <div className="container">
@@ -27,20 +22,18 @@ export default function HeroSection() {
               collection — designed with communities, for communities, across
               the continent.
             </p>
-            <p className={styles.heroLangs}>
-              <span className={styles.heroLangsLabel}>Read the Playbook in:</span>{' '}
-              <Link className={styles.heroLangLink} to={haUrl} hrefLang="ha">Hausa</Link>
-              <Link className={styles.heroLangLink} to={amUrl} hrefLang="am">Amharic</Link>
-              <Link className={styles.heroLangLink} to={swUrl} hrefLang="sw">Swahili</Link>
-              <Link className={styles.heroLangLink} to={frUrl} hrefLang="fr">Français</Link>
-              <Link className={styles.heroLangLink} to={ptUrl} hrefLang="pt">Português</Link>
-            </p>
             <div className={styles.heroButtons}>
               <Link className={clsx('button', styles.primaryButton)} to="/playbook/">
                 <IconBookOpen size={18} /> Read the Playbook
               </Link>
               <Link className={clsx('button', styles.secondaryButton)} to="/tool">
                 <IconWrench size={18} /> Explore the Tool
+              </Link>
+              <Link
+                className={clsx('button', styles.discordButton)}
+                to="https://discord.gg/ChNPHV2PPS"
+              >
+                <IconDiscord size={18} /> Join our Discord
               </Link>
             </div>
           </div>
