@@ -8,7 +8,7 @@ export default function FeaturePlaybook() {
       <div className={clsx('container', styles.featureGrid)}>
         <div className={styles.featureCopy}>
           <Heading as="h2" className={styles.blogTeaserHeading}>
-            Masakhane Playbook
+            AfriPlaybook
           </Heading>
           <p className={styles.featureLead}>
             A practical guide to dataset creation, written with the
@@ -29,7 +29,7 @@ export default function FeaturePlaybook() {
             <div className={styles.mockBar}>
               <span /><span /><span />
               <div className={styles.mockUrl}>
-                masakhane-playbook / annotation-design
+                afriplaybook / annotation-design
               </div>
             </div>
             <div className={styles.mockBody}>
