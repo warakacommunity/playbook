@@ -44,7 +44,7 @@ export default function AfriFinder() {
             <Heading as="h2" className={styles.sectionTitle}>Two modules</Heading>
 
             <div className={styles.cardGrid}>
-              <article className={styles.card}>
+              <article id="marketplace" className={styles.card}>
                 <div className={styles.cardIcon}>
                   <IconCheckCircle size={26} />
                 </div>
@@ -77,7 +77,7 @@ export default function AfriFinder() {
                 </ul>
               </article>
 
-              <article className={styles.card}>
+              <article id="directory" className={styles.card}>
                 <div className={styles.cardIcon}>
                   <IconUsers size={26} />
                 </div>

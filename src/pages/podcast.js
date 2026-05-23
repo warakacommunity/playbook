@@ -8,6 +8,27 @@ import styles from './podcast.module.css';
 const EPISODES_BY_YEAR = {
   '2026': [
     {
+      number: 4,
+      title: 'Building speech datasets for low-resource African languages',
+      desc: 'Field recording, speaker recruitment, and quality control — the practical side of building ASR datasets when there is no pre-existing corpus to start from. With a guest researcher from EthioNLP.',
+      thumb: null,
+      link: '#',
+    },
+    {
+      number: 3,
+      title: 'Hausa NLP: where the field stands in 2026',
+      desc: 'A walk through the last five years of Hausa NLP — from early word embeddings to current LLM evaluation benchmarks. What works, what is still missing, and what newcomers should read first.',
+      thumb: null,
+      link: '#',
+    },
+    {
+      number: 2,
+      title: 'Annotation as community work, not gig work',
+      desc: 'Why treating annotators as collaborators rather than crowd workers changes the quality of African-language datasets. Conversation with a Yoruba Language Lead from the AfriFinder pilot.',
+      thumb: null,
+      link: '#',
+    },
+    {
       number: 1,
       title: 'Why African languages still struggle with modern NLP',
       desc: 'In the opening episode, Dr Shamsuddeen Muhammad lays out the data, modelling, and community gaps that hold African-language AI back — and what realistic next steps look like.',

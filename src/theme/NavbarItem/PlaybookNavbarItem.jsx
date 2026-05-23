@@ -50,6 +50,7 @@ const CloneIcon = () => (
 export default function PlaybookNavbarItem() {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef(null);
+  const closeTimerRef = useRef(null);
 
   useEffect(() => {
     function handleOutside(e) {
@@ -58,15 +59,30 @@ export default function PlaybookNavbarItem() {
       }
     }
     document.addEventListener('mousedown', handleOutside);
-    return () => document.removeEventListener('mousedown', handleOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleOutside);
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
   }, []);
 
   if (typeof window === 'undefined') return null;
 
   const close = () => setOpen(false);
+  const handleEnter = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setOpen(true);
+  };
+  const handleLeave = () => {
+    closeTimerRef.current = setTimeout(() => setOpen(false), 150);
+  };
 
   return (
-    <div ref={wrapperRef} className={styles.wrapper}>
+    <div
+      ref={wrapperRef}
+      className={styles.wrapper}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+    >
       <button
         type="button"
         className={styles.playbookBtn}
