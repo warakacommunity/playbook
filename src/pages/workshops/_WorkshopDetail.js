@@ -1,310 +1,155 @@
-import clsx from 'clsx';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
-import Head from '@docusaurus/Head';
-import styles from '../index.module.css';
-
-const STATUS = {
-  upcoming: { label: 'Upcoming', color: '#059669', bg: 'rgba(5,150,105,0.1)' },
-  planned:  { label: 'Planned',  color: '#2e86c1', bg: 'rgba(46,134,193,0.1)' },
-  past:     { label: 'Past',     color: '#6b7280', bg: 'rgba(107,114,128,0.1)' },
-};
-
-const TYPE_COLOR = {
-  'Workshop and Exhibition': '#7c3aed',
-  Exhibition: '#7c3aed',
-  Internal:   '#d97706',
-  Demo:       '#0891b2',
-  Community:  '#059669',
-};
-
-function Badge({ label, color, bg }) {
-  return (
-    <span style={{
-      display: 'inline-block', padding: '0.25em 0.85em', borderRadius: 99,
-      fontSize: '0.8rem', fontWeight: 700, background: bg, color,
-      letterSpacing: '0.04em', textTransform: 'uppercase',
-    }}>{label}</span>
-  );
-}
+import styles from './_WorkshopDetail.module.css';
 
 export default function WorkshopDetail({ workshop: w }) {
-  const s = STATUS[w.status];
-  const typeColor = TYPE_COLOR[w.type] || '#6b7280';
-
   return (
     <Layout title={w.title} description={w.subtitle}>
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-        <style>{`.navbar, footer.footer { display: none !important; }`}</style>
-      </Head>
-      <section className={clsx(styles.section, styles.cfcSection, styles.cfcPageSection)} style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: '1.05rem' }}>
+      <main className={styles.page}>
         <div className="container">
 
-
-          {/* ── Hero ── */}
-          <div style={{
-            marginBottom: '1.5rem',
-            padding: '2.5rem 2rem',
-            background: 'linear-gradient(135deg, #1e4976 0%, #2e86c1 60%, #5dade2 100%)',
-            borderRadius: 16,
-            color: '#fff',
-          }}>
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.1rem' }}>
-              <Badge label={w.type} color="#fff" bg={`${typeColor}55`} />
+          {/* Header */}
+          <header className={styles.header}>
+            <div className={styles.eyebrow}>
+              <span className={styles.eyebrowDot} aria-hidden="true" />
+              {w.type}
             </div>
-            <Heading as="h1" style={{
-              fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-              lineHeight: 1.15, margin: '0 0 0.5rem',
-              color: '#fff', fontWeight: 800, letterSpacing: '-0.02em',
-            }}>
-              {w.title}
-            </Heading>
-            <p style={{
-              fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)',
-              fontWeight: 500, color: 'rgba(255,255,255,0.88)',
-              margin: '0 0 1.5rem', lineHeight: 1.4,
-            }}>
-              {w.subtitle}
-            </p>
-            <div style={{
-              display: 'flex', gap: '1.25rem', flexWrap: 'wrap',
-              padding: '0.7rem 1.1rem',
-              background: 'rgba(255,255,255,0.1)',
-              borderRadius: 8, fontSize: '1rem',
-              color: 'rgba(255,255,255,0.9)',
-              backdropFilter: 'blur(4px)',
-            }}>
-              <span>📅 {w.date}</span>
-              <span>📍 {w.venue}{w.location && w.location !== w.venue ? ` — ${w.location}` : ''}</span>
-              <span>⏱ {w.duration}</span>
+            <Heading as="h1" className={styles.title}>{w.title}</Heading>
+            <p className={styles.subtitle}>{w.subtitle}</p>
+
+            <div className={styles.meta}>
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>Date</span>
+                <span className={styles.metaValue}>{w.date}</span>
+              </div>
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>Venue</span>
+                <span className={styles.metaValue}>
+                  {w.venue}{w.location && w.location !== w.venue ? `, ${w.location}` : ''}
+                </span>
+              </div>
+              <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>Duration</span>
+                <span className={styles.metaValue}>{w.duration}</span>
+              </div>
             </div>
-          </div>
+          </header>
 
-          {/* ── Description ── */}
-          <div style={{
-            border: '1px solid var(--ifm-color-emphasis-200)',
-            borderRadius: 10, padding: '1.1rem 1.4rem',
-            marginBottom: '2.5rem',
-          }}>
-            <p style={{ fontSize: '1.05rem', lineHeight: 1.8, color: 'var(--ifm-font-color-base)', margin: 0 }}>
-              {w.description}
-            </p>
-          </div>
+          {/* About */}
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>About the workshop</h2>
+            <p className={styles.lead}>{w.description}</p>
+          </section>
 
-          {/* ── Agenda ── */}
-          <div style={{ marginBottom: '3rem', border: '1px solid var(--ifm-color-emphasis-200)', borderRadius: 10, overflow: 'hidden' }}>
-            <div style={{
-              padding: '0.7rem 1.1rem',
-              background: 'linear-gradient(135deg, #1a5276 0%, #2e86c1 100%)',
-              fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
-              letterSpacing: '0.08em', color: '#fff',
-            }}>Agenda · {w.duration}</div>
-            <div style={{ padding: '1.5rem 1.5rem 0.75rem' }}>
-              {w.agenda.map((a, i) => (
-                <div key={i} style={{ display: 'flex', gap: '1rem', paddingBottom: i < w.agenda.length - 1 ? '1.5rem' : 0, position: 'relative' }}>
-                  {i < w.agenda.length - 1 && (
-                    <div style={{
-                      position: 'absolute', left: '18px', top: '36px', bottom: 0, width: '2px',
-                      background: 'var(--ifm-color-emphasis-200)',
-                    }} />
-                  )}
-                  <div style={{
-                    flexShrink: 0, width: '36px', height: '36px', borderRadius: '50%',
-                    background: 'var(--ifm-color-primary)', color: '#fff',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontWeight: 700, fontSize: '0.85rem', position: 'relative', zIndex: 1,
-                  }}>{i + 1}</div>
-                  <div style={{ paddingTop: '0.35rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6em', flexWrap: 'wrap', marginBottom: '0.25rem' }}>
-                      <strong style={{ fontSize: '1.05rem', color: 'var(--ifm-font-color-base)' }}>{a.title}</strong>
-                      <span style={{
-                        fontSize: '0.82rem', fontWeight: 600, color: 'var(--ifm-font-color-base)',
-                        background: 'var(--ifm-color-emphasis-200)', borderRadius: 99,
-                        padding: '0.05em 0.6em',
-                      }}>{a.time}</span>
+          {/* Agenda */}
+          {w.agenda?.length > 0 && (
+            <section className={styles.section}>
+              <h2 className={styles.sectionTitle}>Agenda</h2>
+              <ol className={styles.agendaList}>
+                {w.agenda.map((a, i) => (
+                  <li key={i} className={styles.agendaItem}>
+                    <div className={styles.agendaTime}>{a.time}</div>
+                    <div className={styles.agendaBody}>
+                      <div className={styles.agendaTitle}>{a.title}</div>
+                      {a.detail && <p className={styles.agendaDetail}>{a.detail}</p>}
                     </div>
-                    {a.detail && (
-                      <p style={{ fontSize: '1rem', color: 'var(--ifm-font-color-base)', margin: 0, lineHeight: 1.65 }}>
-                        {a.detail}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Objectives + Outcomes ── */}
-          {(w.objectives?.length > 0 || w.outcomes?.length > 0) && (
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1.25rem', marginBottom: '1.5rem',
-            }}>
-              {w.objectives?.length > 0 && (
-                <div style={{ border: '1px solid var(--ifm-color-emphasis-200)', borderRadius: 10, overflow: 'hidden' }}>
-                  <div style={{
-                    padding: '0.7rem 1.1rem', background: 'var(--ifm-color-primary)',
-                    fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
-                    letterSpacing: '0.08em', color: '#fff',
-                  }}>Objectives</div>
-                  <div style={{ padding: '1rem 1.1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                    {w.objectives.map((o, i) => (
-                      <div key={i} style={{ display: 'flex', gap: '0.65rem', alignItems: 'flex-start' }}>
-                        <span style={{
-                          flexShrink: 0, width: '20px', height: '20px', borderRadius: '50%',
-                          background: 'rgba(26,82,118,0.1)', color: 'var(--ifm-color-primary)',
-                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                          fontSize: '0.7rem', fontWeight: 800, marginTop: '0.15rem',
-                        }}>{i + 1}</span>
-                        <span style={{ fontSize: '1rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.55 }}>{o}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {w.outcomes?.length > 0 && (
-                <div style={{ border: '1px solid rgba(5,150,105,0.25)', borderRadius: 10, overflow: 'hidden' }}>
-                  <div style={{
-                    padding: '0.7rem 1.1rem', background: '#059669',
-                    fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
-                    letterSpacing: '0.08em', color: '#fff',
-                  }}>Expected Outcomes</div>
-                  <div style={{ padding: '1rem 1.1rem', display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-                    {w.outcomes.map((o, i) => (
-                      <div key={i} style={{
-                        display: 'flex', gap: '0.55rem', alignItems: 'flex-start',
-                        padding: '0.35rem 0.55rem', borderRadius: 6,
-                        background: i % 2 === 0 ? 'rgba(5,150,105,0.06)' : 'transparent',
-                      }}>
-                        <span style={{ color: '#059669', flexShrink: 0, fontWeight: 700, fontSize: '0.9rem', marginTop: '0.1rem' }}>✓</span>
-                        <span style={{ fontSize: '1rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.55 }}>{o}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+                  </li>
+                ))}
+              </ol>
+            </section>
           )}
 
-          {/* ── Audience + Organizing Team ── */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '1.25rem', marginBottom: '2.5rem',
-          }}>
-            <div style={{ border: '1px solid var(--ifm-color-emphasis-200)', borderRadius: 10, overflow: 'hidden' }}>
-              <div style={{
-                padding: '0.7rem 1.1rem', background: 'var(--ifm-color-primary)',
-                fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
-                letterSpacing: '0.08em', color: '#fff',
-              }}>Who Should Attend</div>
-              <div style={{ padding: '1rem 1.1rem', display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
-                {w.audience.map((a, i) => (
-                  <span key={i} style={{
-                    display: 'inline-block', padding: '0.3em 0.8em',
-                    borderRadius: 99, fontSize: '0.9rem',
-                    background: 'var(--ifm-background-color)',
-                    color: 'var(--ifm-font-color-base)',
-                    border: '1px solid var(--ifm-color-emphasis-300)',
-                  }}>{a}</span>
-                ))}
+          {/* Objectives + Outcomes */}
+          {(w.objectives?.length > 0 || w.outcomes?.length > 0) && (
+            <section className={styles.section}>
+              <div className={styles.twoCol}>
+                {w.objectives?.length > 0 && (
+                  <div className={styles.subSection}>
+                    <h3>Objectives</h3>
+                    <ul className={styles.bulletList}>
+                      {w.objectives.map((o, i) => <li key={i}>{o}</li>)}
+                    </ul>
+                  </div>
+                )}
+                {w.outcomes?.length > 0 && (
+                  <div className={styles.subSection}>
+                    <h3>Expected outcomes</h3>
+                    <ul className={styles.bulletList}>
+                      {w.outcomes.map((o, i) => <li key={i}>{o}</li>)}
+                    </ul>
+                  </div>
+                )}
               </div>
-            </div>
+            </section>
+          )}
 
-            {w.organizers?.length > 0 && (
-              <div style={{ border: '1px solid rgba(5,150,105,0.25)', borderRadius: 10, overflow: 'hidden' }}>
-                <div style={{
-                  padding: '0.7rem 1.1rem', background: '#059669',
-                  fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
-                  letterSpacing: '0.08em', color: '#fff',
-                }}>Organizing Team</div>
-                <div style={{ padding: '1rem 1.1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                  {w.organizers.map(({ name, affil }, i) => {
-                    const initials = name.split(' ').filter(Boolean).map(n => n[0]).slice(0, 2).join('');
-                    const hue = (i * 53 + 200) % 360;
-                    return (
-                      <div key={i} style={{ display: 'flex', gap: '0.7rem', alignItems: 'center' }}>
-                        <div style={{
-                          flexShrink: 0, width: '34px', height: '34px', borderRadius: '50%',
-                          background: `hsl(${hue},55%,88%)`, color: `hsl(${hue},55%,28%)`,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          fontSize: '0.72rem', fontWeight: 800,
-                        }}>{initials}</div>
-                        <div>
-                          <div style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--ifm-font-color-base)', lineHeight: 1.2 }}>{name}</div>
-                          {affil && <div style={{ fontSize: '0.82rem', color: 'var(--ifm-color-emphasis-700)' }}>{affil}</div>}
-                        </div>
-                      </div>
-                    );
-                  })}
+          {/* Audience + Organizers */}
+          <section className={styles.section}>
+            <div className={styles.twoCol}>
+              {w.audience?.length > 0 && (
+                <div className={styles.subSection}>
+                  <h3>Who should attend</h3>
+                  <div className={styles.tagList}>
+                    {w.audience.map((a, i) => (
+                      <span key={i} className={styles.tag}>{a}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+              {w.organizers?.length > 0 && (
+                <div className={styles.subSection}>
+                  <h3>Organizers</h3>
+                  <div className={styles.orgList}>
+                    {w.organizers.map(({ name, affil }, i) => (
+                      <div key={i} className={styles.orgItem}>
+                        <span className={styles.orgName}>{name}</span>
+                        {affil && <span className={styles.orgAffil}>{affil}</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
 
-          {/* ── Registration ── */}
+          {/* Registration */}
           {w.registrationFormUrl && (() => {
             const directUrl = w.registrationFormUrl.replace('?embedded=true', '');
             return (
-              <div style={{
-                marginBottom: '2.5rem',
-                border: '1px solid var(--ifm-color-emphasis-200)',
-                borderRadius: 10, overflow: 'hidden',
-              }}>
-                <div style={{
-                  padding: '0.7rem 1.1rem',
-                  background: 'linear-gradient(135deg, #1e4976 0%, #2e86c1 100%)',
-                  fontSize: '0.78rem', fontWeight: 700, textTransform: 'uppercase',
-                  letterSpacing: '0.08em', color: '#fff',
-                }}>
-                  Register for this Workshop
+              <section className={styles.register}>
+                <h2 className={styles.registerTitle}>Register for this workshop</h2>
+                <p className={styles.registerBody}>
+                  Participation is free and open to everyone. Fill in the registration form to secure your spot and receive updates about the session.
+                </p>
+                <div className={styles.registerButtons}>
+                  <Link
+                    href={directUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.primaryBtn}
+                  >
+                    Register
+                  </Link>
+                  <Link
+                    href={directUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.secondaryBtn}
+                  >
+                    Edit my response
+                  </Link>
                 </div>
-                <div style={{
-                  padding: '2rem 1.5rem',
-                  display: 'flex', flexDirection: 'column', alignItems: 'center',
-                  gap: '1rem', textAlign: 'center',
-                }}>
-                  <p style={{ margin: 0, fontSize: '1rem', color: 'var(--ifm-font-color-base)', maxWidth: '480px', lineHeight: 1.7 }}>
-                    Participation is free and open to everyone. Fill in the registration form to secure your spot and receive updates about the session.
-                  </p>
-                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    <Link
-                      href={directUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={clsx('button', styles.primaryButton)}
-                      style={{ fontSize: '1rem' }}
-                    >
-                      Register Now →
-                    </Link>
-                    <Link
-                      href={directUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={clsx('button', styles.secondaryButton)}
-                      style={{ fontSize: '1rem' }}
-                    >
-                      Edit my response
-                    </Link>
-                  </div>
-                  <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--ifm-color-emphasis-700)' }}>
-                    Opens in Google Forms — your progress is saved automatically.
-                  </p>
-                </div>
-              </div>
+                <p className={styles.registerNote}>
+                  Opens in Google Forms — your progress is saved automatically.
+                </p>
+              </section>
             );
           })()}
 
-
         </div>
-      </section>
+      </main>
     </Layout>
   );
 }
