@@ -83,8 +83,7 @@ const ITEMS = [
     icon: MicIcon,
     title: 'Podcast',
     desc: 'A podcast on AfricaNLP hosted by Dr Shamsuddeen Muhammad.',
-    href: 'https://open.spotify.com/show/afrinlp',
-    external: true,
+    to: '/podcast',
   },
   {
     icon: NewsletterIcon,
