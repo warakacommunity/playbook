@@ -40,11 +40,11 @@ export default function WorkshopDetail({ workshop: w }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <style>{`.navbar, footer.footer { display: none !important; }`}</style>
       </Head>
       <section className={clsx(styles.section, styles.cfcSection, styles.cfcPageSection)} style={{ fontFamily: "'Inter', system-ui, sans-serif", fontSize: '1.05rem' }}>
         <div className="container">
 
-          <Link to="/workshops" className={styles.cfcBackLink}>← Back to Workshops</Link>
 
           {/* ── Hero ── */}
           <div style={{
@@ -302,11 +302,6 @@ export default function WorkshopDetail({ workshop: w }) {
             );
           })()}
 
-          {/* ── CTAs ── */}
-          <div className={styles.cfcActions} style={{ flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/workshops" className={clsx('button', styles.secondaryButton)}>← All Workshops</Link>
-            <Link to="/contribute-online" className={clsx('button', styles.primaryButton)}>Contribute to the Playbook</Link>
-          </div>
 
         </div>
       </section>
