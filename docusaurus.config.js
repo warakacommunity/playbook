@@ -341,7 +341,7 @@ const config = {
       announcementBar: {
         id: "live-soon-2026-04",
         content:
-          '✓ <strong>Coming soon</strong> — the AfriPlaybook will be live shortly. <a href="/MasakhanePlaybook/blog">See latest updates →</a>',
+          '✓ <strong>Workshop at Indaba 2026</strong> — Data, Culture, and Community  Interactive Exhibition of the AfricaNLP Playbook and Annotation Tool. <a href="/MasakhanePlaybook/workshops/indaba-2026">Register now →</a>',
         backgroundColor: "#e8f5ec",
         textColor: "#0f3d2b",
         isCloseable: true,
