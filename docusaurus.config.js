@@ -378,12 +378,12 @@ const config = {
             position: "left",
           },
           {
-            type: "custom-AboutNavbarItem",
+            type: "custom-AfriFinderNavbarItem",
             position: "left",
           },
           {
-            type: "custom-ContributeButtonNavbarItem",
-            position: "right",
+            type: "custom-AboutNavbarItem",
+            position: "left",
           },
           {
             type: "html",
