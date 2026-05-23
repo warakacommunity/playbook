@@ -212,7 +212,7 @@
   padding: 0.3rem 0.7rem;
   font-size: 0.85rem;
   color: var(--ifm-color-emphasis-800);
-  background: var(--ifm-color-emphasis-100);
+  background: var(--surface-wash);
   border-radius: 6px;
 }
 
@@ -246,9 +246,9 @@
 .register {
   max-width: 780px;
   margin: 0 auto;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 10px;
-  padding: 2rem 1.75rem;
+  background: var(--surface-wash);
+  border-radius: 14px;
+  padding: 2.25rem 1.75rem;
   text-align: center;
 }
 

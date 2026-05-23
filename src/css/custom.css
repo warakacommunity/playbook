@@ -26,6 +26,10 @@
   /* Soft surface tint (Coursera "Prepare for an in-demand career"
      wash). Use for grouped card containers, not for full sections. */
   --brand-surface-tint: #EAF1FE;
+  /* Meta-style neutral wash. Use for cards that should sit on a white
+     page without a border or shadow — barely-tinted off-white. */
+  --surface-wash: #F0F2F5;
+  --surface-wash-hover: #E7EAEF;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
@@ -168,6 +172,9 @@ article p,
   /* Brighter brand RGB for low-alpha tints on dark bg. */
   --brand-rgb: 91, 151, 241;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* Dark equivalent of the Meta wash — a touch lifted from the page bg. */
+  --surface-wash: #1f2128;
+  --surface-wash-hover: #262932;
 }
 
 /* Hide sidebar toggle button and home icon */
