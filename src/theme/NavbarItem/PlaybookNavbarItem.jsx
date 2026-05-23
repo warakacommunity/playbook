@@ -74,7 +74,6 @@ export default function PlaybookNavbarItem() {
         aria-haspopup="true"
         aria-expanded={open}
       >
-        <BookIcon />
         <span className={styles.btnLabel}>AfriPlaybook</span>
         <span className={styles.chevron} aria-hidden="true">{open ? '▲' : '▼'}</span>
       </button>

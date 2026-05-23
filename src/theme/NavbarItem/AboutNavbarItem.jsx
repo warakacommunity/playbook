@@ -132,7 +132,6 @@ export default function AboutNavbarItem() {
         aria-haspopup="true"
         aria-expanded={open}
       >
-        <InfoIcon />
         <span className={styles.btnLabel}>About</span>
         <span className={styles.chevron} aria-hidden="true">{open ? '▲' : '▼'}</span>
       </button>
