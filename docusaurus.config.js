@@ -348,9 +348,7 @@ const config = {
       },
       colorMode: {
         defaultMode: "light",
-        // Was true — caused Safari to flip between themes when macOS
-        // is in Auto appearance mode. The toggle button still works,
-        // user choice persists in localStorage.
+        disableSwitch: true,
         respectPrefersColorScheme: false,
       },
       docs: {
