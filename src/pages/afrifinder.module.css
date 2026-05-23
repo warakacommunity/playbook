@@ -74,15 +74,15 @@
 }
 
 .card {
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 14px;
-  padding: 1.75rem;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  background: var(--surface-wash);
+  border: none;
+  border-radius: 16px;
+  padding: 2rem 1.85rem;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .card:hover {
-  border-color: var(--ifm-color-primary);
+  background: var(--surface-wash-hover);
   transform: translateY(-2px);
 }
 
@@ -90,12 +90,16 @@
   width: 52px;
   height: 52px;
   border-radius: 12px;
-  background: rgba(var(--brand-rgb), 0.1);
+  background: #fff;
   color: var(--ifm-color-primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+}
+
+[data-theme='dark'] .cardIcon {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .cardTitle {
@@ -125,14 +129,16 @@
 /* ---------- Comparison table ---------- */
 .tableWrap {
   overflow-x: auto;
-  border-radius: 12px;
-  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 14px;
+  background: var(--surface-wash);
+  padding: 0.5rem;
 }
 
 .compareTable {
   width: 100%;
   border-collapse: collapse;
   margin: 0;
+  background: transparent;
 }
 
 .compareTable th {
@@ -140,13 +146,14 @@
   font-weight: 700;
   font-size: 0.95rem;
   padding: 0.9rem 1.1rem;
-  background: var(--ifm-color-emphasis-100);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .compareTable td {
   padding: 0.85rem 1.1rem;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   font-size: 0.97rem;
   vertical-align: top;
 }
@@ -165,7 +172,7 @@
   max-width: 760px;
   margin: 4rem auto 0;
   text-align: center;
-  background: var(--ifm-color-emphasis-100);
+  background: var(--surface-wash);
   border-radius: 18px;
   padding: 2.5rem 2rem;
 }
