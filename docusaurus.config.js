@@ -384,10 +384,6 @@ const config = {
             position: "left",
           },
           {
-            type: "custom-EventsNavbarItem",
-            position: "left",
-          },
-          {
             type: "html",
             position: "right",
             value:
