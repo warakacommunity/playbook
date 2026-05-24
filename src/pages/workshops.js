@@ -80,13 +80,25 @@ function WorkshopCard({ w }) {
       </p>
 
       <div style={{ marginTop: '0.5rem' }}>
-        <Link
-          to={`/workshops/${w.id}`}
-          className={clsx('button', styles.secondaryButton)}
-          style={{ fontSize: '0.85rem' }}
-        >
-          View details →
-        </Link>
+        {w.detailUrl ? (
+          <Link
+            href={w.detailUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={clsx('button', styles.secondaryButton)}
+            style={{ fontSize: '0.85rem' }}
+          >
+            View details →
+          </Link>
+        ) : (
+          <Link
+            to={`/workshops/${w.id}`}
+            className={clsx('button', styles.secondaryButton)}
+            style={{ fontSize: '0.85rem' }}
+          >
+            View details →
+          </Link>
+        )}
       </div>
     </article>
   );
