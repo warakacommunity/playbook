@@ -6,7 +6,7 @@ module.exports = defineConfig({
   testMatch: '**/*.screenshot.js',
   timeout: 30_000,
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:3000/MasakhanePlaybook',
     screenshot: 'only-on-failure',
     viewport: { width: 1280, height: 800 },
   },
