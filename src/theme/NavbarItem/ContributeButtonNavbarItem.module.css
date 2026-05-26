@@ -25,12 +25,13 @@
 }
 
 .contributeBtn:hover {
-  background: rgba(0,0,0,0.06);
-  color: var(--ifm-color-primary);
+  background: #2e86c1;
+  color: #fff;
 }
 
 .contributeBtn:active {
-  background: rgba(0,0,0,0.1);
+  background: #1a5276;
+  color: #fff;
 }
 
 [data-theme='dark'] .contributeBtn {
@@ -38,7 +39,8 @@
 }
 
 [data-theme='dark'] .contributeBtn:hover {
-  background: rgba(255,255,255,0.08);
+  background: #2e86c1;
+  color: #fff;
 }
 
 .chevron {

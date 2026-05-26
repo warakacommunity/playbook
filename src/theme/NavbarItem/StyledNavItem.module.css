@@ -27,22 +27,23 @@
 .playbookBtn:hover,
 .toolBtn:hover,
 .aboutBtn:hover {
-  background: var(--ifm-navbar-link-hover-color);
-  background: rgba(0,0,0,0.06);
-  color: var(--ifm-color-primary);
+  background: #2e86c1;
+  color: #fff;
   text-decoration: none;
 }
 
 .playbookBtn:active,
 .toolBtn:active,
 .aboutBtn:active {
-  background: rgba(0,0,0,0.1);
+  background: #1a5276;
+  color: #fff;
 }
 
 [data-theme='dark'] .playbookBtn:hover,
 [data-theme='dark'] .toolBtn:hover,
 [data-theme='dark'] .aboutBtn:hover {
-  background: rgba(255,255,255,0.08);
+  background: #2e86c1;
+  color: #fff;
 }
 
 
