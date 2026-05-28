@@ -1,0 +1,27 @@
+.figure {
+  margin: 1.25rem 0;
+  text-align: center;
+}
+
+.img {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .img {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.caption {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-600);
+  font-style: italic;
+  line-height: 1.4;
+}

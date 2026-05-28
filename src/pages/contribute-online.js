@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
@@ -7,345 +7,279 @@ import Heading from '@theme/Heading';
 import styles from './index.module.css';
 import acc from './contribute-online.module.css';
 import { StructureEditorContent } from '@site/src/components/StructureEditor';
+import Screenshot from '@site/src/components/Screenshot';
 
-/* ── Inline icons ────────────────────────────────────────── */
-const IconKey = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <circle cx="7.5" cy="15.5" r="5.5" /><path d="M21 2l-9.6 9.6" /><path d="M15.5 7.5l3 3L22 7l-3-3" />
-  </svg>
-);
-const IconEdit = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
-  </svg>
-);
-const IconLayers = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" />
-  </svg>
-);
-const IconUpload = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
-  </svg>
-);
-const IconGlobe = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-  </svg>
-);
-const IconSend = () => (
-  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
-  </svg>
-);
+/* ── Sub-step data ───────────────────────────────────────────────────────── */
 
-/* ── Feature overview cards ──────────────────────────────── */
-const FEATURES = [
-  { Icon: IconKey,    title: 'Authenticate',      body: 'Connect your GitHub account in seconds, via popup, device flow, or a personal access token. No local setup required.' },
-  { Icon: IconEdit,   title: 'Edit content',       body: 'Open any existing Playbook page and make changes using a full rich-text editor with headings, lists, links, images, and video.' },
-  { Icon: IconLayers, title: 'Manage structure',   body: 'Add new sections, pages, and subsections directly in the tree view. Rename, reorder, or delete items without touching the filesystem.' },
-  { Icon: IconUpload, title: 'Upload documents',   body: 'Import PDF, Word (.docx), HTML, txt, Markdown, and many more file types. The tool extracts text and images automatically and places them in the right location.' },
-  { Icon: IconGlobe,  title: 'Translate',          body: 'Translate any page into Hausa, Amharic, Swahili, French, or Portuguese, auto-translated first, then refined in a side-by-side editor.' },
-  { Icon: IconSend,   title: 'Submit a PR',        body: 'All changes are staged locally, then submitted as a single Pull Request on GitHub. No direct commits to main, everything goes through review.' },
-];
-
-/* ── Accordion step content ──────────────────────────────── */
-function StepAuth({ s }) {
-  return (
-    <>
-      <div className={styles.scopeGrid}>
-        <article className={styles.scopeCard}>
-          <h3 className={styles.scopeName}>
-            Sign in with GitHub
-            <span style={{ marginLeft: '0.4em', fontSize: '0.75em', fontWeight: 600, color: 'var(--ifm-color-primary)', verticalAlign: 'middle' }}>Recommended</span>
-          </h3>
-          <p className={styles.scopeIntro}>Opens a GitHub authorization popup in a new window.</p>
-          <ul className={styles.scopeList}>
-            <li>Click <strong>Sign in with GitHub</strong> inside the editor</li>
-            <li>A GitHub popup opens, review the permissions</li>
-            <li>Click <strong>Authorize</strong></li>
-            <li>The popup closes and your avatar appears, you are connected</li>
-          </ul>
-        </article>
-        <article className={styles.scopeCard}>
-          <h3 className={styles.scopeName}>Device flow</h3>
-          <p className={styles.scopeIntro}>Automatic fallback when your browser blocks popups.</p>
-          <ul className={styles.scopeList}>
-            <li>The editor switches to device flow automatically</li>
-            <li>A <strong>6-character code</strong> appears in the dialog</li>
-            <li>Visit <code>github.com/login/device</code> in any tab</li>
-            <li>Enter the code and click <strong>Authorize</strong></li>
-            <li>The editor connects automatically</li>
-          </ul>
-        </article>
-        <article className={styles.scopeCard}>
-          <h3 className={styles.scopeName}>Personal Access Token</h3>
-          <p className={styles.scopeIntro}>Use a GitHub token you generate yourself.</p>
-          <ul className={styles.scopeList}>
-            <li>Go to <a href="https://github.com/settings/tokens/new?scopes=public_repo&description=Masakhane+Playbook" target="_blank" rel="noopener noreferrer">github.com/settings/tokens</a></li>
-            <li>Select scope <strong>public_repo</strong></li>
-            <li>Generate and copy the token</li>
-            <li>Paste into the token field and click <strong>Connect</strong></li>
-          </ul>
-        </article>
-      </div>
-      <article className={styles.requirementsCard} style={{ marginTop: '1.25rem' }}>
-        <ul className={styles.requirementsList}>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Your token is stored in <strong>localStorage</strong> on your device only, never sent to any server other than GitHub.</span></li>
-          <li><span className={styles.requirementsBullet}>✓</span><span>To sign out, click your avatar in the editor header and choose <strong>Sign out</strong>.</span></li>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Minimum required scope: <code>public_repo</code>. No admin or private-repo access is ever requested.</span></li>
-        </ul>
-      </article>
-    </>
-  );
-}
-
-function StepStructure() {
-  const addSectionSteps = [
-    { num: '01', title: 'Open the editor', body: 'Click "Start Contributing Online" at the bottom of this page to launch the editor dialog.' },
-    { num: '02', title: 'Click "+ Section"', body: 'At the top of the left panel, click the "+ Section" button. An inline form appears.' },
-    { num: '03', title: 'Enter a name', body: 'Type the section title (e.g. "Data Quality"). Press Enter or click Confirm.' },
-    { num: '04', title: 'Section created', body: 'The tree shows the new section with a default intro page. Staged files: docs/{slug}/_category_.json and docs/{slug}/intro.md.' },
-  ];
-  return (
-    <>
-      <Heading as="h3" style={{ fontSize: '1.05rem', marginBottom: '0.75rem' }}>Add a top-level section (or a chapter)</Heading>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
-        {addSectionSteps.map((s) => (
-          <div key={s.num} className={styles.processStep}>
-            <div className={styles.processNum}>{s.num}</div>
-            <h4 className={styles.processTitle}>{s.title}</h4>
-            <p className={styles.processBody}>{s.body}</p>
-          </div>
-        ))}
-      </div>
-      <Heading as="h3" style={{ fontSize: '1.05rem', marginBottom: '0.75rem' }}>Add a page or subsection</Heading>
-      <div className={styles.requirementsGrid} style={{ marginBottom: '1.25rem' }}>
-        <article className={styles.requirementsCard}>
-          <div className={styles.requirementsHeader}><h4 className={styles.requirementsTitle}>Add a page inside a section</h4></div>
-          <ul className={styles.requirementsList}>
-            <li><span className={styles.requirementsBullet}>1</span><span>Hover over any section name, a <strong>+ Page</strong> icon appears.</span></li>
-            <li><span className={styles.requirementsBullet}>2</span><span>Click it, type the page title, confirm.</span></li>
-            <li><span className={styles.requirementsBullet}>3</span><span>New page opens in the right panel. Staged: <code>docs/{'{section}/{slug}.md'}</code></span></li>
-          </ul>
-        </article>
-        <article className={styles.requirementsCard}>
-          <div className={styles.requirementsHeader}><h4 className={styles.requirementsTitle}>Add a subsection under a page</h4></div>
-          <ul className={styles.requirementsList}>
-            <li><span className={styles.requirementsBullet}>1</span><span>Hover over any page, a <strong>+ Subsection</strong> icon appears.</span></li>
-            <li><span className={styles.requirementsBullet}>2</span><span>Click it and enter the subsection name.</span></li>
-            <li><span className={styles.requirementsBullet}>3</span><span>Page becomes a parent folder. Staged: <code>_category_.json</code> + <code>index.md</code></span></li>
-          </ul>
-        </article>
-      </div>
-      <article className={styles.requirementsCard}>
-        <div className={styles.requirementsHeader}><h4 className={styles.requirementsTitle}>Rename, reorder, and delete</h4></div>
-        <ul className={styles.requirementsList}>
-          <li><span className={styles.requirementsBullet}>✎</span><span><strong>Rename:</strong> hover any item → click the rename icon → type a new name → press Enter.</span></li>
-          <li><span className={styles.requirementsBullet}>↕</span><span><strong>Reorder:</strong> use the up/down arrows on hover to move items within their section.</span></li>
-          <li><span className={styles.requirementsBullet}>✕</span><span><strong>Delete:</strong> click the trash icon → confirm. Staged; undo available in the changes panel.</span></li>
-        </ul>
-      </article>
-    </>
-  );
-}
-
-function StepEdit() {
-  const steps = [
-    { num: '01', title: 'Select a page', body: 'In the left panel tree, click the pencil icon next to any page. The page content loads in the right panel.' },
-    { num: '02', title: 'Edit with the toolbar', body: 'Use the rich-text toolbar above the editor area to format your content (see reference below).' },
-    { num: '03', title: 'Save', body: 'Click Save. The change is staged locally in the pending changes panel. Nothing is sent to GitHub yet.' },
-  ];
-  return (
-    <>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
-        {steps.map((s) => (
-          <div key={s.num} className={styles.processStep}>
-            <div className={styles.processNum}>{s.num}</div>
-            <h4 className={styles.processTitle}>{s.title}</h4>
-            <p className={styles.processBody}>{s.body}</p>
-          </div>
-        ))}
-      </div>
-      <div className={styles.requirementsGrid}>
-        <article className={styles.requirementsCard}>
-          <div className={styles.requirementsHeader}><h4 className={styles.requirementsTitle}>Text formatting</h4></div>
-          <ul className={styles.requirementsList}>
-            <li><span className={styles.requirementsBullet}>B</span><span><strong>Bold</strong>, <em>Italic</em>, Underline, Strikethrough</span></li>
-            <li><span className={styles.requirementsBullet}>H</span><span>Headings H1, H2, H3</span></li>
-            <li><span className={styles.requirementsBullet}>¶</span><span>Bullet list, Numbered list, Blockquote</span></li>
-            <li><span className={styles.requirementsBullet}>A</span><span>Text colour picker</span></li>
-            <li><span className={styles.requirementsBullet}>✕</span><span>Remove all formatting from selection</span></li>
-          </ul>
-        </article>
-        <article className={styles.requirementsCard}>
-          <div className={styles.requirementsHeader}><h4 className={styles.requirementsTitle}>Media &amp; links</h4></div>
-          <ul className={styles.requirementsList}>
-            <li><span className={styles.requirementsBullet}>🔗</span><span>Insert link (prompts for URL) / Remove link</span></li>
-            <li><span className={styles.requirementsBullet}>🖼</span><span>Insert image from local file (embedded inline)</span></li>
-            <li><span className={styles.requirementsBullet}>▶</span><span>Insert video by URL, YouTube, Vimeo, or direct link</span></li>
-            <li><span className={styles.requirementsBullet}>📎</span><span>Insert video from local file (max 10 MB)</span></li>
-          </ul>
-        </article>
-      </div>
-    </>
-  );
-}
-
-function StepUpload() {
-  const steps = [
-    { num: '01', title: 'Click the upload button', body: 'In the left panel header, click the upload (↑) icon. A file picker opens.' },
-    { num: '02', title: 'Select your file', body: 'Choose a PDF, DOCX, MD, MDX, TXT, or HTML file from your device.' },
-    { num: '03', title: 'Extraction runs in-browser', body: 'Text and images are extracted locally,  nothing is uploaded to any server at this stage.' },
-    { num: '04', title: 'Choose placement', body: 'Select where to place the content: as a new top-level page, inside an existing section, or as a subsection. Confirm.' },
-    { num: '05', title: 'Review and edit', body: 'The extracted content opens in the right panel. Review, fix formatting, and click Save to stage the change.' },
-  ];
-  return (
-    <>
-      <div className={styles.scopeGrid} style={{ marginBottom: '1.5rem' }}>
-        <article className={styles.scopeCard}>
-          <h3 className={styles.scopeName}>PDF</h3>
-          <p className={styles.scopeIntro}>Text and embedded images are extracted. Each page becomes a paragraph; images are embedded inline.</p>
-          <ul className={styles.scopeList}>
-            <li>File must contain selectable text (not scanned images)</li>
-            <li>Large PDFs may take a few seconds to process</li>
-          </ul>
-        </article>
-        <article className={styles.scopeCard}>
-          <h3 className={styles.scopeName}>Word (.docx)</h3>
-          <p className={styles.scopeIntro}>Converted to HTML via Mammoth, then to Markdown. Headings, lists, bold, and italic are preserved.</p>
-          <ul className={styles.scopeList}>
-            <li>Complex layouts may be simplified</li>
-            <li>Embedded images are extracted inline</li>
-          </ul>
-        </article>
-        <article className={styles.scopeCard}>
-          <h3 className={styles.scopeName}>Markdown / Text / HTML</h3>
-          <p className={styles.scopeIntro}>Uploaded as-is with frontmatter added automatically.</p>
-          <ul className={styles.scopeList}>
-            <li>Extensions: <code>.md</code> <code>.mdx</code> <code>.txt</code> <code>.html</code></li>
-            <li>Existing frontmatter is preserved</li>
-          </ul>
-        </article>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        {steps.map((s) => (
-          <div key={s.num} className={styles.processStep}>
-            <div className={styles.processNum}>{s.num}</div>
-            <h4 className={styles.processTitle}>{s.title}</h4>
-            <p className={styles.processBody}>{s.body}</p>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-
-function StepTranslate() {
-  const steps = [
-    { num: '01', title: 'Select a page', body: 'Click the translate icon next to any page in the left panel tree.' },
-    { num: '02', title: 'Choose a target language', body: 'Use the language dropdown in the right panel.' },
-    { num: '03', title: 'Auto-translate', body: 'Click Auto-translate. The editor splits: original English on the left, machine-translated text on the right. African languages use MyMemory; European languages use Helsinki-NLP.' },
-    { num: '04', title: 'Alternatively, Google Translate', body: 'Click the Google Translate button as an alternative. Results appear in the same right-hand pane.' },
-    { num: '05', title: 'Refine the translation', body: 'Edit the right-hand pane directly. The left pane stays fixed for reference. Use the same rich-text toolbar.' },
-    { num: '06', title: 'Save', body: 'Click Save. The translation is staged as a new file at i18n/{lang}/docusaurus-plugin-content-docs/current/{original-path}.' },
-  ];
-  return (
-    <>
-      <article className={styles.requirementsCard} style={{ marginBottom: '1.5rem' }}>
-        <div className={styles.requirementsHeader}><h4 className={styles.requirementsTitle}>Supported languages</h4></div>
-        <ul className={styles.requirementsList}>
-          {[['ha','Hausa'],['am','Amharic'],['sw','Swahili'],['fr','Français'],['pt','Português']].map(([code, name]) => (
-            <li key={code}>
-              <span className={styles.requirementsBullet}><code style={{ fontSize: '0.8em' }}>{code}</code></span>
-              <span>{name}</span>
-            </li>
-          ))}
-        </ul>
-      </article>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
-        {steps.map((s) => (
-          <div key={s.num} className={styles.processStep}>
-            <div className={styles.processNum}>{s.num}</div>
-            <h4 className={styles.processTitle}>{s.title}</h4>
-            <p className={styles.processBody}>{s.body}</p>
-          </div>
-        ))}
-      </div>
-      <article className={styles.requirementsCard}>
-        <ul className={styles.requirementsList}>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Auto-translation is a <strong>starting point</strong>, always review and refine before saving.</span></li>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Uploaded documents can also be translated, upload first, then open the translation tab.</span></li>
-          <li><span className={styles.requirementsBullet}>✓</span><span>The translation file path mirrors the English source so the site serves both under the correct locale URL.</span></li>
-        </ul>
-      </article>
-    </>
-  );
-}
-
-function StepSubmit() {
-  const steps = [
-    { num: '01', title: 'Open the changes panel', body: 'The left panel shows a "Pending changes" count badge. Click it to see all staged changes: + (create), ~ (edit), − (delete).' },
-    { num: '02', title: 'Review and undo if needed', body: 'Each change has an undo button (↩). Click to remove that specific change. "Clear all" discards everything.' },
-    { num: '03', title: 'Click "Submit as Pull Request"', body: 'Click Submit. You must be authenticated. The editor bundles all staged changes into a single commit on a new branch.' },
-    { num: '04', title: 'Pull Request is created', body: 'A PR opens on GitHub with a title and body listing all changes. The editor shows a confirmation with a direct link.' },
-    { num: '05', title: 'Wait for review', body: 'A maintainer will review, leave feedback if needed, and merge when the changes meet editorial guidelines.' },
-  ];
-  return (
-    <>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
-        {steps.map((s) => (
-          <div key={s.num} className={styles.processStep}>
-            <div className={styles.processNum}>{s.num}</div>
-            <h4 className={styles.processTitle}>{s.title}</h4>
-            <p className={styles.processBody}>{s.body}</p>
-          </div>
-        ))}
-      </div>
-      <article className={styles.requirementsCard}>
-        <ul className={styles.requirementsList}>
-          <li><span className={styles.requirementsBullet}>✓</span><span>PRs are always created on a new branch, never directly on <code>main</code>.</span></li>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Branch names are auto-generated: <code>edit/{'{slug}-{timestamp}'}</code> or <code>structure/edit-{'{timestamp}'}</code>.</span></li>
-          <li><span className={styles.requirementsBullet}>✓</span><span>Staged changes are saved in <strong>localStorage</strong>, closing the browser and coming back restores your work.</span></li>
-        </ul>
-      </article>
-    </>
-  );
-}
-
-/* ── Accordion step definitions ──────────────────────────── */
 const STEPS = [
-  { label: 'Authenticate',  title: 'Authenticate with GitHub',       Content: StepAuth },
-  { label: 'Structure',     title: 'Manage structure',               Content: StepStructure },
-  { label: 'Edit',          title: 'Edit existing content',          Content: StepEdit },
-  { label: 'Upload',        title: 'Upload documents',               Content: StepUpload },
-  { label: 'Translate',     title: 'Translate a page',               Content: StepTranslate },
-  { label: 'Submit PR',     title: 'Review changes and submit a PR', Content: StepSubmit },
+  {
+    label: 'Authenticate',
+    title: 'Authenticate with GitHub',
+    subSteps: [
+      {
+        title: 'Open the editor',
+        body: 'Click "Start Contributing Online" at the bottom of this page. The editor modal opens with an authentication panel — no local setup or Git knowledge required.',
+        shots: [{ file: 'd1-1-auth-panel-initial.png', caption: 'The authentication panel', width: '480px' }],
+      },
+      {
+        title: 'Sign in with GitHub (recommended)',
+        body: 'Click Sign in with GitHub. A GitHub authorization popup opens. Review the requested permissions (only public_repo), then click Authorize. The popup closes and your avatar appears.',
+        shots: [
+          { file: 'd1-2-github-btn-hover.png', caption: 'Sign in with GitHub button', width: '320px' },
+          { file: 'd1-3-oauth-popup.png', caption: 'GitHub authorization popup', width: '320px' },
+        ],
+      },
+      {
+        title: 'Alternative: device flow or personal access token',
+        body: 'If popups are blocked, the editor falls back to device flow: a 6-character code appears — visit github.com/login/device in any tab and enter it. Or paste a GitHub personal access token directly into the token field (scope: public_repo).',
+        shots: [
+          { file: 'd1-4-device-flow-code.png', caption: 'Device flow — enter this code on GitHub', width: '320px' },
+          { file: 'd1-5-pat-input-focused.png', caption: 'Personal access token input', width: '320px' },
+        ],
+      },
+      {
+        title: 'You are connected',
+        body: 'Your avatar and username appear in the editor header. Your token is stored in localStorage on your device only — never sent to any server other than GitHub. To sign out, click your avatar and choose Sign out.',
+        shots: [{ file: 'd1-6-auth-connected.png', caption: 'Connected — avatar and username in the header', width: '380px' }],
+      },
+    ],
+  },
+  {
+    label: 'Structure',
+    title: 'Manage document structure',
+    subSteps: [
+      {
+        title: 'The left panel tree',
+        body: 'The left panel shows all existing sections and pages. All structural changes are staged locally in the pending changes panel — nothing is committed until you submit a PR.',
+        shots: [{ file: 'd2-1-tree-panel-overview.png', caption: 'The left panel shows sections and pages', width: '280px' }],
+      },
+      {
+        title: 'Add a new section',
+        body: 'Click "+ Section" at the top of the left panel. An inline form appears — type the section name and press Enter. The new section with a default intro page is added to the tree.',
+        shots: [
+          { file: 'd2-2-add-section-btn.png', caption: 'Click "+ Section" in the panel header', width: '300px' },
+          { file: 'd2-3-section-inline-form.png', caption: 'Type the name and press Enter', width: '300px' },
+        ],
+      },
+      {
+        title: 'Add a page or subsection',
+        body: 'Hover any section row to reveal the "+ Page" button. Hover a page row to reveal "+ Sub". Click, type a name, and confirm. New pages open automatically in the right panel.',
+        shots: [
+          { file: 'd3-1-add-page-hover.png', caption: 'Hover a section row to reveal + Page', width: '300px' },
+          { file: 'd4-1-subsection-btn.png', caption: 'Hover a page row to reveal + Sub', width: '300px' },
+        ],
+      },
+      {
+        title: 'Rename, reorder, and delete',
+        body: 'Hover any item to reveal its action buttons: rename, move up/down, and delete. Deletions are staged — you can undo individual changes from the pending changes panel at any time.',
+        shots: [
+          { file: 'd5-1-row-actions.png', caption: 'Hover a row to reveal action buttons', width: '300px' },
+          { file: 'd5-2-rename-input.png', caption: 'Rename becomes an inline editable field', width: '300px' },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Edit',
+    title: 'Edit existing content',
+    subSteps: [
+      {
+        title: 'Select a page to edit',
+        body: 'Click the pencil icon next to any page in the left panel. The page content loads in the right panel with a full rich-text toolbar ready to use.',
+        shots: [{ file: 'd6-1-page-selected.png', caption: 'A page open for editing in the right panel', width: '540px' }],
+      },
+      {
+        title: 'Format text',
+        body: 'Use the toolbar to apply headings (H1–H3), bold, italic, underline, or strikethrough. Select text first, then click a format button, or use keyboard shortcuts like Ctrl+B.',
+        shots: [
+          { file: 'd7-2-heading-dropdown.png', caption: 'Heading dropdown — H1, H2, H3', width: '300px' },
+          { file: 'd7-3-bold-italic.png', caption: 'Bold applied to selected text', width: '300px' },
+        ],
+      },
+      {
+        title: 'Lists and blockquotes',
+        body: 'Insert bullet lists, numbered lists, or blockquotes from the toolbar. Click anywhere in a paragraph, then click the list or blockquote button to convert it.',
+        shots: [
+          { file: 'd7-4-bullet-list.png', caption: 'Bullet list in the editor', width: '300px' },
+          { file: 'd7-6-blockquote.png', caption: 'Blockquote block', width: '300px' },
+        ],
+      },
+      {
+        title: 'Links and images',
+        body: 'Click the link button to insert or remove a hyperlink. Click the image button to embed an image from a local file — it is encoded inline so it travels with the document.',
+        shots: [
+          { file: 'd8-2-link-in-editor.png', caption: 'A link rendered in the editor', width: '300px' },
+          { file: 'd8-4-image-in-editor.png', caption: 'Image embedded inline', width: '300px' },
+        ],
+      },
+      {
+        title: 'Save your changes',
+        body: 'Click Save in the right panel header. The change is staged locally and appears in the pending changes panel at the bottom of the left panel. Nothing is sent to GitHub until you submit a PR.',
+        shots: [
+          { file: 'd9-1-save-button.png', caption: 'Save button in the right panel header', width: '380px' },
+          { file: 'd9-2-save-toast.png', caption: 'Change staged in the pending changes panel', width: '280px' },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Upload',
+    title: 'Upload documents',
+    subSteps: [
+      {
+        title: 'Supported file types',
+        body: 'The upload tool accepts PDF, Word (.docx), Markdown (.md / .mdx), plain text, and HTML files. Text and images are extracted entirely in the browser — nothing is uploaded to any server at this stage.',
+        shots: [{ file: 'd10-1-upload-btn.png', caption: 'Upload button (↑) in the left panel header', width: '300px' }],
+      },
+      {
+        title: 'Upload and choose placement',
+        body: 'Click the upload button (↑), choose a file from your device, then select where to place the extracted content: as a new top-level page, inside an existing section, or as a subsection.',
+        shots: [
+          { file: 'd11-1-upload-placement.png', caption: 'Choose where to place the content', width: '320px' },
+          { file: 'd11-2-target-page-selector.png', caption: 'Select the target section', width: '320px' },
+        ],
+      },
+      {
+        title: 'Review and save',
+        body: 'The extracted content opens in the right panel. Review the text, fix any formatting issues, then click Save to stage the change. For PDFs and DOCX files, images are embedded inline automatically.',
+        shots: [{ file: 'd12-3-md-result.png', caption: 'Extracted content ready to review and save', width: '480px' }],
+      },
+    ],
+  },
+  {
+    label: 'Translate',
+    title: 'Translate a page',
+    subSteps: [
+      {
+        title: 'Open the translation panel',
+        body: 'Hover any page in the left panel to reveal the translate icon. Click it to open the translation panel on the right. Supported languages: Hausa, Amharic, Swahili, French, and Portuguese.',
+        shots: [
+          { file: 'd13-1-translate-icon.png', caption: 'Translate icon on a page row', width: '280px' },
+          { file: 'd13-2-translate-panel.png', caption: 'Translation panel open on the right', width: '480px' },
+        ],
+      },
+      {
+        title: 'Choose a target language',
+        body: 'Use the language dropdown in the translation panel to select the target language. The code shown (ha, am, sw, fr, pt) maps to the Docusaurus locale that will receive the translated file.',
+        shots: [
+          { file: 'd14-1-lang-dropdown-closed.png', caption: 'Language selector', width: '320px' },
+          { file: 'd14-2-lang-dropdown-open.png', caption: 'Dropdown open — choose a language', width: '320px' },
+        ],
+      },
+      {
+        title: 'Auto-translate',
+        body: 'Click Auto-translate to generate a machine translation. African languages use MyMemory; European languages use Helsinki-NLP. The view splits: original English on the left, translation on the right.',
+        shots: [
+          { file: 'd15-1-auto-translate-btn.png', caption: 'Auto-translate button in the toolbar', width: '320px' },
+          { file: 'd17-1-side-by-side.png', caption: 'Side-by-side view after auto-translation', width: '480px' },
+        ],
+      },
+      {
+        title: 'Refine and save',
+        body: 'Edit the translation directly in the right pane — use the same rich-text toolbar. The original English stays on the left for reference. Click Save to stage the translation as a new i18n file.',
+        shots: [
+          { file: 'd17-2-editing-translation.png', caption: 'Editing the translation in the right pane', width: '460px' },
+          { file: 'd17-3-save-translation.png', caption: 'Save button in the translation panel header', width: '360px' },
+        ],
+        tip: 'Auto-translation is a starting point — always review and refine before saving.',
+      },
+    ],
+  },
+  {
+    label: 'Submit PR',
+    title: 'Review changes and submit a PR',
+    subSteps: [
+      {
+        title: 'Review pending changes',
+        body: 'The bottom of the left panel shows a count of staged changes. Click it to expand the changes panel — all pending additions (+), edits (~), and deletions (−) are listed by file path.',
+        shots: [
+          { file: 'd18-1-pending-changes.png', caption: 'Pending changes counter at the bottom', width: '300px' },
+          { file: 'd19-1-changes-review.png', caption: 'All staged changes listed by file', width: '320px' },
+        ],
+      },
+      {
+        title: 'Undo if needed',
+        body: 'Each change has an undo button. Click it to remove that specific change from the staging area. "Clear all" discards everything. Staged changes persist in localStorage across browser sessions.',
+        shots: [{ file: 'd19-3-undo-change.png', caption: 'Undo button on an individual change', width: '380px' }],
+      },
+      {
+        title: 'Submit as a Pull Request',
+        body: 'Click "Submit as Pull Request". All staged changes are bundled into a single commit on a new branch, and a PR is opened on GitHub automatically. A confirmation screen shows a direct link to the PR.',
+        shots: [
+          { file: 'd20-1-submit-btn.png', caption: 'Submit as Pull Request button', width: '320px' },
+          { file: 'd21-1-pr-success.png', caption: 'Confirmation with a link to the opened PR', width: '420px' },
+        ],
+        tip: 'PRs always go to a new branch — never directly to main. A maintainer will review and merge.',
+      },
+    ],
+  },
 ];
 
-/* ── Page ────────────────────────────────────────────────── */
-export default function ContributeOnline() {
-  const [activeTab, setActiveTab] = useState(0);
-  const [editorOpen, setEditorOpen] = useState(false);
+/* ── Page component ──────────────────────────────────────────────────────── */
 
-  const prev = () => setActiveTab((t) => Math.max(0, t - 1));
-  const next = () => setActiveTab((t) => Math.min(STEPS.length - 1, t + 1));
-  const isFirst = activeTab === 0;
-  const isLast  = activeTab === STEPS.length - 1;
-  const { title, Content } = STEPS[activeTab];
+export default function ContributeOnline() {
+  const [activeStep, setActiveStep] = useState(0);
+  const [activeSub, setActiveSub] = useState(0);
+  const [editorOpen, setEditorOpen] = useState(false);
+  const panelRef = useRef(null);
+
+  const step = STEPS[activeStep];
+  const sub = step.subSteps[activeSub];
+  const subCount = step.subSteps.length;
+
+  const isGlobalFirst = activeStep === 0 && activeSub === 0;
+  const isGlobalLast = activeStep === STEPS.length - 1 && activeSub === subCount - 1;
+
+  function scrollPanel() {
+    if (panelRef.current) {
+      panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function goPrev() {
+    if (activeSub > 0) {
+      setActiveSub(s => s - 1);
+    } else if (activeStep > 0) {
+      const prevStep = STEPS[activeStep - 1];
+      setActiveStep(s => s - 1);
+      setActiveSub(prevStep.subSteps.length - 1);
+    }
+    scrollPanel();
+  }
+
+  function goNext() {
+    if (activeSub < subCount - 1) {
+      setActiveSub(s => s + 1);
+    } else if (activeStep < STEPS.length - 1) {
+      setActiveStep(s => s + 1);
+      setActiveSub(0);
+    }
+    scrollPanel();
+  }
+
+  function goToStep(i) {
+    setActiveStep(i);
+    setActiveSub(0);
+    scrollPanel();
+  }
+
+  const nextLabel = activeSub < subCount - 1
+    ? 'Next →'
+    : activeStep < STEPS.length - 1
+      ? `Next: ${STEPS[activeStep + 1].label} →`
+      : null;
 
   return (
     <Layout
       title="Contribute Online"
-      description="Step-by-step guide to contributing to the AfriPlaybook directly in your browser, no local setup required."
+      description="Step-by-step guide to contributing to the AfriPlaybook directly in your browser — no local setup required."
     >
       <section className={clsx(styles.section, styles.cfcSection, styles.cfcPageSection)}>
         <div className="container">
 
           <Link to="/" className={styles.cfcBackLink}>← Back to home</Link>
 
-          {/* ── Hero ───────────────────────────────────────── */}
+          {/* Hero */}
           <div className={styles.cfcHeader}>
             <div>
               <span className={styles.sectionEyebrow}>Online contribution</span>
@@ -354,83 +288,99 @@ export default function ContributeOnline() {
               </Heading>
               <p className={styles.cfcLead}>
                 No Git, no terminal, no local setup. Authenticate with GitHub,
-                use the built-in editor to add or improve content, and submit
-                your changes as a Pull Request, all without leaving the page.
+                edit or upload content, and submit your changes as a Pull Request
+                — all without leaving the page.
               </p>
             </div>
           </div>
 
-          {/* ── Overview cards ─────────────────────────────── */}
-          <div className={styles.cfcSubhead}>
-            <Heading as="h2" className={styles.cfcSubheadTitle}>What you can do</Heading>
-            <p className={styles.cfcSubheadLead}>
-              The online editor covers the full contribution lifecycle, from
-              authentication through editing, uploading, translating, and submitting.
-            </p>
-          </div>
-          <div className={styles.expectationGrid}>
-            {FEATURES.map(({ Icon, title: t, body }) => (
-              <article key={t} className={styles.expectationCard}>
-                <div className={styles.expectationIcon}><Icon /></div>
-                <h3 className={styles.expectationTitle}>{t}</h3>
-                <p className={styles.expectationBody}>{body}</p>
-              </article>
-            ))}
-          </div>
-
-          {/* ── Tabbed step guide ──────────────────────────── */}
-          <div className={styles.cfcSubhead}>
-            <Heading as="h2" className={styles.cfcSubheadTitle}>Step-by-step guide</Heading>
-            <p className={styles.cfcSubheadLead}>
-              Follow the steps below, or use Next / Previous to go through them in order.
-            </p>
+          {/* Step tabs */}
+          <div ref={panelRef} className={acc.tabList} role="tablist" aria-label="Contribution steps">
+            {STEPS.map(({ label }, i) => {
+              const done = i < activeStep;
+              return (
+                <button
+                  key={label}
+                  role="tab"
+                  type="button"
+                  aria-selected={i === activeStep}
+                  className={clsx(acc.tab, i === activeStep && acc.tabActive, done && acc.tabDone)}
+                  onClick={() => goToStep(i)}
+                >
+                  <span className={clsx(acc.tabNum, done && acc.tabNumDone)}>
+                    {done ? '✓' : i + 1}
+                  </span>
+                  <span className={acc.tabLabel}>{label}</span>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Tab strip */}
-          <div className={acc.tabList} role="tablist" aria-label="Contribution steps">
-            {STEPS.map(({ label }, i) => (
-              <button
-                key={label}
-                role="tab"
-                type="button"
-                aria-selected={i === activeTab}
-                className={clsx(acc.tab, i === activeTab && acc.tabActive)}
-                onClick={() => setActiveTab(i)}
-              >
-                <span className={acc.tabNum}>{i + 1}</span>
-                <span className={acc.tabLabel}>{label}</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Tab panel */}
+          {/* Sub-step panel */}
           <div role="tabpanel" className={acc.tabPanel}>
-            <Heading as="h3" style={{ fontSize: '1.3rem', marginBottom: '1.5rem' }}>
-              Step {activeTab + 1}, {title}
-            </Heading>
-            <Content />
 
-            {/* Next / Previous nav */}
+            {/* Header row: step context + progress dots */}
+            <div className={acc.subHeader}>
+              <span className={acc.stepMeta}>
+                Step {activeStep + 1} of {STEPS.length} &mdash; {step.title}
+              </span>
+              <div className={acc.dots} aria-label={`Sub-step ${activeSub + 1} of ${subCount}`}>
+                {step.subSteps.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Go to sub-step ${i + 1}`}
+                    className={clsx(acc.dot, i === activeSub && acc.dotActive, i < activeSub && acc.dotDone)}
+                    onClick={() => { setActiveSub(i); scrollPanel(); }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Sub-step title */}
+            <Heading as="h3" className={acc.subTitle}>{sub.title}</Heading>
+
+            {/* Body text */}
+            {sub.body && <p className={acc.subBody}>{sub.body}</p>}
+
+            {/* Screenshots */}
+            {sub.shots && (
+              sub.shots.length === 1
+                ? <Screenshot file={sub.shots[0].file} caption={sub.shots[0].caption} width={sub.shots[0].width} />
+                : (
+                  <div className={acc.shotRow}>
+                    {sub.shots.map(s => (
+                      <div key={s.file} className={acc.shotCell}>
+                        <Screenshot file={s.file} caption={s.caption} width={s.width} />
+                      </div>
+                    ))}
+                  </div>
+                )
+            )}
+
+            {/* Tip */}
+            {sub.tip && (
+              <div className={acc.tip}>
+                <span className={acc.tipIcon}>💡</span>
+                <span>{sub.tip}</span>
+              </div>
+            )}
+
+            {/* Navigation */}
             <div className={acc.tabNav}>
-              {!isFirst ? (
-                <button type="button" className={acc.navBtn} onClick={prev}>
-                  ← Previous
-                </button>
-              ) : (
-                <span className={acc.navSpacer} />
-              )}
+              {!isGlobalFirst
+                ? <button type="button" className={acc.navBtn} onClick={goPrev}>← Previous</button>
+                : <span />}
 
-              {!isLast ? (
-                <button type="button" className={clsx(acc.navBtn, acc.navBtnPrimary)} onClick={next}>
-                  Next →
-                </button>
-              ) : (
-                <span className={acc.navSpacer} />
-              )}
+              <span className={acc.subCounter}>{activeSub + 1} / {subCount}</span>
+
+              {!isGlobalLast && nextLabel
+                ? <button type="button" className={clsx(acc.navBtn, acc.navBtnPrimary)} onClick={goNext}>{nextLabel}</button>
+                : <span />}
             </div>
           </div>
 
-          {/* ── Bottom CTA ─────────────────────────────────── */}
+          {/* CTA */}
           <div className={styles.cfcActions} style={{ marginTop: '2.5rem', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button
               type="button"

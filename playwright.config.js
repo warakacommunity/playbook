@@ -6,14 +6,17 @@ module.exports = defineConfig({
   testMatch: '**/*.screenshot.js',
   timeout: 30_000,
   use: {
-    baseURL: 'http://localhost:3000/MasakhanePlaybook',
+    baseURL: 'http://localhost:3000',
     screenshot: 'only-on-failure',
-    viewport: { width: 1280, height: 800 },
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 960, height: 700 },
+        deviceScaleFactor: 2,
+      },
     },
   ],
   outputDir: 'scripts/screenshots/.results',
