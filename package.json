@@ -23,6 +23,7 @@
     "pdf": "yarn build && yarn pdf:built",
     "test": "vitest run",
     "screenshots": "playwright test --config=playwright.config.js",
+    "screenshots:compress": "find static/img/screenshots -name 'd*.png' -size +20k -exec pngquant --force --quality 82-95 --speed 1 --output {} {} \\;",
     "screenshots:install": "playwright install chromium"
   },
   "dependencies": {
