@@ -242,6 +242,15 @@ export function StructureEditorContent({ onClose }) {
     }
   }, [auth?.token, error, loadTree]);
 
+  // Hide body overflow when modal is open
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
   /* ── Auth ─────────────────────────────────────────────────────────────── */
 
   async function handleConnect(token) {
