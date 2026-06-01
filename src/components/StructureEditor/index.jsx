@@ -940,7 +940,7 @@ export function StructureEditorContent({ onClose }) {
                       type="button"
                       onClick={() => uploadInputRef.current?.click()}
                     >
-                      📤
+                      📤 Upload document
                     </button>
                     <input
                       ref={uploadInputRef}
