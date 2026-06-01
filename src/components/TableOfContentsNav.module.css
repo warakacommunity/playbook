@@ -1,0 +1,209 @@
+.container {
+  margin: 0 auto 3rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 8px;
+  border: 1px solid #e0e7ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Progress Bar */
+.progressBar {
+  position: relative;
+  margin-bottom: 1.5rem;
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  position: absolute;
+  top: -22px;
+  right: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* Main Navigation Layout */
+.navigation {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.buttonSection {
+  display: flex;
+  justify-content: center;
+}
+
+.sectionLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+/* Current Section (Center) */
+.section {
+  text-align: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.currentHeading {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.5;
+  word-break: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sectionCounter {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.empty {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Navigation Buttons */
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 110px;
+  text-align: center;
+  font-family: inherit;
+}
+
+.navButton:not(.disabled) {
+  cursor: pointer;
+}
+
+.navButton:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.navButton.disabled {
+  background: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.navButton.disabled:hover {
+  background: #d1d5db;
+  transform: none;
+}
+
+/* Level-based styling */
+.level2 {
+  font-weight: 600;
+}
+
+/* Divider between top and bottom navigation */
+.divider {
+  margin-top: 1.5rem;
+  border-top: 2px solid rgba(107, 114, 128, 0.2);
+}
+
+/* Smooth transitions for section visibility */
+:global(article .markdown > *) {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+:global(article .markdown > [style*="display: none"]) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navigation {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .buttonSection {
+    order: 10; /* Push buttons to bottom */
+  }
+
+  .navButton {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .sectionLabel {
+    font-size: 0.7rem;
+  }
+
+  .progressText {
+    font-size: 0.65rem;
+    top: -20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+    margin: 0 auto 2rem;
+  }
+
+  .navigation {
+    gap: 0.75rem;
+  }
+
+  .navButton {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    min-width: 90px;
+  }
+
+  .currentHeading {
+    font-size: 0.8rem;
+  }
+}
