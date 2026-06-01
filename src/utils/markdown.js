@@ -194,7 +194,9 @@ function nodeToMd(node) {
 }
 
 export function htmlToMd(html) {
+  // Remove empty anchor tags (id-only anchors from Word documents)
+  const cleaned = html.replace(/<a\s+id="[^"]*">\s*<\/a>/g, '');
   const div = document.createElement('div');
-  div.innerHTML = html;
+  div.innerHTML = cleaned;
   return nodeToMd(div).replace(/\n{3,}/g, '\n\n').trim();
 }

@@ -399,6 +399,15 @@ export function StructureEditorContent({ onClose }) {
       } else if (ext === 'docx') {
         const arrayBuffer = await file.arrayBuffer();
         const result = await mammoth.convertToHtml({ arrayBuffer }, {
+          styleMap: [
+            'p[style-name="Heading 1"] => h1:fresh',
+            'p[style-name="Heading 2"] => h2:fresh',
+            'p[style-name="Heading 3"] => h3:fresh',
+            'p[style-name="Heading 4"] => h4:fresh',
+            'p[style-name="Heading 5"] => h5:fresh',
+            'p[style-name="Heading 6"] => h6:fresh',
+            'p[style-name="Normal"] => p:fresh',
+          ],
           convertImage: mammoth.images.imgElement(image =>
             image.read('base64').then(b64 => ({
               src: `data:${image.contentType};base64,${b64}`,
@@ -417,10 +426,45 @@ export function StructureEditorContent({ onClose }) {
       console.error('[upload] parse error:', file.name, err);
       return null;
     }
-    const h1 = markdown.match(/^#\s+(.+)$/m);
-    const titleFromH1 = !!h1;
-    const title = h1 ? h1[1].trim() : file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ');
-    return { fileName: file.name, title, titleFromH1, markdown };
+    // Split by h1 headings to create separate pages, preserving document order
+    const h1Pattern = /^#\s+(.+)$/gm;
+    const h1Matches = Array.from(markdown.matchAll(h1Pattern));
+
+    if (h1Matches.length > 1) {
+      // Multiple h1 headings: split into separate pages while preserving order
+      const sections = [];
+
+      for (let i = 0; i < h1Matches.length; i++) {
+        const match = h1Matches[i];
+        const title = match[1].trim();
+
+        // Get the start position of this h1
+        const startPos = match.index;
+
+        // Get the start position of the next h1 (or end of markdown)
+        const endPos = i + 1 < h1Matches.length
+          ? h1Matches[i + 1].index
+          : markdown.length;
+
+        // Extract the section: from this h1 to the start of next h1
+        const sectionMarkdown = markdown.substring(startPos, endPos).trim();
+
+        sections.push({
+          fileName: file.name,
+          title,
+          titleFromH1: true,
+          markdown: sectionMarkdown
+        });
+      }
+
+      return sections;
+    } else {
+      // Single h1 or no h1: treat as one page
+      const h1 = markdown.match(/^#\s+(.+)$/m);
+      const titleFromH1 = !!h1;
+      const title = h1 ? h1[1].trim() : file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ');
+      return [{ fileName: file.name, title, titleFromH1, markdown }];
+    }
   }
 
   async function handleUploadFile(e) {
@@ -430,17 +474,20 @@ export function StructureEditorContent({ onClose }) {
 
     const defaultSection = tree.find(n => n.type === 'section')?.path ?? '';
 
-    if (files.length === 1) {
-      const item = await parseUploadFile(files[0]);
-      if (!item) return;
-      setUploadPreview(item);
+    // Parse all files and flatten results
+    const allItems = (await Promise.all(files.map(parseUploadFile)))
+      .filter(Boolean)
+      .flat();
+
+    if (!allItems.length) return;
+
+    if (allItems.length === 1) {
+      setUploadPreview(allItems[0]);
       setUploadPlacement('page');
       setUploadTargetSection(defaultSection);
       setUploadSectionName('');
     } else {
-      const items = (await Promise.all(files.map(parseUploadFile))).filter(Boolean);
-      if (!items.length) return;
-      setUploadBatch(items);
+      setUploadBatch(allItems);
       setUploadPlacement('section');
       setUploadTargetSection(defaultSection);
       setUploadSectionName('');
@@ -513,11 +560,14 @@ export function StructureEditorContent({ onClose }) {
       });
 
     } else if (uploadPlacement === 'section') {
+      // Create ONE top-level section and add all items as pages within it
       const label = uploadSectionName.trim() || uploadBatch[0].title;
       const slug = slugify(label);
       const position = tree.filter(n => n.type === 'section')
         .reduce((m, n) => Math.max(m, isFinite(n.position) ? n.position : 0), 0) + 1;
       upsert(`docs/${slug}/_category_.json`, starterCategory(label, position));
+
+      // Add all batch items as pages within this section, preserving order
       uploadBatch.forEach((item, i) => {
         upsert(`docs/${slug}/${slugify(item.title)}.md`, buildUploadContent(item.markdown, item.title, i + 1));
       });

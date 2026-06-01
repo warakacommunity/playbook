@@ -157,7 +157,7 @@ function titleCase(slug) {
   return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 
-function buildDocsTree(files, cats, basePath = 'docs') {
+function buildDocsTree(files, cats, basePath = 'docs', pagePositions = {}) {
   const prefix = basePath + '/';
   const directFiles = files.filter(f => {
     const rel = f.path.slice(prefix.length);
@@ -176,14 +176,15 @@ function buildDocsTree(files, cats, basePath = 'docs') {
     if (!f.path.endsWith('.md')) continue;
     const slug = f.path.replace(/^.*\//, '').replace('.md', '');
     if (slug === 'index') continue;
-    nodes.push({ type: 'page', slug, path: f.path, label: titleCase(slug), sha: f.sha, position: Infinity, children: [] });
+    const position = pagePositions[f.path] != null ? pagePositions[f.path] : Infinity;
+    nodes.push({ type: 'page', slug, path: f.path, label: titleCase(slug), sha: f.sha, position, children: [] });
   }
 
   for (const dir of subdirs) {
     const catPath = `${basePath}/${dir}/_category_.json`;
     const cat = cats[catPath];
     if (!cat) continue;
-    const children = buildDocsTree(files, cats, `${basePath}/${dir}`);
+    const children = buildDocsTree(files, cats, `${basePath}/${dir}`, pagePositions);
     nodes.push({
       type: 'section',
       slug: dir,
@@ -213,6 +214,7 @@ function buildDocsTree(files, cats, basePath = 'docs') {
 export function computeDocsTree(gitFiles, catData, changes) {
   let files = [...gitFiles];
   const cats = { ...catData };
+  const pagePositions = {}; // Extract sidebar_position from page files
 
   for (const [path, change] of Object.entries(changes)) {
     if (change.op === 'delete') {
@@ -222,11 +224,21 @@ export function computeDocsTree(gitFiles, catData, changes) {
       if (!files.find(f => f.path === path)) files.push({ path, sha: null });
       if (path.endsWith('_category_.json')) {
         try { cats[path] = JSON.parse(change.content); } catch {}
+      } else if (path.endsWith('.md')) {
+        // Extract sidebar_position from page frontmatter
+        const match = change.content.match(/^---\n([\s\S]*?)\n---/);
+        if (match) {
+          const frontmatter = match[1];
+          const posMatch = frontmatter.match(/sidebar_position:\s*(\d+)/);
+          if (posMatch) {
+            pagePositions[path] = parseInt(posMatch[1], 10);
+          }
+        }
       }
     }
   }
 
-  return buildDocsTree(files, cats);
+  return buildDocsTree(files, cats, 'docs', pagePositions);
 }
 
 export async function fetchDocsTree(token) {
