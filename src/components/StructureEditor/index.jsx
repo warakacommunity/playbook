@@ -68,11 +68,10 @@ function starterPage(title, position) {
 }
 
 function starterCategory(label, position, description = '') {
-  return JSON.stringify(
-    { label, position, link: { type: 'generated-index', description } },
-    null,
-    2,
-  );
+  const link = description
+    ? { type: 'generated-index', description }
+    : { type: 'generated-index' };
+  return JSON.stringify({ label, position, link }, null, 2);
 }
 
 /* ── Modal content ───────────────────────────────────────────────────── */
