@@ -269,11 +269,9 @@ export async function createStructurePR({ token, changes, prTitle, prBody }) {
   const baseCommitSha = ref.object.sha;
   const baseCommit = await ghFetch(`/repos/${OWNER}/${REPO}/git/commits/${baseCommitSha}`, token);
 
-  const treeEntries = changes.map(c =>
-    c.op === 'delete'
-      ? { path: c.path, mode: '100644', type: 'blob', sha: null }
-      : { path: c.path, mode: '100644', type: 'blob', content: c.content },
-  );
+  const treeEntries = changes
+    .filter(c => c.op !== 'delete')  // Only include additions and modifications
+    .map(c => ({ path: c.path, mode: '100644', type: 'blob', content: c.content }));
 
   const newTree = await ghFetch(`/repos/${OWNER}/${REPO}/git/trees`, token, {
     method: 'POST',
