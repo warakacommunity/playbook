@@ -1176,10 +1176,54 @@
   color: #c0392b;
   font-size: 0.85rem;
   line-height: 1.6;
+  max-height: 350px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 [data-theme='dark'] .submitErrorBody {
   color: #f08080;
+}
+
+.primaryButton {
+  padding: 0.45rem 0.75rem;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+.primaryButton:hover:not(:disabled) {
+  opacity: 0.88;
+}
+.primaryButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  padding: 0.45rem 0.75rem;
+  background: transparent;
+  color: var(--ifm-color-content);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+.secondaryButton:hover:not(:disabled) {
+  background: var(--ifm-color-emphasis-100);
+}
+.secondaryButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .successBox {

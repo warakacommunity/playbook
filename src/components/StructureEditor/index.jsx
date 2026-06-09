@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {
   fetchDocsTree,
@@ -123,6 +124,7 @@ export function StructureEditorContent({ onClose }) {
   const [leftHidden, setLeftHidden] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
   const [translateSplitWidth, setTranslateSplitWidth] = useState(null); // null = 50/50 until first drag
+  const originalLeftWidthRef = useRef(320);
 
   // Translation tab
   const [rightPanelTab, setRightPanelTab] = useState('edit'); // 'edit' | 'translate'
@@ -136,6 +138,17 @@ export function StructureEditorContent({ onClose }) {
   const [uploadPlacement, setUploadPlacement] = useState('page'); // 'page' | 'section' | 'subsection'
   const [uploadTargetSection, setUploadTargetSection] = useState('');
   const [uploadSectionName, setUploadSectionName] = useState('');
+
+  // Auto-resize left panel when fork error appears/disappears
+  useEffect(() => {
+    const isForkError = submitError && submitError.includes('don\'t have write access');
+    if (isForkError) {
+      originalLeftWidthRef.current = leftWidth;
+      setLeftWidth(550); // Wider for fork instructions
+    } else if (submitError === '') {
+      setLeftWidth(originalLeftWidthRef.current); // Restore original
+    }
+  }, [submitError]);
 
   function handleHeaderMouseDown(e) {
     if (fullscreen) return;
@@ -1133,40 +1146,137 @@ export function StructureEditorContent({ onClose }) {
                     onDisconnect={handleDisconnect}
                   />
 
-                  {submitError && (
-                    <div className={styles.submitErrorBox}>
-                      <div className={styles.submitErrorHeader}>
-                        <span>⚠️ Cannot Submit PR</span>
-                        <button
-                          className={styles.closeBtn}
-                          onClick={() => setSubmitError('')}
-                          type="button"
-                        >✕</button>
-                      </div>
-                      <div className={styles.submitErrorBody}>
-                        <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>{submitError}</p>
-                        <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
+                  {submitError && (() => {
+                    // Extract fork URL if present
+                    const forkUrlMatch = submitError.match(/https:\/\/github\.com\/[^/]+\/MasakhanePlaybook/);
+                    const forkUrl = forkUrlMatch ? forkUrlMatch[0] : null;
+                    const isForkError = submitError.includes('don\'t have write access');
+
+                    if (isForkError && forkUrl) {
+                      return (
+                        <div className={styles.submitErrorBox} style={{ display: 'flex', flexDirection: 'column', maxHeight: '70vh' }}>
+                          <div className={styles.submitErrorHeader} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
+                            <span>⚠️ Fork Required to Contribute</span>
+                            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                              <button
+                                className={clsx('button', styles.primaryButton)}
+                                onClick={handleSubmit}
+                                disabled={submitting}
+                                style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem', whiteSpace: 'nowrap' }}
+                                type="button"
+                              >
+                                {submitting ? '⏳ Retrying…' : '🔄 Retry'}
+                              </button>
+                              <button
+                                className={styles.closeBtn}
+                                onClick={() => setSubmitError('')}
+                                type="button"
+                              >✕</button>
+                            </div>
+                          </div>
+                          <div className={styles.submitErrorBody} style={{ flex: 1, minHeight: 0, paddingTop: '0.75rem' }}>
+                            <p style={{ marginTop: 0, fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
+                              Follow these 3 steps to contribute:
+                            </p>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                              {/* Step 1 */}
+                              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>1️⃣</div>
+                                <div style={{ flex: 1 }}>
+                                  <div style={{ fontWeight: '600', marginBottom: '0.3rem' }}>Fork the repository</div>
+                                  <button
+                                    style={{
+                                      background: 'none',
+                                      border: 'none',
+                                      color: '#0969da',
+                                      cursor: 'pointer',
+                                      textDecoration: 'underline',
+                                      padding: 0,
+                                      font: 'inherit',
+                                      fontSize: '0.9rem'
+                                    }}
+                                    onClick={() => window.open(`https://github.com/MasakhaneHubNLP/MasakhanePlaybook/fork`, '_blank')}
+                                    type="button"
+                                  >
+                                    Click here to fork on GitHub →
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Step 2 */}
+                              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>2️⃣</div>
+                                <div>
+                                  <div style={{ fontWeight: '600' }}>Wait 10-15 seconds</div>
+                                  <div style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.2rem' }}>
+                                    GitHub needs time to create your fork
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Step 3 */}
+                              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>3️⃣</div>
+                                <div style={{ flex: 1 }}>
+                                  <div style={{ fontWeight: '600' }}>Click Retry (top right)</div>
+                                  <div style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.2rem' }}>
+                                    Fork: <code style={{ background: '#f0f0f0', padding: '2px 4px', borderRadius: '3px', fontSize: '0.85rem' }}>{forkUrl.replace('https://github.com/', '')}</code>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div style={{ borderTop: '1px solid #f5c6cb', padding: '0.75rem 1rem', display: 'flex', gap: '0.5rem', flexShrink: 0, backgroundColor: '#fff0f0', justifyContent: 'flex-end' }}>
+                            <button
+                              className={clsx('button', styles.secondaryButton)}
+                              onClick={() => window.open(forkUrl, '_blank')}
+                              style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem' }}
+                              type="button"
+                            >
+                              👁️ View fork
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    // Fallback for other errors
+                    return (
+                      <div className={styles.submitErrorBox}>
+                        <div className={styles.submitErrorHeader}>
+                          <span>⚠️ Cannot Submit PR</span>
                           <button
-                            className={clsx('button', styles.primaryButton)}
-                            onClick={handleSubmit}
-                            disabled={submitting}
-                            style={{ flex: 1 }}
-                            type="button"
-                          >
-                            {submitting ? 'Retrying…' : '🔄 Retry after forking'}
-                          </button>
-                          <button
-                            className={clsx('button', styles.secondaryButton)}
+                            className={styles.closeBtn}
                             onClick={() => setSubmitError('')}
-                            style={{ flex: 1 }}
                             type="button"
-                          >
-                            Dismiss
-                          </button>
+                          >✕</button>
+                        </div>
+                        <div className={styles.submitErrorBody}>
+                          <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>{submitError}</p>
+                          <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
+                            <button
+                              className={clsx('button', styles.primaryButton)}
+                              onClick={handleSubmit}
+                              disabled={submitting}
+                              style={{ flex: 1 }}
+                              type="button"
+                            >
+                              {submitting ? 'Retrying…' : '🔄 Retry'}
+                            </button>
+                            <button
+                              className={clsx('button', styles.secondaryButton)}
+                              onClick={() => setSubmitError('')}
+                              style={{ flex: 1 }}
+                              type="button"
+                            >
+                              Dismiss
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    );
+                  })()}
 
                   <div className={styles.submitRow}>
                     <button className={styles.cancelBtn} onClick={onClose} type="button">Close</button>

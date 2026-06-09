@@ -142,7 +142,7 @@ export function AuthPanel({ auth, clientId, proxyUrl, callbackUrl, onConnect, on
         </button>
       </div>
       <a
-        href="https://github.com/settings/tokens/new?scopes=public_repo&description=Masakhane+Playbook"
+        href="https://github.com/settings/tokens/new?scopes=repo&description=Masakhane+Playbook"
         target="_blank" rel="noreferrer noopener"
         className={styles.authTokenLink}
       >
