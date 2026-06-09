@@ -265,36 +265,50 @@ export async function fetchDocsTree(token) {
 }
 
 export async function createStructurePR({ token, changes, prTitle, prBody }) {
-  const ref = await ghFetch(`/repos/${OWNER}/${REPO}/git/ref/heads/${BASE_BRANCH}`, token);
-  const baseCommitSha = ref.object.sha;
-  const baseCommit = await ghFetch(`/repos/${OWNER}/${REPO}/git/commits/${baseCommitSha}`, token);
+  try {
+    const ref = await ghFetch(`/repos/${OWNER}/${REPO}/git/ref/heads/${BASE_BRANCH}`, token);
+    const baseCommitSha = ref.object.sha;
+    const baseCommit = await ghFetch(`/repos/${OWNER}/${REPO}/git/commits/${baseCommitSha}`, token);
 
-  const treeEntries = changes
-    .filter(c => c.op !== 'delete')  // Only include additions and modifications
-    .map(c => ({ path: c.path, mode: '100644', type: 'blob', content: c.content }));
+    const treeEntries = changes
+      .filter(c => c.op !== 'delete')  // Only include additions and modifications
+      .map(c => ({ path: c.path, mode: '100644', type: 'blob', content: c.content }));
 
-  const newTree = await ghFetch(`/repos/${OWNER}/${REPO}/git/trees`, token, {
-    method: 'POST',
-    body: JSON.stringify({ base_tree: baseCommit.tree.sha, tree: treeEntries }),
-  });
+    const newTree = await ghFetch(`/repos/${OWNER}/${REPO}/git/trees`, token, {
+      method: 'POST',
+      body: JSON.stringify({ base_tree: baseCommit.tree.sha, tree: treeEntries }),
+    });
 
-  const newCommit = await ghFetch(`/repos/${OWNER}/${REPO}/git/commits`, token, {
-    method: 'POST',
-    body: JSON.stringify({ message: prTitle, tree: newTree.sha, parents: [baseCommitSha] }),
-  });
+    const newCommit = await ghFetch(`/repos/${OWNER}/${REPO}/git/commits`, token, {
+      method: 'POST',
+      body: JSON.stringify({ message: prTitle, tree: newTree.sha, parents: [baseCommitSha] }),
+    });
 
-  const branch = `structure/edit-${Date.now().toString(36)}`;
-  await ghFetch(`/repos/${OWNER}/${REPO}/git/refs`, token, {
-    method: 'POST',
-    body: JSON.stringify({ ref: `refs/heads/${branch}`, sha: newCommit.sha }),
-  });
+    const branch = `structure/edit-${Date.now().toString(36)}`;
+    await ghFetch(`/repos/${OWNER}/${REPO}/git/refs`, token, {
+      method: 'POST',
+      body: JSON.stringify({ ref: `refs/heads/${branch}`, sha: newCommit.sha }),
+    });
 
-  const pr = await ghFetch(`/repos/${OWNER}/${REPO}/pulls`, token, {
-    method: 'POST',
-    body: JSON.stringify({ title: prTitle, head: branch, base: BASE_BRANCH, body: prBody }),
-  });
+    const pr = await ghFetch(`/repos/${OWNER}/${REPO}/pulls`, token, {
+      method: 'POST',
+      body: JSON.stringify({ title: prTitle, head: branch, base: BASE_BRANCH, body: prBody }),
+    });
 
-  return { number: pr.number, url: pr.html_url, branch };
+    return { number: pr.number, url: pr.html_url, branch };
+  } catch (error) {
+    // Check if it's a permission/fork issue
+    if (error.message?.includes('404') || error.message?.includes('403')) {
+      throw new Error(
+        'Unable to create PR. Please ensure:\n' +
+        '1. You have a GitHub account\n' +
+        '2. You have forked the MasakhanePlaybook repository\n' +
+        '3. Your token has "repo" and "write:repo_hook" permissions\n\n' +
+        'Fork the repository at: https://github.com/MasakhaneHubNLP/MasakhanePlaybook'
+      );
+    }
+    throw error;
+  }
 }
 
 export async function createEditPR({ token, filePath, newContent, prTitle, prBody }) {
