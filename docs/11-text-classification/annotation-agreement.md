@@ -2,7 +2,6 @@
 sidebar_position: 8
 sidebar_label: "Annotation Agreement"
 ---
-
 # Annotation Agreement
 
 Annotation agreement measures the extent to which multiple annotators assign the same labels to the same data instances. In text classification tasks, agreement is one of the most important indicators of dataset quality because it reflects the clarity of the annotation guidelines, the complexity of the task, and the consistency of the annotators. High agreement suggests that the labels are reliable and reproducible, while low agreement may indicate ambiguous definitions, insufficient annotator training, or inherently subjective phenomena.
@@ -23,11 +22,16 @@ Agreement should be calculated and reported for every dataset that involves huma
 
 The simplest measure of agreement is percentage agreement, which calculates the proportion of instances for which annotators assigned the same label.
 
-Agreement  %= (Number of Agreed instances / Total Number of Instances) * 100
+```
+```
+
+Agreement %= (Number of Agreed instances / Total Number of Instances) * 100
 
 *For example, if two annotators label 1,000 texts and agree on 850 of them:*
 
-Agreement %  = (850 / 1000) * 100 = 85%
+Agreement % = (850 / 1000) * 100 = 85%
+
+```
 
 Although easy to understand, percentage agreement does not account for agreement occurring by chance and should not be the only metric reported.
 
@@ -35,33 +39,43 @@ Although easy to understand, percentage agreement does not account for agreement
 
 When exactly two annotators label each instance, Cohen's Kappa is the most commonly used agreement metric. Cohen's Kappa adjusts for the amount of agreement that could occur purely by chance.
 
+```
+```
+
 Kappa = (Observed Agreement - Expected Agreement) / (1 - Expected Agreement)
 
 Or
 
-Kappa = (Po - Pe) / (1 - Pe) 
+Kappa = (Po - Pe) / (1 - Pe)
 
 Where:
 
-**Observed agreement  (Po) **is the proportion of instances where the annotators actually agreed.
+Observed agreement (Po) is the proportion of instances where the annotators actually agreed.
 
 Po​=Total number of items/Number of agreements​
 
-**Expected Agreement (Pe)** represents the level of agreement that would be expected to occur purely by chance, given the distribution of labels assigned by each annotator. It is calculated by determining the probability that both annotators independently select the same category and then summing these probabilities across all categories.  
+Expected Agreement (Pe) represents the level of agreement that would be expected to occur purely by chance, given the distribution of labels assigned by each annotator. It is calculated by determining the probability that both annotators independently select the same category and then summing these probabilities across all categories.
+
+```
 
 Cohen's Kappa is widely used in sentiment analysis, hate speech detection, topic classification, emotion classification, and many other NLP tasks involving two annotators.
 
 ### **Python Example**
 
-from sklearn.metrics import cohen_kappa_score
+```
+```
+
+from sklearn.metrics import cohen*kappa*score
 
 annotator1 = [0, 1, 1, 0, 2]
 
 annotator2 = [0, 1, 0, 0, 2]
 
-kappa = cohen_kappa_score(annotator1, annotator2)
+kappa = cohen*kappa*score(annotator1, annotator2)
 
 print(kappa)
+
+```
 
 ## **Agreement Among Three or More Annotators**
 
@@ -78,13 +92,18 @@ It is appropriate when:d
 - Three or more annotators label each instance.
 - Every instance receives the same number of annotations.
 
+```
+```
+
 Fleiss kappa (k) = P−Pe)/(1-Pe)
 
-Where 
+Where
 
-p  is the mean of the agreement probability over all raters and 
+p is the mean of the agreement probability over all raters and
 
 Pe is the mean agreement probability over all raters if they were randomly assigned.
+
+```
 
 ### **Krippendorff's Alpha**
 
@@ -109,17 +128,20 @@ Although interpretation varies slightly across fields, the following ranges are 
 
 Kappa Score	Interpretation
 
-< 0.00	Poor Agreement
+```
+```
 
-0.00 - 0.20	Slight Agreement
+< 0.00 Poor Agreement
 
-0.21 - 0.40	Fair Agreement
+0.00 - 0.20 Slight Agreement
 
-0.41 - 0.60	Moderate Agreement
+0.21 - 0.40 Fair Agreement
 
-0.61 - 0.80	Substantial Agreement
+0.41 - 0.60 Moderate Agreement
 
-0.81 - 1.00	Almost Perfect / Excellent Agreement
+0.61 - 0.80 Substantial Agreement
+
+0.81 - 1.00 Almost Perfect / Excellent Agreement
 
 *As a general guideline:*
 
@@ -130,6 +152,8 @@ Kappa Score	Interpretation
 0.60-0.80: considered good agreement.
 
 Above 0.80: considered very strong agreement.
+
+```
 
 For highly subjective tasks such as emotion classification, sarcasm detection, or offensiveness annotation, lower agreement scores may still be acceptable due to genuine differences in human interpretation.
 
