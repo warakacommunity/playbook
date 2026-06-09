@@ -42,6 +42,11 @@ const STEPS = [
         body: 'Your avatar and username appear in the editor header. Your token is stored in localStorage on your device only — never sent to any server other than GitHub. To sign out, click your avatar and choose Sign out.',
         shots: [{ file: 'd1-6-auth-connected.png', caption: 'Connected — avatar and username in the header', width: '380px' }],
       },
+      {
+        title: 'Fork required for public contributions',
+        body: 'For security, only repository owners can commit directly to the main branch. If you\'re not an owner, when you click "Submit as Pull Request", the editor will automatically detect this and ask you to fork the repository. Forking creates your own copy where you have write access. The process takes 10–15 seconds and is one-time — after that, all your contributions go through your fork. The editor will guide you through each step with clear instructions and buttons.',
+        shots: [{ file: 'd1-7-fork-required.png', caption: 'Fork instructions appear if you don\'t have write access', width: '420px' }],
+      },
     ],
   },
   {
