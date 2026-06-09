@@ -1141,6 +1141,47 @@
   color: #f08080;
 }
 
+.submitErrorBox {
+  background: #fff0f0;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+[data-theme='dark'] .submitErrorBox {
+  background: #3a1010;
+  border-color: #7a2020;
+}
+
+.submitErrorHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: #ffe0e0;
+  border-bottom: 1px solid #f5c6cb;
+  color: #c0392b;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .submitErrorHeader {
+  background: #4a1515;
+  border-color: #7a2020;
+  color: #f08080;
+}
+
+.submitErrorBody {
+  padding: 1rem;
+  color: #c0392b;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+[data-theme='dark'] .submitErrorBody {
+  color: #f08080;
+}
+
 .successBox {
   display: flex;
   flex-direction: column;

@@ -1133,7 +1133,21 @@ export function StructureEditorContent({ onClose }) {
                     onDisconnect={handleDisconnect}
                   />
 
-                  {submitError && <div className={styles.errorBox}>{submitError}</div>}
+                  {submitError && (
+                    <div className={styles.submitErrorBox}>
+                      <div className={styles.submitErrorHeader}>
+                        <span>⚠️ Cannot Submit PR</span>
+                        <button
+                          className={styles.closeBtn}
+                          onClick={() => setSubmitError('')}
+                          type="button"
+                        >✕</button>
+                      </div>
+                      <div className={styles.submitErrorBody}>
+                        <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>{submitError}</p>
+                      </div>
+                    </div>
+                  )}
 
                   <div className={styles.submitRow}>
                     <button className={styles.cancelBtn} onClick={onClose} type="button">Close</button>
