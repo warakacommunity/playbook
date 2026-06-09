@@ -1145,6 +1145,25 @@ export function StructureEditorContent({ onClose }) {
                       </div>
                       <div className={styles.submitErrorBody}>
                         <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>{submitError}</p>
+                        <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
+                          <button
+                            className={clsx('button', styles.primaryButton)}
+                            onClick={handleSubmit}
+                            disabled={submitting}
+                            style={{ flex: 1 }}
+                            type="button"
+                          >
+                            {submitting ? 'Retrying…' : '🔄 Retry after forking'}
+                          </button>
+                          <button
+                            className={clsx('button', styles.secondaryButton)}
+                            onClick={() => setSubmitError('')}
+                            style={{ flex: 1 }}
+                            type="button"
+                          >
+                            Dismiss
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )}
