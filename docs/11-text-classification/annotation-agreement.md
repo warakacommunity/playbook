@@ -23,8 +23,6 @@ Agreement should be calculated and reported for every dataset that involves huma
 The simplest measure of agreement is percentage agreement, which calculates the proportion of instances for which annotators assigned the same label.
 
 ```
-```
-
 Agreement %= (Number of Agreed instances / Total Number of Instances) * 100
 
 *For example, if two annotators label 1,000 texts and agree on 850 of them:*
@@ -39,7 +37,6 @@ Although easy to understand, percentage agreement does not account for agreement
 
 When exactly two annotators label each instance, Cohen's Kappa is the most commonly used agreement metric. Cohen's Kappa adjusts for the amount of agreement that could occur purely by chance.
 
-```
 ```
 
 Kappa = (Observed Agreement - Expected Agreement) / (1 - Expected Agreement)
@@ -63,8 +60,6 @@ Cohen's Kappa is widely used in sentiment analysis, hate speech detection, topic
 ### **Python Example**
 
 ```
-```
-
 from sklearn.metrics import cohen*kappa*score
 
 annotator1 = [0, 1, 1, 0, 2]
@@ -93,8 +88,6 @@ It is appropriate when:d
 - Every instance receives the same number of annotations.
 
 ```
-```
-
 Fleiss kappa (k) = P−Pe)/(1-Pe)
 
 Where
@@ -129,8 +122,6 @@ Although interpretation varies slightly across fields, the following ranges are 
 Kappa Score	Interpretation
 
 ```
-```
-
 < 0.00 Poor Agreement
 
 0.00 - 0.20 Slight Agreement
