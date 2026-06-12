@@ -14,7 +14,7 @@ dotenv.config({ path: ".env.local" });
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Masakhane Playbook",
+  title: "Waraka Community AfriPlaybook",
   customFields: {
     // GitHub OAuth App for the "Connect GitHub" popup login in the Contribute dialog.
     GITHUB_OAUTH_CLIENT_ID: process.env.GITHUB_OAUTH_CLIENT_ID || "",
@@ -106,14 +106,14 @@ const config = {
         },
         blog: {
           showReadingTime: true,
-          blogTitle: "Masakhane Blog",
-          blogDescription: "Updates from the Masakhane community",
+          blogTitle: "AfriPlaybook Blog",
+          blogDescription: "Updates from the Waraka Community",
           postsPerPage: 10,
           blogSidebarTitle: "Recent posts",
           blogSidebarCount: "ALL",
           feedOptions: {
             type: ["rss", "atom"],
-            title: "Masakhane Blog",
+            title: "AfriPlaybook Blog",
             copyright: `Copyright © ${new Date().getFullYear()} Masakhane.`,
           },
           // editUrl removed — "Suggest Edit" modal handles community edits instead.
@@ -360,7 +360,7 @@ const config = {
       navbar: {
         title: "Home",
         logo: {
-          alt: "Masakhane Playbook Home",
+          alt: "Waraka Community AfriPlaybook Home",
           src: "img/playbook-mark.svg",
           href: "/",
           target: "_self",
