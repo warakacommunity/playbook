@@ -161,7 +161,7 @@ Pushes to `main` trigger `.github/workflows/deploy.yml`, which:
 3. Generates the PDF via `yarn pdf:built` (downloads Chromium, runs Puppeteer with `--no-sandbox`).
 4. Publishes `build/` to the `gh-pages` branch.
 
-Total CI time: ~3–5 min. Live URL: <https://masakhanehubnlp.github.io/MasakhanePlaybook/>.
+Total CI time: ~3–5 min. Live URL: <https://warakacommunity.github.io/AfriPlaybook/>.
 
 ---
 
