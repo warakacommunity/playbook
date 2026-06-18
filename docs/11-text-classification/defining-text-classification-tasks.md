@@ -5,8 +5,7 @@ sidebar_label: "Defining text classification tasks:"
 
 # Defining text classification tasks:
 
-:::info[📚 Text classifcation NLP tasks]
-Text classification is one of the most widely studied areas of Natural Language Processing (NLP) and encompasses a variety of downstream tasks. In this playbook, we focus on three of the most common text classification tasks as illustrative use cases: sentiment analysis, emotion analysis (including emotion intensity prediction), and hate speech detection. Nevertheless, the methodology and workflow presented here can be readily adapted to many other NLP classification tasks. :::
+:::info[📚 Common Text classification NLP tasks] Text classification is one of the most widely studied areas of Natural Language Processing (NLP) and encompasses a variety of downstream tasks. In this playbook, we focus on three of the most common text classification tasks as illustrative use cases: sentiment analysis, emotion analysis (including emotion intensity prediction), and hate speech detection. Nevertheless, the methodology and workflow presented here can be readily adapted to many other NLP classification tasks. :::
 
 Text classification is one of the most fundamental tasks in Natural Language Processing (NLP). The goal is to automatically assign one or more predefined labels (categories) to a piece of text. Among numerous text classification NLP tasks, sentiment analysis, hate speech classification, emotion classification, and topic classification are the most common. In this guidebook, we will discuss details about these common NLP tasks. While there is no single agreed-upon definition of the following NLP tasks, we use the most widely agreed-upon definitions.
 
