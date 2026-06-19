@@ -145,6 +145,11 @@ export async function fetchRawFile(filePath) {
   return res.text();
 }
 
+/** Public raw URL for a repo path on the base branch — used to preview committed images. */
+export function rawUrl(filePath) {
+  return `${RAW}/${filePath}`;
+}
+
 async function ghFetchPublic(path) {
   const res = await fetch(`${API}${path}`, {
     headers: { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' },
@@ -335,7 +340,8 @@ export async function createStructurePR({ token, changes, prTitle, prBody }) {
             method: 'PUT',
             body: JSON.stringify({
               message: `${change.op === 'add' ? 'add' : 'edit'}: ${change.path}`,
-              content: encodeBase64(change.content),
+              // Binary images arrive already base64-encoded; text must be encoded here.
+              content: change.encoding === 'base64' ? change.content : encodeBase64(change.content),
               sha: existing?.sha,
             }),
           });
@@ -347,9 +353,22 @@ export async function createStructurePR({ token, changes, prTitle, prBody }) {
       const baseCommitSha = ref.object.sha;
       const baseCommit = await ghFetch(`/repos/${OWNER}/${REPO}/git/commits/${baseCommitSha}`, token);
 
-      const treeEntries = changes
-        .filter(c => c.op !== 'delete')
-        .map(c => ({ path: c.path, mode: '100644', type: 'blob', content: c.content }));
+      // Binary images (encoding: 'base64') can't ride along as inline tree `content`
+      // (the trees API treats it as UTF-8 text) — upload them as blobs and reference the sha.
+      const treeEntries = await Promise.all(
+        changes
+          .filter(c => c.op !== 'delete')
+          .map(async c => {
+            if (c.encoding === 'base64') {
+              const blob = await ghFetch(`/repos/${OWNER}/${REPO}/git/blobs`, token, {
+                method: 'POST',
+                body: JSON.stringify({ content: c.content, encoding: 'base64' }),
+              });
+              return { path: c.path, mode: '100644', type: 'blob', sha: blob.sha };
+            }
+            return { path: c.path, mode: '100644', type: 'blob', content: c.content };
+          }),
+      );
 
       const treeResult = await ghFetch(`/repos/${OWNER}/${REPO}/git/trees`, token, {
         method: 'POST',
@@ -380,31 +399,50 @@ export async function createStructurePR({ token, changes, prTitle, prBody }) {
   }
 }
 
-export async function createEditPR({ token, filePath, newContent, prTitle, prBody }) {
+/**
+ * Opens a PR that edits a single file, plus any binary `assets` it references.
+ * `assets` is an optional array of `{ path, base64 }` image files to commit
+ * alongside the edited content. The edit + images land in one atomic commit
+ * (git trees/blobs API) so a page never references an image that isn't there.
+ */
+export async function createEditPR({ token, filePath, newContent, prTitle, prBody, assets = [] }) {
   const branch = `edit/${slugify(filePath.replace(/[/.]/g, '-'))}-${Date.now().toString(36)}`;
 
-  const ref = await ghFetch(
-    `/repos/${OWNER}/${REPO}/git/ref/heads/${BASE_BRANCH}`,
-    token
+  const ref = await ghFetch(`/repos/${OWNER}/${REPO}/git/ref/heads/${BASE_BRANCH}`, token);
+  const baseCommitSha = ref.object.sha;
+  const baseCommit = await ghFetch(`/repos/${OWNER}/${REPO}/git/commits/${baseCommitSha}`, token);
+
+  // Upload each image as a blob, then reference its sha in the tree (inline tree
+  // `content` is UTF-8-only and would corrupt binary data).
+  const assetEntries = await Promise.all(
+    assets.map(async a => {
+      const blob = await ghFetch(`/repos/${OWNER}/${REPO}/git/blobs`, token, {
+        method: 'POST',
+        body: JSON.stringify({ content: a.base64, encoding: 'base64' }),
+      });
+      return { path: a.path, mode: '100644', type: 'blob', sha: blob.sha };
+    }),
   );
-  const file = await ghFetch(
-    `/repos/${OWNER}/${REPO}/contents/${filePath}?ref=${BASE_BRANCH}`,
-    token
-  );
+
+  const tree = await ghFetch(`/repos/${OWNER}/${REPO}/git/trees`, token, {
+    method: 'POST',
+    body: JSON.stringify({
+      base_tree: baseCommit.tree.sha,
+      tree: [
+        { path: filePath, mode: '100644', type: 'blob', content: newContent },
+        ...assetEntries,
+      ],
+    }),
+  });
+
+  const newCommit = await ghFetch(`/repos/${OWNER}/${REPO}/git/commits`, token, {
+    method: 'POST',
+    body: JSON.stringify({ message: `edit: ${filePath}`, tree: tree.sha, parents: [baseCommitSha] }),
+  });
 
   await ghFetch(`/repos/${OWNER}/${REPO}/git/refs`, token, {
     method: 'POST',
-    body: JSON.stringify({ ref: `refs/heads/${branch}`, sha: ref.object.sha }),
-  });
-
-  await ghFetch(`/repos/${OWNER}/${REPO}/contents/${filePath}`, token, {
-    method: 'PUT',
-    body: JSON.stringify({
-      message: `edit: ${filePath}`,
-      content: encodeBase64(newContent),
-      sha: file.sha,
-      branch,
-    }),
+    body: JSON.stringify({ ref: `refs/heads/${branch}`, sha: newCommit.sha }),
   });
 
   const pr = await ghFetch(`/repos/${OWNER}/${REPO}/pulls`, token, {

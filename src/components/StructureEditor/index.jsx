@@ -8,9 +8,10 @@ import {
   createStructurePR,
   fetchRawFile,
   verifyGitHubToken,
+  rawUrl,
 } from '@site/src/utils/github';
 import mammoth from 'mammoth';
-import { splitFrontmatter, slugify, setFrontmatterField, mdToHtml, htmlToMd } from '@site/src/utils/markdown';
+import { splitFrontmatter, slugify, setFrontmatterField, mdToHtml, htmlToMd, extractDataUriImages, IMAGE_DIR } from '@site/src/utils/markdown';
 import { WysiwygEditor } from '@site/src/components/WysiwygEditor';
 import { AuthPanel } from './AuthPanel';
 import { InlineForm, TreeRow } from './TreeRow';
@@ -125,6 +126,10 @@ export function StructureEditorContent({ onClose }) {
   const [fullscreen, setFullscreen] = useState(false);
   const [translateSplitWidth, setTranslateSplitWidth] = useState(null); // null = 50/50 until first drag
   const originalLeftWidthRef = useRef(320);
+
+  // Data-URIs of images extracted this session, keyed by their repo image path.
+  // Used to preview pending (not-yet-committed) images in the editor.
+  const assetUris = useRef({});
 
   // Translation tab
   const [rightPanelTab, setRightPanelTab] = useState('edit'); // 'edit' | 'translate'
@@ -649,7 +654,46 @@ export function StructureEditorContent({ onClose }) {
   /* ── Change helpers ─────────────────────────────────────────────────── */
 
   function upsert(path, content) {
+    // For markdown pages, extract any embedded base64 images into real files
+    // co-located in an `images/` folder next to the page, and reference them by
+    // a relative `images/<name>` path instead of bloating the page with data-URIs.
+    if (typeof content === 'string' && path.endsWith('.md')) {
+      const dir = path.replace(/\/[^/]+$/, '');
+      // Editor previews show committed images via their raw URL; turn those back
+      // into co-located `images/` references before saving.
+      const normalized = content.split(`${rawUrl(`${dir}/${IMAGE_DIR}/`)}`).join(`${IMAGE_DIR}/`);
+
+      if (normalized.includes('data:')) {
+        const baseName = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
+        const { markdown, assets } = extractDataUriImages(normalized, baseName);
+        setChanges(prev => {
+          const next = { ...prev, [path]: { op: 'upsert', content: markdown } };
+          for (const a of assets) {
+            const assetPath = `${dir}/${IMAGE_DIR}/${a.name}`;
+            assetUris.current[assetPath] = `data:${a.contentType};base64,${a.base64}`;
+            next[assetPath] = { op: 'upsert', content: a.base64, encoding: 'base64' };
+          }
+          return next;
+        });
+        return;
+      }
+      setChanges(prev => ({ ...prev, [path]: { op: 'upsert', content: normalized } }));
+      return;
+    }
     setChanges(prev => ({ ...prev, [path]: { op: 'upsert', content } }));
+  }
+
+  /**
+   * Rewrites co-located `images/<file>` image references to a URL the browser
+   * can actually render in the editor preview: the pending image's in-memory
+   * data-URI when available, otherwise the committed raw GitHub URL.
+   */
+  function resolveAssetsForDisplay(md, mdPath) {
+    const dir = mdPath.replace(/\/[^/]+$/, '');
+    const toUrl = name => assetUris.current[`${dir}/${IMAGE_DIR}/${name}`] || rawUrl(`${dir}/${IMAGE_DIR}/${name}`);
+    return String(md)
+      .replace(/!\[([^\]]*)\]\((?:\.\/)?images\/([^)\s]+)\)/g, (_m, alt, name) => `![${alt}](${toUrl(name)})`)
+      .replace(/(<img\b[^>]*?\bsrc=["'])(?:\.\/)?images\/([^"']+)(["'][^>]*>)/gi, (_m, pre, name, post) => `${pre}${toUrl(name)}${post}`);
   }
 
   function del(path) {
@@ -694,7 +738,7 @@ export function StructureEditorContent({ onClose }) {
     try {
       const md = await getPageContent(indexPath);
       const { frontmatter, content } = splitFrontmatter(md);
-      setRightPanel({ path: indexPath, htmlContent: mdToHtml(content), frontmatter, fetching: false, dirty: false });
+      setRightPanel({ path: indexPath, htmlContent: mdToHtml(resolveAssetsForDisplay(content, indexPath)), frontmatter, fetching: false, dirty: false });
     } catch {
       // File doesn't exist yet — open a blank starter (saved to pendingChanges on save)
       const starter = `---\nsidebar_label: ${JSON.stringify(node.label)}\nsidebar_position: 0\n---\n\n# ${node.label}\n\n`;
@@ -711,7 +755,7 @@ export function StructureEditorContent({ onClose }) {
     try {
       const md = await getPageContent(node.path);
       const { frontmatter, content } = splitFrontmatter(md);
-      setRightPanel({ path: node.path, htmlContent: mdToHtml(content), frontmatter, fetching: false, dirty: false });
+      setRightPanel({ path: node.path, htmlContent: mdToHtml(resolveAssetsForDisplay(content, node.path)), frontmatter, fetching: false, dirty: false });
     } catch (e) {
       setError(`Could not load page: ${e.message}`);
       setRightPanel(null);

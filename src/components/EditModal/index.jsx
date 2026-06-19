@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { fetchRawFile, createEditPR } from '@site/src/utils/github';
-import { splitFrontmatter, mdToHtml, htmlToMd } from '@site/src/utils/markdown';
+import { fetchRawFile, createEditPR, rawUrl } from '@site/src/utils/github';
+import { splitFrontmatter, mdToHtml, htmlToMd, extractDataUriImages, IMAGE_DIR } from '@site/src/utils/markdown';
 import { WysiwygEditor } from '@site/src/components/WysiwygEditor';
 import styles from './index.module.css';
 
 export { mdToHtml, htmlToMd, WysiwygEditor };
+
+/** Turn co-located `images/<file>` refs into raw GitHub URLs so committed images preview. */
+function resolveAssetsForDisplay(md, filePath) {
+  const dir = filePath.replace(/\/[^/]+$/, '');
+  const toUrl = name => rawUrl(`${dir}/${IMAGE_DIR}/${name}`);
+  return String(md)
+    .replace(/!\[([^\]]*)\]\((?:\.\/)?images\/([^)\s]+)\)/g, (_m, alt, name) => `![${alt}](${toUrl(name)})`)
+    .replace(/(<img\b[^>]*?\bsrc=["'])(?:\.\/)?images\/([^"']+)(["'][^>]*>)/gi, (_m, pre, name, post) => `${pre}${toUrl(name)}${post}`);
+}
 
 /* ── Form field helper ───────────────────────────────────────────────── */
 
@@ -58,7 +67,7 @@ function ModalContent({ onClose, mode, filePath, itemId, itemData, pageTitle, in
       if (initialMd !== undefined) {
         const { frontmatter: fm, content } = splitFrontmatter(initialMd);
         setFrontmatter(fm);
-        setHtmlContent(mdToHtml(content));
+        setHtmlContent(mdToHtml(resolveAssetsForDisplay(content, filePath)));
         return;
       }
       setFetching(true);
@@ -67,7 +76,7 @@ function ModalContent({ onClose, mode, filePath, itemId, itemData, pageTitle, in
         .then((md) => {
           const { frontmatter: fm, content } = splitFrontmatter(md);
           setFrontmatter(fm);
-          setHtmlContent(mdToHtml(content));
+          setHtmlContent(mdToHtml(resolveAssetsForDisplay(content, filePath)));
         })
         .catch((err) => setError(`Failed to load content: ${err.message}`))
         .finally(() => setFetching(false));
@@ -90,10 +99,17 @@ function ModalContent({ onClose, mode, filePath, itemId, itemData, pageTitle, in
     setSubmitting(true);
     setError('');
     try {
-      let newContent, prTitle, prBody;
+      let newContent, prTitle, prBody, assets = [];
 
       if (mode === 'markdown') {
-        const md = htmlToMd(htmlContent);
+        const dir = filePath.replace(/\/[^/]+$/, '');
+        const baseName = filePath.replace(/^.*\//, '').replace(/\.[^.]+$/, '');
+        // Editor previews committed images via raw URLs — turn those back into
+        // co-located images/ refs, then extract any newly-embedded base64 images.
+        let md = htmlToMd(htmlContent).split(`${rawUrl(`${dir}/${IMAGE_DIR}/`)}`).join(`${IMAGE_DIR}/`);
+        const extracted = extractDataUriImages(md, baseName);
+        md = extracted.markdown;
+        assets = extracted.assets.map(a => ({ path: `${dir}/${IMAGE_DIR}/${a.name}`, base64: a.base64 }));
         newContent = frontmatter + md + '\n';
         prTitle = `Edit: ${pageTitle || filePath}`;
         prBody = [
@@ -116,7 +132,7 @@ function ModalContent({ onClose, mode, filePath, itemId, itemData, pageTitle, in
         ].join('\n');
       }
 
-      const pr = await createEditPR({ token, filePath, newContent, prTitle, prBody });
+      const pr = await createEditPR({ token, filePath, newContent, prTitle, prBody, assets });
       setSuccess(pr);
     } catch (err) {
       setError(err.message);

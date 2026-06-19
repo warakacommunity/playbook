@@ -200,3 +200,79 @@ export function htmlToMd(html) {
   div.innerHTML = cleaned;
   return nodeToMd(div).replace(/\n{3,}/g, '\n\n').trim();
 }
+
+/* ── Embedded image extraction ───────────────────────────────────────── */
+
+// Per-chapter co-located image folder (matches the repo convention: docs/<chapter>/images/).
+export const IMAGE_DIR = 'images';
+
+const IMG_EXT_BY_TYPE = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg',
+  'image/gif': 'gif',
+  'image/webp': 'webp',
+  'image/svg+xml': 'svg',
+  'image/bmp': 'bmp',
+  'image/x-icon': 'ico',
+  'image/avif': 'avif',
+};
+
+/** Maps a data-URI content type to a sensible file extension. */
+function extForContentType(contentType) {
+  if (IMG_EXT_BY_TYPE[contentType]) return IMG_EXT_BY_TYPE[contentType];
+  const sub = (contentType.split('/')[1] || 'png').replace(/[^a-z0-9]/gi, '');
+  return sub || 'png';
+}
+
+/**
+ * Small deterministic string hash → short base36 token. Used to name extracted
+ * images by their content, so re-running extraction on the same image yields the
+ * same filename (idempotent — no duplicate images on repeated saves).
+ */
+function shortHash(str) {
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
+  return (h.toString(36) + str.length.toString(36)).slice(0, 12);
+}
+
+/**
+ * Replaces every embedded base64 data-URI image in `markdown` — both the
+ * `![alt](data:…)` markdown form and raw `<img src="data:…">` HTML — with a
+ * relative `images/<name>` reference, and returns the rewritten markdown plus
+ * the list of image files to write alongside the page.
+ *
+ * Filenames are `<baseName>-<contentHash>.<ext>`, so identical images dedupe to
+ * one file and repeated extraction is stable.
+ *
+ * @param {string} markdown
+ * @param {string} baseName  slug used to prefix generated filenames (e.g. page slug)
+ * @returns {{ markdown: string, assets: Array<{ name: string, base64: string, contentType: string }> }}
+ */
+export function extractDataUriImages(markdown, baseName) {
+  const assets = [];
+  const seen = new Set();
+  const safeBase = slugify(baseName) || 'image';
+
+  const register = (contentType, rawData) => {
+    const base64 = rawData.replace(/\s+/g, '');
+    const name = `${safeBase}-${shortHash(base64)}.${extForContentType(contentType)}`;
+    if (!seen.has(name)) {
+      seen.add(name);
+      assets.push({ name, base64, contentType });
+    }
+    return `${IMAGE_DIR}/${name}`;
+  };
+
+  let out = String(markdown).replace(
+    /!\[([^\]]*)\]\(\s*data:([^;,]+);base64,([^)\s]+)\s*\)/g,
+    (_m, alt, contentType, data) => `![${alt}](${register(contentType, data)})`,
+  );
+
+  out = out.replace(
+    /(<img\b[^>]*?\bsrc=["'])data:([^;,]+);base64,([^"']+)(["'][^>]*>)/gi,
+    (_m, pre, contentType, data, post) => `${pre}${register(contentType, data)}${post}`,
+  );
+
+  return { markdown: out, assets };
+}
