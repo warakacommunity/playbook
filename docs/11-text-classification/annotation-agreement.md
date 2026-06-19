@@ -6,6 +6,9 @@ sidebar_label: "Annotation Agreement"
 
 Annotation agreement measures the extent to which multiple annotators assign the same labels to the same data instances. In text classification tasks, agreement is one of the most important indicators of dataset quality because it reflects the clarity of the annotation guidelines, the complexity of the task, and the consistency of the annotators. High agreement suggests that the labels are reliable and reproducible, while low agreement may indicate ambiguous definitions, insufficient annotator training, or inherently subjective phenomena.
 
+Annotation agreement should be reported because it provides evidence that the guidelines are understandable and that the labels are reproducible. Agreement values should always be interpreted together with the task difficulty and the degree of subjectivity involved.
+
+
 ## **Why Annotation Agreement Matters**
 
 Annotation agreement serves various purposes:
@@ -160,3 +163,39 @@ When publishing a dataset, researchers should report:
 6. Annotator-level dataset for further annotator subjectivity and disagreement research.
 
 Transparent reporting of annotation agreement improves the credibility, reproducibility, and scientific value of the dataset.
+
+Agreement Metric guidance:
+- Use percentage agreement only as a simple descriptive measure.
+- Use Cohen’s kappa when there are exactly two annotators.
+- Use Fleiss’ kappa when there are three or more annotators and each item has the same number of labels.
+- Use Krippendorff’s alpha when annotations may be missing or when you want a more flexible reliability measure.
+
+Note that agreemnet metrics are not the only listed above, m=explore more agrement metrics that suits the targetd task.
+
+
+Example how to calculate sklearn / statsmodels / krippendorff
+```python
+from sklearn.metrics import cohen_kappa_score
+from statsmodels.stats.inter_rater import fleiss_kappa, aggregate_raters
+import krippendorff, numpy as np
+
+# Cohen's kappa — exactly two annotators
+# Cohen's κ = (Pₒ − Pₑ) / (1 − Pₑ) where Pₒ = observed agreement, Pₑ = Σₙ pₙ₁·pₙ₂ (chance agreement)
+cohen_kappa_score(a1, a2)
+
+# Fleiss' kappa — items x raters matrix, equal number of raters each
+# Fleiss' κ = (P̄ − P̄ₑ) / (1 − P̄ₑ) over n raters, k categories
+
+table, _ = aggregate_raters(ratings)      # -> items x categories counts
+fleiss_kappa(table)
+
+# Krippendorff's alpha — raters x items, np.nan for missing
+# Krippendorff's α = 1 − Dₒ / Dₑ (Dₒ observed disagreement, Dₑ expected; handles missing data & any #raters)
+
+krippendorff.alpha(reliability_data=data, level_of_measurement="nominal")
+```
+
+:::info[📚 Tips]
+For subjective tasks such as emotion and offensiveness annotation, lower agreement is not always a failure; it can reflect real ambiguity in human interpretation.
+So, lower scores can still be valid — genuine human disagreement is signal, not just noise.
+:::
