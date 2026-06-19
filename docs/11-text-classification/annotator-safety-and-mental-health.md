@@ -10,3 +10,11 @@ Protecting annotator well-being is essential, particularly when working with har
 Protecting annotators through informed consent, controlled exposure, breaks, and support systems improves both well-being and annotation quality. 
 
 ![](images/annotator-safety-and-mental-health-1ijc2ov5oy4.png)
+
+For any data annotation such as hate speech, we should create a content warning + opt-in (show before any harmful-content task) like below.
+:::warning[CONTENT WARNING]
+This task contains hate speech, offensive, or distressing material.
+• You may skip any item, take breaks at any time, or withdraw with no penalty.
+• If you feel distressed, stop and contact the support team.
+[ ] I understand and choose to participate in this task.
+:::
