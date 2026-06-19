@@ -17,5 +17,5 @@ When selecting a source, prefer data that naturally contains the phenomenon of i
 :::
 
 :::warning[Benchmark datasets]
-Warning. Benchmark datasets are useful for comparison, but they may not reflect the target language variety, region, or social context. Always check whether the original data distribution matches your intended use case.
+Benchmark datasets are useful for comparison, but they may not reflect the target language variety, region, or social context. Always check whether the original data distribution matches your intended use case.
 :::
