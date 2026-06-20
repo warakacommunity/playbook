@@ -233,8 +233,8 @@ export function StructureEditorContent({ onClose }) {
       .then(({ files, cats }) => {
         setGitFiles(files);
         setCatData(cats);
-        const topKeys = Object.keys(cats).filter(p => p.match(/^docs\/[^/]+\/_category_\.json$/));
-        setExpanded(new Set(topKeys.map(p => p.replace('/_category_.json', ''))));
+        // Keep sections collapsed by default
+        setExpanded(new Set());
       })
       .catch(e => {
         const is403 = e.message?.includes('403');
@@ -1065,6 +1065,32 @@ export function StructureEditorContent({ onClose }) {
                       style={{ display: 'none' }}
                       onChange={handleUploadFile}
                     />
+                    <button
+                      className={styles.hideStructureBtn}
+                      onClick={() => {
+                        if (expanded.size === 0) {
+                          // Expand all
+                          const allKeys = new Set();
+                          function collectKeys(nodes) {
+                            for (const node of nodes) {
+                              if (node.type === 'section') {
+                                allKeys.add(node.path);
+                                if (node.children) collectKeys(node.children);
+                              }
+                            }
+                          }
+                          if (tree) collectKeys(tree);
+                          setExpanded(allKeys);
+                        } else {
+                          // Collapse all
+                          setExpanded(new Set());
+                        }
+                      }}
+                      title={expanded.size === 0 ? 'Expand all sections' : 'Collapse all sections'}
+                      type="button"
+                    >
+                      {expanded.size === 0 ? '▼ Expand' : '▲ Collapse'}
+                    </button>
                     <button
                       className={styles.hideStructureBtn}
                       onClick={() => setLeftHidden(true)}
