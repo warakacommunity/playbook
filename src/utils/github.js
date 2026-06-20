@@ -278,12 +278,19 @@ export async function createStructurePR({ token, changes, prTitle, prBody }) {
     let targetRepoName = REPO;
     let useFork = false;
     let defaultBranch = BASE_BRANCH;
+    let hasWriteAccess = false;
 
-    // Check if user is the repo owner
-    const isOwner = userLogin === OWNER;
+    // Check if user has write access to the main repo
+    try {
+      const repo = await ghFetch(`/repos/${OWNER}/${REPO}`, token);
+      // Check if user has push permission (write access)
+      hasWriteAccess = repo.permissions?.push === true;
+    } catch {
+      hasWriteAccess = false;
+    }
 
-    if (!isOwner) {
-      // Not the owner; use fork
+    if (!hasWriteAccess) {
+      // No write access to main repo; check for fork
       try {
         const fork = await ghFetch(`/repos/${userLogin}/${REPO}`, token);
         if (fork?.fork) {
