@@ -282,7 +282,17 @@ export default function ContributeOnline() {
       <section className={clsx(styles.section, styles.cfcSection, styles.cfcPageSection)}>
         <div className="container">
 
-          <Link to="/" className={styles.cfcBackLink}>← Back to home</Link>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <Link to="/" className={styles.cfcBackLink}>← Back to home</Link>
+            <button
+              type="button"
+              className={clsx('button', styles.primaryButton)}
+              onClick={() => setEditorOpen(true)}
+              style={{ padding: '0.45rem 1rem', fontSize: '0.9rem' }}
+            >
+              ⚡ Start Contributing Online
+            </button>
+          </div>
 
           {/* Hero */}
           <div className={styles.cfcHeader}>
