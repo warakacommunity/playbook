@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 5
 ---
 
 # Running a Playbook Workshop
@@ -14,7 +14,7 @@ A dedicated session makes sense when:
 - You need to align a large team on common terminology before annotation begins
 - You are piloting the playbook in a new language community and want to collect localization feedback
 
-For small teams or individual onboarding, a one-to-one walkthrough is usually sufficient — see [Onboarding a Team](./onboarding).
+For small teams or individual contributors, a one-to-one walkthrough is usually sufficient.
 
 ## Workshop Formats
 
@@ -31,7 +31,7 @@ For small teams or individual onboarding, a one-to-one walkthrough is usually su
 2. **Prepare a concrete worked example** — use real samples from your project, not abstract examples
 3. **Distribute materials in advance** — share the chapter link or a printout at least 3 days beforehand
 4. **Assign roles** — designate a facilitator, a note-taker, and a timekeeper before the session begins
-5. **Make materials available offline** — see [Inclusive Access](./inclusive-access)
+5. **Make materials available offline** so contributors without reliable internet can take part
 
 ## A Simple Session Structure
 

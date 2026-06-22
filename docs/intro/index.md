@@ -64,20 +64,6 @@ This playbook is open source, maintained by the AfricaNLP and Masakhane communit
 
 Start with the [contribution guide](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/README.md#ways-to-contribute), raise an idea in [GitHub Discussions](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/discussions), or join us on [Discord](https://discord.gg/ChNPHV2PPS). If you build datasets for African languages, or want to learn how, you are already part of who this is for. Come and build it with us.
 
-## How to read this playbook
-
-The playbook runs end-to-end through the dataset lifecycle, but you don't have to read it that way. Pick the path that fits where you are:
-
-- **New to dataset design.** Start here, then read chapters 2–4 in order: Data Collection, Annotation Design, Data Quality. They build on each other and cover the foundations everyone needs.
-- **You already have raw data and want help annotating it.** Go to chapter 3 (Annotation Design and Workforce Management), then chapter 4 (Data Quality Assurance and Validation).
-- **You're working with a specific modality** (speech, multimodal, low-resource scripts). Skip to chapter 5 (Modality-Specific Task Design).
-- **You're using LLMs to generate or augment data.** Read chapter 7 (LLM-Assisted and Synthetic Data Generation) for the trade-offs and safeguards.
-- **You're preparing a dataset for release.** Read chapter 6 (Documentation, Data Release, and Governance) and chapter 9 (Dataset Lifecycle Management and Release Checklist).
-- **You're offline or on a slow connection.** Use **Download PDF** in the navbar. The whole playbook bundles into one file, rebuilt on every release.
-- **You'd rather read in another language.** Use the language switcher at the top-right. Translations are community-maintained and grow over time.
-
-Throughout, you'll find practical templates (consent forms, annotation guidelines, governance checklists), worked examples from real African-language projects, and links to datasets and tools you can reuse. New terms are defined in the [glossary](/AfriPlaybook/glossary).
-
 ---
 
 ## How to cite this playbook
