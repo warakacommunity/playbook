@@ -488,11 +488,12 @@
 }
 
 .scopeCard {
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 18px;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
   padding: 2rem 1.85rem 1.85rem;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   position: relative;
   overflow: hidden;
 }
@@ -511,9 +512,10 @@
 }
 
 .scopeCard:hover {
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
   transform: translateY(-4px);
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 26px 50px -28px rgba(var(--brand-rgb), 0.35);
 }
 
 .scopeCard:hover::before {
@@ -666,10 +668,19 @@
 }
 
 .requirementsCard {
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 18px;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
   padding: 2rem;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.requirementsCard:hover {
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
 }
 
 .requirementsHeader {
@@ -736,16 +747,19 @@
 }
 
 .expectationCard {
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 14px;
-  padding: 1.5rem 1.4rem;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
+  padding: 1.7rem 1.6rem;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .expectationCard:hover {
-  border-color: var(--ifm-color-primary-lighter);
-  transform: translateY(-2px);
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
 }
 
 .expectationIcon {
@@ -864,16 +878,17 @@
 }
 
 .timelineItem {
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 14px;
-  padding: 1.4rem 1.2rem;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
+  padding: 1.7rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   position: relative;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 @media (max-width: 996px) {
@@ -886,8 +901,10 @@
 }
 
 .timelineItem:hover {
-  border-color: var(--ifm-color-primary-lighter);
-  transform: translateY(-2px);
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
 }
 
 .timelineDot {
@@ -1192,16 +1209,18 @@
   gap: 1.5rem;
   align-items: center;
   padding: 1.7rem 1.85rem;
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 18px;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .agendaItem:hover {
-  border-color: var(--ifm-color-primary);
-  transform: translateX(3px);
-  box-shadow: 0 18px 36px -22px rgba(var(--brand-rgb), 0.3);
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
 }
 
 @media (max-width: 768px) {
@@ -1332,20 +1351,19 @@
   display: flex;
   align-items: center;
   gap: 1.1rem;
-  padding: 1.6rem 1.6rem;
+  padding: 1.7rem 1.7rem;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.organizerCard:hover {
   background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 16px;
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.organizerCard:hover {
-  box-shadow: 0 18px 36px -22px rgba(var(--brand-rgb), 0.3);
-}
-
-.organizerCard:hover {
-  border-color: var(--ifm-color-primary-lighter);
-  transform: translateY(-2px);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
 }
 
 .organizerAvatar {
@@ -2347,20 +2365,22 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 12px;
-  padding: 1.6rem 1.5rem 3rem;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
+  padding: 1.7rem 1.6rem 3rem;
   text-decoration: none !important;
   color: inherit;
-  transition: transform 0.2s ease, border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .getInvolvedCard:hover {
-  transform: translateY(-2px);
-  border-color: var(--ifm-color-emphasis-300);
-  box-shadow: 0 6px 18px -8px rgba(15, 23, 42, 0.08);
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
 }
 
 .getInvolvedIcon {
@@ -2484,20 +2504,22 @@
 .blogTeaserCard {
   display: flex;
   flex-direction: column;
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 12px;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
   overflow: hidden;
   text-decoration: none !important;
   color: inherit;
-  transition: transform 0.15s ease, border-color 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .blogTeaserCard:hover {
-  transform: translateY(-2px);
-  border-color: var(--ifm-color-emphasis-300);
-  box-shadow: 0 6px 18px -8px rgba(15, 23, 42, 0.08);
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
 }
 
 .blogTeaserThumb {
@@ -2935,13 +2957,21 @@
   flex-direction: column;
   align-items: center;
   gap: 0.55rem;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  box-shadow: none;
+  padding: 1.7rem 1.4rem;
   text-decoration: none !important;
   color: inherit;
-  transition: transform 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .contributorCard:hover {
-  transform: translateY(-3px);
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
 }
 
 .contributorAvatar {

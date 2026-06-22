@@ -27,7 +27,7 @@
 .playbookBtn:hover,
 .toolBtn:hover,
 .aboutBtn:hover {
-  background: #2e86c1;
+  background: #5b3df5;
   color: #fff;
   text-decoration: none;
 }
@@ -35,14 +35,14 @@
 .playbookBtn:active,
 .toolBtn:active,
 .aboutBtn:active {
-  background: #1a5276;
+  background: #4422db;
   color: #fff;
 }
 
 [data-theme='dark'] .playbookBtn:hover,
 [data-theme='dark'] .toolBtn:hover,
 [data-theme='dark'] .aboutBtn:hover {
-  background: #2e86c1;
+  background: #5b3df5;
   color: #fff;
 }
 

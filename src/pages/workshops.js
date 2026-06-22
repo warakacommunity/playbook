@@ -8,13 +8,13 @@ import { WORKSHOPS } from '@site/src/data/workshops';
 
 const STATUS = {
   upcoming: { label: 'Upcoming', color: '#059669', bg: 'rgba(5,150,105,0.1)' },
-  planned:  { label: 'Planned',  color: '#2e86c1', bg: 'rgba(46,134,193,0.1)' },
+  planned:  { label: 'Planned',  color: '#5b3df5', bg: 'rgba(91, 61, 245,0.1)' },
   past:     { label: 'Past',     color: '#6b7280', bg: 'rgba(107,114,128,0.1)' },
 };
 
 const TYPE_COLOR = {
-  'Workshop and Exhibition': '#7c3aed',
-  Exhibition: '#7c3aed',
+  'Workshop and Exhibition': '#5b3df5',
+  Exhibition: '#5b3df5',
   Internal:   '#d97706',
   Demo:       '#0891b2',
   Community:  '#059669',
@@ -47,17 +47,17 @@ function TypeBadge({ type }) {
 function WorkshopCard({ w }) {
   return (
     <article style={{
-      border: '1.5px solid var(--ifm-color-emphasis-200)',
-      borderRadius: 12,
-      padding: '1.25rem 1.4rem',
-      background: 'var(--ifm-background-color)',
+      border: '1px solid transparent',
+      borderRadius: 22,
+      padding: '1.6rem 1.7rem',
+      background: 'var(--surface-wash)',
       display: 'flex',
       flexDirection: 'column',
       gap: '0.5rem',
-      transition: 'border-color 0.15s, box-shadow 0.15s',
+      transition: 'border-color 0.18s, box-shadow 0.18s, background 0.18s, transform 0.18s',
     }}
-    onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--ifm-color-primary)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.08)'; }}
-    onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--ifm-color-emphasis-200)'; e.currentTarget.style.boxShadow = 'none'; }}
+    onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(var(--brand-rgb), 0.25)'; e.currentTarget.style.background = 'var(--ifm-background-color)'; e.currentTarget.style.boxShadow = '0 24px 48px -28px rgba(var(--brand-rgb), 0.35)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
+    onMouseLeave={e => { e.currentTarget.style.borderColor = 'transparent'; e.currentTarget.style.background = 'var(--surface-wash)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.transform = 'none'; }}
     >
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
         <StatusBadge status={w.status} />

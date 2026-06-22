@@ -1,28 +1,30 @@
 /* ============================================================
    AfriAnnotate / AfriFinder landing pages
-   Light, calm, editorial — warm cream ground, forest-green
-   primary, terracotta accents. Exo 2 display / Inter body.
-   Inspired by the airy, spacious feel of safeintelligence.ai.
+   Opera-inspired palette — vivid indigo-purple primary, soft
+   peach-to-lavender washes, near-black bold headings, cool
+   light-grey surfaces. Exo 2 display / body.
    All classes are prefixed .lp- and used as global classes.
+   (Token names kept as --lp-green/--lp-terra for compatibility;
+   their *values* are now the purple/violet Opera accents.)
    ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800&display=swap');
 
 .lp-page {
   --lp-bg: #ffffff;
-  --lp-bg-soft: #f4f5f4;
+  --lp-bg-soft: #f4f2fb;
   --lp-card: #ffffff;
-  --lp-ink: #1c1a15;
-  --lp-ink-soft: #4b483f;
-  --lp-muted: #74705f;
-  --lp-line: rgba(28, 26, 21, 0.12);
-  --lp-line-soft: rgba(28, 26, 21, 0.07);
-  --lp-green: #1f5b3f;
-  --lp-green-deep: #16442f;
-  --lp-green-tint: #e9f0ea;
-  --lp-terra: #c4632f;
-  --lp-terra-deep: #a8522485;
-  --lp-gold: #cf9a34;
-  --lp-cream: #f7f2e8;
+  --lp-ink: #16131f;
+  --lp-ink-soft: #403c52;
+  --lp-muted: #6c6880;
+  --lp-line: rgba(22, 19, 31, 0.12);
+  --lp-line-soft: rgba(22, 19, 31, 0.07);
+  --lp-green: #5b3df5;        /* primary — Opera indigo-purple */
+  --lp-green-deep: #4626d6;   /* hover / deeper purple */
+  --lp-green-tint: #ece8fe;   /* soft purple surface tint */
+  --lp-terra: #8b5cff;        /* secondary accent — lighter violet */
+  --lp-terra-deep: #6f3df0d9;
+  --lp-gold: #f6a878;         /* warm peach echo from the gradient */
+  --lp-cream: #fcefe7;        /* peach — light text on purple blocks */
   --lp-display: 'Exo 2', system-ui, sans-serif;
   --lp-body: 'Exo 2', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --lp-mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -152,7 +154,7 @@
 .lp-btn-primary {
   background: var(--lp-green);
   color: #fff;
-  box-shadow: 0 10px 24px -12px rgba(31, 91, 63, 0.6);
+  box-shadow: 0 10px 24px -12px rgba(91, 61, 245, 0.6);
 }
 
 .lp-btn-primary:hover {
@@ -160,7 +162,7 @@
   color: #fff;
   text-decoration: none;
   transform: translateY(-2px);
-  box-shadow: 0 16px 30px -12px rgba(31, 91, 63, 0.65);
+  box-shadow: 0 16px 30px -12px rgba(91, 61, 245, 0.65);
 }
 
 .lp-btn-primary:hover svg {
@@ -196,8 +198,8 @@
   height: 120%;
   z-index: 0;
   background:
-    radial-gradient(40% 55% at 82% 0%, rgba(31, 91, 63, 0.1), transparent 70%),
-    radial-gradient(36% 48% at 6% 30%, rgba(196, 99, 47, 0.08), transparent 72%);
+    radial-gradient(40% 55% at 82% 0%, rgba(91, 61, 245, 0.1), transparent 70%),
+    radial-gradient(36% 48% at 6% 30%, rgba(139, 92, 255, 0.08), transparent 72%);
   pointer-events: none;
 }
 
@@ -252,6 +254,11 @@
   position: relative;
   overflow: hidden;
   padding: 0;
+  /* Opera-style soft peach → lavender wash */
+  background:
+    radial-gradient(60% 50% at 12% 8%, rgba(252, 224, 206, 0.55), transparent 70%),
+    radial-gradient(55% 55% at 92% 4%, rgba(232, 226, 251, 0.7), transparent 72%),
+    linear-gradient(180deg, #fbeee9 0%, #f1eefb 48%, #ffffff 100%);
 }
 
 .lp-hero-fold {
@@ -379,7 +386,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #d8cfba;
+  background: #d9d4ec;
 }
 
 .lp-frame-url {
@@ -441,23 +448,28 @@
   }
 }
 
+/* Opera-style soft panel: light lavender-grey fill, big radius, no border;
+   lifts to a white card with a purple glow on hover. */
 .lp-feature-card {
-  background: var(--lp-card);
-  border: 1px solid var(--lp-line);
-  border-radius: 16px;
-  padding: 1.9rem 1.7rem;
-  box-shadow: 0 1px 2px rgba(28, 26, 21, 0.04);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--lp-bg-soft);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  padding: 2.1rem 1.9rem;
+  box-shadow: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .lp-feature-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(31, 91, 63, 0.35);
-  box-shadow: 0 20px 40px -24px rgba(28, 26, 21, 0.28);
+  background: var(--lp-card);
+  border-color: rgba(91, 61, 245, 0.25);
+  box-shadow: 0 24px 48px -28px rgba(91, 61, 245, 0.35);
 }
 
 .lp-feature-card.is-unique {
-  border-color: rgba(31, 91, 63, 0.28);
+  background: var(--lp-green-tint);
+  border-color: rgba(91, 61, 245, 0.22);
 }
 
 .lp-feature-top {
@@ -487,7 +499,7 @@
   padding: 0.3rem 0.6rem;
   border-radius: 999px;
   color: var(--lp-terra);
-  background: rgba(196, 99, 47, 0.1);
+  background: rgba(139, 92, 255, 0.1);
 }
 
 .lp-feature-h {
@@ -564,7 +576,7 @@
 
 .lp-vs-new {
   background: var(--lp-green-tint);
-  border-color: rgba(31, 91, 63, 0.3);
+  border-color: rgba(91, 61, 245, 0.3);
 }
 
 .lp-vs-h {
@@ -598,7 +610,7 @@
 
 .lp-vs-old .lp-vs-item span {
   text-decoration: line-through;
-  text-decoration-color: rgba(196, 99, 47, 0.55);
+  text-decoration-color: rgba(139, 92, 255, 0.55);
 }
 
 .lp-vs-mark {
@@ -667,7 +679,7 @@
 }
 
 .lp-step {
-  border-left: 2px solid rgba(196, 99, 47, 0.4);
+  border-left: 2px solid rgba(139, 92, 255, 0.4);
   padding: 0.2rem 0 0.2rem 1.5rem;
 }
 
