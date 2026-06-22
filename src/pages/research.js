@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import styles from './research.module.css';
@@ -217,17 +217,18 @@ export default function ResearchPage() {
   const [activeType, setActiveType] = useState('All Publications');
   const [query, setQuery] = useState('');
 
-  const filtered = useMemo(() => {
-    return PUBLICATIONS.filter((p) => {
-      if (activeType !== 'All Publications' && p.type !== activeType) return false;
-      if (query.trim()) {
-        const q = query.trim().toLowerCase();
-        const hay = `${p.title} ${p.desc} ${p.venue} ${p.tags.join(' ')}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      return true;
-    }).sort((a, b) => b.date.localeCompare(a.date));
-  }, [activeType, query]);
+  const q = query.trim().toLowerCase();
+  const filtered = PUBLICATIONS
+    .filter((p) => activeType === 'All Publications' || p.type === activeType)
+    .filter((p) => {
+      if (!q) return true;
+      const haystack = [p.title, p.desc, p.venue, ...(p.tags || [])]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(q);
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <Layout
@@ -256,7 +257,7 @@ export default function ResearchPage() {
               <input
                 type="search"
                 className={styles.searchInput}
-                placeholder="Search publications, authors, or topics..."
+                placeholder="Search by title, venue, or topic..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 aria-label="Search publications"
