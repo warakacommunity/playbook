@@ -5,31 +5,33 @@ slug: /
 
 # 1. Introduction
 
-> The bullet was the means of the physical subjugation. Language was the means of the spiritual subjugation.
->
-> — Ngũgĩ wa Thiong'o, *Decolonising the Mind: The Politics of Language in African Literature* (1986)
-
-Africa is home to roughly a third of the world's living languages, about 2,000 of the some 7,000 spoken on Earth ([Ethnologue, 2019](https://www.ethnologue.com/)). Almost none of them are visible to the systems now reshaping how the rest of the world reads, writes, searches, translates, and speaks. When a language model stumbles over Yorùbá, Chichewa, or Wolof, the cause is rarely the model. It is the data. The text and speech these systems learn from barely exist in a usable form, and where they do exist, they are too often wrong.
-
-[Joshi et al. (2020)](https://aclanthology.org/2020.acl-main.560/) sort the world's languages into six tiers by how many resources they have. The bottom tier, the *left-behinds*, with essentially no labelled data and little prospect of being served by current methods, holds the overwhelming majority of languages, and African languages crowd into it. Most have no annotated corpus, no benchmark, no tools. They are missing not because they are small. Many have tens of millions of speakers. They are missing because no one has built the data.
-
 :::tip[Help build the AfriPlaybook]
 This playbook is open source and community-owned. You don't need to write a whole chapter to help. Fixing an error, translating a page, or sharing what worked on a real project all count. See [**Built in the open**](#built-in-the-open) below, or jump straight to the [contribution guide](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/README.md#ways-to-contribute).
 :::
 
+
+> The bullet was the means of the physical subjugation. Language was the means of the spiritual subjugation.
+>
+> — Ngũgĩ wa Thiong'o, *Decolonising the Mind: The Politics of Language in African Literature* (1986)
+
+Africa is home to roughly a third of the world's living languages, about 2,000 of the some 7,000 spoken on Earth ([Ethnologue, 2019](https://www.ethnologue.com/)). Almost none of them are visible to the systems now reshaping how the rest of the world reads, writes, searches, translates, and speaks. When a language model stumbles over Yorùbá, Chichewa, or Wolof, the cause is rarely the model. It is the data. The text and speech these systems learn from barely exist in a usable form.
+
+[Joshi et al. (2020)](https://aclanthology.org/2020.acl-main.560/) sort the world's languages into six tiers by how many resources they have. The bottom tier, the *left-behinds*, with essentially no labelled data and little prospect of being served by current methods, holds the overwhelming majority of languages, and African languages crowd into it. Most have no annotated corpus, no benchmark, no tools. They are missing not because they are small. Many have tens of millions of speakers. They are missing because no one has built the data.
+
+![Joshi et al.'s six language resource classes, plotted by how much labelled and unlabelled data each has. Class 0, the left-behinds, holds the overwhelming majority of languages and sits at the bottom with almost no data; African languages crowd into classes 0 and 1. The better-resourced classes hold only a handful of languages each.](./africanlp-language-classes.svg)
+
 ## Scraping will not fix this
 
-When a language has no data, the instinct is to go and scrape more of it: crawl a wider slice of the web and trust that coverage will follow. For African languages, that instinct fails, for two separate reasons.
+When a language has no data, the instinct is to go and scrape more of it: crawl a wider slice of the web and trust that coverage will follow. For African languages, that instinct fails.
 
-First, the web does not contain much African-language text, and what it contains is thin and noisy. When [Kreutzer et al. (2022)](https://aclanthology.org/2022.tacl-1.4/) audited the large multilingual crawls everyone trains on, they found that for many low-resource languages a large share of the data was mislabelled, machine-translated, or not language at all. At the tail, quality collapses along with quantity.
+The web does not contain much African-language text, and what it contains is thin and noisy. When [Kreutzer et al. (2022)](https://aclanthology.org/2022.tacl-1.4/) audited the large multilingual crawls everyone trains on, they found that for many low-resource languages a large share of the data was mislabelled, machine-translated, or not language at all. At the tail, quality collapses along with quantity.
 
-Second, and this cuts deeper, scraping treats people's words as a resource to be taken. Scholars of technology have a name for the pattern. [Couldry and Mejias (2019)](https://www.sup.org/books/sociology/costs-connection) call it *data colonialism*: the normalising of appropriating human life through data, much as historical colonialism normalised the appropriation of land and labour. [Birhane (2020)](https://script-ed.org/wp-content/uploads/2020/08/birhane.pdf) traces the shape this takes on the continent: an *algorithmic colonisation of Africa* in which the infrastructure, the models, and the value they produce are owned elsewhere, while African data is framed as an untapped abundance waiting to be mined.
+The only sure way to get high-quality data for African languages is to build it with the people who speak them, the people who know the words, the grammar, the idioms, and the culture. One of the main blockers to AfricaNLP is that the people who speak these languages are not the ones building the data. The people who build it often cannot tell what is correct, what is offensive, or what is missing. They do not know what matters to the communities behind the language, or how to keep the data they collect from causing harm.
 
-Decolonising AI in Africa, then, is not a slogan to bolt onto a model. It is a question of who builds the data, who owns it, and who benefits. The answer this playbook is built around is plain: the people who speak the languages. Data made by and with those communities is not only more just. It is better. It carries dialect, register, and meaning no crawler can reach, and it comes with the consent and context that make it safe to use and to release.
+That gap has real consequences. Data built without its speakers can look clean while being quietly wrong, and any model trained on it inherits every mistake. Such errors spread, into search results, translations, and the everyday tools that millions of people are starting to depend on. Getting the data right decides whether a language is served well, served badly, or left out of these tools altogether.
 
-The stakes run deeper than fairness. Long before the first language model, Ngũgĩ wa Thiong'o named language as the ground on which domination is won or refused: "the bullet was the means of the physical subjugation. Language was the means of the spiritual subjugation" (Ngũgĩ wa Thiong'o, *Decolonising the Mind*, 1986, p. 9). Language, for Ngũgĩ, is never only communication; it is a "carrier of culture," the "collective memory bank of a people's experience in history" (pp. 13, 15). Seen this way, an AI that cannot work in Yorùbá or Wolof, or that knows them only as scraped fragments, is his *cultural bomb* in a new casing, telling millions of speakers once more that their language is not where real knowledge lives. Building that data, in those languages, with the people who speak them, is how that message is refused.
+This playbook is about how to fix that problem. It is a practical, opinionated, step-by-step guide to building high-quality datasets for African languages, drawing on the direct experience of the people who speak and understand them. The playbook is build by the people who know the languages, for the people who want to build datasets for them. It is about how to do it right, and how to do it safely.
 
-We know this works, because it already has. [Masakhane](https://www.masakhane.io/), the grassroots community this playbook grows out of, has spent years proving the point. Its [participatory model](https://aclanthology.org/2020.findings-emnlp.195/) (Nekoto et al., 2020) puts native speakers at the centre of dataset creation rather than at the end of a pipeline. Out of it came resources that did not exist before: [MasakhaNER](https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00416/107614/MasakhaNER-Named-Entity-Recognition-for-African) (Adelani et al., 2021), the first large, high-quality named-entity dataset for ten African languages, built by speakers rather than scraped; [MasakhaNEWS](https://arxiv.org/abs/2304.09972), news classification across sixteen; [AfriQA](https://github.com/masakhane-io/afriqa), the first cross-lingual open-retrieval question-answering dataset for African languages; and [AfroLID](https://aclanthology.org/2022.emnlp-main.128/), language identification spanning 517 languages. None came from a bigger crawl. They came from people.
 
 ## The field is growing, the data is not keeping up
 
