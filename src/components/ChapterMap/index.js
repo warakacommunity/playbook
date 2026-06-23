@@ -100,11 +100,6 @@ export default function ChapterMap() {
               </Link>
             ))}
           </div>
-          {i < PHASES.length - 1 && (
-            <div className={styles.connector} aria-hidden="true">
-              ↓
-            </div>
-          )}
         </div>
       ))}
     </nav>
