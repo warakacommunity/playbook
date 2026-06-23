@@ -57,7 +57,13 @@ jobs:
           external_repository: warakacommunity/warakacommunity.github.io
           publish_branch: gh-pages
           publish_dir: ./build # Docusaurus builds into the 'build' folder
-          # Wipe the destination each deploy so removed pages don't linger.
-          force_orphan: true
+          # Keep previously-published files instead of wiping the branch each deploy.
+          # Docusaurus uses content-hashed asset filenames, so old chunks (e.g. an
+          # earlier main.<hash>.js) must linger: stale HTML on the CDN edge, and the
+          # PWA service worker's precached manifest, still reference them. force_orphan
+          # deletes those → returning visitors get 404s on route chunks → pages hang on
+          # "Loading page content…". keep_files preserves them so stale refs resolve.
+          # Trade-off: removed *pages* linger until a periodic manual clean deploy.
+          keep_files: true
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
