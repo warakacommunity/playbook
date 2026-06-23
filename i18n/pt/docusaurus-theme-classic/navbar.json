@@ -7,8 +7,8 @@
     "message": "Logótipo Masakhane",
     "description": "The alt text of navbar logo"
   },
-  "item.label.MasakhanePlaybook": {
-    "message": "MasakhanePlaybook",
+  "item.label.AfriPlaybook": {
+    "message": "AfriPlaybook",
     "description": "Navbar item with label Playbook"
   },
   "item.label.MasakhaneTool": {

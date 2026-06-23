@@ -40,22 +40,22 @@ Both are open from day one — there is no closed version, no commercial fork.
 ## Get in touch
 
 - 💬 **Discord** — join the community at [discord.gg/ChNPHV2PPS](https://discord.gg/ChNPHV2PPS)
-- 🗣️ **GitHub Discussions** — [github.com/MasakhaneHubNLP/MasakhanePlaybook/discussions](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/discussions)
-- 🐛 **Bugs / feature requests** — [GitHub Issues](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/issues)
+- 🗣️ **GitHub Discussions** — [github.com/warakacommunity/AfriPlaybook/discussions](https://github.com/warakacommunity/AfriPlaybook/discussions)
+- 🐛 **Bugs / feature requests** — [GitHub Issues](https://github.com/warakacommunity/AfriPlaybook/issues)
 - 📰 **Newsletter** — [/newsletter](/newsletter) (launching shortly)
 
 ## How to contribute
 
 We welcome contributions from researchers, practitioners, students, language experts, and translators. Pick whichever fits:
 
-- **Write a chapter** — fill a gap in the Playbook. See [How to contribute a chapter](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/README.md#how-to-contribute-a-chapter).
+- **Write a chapter** — fill a gap in the Playbook. See [How to contribute a chapter](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#how-to-contribute-a-chapter).
 - **Translate** — adapt an existing chapter into Hausa, Amharic, Swahili, French, or Portuguese.
 - **Review** — open issues or PRs against existing chapters; correct technical errors, clarify language, suggest references.
 - **Share a case study** — a short post in our blog about a real-world Masakhane project.
 
 ## How to cite
 
-If you reference the Playbook in research, teaching, or a project, please cite it. See the [citation page](/cite) for BibTeX, APA, MLA, Chicago, and the machine-readable [`CITATION.cff`](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/CITATION.cff).
+If you reference the Playbook in research, teaching, or a project, please cite it. See the [citation page](/cite) for BibTeX, APA, MLA, Chicago, and the machine-readable [`CITATION.cff`](https://github.com/warakacommunity/AfriPlaybook/blob/main/CITATION.cff).
 
 ## Code of conduct
 
@@ -69,4 +69,4 @@ We follow the [Contributor Covenant](https://www.contributor-covenant.org/). Be 
 
 ## Acknowledgments
 
-The Playbook is the result of contributions from researchers, practitioners, students, language experts, and translators across the continent. A full contributors list is maintained in [`CITATION.cff`](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/CITATION.cff) and on the [GitHub repository](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/graphs/contributors).
+The Playbook is the result of contributions from researchers, practitioners, students, language experts, and translators across the continent. A full contributors list is maintained in [`CITATION.cff`](https://github.com/warakacommunity/AfriPlaybook/blob/main/CITATION.cff) and on the [GitHub repository](https://github.com/warakacommunity/AfriPlaybook/graphs/contributors).

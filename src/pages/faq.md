@@ -6,7 +6,7 @@ hide_table_of_contents: true
 
 <!-- markdownlint-disable MD033 -->
 
-Click any question to read the answer. If yours isn't covered here, ask on [Discord](https://discord.gg/ChNPHV2PPS) or open a [GitHub Discussion](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/discussions).
+Click any question to read the answer. If yours isn't covered here, ask on [Discord](https://discord.gg/ChNPHV2PPS) or open a [GitHub Discussion](https://github.com/warakacommunity/AfriPlaybook/discussions).
 
 <div className="faq-list">
 
@@ -26,14 +26,14 @@ Yes — contributions are very welcome. The recommended flow:
 2. **Fork the repo**, write your chapter as a Markdown file under the relevant section folder in `docs/`.
 3. **Open a pull request** referencing your issue.
 
-The full step-by-step guide — including frontmatter conventions, sidebar configuration, math/admonition syntax, and image handling — is in the [contribution guide in the README](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/README.md#how-to-contribute-a-chapter).
+The full step-by-step guide — including frontmatter conventions, sidebar configuration, math/admonition syntax, and image handling — is in the [contribution guide in the README](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#how-to-contribute-a-chapter).
 
 </details>
 
 <details className="faq-item">
 <summary>How do I cite the Playbook?</summary>
 
-Every chapter page has a **"Cite this page"** link in the footer that gives you the BibTeX for that specific chapter. The dedicated [citation page](/cite) provides BibTeX, APA, MLA, Chicago, and a machine-readable [`CITATION.cff`](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/CITATION.cff) (which GitHub renders as a "Cite this repository" button on the repo page).
+Every chapter page has a **"Cite this page"** link in the footer that gives you the BibTeX for that specific chapter. The dedicated [citation page](/cite) provides BibTeX, APA, MLA, Chicago, and a machine-readable [`CITATION.cff`](https://github.com/warakacommunity/AfriPlaybook/blob/main/CITATION.cff) (which GitHub renders as a "Cite this repository" button on the repo page).
 
 If you cite a specific chapter, please include the chapter title and the URL of the chapter page.
 
@@ -66,9 +66,9 @@ The Tool itself supports any African language and script through Unicode, with *
 
 There are several ways, depending on how much time you have:
 
-- **5 minutes** — [Star the repo on GitHub](https://github.com/MasakhaneHubNLP/MasakhanePlaybook) or [join Discord](https://discord.gg/ChNPHV2PPS).
+- **5 minutes** — [Star the repo on GitHub](https://github.com/warakacommunity/AfriPlaybook) or [join Discord](https://discord.gg/ChNPHV2PPS).
 - **30 minutes** — Translate one paragraph, fix a typo, or add a missing reference (the "Edit this page" link at the bottom of every chapter takes you straight to GitHub).
-- **A few hours** — Write a [blog post case study](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/README.md#how-to-write-a-blog-post) about a real-world dataset project.
+- **A few hours** — Write a [blog post case study](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#how-to-write-a-blog-post) about a real-world dataset project.
 - **A few weeks** — Lead a chapter. See the open [Call for Chapter Development Proposals](/blog/call-for-chapters-masakhane-playbook) (USD $1,000 honorarium per accepted chapter, open through 30 June 2026).
 
 </details>
@@ -88,10 +88,10 @@ You can use either independently. They were designed together so the practices i
 <details className="faq-item">
 <summary>I found an error or want to report a bug — where do I go?</summary>
 
-- **Bug in a chapter** (typo, broken link, wrong information): open a [new issue](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/issues/new) with the URL of the page and what's wrong, or click the "Edit this page" link at the bottom of the chapter and submit a fix directly.
+- **Bug in a chapter** (typo, broken link, wrong information): open a [new issue](https://github.com/warakacommunity/AfriPlaybook/issues/new) with the URL of the page and what's wrong, or click the "Edit this page" link at the bottom of the chapter and submit a fix directly.
 - **Bug in the Tool**: open an issue on the Tool's repository (linked from the [Tool page](/tool)).
 - **Feature request**: open an issue describing what you'd like and why.
-- **Open-ended question or discussion**: prefer [GitHub Discussions](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/discussions) over an issue.
+- **Open-ended question or discussion**: prefer [GitHub Discussions](https://github.com/warakacommunity/AfriPlaybook/discussions) over an issue.
 
 </details>
 
@@ -113,4 +113,4 @@ The project is anchored at **Bayero University, Kano (Nigeria)** and **Bahir Dar
 
 ---
 
-Still have a question? [Ask on Discord](https://discord.gg/ChNPHV2PPS) or [open a discussion](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/discussions).
+Still have a question? [Ask on Discord](https://discord.gg/ChNPHV2PPS) or [open a discussion](https://github.com/warakacommunity/AfriPlaybook/discussions).

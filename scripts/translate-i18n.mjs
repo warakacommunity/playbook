@@ -23,7 +23,7 @@ const FILES = [
 const T = {
   ha: {
     // navbar
-    "item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "item.label.AfriPlaybook": "AfriPlaybook",
     "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "Bulogi",
     "item.label.Download PDF": "Sauke PDF",
@@ -33,7 +33,7 @@ const T = {
     "link.title.Docs": "Takardu",
     "link.title.Community": "Al'umma",
     "link.title.More": "Ƙari",
-    "link.item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "link.item.label.AfriPlaybook": "AfriPlaybook",
     "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "Bulogi",
     "link.item.label.GitHub Repository": "Ma'ajiyar GitHub",
@@ -110,7 +110,7 @@ const T = {
   },
 
   am: {
-    "item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "item.label.AfriPlaybook": "AfriPlaybook",
     "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "ብሎግ",
     "item.label.Download PDF": "PDF አውርድ",
@@ -119,7 +119,7 @@ const T = {
     "link.title.Docs": "ሰነዶች",
     "link.title.Community": "ማህበረሰብ",
     "link.title.More": "ተጨማሪ",
-    "link.item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "link.item.label.AfriPlaybook": "AfriPlaybook",
     "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "ብሎግ",
     "link.item.label.GitHub Repository": "GitHub ማከማቻ",
@@ -194,7 +194,7 @@ const T = {
   },
 
   sw: {
-    "item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "item.label.AfriPlaybook": "AfriPlaybook",
     "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "Blogu",
     "item.label.Download PDF": "Pakua PDF",
@@ -203,7 +203,7 @@ const T = {
     "link.title.Docs": "Hati",
     "link.title.Community": "Jumuiya",
     "link.title.More": "Zaidi",
-    "link.item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "link.item.label.AfriPlaybook": "AfriPlaybook",
     "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "Blogu",
     "link.item.label.GitHub Repository": "Hifadhi ya GitHub",
@@ -278,7 +278,7 @@ const T = {
   },
 
   fr: {
-    "item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "item.label.AfriPlaybook": "AfriPlaybook",
     "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "Blog",
     "item.label.Download PDF": "Télécharger le PDF",
@@ -287,7 +287,7 @@ const T = {
     "link.title.Docs": "Documentation",
     "link.title.Community": "Communauté",
     "link.title.More": "Plus",
-    "link.item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "link.item.label.AfriPlaybook": "AfriPlaybook",
     "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "Blog",
     "link.item.label.GitHub Repository": "Dépôt GitHub",
@@ -363,7 +363,7 @@ const T = {
   },
 
   pt: {
-    "item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "item.label.AfriPlaybook": "AfriPlaybook",
     "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "Blog",
     "item.label.Download PDF": "Baixar PDF",
@@ -372,7 +372,7 @@ const T = {
     "link.title.Docs": "Documentação",
     "link.title.Community": "Comunidade",
     "link.title.More": "Mais",
-    "link.item.label.MasakhanePlaybook": "MasakhanePlaybook",
+    "link.item.label.AfriPlaybook": "AfriPlaybook",
     "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "Blog",
     "link.item.label.GitHub Repository": "Repositório do GitHub",

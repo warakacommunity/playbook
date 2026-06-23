@@ -15,7 +15,7 @@ What the AfriPlaybook project has shipped, what's in flight right now, and what'
 - Foundational chapter scaffolding across the dataset lifecycle (10 sections, ~22 chapters)
 - Open infrastructure: Docusaurus 3.10 site, downloadable PDF, RSS / Atom blog feeds, installable PWA for offline reading
 - Internationalisation scaffolding for 6 languages (English + Hausa, Amharic, Swahili, French, Portuguese)
-- Citation system: per-page "Cite this page" link, BibTeX, APA, MLA, Chicago, machine-readable [`CITATION.cff`](https://github.com/MasakhaneHubNLP/MasakhanePlaybook/blob/main/CITATION.cff)
+- Citation system: per-page "Cite this page" link, BibTeX, APA, MLA, Chicago, machine-readable [`CITATION.cff`](https://github.com/warakacommunity/AfriPlaybook/blob/main/CITATION.cff)
 - Community channels: Discord, GitHub Discussions, AfricaNLP Newsletter signup page
 - Math (KaTeX), Mermaid-ready diagrams, comments via [Giscus](/AfriPlaybook/), Cloudflare Web Analytics
 

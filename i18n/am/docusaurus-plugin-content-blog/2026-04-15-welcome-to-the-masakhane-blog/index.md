@@ -23,7 +23,7 @@ The blog publishes an RSS feed at [`/blog/rss.xml`](pathname:///blog/rss.xml) an
 
 ## How to write a post
 
-Posts live in the `blog/` folder of the [MasakhanePlaybook repo](https://github.com/MasakhaneHubNLP/MasakhanePlaybook). Each post is a markdown file (or a folder containing `index.md` if you have images). The frontmatter looks like this:
+Posts live in the `blog/` folder of the [AfriPlaybook repo](https://github.com/warakacommunity/AfriPlaybook). Each post is a markdown file (or a folder containing `index.md` if you have images). The frontmatter looks like this:
 
 ```yaml
 ---

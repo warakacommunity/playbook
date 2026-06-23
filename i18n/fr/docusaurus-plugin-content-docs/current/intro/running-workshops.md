@@ -56,5 +56,5 @@ For a full-day workshop, repeat the deep-dive and hands-on blocks for each addit
 
 - Share a written summary within 48 hours: what was covered, what questions arose, what next steps are
 - Log any sections that caused confusion — these are candidates for improvement
-- Submit feedback via the [GitHub repository](https://github.com/MasakhaneHubNLP/MasakhanePlaybook) or the built-in feedback form on the site
+- Submit feedback via the [GitHub repository](https://github.com/warakacommunity/AfriPlaybook) or the built-in feedback form on the site
 - Identify one or two participants who can serve as local playbook champions — people who can answer questions and onboard future contributors independently
