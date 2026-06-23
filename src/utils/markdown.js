@@ -114,6 +114,12 @@ export function mdToHtml(md) {
     }
     if (paraLines.length > 0) {
       out.push(`<p>${paraLines.join('<br>')}</p>`);
+    } else {
+      // No rule matched and the paragraph loop consumed nothing — e.g. an empty
+      // heading like "### " (hashes with no title) or a bare ">" that isn't a
+      // valid blockquote. Skip the line so `i` always advances; otherwise the
+      // outer while spins forever and freezes the tab.
+      i++;
     }
   }
   return out.join('\n');
