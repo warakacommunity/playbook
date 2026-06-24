@@ -9,7 +9,6 @@ import {
   IconSparkles,
   IconRocket,
   IconBookOpen,
-  IconAward,
   IconHeart,
   IconCalendar,
 } from '@site/src/components/Icons';
@@ -92,6 +91,8 @@ const WHO = [
 
 export default function Fellowship() {
   const mark = useBaseUrl('/img/brand/afriannotate-mark.svg');
+  const cohortImg = useBaseUrl('/img/fellowship/cohort.jpg');
+  const mentorshipImg = useBaseUrl('/img/fellowship/mentorship.jpg');
 
   return (
     <Layout
@@ -148,6 +149,15 @@ export default function Fellowship() {
               </div>
             </div>
           </div>
+
+          {/* Establishing photo — African students collaborating (Iwaria, Unsplash). */}
+          <div className="lp-wrap">
+            <div className="lp-hero-shot">
+              <div className="lp-frame">
+                <img src={cohortImg} alt="African students working together on laptops" loading="lazy" />
+              </div>
+            </div>
+          </div>
         </header>
 
         {/* ============ TRUST ============ */}
@@ -162,7 +172,6 @@ export default function Fellowship() {
         {/* ============ THE NEED ============ */}
         <section className="lp-section">
           <div className="lp-wrap">
-            <span className="lp-section-kicker">Why this matters</span>
             <h2 className="lp-h2" style={{maxWidth: '16em'}}>
               Africa’s gap is a <em>mentorship gap</em>, not a talent gap.
             </h2>
@@ -175,13 +184,12 @@ export default function Fellowship() {
               draft honestly, and open the door to a first paper.
             </p>
             <p className="lp-body">
-              Programs like the Fatima Fellowship showed that one thing moves the
-              needle more than anything else — pairing motivated people with
-              researchers willing to mentor them. The AfriNLP Fellowship brings
-              that model home: it connects Africa’s most promising NLP minds with
-              experienced mentors from around the world, and makes sure the best
-              guidance reaches people who would never otherwise have it,
-              whatever their background.
+              One thing moves the needle more than anything else — pairing
+              motivated people with researchers willing to mentor them. The
+              AfriNLP Fellowship is built on that idea: it connects Africa’s most
+              promising NLP minds with experienced mentors from around the world,
+              and makes sure the best guidance reaches people who would never
+              otherwise have it, whatever their background.
             </p>
           </div>
         </section>
@@ -189,7 +197,6 @@ export default function Fellowship() {
         {/* ============ WHAT YOU GET ============ */}
         <section className="lp-section" style={{paddingTop: 0}}>
           <div className="lp-wrap">
-            <span className="lp-section-kicker">What fellows get</span>
             <h2 className="lp-h2">Everything you need to do real research</h2>
             <div className="lp-feature-grid">
               {BENEFITS.map((b) => (
@@ -209,7 +216,6 @@ export default function Fellowship() {
         {/* ============ TIMELINE ============ */}
         <section className="lp-section" style={{paddingTop: 0}}>
           <div className="lp-wrap">
-            <span className="lp-section-kicker">How the cohort runs</span>
             <h2 className="lp-h2">From application to publication in one cohort</h2>
             <p className="lp-body" style={{marginBottom: '1.5rem'}}>
               The first AfriNLP Fellowship cohort runs over roughly nine months,
@@ -259,15 +265,10 @@ export default function Fellowship() {
                 </a>
               </div>
             </div>
-            {/* Image slot: drop in a real, consented cohort/mentorship photo here. */}
+            {/* Mentorship photo — pair-programming / review (Desola Lanre-Ologun, Unsplash). */}
             <div className="lp-split-media">
-              <div className="lp-frame" style={{aspectRatio: '4 / 3', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface-wash)'}}>
-                <div style={{textAlign: 'center', padding: '2rem', color: 'var(--ifm-color-emphasis-600)'}}>
-                  <IconAward size={40} />
-                  <p style={{marginTop: '0.75rem', fontSize: '0.85rem'}}>
-                    Cohort photo goes here
-                  </p>
-                </div>
+              <div className="lp-frame">
+                <img src={mentorshipImg} alt="A researcher mentoring a fellow at a laptop, reviewing code together" loading="lazy" />
               </div>
             </div>
           </div>
@@ -276,7 +277,6 @@ export default function Fellowship() {
         {/* ============ WHO SHOULD APPLY ============ */}
         <section className="lp-section" style={{paddingTop: 0}}>
           <div className="lp-wrap">
-            <span className="lp-section-kicker">Who should apply</span>
             <h2 className="lp-h2">You don’t need permission to be a researcher</h2>
             <div className="lp-vs" style={{gridTemplateColumns: '1fr'}}>
               <div className="lp-vs-col lp-vs-new">
