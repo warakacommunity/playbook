@@ -142,7 +142,7 @@ A few things every contribution should follow:
 - **Write plainly.** Short sentences, active voice, one idea per paragraph. Explain jargon the first time you use it.
 - **Cite real sources.** Every claim and example must point to a real, verifiable paper, dataset, or project — never an invented or unchecked citation.
 
-For the full style rules and deeper repository details, see [CONTRIBUTING.md](https://github.com/warakacommunity/AfriPlaybook/blob/main/CONTRIBUTING.md).
+For how to structure a page, add sections and subsections, and use the colored callout boxes — in **Markdown or Word** — see [How to Write the Document](./how-to-write). For the full style rules and deeper repository details, see [CONTRIBUTING.md](https://github.com/warakacommunity/AfriPlaybook/blob/main/CONTRIBUTING.md).
 
 ## Translating a page
 
