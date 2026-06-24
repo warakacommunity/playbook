@@ -475,6 +475,11 @@ const config = {
             position: "left",
           },
           {
+            to: "/fellowship",
+            label: "Fellowship",
+            position: "left",
+          },
+          {
             type: "custom-AboutNavbarItem",
             position: "left",
           },
@@ -513,6 +518,10 @@ const config = {
               {
                 label: "AfriFinder",
                 to: "/afrifinder",
+              },
+              {
+                label: "Fellowship",
+                to: "/fellowship",
               },
               {
                 label: "Blog",
