@@ -173,7 +173,7 @@ export default function Fellowship() {
         <section className="lp-section">
           <div className="lp-wrap">
             <h2 className="lp-h2" style={{maxWidth: '16em'}}>
-              Africa’s gap is a <em>mentorship gap</em>, not a talent gap.
+              The talent is already here. <em>What’s missing is the mentorship.</em>
             </h2>
             <p className="lp-body">
               African languages are spoken by hundreds of millions of people and
