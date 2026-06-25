@@ -16,6 +16,6 @@ This page lists all governance toolkit templates available in the playbook. Each
 
 ## Other Artifacts
 
-- Annotation guideline template → see [Training and Guidelines](../annotation-design/training_guidlines.md)
+- Annotation guideline template → see [Training and Guidelines](../3_annotation-design/training_guidlines.md)
 - Datasheet template → see [Documentation and Reporting](./documentation.md)
-- Data collection plan template → see [Cost and Resource Planning](../data-collection/cost-resource-planning.md)
+- Data collection plan template → see [Cost and Resource Planning](../2_data-collection/6_cost-resource-planning.md)

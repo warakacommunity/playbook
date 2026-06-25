@@ -16,11 +16,11 @@ Data comes from people, and those people keep a stake in it. Ask for informed co
 
 ## Quality over scale
 
-A small, clean, well-documented dataset is worth more than a large, noisy one. Web-scale crawls for low-resource languages are full of mislabelled and machine-translated text ([Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/)). It is better to label a thousand examples well than a million badly. The whole [data quality](../data-quality/index.md) chapter exists because this principle is easy to say and hard to keep.
+A small, clean, well-documented dataset is worth more than a large, noisy one. Web-scale crawls for low-resource languages are full of mislabelled and machine-translated text ([Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/)). It is better to label a thousand examples well than a million badly. The whole [data quality](../4_data-quality/index.md) chapter exists because this principle is easy to say and hard to keep.
 
 ## Context travels with the data
 
-A dataset without documentation is hard to trust and easy to misuse. Record what you collected, from whom, how, and why. Name the languages, scripts, and varieties precisely. Good [documentation](../documentation/documentation.md) is what lets other people reuse your work, and what lets you defend it later.
+A dataset without documentation is hard to trust and easy to misuse. Record what you collected, from whom, how, and why. Name the languages, scripts, and varieties precisely. Good [documentation](../6_documentation/documentation.md) is what lets other people reuse your work, and what lets you defend it later.
 
 ## Build in the open, design for reuse
 

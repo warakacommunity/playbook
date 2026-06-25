@@ -52,7 +52,7 @@ const PHASES = [
       {
         title: "Documentation & Governance",
         blurb: "Consent, licensing, ownership, and datasheets.",
-        href: "/AfriPlaybook/documentation",
+        href: "/AfriPlaybook/documentation/documentation",
       },
       {
         title: "Lifecycle & Release",
