@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 760" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">What a Text-to-Speech corpus needs</title>
+  <desc id="desc">Text paired with studio-clean, single-speaker audio chosen for phonetic coverage trains a synthetic voice; with callouts for phoneme and tone labelling, consent and voice-rights, and evaluation by Mean Opinion Score and intelligibility.</desc>
+
+  <!-- outer self-contained card -->
+  <rect x="8" y="8" width="1164" height="744" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- heading -->
+  <text x="32" y="50" font-size="24" font-weight="700" fill="#2B2218">Anatomy of a TTS corpus</text>
+  <text x="32" y="76" font-size="14" fill="#8A7D6E">Text + studio-clean, single-speaker audio chosen for phonetic coverage &#8594; a synthetic voice</text>
+
+  <!-- ============ INPUTS ROW ============ -->
+  <text x="32" y="118" font-size="13" font-weight="700" fill="#8A7D6E" letter-spacing="0.5">PAIRED INPUTS</text>
+
+  <!-- Text box (terracotta) -->
+  <rect x="32" y="132" width="300" height="178" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="52" y="160" font-size="17" font-weight="700" fill="#9C4F2B">Text script</text>
+  <text x="52" y="184" font-size="13" fill="#2B2218">Normalized to spoken form: numbers,</text>
+  <text x="52" y="202" font-size="13" fill="#2B2218">dates, abbreviations written as said.</text>
+  <text x="52" y="226" font-size="13" fill="#2B2218">Diacritics preserved exactly &#8212; they</text>
+  <text x="52" y="244" font-size="13" fill="#2B2218">carry the pitch in tone languages.</text>
+  <rect x="52" y="258" width="260" height="38" rx="8" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="64" y="282" font-size="13" fill="#8A3B25" font-family="ui-monospace,Menlo,Consolas,monospace">&#7884; d&#233; n&#237; aago m&#7865;&#769;j&#7885;.</text>
+
+  <!-- Audio box (forest green) -->
+  <rect x="356" y="132" width="300" height="178" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="376" y="160" font-size="17" font-weight="700" fill="#1F5B3F">Studio-clean audio</text>
+  <text x="376" y="184" font-size="13" fill="#2B2218">Single speaker, one voice. Mono,</text>
+  <text x="376" y="202" font-size="13" fill="#2B2218">22.05 kHz, quiet environment.</text>
+  <text x="376" y="226" font-size="13" fill="#2B2218">Any noise is baked into the voice.</text>
+  <text x="376" y="244" font-size="13" fill="#2B2218">Script chosen for phonetic coverage</text>
+  <text x="376" y="262" font-size="13" fill="#2B2218">so every sound appears often enough.</text>
+  <!-- tiny waveform -->
+  <g stroke="#2E7D5B" stroke-width="2.5" stroke-linecap="round">
+    <line x1="380" y1="288" x2="380" y2="288"/>
+    <line x1="390" y1="282" x2="390" y2="294"/>
+    <line x1="400" y1="274" x2="400" y2="302"/>
+    <line x1="410" y1="268" x2="410" y2="308"/>
+    <line x1="420" y1="278" x2="420" y2="298"/>
+    <line x1="430" y1="272" x2="430" y2="304"/>
+    <line x1="440" y1="284" x2="440" y2="292"/>
+    <line x1="450" y1="276" x2="450" y2="300"/>
+    <line x1="460" y1="270" x2="460" y2="306"/>
+    <line x1="470" y1="280" x2="470" y2="296"/>
+    <line x1="480" y1="274" x2="480" y2="302"/>
+    <line x1="490" y1="286" x2="490" y2="290"/>
+  </g>
+
+  <!-- connector: inputs -> paired clip -->
+  <path d="M182 310 L182 340 L500 340 L500 310" fill="none" stroke="#CBBBA4" stroke-width="1.5"/>
+  <path d="M341 221 L351 221" stroke="#CBBBA4" stroke-width="1.5"/>
+  <text x="266" y="334" font-size="12" fill="#8A7D6E" text-anchor="middle">aligned per clip</text>
+
+  <!-- Metadata / LJSpeech layout box (gold) -->
+  <rect x="32" y="356" width="624" height="86" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="52" y="384" font-size="16" font-weight="700" fill="#B97F37">metadata.csv &#8212; LJSpeech layout</text>
+  <text x="52" y="408" font-size="13" fill="#2B2218" font-family="ui-monospace,Menlo,Consolas,monospace">clip_id | original text | normalized (spoken) text</text>
+  <text x="52" y="428" font-size="13" fill="#8A7D6E">One folder of single-speaker WAVs, one pipe-separated metadata file.</text>
+
+  <!-- arrow metadata -> model -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F5B3F"/>
+    </marker>
+  </defs>
+  <path d="M656 399 L736 399" fill="none" stroke="#1F5B3F" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="696" y="390" font-size="12" fill="#8A7D6E" text-anchor="middle">train</text>
+
+  <!-- ============ SYNTHETIC VOICE (deep rust) ============ -->
+  <rect x="744" y="132" width="404" height="310" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="766" y="162" font-size="18" font-weight="700" fill="#8A3B25">Synthetic voice</text>
+  <text x="766" y="186" font-size="13" fill="#2B2218">A reproducible voice that turns written</text>
+  <text x="766" y="204" font-size="13" fill="#2B2218">text into spoken audio &#8212; making the</text>
+  <text x="766" y="222" font-size="13" fill="#2B2218">language usable by people who cannot</text>
+  <text x="766" y="240" font-size="13" fill="#2B2218">read it or cannot see a screen.</text>
+
+  <!-- inner: phoneme/tone callout (forest tint) -->
+  <rect x="766" y="258" width="360" height="76" rx="10" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="782" y="282" font-size="14" font-weight="700" fill="#1F5B3F">Pronunciation / phoneme labelling</text>
+  <text x="782" y="302" font-size="13" fill="#2B2218">Tone marking is critical for tone languages:</text>
+  <text x="782" y="320" font-size="13" fill="#2B2218">the same spelling carries different pitches.</text>
+
+  <!-- inner: consent / voice-rights callout (gold tint, warning) -->
+  <rect x="766" y="344" width="360" height="84" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="782" y="368" font-size="14" font-weight="700" fill="#8A3B25">&#9888; Consent &amp; voice-rights</text>
+  <text x="782" y="388" font-size="13" fill="#2B2218">Speaker must agree their voice will be synthesised.</text>
+  <text x="782" y="406" font-size="13" fill="#2B2218">Licence must forbid impersonation / voice cloning</text>
+  <text x="782" y="424" font-size="13" fill="#2B2218">&#8212; Kaitiakitanga-style licence template.</text>
+
+  <!-- ============ EVALUATION ROW (terracotta header) ============ -->
+  <text x="32" y="488" font-size="13" font-weight="700" fill="#8A7D6E" letter-spacing="0.5">EVALUATION &#8212; JUDGED MOSTLY BY PEOPLE</text>
+
+  <!-- MOS box -->
+  <rect x="32" y="502" width="360" height="158" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="52" y="530" font-size="17" font-weight="700" fill="#9C4F2B">Mean Opinion Score (MOS)</text>
+  <text x="52" y="554" font-size="13" fill="#2B2218">Listeners rate naturalness, e.g. 1&#8211;5.</text>
+  <text x="52" y="572" font-size="13" fill="#2B2218">Average several listeners per clip so</text>
+  <text x="52" y="590" font-size="13" fill="#2B2218">MOS is real opinion, not one person's.</text>
+  <text x="52" y="614" font-size="13" fill="#2B2218">Ordinal rating &#8594; Krippendorff's alpha</text>
+  <text x="52" y="632" font-size="13" fill="#2B2218">for inter-listener agreement.</text>
+  <!-- star rating glyphs -->
+  <g fill="#E0A458">
+    <text x="316" y="530" font-size="15">&#9733;&#9733;&#9733;&#9733;&#9734;</text>
+  </g>
+
+  <!-- Intelligibility box -->
+  <rect x="408" y="502" width="360" height="158" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="428" y="530" font-size="17" font-weight="700" fill="#1F5B3F">Intelligibility check</text>
+  <text x="428" y="554" font-size="13" fill="#2B2218">Listener types the sentence they heard.</text>
+  <text x="428" y="572" font-size="13" fill="#2B2218">Compare to intended text with Character</text>
+  <text x="428" y="590" font-size="13" fill="#2B2218">Error Rate (CER) &#8212; low CER confirms</text>
+  <text x="428" y="608" font-size="13" fill="#2B2218">the voice is understood, not just smooth.</text>
+  <text x="428" y="632" font-size="13" fill="#8A7D6E">Catches a pleasant but unclear voice.</text>
+
+  <!-- Objective note box (muted, hairline) -->
+  <rect x="784" y="502" width="364" height="158" rx="12" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="804" y="530" font-size="16" font-weight="700" fill="#2B2218">Objective measures</text>
+  <text x="804" y="554" font-size="13" fill="#2B2218">Mel-Cepstral Distortion tracks progress</text>
+  <text x="804" y="572" font-size="13" fill="#2B2218">during development, but correlates only</text>
+  <text x="804" y="590" font-size="13" fill="#2B2218">loosely with the human ear.</text>
+  <text x="804" y="616" font-size="13" font-weight="700" fill="#8A3B25">Native-speaker listening tests</text>
+  <text x="804" y="634" font-size="13" fill="#2B2218">remain the real measure of a voice.</text>
+
+  <!-- evaluation connector from synthetic voice -->
+  <path d="M946 442 L946 470 L580 470" fill="none" stroke="#CBBBA4" stroke-width="1.5"/>
+  <path d="M580 470 L580 502" fill="none" stroke="#CBBBA4" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="763" y="464" font-size="12" fill="#8A7D6E" text-anchor="middle">evaluate the output</text>
+
+  <!-- reference footnote: BibleTTS -->
+  <rect x="32" y="684" width="1116" height="44" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="52" y="704" font-size="13" font-weight="700" fill="#9C4F2B">Model African resource:</text>
+  <text x="214" y="704" font-size="13" fill="#2B2218">BibleTTS &#8212; up to 86 h of clean single-speaker audio per language, open CC-BY-SA, across several families.</text>
+  <text x="52" y="721" font-size="12" fill="#8A7D6E">NaijaVoices and WAXAL also support TTS as well as ASR.</text>
+</svg>

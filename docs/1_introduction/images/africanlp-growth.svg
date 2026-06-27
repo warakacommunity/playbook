@@ -4,26 +4,26 @@
   <text x="28" y="61" font-size="13" fill="#6b7280">Papers and active authors per year, 2006 vs 2024</text>
 
   <!-- legend -->
-  <rect x="470" y="30" width="13" height="13" rx="2" fill="#9aa0a6"/>
+  <rect x="470" y="30" width="13" height="13" rx="2" fill="#B7A893"/>
   <text x="489" y="41" font-size="12.5" fill="#6b7280">2006</text>
-  <rect x="540" y="30" width="13" height="13" rx="2" fill="#5B3DF5"/>
+  <rect x="540" y="30" width="13" height="13" rx="2" fill="#C66A3D"/>
   <text x="559" y="41" font-size="12.5" fill="#6b7280">2024</text>
 
   <!-- baseline -->
   <line x1="60" y1="300" x2="700" y2="300" stroke="#e5e7eb" stroke-width="1.5"/>
 
   <!-- Papers group (scale: 220px = 1103) -->
-  <rect x="190" y="295.8" width="70" height="4.2" rx="2" fill="#9aa0a6"/>
-  <text x="225" y="288" font-size="13" font-weight="600" fill="#6b7280" text-anchor="middle">21</text>
-  <rect x="270" y="242.7" width="70" height="57.3" rx="2" fill="#5B3DF5"/>
-  <text x="305" y="234" font-size="13" font-weight="700" fill="#5B3DF5" text-anchor="middle">287</text>
+  <rect x="190" y="295.8" width="70" height="4.2" rx="2" fill="#B7A893"/>
+  <text x="225" y="288" font-size="13" font-weight="600" fill="#8A7D6E" text-anchor="middle">21</text>
+  <rect x="270" y="242.7" width="70" height="57.3" rx="2" fill="#C66A3D"/>
+  <text x="305" y="234" font-size="13" font-weight="700" fill="#9C4F2B" text-anchor="middle">287</text>
   <text x="265" y="322" font-size="14" font-weight="600" fill="#374151" text-anchor="middle">Papers</text>
 
   <!-- Authors group -->
-  <rect x="440" y="284.4" width="70" height="15.6" rx="2" fill="#9aa0a6"/>
-  <text x="475" y="276" font-size="13" font-weight="600" fill="#6b7280" text-anchor="middle">78</text>
-  <rect x="520" y="80" width="70" height="220" rx="2" fill="#5B3DF5"/>
-  <text x="555" y="72" font-size="13" font-weight="700" fill="#5B3DF5" text-anchor="middle">1,103</text>
+  <rect x="440" y="284.4" width="70" height="15.6" rx="2" fill="#B7A893"/>
+  <text x="475" y="276" font-size="13" font-weight="600" fill="#8A7D6E" text-anchor="middle">78</text>
+  <rect x="520" y="80" width="70" height="220" rx="2" fill="#C66A3D"/>
+  <text x="555" y="72" font-size="13" font-weight="700" fill="#9C4F2B" text-anchor="middle">1,103</text>
   <text x="515" y="322" font-size="14" font-weight="600" fill="#374151" text-anchor="middle">Authors</text>
 
   <text x="28" y="343" font-size="11.5" fill="#9ca3af">Recreated from Belay et al. (2025). &#8220;In 2006, there were 21 papers authored by 78 researchers. By 2024, this had grown to 287 papers with 1,103 authors.&#8221;</text>

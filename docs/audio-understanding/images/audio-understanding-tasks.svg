@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 760" width="100%" font-family="Inter, 'Segoe UI', Roboto, system-ui, sans-serif" role="img" aria-labelledby="auTitle">
+  <title id="auTitle">Audio understanding tasks beyond transcription — one audio clip fans out to whole-clip classification, event detection in time, keyword spotting and language identification, with African-specific notes on taxonomy and code-switching and evaluation by macro F1 and mean average precision</title>
+
+  <!-- Outer branded card -->
+  <rect x="2" y="2" width="1236" height="756" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ============ HEADER ============ -->
+  <rect x="400" y="40" width="440" height="48" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="620" y="70" text-anchor="middle" font-size="20" font-weight="700" fill="#9C4F2B">Audio understanding (not transcription)</text>
+
+  <!-- ============ SOURCE: AUDIO CLIP ============ -->
+  <rect x="445" y="116" width="350" height="86" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <!-- waveform glyph -->
+  <g stroke="#B97F37" stroke-width="3" stroke-linecap="round">
+    <path d="M512 159 L512 159"/>
+    <path d="M512 152 L512 166"/>
+    <path d="M522 144 L522 174"/>
+    <path d="M532 134 L532 184"/>
+    <path d="M542 150 L542 168"/>
+    <path d="M552 140 L552 178"/>
+    <path d="M562 128 L562 190"/>
+    <path d="M572 148 L572 170"/>
+    <path d="M582 138 L582 180"/>
+    <path d="M592 152 L592 166"/>
+  </g>
+  <text x="678" y="150" text-anchor="middle" font-size="16" font-weight="700" fill="#B97F37">Audio clip</text>
+  <text x="678" y="172" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">clip + labels (a list)</text>
+  <text x="678" y="190" text-anchor="middle" font-size="12.5" font-weight="500" fill="#8A7D6E">radio &#183; community &#183; sensors &#183; calls</text>
+
+  <!-- ============ CONNECTORS (fan-out, drawn under cards) ============ -->
+  <g fill="none" stroke="#CBBBA4" stroke-width="1.5">
+    <!-- clip down to fan bus -->
+    <path d="M620 202 L620 228"/>
+    <!-- horizontal fan bus across the 4 column centers -->
+    <path d="M170 228 L1070 228"/>
+    <!-- bus down to each card -->
+    <path d="M170 228 L170 256"/>
+    <path d="M470 228 L470 256"/>
+    <path d="M770 228 L770 256"/>
+    <path d="M1070 228 L1070 256"/>
+  </g>
+
+  <!-- ============ TASK CARD 1 — Whole-clip classification (terracotta) ============ -->
+  <rect x="36" y="256" width="268" height="234" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <rect x="56" y="274" width="228" height="44" rx="11" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="170" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#9C4F2B">Whole-clip classification</text>
+  <text x="170" y="344" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">What does the clip contain?</text>
+  <text x="170" y="366" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Multi-label over the whole clip</text>
+  <text x="64" y="402" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">EXAMPLE LABELS</text>
+  <rect x="64" y="410" width="100" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="114" y="430" text-anchor="middle" font-size="12.5" font-weight="600" fill="#9C4F2B">Speech</text>
+  <rect x="172" y="410" width="104" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="224" y="430" text-anchor="middle" font-size="12.5" font-weight="600" fill="#9C4F2B">Music</text>
+  <rect x="64" y="448" width="212" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="170" y="468" text-anchor="middle" font-size="12.5" font-weight="600" fill="#9C4F2B">Cough &#183; Singing &#183; Silence</text>
+
+  <!-- ============ TASK CARD 2 — Event detection in time (forest green) ============ -->
+  <rect x="336" y="256" width="268" height="234" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <rect x="356" y="274" width="228" height="44" rx="11" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="470" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#1F5B3F">Event detection in time</text>
+  <text x="470" y="344" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Where does an event happen?</text>
+  <text x="470" y="366" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Span-level labels on a timeline</text>
+  <text x="364" y="402" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">MARK SPANS IN TIME</text>
+  <!-- mini timeline -->
+  <line x1="364" y1="438" x2="576" y2="438" stroke="#2E7D5B" stroke-width="1.5"/>
+  <rect x="378" y="424" width="64" height="28" rx="8" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="410" y="443" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1F5B3F">event</text>
+  <rect x="496" y="424" width="64" height="28" rx="8" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="528" y="443" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1F5B3F">event</text>
+  <text x="470" y="476" text-anchor="middle" font-size="12.5" font-weight="500" fill="#2B2218">name it and locate it</text>
+
+  <!-- ============ TASK CARD 3 — Keyword spotting (gold) ============ -->
+  <rect x="636" y="256" width="268" height="234" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <rect x="656" y="274" width="228" height="44" rx="11" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="770" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#B97F37">Keyword spotting</text>
+  <text x="770" y="344" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Is a target word or call present?</text>
+  <text x="770" y="366" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Spot specific sounds in audio</text>
+  <text x="664" y="402" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">FIND THE TARGET</text>
+  <rect x="664" y="410" width="212" height="32" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="770" y="430" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B97F37">a specific radio call</text>
+  <rect x="664" y="448" width="212" height="32" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="770" y="468" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B97F37">a cough in a screening</text>
+
+  <!-- ============ TASK CARD 4 — Language identification (deep rust) ============ -->
+  <rect x="936" y="256" width="268" height="234" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <rect x="956" y="274" width="228" height="44" rx="11" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="1070" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#8A3B25">Language identification</text>
+  <text x="1070" y="344" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Which language is spoken?</text>
+  <text x="1070" y="366" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Label the language of the clip</text>
+  <text x="964" y="402" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">HARDER THAN IT LOOKS</text>
+  <rect x="964" y="410" width="212" height="70" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="1070" y="434" text-anchor="middle" font-size="12.5" font-weight="500" fill="#2B2218">Much African audio is</text>
+  <text x="1070" y="453" text-anchor="middle" font-size="12.5" font-weight="700" fill="#8A3B25">multilingual / code-switched,</text>
+  <text x="1070" y="472" text-anchor="middle" font-size="12.5" font-weight="500" fill="#2B2218">so even &#8220;which language&#8221; is hard</text>
+
+  <!-- ============ CONNECTORS to lower notes ============ -->
+  <g fill="none" stroke="#CBBBA4" stroke-width="1.5">
+    <path d="M170 490 L170 524"/>
+    <path d="M470 490 L470 524"/>
+    <path d="M770 490 L770 524"/>
+    <path d="M1070 490 L1070 524"/>
+    <path d="M170 524 L1070 524"/>
+    <!-- down into the two note bands -->
+    <path d="M370 524 L370 560"/>
+    <path d="M870 524 L870 560"/>
+  </g>
+
+  <!-- ============ AFRICAN-SPECIFIC NOTES (forest green) ============ -->
+  <rect x="36" y="560" width="668" height="100" rx="12" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <rect x="56" y="578" width="628" height="38" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="370" y="603" text-anchor="middle" font-size="15" font-weight="700" fill="#1F5B3F">African-specific: the labels are the task</text>
+  <text x="56" y="638" font-size="13" font-weight="600" fill="#1F5B3F">&#8226; Taxonomy must fit local reality &#8212;</text>
+  <text x="56" y="654" font-size="12.5" font-weight="500" fill="#2B2218">relevant sounds, instruments, animals and acoustic environments differ; do not borrow a scheme.</text>
+
+  <!-- ============ EVALUATION NOTE (gold) ============ -->
+  <rect x="736" y="560" width="468" height="100" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <rect x="756" y="578" width="428" height="38" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="970" y="603" text-anchor="middle" font-size="15" font-weight="700" fill="#B97F37">Evaluation depends on the task</text>
+  <text x="756" y="638" font-size="13" font-weight="600" fill="#9C4F2B">Classification</text>
+  <text x="848" y="638" font-size="13" font-weight="500" fill="#2B2218">&#8594; macro F1 (rare sounds count)</text>
+  <text x="756" y="655" font-size="13" font-weight="600" fill="#1F5B3F">Detection</text>
+  <text x="848" y="655" font-size="13" font-weight="500" fill="#2B2218">&#8594; mean Average Precision (locate + name)</text>
+
+  <!-- shared footnote -->
+  <text x="36" y="694" font-size="12" font-weight="500" font-style="italic" fill="#8A7D6E">Shared pipeline: clear label definitions &#183; native-speaker, locally knowledgeable annotators &#183; measure agreement on a shared sample.</text>
+</svg>

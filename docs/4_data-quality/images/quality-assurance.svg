@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="qa-title qa-desc">
+  <title id="qa-title">Quality assurance as a continuous loop</title>
+  <desc id="qa-desc">A cycle of four data-quality practices — measure inter-annotator agreement, use gold and control checks, audit and spot-check by hand, and close the feedback loop — with a return arrow showing errors feed back into guidelines and training.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+    <marker id="arrow-rust" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8A3B25"/>
+    </marker>
+  </defs>
+
+  <!-- Outer self-contained card -->
+  <rect x="6" y="6" width="908" height="608" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="460" y="56" text-anchor="middle" font-size="24" font-weight="700" fill="#2B2218">Quality assurance is a loop, not a checkpoint</text>
+  <text x="460" y="82" text-anchor="middle" font-size="14" fill="#8A7D6E">Keep the discipline up from pilot to the last item — not a final inspection before release</text>
+
+  <!-- ===================== CYCLE ===================== -->
+  <!-- Connector arcs between nodes (clockwise) -->
+  <!-- 1 (top-left) -> 2 (top-right) -->
+  <path d="M345 200 H575" fill="none" stroke="#CBBBA4" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <!-- 2 (top-right) -> 3 (bottom-right) -->
+  <path d="M695 250 V410" fill="none" stroke="#CBBBA4" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <!-- 3 (bottom-right) -> 4 (bottom-left) -->
+  <path d="M575 460 H345" fill="none" stroke="#CBBBA4" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Return arrow: 4 (bottom-left) -> 1 (top-left), emphasised -->
+  <path d="M225 410 V250" fill="none" stroke="#8A3B25" stroke-width="3" marker-end="url(#arrow-rust)"/>
+  <text x="138" y="326" text-anchor="middle" font-size="13" font-weight="600" fill="#8A3B25">
+    <tspan x="170" dy="0">close the</tspan>
+    <tspan x="170" dy="16">loop &amp; retrain</tspan>
+  </text>
+
+  <!-- Center hub -->
+  <circle cx="460" cy="330" r="74" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="460" y="320" text-anchor="middle" font-size="15" font-weight="700" fill="#1F5B3F">Continuous</text>
+  <text x="460" y="340" text-anchor="middle" font-size="15" font-weight="700" fill="#1F5B3F">QA cycle</text>
+  <text x="460" y="360" text-anchor="middle" font-size="12" fill="#2E7D5B">every batch</text>
+
+  <!-- ============ NODE 1: Measure agreement (terracotta) top-left ============ -->
+  <g>
+    <rect x="105" y="150" width="240" height="100" rx="12" fill="#FBEDE3" stroke="#9C4F2B" stroke-width="1.5"/>
+    <circle cx="131" cy="176" r="13" fill="#C66A3D"/>
+    <text x="131" y="181" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">1</text>
+    <text x="154" y="181" font-size="15" font-weight="700" fill="#9C4F2B">Measure agreement</text>
+    <text x="123" y="208" font-size="13" fill="#2B2218">Chance-corrected metrics:</text>
+    <text x="123" y="226" font-size="13" fill="#2B2218">Cohen / Fleiss kappa,</text>
+    <text x="123" y="244" font-size="13" fill="#2B2218">Krippendorff alpha — read honestly.</text>
+  </g>
+
+  <!-- ============ NODE 2: Gold & control checks (gold) top-right ============ -->
+  <g>
+    <rect x="575" y="150" width="240" height="100" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="601" cy="176" r="13" fill="#E0A458"/>
+    <text x="601" y="181" text-anchor="middle" font-size="14" font-weight="700" fill="#2B2218">2</text>
+    <text x="624" y="181" font-size="15" font-weight="700" fill="#B97F37">Gold &amp; control checks</text>
+    <text x="593" y="208" font-size="13" fill="#2B2218">Hidden trusted items track</text>
+    <text x="593" y="226" font-size="13" fill="#2B2218">who has drifted; screen &amp;</text>
+    <text x="593" y="244" font-size="13" fill="#2B2218">re-test annotators per batch.</text>
+  </g>
+
+  <!-- ============ NODE 3: Audit & spot-check (forest green) bottom-right ============ -->
+  <g>
+    <rect x="575" y="410" width="240" height="100" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="601" cy="436" r="13" fill="#2E7D5B"/>
+    <text x="601" y="441" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">3</text>
+    <text x="624" y="441" font-size="15" font-weight="700" fill="#1F5B3F">Audit &amp; spot-check</text>
+    <text x="593" y="468" font-size="13" fill="#2B2218">Read a sample by hand:</text>
+    <text x="593" y="486" font-size="13" fill="#2B2218">edge cases, disagreements,</text>
+    <text x="593" y="504" font-size="13" fill="#2B2218">one-source subsets.</text>
+  </g>
+
+  <!-- ============ NODE 4: Close the feedback loop (deep rust) bottom-left ============ -->
+  <g>
+    <rect x="105" y="410" width="240" height="100" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <circle cx="131" cy="436" r="13" fill="#8A3B25"/>
+    <text x="131" y="441" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">4</text>
+    <text x="154" y="441" font-size="15" font-weight="700" fill="#8A3B25">Close the feedback loop</text>
+    <text x="123" y="468" font-size="13" fill="#2B2218">Feed recurring errors back</text>
+    <text x="123" y="486" font-size="13" fill="#2B2218">into guidelines &amp; training;</text>
+    <text x="123" y="504" font-size="13" fill="#2B2218">re-calibrate when drift shows.</text>
+  </g>
+
+  <!-- ===================== African stakes banner ===================== -->
+  <rect x="30" y="546" width="860" height="48" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <circle cx="58" cy="570" r="9" fill="#C66A3D"/>
+  <text x="58" y="575" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">!</text>
+  <text x="78" y="566" font-size="13" font-weight="600" fill="#9C4F2B">African stakes:</text>
+  <text x="78" y="584" font-size="13" fill="#2B2218">datasets are small and expensive with no clean pool to dilute mistakes — catch problems in week two, not at release.</text>
+</svg>

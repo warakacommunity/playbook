@@ -11,14 +11,20 @@ Emotion detection or emotion classification is a task that aims to identify and 
 
 Emotion annotation goes a step further than sentiment analysis by analyzing specific emotions and classifying the text into categories such as joy, anger, sadness, fear, or surprise. By recognizing these, companies can better understand customer responses, which helps them respond to specific issues accordingly. For example, if you can identify any frustration in a customer complaint, you can address the issue immediately and prevent escalation. Emotion can be annotated into one of the following approaches.
 
-### 9.1. Single Label Emotion Analysis
+### Single-label Emotion Analysis
 
 In single-label annotation, a text has either no emotion or only one of the emotions for the given list of emotions; each text is assigned one dominant emotion.
 
-![Single-label emotion](images/single-emotion.png)
+| Id | Text | Emotion |
+|----|------|---------|
+| sample_01 | Never saw him again. | Sadness |
+| sample_02 | I love telling this story. | Joy |
+| sample_03 | How stupid of him. | Anger |
+| sample_04 | None of us did. | Neutral |
+| sample_05 | I can't believe it! I won the scholarship! This is amazing! | Joy |
 
 
-### **9.2. Multi-label Emotion Analysis **
+### Multi-label Emotion Analysis
 
 In multi-label emotion analysis, a text may express no emotion, a single emotion, two emotions, or multiple emotions simultaneously. A sample multi-label emotion annotation interface is shown below. The use of checkboxes allows annotators to select one or more emotion categories, along with the corresponding intensity level for each selected emotion. In multi-label emotion annotation, recording emotion intensities is common practice because different emotions may be expressed with varying degrees of strength within the same text. Therefore, intensity annotations provide additional information beyond the mere presence or absence of an emotion.
 
@@ -42,31 +48,31 @@ This approach combines annotator agreement and emotion intensity, resulting in a
 
 Since we have a scale from 0 to 3, a threshold of 0.5  can be a good choice. The below are example scenarios.
 
-### **Example 1**
+#### Example 1
 
 - Annotator scores: 0, 0, 3,3
 - Average score: (0+ 0 + 3+3) / 4 =  1.5
 - Result: Since 1.5 > 0.5, final label = 1 (emotion present).
 
-### **Example 2**
+#### Example 2
 
 - Annotator scores: 1, 2, 1
 - Average score: (1 + 2 + 1) / 3 = 1.33
 - Result: Since 1.33 > 0.5, final label = 1 (emotion present).
 
-### **Example 3**
+#### Example 3
 
 - Annotator scores: 1, 1, 0
 - Average score: (1 + 1 + 0) / 3 = 0.666
 - Result: Since 0.66 >  0.5, final label = 1 (emotion present).
 
-### **Example 4**
+#### Example 4
 
 - Annotator scores: 1, 1, 0, 0,0
 - Average score: (1 + 1+ 0 + 0+0) / 5 =  0.4
 - Result: Since 0.4  <  0.5, the final label =0 ( no emotion present).
 
-### **Example 5**
+#### Example 5
 
 - Annotator scores: 1, 2, 3, 2
 - Average score = (1 + 2 + 3 + 2) / 4 = 8 / 4 = 2.0
@@ -74,9 +80,15 @@ Since we have a scale from 0 to 3, a threshold of 0.5  can be a good choice. The
 
 This method combines both agreement among annotators and the intensity of the emotion, providing a balanced evaluation. Majority vote does not consider the intensity and may miss out on subtle emotional content. A sample format of the multi-label emotion dataset is shown below. The final binary emotion labels are then derived using the aggregation procedure described above.
 
-![Multi-label format](images/multi-label-emotion-format.png)
+| Id | Text | Anger | Fear | Joy | Sadness | Surprise |
+|----|------|:-----:|:----:|:---:|:-------:|:--------:|
+| sample_01 | Never saw him again. | 0 | 0 | 0 | 1 | 0 |
+| sample_02 | I love telling this story. | 0 | 0 | 1 | 0 | 0 |
+| sample_03 | How stupid of him. | 1 | 0 | 0 | 0 | 0 |
+| sample_04 | None of us did. | 0 | 0 | 0 | 0 | 0 |
+| sample_05 | I can't believe it! I won the scholarship! This is amazing! | 0 | 0 | 1 | 0 | 1 |
 
-### **9.3. Emotion Intensity**
+### Emotion Intensity
 
 Annotators indicate the emotions that are likely conveyed in the text and their intensity levels, i.e., low (1), medium (2) or high (3). The scores that are associated to the different intensity levels (0 [no emotion] to 3 [high emotion]) are then averaged. This average score is used to classify the emotion intensity based on its proximity to the predefined values corresponding to the intensity (i.e., low (0), 1 (low), 2 (medium), and 3 (high)). 
 
@@ -108,6 +120,12 @@ Example 4:
 
 A sample format of the multi-label emotion intensities dataset is shown below. Each emotion is assigned an intensity score ranging from 0 (not present) to 3 (high intensity). 
 
-![Multi-label intensity](images/multi-label-intensity.png)
+| Id | Text | Anger | Fear | Joy | Sadness | Surprise |
+|----|------|:-----:|:----:|:---:|:-------:|:--------:|
+| sample_01 | Never saw him again. | 0 | 0 | 0 | 2 | 0 |
+| sample_02 | I love telling this story. | 0 | 0 | 2 | 0 | 0 |
+| sample_03 | How stupid of him. | 2 | 0 | 0 | 0 | 0 |
+| sample_04 | None of us did. | 0 | 0 | 0 | 0 | 0 |
+| sample_05 | I can't believe it! I won the scholarship! This is amazing! | 0 | 0 | 3 | 0 | 3 |
 
 

@@ -4,6 +4,8 @@ import PlaybookNavbarItem from './PlaybookNavbarItem';
 import ToolNavbarItem from './ToolNavbarItem';
 import AfriFinderNavbarItem from './AfriFinderNavbarItem';
 import AboutNavbarItem from './AboutNavbarItem';
+import SearchNavbarItem from './SearchNavbarItem';
+import LocaleNavbarItem from './LocaleNavbarItem';
 
 export default {
   ...ComponentTypes,
@@ -12,4 +14,6 @@ export default {
   'custom-ToolNavbarItem': ToolNavbarItem,
   'custom-AfriFinderNavbarItem': AfriFinderNavbarItem,
   'custom-AboutNavbarItem': AboutNavbarItem,
+  'custom-SearchNavbarItem': SearchNavbarItem,
+  'custom-LocaleNavbarItem': LocaleNavbarItem,
 };

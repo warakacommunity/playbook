@@ -31,8 +31,8 @@ const PHASES = [
       },
       {
         title: "Modality-Specific Task Design",
-        blurb: "Text, speech, images, and multimodal data.",
-        href: "/AfriPlaybook/modality-specific-task/text-data",
+        blurb: "Text, speech, vision, and multimodal data.",
+        href: "/AfriPlaybook/sections/speech",
       },
       {
         title: "LLM-Assisted & Synthetic Data",

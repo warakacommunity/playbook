@@ -290,7 +290,7 @@ export default function ContributeOnline() {
               onClick={() => setEditorOpen(true)}
               style={{ padding: '0.45rem 1rem', fontSize: '0.9rem' }}
             >
-              ⚡ Start Contributing Online
+              Start Contributing Online
             </button>
           </div>
 

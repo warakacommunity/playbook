@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 560" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="qa-title">
+  <title id="qa-title">Three forms of question answering for African languages: Extractive, Open-retrieval, and Generative QA</title>
+
+  <!-- Outer self-contained card -->
+  <rect x="6" y="6" width="868" height="548" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Question answering, three forms</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Returning a correct answer to a question — one of the most useful, and hardest, tasks for African languages</text>
+  <line x1="30" y1="86" x2="850" y2="86" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ============ Column 1: Extractive QA (terracotta) ============ -->
+  <g>
+    <rect x="30" y="104" width="262" height="370" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="50" y="134" font-size="16" font-weight="700" fill="#9C4F2B">Extractive QA</text>
+    <text x="50" y="156" font-size="13" fill="#2B2218">Pull the answer as a span</text>
+    <text x="50" y="174" font-size="13" fill="#2B2218">from a given passage</text>
+
+    <!-- Question -->
+    <rect x="50" y="190" width="222" height="40" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="62" y="208" font-size="11" font-weight="700" fill="#C66A3D">QUESTION</text>
+    <text x="62" y="223" font-size="13" fill="#2B2218">Wane birni ne mafi girma?</text>
+
+    <!-- Passage with highlighted span -->
+    <rect x="50" y="244" width="222" height="92" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="62" y="262" font-size="11" font-weight="700" fill="#8A7D6E">PASSAGE (context)</text>
+    <rect x="62" y="270" width="42" height="20" rx="6" fill="#F8ECD6" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="69" y="284" font-size="13" font-weight="700" fill="#8A3B25">Kano</text>
+    <text x="112" y="284" font-size="13" fill="#2B2218">ita ce birni</text>
+    <text x="62" y="304" font-size="13" fill="#2B2218">mafi girma a arewacin</text>
+    <text x="62" y="322" font-size="13" fill="#2B2218">Najeriya...</text>
+
+    <!-- Arrow -->
+    <line x1="161" y1="340" x2="161" y2="368" stroke="#C66A3D" stroke-width="2"/>
+    <path d="M161 374 l-6 -10 h12 z" fill="#C66A3D"/>
+
+    <!-- Answer -->
+    <rect x="50" y="382" width="222" height="40" rx="10" fill="#F8ECD6" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="62" y="400" font-size="11" font-weight="700" fill="#9C4F2B">ANSWER (span)</text>
+    <text x="62" y="415" font-size="13" font-weight="700" fill="#2B2218">"Kano" — answer_start 0</text>
+
+    <text x="50" y="446" font-size="12" fill="#8A7D6E">SQuAD shape: text + offset.</text>
+    <text x="50" y="463" font-size="12" fill="#8A7D6E">Scored by Exact Match &amp; F1.</text>
+  </g>
+
+  <!-- ============ Column 2: Open-retrieval QA (green) ============ -->
+  <g>
+    <rect x="309" y="104" width="262" height="370" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="329" y="134" font-size="16" font-weight="700" fill="#1F5B3F">Open-retrieval QA</text>
+    <text x="329" y="156" font-size="13" fill="#2B2218">First find the passage,</text>
+    <text x="329" y="174" font-size="13" fill="#2B2218">then extract or generate</text>
+
+    <!-- Question (African language) -->
+    <rect x="329" y="190" width="222" height="40" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="341" y="208" font-size="11" font-weight="700" fill="#2E7D5B">QUESTION (African lang.)</text>
+    <text x="341" y="223" font-size="13" fill="#2B2218">Wane birni ne mafi girma?</text>
+
+    <!-- Retrieve step -->
+    <line x1="440" y1="234" x2="440" y2="250" stroke="#1F5B3F" stroke-width="2"/>
+    <path d="M440 256 l-6 -10 h12 z" fill="#1F5B3F"/>
+    <rect x="329" y="260" width="222" height="60" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="341" y="278" font-size="11" font-weight="700" fill="#2E7D5B">RETRIEVE (cross-lingual)</text>
+    <text x="341" y="296" font-size="13" fill="#2B2218">Passage often in English</text>
+    <text x="341" y="312" font-size="13" fill="#2B2218">or French</text>
+
+    <!-- Extract/generate step -->
+    <line x1="440" y1="324" x2="440" y2="340" stroke="#1F5B3F" stroke-width="2"/>
+    <path d="M440 346 l-6 -10 h12 z" fill="#1F5B3F"/>
+    <rect x="329" y="350" width="222" height="32" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="341" y="370" font-size="13" font-weight="700" fill="#2B2218">extract / generate answer</text>
+
+    <!-- Answer -->
+    <line x1="440" y1="386" x2="440" y2="398" stroke="#1F5B3F" stroke-width="2"/>
+    <path d="M440 404 l-6 -10 h12 z" fill="#1F5B3F"/>
+    <rect x="329" y="408" width="222" height="36" rx="10" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="341" y="431" font-size="13" font-weight="700" fill="#1F5B3F">"Kano"</text>
+
+    <text x="329" y="463" font-size="12" fill="#8A7D6E">AfriQA: 12,000+ Qs, 10 langs.</text>
+  </g>
+
+  <!-- ============ Column 3: Generative QA (gold) ============ -->
+  <g>
+    <rect x="588" y="104" width="262" height="370" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="608" y="134" font-size="16" font-weight="700" fill="#B97F37">Generative QA</text>
+    <text x="608" y="156" font-size="13" fill="#2B2218">Answer produced from</text>
+    <text x="608" y="174" font-size="13" fill="#2B2218">the model's own knowledge</text>
+
+    <!-- Question -->
+    <rect x="608" y="190" width="222" height="40" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="620" y="208" font-size="11" font-weight="700" fill="#E0A458">QUESTION</text>
+    <text x="620" y="223" font-size="13" fill="#2B2218">Wane birni ne mafi girma?</text>
+
+    <!-- Model knowledge (no passage) -->
+    <line x1="719" y1="234" x2="719" y2="254" stroke="#B97F37" stroke-width="2"/>
+    <path d="M719 260 l-6 -10 h12 z" fill="#B97F37"/>
+    <rect x="608" y="264" width="222" height="92" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="620" y="284" font-size="11" font-weight="700" fill="#E0A458">MODEL KNOWLEDGE</text>
+    <text x="620" y="302" font-size="13" fill="#2B2218">No passage supplied —</text>
+    <text x="620" y="320" font-size="13" fill="#2B2218">answer from what the</text>
+    <text x="620" y="338" font-size="13" fill="#2B2218">model has read.</text>
+
+    <!-- Arrow -->
+    <line x1="719" y1="360" x2="719" y2="372" stroke="#B97F37" stroke-width="2"/>
+    <path d="M719 378 l-6 -10 h12 z" fill="#B97F37"/>
+
+    <!-- Answer (free text) -->
+    <rect x="608" y="382" width="222" height="40" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="620" y="400" font-size="11" font-weight="700" fill="#B97F37">ANSWER (free text)</text>
+    <text x="620" y="415" font-size="13" font-weight="700" fill="#2B2218">"Birnin Kano ne..."</text>
+
+    <text x="608" y="446" font-size="12" fill="#8A7D6E">Auto scoring unreliable —</text>
+    <text x="608" y="463" font-size="12" fill="#8A7D6E">native-speaker eval needed.</text>
+  </g>
+
+  <!-- Footer note -->
+  <line x1="30" y1="492" x2="850" y2="492" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="30" y="516" font-size="12.5" fill="#8A7D6E">Shared challenge: the knowledge gap and answer boundaries in morphologically rich languages, where the</text>
+  <text x="30" y="534" font-size="12.5" fill="#8A7D6E">same answer ("Kano" vs. "birnin Kano") appears in inflected forms — clear annotation guidelines are essential.</text>
+</svg>

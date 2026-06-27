@@ -1015,7 +1015,6 @@ export function StructureEditorContent({ onClose }) {
         {/* Header — drag to reposition */}
         <div className={styles.modalHeader} onMouseDown={handleHeaderMouseDown}>
           <div className={styles.headerLeft}>
-            <span className={styles.headerIcon}>✦</span>
             <h2 className={styles.modalTitle}>Contribute to the Playbook</h2>
           </div>
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">✕</button>
@@ -1053,7 +1052,17 @@ export function StructureEditorContent({ onClose }) {
                   </button>
                 ) : (
                 <div className={styles.treePanelHeader}>
-                  <span className={styles.treePanelTitle}>Playbook pages</span>
+                  <div className={styles.treePanelTitleRow}>
+                    <span className={styles.treePanelTitle}>Playbook pages</span>
+                    <button
+                      className={styles.hideStructureBtn}
+                      onClick={() => setLeftHidden(true)}
+                      title="Hide structure panel"
+                      type="button"
+                    >
+                      ❮
+                    </button>
+                  </div>
                   <div className={styles.treePanelHeaderActions}>
                     <button
                       className={styles.addSectionBtn}
@@ -1071,7 +1080,7 @@ export function StructureEditorContent({ onClose }) {
                       type="button"
                       onClick={() => uploadInputRef.current?.click()}
                     >
-                      📤 Upload document
+                      Upload document
                     </button>
                     <input
                       ref={uploadInputRef}
@@ -1081,40 +1090,6 @@ export function StructureEditorContent({ onClose }) {
                       style={{ display: 'none' }}
                       onChange={handleUploadFile}
                     />
-                    <button
-                      className={styles.hideStructureBtn}
-                      onClick={() => {
-                        if (expanded.size === 0) {
-                          // Expand all
-                          const allKeys = new Set();
-                          function collectKeys(nodes) {
-                            for (const node of nodes) {
-                              if (node.type === 'section') {
-                                allKeys.add(node.path);
-                                if (node.children) collectKeys(node.children);
-                              }
-                            }
-                          }
-                          if (tree) collectKeys(tree);
-                          setExpanded(allKeys);
-                        } else {
-                          // Collapse all
-                          setExpanded(new Set());
-                        }
-                      }}
-                      title={expanded.size === 0 ? 'Expand all sections' : 'Collapse all sections'}
-                      type="button"
-                    >
-                      {expanded.size === 0 ? '▼ Expand' : '▲ Collapse'}
-                    </button>
-                    <button
-                      className={styles.hideStructureBtn}
-                      onClick={() => setLeftHidden(true)}
-                      title="Hide structure panel"
-                      type="button"
-                    >
-                      ❮
-                    </button>
                   </div>
                 </div>
                 )}
@@ -1242,7 +1217,7 @@ export function StructureEditorContent({ onClose }) {
                       return (
                         <div className={styles.submitErrorBox} style={{ display: 'flex', flexDirection: 'column', maxHeight: '70vh' }}>
                           <div className={styles.submitErrorHeader} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
-                            <span>⚠️ Fork Required to Contribute</span>
+                            <span>Fork Required to Contribute</span>
                             <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                               <button
                                 className={clsx('button', styles.primaryButton)}
@@ -1251,7 +1226,7 @@ export function StructureEditorContent({ onClose }) {
                                 style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem', whiteSpace: 'nowrap' }}
                                 type="button"
                               >
-                                {submitting ? '⏳ Retrying…' : '🔄 Retry'}
+                                {submitting ? 'Retrying…' : 'Retry'}
                               </button>
                               <button
                                 className={styles.closeBtn}
@@ -1268,7 +1243,7 @@ export function StructureEditorContent({ onClose }) {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                               {/* Step 1 */}
                               <div style={{ display: 'flex', gap: '0.75rem' }}>
-                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>1️⃣</div>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>1</div>
                                 <div style={{ flex: 1 }}>
                                   <div style={{ fontWeight: '600', marginBottom: '0.3rem' }}>Fork the repository</div>
                                   <button
@@ -1292,7 +1267,7 @@ export function StructureEditorContent({ onClose }) {
 
                               {/* Step 2 */}
                               <div style={{ display: 'flex', gap: '0.75rem' }}>
-                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>2️⃣</div>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>2</div>
                                 <div>
                                   <div style={{ fontWeight: '600' }}>Wait 10-15 seconds</div>
                                   <div style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.2rem' }}>
@@ -1303,7 +1278,7 @@ export function StructureEditorContent({ onClose }) {
 
                               {/* Step 3 */}
                               <div style={{ display: 'flex', gap: '0.75rem' }}>
-                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>3️⃣</div>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#2e8555', minWidth: '2rem', flexShrink: 0 }}>3</div>
                                 <div style={{ flex: 1 }}>
                                   <div style={{ fontWeight: '600' }}>Click Retry (top right)</div>
                                   <div style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.2rem' }}>
@@ -1320,7 +1295,7 @@ export function StructureEditorContent({ onClose }) {
                               style={{ padding: '0.35rem 0.8rem', fontSize: '0.8rem' }}
                               type="button"
                             >
-                              👁️ View fork
+                              View fork
                             </button>
                           </div>
                         </div>
@@ -1331,7 +1306,7 @@ export function StructureEditorContent({ onClose }) {
                     return (
                       <div className={styles.submitErrorBox}>
                         <div className={styles.submitErrorHeader}>
-                          <span>⚠️ Cannot Submit PR</span>
+                          <span>Cannot Submit PR</span>
                           <button
                             className={styles.closeBtn}
                             onClick={() => setSubmitError('')}
@@ -1348,7 +1323,7 @@ export function StructureEditorContent({ onClose }) {
                               style={{ flex: 1 }}
                               type="button"
                             >
-                              {submitting ? 'Retrying…' : '🔄 Retry'}
+                              {submitting ? 'Retrying…' : 'Retry'}
                             </button>
                             <button
                               className={clsx('button', styles.secondaryButton)}
@@ -1404,7 +1379,7 @@ export function StructureEditorContent({ onClose }) {
                             onClick={() => setRightPanelTab('edit')}
                             type="button"
                           >
-                            ✎ Edit
+                            Edit
                           </button>
                           <button
                             className={`${styles.rightPanelTab} ${rightPanelTab === 'translate' ? styles.rightPanelTabActive : ''}`}
@@ -1413,7 +1388,7 @@ export function StructureEditorContent({ onClose }) {
                             title={!auth ? 'Sign in with GitHub to contribute translations' : undefined}
                             type="button"
                           >
-                            🌍 Translation
+                            Translation
                           </button>
                         </div>
                         <div className={styles.rightPanelActions}>
@@ -1425,7 +1400,7 @@ export function StructureEditorContent({ onClose }) {
                               disabled={!auth}
                               title={!auth ? 'Sign in with GitHub to save changes' : undefined}
                             >
-                              ✓ Save to changes
+                              Save to changes
                             </button>
                           ) : (
                             <button
@@ -1435,7 +1410,7 @@ export function StructureEditorContent({ onClose }) {
                               disabled={!auth || !translationHtml.trim()}
                               title={!auth ? 'Sign in with GitHub to save' : !translationHtml.trim() ? 'Add a translation first' : undefined}
                             >
-                              ✓ Save translation
+                              Save translation
                             </button>
                           )}
                           <button
@@ -1492,7 +1467,7 @@ export function StructureEditorContent({ onClose }) {
                                 disabled={translating || !SUPPORTED_AUTO_TRANSLATE.has(translationLang)}
                                 title="Generate a draft translation (Helsinki-NLP for European languages, MyMemory for African languages)"
                               >
-                                {translating ? '⏳ Translating…' : '✨ Auto-translate'}
+                                {translating ? 'Translating…' : 'Auto-translate'}
                               </button>
                             )}
                             <button
@@ -1502,7 +1477,7 @@ export function StructureEditorContent({ onClose }) {
                               disabled={translating}
                               title="Translate using Google Translate API"
                             >
-                              {translating ? '⏳ Translating…' : '🌐 Google Translate'}
+                              {translating ? 'Translating…' : '🌐 Google Translate'}
                             </button>
                           </div>
                           {translateError && (

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Image captioning: native captions vs translated English captions</title>
+  <desc id="desc">One image yields several reference captions written natively in the target language by local speakers, the apt path, versus translating English captions which is stilted and culturally displaced; evaluated with BLEU, CIDEr and SPICE plus native-speaker human evaluation.</desc>
+
+  <!-- outer self-contained card -->
+  <rect x="6" y="6" width="908" height="608" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- heading -->
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Writing image captions for African languages</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">One image &#8594; several reference captions in the target language &#183; AfriCaption paradigm</text>
+
+  <!-- IMAGE placeholder -->
+  <g>
+    <rect x="30" y="100" width="200" height="170" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="46" y="126" font-size="13" font-weight="700" fill="#1F5B3F">Image of an African scene</text>
+    <!-- simple scene glyph: sky, sun, ground, baskets -->
+    <rect x="46" y="138" width="168" height="98" rx="8" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="186" cy="162" r="13" fill="#E0A458"/>
+    <rect x="46" y="208" width="168" height="28" rx="0" fill="#2E7D5B" opacity="0.55"/>
+    <ellipse cx="84" cy="206" rx="20" ry="9" fill="#C66A3D"/>
+    <ellipse cx="124" cy="206" rx="20" ry="9" fill="#9C4F2B"/>
+    <ellipse cx="164" cy="206" rx="20" ry="9" fill="#8A3B25"/>
+    <text x="46" y="258" font-size="13" fill="#8A7D6E">market_0007.jpg &#183; hau_Latn</text>
+  </g>
+
+  <!-- the key choice label -->
+  <text x="30" y="312" font-size="14" font-weight="700" fill="#2B2218">The key choice: how are captions produced?</text>
+
+  <!-- connector from image to choice -->
+  <path d="M130 270 L130 296" stroke="#CBBBA4" stroke-width="2" fill="none"/>
+  <polygon points="130,302 126,294 134,294" fill="#CBBBA4"/>
+
+  <!-- PREFERRED: native captions -->
+  <g>
+    <rect x="30" y="328" width="500" height="216" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <rect x="30" y="328" width="500" height="34" rx="12" fill="#1F5B3F"/>
+    <rect x="30" y="346" width="500" height="16" fill="#1F5B3F"/>
+    <text x="48" y="350" font-size="14" font-weight="700" fill="#FFFFFF">Write natively from the image &#10003; preferred</text>
+    <text x="48" y="384" font-size="13" fill="#2B2218">Local speakers describe the picture the way they naturally would,</text>
+    <text x="48" y="402" font-size="13" fill="#2B2218">reflecting how speakers describe their world. Several references per image.</text>
+
+    <!-- caption chips -->
+    <g font-size="13" fill="#9C4F2B">
+      <rect x="48" y="416" width="464" height="34" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+      <text x="62" y="437">Mata suna sayar da kayan lambu a kasuwa.</text>
+
+      <rect x="48" y="458" width="464" height="34" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+      <text x="62" y="479">Wasu mata na kasuwanci da ganye a kasuwa.</text>
+
+      <rect x="48" y="500" width="464" height="34" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+      <text x="62" y="521" fill="#B97F37">+ more references from other annotators &#8230;</text>
+    </g>
+  </g>
+
+  <!-- AVOID: translated captions -->
+  <g>
+    <rect x="556" y="328" width="334" height="216" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <rect x="556" y="328" width="334" height="34" rx="12" fill="#8A3B25"/>
+    <rect x="556" y="346" width="334" height="16" fill="#8A3B25"/>
+    <text x="574" y="350" font-size="14" font-weight="700" fill="#FFFFFF">Translate English captions &#10007; avoid</text>
+    <text x="574" y="384" font-size="13" fill="#2B2218">Quick, but yields stilted,</text>
+    <text x="574" y="402" font-size="13" fill="#2B2218">culturally displaced descriptions.</text>
+
+    <rect x="574" y="418" width="298" height="34" rx="10" fill="#FBF7F0" stroke="#CBBBA4" stroke-width="1.5"/>
+    <text x="588" y="439" font-size="13" fill="#8A7D6E">EN: "Women selling vegetables"</text>
+
+    <path d="M723 454 L723 470" stroke="#8A3B25" stroke-width="2" fill="none"/>
+    <polygon points="723,476 719,468 727,468" fill="#8A3B25"/>
+
+    <rect x="574" y="478" width="298" height="34" rx="10" fill="#FBF7F0" stroke="#CBBBA4" stroke-width="1.5"/>
+    <text x="588" y="499" font-size="13" fill="#8A7D6E" font-style="italic">word-for-word, sounds foreign</text>
+  </g>
+
+  <!-- divider before eval -->
+  <line x1="30" y1="566" x2="890" y2="566" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- EVAL row -->
+  <text x="30" y="590" font-size="13" font-weight="700" fill="#2B2218">Evaluation</text>
+  <g font-size="13">
+    <rect x="120" y="576" width="172" height="26" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="134" y="593" fill="#B97F37">BLEU / CIDEr / SPICE</text>
+
+    <rect x="304" y="576" width="296" height="26" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="318" y="593" fill="#9C4F2B">overlap metrics &#8212; weak on rich morphology</text>
+
+    <rect x="612" y="576" width="278" height="26" rx="10" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="626" y="593" fill="#1F5B3F">native-speaker human eval &#8212; dependable</text>
+  </g>
+</svg>

@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 690" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="vqaTitle vqaDesc">
+  <title id="vqaTitle">Visual question answering for African languages</title>
+  <desc id="vqaDesc">An image plus a question in a low-resource African language flows to a model that must understand both, producing an answer scored by VQA accuracy over several accepted answers. Two data routes are contrasted: translating an English VQA set (quick, Western scenes) versus collecting questions written natively about local images (harder, fits users), with HaVQA shown as the Hausa example.</desc>
+
+  <!-- outer self-contained card -->
+  <rect x="6" y="6" width="968" height="678" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- header -->
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Visual question answering in African languages</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Image + question in a low-resource language &#8594; the model must understand both &#8594; answer, scored by VQA accuracy.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- markers -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+
+  <!-- ============ INPUT: IMAGE (terracotta) ============ -->
+  <g>
+    <rect x="30" y="120" width="210" height="208" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <circle cx="58" cy="150" r="13" fill="#C66A3D"/>
+    <text x="58" y="155" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="80" y="155" font-size="16" font-weight="700" fill="#9C4F2B">Image</text>
+
+    <!-- image placeholder: simple scene (sun, hills, market stall) -->
+    <rect x="48" y="172" width="174" height="110" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <circle cx="190" cy="200" r="12" fill="#E0A458"/>
+    <path d="M48 262 Q90 222 130 248 Q175 280 222 252 L222 281 L48 281 Z" fill="#E7F1EC"/>
+    <path d="M48 272 Q110 250 222 270 L222 281 L48 281 Z" fill="#2E7D5B" opacity="0.55"/>
+    <rect x="78" y="232" width="34" height="30" rx="3" fill="#C66A3D"/>
+    <rect x="70" y="226" width="50" height="9" rx="3" fill="#8A3B25"/>
+    <text x="135" y="300" font-size="12" fill="#8A7D6E" text-anchor="middle">a local scene, not a stock photo</text>
+  </g>
+
+  <!-- connector image -> model -->
+  <line x1="240" y1="224" x2="312" y2="224" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ INPUT: QUESTION bubble (gold) ============ -->
+  <g>
+    <rect x="30" y="338" width="210" height="120" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="58" cy="368" r="13" fill="#B97F37"/>
+    <text x="58" y="373" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="80" y="373" font-size="16" font-weight="700" fill="#B97F37">Question</text>
+    <text x="80" y="391" font-size="12" fill="#8A7D6E">in the user's language</text>
+
+    <!-- question speech bubble -->
+    <rect x="48" y="402" width="174" height="44" rx="11" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <path d="M66 446 l0 14 l16 -14 z" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="60" y="422" font-size="13" font-weight="600" fill="#2B2218">Mutane nawa ke</text>
+    <text x="60" y="439" font-size="13" font-weight="600" fill="#2B2218">cikin hoton?</text>
+  </g>
+
+  <!-- connector question -> model -->
+  <line x1="240" y1="384" x2="312" y2="334" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ MODEL (forest green) ============ -->
+  <g>
+    <rect x="314" y="186" width="220" height="214" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="342" cy="216" r="13" fill="#1F5B3F"/>
+    <text x="342" y="221" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="364" y="221" font-size="16" font-weight="700" fill="#1F5B3F">VQA model</text>
+
+    <text x="334" y="252" font-size="13" font-weight="600" fill="#2E7D5B">Must understand BOTH:</text>
+
+    <rect x="334" y="262" width="180" height="44" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="346" y="282" font-size="13" font-weight="600" fill="#1F5B3F">the image</text>
+    <text x="346" y="299" font-size="12" fill="#8A7D6E">objects, count, scene</text>
+
+    <rect x="334" y="312" width="180" height="44" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="346" y="332" font-size="13" font-weight="600" fill="#1F5B3F">the question</text>
+    <text x="346" y="349" font-size="12" fill="#8A7D6E">low-resource language</text>
+
+    <text x="334" y="382" font-size="12" font-style="italic" fill="#2E7D5B">vision &#215; language, jointly</text>
+  </g>
+
+  <!-- connector model -> answer -->
+  <line x1="540" y1="293" x2="576" y2="293" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ ANSWER bubble + EVAL (deep rust) ============ -->
+  <g transform="translate(-26,0)">
+    <rect x="608" y="186" width="368" height="214" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <circle cx="636" cy="216" r="13" fill="#8A3B25"/>
+    <text x="636" y="221" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="658" y="221" font-size="16" font-weight="700" fill="#8A3B25">Answer &amp; scoring</text>
+
+    <!-- answer speech bubble -->
+    <rect x="628" y="240" width="200" height="46" rx="11" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <path d="M806 286 l0 14 l-16 -14 z" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="642" y="262" font-size="13" font-weight="600" fill="#2B2218">"mutane biyu"</text>
+    <text x="642" y="279" font-size="12" fill="#8A7D6E">(also accepted: "biyu")</text>
+
+    <text x="628" y="312" font-size="13" font-weight="600" fill="#8A3B25">VQA score &#183; answer accuracy</text>
+    <rect x="628" y="320" width="305" height="32" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="642" y="340" font-size="12" fill="#2B2218">credit if it matches several accepted answers</text>
+    <text x="628" y="376" font-size="12" font-style="italic" fill="#8A3B25">+ human check on a sample &#8212; morphology caveats as in QA</text>
+  </g>
+
+  <!-- ============ TWO DATA ROUTES ============ -->
+  <text x="30" y="478" font-size="15" font-weight="700" fill="#2B2218">Two routes to the data</text>
+  <line x1="30" y1="488" x2="950" y2="488" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ROUTE A: translate (gold) -->
+  <g>
+    <rect x="30" y="504" width="448" height="148" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="48" y="530" font-size="15" font-weight="700" fill="#B97F37">A &#183; Translate an English VQA set</text>
+    <rect x="380" y="514" width="80" height="22" rx="8" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="420" y="530" font-size="12" font-weight="700" fill="#B97F37" text-anchor="middle">quick</text>
+
+    <text x="48" y="554" font-size="13" fill="#2B2218">Faithfully translate question&#8211;answer pairs, verified</text>
+    <text x="48" y="572" font-size="13" fill="#2B2218">against each image by native speakers.</text>
+    <text x="48" y="596" font-size="13" fill="#8A7D6E">Ceiling: Western images &amp; assumptions baked in</text>
+    <text x="48" y="614" font-size="13" fill="#8A7D6E">&#8212; reflects Western scenes, not local context.</text>
+
+    <rect x="48" y="624" width="412" height="20" rx="6" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="58" y="638" font-size="12" fill="#8A3B25"><tspan font-weight="700" fill="#8A3B25">HaVQA</tspan> (Hausa): 6,022 EN pairs over 1,555 Visual Genome images</text>
+  </g>
+
+  <!-- ROUTE B: native (forest green) -->
+  <g>
+    <rect x="502" y="504" width="448" height="148" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="520" y="530" font-size="15" font-weight="700" fill="#1F5B3F">B &#183; Collect native questions, local images</text>
+    <rect x="852" y="514" width="80" height="22" rx="8" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="892" y="530" font-size="12" font-weight="700" fill="#1F5B3F" text-anchor="middle">harder</text>
+
+    <text x="520" y="554" font-size="13" fill="#2B2218">Speakers author questions about images from</text>
+    <text x="520" y="572" font-size="13" fill="#2B2218">their own context; answers marked &amp; verified.</text>
+    <text x="520" y="596" font-size="13" fill="#2E7D5B">Pays off: data that actually fits the users,</text>
+    <text x="520" y="614" font-size="13" fill="#2E7D5B">culturally grounded (cf. Afri-MCQA).</text>
+
+    <rect x="520" y="624" width="412" height="20" rx="6" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="530" y="638" font-size="12" fill="#1F5B3F">Built-in check: does the question still match the picture?</text>
+  </g>
+
+  <!-- footer -->
+  <text x="950" y="676" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Image &amp; text &#183; VQA</text>
+</svg>

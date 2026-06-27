@@ -8,13 +8,13 @@ import { WORKSHOPS } from '@site/src/data/workshops';
 
 const STATUS = {
   upcoming: { label: 'Upcoming', color: '#059669', bg: 'rgba(5,150,105,0.1)' },
-  planned:  { label: 'Planned',  color: '#5b3df5', bg: 'rgba(91, 61, 245,0.1)' },
+  planned:  { label: 'Planned',  color: '#c66a3d', bg: 'rgba(198, 106, 61,0.1)' },
   past:     { label: 'Past',     color: '#6b7280', bg: 'rgba(107,114,128,0.1)' },
 };
 
 const TYPE_COLOR = {
-  'Workshop and Exhibition': '#5b3df5',
-  Exhibition: '#5b3df5',
+  'Workshop and Exhibition': '#c66a3d',
+  Exhibition: '#c66a3d',
   Internal:   '#d97706',
   Demo:       '#0891b2',
   Community:  '#059669',

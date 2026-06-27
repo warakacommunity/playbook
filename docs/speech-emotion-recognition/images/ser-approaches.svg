@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 660" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="ttl">
+  <title id="ttl">Speech emotion recognition: an audio clip read by pitch, energy and rhythm, then labelled either as categories (terracotta) or along continuous dimensions (green), with culture, perspectivist annotation and balanced-accuracy evaluation.</title>
+
+  <!-- outer self-contained card -->
+  <rect x="6" y="6" width="948" height="648" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- heading -->
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Speech Emotion Recognition</text>
+  <text x="30" y="72" font-size="14" fill="#8A7D6E">Emotion is read from <tspan fill="#2B2218" font-weight="600">how</tspan> something is said, not what is said.</text>
+
+  <!-- ============ AUDIO CLIP (source) ============ -->
+  <g>
+    <rect x="30" y="100" width="220" height="118" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="48" y="128" font-size="15" font-weight="700" fill="#B97F37">Audio clip</text>
+    <!-- waveform -->
+    <g stroke="#B97F37" stroke-width="3" stroke-linecap="round">
+      <line x1="48" y1="160" x2="48" y2="172"/>
+      <line x1="58" y1="150" x2="58" y2="182"/>
+      <line x1="68" y1="140" x2="68" y2="192"/>
+      <line x1="78" y1="156" x2="78" y2="176"/>
+      <line x1="88" y1="146" x2="88" y2="186"/>
+      <line x1="98" y1="134" x2="98" y2="198"/>
+      <line x1="108" y1="152" x2="108" y2="180"/>
+      <line x1="118" y1="142" x2="118" y2="190"/>
+      <line x1="128" y1="158" x2="128" y2="174"/>
+      <line x1="138" y1="148" x2="138" y2="184"/>
+      <line x1="148" y1="138" x2="148" y2="194"/>
+      <line x1="158" y1="156" x2="158" y2="176"/>
+    </g>
+    <text x="178" y="172" font-size="12.5" fill="#8A7D6E" font-style="italic">yor_emo_014</text>
+    <text x="48" y="206" font-size="13" fill="#2B2218">cues: pitch &#183; energy &#183; rhythm</text>
+  </g>
+
+  <!-- connector from audio to the split -->
+  <path d="M250 159 H300" fill="none" stroke="#CBBBA4" stroke-width="2"/>
+  <text x="262" y="151" font-size="12" fill="#8A7D6E">label as &#8230;</text>
+  <!-- branch lines -->
+  <path d="M300 159 V120 H336" fill="none" stroke="#CBBBA4" stroke-width="2"/>
+  <path d="M300 159 V300 H336" fill="none" stroke="#CBBBA4" stroke-width="2"/>
+  <circle cx="300" cy="159" r="3.5" fill="#CBBBA4"/>
+  <polygon points="336,116 344,120 336,124" fill="#CBBBA4"/>
+  <polygon points="336,296 344,300 336,304" fill="#CBBBA4"/>
+
+  <!-- ============ CATEGORICAL (terracotta) ============ -->
+  <g>
+    <rect x="346" y="100" width="566" height="138" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="366" y="128" font-size="16" font-weight="700" fill="#9C4F2B">Categorical labels</text>
+    <text x="366" y="148" font-size="13" fill="#8A7D6E">one discrete emotion per listener</text>
+    <!-- category chips -->
+    <g font-size="13" font-weight="600">
+      <rect x="366" y="166" width="78" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+      <text x="405" y="186" fill="#9C4F2B" text-anchor="middle">Anger</text>
+      <rect x="454" y="166" width="70" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+      <text x="489" y="186" fill="#9C4F2B" text-anchor="middle">Joy</text>
+      <rect x="534" y="166" width="96" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+      <text x="582" y="186" fill="#9C4F2B" text-anchor="middle">Sadness</text>
+      <rect x="640" y="166" width="70" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+      <text x="675" y="186" fill="#9C4F2B" text-anchor="middle">Fear</text>
+      <rect x="720" y="166" width="86" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+      <text x="763" y="186" fill="#9C4F2B" text-anchor="middle">Neutral</text>
+      <rect x="816" y="166" width="78" height="32" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <text x="855" y="186" fill="#8A3B25" text-anchor="middle" font-style="italic">Other</text>
+    </g>
+    <text x="366" y="216" font-size="12.5" fill="#8A7D6E"><tspan fill="#8A3B25" font-weight="600">Other</tspan> is a safety valve: a cluster there means the<tspan x="366" dy="16">taxonomy is missing an emotion that matters.</tspan></text>
+  </g>
+
+  <!-- ============ DIMENSIONAL (green) ============ -->
+  <g>
+    <rect x="346" y="262" width="566" height="158" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="366" y="290" font-size="16" font-weight="700" fill="#1F5B3F">Continuous dimensions</text>
+    <text x="366" y="310" font-size="13" fill="#8A7D6E">rate each clip on sliding scales</text>
+    <!-- valence axis -->
+    <text x="366" y="344" font-size="13" fill="#2B2218">Valence</text>
+    <text x="366" y="360" font-size="11.5" fill="#8A7D6E">how positive</text>
+    <line x1="470" y1="346" x2="880" y2="346" stroke="#2E7D5B" stroke-width="2"/>
+    <text x="470" y="334" font-size="11.5" fill="#8A7D6E" text-anchor="start">negative</text>
+    <text x="880" y="334" font-size="11.5" fill="#8A7D6E" text-anchor="end">positive</text>
+    <circle cx="590" cy="346" r="6" fill="#1F5B3F"/>
+    <!-- arousal axis -->
+    <text x="366" y="392" font-size="13" fill="#2B2218">Arousal</text>
+    <text x="366" y="408" font-size="11.5" fill="#8A7D6E">how aroused</text>
+    <line x1="470" y1="394" x2="880" y2="394" stroke="#2E7D5B" stroke-width="2"/>
+    <text x="470" y="382" font-size="11.5" fill="#8A7D6E" text-anchor="start">calm</text>
+    <text x="880" y="382" font-size="11.5" fill="#8A7D6E" text-anchor="end">excited</text>
+    <circle cx="770" cy="394" r="6" fill="#1F5B3F"/>
+  </g>
+
+  <!-- ============ KEY POINTS row ============ -->
+  <!-- culture -->
+  <g>
+    <rect x="30" y="448" width="288" height="100" rx="10" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="48" y="474" font-size="14" font-weight="700" fill="#1F5B3F">Emotion is culturally variable</text>
+    <text x="48" y="497" font-size="12.5" fill="#2B2218">Vocal cues for anger or respect differ</text>
+    <text x="48" y="514" font-size="12.5" fill="#2B2218">across communities.</text>
+    <text x="48" y="535" font-size="12.5" fill="#1F5B3F" font-weight="600">Decide the taxonomy WITH the community.</text>
+  </g>
+
+  <!-- perspectivist -->
+  <g>
+    <rect x="336" y="448" width="288" height="100" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="354" y="474" font-size="14" font-weight="700" fill="#9C4F2B">Disagreement is signal, not noise</text>
+    <text x="354" y="497" font-size="12.5" fill="#2B2218">Perspectivist: keep every annotator's</text>
+    <text x="354" y="514" font-size="12.5" fill="#2B2218">label; majority is only a convenience.</text>
+    <text x="354" y="535" font-size="12.5" fill="#9C4F2B" font-weight="600">Preserve the full label distribution.</text>
+  </g>
+
+  <!-- evaluation -->
+  <g>
+    <rect x="642" y="448" width="288" height="100" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="660" y="474" font-size="14" font-weight="700" fill="#B97F37">Evaluation</text>
+    <text x="660" y="497" font-size="12.5" fill="#2B2218">Datasets are imbalanced (Neutral</text>
+    <text x="660" y="514" font-size="12.5" fill="#2B2218">dominates).</text>
+    <text x="660" y="535" font-size="12.5" fill="#B97F37" font-weight="600">Report unweighted / balanced acc.</text>
+  </g>
+
+  <!-- distribution mini-illustration tying perspectivist point -->
+  <g>
+    <text x="30" y="588" font-size="12.5" fill="#8A7D6E">3 annotators, 1 clip &#8594; keep the spread:</text>
+    <rect x="262" y="576" width="40" height="16" rx="4" fill="#C66A3D"/>
+    <text x="282" y="588" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Anger</text>
+    <rect x="306" y="576" width="40" height="16" rx="4" fill="#C66A3D"/>
+    <text x="326" y="588" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Anger</text>
+    <rect x="350" y="576" width="54" height="16" rx="4" fill="#8A3B25"/>
+    <text x="377" y="588" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600">Disgust</text>
+    <text x="414" y="588" font-size="12" fill="#8A7D6E" font-style="italic">majority Anger, but the 1 is kept.</text>
+  </g>
+
+  <!-- footer reference -->
+  <line x1="30" y1="608" x2="930" y2="608" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="30" y="632" font-size="12.5" fill="#8A7D6E">Reference: <tspan fill="#2B2218" font-weight="600">BRIGHTER / AfriEmo</tspan> (SemEval-2025) &#8212; text-emotion across 12+ African languages; useful for taxonomy &amp; culture.</text>
+</svg>

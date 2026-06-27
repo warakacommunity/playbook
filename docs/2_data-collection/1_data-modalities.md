@@ -7,6 +7,8 @@ description: What data modality means, why it's the first fork in the road for a
 
 Learn what data modality means, why it's the first decision in any collection plan, and how it shapes cost, sourcing, and tooling long before anyone writes an annotation guideline.
 
+![The data modalities for African-language datasets and what each needs](images/data-modalities.svg)
+
 ## What a modality is
 
 A **data modality** is the format a piece of data takes — text, image, audio, video, or some structured combination of these. Each modality encodes information differently and needs different tools to capture, store, and process it. A sentence and a photograph might describe the same painting, but one is a sequence of discrete symbols and the other is a dense grid of pixel values; nothing about how you collect, store, or validate one transfers directly to the other.
@@ -14,7 +16,7 @@ A **data modality** is the format a piece of data takes — text, image, audio, 
 This matters more than it sounds. Most of the hard choices in dataset creation — where the data comes from, what it costs, who can label it, what can go wrong — are downstream of the modality decision, not the modeling decision. A multilingual sentiment project that decides to add a speech component is not "adding a feature." It is starting an entirely separate collection effort, often with its own budget line, its own legal questions, and its own pool of qualified contributors.
 
 :::note Scope of this section
-This page covers modality at the **collection** stage: what each modality is and why it changes where you go to find data, who can supply it, and how much it costs. Designing annotation tasks and label schemas for a given modality — bounding boxes, transcription guidelines, emotion taxonomies — is covered later, in [Chapter 5: Modality-Specific Task Design](https://warakacommunity.github.io/AfriPlaybook/category/5-modality-specific-task-design).
+This page covers modality at the **collection** stage: what each modality is and why it changes where you go to find data, who can supply it, and how much it costs. Designing annotation tasks and label schemas for a given modality — bounding boxes, transcription guidelines, emotion taxonomies — is covered later, in the modality sections — [Text](../sections/text.md), [Speech](../sections/speech.md), [Vision](../sections/vision.md) and [Multimodal](../sections/multimodal.md).
 :::
 
 ## The modalities you'll most often collect

@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 640" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Annotation workflow with adjudication and a perspectivist path</title>
+  <desc id="desc">Several annotators independently label the same items; inter-annotator agreement is measured; disagreements are routed to adjudication or review to produce final labels; genuine disagreement on subjective tasks is preserved as signal.</desc>
+
+  <!-- Outer self-contained card -->
+  <rect x="2" y="2" width="976" height="636" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="26" y="44" font-size="22" font-weight="700" fill="#2B2218">Annotation workflow &amp; adjudication</text>
+  <text x="26" y="68" font-size="13" fill="#8A7D6E">Independent labels &#8594; measure agreement &#8594; resolve disagreement &#8594; final dataset</text>
+  <line x1="26" y1="82" x2="954" y2="82" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Stage labels -->
+  <text x="120" y="112" font-size="12" font-weight="700" fill="#8A7D6E" text-anchor="middle" letter-spacing="0.6">1 &#183; INDEPENDENT LABELING</text>
+  <text x="420" y="112" font-size="12" font-weight="700" fill="#8A7D6E" text-anchor="middle" letter-spacing="0.6">2 &#183; MEASURE AGREEMENT</text>
+  <text x="730" y="112" font-size="12" font-weight="700" fill="#8A7D6E" text-anchor="middle" letter-spacing="0.6">3 &#183; RESOLVE &amp; FINALIZE</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#CBBBA4"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#2E7D5B"/>
+    </marker>
+  </defs>
+
+  <!-- ===== Stage 1: same items + 3 annotators ===== -->
+  <!-- Shared items -->
+  <rect x="34" y="138" width="172" height="48" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="120" y="160" font-size="14" font-weight="700" fill="#B97F37" text-anchor="middle">Same items</text>
+  <text x="120" y="178" font-size="13" fill="#8A7D6E" text-anchor="middle">one shared batch</text>
+
+  <!-- Annotator A -->
+  <rect x="34" y="206" width="172" height="56" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="120" y="228" font-size="14" font-weight="700" fill="#9C4F2B" text-anchor="middle">Annotator A</text>
+  <text x="120" y="247" font-size="13" fill="#8A7D6E" text-anchor="middle">independent labels</text>
+
+  <!-- Annotator B -->
+  <rect x="34" y="276" width="172" height="56" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="120" y="298" font-size="14" font-weight="700" fill="#9C4F2B" text-anchor="middle">Annotator B</text>
+  <text x="120" y="317" font-size="13" fill="#8A7D6E" text-anchor="middle">independent labels</text>
+
+  <!-- Annotator C -->
+  <rect x="34" y="346" width="172" height="56" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="120" y="368" font-size="14" font-weight="700" fill="#9C4F2B" text-anchor="middle">Annotator C</text>
+  <text x="120" y="387" font-size="13" fill="#8A7D6E" text-anchor="middle">&#8805; 3, odd number</text>
+
+  <!-- item -> annotators -->
+  <path d="M120 186 L120 206" stroke="#CBBBA4" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M206 234 C 224 234, 224 300, 206 304" stroke="#CBBBA4" stroke-width="1.5" fill="none"/>
+  <path d="M206 304 C 224 360, 224 372, 206 372" stroke="#CBBBA4" stroke-width="1.5" fill="none"/>
+
+  <!-- ===== Stage 2: agreement ===== -->
+  <rect x="334" y="206" width="172" height="120" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="420" y="234" font-size="15" font-weight="700" fill="#1F5B3F" text-anchor="middle">Inter-annotator</text>
+  <text x="420" y="254" font-size="15" font-weight="700" fill="#1F5B3F" text-anchor="middle">agreement</text>
+  <line x1="356" y1="266" x2="484" y2="266" stroke="#1F5B3F" stroke-width="1" opacity="0.35"/>
+  <text x="420" y="286" font-size="13" fill="#2B2218" text-anchor="middle">compute reliability</text>
+  <text x="420" y="305" font-size="13" fill="#8A7D6E" text-anchor="middle">on overlapping items</text>
+
+  <!-- annotators -> agreement -->
+  <path d="M206 234 C 280 234, 280 250, 334 256" stroke="#CBBBA4" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M206 304 L 334 290" stroke="#CBBBA4" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M206 374 C 280 360, 280 300, 334 294" stroke="#CBBBA4" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ===== Branch: agree vs disagree ===== -->
+  <!-- Agreement -> majority/final -->
+  <text x="540" y="178" font-size="12" font-weight="700" fill="#1F5B3F">agree</text>
+  <text x="540" y="360" font-size="12" font-weight="700" fill="#8A3B25">disagree</text>
+
+  <!-- Stage 3 top: Final (from agreement / majority) -->
+  <rect x="630" y="138" width="200" height="64" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="730" y="164" font-size="15" font-weight="700" fill="#1F5B3F" text-anchor="middle">Final labels</text>
+  <text x="730" y="184" font-size="13" fill="#8A7D6E" text-anchor="middle">majority settles most cases</text>
+
+  <path d="M506 250 C 560 200, 580 170, 630 170" stroke="#2E7D5B" stroke-width="1.8" fill="none" marker-end="url(#arrowGreen)"/>
+
+  <!-- Stage 3 mid: Adjudication / review -->
+  <rect x="630" y="234" width="200" height="92" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="730" y="262" font-size="15" font-weight="700" fill="#8A3B25" text-anchor="middle">Adjudication / review</text>
+  <line x1="652" y1="274" x2="808" y2="274" stroke="#8A3B25" stroke-width="1" opacity="0.3"/>
+  <text x="730" y="294" font-size="13" fill="#2B2218" text-anchor="middle">expert / coordinator decides</text>
+  <text x="730" y="312" font-size="13" fill="#8A7D6E" text-anchor="middle">record as guideline precedent</text>
+
+  <path d="M506 290 L 630 282" stroke="#CBBBA4" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- adjudication -> final labels -->
+  <path d="M730 234 L 730 202" stroke="#CBBBA4" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ===== Read-it-first decision diamond ===== -->
+  <g>
+    <polygon points="420,372 506,420 420,468 334,420" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="420" y="412" font-size="13" font-weight="700" fill="#B97F37" text-anchor="middle">Read the</text>
+    <text x="420" y="430" font-size="13" font-weight="700" fill="#B97F37" text-anchor="middle">disagreement</text>
+  </g>
+  <path d="M420 326 L 420 372" stroke="#CBBBA4" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- diamond -> adjudication (error / unclear) -->
+  <path d="M506 420 C 580 420, 600 320, 630 300" stroke="#CBBBA4" stroke-width="1.8" fill="none" marker-end="url(#arrow)"/>
+  <text x="540" y="448" font-size="12" fill="#8A7D6E">error or unclear guideline</text>
+  <text x="540" y="464" font-size="12" fill="#8A7D6E">&#8594; fix / retrain / adjudicate</text>
+
+  <!-- ===== Perspectivist path ===== -->
+  <rect x="334" y="498" width="496" height="112" rx="12" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="358" y="526" font-size="15" font-weight="700" fill="#1F5B3F">Genuine disagreement is signal &#8212; preserve it</text>
+  <line x1="358" y1="538" x2="806" y2="538" stroke="#2E7D5B" stroke-width="1" opacity="0.3"/>
+  <text x="358" y="560" font-size="13" fill="#2B2218">On subjective tasks (sentiment, emotion, hate speech, sarcasm) two native</text>
+  <text x="358" y="578" font-size="13" fill="#2B2218">speakers can both be right. Keep individual labels and group annotators by</text>
+  <text x="358" y="596" font-size="13" fill="#2B2218">perspective rather than collapsing them into one &#8220;gold&#8221; answer.</text>
+
+  <!-- diamond -> perspectivist (real interpretive variation) -->
+  <path d="M420 468 L 420 498" stroke="#2E7D5B" stroke-width="1.8" fill="none" marker-end="url(#arrowGreen)"/>
+  <text x="432" y="490" font-size="12" font-weight="700" fill="#2E7D5B">real interpretive variation</text>
+
+  <!-- perspectivist -> dataset (preserved range) -->
+  <rect x="630" y="408" width="200" height="64" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="730" y="434" font-size="14" font-weight="700" fill="#B97F37" text-anchor="middle">Dataset records</text>
+  <text x="730" y="453" font-size="13" fill="#8A7D6E" text-anchor="middle">the range of valid readings</text>
+  <path d="M730 498 L 730 472" stroke="#2E7D5B" stroke-width="1.8" fill="none" marker-end="url(#arrowGreen)"/>
+
+  <!-- Legend -->
+  <g font-size="12" fill="#8A7D6E">
+    <rect x="26" y="438" width="14" height="14" rx="3" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="46" y="450">Annotators</text>
+    <rect x="26" y="460" width="14" height="14" rx="3" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="46" y="472">Agreement / final</text>
+    <rect x="26" y="482" width="14" height="14" rx="3" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="46" y="494">Review</text>
+    <rect x="26" y="504" width="14" height="14" rx="3" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="46" y="516">Decision / data</text>
+    <line x1="28" y1="540" x2="44" y2="540" stroke="#2E7D5B" stroke-width="1.8"/>
+    <text x="50" y="544">Perspectivist path</text>
+  </g>
+</svg>
