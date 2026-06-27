@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 720" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">AfriPlaybook OCR pipeline for African-language printed text</title>
+  <desc id="desc">Scanned printed source is segmented into line images paired with exact transcriptions preserving every diacritic and the large character sets of Ge'ez and Ajami scripts, used to train an OCR model evaluated primarily with Character Error Rate and Word Error Rate alongside, with synthetic text rendering and the Fidel Amharic dataset to bootstrap low-coverage scripts.</desc>
+
+  <!-- outer self-contained card -->
+  <rect x="8" y="8" width="1164" height="704" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- header -->
+  <text x="32" y="52" font-size="24" font-weight="700" fill="#2B2218">OCR pipeline for African-language printed text</text>
+  <text x="32" y="78" font-size="14" fill="#8A7D6E">Scanned source &#8594; line images + exact transcription &#8594; OCR model, scored on Character Error Rate (CER)</text>
+  <line x1="32" y1="96" x2="1148" y2="96" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- connector marker -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+
+  <!-- ================= MAIN ROW ================= -->
+
+  <!-- Stage 1: Scanned printed source (terracotta) -->
+  <rect x="32" y="150" width="250" height="150" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="52" y="184" font-size="16" font-weight="700" fill="#9C4F2B">1 &#183; Scanned source</text>
+  <text x="52" y="212" font-size="13" fill="#2B2218">Printed material digitised:</text>
+  <text x="52" y="232" font-size="13" fill="#2B2218">books, newspapers,</text>
+  <text x="52" y="252" font-size="13" fill="#2B2218">government gazettes.</text>
+  <text x="52" y="282" font-size="13" fill="#8A7D6E">Scan quality sets the ceiling.</text>
+
+  <!-- Stage 2: Line images + transcription (forest green) -->
+  <rect x="332" y="150" width="278" height="150" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="352" y="184" font-size="16" font-weight="700" fill="#1F5B3F">2 &#183; Line images + text</text>
+  <text x="352" y="212" font-size="13" fill="#2B2218">One record per line:</text>
+  <text x="352" y="232" font-size="13" fill="#2E7D5B" font-family="ui-monospace,Menlo,Consolas,monospace">image_path,text</text>
+  <text x="352" y="258" font-size="13" fill="#2B2218">Exact transcription</text>
+  <text x="352" y="278" font-size="13" fill="#2B2218">preserves every diacritic</text>
+  <text x="352" y="296" font-size="12" fill="#8A7D6E">native readers, fixed conventions</text>
+
+  <!-- Stage 3: OCR model (gold) -->
+  <rect x="660" y="150" width="220" height="150" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="680" y="184" font-size="16" font-weight="700" fill="#B97F37">3 &#183; OCR model</text>
+  <text x="680" y="212" font-size="13" fill="#2B2218">Trains on line image</text>
+  <text x="680" y="232" font-size="13" fill="#2B2218">&#8594; character sequence.</text>
+  <text x="680" y="262" font-size="13" fill="#8A7D6E">Text column is the</text>
+  <text x="680" y="282" font-size="13" fill="#8A7D6E">scored ground truth.</text>
+
+  <!-- Stage 4: Evaluation CER/WER (deep rust) -->
+  <rect x="930" y="150" width="218" height="150" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="950" y="184" font-size="16" font-weight="700" fill="#8A3B25">4 &#183; Evaluation</text>
+  <text x="950" y="214" font-size="14" font-weight="700" fill="#8A3B25">CER</text>
+  <text x="982" y="214" font-size="13" fill="#2B2218">primary metric</text>
+  <text x="950" y="240" font-size="13" fill="#2B2218">fair to large character</text>
+  <text x="950" y="258" font-size="13" fill="#2B2218">sets &amp; rich morphology.</text>
+  <text x="950" y="286" font-size="13" fill="#8A7D6E">WER reported alongside.</text>
+
+  <!-- main connectors -->
+  <line x1="282" y1="225" x2="328" y2="225" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="610" y1="225" x2="656" y2="225" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="880" y1="225" x2="926" y2="225" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ================= SCRIPT CHALLENGE (under stage 2) ================= -->
+  <rect x="332" y="360" width="278" height="130" rx="10" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="352" y="390" font-size="14" font-weight="700" fill="#1F5B3F">Script challenge</text>
+  <text x="352" y="414" font-size="13" fill="#2B2218">Latin scripts: a missing accent</text>
+  <text x="352" y="432" font-size="13" fill="#2B2218">changes the word &#8212; e.g. za&#599;e.</text>
+  <text x="352" y="456" font-size="13" fill="#2B2218">Ge'ez &amp; Ajami: large character</text>
+  <text x="352" y="474" font-size="13" fill="#2B2218">sets and contextual shapes.</text>
+
+  <!-- connector stage2 down to script challenge -->
+  <line x1="471" y1="300" x2="471" y2="356" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ================= BOOTSTRAP / SYNTHETIC (gold, feeds into training) ================= -->
+  <rect x="32" y="360" width="250" height="130" rx="10" fill="#F8ECD6" stroke="#E0A458" stroke-width="1.5"/>
+  <text x="52" y="390" font-size="14" font-weight="700" fill="#B97F37">Bootstrap low coverage</text>
+  <text x="52" y="414" font-size="13" fill="#2B2218">Synthetic text generation:</text>
+  <text x="52" y="432" font-size="13" fill="#2B2218">render known text in many</text>
+  <text x="52" y="450" font-size="13" fill="#2B2218">fonts to seed scripts with</text>
+  <text x="52" y="468" font-size="13" fill="#2B2218">little real coverage.</text>
+
+  <!-- ================= FIDEL DATASET (terracotta accent) ================= -->
+  <rect x="660" y="360" width="488" height="130" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="680" y="390" font-size="14" font-weight="700" fill="#9C4F2B">Reference: Fidel Amharic dataset</text>
+  <text x="680" y="414" font-size="13" fill="#2B2218">Combines printed, handwritten, and synthetic Ge'ez text so models</text>
+  <text x="680" y="432" font-size="13" fill="#2B2218">learn the script's full range of characters and contextual forms.</text>
+  <text x="680" y="462" font-size="13" fill="#8A7D6E">A model for assembling balanced training data for a complex script.</text>
+
+  <!-- connectors: synthetic + fidel feed the OCR model -->
+  <path d="M157,360 L157,330 L770,330 L770,304" fill="none" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M790,360 L790,330" fill="none" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ================= ANNOTATION SHORTCUT NOTE ================= -->
+  <rect x="32" y="540" width="1116" height="100" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="52" y="570" font-size="14" font-weight="700" fill="#2B2218">Annotation discipline &amp; scoring</text>
+  <text x="52" y="594" font-size="13" fill="#2B2218">Transcription is the labelling task: native readers type exactly what is printed, every diacritic, with a fixed convention for ambiguous characters.</text>
+  <text x="52" y="616" font-size="13" fill="#2B2218">Speed it up by correcting an existing engine's output rather than typing from scratch. Score with </text>
+  <text x="640" y="616" font-size="13" font-family="ui-monospace,Menlo,Consolas,monospace" fill="#8A3B25">jiwer</text>
+  <text x="678" y="616" font-size="13" fill="#2B2218">: CER as the headline, WER alongside; match the</text>
+  <text x="52" y="634" font-size="13" fill="#8A7D6E">scorer's normalization to your transcription conventions.</text>
+
+</svg>

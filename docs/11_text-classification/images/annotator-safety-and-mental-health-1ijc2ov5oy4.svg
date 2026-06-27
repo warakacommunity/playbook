@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1123 619" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif">
+  <title>Annotator safety and mental health: practices for handling distressing content</title>
+
+  <!-- Outer self-contained card -->
+  <rect x="1" y="1" width="1121" height="617" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ===================== ROW 1 (4 cards) ===================== -->
+
+  <!-- Card 1: Consent & opt-out (terracotta) -->
+  <g>
+    <rect x="24" y="24" width="256" height="276" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <rect x="46" y="50" width="20" height="15" rx="2.5" fill="none" stroke="#C66A3D" stroke-width="1.6"/>
+    <path d="M49 50 v-4 a7 7 0 0 1 14 0" fill="none" stroke="#C66A3D" stroke-width="1.6"/>
+    <text x="46" y="92" font-size="16" font-weight="700" fill="#C66A3D">Consent &amp; opt-out</text>
+    <g font-size="12.5" fill="#2B2218">
+      <circle cx="50" cy="118" r="1.6" fill="#8A7D6E"/>
+      <text x="60" y="122">Warn about offensive or</text>
+      <text x="60" y="140">distressing content</text>
+      <text x="60" y="158">upfront</text>
+      <circle cx="50" cy="182" r="1.6" fill="#8A7D6E"/>
+      <text x="60" y="186">High-risk tasks must be</text>
+      <text x="60" y="204">explicitly opt-in</text>
+      <circle cx="50" cy="228" r="1.6" fill="#8A7D6E"/>
+      <text x="60" y="232">Skip or withdraw anytime</text>
+      <text x="60" y="250">&#x2014; no penalty</text>
+    </g>
+  </g>
+
+  <!-- Card 2: Tiered task design (gold) -->
+  <g>
+    <rect x="296" y="24" width="256" height="276" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <rect x="318" y="48" width="14" height="14" rx="2" fill="none" stroke="#B97F37" stroke-width="1.6"/>
+    <rect x="326" y="56" width="14" height="14" rx="2" fill="none" stroke="#E0A458" stroke-width="1.6"/>
+    <text x="318" y="92" font-size="16" font-weight="700" fill="#B97F37">Tiered task design</text>
+    <g font-size="12.5" fill="#2B2218">
+      <circle cx="322" cy="118" r="1.6" fill="#8A7D6E"/>
+      <text x="332" y="122">General annotators &#x2192;</text>
+      <text x="332" y="140">low/medium-risk content</text>
+      <circle cx="322" cy="164" r="1.6" fill="#8A7D6E"/>
+      <text x="332" y="168">Trained specialists &#x2192; high-</text>
+      <text x="332" y="186">risk categories</text>
+      <circle cx="322" cy="210" r="1.6" fill="#8A7D6E"/>
+      <text x="332" y="214">Pre-screen &amp; filter</text>
+      <text x="332" y="232">extreme content before</text>
+      <text x="332" y="250">annotation</text>
+    </g>
+  </g>
+
+  <!-- Card 3: Exposure limits (gold/accent) -->
+  <g>
+    <rect x="568" y="24" width="256" height="276" rx="12" fill="#F8ECD6" stroke="#E0A458" stroke-width="1.5"/>
+    <circle cx="597" cy="57" r="11" fill="none" stroke="#B97F37" stroke-width="1.6"/>
+    <path d="M597 50 v7 l5 3" fill="none" stroke="#B97F37" stroke-width="1.6" stroke-linecap="round"/>
+    <text x="590" y="92" font-size="16" font-weight="700" fill="#B97F37">Exposure limits</text>
+    <g font-size="12.5" fill="#2B2218">
+      <circle cx="594" cy="118" r="1.6" fill="#8A7D6E"/>
+      <text x="604" y="122">Set daily max session &amp;</text>
+      <text x="604" y="140">time limits on toxic</text>
+      <text x="604" y="158">content</text>
+      <circle cx="594" cy="182" r="1.6" fill="#8A7D6E"/>
+      <text x="604" y="186">Enforce regular breaks;</text>
+      <text x="604" y="204">mix in neutral tasks</text>
+      <circle cx="594" cy="228" r="1.6" fill="#8A7D6E"/>
+      <text x="604" y="232">Rotate annotators across</text>
+      <text x="604" y="250">task types</text>
+    </g>
+  </g>
+
+  <!-- Card 4: Psychological support (forest) -->
+  <g>
+    <rect x="840" y="24" width="259" height="276" rx="12" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <path d="M862 56 c0 -8 11 -10 11 -2 c0 -8 11 -6 11 2 c0 7 -11 13 -11 13 c0 0 -11 -6 -11 -13 z" fill="none" stroke="#1F5B3F" stroke-width="1.6" stroke-linejoin="round"/>
+    <text x="862" y="92" font-size="16" font-weight="700" fill="#1F5B3F">Psychological support</text>
+    <g font-size="12.5" fill="#2B2218">
+      <circle cx="866" cy="118" r="1.6" fill="#8A7D6E"/>
+      <text x="876" y="122">Provide counseling or</text>
+      <text x="876" y="140">mental health resources</text>
+      <circle cx="866" cy="164" r="1.6" fill="#8A7D6E"/>
+      <text x="876" y="168">Safe channels to report</text>
+      <text x="876" y="186">distress without stigma</text>
+      <circle cx="866" cy="210" r="1.6" fill="#8A7D6E"/>
+      <text x="876" y="214">Optional peer-support &amp;</text>
+      <text x="876" y="232">debrief sessions</text>
+    </g>
+  </g>
+
+  <!-- ===================== ROW 2 (3 cards) ===================== -->
+
+  <!-- Card 5: Training & briefing (deep rust) -->
+  <g>
+    <rect x="24" y="320" width="350" height="276" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <path d="M46 352 l13 -6 13 6 -13 6 z" fill="none" stroke="#8A3B25" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M53 357 v7 q6 3 12 0 v-7" fill="none" stroke="#8A3B25" stroke-width="1.6"/>
+    <text x="46" y="392" font-size="16" font-weight="700" fill="#8A3B25">Training &amp; briefing</text>
+    <g font-size="12.5" fill="#2B2218">
+      <circle cx="50" cy="418" r="1.6" fill="#8A7D6E"/>
+      <text x="60" y="422">Train on content types, emotional-</text>
+      <text x="60" y="440">distance techniques, and escalation</text>
+      <text x="60" y="458">paths</text>
+      <circle cx="50" cy="482" r="1.6" fill="#8A7D6E"/>
+      <text x="60" y="486">Emphasize: content &#x2260; reflection of</text>
+      <text x="60" y="504">the annotator</text>
+      <circle cx="50" cy="528" r="1.6" fill="#8A7D6E"/>
+      <text x="60" y="532">Run onboarding sessions with Q&amp;A</text>
+    </g>
+  </g>
+
+  <!-- Card 6: Ongoing monitoring (forest) -->
+  <g>
+    <rect x="390" y="320" width="350" height="276" rx="12" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <path d="M412 352 h6 l3 -8 5 16 4 -10 3 4 h6" fill="none" stroke="#1F5B3F" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="412" y="392" font-size="16" font-weight="700" fill="#1F5B3F">Ongoing monitoring</text>
+    <g font-size="12.5" fill="#2B2218">
+      <circle cx="416" cy="418" r="1.6" fill="#8A7D6E"/>
+      <text x="426" y="422">Supervisors watch for burnout, errors</text>
+      <text x="426" y="440">&amp; avoidance signals</text>
+      <circle cx="416" cy="464" r="1.6" fill="#8A7D6E"/>
+      <text x="426" y="468">Allow pace adjustment or</text>
+      <text x="426" y="486">reassignment without penalty</text>
+      <circle cx="416" cy="510" r="1.6" fill="#8A7D6E"/>
+      <text x="426" y="514">Anonymous well-being surveys for</text>
+      <text x="426" y="532">long projects</text>
+    </g>
+  </g>
+
+  <!-- Card 7: Fair pay & ethics (terracotta) -->
+  <g>
+    <rect x="756" y="320" width="343" height="276" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <circle cx="789" cy="350" r="11" fill="none" stroke="#C66A3D" stroke-width="1.6"/>
+    <text x="789" y="355" font-size="13" font-weight="700" fill="#C66A3D" text-anchor="middle">$</text>
+    <text x="778" y="392" font-size="16" font-weight="700" fill="#C66A3D">Fair pay &amp; ethics</text>
+    <g font-size="12.5" fill="#2B2218">
+      <circle cx="782" cy="418" r="1.6" fill="#8A7D6E"/>
+      <text x="792" y="422">Higher-risk tasks warrant higher pay</text>
+      <circle cx="782" cy="450" r="1.6" fill="#8A7D6E"/>
+      <text x="792" y="454">Never incentivize skipping breaks or</text>
+      <text x="792" y="472">safety steps</text>
+      <circle cx="782" cy="496" r="1.6" fill="#8A7D6E"/>
+      <text x="792" y="500">Align with labor, data protection &amp;</text>
+      <text x="792" y="518">ethics regulations</text>
+    </g>
+  </g>
+</svg>

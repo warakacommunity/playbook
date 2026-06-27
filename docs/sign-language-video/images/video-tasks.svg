@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 600" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif">
+  <title>General video-understanding tasks: whole-clip classification, temporal event/action detection, and target-language captioning, with practical constraints and evaluation metrics.</title>
+
+  <!-- outer self-contained card -->
+  <rect x="8" y="8" width="904" height="584" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- header -->
+  <text x="32" y="52" font-size="22" font-weight="700" fill="#2B2218">Video-understanding tasks</text>
+  <text x="32" y="76" font-size="14" fill="#8A7D6E">Three ways to read meaning from short African-language video clips</text>
+
+  <!-- ============ TASK CARDS ============ -->
+
+  <!-- Card 1: Whole-clip classification (forest green) -->
+  <rect x="32" y="100" width="276" height="184" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <rect x="32" y="100" width="276" height="40" rx="12" fill="#1F5B3F"/>
+  <rect x="32" y="120" width="276" height="20" fill="#1F5B3F"/>
+  <text x="50" y="126" font-size="15" font-weight="700" fill="#FFFFFF">Whole-clip classification</text>
+  <text x="50" y="166" font-size="13" fill="#2B2218">One label for the entire clip.</text>
+  <text x="50" y="186" font-size="13" fill="#2B2218">Cheap and fast to annotate.</text>
+  <!-- mini clip with single tag -->
+  <rect x="50" y="204" width="240" height="34" rx="8" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <rect x="60" y="212" width="40" height="18" rx="4" fill="#2E7D5B"/>
+  <text x="110" y="225" font-size="13" fill="#2B2218">clip</text>
+  <rect x="186" y="211" width="96" height="20" rx="10" fill="#1F5B3F"/>
+  <text x="234" y="225" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">harvesting</text>
+  <text x="50" y="262" font-size="12.5" fill="#8A7D6E">Config: &lt;Choices&gt;</text>
+
+  <!-- Card 2: Temporal detection (terracotta) -->
+  <rect x="322" y="100" width="276" height="184" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <rect x="322" y="100" width="276" height="40" rx="12" fill="#C66A3D"/>
+  <rect x="322" y="120" width="276" height="20" fill="#C66A3D"/>
+  <text x="340" y="126" font-size="15" font-weight="700" fill="#FFFFFF">Temporal event detection</text>
+  <text x="340" y="166" font-size="13" fill="#2B2218">Mark when actions happen,</text>
+  <text x="340" y="186" font-size="13" fill="#2B2218">spanning the video timeline.</text>
+  <!-- inline note instead of timeline (full timeline below) -->
+  <rect x="340" y="204" width="240" height="34" rx="8" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="354" y="225" font-size="12.5" fill="#2B2218">Slow; needs clear event boundaries.</text>
+  <text x="340" y="262" font-size="12.5" fill="#8A7D6E">Config: &lt;Labels&gt; on timeline</text>
+
+  <!-- Card 3: Captioning (gold) -->
+  <rect x="612" y="100" width="276" height="184" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <rect x="612" y="100" width="276" height="40" rx="12" fill="#B97F37"/>
+  <rect x="612" y="120" width="276" height="20" fill="#B97F37"/>
+  <text x="630" y="126" font-size="15" font-weight="700" fill="#FFFFFF">Captioning</text>
+  <text x="630" y="166" font-size="13" fill="#2B2218">Describe the clip in words,</text>
+  <text x="630" y="186" font-size="13" fill="#2B2218">written in the target language</text>
+  <text x="630" y="204" font-size="13" fill="#2B2218">directly, not translated.</text>
+  <rect x="630" y="216" width="240" height="22" rx="8" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="642" y="231" font-size="11" fill="#2B2218">"Mkulima anavuna mahindi kwa mkono."</text>
+  <text x="630" y="262" font-size="12.5" fill="#8A7D6E">Native-speaker eval is dependable.</text>
+
+  <!-- ============ TIMELINE ============ -->
+  <text x="32" y="324" font-size="15" font-weight="700" fill="#2B2218">Temporal detection on the timeline</text>
+
+  <rect x="32" y="338" width="856" height="86" rx="12" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+  <!-- track baseline -->
+  <line x1="60" y1="408" x2="860" y2="408" stroke="#CBBBA4" stroke-width="1.5"/>
+  <!-- ticks -->
+  <line x1="60" y1="404" x2="60" y2="412" stroke="#CBBBA4" stroke-width="1.5"/>
+  <line x1="260" y1="404" x2="260" y2="412" stroke="#CBBBA4" stroke-width="1.5"/>
+  <line x1="460" y1="404" x2="460" y2="412" stroke="#CBBBA4" stroke-width="1.5"/>
+  <line x1="660" y1="404" x2="660" y2="412" stroke="#CBBBA4" stroke-width="1.5"/>
+  <line x1="860" y1="404" x2="860" y2="412" stroke="#CBBBA4" stroke-width="1.5"/>
+  <text x="58" y="396" font-size="12" fill="#8A7D6E">0s</text>
+  <text x="840" y="396" font-size="12" fill="#8A7D6E">12s</text>
+  <!-- event spans -->
+  <rect x="84" y="362" width="180" height="22" rx="6" fill="#1F5B3F"/>
+  <text x="174" y="377" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Planting</text>
+  <rect x="320" y="362" width="240" height="22" rx="6" fill="#C66A3D"/>
+  <text x="440" y="377" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Harvesting</text>
+  <rect x="612" y="362" width="200" height="22" rx="6" fill="#E0A458"/>
+  <text x="712" y="377" font-size="12" font-weight="600" fill="#2B2218" text-anchor="middle">Speaking</text>
+
+  <!-- ============ CONSTRAINTS + EVAL ============ -->
+
+  <!-- Constraints (deep rust tint) -->
+  <rect x="32" y="442" width="420" height="132" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="50" y="468" font-size="14" font-weight="700" fill="#8A3B25">Practical constraints</text>
+  <text x="50" y="492" font-size="13" fill="#2B2218">&#8226; Large files &amp; weight &#8594; keep clips short.</text>
+  <text x="50" y="514" font-size="13" fill="#2B2218">&#8226; Annotation is slow &#8594; tight, scoped label set.</text>
+  <text x="50" y="536" font-size="13" fill="#2B2218">&#8226; Intermittent bandwidth &#8594; small, shareable units.</text>
+  <text x="50" y="558" font-size="13" fill="#2B2218">&#8226; Labelled African video is scarce.</text>
+
+  <!-- Evaluation (gold tint) -->
+  <rect x="468" y="442" width="420" height="132" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="486" y="468" font-size="14" font-weight="700" fill="#B97F37">Evaluation</text>
+  <!-- row chips -->
+  <circle cx="494" cy="490" r="5" fill="#1F5B3F"/>
+  <text x="510" y="494" font-size="13" fill="#2B2218">Classification: accuracy &amp; F1</text>
+  <circle cx="494" cy="514" r="5" fill="#C66A3D"/>
+  <text x="510" y="518" font-size="13" fill="#2B2218">Temporal detection: mean Average Precision (mAP)</text>
+  <circle cx="494" cy="538" r="5" fill="#E0A458"/>
+  <text x="510" y="542" font-size="13" fill="#2B2218">Captioning: text-generation metrics</text>
+  <text x="510" y="562" font-size="12.5" fill="#8A7D6E">+ native-speaker human evaluation</text>
+
+</svg>

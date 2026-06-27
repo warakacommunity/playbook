@@ -34,6 +34,66 @@ This isn't a story about one platform behaving badly. It's the generic risk of a
 - **Respect rate limits and use backoff.** Getting your access revoked for abuse, even unintentionally, can end a collection effort outright, unlike a scraper simply being slowed down.
 - **Don't design a project's entire data plan around a single platform's API.** Treat any one API as one source among several, and have a sense of what the project does if that source disappears mid-project — because, as the AfriSenti example shows, it has happened before, with no advance warning.
 
+## A worked example: pulling from a Wikimedia API
+
+Of the categories above, the Wikimedia APIs are the safest to learn on: they are built for reuse, cover many African languages, and are not going to reprice overnight. The example below pulls article extracts from a language edition of Wikipedia, archives the raw response exactly as received, and records provenance for each article. Swap `lang` for any Wikipedia language code, such as `yo` (Yoruba), `sw` (Swahili), `ha` (Hausa), or `am` (Amharic).
+
+```python
+import json
+from datetime import datetime, timezone
+
+import requests
+
+USER_AGENT = "AfriPlaybook-collector/1.0 (+contact: you@example.org)"
+
+
+def pull_extracts(lang: str, titles: list[str]) -> list[dict]:
+    """Fetch plain-text extracts for given article titles from one
+    Wikipedia language edition, archiving raw responses and provenance."""
+    endpoint = f"https://{lang}.wikipedia.org/w/api.php"
+    params = {
+        "action": "query",
+        "format": "json",
+        "prop": "extracts",
+        "explaintext": "1",          # plain text, not HTML
+        "titles": "|".join(titles),
+        "formatversion": "2",
+    }
+    response = requests.get(
+        endpoint, params=params, headers={"User-Agent": USER_AGENT}, timeout=30
+    )
+    response.raise_for_status()
+    pulled_at = datetime.now(timezone.utc).isoformat()
+
+    # Archive the raw response first, before any processing.
+    with open(f"raw_{lang}_response.json", "w", encoding="utf-8") as raw:
+        json.dump(response.json(), raw, ensure_ascii=False, indent=2)
+
+    records = []
+    for page in response.json()["query"]["pages"]:
+        if "extract" not in page:       # missing or redirected pages
+            continue
+        records.append({
+            "title": page["title"],
+            "text": page["extract"],
+            "language": lang,
+            "source_url": f"https://{lang}.wikipedia.org/wiki/{page['title'].replace(' ', '_')}",
+            "license": "CC BY-SA 4.0",  # Wikipedia text license
+            "api_endpoint": endpoint,
+            "pulled_at": pulled_at,
+        })
+    return records
+
+
+if __name__ == "__main__":
+    records = pull_extracts(lang="yo", titles=["Nàìjíríà", "Èkó"])
+    with open("wikipedia_yo.jsonl", "w", encoding="utf-8") as out:
+        for record in records:
+            out.write(json.dumps(record, ensure_ascii=False) + "\n")
+```
+
+The order of operations matters here. The raw response is written to disk before anything is extracted from it, so that if the schema turns out to differ from what was expected, or access changes later, the original pull is preserved and the parsing can be redone offline. Each record carries its license (`CC BY-SA 4.0` for Wikipedia text, which means downstream reuse must attribute and share alike), the exact endpoint, and the pull time. That is the provenance discipline from [Data Provenance and Traceability](./data-provenance-traceability) applied at the point of collection, where it is cheap, rather than reconstructed afterwards, where it is often impossible.
+
 ## The bigger pattern
 
 Both this page and [Web Scraping](./web-scraping) point at the same lesson from different directions: methods that depend on a third party's continued goodwill — whether that's a platform's API pricing or a site's tolerance for crawlers — are inherently less stable than methods that don't. Community-sourced data, institutional partnerships, and purpose-built collection campaigns (see [Data Sources](./data-sources)) take longer to set up, but they don't disappear because someone else changed a pricing page.

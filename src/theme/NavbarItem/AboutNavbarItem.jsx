@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Chevron from './Chevron';
+import { registerDropdown, openExclusive } from './dropdownBus';
 import Link from '@docusaurus/Link';
 import styles from './StyledNavItem.module.css';
 
@@ -109,6 +111,8 @@ export default function AboutNavbarItem() {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef(null);
   const closeTimerRef = useRef(null);
+  const selfCloser = useRef(() => setOpen(false));
+  useEffect(() => registerDropdown(selfCloser.current), []);
 
   useEffect(() => {
     function handleOutside(e) {
@@ -128,6 +132,7 @@ export default function AboutNavbarItem() {
   const close = () => setOpen(false);
   const handleEnter = () => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    openExclusive(selfCloser.current);
     setOpen(true);
   };
   const handleLeave = () => {
@@ -149,7 +154,7 @@ export default function AboutNavbarItem() {
         aria-expanded={open}
       >
         <span className={styles.btnLabel}>About</span>
-        <span className={styles.chevron} aria-hidden="true">{open ? '▲' : '▼'}</span>
+        <Chevron open={open} />
       </button>
 
       {open && (

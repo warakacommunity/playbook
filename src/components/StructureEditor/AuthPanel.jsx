@@ -108,46 +108,25 @@ export function AuthPanel({ auth, clientId, proxyUrl, callbackUrl, onConnect, on
     );
   }
 
-  // ── Default: GitHub button + token input always visible ──────────────
+  // ── Default: one-click GitHub sign-in only. No token paste — authorisation
+  // happens on GitHub's own domain, so nothing sensitive is ever typed here
+  // (a copycat site can't phish a token that's never entered). ──────────────
   return (
     <div className={styles.authBlock}>
       <button
         className={styles.authGitHubBtn}
         onClick={handleSignIn}
         disabled={phase === 'loading' || !canDevice}
-        title={!canDevice ? 'OAuth not configured — use a personal access token below' : undefined}
         type="button"
       >
         {GH_MARK}
         {phase === 'loading' ? 'Connecting…' : 'Sign in with GitHub'}
       </button>
-      <p className={styles.authOrDivider}>or use a personal access token</p>
-      <div className={styles.authPatRow}>
-        <input
-          type="password"
-          className={styles.authTokenInput}
-          value={draft}
-          onChange={e => setDraft(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handlePaste()}
-          placeholder="ghp_xxxxxxxxxxxx"
-          autoComplete="off"
-        />
-        <button
-          className={styles.authConnectBtn}
-          onClick={handlePaste}
-          disabled={!draft.trim() || phase === 'loading'}
-          type="button"
-        >
-          {phase === 'loading' ? '…' : 'Connect'}
-        </button>
-      </div>
-      <a
-        href="https://github.com/settings/tokens/new?scopes=repo&description=Masakhane+Playbook"
-        target="_blank" rel="noreferrer noopener"
-        className={styles.authTokenLink}
-      >
-        Generate a token on GitHub ↗
-      </a>
+      <p className={styles.authHint}>
+        {canDevice
+          ? 'One click — you authorise securely on GitHub. Nothing is typed here.'
+          : 'One-click GitHub sign-in is being set up — check back soon.'}
+      </p>
       {error && <p className={styles.authError}>{error}</p>}
     </div>
   );

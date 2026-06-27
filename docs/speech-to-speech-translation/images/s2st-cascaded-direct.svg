@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 900 560" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Speech-to-Speech Translation: Cascaded vs Direct</title>
+  <desc id="desc">Two approaches to building speech-to-speech translation. Cascaded chains ASR, Machine Translation, and TTS, reusing existing data but compounding errors. Direct maps source speech to target speech in one step but needs scarce paired speech.</desc>
+
+  <!-- Outer self-contained card -->
+  <rect x="6" y="6" width="888" height="548" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Heading -->
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Building Speech-to-Speech Translation</text>
+  <text x="30" y="72" font-size="14" fill="#8A7D6E">Two routes from source speech to target speech</text>
+
+  <!-- ============ CASCADED (green) ============ -->
+  <rect x="30" y="96" width="840" height="184" rx="12" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="50" y="126" font-size="17" font-weight="700" fill="#1F5B3F">1 &#183; Cascaded</text>
+  <text x="50" y="148" font-size="13" fill="#2B2218">Chain three components. Reuses existing ASR, MT and TTS datasets &#8212; but errors compound across stages.</text>
+
+  <!-- Source speech chip -->
+  <rect x="50" y="172" width="118" height="64" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="109" y="200" font-size="13" font-weight="700" fill="#1F5B3F" text-anchor="middle">Source</text>
+  <text x="109" y="218" font-size="13" fill="#2B2218" text-anchor="middle">speech</text>
+
+  <!-- ASR -->
+  <rect x="216" y="172" width="148" height="64" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="290" y="198" font-size="14" font-weight="700" fill="#1F5B3F" text-anchor="middle">ASR</text>
+  <text x="290" y="218" font-size="13" fill="#2B2218" text-anchor="middle">speech &#8594; text</text>
+
+  <!-- MT -->
+  <rect x="412" y="172" width="148" height="64" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="486" y="198" font-size="14" font-weight="700" fill="#1F5B3F" text-anchor="middle">Machine Translation</text>
+  <text x="486" y="218" font-size="13" fill="#2B2218" text-anchor="middle">text &#8594; text</text>
+
+  <!-- TTS -->
+  <rect x="608" y="172" width="148" height="64" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="682" y="198" font-size="14" font-weight="700" fill="#1F5B3F" text-anchor="middle">TTS</text>
+  <text x="682" y="218" font-size="13" fill="#2B2218" text-anchor="middle">text &#8594; speech</text>
+
+  <!-- Target speech chip -->
+  <rect x="800" y="172" width="48" height="64" rx="10" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="824" y="200" font-size="13" font-weight="700" fill="#1F5B3F" text-anchor="middle">Tgt</text>
+  <text x="824" y="218" font-size="11" fill="#2B2218" text-anchor="middle">speech</text>
+
+  <!-- Cascaded arrows (green connectors) -->
+  <defs>
+    <marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2E7D5B"/></marker>
+    <marker id="arrT" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#C66A3D"/></marker>
+  </defs>
+  <line x1="168" y1="204" x2="214" y2="204" stroke="#2E7D5B" stroke-width="2" marker-end="url(#arrG)"/>
+  <line x1="364" y1="204" x2="410" y2="204" stroke="#2E7D5B" stroke-width="2" marker-end="url(#arrG)"/>
+  <line x1="560" y1="204" x2="606" y2="204" stroke="#2E7D5B" stroke-width="2" marker-end="url(#arrG)"/>
+  <line x1="756" y1="204" x2="798" y2="204" stroke="#2E7D5B" stroke-width="2" marker-end="url(#arrG)"/>
+
+  <text x="486" y="262" font-size="12.5" fill="#8A3B25" text-anchor="middle">Errors compound: a wrong transcription becomes a mistranslation becomes a wrong word spoken aloud.</text>
+
+  <!-- ============ DIRECT (terracotta) ============ -->
+  <rect x="30" y="300" width="840" height="150" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="50" y="330" font-size="17" font-weight="700" fill="#9C4F2B">2 &#183; Direct</text>
+  <text x="50" y="352" font-size="13" fill="#2B2218">Learn source speech &#8594; target speech in one step. No cascading errors &#8212; but needs scarce paired speech.</text>
+
+  <!-- Source speech -->
+  <rect x="150" y="376" width="180" height="56" rx="10" fill="#FFFFFF" stroke="#9C4F2B" stroke-width="1.5"/>
+  <text x="240" y="400" font-size="14" font-weight="700" fill="#9C4F2B" text-anchor="middle">Source speech</text>
+  <text x="240" y="419" font-size="12.5" fill="#2B2218" text-anchor="middle">language A</text>
+
+  <!-- one-step model -->
+  <rect x="390" y="372" width="120" height="64" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="450" y="400" font-size="13" font-weight="700" fill="#8A3B25" text-anchor="middle">one model</text>
+  <text x="450" y="419" font-size="12" fill="#2B2218" text-anchor="middle">end-to-end</text>
+
+  <!-- Target speech -->
+  <rect x="570" y="376" width="180" height="56" rx="10" fill="#FFFFFF" stroke="#9C4F2B" stroke-width="1.5"/>
+  <text x="660" y="400" font-size="14" font-weight="700" fill="#9C4F2B" text-anchor="middle">Target speech</text>
+  <text x="660" y="419" font-size="12.5" fill="#2B2218" text-anchor="middle">language B</text>
+
+  <line x1="330" y1="404" x2="388" y2="404" stroke="#C66A3D" stroke-width="2" marker-end="url(#arrT)"/>
+  <line x1="510" y1="404" x2="568" y2="404" stroke="#C66A3D" stroke-width="2" marker-end="url(#arrT)"/>
+
+  <!-- ============ Notes row ============ -->
+  <!-- Evaluation note (gold) -->
+  <rect x="30" y="470" width="500" height="68" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="48" y="494" font-size="13" font-weight="700" fill="#B97F37">Evaluation</text>
+  <text x="48" y="514" font-size="12.5" fill="#2B2218">ASR-BLEU / chrF: transcribe the output, score vs. reference (chrF for</text>
+  <text x="48" y="530" font-size="12.5" fill="#2B2218">morphology). BLASER scores from audio. Human eval stays essential.</text>
+
+  <!-- Reality note (deep rust) -->
+  <rect x="546" y="470" width="324" height="68" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="564" y="494" font-size="13" font-weight="700" fill="#8A3B25">For most African pairs today</text>
+  <text x="564" y="514" font-size="12.5" fill="#2B2218">Cascaded is the realistic route: it reuses ASR,</text>
+  <text x="564" y="530" font-size="12.5" fill="#2B2218">MT &amp; TTS data. Direct paired speech is rare.</text>
+</svg>

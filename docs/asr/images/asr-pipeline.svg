@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="asrTitle asrDesc">
+  <title id="asrTitle">ASR data concept for African languages</title>
+  <desc id="asrDesc">Audio (read vs spontaneous speech) flows to faithful transcription by native speakers, then trains an ASR model evaluated with WER and CER, with CER the fairer headline for morphologically rich and tonal languages.</desc>
+
+  <!-- outer self-contained card -->
+  <rect x="6" y="6" width="968" height="608" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- header -->
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Building ASR data for African languages</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Audio &#8594; faithful transcription &#8594; ASR model &#8594; evaluation. CER is the fairer headline for tonal &amp; morphologically rich languages.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- markers -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+
+  <!-- ============ STAGE 1: AUDIO (terracotta) ============ -->
+  <g>
+    <rect x="30" y="120" width="210" height="200" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <circle cx="58" cy="150" r="13" fill="#C66A3D"/>
+    <text x="58" y="155" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="80" y="155" font-size="16" font-weight="700" fill="#9C4F2B">Audio</text>
+
+    <rect x="48" y="172" width="174" height="64" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="60" y="192" font-size="14" font-weight="600" fill="#9C4F2B">Read speech</text>
+    <text x="60" y="210" font-size="13" fill="#8A7D6E">prepared, clean,</text>
+    <text x="60" y="228" font-size="13" fill="#8A7D6E">easy to collect</text>
+
+    <rect x="48" y="244" width="174" height="66" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="60" y="266" font-size="14" font-weight="600" fill="#9C4F2B">Spontaneous speech</text>
+    <text x="60" y="284" font-size="13" fill="#8A7D6E">realistic; harder to</text>
+    <text x="60" y="302" font-size="13" fill="#8A7D6E">record &amp; transcribe</text>
+  </g>
+
+  <!-- connector 1 -> 2 -->
+  <line x1="246" y1="220" x2="272" y2="220" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 2: TRANSCRIPTION (forest green) ============ -->
+  <g transform="translate(-12,0)">
+    <rect x="290" y="120" width="240" height="290" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="318" cy="150" r="13" fill="#1F5B3F"/>
+    <text x="318" y="155" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="340" y="151" font-size="16" font-weight="700" fill="#1F5B3F">Faithful transcription</text>
+    <text x="340" y="169" font-size="13" fill="#2E7D5B">by native speakers</text>
+
+    <text x="308" y="200" font-size="13" font-weight="600" fill="#2E7D5B">Conventions to settle first:</text>
+
+    <rect x="308" y="210" width="204" height="32" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="320" y="231" font-size="13" fill="#2B2218">Tone &amp; diacritics</text>
+
+    <rect x="308" y="248" width="204" height="32" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="320" y="269" font-size="13" fill="#2B2218">Orthography choice</text>
+
+    <rect x="308" y="286" width="204" height="32" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="320" y="307" font-size="13" fill="#2B2218">Code-switching</text>
+
+    <rect x="308" y="324" width="204" height="32" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="320" y="345" font-size="13" fill="#2B2218">Disfluencies &amp; overlap</text>
+
+    <text x="308" y="383" font-size="13" fill="#2E7D5B" font-style="italic">+ second-pass review of a sample</text>
+  </g>
+
+  <!-- connector 2 -> 3 -->
+  <line x1="524" y1="220" x2="546" y2="220" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 3: ASR MODEL (gold) ============ -->
+  <g transform="translate(-28,0)">
+    <rect x="580" y="120" width="200" height="200" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="608" cy="150" r="13" fill="#B97F37"/>
+    <text x="608" y="155" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="630" y="155" font-size="16" font-weight="700" fill="#B97F37">ASR model</text>
+
+    <rect x="598" y="172" width="164" height="56" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="610" y="194" font-size="13" font-weight="600" fill="#B97F37">audio &#8594; text</text>
+    <text x="610" y="214" font-size="13" fill="#8A7D6E">trained on manifests</text>
+
+    <rect x="598" y="236" width="164" height="66" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="610" y="258" font-size="12" font-weight="600" fill="#B97F37">Self-supervised pretrain</text>
+    <text x="610" y="278" font-size="13" fill="#8A7D6E">AfriHuBERT: little</text>
+    <text x="610" y="296" font-size="13" fill="#8A7D6E">labelled data goes far</text>
+  </g>
+
+  <!-- connector 3 -> 4 -->
+  <line x1="758" y1="220" x2="780" y2="220" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ STAGE 4: EVALUATION (deep rust) ============ -->
+  <g>
+    <rect x="786" y="120" width="152" height="290" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <circle cx="814" cy="150" r="13" fill="#8A3B25"/>
+    <text x="814" y="155" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="838" y="155" font-size="16" font-weight="700" fill="#8A3B25">Evaluate</text>
+
+    <rect x="810" y="196" width="104" height="56" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="862" y="220" font-size="15" font-weight="700" fill="#8A7D6E" text-anchor="middle">WER</text>
+    <text x="862" y="240" font-size="12" fill="#8A7D6E" text-anchor="middle">word-level</text>
+
+    <rect x="810" y="262" width="104" height="68" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="2"/>
+    <text x="862" y="287" font-size="16" font-weight="700" fill="#8A3B25" text-anchor="middle">CER</text>
+    <text x="862" y="305" font-size="12" fill="#8A3B25" text-anchor="middle">char-level</text>
+    <text x="862" y="322" font-size="12" font-weight="700" fill="#8A3B25" text-anchor="middle">headline</text>
+
+    <text x="862" y="358" font-size="12" fill="#8A3B25" text-anchor="middle">fairer for tonal</text>
+    <text x="862" y="374" font-size="12" fill="#8A3B25" text-anchor="middle">&amp; rich morph.</text>
+  </g>
+
+  <!-- ============ WER vs CER callout (gold tint, deep rust title) ============ -->
+  <rect x="290" y="430" width="540" height="100" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="308" y="456" font-size="14" font-weight="700" fill="#8A3B25">Why CER is the fairer headline</text>
+  <text x="308" y="480" font-size="13" fill="#2B2218">ref:  "ina kwana yaya gida"  &#8594;  hyp:  "ina kwana yaya gidda"  (one doubled letter)</text>
+  <text x="308" y="506" font-size="13" fill="#8A7D6E"><tspan font-weight="700" fill="#8A7D6E">WER 0.25</tspan>  one word marked wrong   &#183;   <tspan font-weight="700" fill="#8A3B25">CER 0.05</tspan>  one character wrong</text>
+  <text x="308" y="524" font-size="12" fill="#8A7D6E" font-style="italic">Normalize reference &amp; hypothesis the same way &#8212; keep diacritics if the guidelines do.</text>
+
+  <!-- ============ Corpora strip (cream cards, hairline) ============ -->
+  <rect x="30" y="430" width="240" height="100" rx="12" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="48" y="456" font-size="14" font-weight="700" fill="#2B2218">African ASR corpora</text>
+  <text x="48" y="480" font-size="13" fill="#8A7D6E">African Next Voices &#183; ~9k hrs</text>
+  <text x="48" y="500" font-size="13" fill="#8A7D6E">NaijaVoices &#183; 1.8k hrs</text>
+  <text x="48" y="520" font-size="13" fill="#8A7D6E">AfriSpeech-200 &#183; accented EN</text>
+
+  <!-- footer note -->
+  <text x="30" y="566" font-size="13" fill="#8A7D6E">Split train/test by</text>
+  <rect x="158" y="552" width="84" height="22" rx="8" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="200" y="568" font-size="13" font-weight="600" fill="#1F5B3F" text-anchor="middle">speaker_id</text>
+  <text x="252" y="566" font-size="13" fill="#8A7D6E">&#8212; the same voice in both flatters the reported error rate.</text>
+
+  <text x="950" y="566" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; ASR</text>
+</svg>

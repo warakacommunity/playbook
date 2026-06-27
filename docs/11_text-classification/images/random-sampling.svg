@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 256" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif">
+  <title>Random sampling — pros and cons</title>
+
+  <!-- self-contained outer card -->
+  <rect x="2" y="2" width="1020" height="252" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- PROS panel -->
+  <rect x="26" y="26" width="462" height="204" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5" stroke-opacity="0.35"/>
+  <text x="56" y="66" font-size="14" font-weight="700" letter-spacing="3" fill="#1F5B3F">PROS</text>
+
+  <!-- pros items -->
+  <g>
+    <path d="M58 102 l8 9 16 -19" fill="none" stroke="#2E7D5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="94" y="107" font-size="14" fill="#2B2218">Zero selection bias — most representative</text>
+  </g>
+  <g>
+    <path d="M58 146 l8 9 16 -19" fill="none" stroke="#2E7D5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="94" y="151" font-size="14" fill="#2B2218">Simple to implement and audit</text>
+  </g>
+  <g>
+    <path d="M58 190 l8 9 16 -19" fill="none" stroke="#2E7D5B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="94" y="195" font-size="14" fill="#2B2218">Best for estimating true distributions</text>
+  </g>
+
+  <!-- CONS panel -->
+  <rect x="536" y="26" width="462" height="204" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5" stroke-opacity="0.35"/>
+  <text x="566" y="66" font-size="14" font-weight="700" letter-spacing="3" fill="#8A3B25">CONS</text>
+
+  <!-- cons items -->
+  <g>
+    <path d="M569 93 l16 16 M585 93 l-16 16" fill="none" stroke="#C66A3D" stroke-width="3" stroke-linecap="round"/>
+    <text x="604" y="107" font-size="14" fill="#2B2218">Rare classes underrepresented</text>
+  </g>
+  <g>
+    <path d="M569 137 l16 16 M585 137 l-16 16" fill="none" stroke="#C66A3D" stroke-width="3" stroke-linecap="round"/>
+    <text x="604" y="151" font-size="14" fill="#2B2218">Wastes budget on uninformative samples</text>
+  </g>
+  <g>
+    <path d="M569 181 l16 16 M585 181 l-16 16" fill="none" stroke="#C66A3D" stroke-width="3" stroke-linecap="round"/>
+    <text x="604" y="195" font-size="14" fill="#2B2218">Inefficient for imbalanced tasks</text>
+  </g>
+</svg>

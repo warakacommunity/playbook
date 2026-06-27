@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 540" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Data modalities to collect for African-language datasets</title>
+  <desc id="desc">Five modality cards — Text, Speech and audio, Images, Video, and Multimodal — each noting what it is and what collecting it needs.</desc>
+
+  <!-- Outer self-contained card -->
+  <rect x="8" y="8" width="1104" height="524" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="32" y="56" font-size="24" font-weight="700" fill="#2B2218">Data modalities you'll most often collect</text>
+  <text x="32" y="82" font-size="14" fill="#8A7D6E">The format your data takes is the first fork in the road — it shapes sourcing, cost, who can supply it, and what can go wrong.</text>
+  <line x1="32" y1="98" x2="1088" y2="98" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- TEXT -->
+  <g>
+    <rect x="32" y="120" width="338" height="180" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="56" y="156" font-size="18" font-weight="700" fill="#9C4F2B">Text</text>
+    <line x1="56" y1="168" x2="346" y2="168" stroke="#CBBBA4" stroke-width="1"/>
+    <text x="56" y="194" font-size="13" fill="#2B2218">Sequences of discrete symbols — the most</text>
+    <text x="56" y="212" font-size="13" fill="#2B2218">common start, with the most tooling.</text>
+    <text x="56" y="244" font-size="13" font-weight="600" fill="#C66A3D">Needs:</text>
+    <text x="56" y="264" font-size="13" fill="#2B2218">Web crawls, archives, books, social media —</text>
+    <text x="56" y="282" font-size="13" fill="#2B2218">but apparent abundance is often deceptive.</text>
+  </g>
+
+  <!-- SPEECH AND AUDIO -->
+  <g>
+    <rect x="391" y="120" width="338" height="180" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="415" y="156" font-size="18" font-weight="700" fill="#1F5B3F">Speech &amp; audio</text>
+    <line x1="415" y1="168" x2="705" y2="168" stroke="#CBBBA4" stroke-width="1"/>
+    <text x="415" y="194" font-size="13" fill="#2B2218">Often the more natural modality for oral-</text>
+    <text x="415" y="212" font-size="13" fill="#2B2218">tradition languages with no set orthography.</text>
+    <text x="415" y="244" font-size="13" font-weight="600" fill="#2E7D5B">Needs:</text>
+    <text x="415" y="264" font-size="13" fill="#2B2218">Recording, not scraping — equipment, consent,</text>
+    <text x="415" y="282" font-size="13" fill="#2B2218">and transcription as its own annotation task.</text>
+  </g>
+
+  <!-- IMAGES -->
+  <g>
+    <rect x="750" y="120" width="338" height="180" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="774" y="156" font-size="18" font-weight="700" fill="#B97F37">Images</text>
+    <line x1="774" y1="168" x2="1064" y2="168" stroke="#CBBBA4" stroke-width="1"/>
+    <text x="774" y="194" font-size="13" fill="#2B2218">Dense grids of pixels — two problems: source</text>
+    <text x="774" y="212" font-size="13" fill="#2B2218">existing images, or capture new ones.</text>
+    <text x="774" y="244" font-size="13" font-weight="600" fill="#B97F37">Needs:</text>
+    <text x="774" y="264" font-size="13" fill="#2B2218">Sourcing raises licensing questions; capture</text>
+    <text x="774" y="282" font-size="13" fill="#2B2218">raises consent and privacy ones.</text>
+  </g>
+
+  <!-- VIDEO -->
+  <g>
+    <rect x="32" y="316" width="510" height="180" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="56" y="352" font-size="18" font-weight="700" fill="#8A3B25">Video</text>
+    <line x1="56" y1="364" x2="518" y2="364" stroke="#CBBBA4" stroke-width="1"/>
+    <text x="56" y="390" font-size="13" fill="#2B2218">Audio's cost structure plus image storage and bandwidth, multiplied by time.</text>
+    <text x="56" y="408" font-size="13" fill="#2B2218">Rarely collected for its own sake in low-resource work.</text>
+    <text x="56" y="440" font-size="13" font-weight="600" fill="#8A3B25">Needs:</text>
+    <text x="56" y="460" font-size="13" fill="#2B2218">Recording and consent at scale — usually bundled with another goal (sign-language</text>
+    <text x="56" y="478" font-size="13" fill="#2B2218">corpora, instructional content, or as source for extracted audio and frames).</text>
+  </g>
+
+  <!-- MULTIMODAL -->
+  <g>
+    <rect x="563" y="316" width="525" height="180" rx="12" fill="#FBF7F0" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="587" y="352" font-size="18" font-weight="700" fill="#1F5B3F">Multimodal data</text>
+    <rect x="932" y="335" width="132" height="24" rx="10" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1"/>
+    <text x="998" y="351" font-size="12" font-weight="600" fill="#1F5B3F" text-anchor="middle">a combination</text>
+    <line x1="587" y1="364" x2="1064" y2="364" stroke="#CBBBA4" stroke-width="1"/>
+    <text x="587" y="390" font-size="13" fill="#2B2218">Not a separate modality but a pairing — text-image, audio-video, image-caption —</text>
+    <text x="587" y="408" font-size="13" fill="#2B2218">collected so the modalities can be analyzed together.</text>
+    <text x="587" y="440" font-size="13" font-weight="600" fill="#2E7D5B">Needs:</text>
+    <text x="587" y="460" font-size="13" fill="#2B2218">Both modalities for the same underlying item, often from different sources, with</text>
+    <text x="587" y="478" font-size="13" fill="#2B2218">careful tracking of which pairs go together.</text>
+  </g>
+</svg>

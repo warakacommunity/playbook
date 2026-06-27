@@ -30,4 +30,4 @@ Hate speech can target one or many targets during expression. Ayele et al (2024)
 
 Some studies, such as Ayele et al (2024) also examine and rate the severity of hate and offensive messages with rating scales from 1-5.
 
-![](images/hate-speech-analysis-g159il1u80.jpg)
+![](images/hate-speech-analysis.png)

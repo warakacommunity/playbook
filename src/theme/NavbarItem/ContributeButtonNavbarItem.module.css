@@ -25,12 +25,12 @@
 }
 
 .contributeBtn:hover {
-  background: #5b3df5;
+  background: #c66a3d;
   color: #fff;
 }
 
 .contributeBtn:active {
-  background: #4422db;
+  background: #a55530;
   color: #fff;
 }
 
@@ -39,7 +39,7 @@
 }
 
 [data-theme='dark'] .contributeBtn:hover {
-  background: #5b3df5;
+  background: #c66a3d;
   color: #fff;
 }
 

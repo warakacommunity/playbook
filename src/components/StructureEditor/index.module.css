@@ -150,17 +150,25 @@
 
 .treePanelHeader {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.55rem;
+  padding: 0.7rem 1rem 0.6rem;
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
   flex-shrink: 0;
+}
+
+.treePanelTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .treePanelHeaderActions {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.35rem;
+  flex-wrap: wrap;
 }
 
 .hideStructureBtn {
@@ -189,33 +197,48 @@
 }
 
 .addSectionBtn {
-  padding: 0.24rem 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.34rem 0.72rem;
   background: var(--ifm-color-primary);
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 600;
-  font-family: inherit;
-  transition: opacity 0.15s;
-}
-.addSectionBtn:hover { opacity: 0.88; }
-
-.uploadBtn {
-  padding: 0.24rem 0.5rem;
-  background: none;
-  color: var(--ifm-color-primary);
-  border: 1.5px solid var(--ifm-color-primary);
-  border-radius: 5px;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 7px;
   cursor: pointer;
   font-size: 0.78rem;
-  line-height: 1;
-  transition: background 0.15s, color 0.15s;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.1;
+  white-space: nowrap;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+.addSectionBtn:hover {
+  background: var(--ifm-color-primary-darker);
+  box-shadow: 0 3px 8px -3px rgba(var(--brand-rgb), 0.55);
+}
+.addSectionBtn:active { transform: translateY(1px); }
+
+.uploadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.34rem 0.72rem;
+  background: none;
+  color: var(--ifm-color-primary);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 45%, var(--ifm-color-emphasis-300));
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.1;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .uploadBtn:hover:not(:disabled) {
-  background: var(--ifm-color-primary);
-  color: #fff;
+  background: rgba(var(--brand-rgb), 0.08);
+  border-color: var(--ifm-color-primary);
 }
 .uploadBtn:disabled {
   opacity: 0.4;
@@ -654,7 +677,7 @@
   padding: 0.28rem 0.85rem;
   font-size: 0.8rem;
   font-weight: 700;
-  background: #5b3df5;
+  background: #c66a3d;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -925,25 +948,25 @@
   gap: 0.55rem;
   width: 100%;
   padding: 0.55rem 1rem;
-  background: #2da44e;
+  background: #24292f;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
   font-family: inherit;
   letter-spacing: 0.01em;
-  transition: background 0.15s, transform 0.1s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
 }
 .authGitHubBtn:hover:not(:disabled) {
-  background: #2c974b;
+  background: #1b1f24;
   transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+  box-shadow: 0 4px 10px -2px rgba(0,0,0,0.25);
 }
-.authGitHubBtn:active { transform: translateY(0); }
-.authGitHubBtn:disabled { opacity: 0.7; cursor: wait; }
+.authGitHubBtn:active:not(:disabled) { transform: translateY(0); }
+.authGitHubBtn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
 
 /* Device flow — code display */
 .authDeviceBox {
@@ -1115,6 +1138,14 @@
   color: var(--ifm-color-emphasis-500);
   margin: 0.55rem 0 0.35rem;
   text-align: center;
+}
+
+.authHint {
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--ifm-color-content-secondary);
+  text-align: center;
+  margin: 0.6rem 0 0;
 }
 
 .authTokenLink {

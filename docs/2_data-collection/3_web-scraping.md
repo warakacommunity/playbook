@@ -38,6 +38,91 @@ Scraping plans that assume the open web behaves the way it did five years ago sh
 - **Don't scrape behind logins or around anti-bot measures.** Circumventing access controls carries real legal risk and is a hard line many institutional review boards will not approve, regardless of the research value.
 - **For African-language text specifically, validate language identification on anything you scrape.** Off-the-shelf language identifiers are themselves trained mostly on high-resource languages and frequently misclassify African-language text — exactly the failure mode Kreutzer et al. documented at scale. Spot-check a sample with a native speaker before trusting an automated filter.
 
+## A minimal, well-behaved scraper
+
+The points above translate into code more directly than they might seem to. A scraper that respects `robots.txt`, rate-limits itself, records provenance, and verifies the language of what it collects is not much longer than a careless one. The example below uses only widely available libraries (`requests`, `beautifulsoup4`, and a language identifier).
+
+```python
+import time
+import json
+import urllib.robotparser
+from datetime import datetime, timezone
+from urllib.parse import urlparse
+
+import requests
+from bs4 import BeautifulSoup
+
+USER_AGENT = "AfriPlaybook-collector/1.0 (+contact: you@example.org)"
+RATE_LIMIT_SECONDS = 2.0  # one request every two seconds, at most
+
+
+def allowed_by_robots(url: str) -> bool:
+    """Honour robots.txt before fetching. If we can't read it, don't fetch."""
+    parts = urlparse(url)
+    robots_url = f"{parts.scheme}://{parts.netloc}/robots.txt"
+    parser = urllib.robotparser.RobotFileParser()
+    try:
+        parser.set_url(robots_url)
+        parser.read()
+    except Exception:
+        return False
+    return parser.can_fetch(USER_AGENT, url)
+
+
+def fetch(url: str) -> str | None:
+    if not allowed_by_robots(url):
+        print(f"Skipped (robots.txt disallows): {url}")
+        return None
+    response = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=30)
+    response.raise_for_status()
+    time.sleep(RATE_LIMIT_SECONDS)  # be a good guest
+    return response.text
+
+
+def extract_text(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup(["script", "style", "nav", "footer"]):
+        tag.decompose()
+    return " ".join(soup.get_text(separator=" ").split())
+
+
+def collect(urls: list[str], expected_lang: str, out_path: str) -> None:
+    """Fetch each URL, keep only text that looks like the target language,
+    and record provenance for every record we keep."""
+    from glotlid import GlotLID  # pip install glotlid
+
+    identifier = GlotLID()
+    with open(out_path, "w", encoding="utf-8") as out:
+        for url in urls:
+            html = fetch(url)
+            if html is None:
+                continue
+            text = extract_text(html)
+            label, score = identifier.predict(text)  # e.g. ("hau_Latn", 0.97)
+            if not label.startswith(expected_lang) or score < 0.7:
+                print(f"Skipped (language {label}, score {score:.2f}): {url}")
+                continue
+            record = {
+                "text": text,
+                "source_url": url,
+                "language": label,
+                "lang_confidence": round(float(score), 3),
+                "collected_at": datetime.now(timezone.utc).isoformat(),
+                "collector": USER_AGENT,
+            }
+            out.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
+if __name__ == "__main__":
+    collect(
+        urls=["https://example.org/hausa-article-1"],
+        expected_lang="hau",  # ISO 639-3 prefix for Hausa
+        out_path="raw_hausa.jsonl",
+    )
+```
+
+Three things in this script do the work the prose asked for. The `allowed_by_robots` check refuses to fetch anything the site disallows, and fails closed if the policy can't be read. The `RATE_LIMIT_SECONDS` pause keeps the crawl from looking like an attack. And the language check, using [GlotLID](https://github.com/cisnlp/GlotLID) here, drops anything that isn't confidently the target language, which is the single most important filter for African-language scraping given how often general-purpose crawls mislabel it ([Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/)). The confidence threshold of `0.7` is a starting point, not a universal value: set it by spot-checking a sample with a native speaker, as described above.
+
 ## When scraping is the right call
 
 Scraping earns its place when the target source is large, public, has a clear and permissive access policy, and — critically — actually contains meaningful volume in the target language. It's the wrong tool when the honest problem is that the language simply isn't well represented online yet. In that case, the community, institutional, and purpose-built collection routes covered in [Data Sources](./data-sources) are where the real work is.

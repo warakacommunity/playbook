@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Chevron from './Chevron';
 import Link from '@docusaurus/Link';
 import styles from './ContributeButtonNavbarItem.module.css';
 
@@ -59,9 +60,7 @@ export default function ContributeButtonNavbarItem() {
       >
         <PenIcon />
         <span className={styles.btnLabel}>Start Contributing</span>
-        <span className={styles.chevron} aria-hidden="true">
-          {dropdownOpen ? '▲' : '▼'}
-        </span>
+        <Chevron open={dropdownOpen} />
       </button>
 
       {dropdownOpen && (

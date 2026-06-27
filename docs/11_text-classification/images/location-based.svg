@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 268" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="lb-title">
+  <title id="lb-title">Location-based selection: pros and cons</title>
+
+  <!-- self-contained outer card -->
+  <rect x="1" y="1" width="1022" height="266" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+  <!-- forest green accent bar -->
+  <rect x="24" y="24" width="976" height="5" rx="2.5" fill="#1F5B3F"/>
+
+  <!-- PROS card -->
+  <rect x="40" y="46" width="448" height="198" rx="12" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="72" y="84" font-size="14" font-weight="700" letter-spacing="3" fill="#1F5B3F">PROS</text>
+
+  <!-- check icon -->
+  <g stroke="#2E7D5B" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M72 119 l7 7 l12 -15"/>
+    <path d="M72 161 l7 7 l12 -15"/>
+    <path d="M72 203 l7 7 l12 -15"/>
+  </g>
+  <text x="104" y="124" font-size="16" fill="#2B2218">Enables dialect / regional studies</text>
+  <text x="104" y="166" font-size="16" fill="#2B2218">Precise targeting for geo tasks</text>
+  <text x="104" y="208" font-size="16" fill="#2B2218">Scales easily with bounding boxes</text>
+
+  <!-- CONS card -->
+  <rect x="536" y="46" width="448" height="198" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="568" y="84" font-size="14" font-weight="700" letter-spacing="3" fill="#8A3B25">CONS</text>
+
+  <!-- cross icon -->
+  <g stroke="#8A3B25" stroke-width="2.4" stroke-linecap="round">
+    <path d="M568 112 l14 14 M582 112 l-14 14"/>
+    <path d="M568 154 l14 14 M582 154 l-14 14"/>
+    <path d="M568 196 l14 14 M582 196 l-14 14"/>
+  </g>
+  <text x="600" y="124" font-size="16" fill="#2B2218">Only ~1&#8211;3% of tweets are geotagged</text>
+  <text x="600" y="166" font-size="16" fill="#2B2218">Location &#8800; author&#8217;s language region</text>
+  <text x="600" y="208" font-size="16" fill="#2B2218">Platform-dependent metadata</text>
+</svg>

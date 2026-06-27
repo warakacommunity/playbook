@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 536" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Three documentation standards for African-language datasets</title>
+  <desc id="desc">Datasheet, Data Statement, and Model Card cards, with a note that the data statement is especially valuable for African datasets.</desc>
+
+  <!-- Outer self-contained card -->
+  <rect x="8" y="8" width="864" height="520" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="32" y="56" font-size="22" font-weight="700" fill="#2B2218">Documentation standards</text>
+  <text x="32" y="80" font-size="14" fill="#8A7D6E">Don't invent one — use a standard others already know how to read.</text>
+  <line x1="32" y1="96" x2="848" y2="96" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ===== Card 1: Datasheet (terracotta) ===== -->
+  <g>
+    <rect x="32" y="120" width="262" height="268" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <rect x="32" y="120" width="262" height="46" rx="12" fill="#C66A3D"/>
+    <rect x="32" y="150" width="262" height="16" fill="#C66A3D"/>
+    <text x="52" y="149" font-size="18" font-weight="700" fill="#FFFFFF">Datasheet</text>
+    <text x="52" y="186" font-size="13" fill="#8A7D6E">For the dataset</text>
+
+    <text x="52" y="214" font-size="13.5" fill="#2B2218">• Motivation</text>
+    <text x="52" y="238" font-size="13.5" fill="#2B2218">• Composition</text>
+    <text x="52" y="262" font-size="13.5" fill="#2B2218">• Collection process</text>
+    <text x="52" y="286" font-size="13.5" fill="#2B2218">• Recommended uses</text>
+    <text x="52" y="310" font-size="13.5" fill="#2B2218">• Limitations</text>
+
+    <line x1="52" y1="332" x2="274" y2="332" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="52" y="356" font-size="13" fill="#9C4F2B">Travels with the data like a</text>
+    <text x="52" y="374" font-size="13" fill="#9C4F2B">component datasheet.</text>
+  </g>
+
+  <!-- ===== Card 2: Data Statement (forest green) ===== -->
+  <g>
+    <rect x="309" y="120" width="262" height="268" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <rect x="309" y="120" width="262" height="46" rx="12" fill="#1F5B3F"/>
+    <rect x="309" y="150" width="262" height="16" fill="#1F5B3F"/>
+    <text x="329" y="149" font-size="18" font-weight="700" fill="#FFFFFF">Data Statement</text>
+    <text x="329" y="186" font-size="13" fill="#8A7D6E">Linguistic &amp; demographic context</text>
+
+    <text x="329" y="214" font-size="13.5" fill="#2B2218">• Speakers (who produced it)</text>
+    <text x="329" y="238" font-size="13.5" fill="#2B2218">• Annotators (who labelled it)</text>
+    <text x="329" y="262" font-size="13.5" fill="#2B2218">• Language &amp; variety</text>
+    <text x="329" y="286" font-size="13.5" fill="#2B2218">• Region &amp; register</text>
+    <text x="329" y="310" font-size="13.5" fill="#2B2218">• Fitness for a given use</text>
+
+    <line x1="329" y1="332" x2="551" y2="332" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="329" y="356" font-size="13" fill="#2E7D5B">A short, readable file that</text>
+    <text x="329" y="374" font-size="13" fill="#2E7D5B">travels with the data.</text>
+  </g>
+
+  <!-- ===== Card 3: Model Card (gold) ===== -->
+  <g>
+    <rect x="586" y="120" width="262" height="268" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <rect x="586" y="120" width="262" height="46" rx="12" fill="#B97F37"/>
+    <rect x="586" y="150" width="262" height="16" fill="#B97F37"/>
+    <text x="606" y="149" font-size="18" font-weight="700" fill="#FFFFFF">Model Card</text>
+    <text x="606" y="186" font-size="13" fill="#8A7D6E">For a model trained on the data</text>
+
+    <text x="606" y="214" font-size="13.5" fill="#2B2218">• Intended use</text>
+    <text x="606" y="238" font-size="13.5" fill="#2B2218">• Performance across groups</text>
+    <text x="606" y="262" font-size="13.5" fill="#2B2218">• Limitations</text>
+
+    <line x1="606" y1="284" x2="828" y2="284" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="606" y="356" font-size="13" fill="#8A3B25">Does for the model what the</text>
+    <text x="606" y="374" font-size="13" fill="#8A3B25">datasheet does for the data.</text>
+  </g>
+
+  <!-- Citations row -->
+  <text x="163" y="408" font-size="12.5" fill="#8A7D6E" text-anchor="middle">Gebru et al., 2021</text>
+  <text x="440" y="408" font-size="12.5" fill="#8A7D6E" text-anchor="middle">Bender &amp; Friedman, 2018</text>
+  <text x="717" y="408" font-size="12.5" fill="#8A7D6E" text-anchor="middle">Mitchell et al., 2019</text>
+
+  <!-- African-language note (deep rust highlight) -->
+  <g>
+    <rect x="32" y="430" width="816" height="74" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <circle cx="62" cy="455" r="13" fill="#8A3B25"/>
+    <text x="62" y="460" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">!</text>
+    <text x="88" y="453" font-size="14" font-weight="700" fill="#8A3B25">Especially valuable for African datasets</text>
+    <text x="88" y="474" font-size="13" fill="#2B2218">The data statement records the precise language, variety, region, and speaker profile that decide</text>
+    <text x="88" y="492" font-size="13" fill="#2B2218">whether the data fits a use — and that get lost when unwritten.</text>
+  </g>
+</svg>

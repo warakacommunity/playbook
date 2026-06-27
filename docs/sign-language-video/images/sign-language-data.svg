@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 760" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">Sign-language data: video of signing to gloss and translation</title>
+  <desc id="desc">A signing video is paired with two written representations — sign-by-sign gloss and fluent translation — produced with the Deaf community, with signer diversity tracked, referencing AfriSign, and evaluated by WER, BLEU/chrF, and human eval by fluent signers.</desc>
+
+  <!-- outer self-contained card -->
+  <rect x="6" y="6" width="1168" height="748" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- heading -->
+  <text x="30" y="48" font-size="26" font-weight="700" fill="#2B2218">Sign-language data: from video to two written representations</text>
+  <text x="30" y="74" font-size="14" fill="#8A7D6E">Done with the Deaf community · referencing AfriSign · signer-independent evaluation</text>
+
+  <!-- ============ SOURCE: signing video ============ -->
+  <g>
+    <rect x="30" y="110" width="250" height="200" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="50" y="140" font-size="17" font-weight="700" fill="#1F5B3F">Video of signing</text>
+    <!-- mini video frame -->
+    <rect x="50" y="156" width="210" height="104" rx="8" fill="#FFFFFF" stroke="#CBBBA4" stroke-width="1.5"/>
+    <!-- play glyph -->
+    <circle cx="155" cy="208" r="22" fill="#2E7D5B"/>
+    <path d="M148 197 L171 208 L148 219 Z" fill="#FFFFFF"/>
+    <!-- signer figure hint -->
+    <circle cx="92" cy="186" r="9" fill="#E0A458"/>
+    <path d="M81 214 q11 -16 22 0" fill="none" stroke="#E0A458" stroke-width="3"/>
+    <text x="50" y="282" font-size="13" fill="#2B2218">Hands, face, and body —</text>
+    <text x="50" y="300" font-size="13" fill="#2B2218">a full natural language.</text>
+  </g>
+
+  <!-- record metadata chip -->
+  <g>
+    <rect x="30" y="330" width="250" height="118" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="48" y="356" font-size="14" font-weight="700" fill="#B97F37">Record metadata</text>
+    <text x="48" y="380" font-size="13" fill="#2B2218">sign_language</text>
+    <text x="48" y="402" font-size="13" fill="#2B2218">signer_id  <tspan fill="#8A7D6E">— enables</tspan></text>
+    <text x="48" y="422" font-size="13" fill="#2B2218">signer-independent splits</text>
+    <text x="48" y="440" font-size="12" fill="#8A7D6E">Mixed-signer splits inflate accuracy.</text>
+  </g>
+
+  <!-- connector: video -> representations -->
+  <line x1="280" y1="210" x2="356" y2="210" stroke="#CBBBA4" stroke-width="2.5"/>
+  <path d="M356 210 l-12 -6 v12 z" fill="#CBBBA4"/>
+
+  <!-- ============ TWO WRITTEN REPRESENTATIONS ============ -->
+  <text x="372" y="132" font-size="15" font-weight="700" fill="#2B2218">Two written representations</text>
+
+  <!-- GLOSS box -->
+  <g>
+    <rect x="372" y="146" width="350" height="118" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="392" y="174" font-size="16" font-weight="700" fill="#8A3B25">GLOSS — sign by sign</text>
+    <text x="392" y="196" font-size="13" fill="#8A7D6E">Notation transcribing the signs themselves</text>
+    <rect x="392" y="208" width="310" height="40" rx="8" fill="#FFFFFF" stroke="#CBBBA4" stroke-width="1.5"/>
+    <text x="406" y="233" font-size="14" font-weight="600" fill="#2B2218" font-family="'Courier New',monospace">BOOK READ I</text>
+  </g>
+
+  <!-- TRANSLATION box -->
+  <g>
+    <rect x="372" y="282" width="350" height="118" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="392" y="310" font-size="16" font-weight="700" fill="#9C4F2B">TRANSLATION — fluent text</text>
+    <text x="392" y="332" font-size="13" fill="#8A7D6E">Spoken-language meaning; enables SLT</text>
+    <rect x="392" y="344" width="310" height="40" rx="8" fill="#FFFFFF" stroke="#CBBBA4" stroke-width="1.5"/>
+    <text x="406" y="369" font-size="14" font-weight="600" fill="#2B2218" font-style="italic">"I am reading a book."</text>
+  </g>
+
+  <!-- connectors from video to both boxes -->
+  <line x1="362" y1="148" x2="362" y2="398" stroke="#CBBBA4" stroke-width="2.5"/>
+  <line x1="362" y1="205" x2="372" y2="205" stroke="#CBBBA4" stroke-width="2.5"/>
+  <path d="M372 205 l-12 -6 v12 z" fill="#CBBBA4"/>
+  <line x1="362" y1="341" x2="372" y2="341" stroke="#CBBBA4" stroke-width="2.5"/>
+  <path d="M372 341 l-12 -6 v12 z" fill="#CBBBA4"/>
+
+  <!-- ============ WITH THE DEAF COMMUNITY ============ -->
+  <g>
+    <rect x="762" y="146" width="388" height="118" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="784" y="174" font-size="16" font-weight="700" fill="#1F5B3F">With the Deaf community</text>
+    <text x="784" y="200" font-size="13" fill="#2B2218">Annotation by fluent signers — ideally Deaf</text>
+    <text x="784" y="220" font-size="13" fill="#2B2218">annotators. Grammar lives in spatial and</text>
+    <text x="784" y="240" font-size="13" fill="#2B2218">facial detail a hearing outsider will miss.</text>
+    <text x="784" y="258" font-size="12" fill="#8A7D6E">It is the community's language to represent.</text>
+  </g>
+  <!-- connector representations -> community -->
+  <line x1="722" y1="205" x2="762" y2="205" stroke="#CBBBA4" stroke-width="2.5"/>
+  <path d="M762 205 l-12 -6 v12 z" fill="#CBBBA4"/>
+
+  <!-- ============ SIGNER DIVERSITY ============ -->
+  <g>
+    <rect x="762" y="282" width="388" height="118" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="784" y="310" font-size="16" font-weight="700" fill="#B97F37">Signer diversity matters</text>
+    <text x="784" y="334" font-size="13" fill="#2B2218">A model trained on few signers fails on new ones.</text>
+    <!-- gap bars -->
+    <text x="784" y="362" font-size="12" fill="#2B2218">signer-dependent</text>
+    <rect x="900" y="352" width="170" height="12" rx="6" fill="#2E7D5B"/>
+    <text x="784" y="386" font-size="12" fill="#2B2218">signer-independent</text>
+    <rect x="900" y="376" width="96" height="12" rx="6" fill="#C66A3D"/>
+    <text x="1004" y="386" font-size="11" fill="#8A7D6E">← accuracy gap</text>
+  </g>
+
+  <!-- ============ EVALUATION ROW ============ -->
+  <text x="30" y="486" font-size="15" font-weight="700" fill="#2B2218">Evaluation</text>
+  <!-- connectors down from gloss/translation -->
+  <line x1="547" y1="400" x2="547" y2="500" stroke="#CBBBA4" stroke-width="2.5"/>
+  <path d="M547 500 l-6 -12 h12 z" fill="#CBBBA4"/>
+
+  <!-- WER over glosses -->
+  <g>
+    <rect x="30" y="504" width="355" height="200" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="50" y="534" font-size="16" font-weight="700" fill="#8A3B25">Recognition · glosses</text>
+    <rect x="50" y="550" width="150" height="34" rx="9" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="68" y="573" font-size="14" font-weight="700" fill="#8A3B25">WER</text>
+    <text x="50" y="612" font-size="13" fill="#2B2218">Word Error Rate over the</text>
+    <text x="50" y="632" font-size="13" fill="#2B2218">sign-by-sign gloss notation.</text>
+    <text x="50" y="668" font-size="12" fill="#8A7D6E">Lower is better.</text>
+  </g>
+
+  <!-- BLEU / chrF -->
+  <g>
+    <rect x="412" y="504" width="355" height="200" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="432" y="534" font-size="16" font-weight="700" fill="#9C4F2B">Translation · text metrics</text>
+    <rect x="432" y="550" width="120" height="34" rx="9" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="450" y="573" font-size="14" font-weight="700" fill="#9C4F2B">BLEU</text>
+    <rect x="566" y="550" width="120" height="34" rx="9" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="584" y="573" font-size="14" font-weight="700" fill="#9C4F2B">chrF</text>
+    <text x="432" y="612" font-size="13" fill="#2B2218">Compare fluent translation</text>
+    <text x="432" y="632" font-size="13" fill="#2B2218">against reference text.</text>
+    <text x="432" y="668" font-size="12" fill="#8A7D6E">Higher is better.</text>
+  </g>
+
+  <!-- Human eval -->
+  <g>
+    <rect x="794" y="504" width="356" height="200" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="814" y="534" font-size="16" font-weight="700" fill="#1F5B3F">Human eval · fluent signers</text>
+    <rect x="814" y="550" width="220" height="34" rx="9" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="832" y="573" font-size="14" font-weight="700" fill="#1F5B3F">Judged by fluent signers</text>
+    <text x="814" y="612" font-size="13" fill="#2B2218">Automatic metrics guide; human</text>
+    <text x="814" y="632" font-size="13" fill="#2B2218">judgement by fluent signers</text>
+    <text x="814" y="652" font-size="13" fill="#2B2218">remains the real measure.</text>
+    <text x="814" y="684" font-size="12" fill="#8A7D6E">Closes the loop with the community.</text>
+  </g>
+
+  <!-- AfriSign reference footer -->
+  <line x1="30" y1="726" x2="1150" y2="726" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="30" y="745" font-size="13" fill="#8A7D6E">Reference: <tspan font-weight="700" fill="#9C4F2B">AfriSign</tspan> — first substantial African video-to-text sign-language dataset (Bible verses, six countries).</text>
+</svg>

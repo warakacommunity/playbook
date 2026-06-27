@@ -233,7 +233,7 @@
 }
 
 .navBtnPrimary {
-  background: linear-gradient(135deg, #4422db 0%, #5b3df5 100%);
+  background: linear-gradient(135deg, #a55530 0%, #c66a3d 100%);
   color: #fff;
   border-color: transparent;
 }
@@ -246,5 +246,5 @@
 }
 
 [data-theme='dark'] .navBtnPrimary {
-  background: linear-gradient(135deg, #5b3df5 0%, #8670f9 100%);
+  background: linear-gradient(135deg, #c66a3d 0%, #db9a7b 100%);
 }

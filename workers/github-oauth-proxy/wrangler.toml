@@ -1,0 +1,13 @@
+name = "afriplaybook-github-oauth"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Non-secret values — safe to commit.
+# ALLOWED_ORIGIN is a comma-separated allowlist; localhost is always allowed for
+# dev. List every site this worker serves so you never have to redeploy on a move.
+[vars]
+GITHUB_CLIENT_ID = "Ov23liZcoHlUBKSLpDJA"
+ALLOWED_ORIGIN = "https://warakacommunity.github.io,https://afriannotate.github.io"
+
+# The client secret is NOT set here. Add it as an encrypted secret:
+#   wrangler secret put GITHUB_CLIENT_SECRET

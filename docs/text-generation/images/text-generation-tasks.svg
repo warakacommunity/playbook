@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 700" width="100%" font-family="Inter, 'Segoe UI', Roboto, system-ui, sans-serif" role="img" aria-labelledby="tgTitle">
+  <title id="tgTitle">Text generation tasks — open-ended generation, summarization and question answering, their data and weak automatic metrics, all converging on native-speaker human evaluation</title>
+
+  <!-- Outer branded card -->
+  <rect x="2" y="2" width="1236" height="696" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ============ CONNECTORS (drawn first, under boxes) ============ -->
+  <g fill="none" stroke="#CBBBA4" stroke-width="1.5">
+    <!-- header bottom to horizontal bus -->
+    <path d="M620 92 L620 112"/>
+    <!-- horizontal bus across the 3 column centers -->
+    <path d="M210 112 L1030 112"/>
+    <!-- bus down to each column header -->
+    <path d="M210 112 L210 134"/>
+    <path d="M620 112 L620 134"/>
+    <path d="M1030 112 L1030 134"/>
+
+    <!-- each card down to the convergence bus -->
+    <path d="M210 484 L210 506"/>
+    <path d="M620 484 L620 506"/>
+    <path d="M1030 484 L1030 506"/>
+    <!-- convergence bus -->
+    <path d="M210 506 L1030 506"/>
+    <!-- bus down into human-evaluation note -->
+    <path d="M620 506 L620 530"/>
+  </g>
+
+  <!-- ============ HEADER ============ -->
+  <rect x="430" y="44" width="380" height="48" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="620" y="74" text-anchor="middle" font-size="20" font-weight="700" fill="#9C4F2B">Text generation tasks</text>
+
+  <!-- ============ COLUMN 1 — Open-ended generation (terracotta) ============ -->
+  <!-- card -->
+  <rect x="36" y="134" width="348" height="350" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <!-- title bar -->
+  <rect x="56" y="152" width="308" height="46" rx="11" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="210" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#9C4F2B">Open-ended generation</text>
+  <text x="210" y="220" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Fluent, useful text from a prompt</text>
+
+  <!-- learns-from row -->
+  <text x="64" y="252" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">LEARNS FROM</text>
+  <rect x="64" y="260" width="142" height="34" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="135" y="281" text-anchor="middle" font-size="12.5" font-weight="600" fill="#9C4F2B">Monolingual text</text>
+  <rect x="214" y="260" width="142" height="34" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="285" y="281" text-anchor="middle" font-size="12.5" font-weight="600" fill="#9C4F2B">Instruction data</text>
+  <rect x="64" y="300" width="292" height="34" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="210" y="321" text-anchor="middle" font-size="12.5" font-weight="600" fill="#9C4F2B">WURA &#183; SERENGETI corpora</text>
+
+  <!-- weak metric row -->
+  <text x="64" y="362" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">WEAK AUTO METRIC</text>
+  <rect x="64" y="370" width="292" height="34" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="210" y="391" text-anchor="middle" font-size="12.5" font-weight="600" fill="#8A3B25">Perplexity &#8212; rough signal only</text>
+
+  <!-- distinctive risk -->
+  <text x="64" y="432" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">JUDGE BY HAND</text>
+  <text x="64" y="453" font-size="12.5" font-weight="500" fill="#2B2218">Fluency, factuality,</text>
+  <text x="64" y="470" font-size="12.5" font-weight="500" fill="#2B2218">cultural appropriateness</text>
+
+  <!-- ============ COLUMN 2 — Summarization (forest green) ============ -->
+  <rect x="446" y="134" width="348" height="350" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <rect x="466" y="152" width="308" height="46" rx="11" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="620" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#1F5B3F">Summarization</text>
+  <text x="620" y="220" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">Condense a document, keep its meaning</text>
+
+  <text x="474" y="252" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">LEARNS FROM</text>
+  <rect x="474" y="260" width="142" height="34" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="545" y="281" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1F5B3F">Extractive pairs</text>
+  <rect x="624" y="260" width="142" height="34" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="695" y="281" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1F5B3F">Abstractive pairs</text>
+  <rect x="474" y="300" width="292" height="34" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="620" y="321" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1F5B3F">Document &#8594; reference summary</text>
+
+  <text x="474" y="362" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">WEAK AUTO METRIC</text>
+  <rect x="474" y="370" width="142" height="34" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="545" y="391" text-anchor="middle" font-size="12.5" font-weight="600" fill="#8A3B25">ROUGE</text>
+  <rect x="624" y="370" width="142" height="34" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="695" y="391" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B97F37">BERTScore</text>
+
+  <text x="474" y="432" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">JUDGE BY HAND</text>
+  <text x="474" y="453" font-size="12.5" font-weight="500" fill="#2B2218">Faithfulness to the source</text>
+  <text x="474" y="470" font-size="12.5" font-weight="500" fill="#2B2218">(catch invented content)</text>
+
+  <!-- ============ COLUMN 3 — Question answering (gold) ============ -->
+  <rect x="856" y="134" width="348" height="350" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <rect x="876" y="152" width="308" height="46" rx="11" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="1030" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#B97F37">Question answering</text>
+  <text x="1030" y="220" text-anchor="middle" font-size="13" font-weight="500" fill="#2B2218">A correct answer to a question</text>
+
+  <text x="884" y="252" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">LEARNS FROM</text>
+  <rect x="884" y="260" width="142" height="34" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="955" y="281" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B97F37">Passage + span</text>
+  <rect x="1034" y="260" width="142" height="34" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="1105" y="281" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B97F37">SQuAD shape</text>
+  <rect x="884" y="300" width="292" height="34" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="1030" y="321" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B97F37">AfriQA &#183; AfriMMLU / IrokoBench</text>
+
+  <text x="884" y="362" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">WEAK AUTO METRIC</text>
+  <rect x="884" y="370" width="142" height="34" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+  <text x="955" y="391" text-anchor="middle" font-size="12.5" font-weight="600" fill="#8A3B25">Exact Match</text>
+  <rect x="1034" y="370" width="142" height="34" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="1105" y="391" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B97F37">Token F1</text>
+
+  <text x="884" y="432" font-size="12" font-weight="700" fill="#8A7D6E" letter-spacing="0.4">JUDGE BY HAND</text>
+  <text x="884" y="453" font-size="12.5" font-weight="500" fill="#2B2218">Correct-but-inflected answers</text>
+  <text x="884" y="470" font-size="12.5" font-weight="500" fill="#2B2218">metrics undercount</text>
+
+  <!-- ============ SHARED HUMAN EVALUATION NOTE ============ -->
+  <rect x="270" y="530" width="700" height="142" rx="12" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <rect x="290" y="548" width="660" height="40" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="620" y="574" text-anchor="middle" font-size="16" font-weight="700" fill="#1F5B3F">Native-speaker human evaluation</text>
+  <text x="620" y="616" text-anchor="middle" font-size="13.5" font-weight="600" fill="#2B2218">All three tasks learn from text and share a weak-metrics problem.</text>
+  <text x="620" y="638" text-anchor="middle" font-size="13.5" font-weight="500" fill="#2B2218">Automatic metrics are weak for African-language generation;</text>
+  <text x="620" y="659" text-anchor="middle" font-size="13.5" font-weight="700" fill="#1F5B3F">human evaluation by native speakers is the dependable measure.</text>
+
+  <!-- shared pipeline footnote -->
+  <text x="36" y="690" font-size="12" font-weight="500" font-style="italic" fill="#8A7D6E">Shared pipeline: source &amp; clean text &#183; train native-speaker annotators &#183; measure agreement &#183; release under a clear licence.</text>
+</svg>

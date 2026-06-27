@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">One gesture, different meanings: define the vocabulary with the community</title>
+  <desc id="desc">The same beckon gesture maps to different meanings across regions, so a gesture vocabulary must be defined with the community whose gestures they are. Includes data and evaluation notes.</desc>
+
+  <!-- outer card -->
+  <rect x="6" y="6" width="888" height="628" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- heading -->
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">The same gesture, different meanings</text>
+  <text x="30" y="72" font-size="14" fill="#8A7D6E">Define the gesture vocabulary <tspan font-weight="700" fill="#9C4F2B">with the community</tspan> whose gestures they are &#8212; not from a foreign taxonomy.</text>
+
+  <!-- ============ central gesture node ============ -->
+  <g>
+    <rect x="350" y="100" width="200" height="92" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="450" y="128" text-anchor="middle" font-size="13" fill="#8A7D6E">ONE GESTURE</text>
+    <text x="450" y="152" text-anchor="middle" font-size="20" font-weight="700" fill="#B97F37">&#8220;Beckon&#8221;</text>
+    <text x="450" y="176" text-anchor="middle" font-size="13" fill="#2B2218">hand drawn toward body</text>
+  </g>
+
+  <!-- connectors from center to three meaning boxes -->
+  <g stroke="#CBBBA4" stroke-width="2" fill="none">
+    <path d="M390 192 C 340 232, 230 232, 190 268"/>
+    <path d="M450 192 L 450 268"/>
+    <path d="M510 192 C 560 232, 670 232, 710 268"/>
+  </g>
+
+  <!-- ============ three regional meanings ============ -->
+  <!-- region 1 : forest green -->
+  <g>
+    <rect x="60" y="270" width="240" height="120" rx="11" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="80" y="298" font-size="13" font-weight="700" fill="#1F5B3F">Coastal Kenya</text>
+    <line x1="80" y1="308" x2="280" y2="308" stroke="#1F5B3F" stroke-width="1" opacity="0.35"/>
+    <text x="80" y="332" font-size="14" font-weight="700" fill="#2B2218">Means: come here</text>
+    <text x="80" y="356" font-size="13" fill="#2B2218">Calling someone to approach &#8212;</text>
+    <text x="80" y="374" font-size="13" fill="#2B2218">a friendly summons.</text>
+  </g>
+
+  <!-- region 2 : terracotta -->
+  <g>
+    <rect x="330" y="270" width="240" height="120" rx="11" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="350" y="298" font-size="13" font-weight="700" fill="#9C4F2B">Region B</text>
+    <line x1="350" y1="308" x2="550" y2="308" stroke="#C66A3D" stroke-width="1" opacity="0.35"/>
+    <text x="350" y="332" font-size="14" font-weight="700" fill="#2B2218">Means: dismissal</text>
+    <text x="350" y="356" font-size="13" fill="#2B2218">A wave-off, sending someone</text>
+    <text x="350" y="374" font-size="13" fill="#2B2218">away &#8212; nearly the opposite.</text>
+  </g>
+
+  <!-- region 3 : gold -->
+  <g>
+    <rect x="600" y="270" width="240" height="120" rx="11" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="620" y="298" font-size="13" font-weight="700" fill="#B97F37">Region C</text>
+    <line x1="620" y1="308" x2="820" y2="308" stroke="#B97F37" stroke-width="1" opacity="0.35"/>
+    <text x="620" y="332" font-size="14" font-weight="700" fill="#2B2218">Means: counting</text>
+    <text x="620" y="356" font-size="13" fill="#2B2218">A numeric tally gesture with</text>
+    <text x="620" y="374" font-size="13" fill="#2B2218">no global equivalent label.</text>
+  </g>
+
+  <!-- warning strip : deep rust -->
+  <g>
+    <rect x="60" y="408" width="780" height="44" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="80" y="424" font-size="13.5" fill="#8A3B25"><tspan font-weight="700">One global label would be wrong somewhere.</tspan> Record meaning + region with every gesture</text>
+    <text x="80" y="442" font-size="13.5" fill="#8A3B25">so a culturally specific sign is never flattened.</text>
+  </g>
+
+  <!-- ============ bottom: data note + eval ============ -->
+  <!-- data note -->
+  <g>
+    <rect x="60" y="470" width="510" height="146" rx="11" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="80" y="498" font-size="14" font-weight="700" fill="#1F5B3F">Data note</text>
+    <line x1="80" y1="508" x2="550" y2="508" stroke="#2E7D5B" stroke-width="1" opacity="0.35"/>
+    <text x="80" y="532" font-size="13" fill="#2B2218">&#8226; Video or wearable-sensor recordings of gestures.</text>
+    <text x="80" y="554" font-size="13" fill="#2B2218">&#8226; Temporal labelling: mark when each gesture <tspan font-weight="700">starts &amp; stops</tspan>.</text>
+    <text x="80" y="576" font-size="13" fill="#2B2218">&#8226; Each record stores gesture, <tspan font-weight="700">meaning</tspan> and <tspan font-weight="700">region</tspan>.</text>
+    <text x="80" y="598" font-size="13" fill="#2B2218">&#8226; Annotators recruited from the relevant community.</text>
+  </g>
+
+  <!-- eval -->
+  <g>
+    <rect x="588" y="470" width="252" height="146" rx="11" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="608" y="498" font-size="14" font-weight="700" fill="#B97F37">Evaluation</text>
+    <line x1="608" y1="508" x2="820" y2="508" stroke="#B97F37" stroke-width="1" opacity="0.35"/>
+    <text x="608" y="532" font-size="13" fill="#2B2218">&#8226; Overall <tspan font-weight="700">accuracy</tspan>.</text>
+    <text x="608" y="554" font-size="13" fill="#2B2218">&#8226; <tspan font-weight="700">Per-class F1</tspan> for imbalanced</text>
+    <text x="624" y="572" font-size="13" fill="#2B2218">gesture sets.</text>
+    <text x="608" y="594" font-size="13" fill="#2B2218">&#8226; Human check on culturally</text>
+    <text x="624" y="612" font-size="13" fill="#2B2218">loaded categories.</text>
+  </g>
+</svg>

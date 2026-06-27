@@ -1,0 +1,170 @@
+<svg viewBox="0 0 960 600" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="diagTitle">
+  <title id="diagTitle">Document layout analysis: a multi-column page with colour-coded structural regions, a 1 to 2 to 3 reading-order indicator, and a region legend.</title>
+
+  <!-- Outer self-contained card -->
+  <rect x="1" y="1" width="958" height="598" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="2"/>
+
+  <!-- Heading -->
+  <text x="24" y="44" font-size="22" font-weight="700" fill="#2B2218">Layout &amp; document understanding</text>
+  <text x="24" y="68" font-size="14" fill="#8A7D6E">Detecting structural regions on a scanned, multi-column African archival page</text>
+  <line x1="24" y1="84" x2="936" y2="84" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ===================== LEFT: the document page ===================== -->
+  <!-- Page panel container -->
+  <rect x="24" y="104" width="520" height="412" rx="12" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="44" y="130" font-size="13" font-weight="600" fill="#8A7D6E">SCANNED PAGE — boxed &amp; labelled regions</text>
+
+  <!-- Skewed/uneven scan effect: the page sheet is slightly rotated -->
+  <g transform="translate(44,144) rotate(-1.4)">
+    <!-- paper sheet with faded edge -->
+    <rect x="0" y="0" width="476" height="356" rx="4" fill="#FFFDF9" stroke="#E7DDCB" stroke-width="1.5"/>
+    <rect x="0" y="0" width="476" height="356" rx="4" fill="url(#scanFade)" opacity="0.5"/>
+
+    <!-- Title region (forest green) -->
+    <rect x="18" y="16" width="440" height="40" rx="6" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="28" y="41" font-size="13" font-weight="600" fill="#1F5B3F">Title</text>
+
+    <!-- Two columns -->
+    <!-- Column A outline (gold) -->
+    <rect x="18" y="68" width="212" height="270" rx="8" fill="none" stroke="#E0A458" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="26" y="84" font-size="13" font-weight="600" fill="#B97F37">Column</text>
+
+    <!-- Paragraph 1 in col A (medium green) -->
+    <rect x="28" y="92" width="192" height="92" rx="6" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="36" y="108" font-size="13" font-weight="600" fill="#2E7D5B">Paragraph</text>
+    <g stroke="#CBBBA4" stroke-width="3" stroke-linecap="round">
+      <line x1="36" y1="124" x2="210" y2="124"/>
+      <line x1="36" y1="138" x2="210" y2="138"/>
+      <line x1="36" y1="152" x2="200" y2="152"/>
+      <line x1="36" y1="166" x2="186" y2="166"/>
+    </g>
+
+    <!-- Figure in col A (deep rust) -->
+    <rect x="28" y="196" width="192" height="130" rx="6" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="36" y="212" font-size="13" font-weight="600" fill="#8A3B25">Figure</text>
+    <circle cx="84" cy="270" r="26" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <path d="M44 318 L96 256 L132 290 L168 248 L204 318 Z" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+
+    <!-- Column B outline (gold) -->
+    <rect x="246" y="68" width="212" height="270" rx="8" fill="none" stroke="#E0A458" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="254" y="84" font-size="13" font-weight="600" fill="#B97F37">Column</text>
+
+    <!-- Paragraph 2 in col B -->
+    <rect x="256" y="92" width="192" height="78" rx="6" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="264" y="108" font-size="13" font-weight="600" fill="#2E7D5B">Paragraph</text>
+    <g stroke="#CBBBA4" stroke-width="3" stroke-linecap="round">
+      <line x1="264" y1="124" x2="438" y2="124"/>
+      <line x1="264" y1="138" x2="438" y2="138"/>
+      <line x1="264" y1="152" x2="420" y2="152"/>
+    </g>
+
+    <!-- Table in col B (terracotta) -->
+    <rect x="256" y="182" width="192" height="144" rx="6" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="264" y="198" font-size="13" font-weight="600" fill="#C66A3D">Table</text>
+    <g stroke="#C66A3D" stroke-width="1.2" opacity="0.85">
+      <line x1="264" y1="208" x2="440" y2="208"/>
+      <line x1="264" y1="236" x2="440" y2="236"/>
+      <line x1="264" y1="264" x2="440" y2="264"/>
+      <line x1="264" y1="292" x2="440" y2="292"/>
+      <line x1="264" y1="318" x2="440" y2="318"/>
+      <line x1="308" y1="208" x2="308" y2="318"/>
+      <line x1="374" y1="208" x2="374" y2="318"/>
+    </g>
+
+    <!-- Marginalia (rust) - handwritten note in the margin -->
+    <rect x="402" y="40" width="62" height="20" rx="5" fill="#FBEDE3" stroke="#9C4F2B" stroke-width="1.5"/>
+    <text x="409" y="54" font-size="11" font-weight="600" fill="#9C4F2B" font-style="italic">note</text>
+  </g>
+
+  <!-- Reading-order indicator overlaid on page (1 -> 2 -> 3) -->
+  <g>
+    <!-- marker 1 over Paragraph in col A (placed over body lines, clear of the label) -->
+    <circle cx="92" cy="288" r="13" fill="#2B2218"/>
+    <text x="92" y="293" font-size="13" font-weight="700" fill="#FBF7F0" text-anchor="middle">1</text>
+    <!-- marker 2 over Paragraph in col B (placed over body lines, clear of the label) -->
+    <circle cx="322" cy="288" r="13" fill="#2B2218"/>
+    <text x="322" y="293" font-size="13" font-weight="700" fill="#FBF7F0" text-anchor="middle">2</text>
+    <!-- marker 3 over Table in col B -->
+    <circle cx="322" cy="388" r="13" fill="#2B2218"/>
+    <text x="322" y="393" font-size="13" font-weight="700" fill="#FBF7F0" text-anchor="middle">3</text>
+    <!-- arrows -->
+    <path d="M108 288 H300" fill="none" stroke="#2B2218" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <path d="M322 304 V370" fill="none" stroke="#2B2218" stroke-width="1.8" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Reading-order caption -->
+  <rect x="44" y="486" width="220" height="22" rx="6" fill="#F8ECD6" stroke="#E7DDCB" stroke-width="1"/>
+  <text x="56" y="501" font-size="13" fill="#2B2218">Reading order: 1 &#8594; 2 &#8594; 3</text>
+
+  <!-- ===================== RIGHT: legend + notes ===================== -->
+  <!-- Legend card -->
+  <rect x="568" y="104" width="368" height="232" rx="12" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+  <text x="588" y="132" font-size="15" font-weight="700" fill="#2B2218">Region types</text>
+
+  <!-- legend rows -->
+  <g>
+    <rect x="588" y="146" width="22" height="22" rx="6" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="620" y="162" font-size="13" font-weight="600" fill="#2B2218">Title</text>
+  </g>
+  <g>
+    <rect x="588" y="178" width="22" height="22" rx="6" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="620" y="194" font-size="13" font-weight="600" fill="#2B2218">Paragraph</text>
+  </g>
+  <g>
+    <rect x="588" y="210" width="22" height="22" rx="6" fill="none" stroke="#E0A458" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="620" y="226" font-size="13" font-weight="600" fill="#2B2218">Column</text>
+  </g>
+  <g>
+    <rect x="588" y="242" width="22" height="22" rx="6" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="620" y="258" font-size="13" font-weight="600" fill="#2B2218">Table</text>
+  </g>
+  <g>
+    <rect x="588" y="274" width="22" height="22" rx="6" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="620" y="290" font-size="13" font-weight="600" fill="#2B2218">Figure</text>
+  </g>
+  <g>
+    <rect x="588" y="306" width="22" height="22" rx="6" fill="#FBEDE3" stroke="#9C4F2B" stroke-width="1.5"/>
+    <text x="620" y="322" font-size="13" font-weight="600" fill="#2B2218">Marginalia</text>
+  </g>
+
+  <!-- right column second list: reading order + table cells -->
+  <g>
+    <circle cx="788" cy="157" r="11" fill="#2B2218"/>
+    <text x="788" y="162" font-size="12" font-weight="700" fill="#FBF7F0" text-anchor="middle">1</text>
+    <text x="808" y="162" font-size="13" fill="#2B2218">Reading-order marks</text>
+  </g>
+  <g>
+    <rect x="777" y="180" width="22" height="22" rx="4" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.2"/>
+    <line x1="788" y1="180" x2="788" y2="202" stroke="#C66A3D" stroke-width="1"/>
+    <line x1="777" y1="191" x2="799" y2="191" stroke="#C66A3D" stroke-width="1"/>
+    <text x="808" y="196" font-size="13" fill="#2B2218">Table-cell structure</text>
+  </g>
+  <text x="777" y="232" font-size="12" fill="#8A7D6E">Boxes use COCO format</text>
+  <text x="777" y="250" font-size="12" fill="#8A7D6E">— same as object</text>
+  <text x="777" y="268" font-size="12" fill="#8A7D6E">detection, with region</text>
+  <text x="777" y="286" font-size="12" fill="#8A7D6E">types as categories.</text>
+
+  <!-- African challenge card -->
+  <rect x="568" y="350" width="368" height="78" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+  <text x="588" y="374" font-size="14" font-weight="700" fill="#9C4F2B">African challenge</text>
+  <text x="588" y="394" font-size="13" fill="#2B2218">Old, unevenly scanned, multi-column pages that</text>
+  <text x="588" y="412" font-size="13" fill="#2B2218">mix scripts — plus faded ink and marginalia.</text>
+
+  <!-- Evaluation card -->
+  <rect x="568" y="438" width="368" height="78" rx="10" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+  <text x="588" y="462" font-size="14" font-weight="700" fill="#1F5B3F">Evaluation — like detection</text>
+  <text x="588" y="482" font-size="13" fill="#2B2218">mean Average Precision (mAP) for region match +</text>
+  <text x="588" y="500" font-size="13" fill="#2B2218">F1 over structural elements, with a human check.</text>
+
+  <!-- defs -->
+  <defs>
+    <linearGradient id="scanFade" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#FBEDE3" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#FFFDF9" stop-opacity="0"/>
+      <stop offset="1" stop-color="#F3E0D8" stop-opacity="0.5"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2B2218"/>
+    </marker>
+  </defs>
+</svg>

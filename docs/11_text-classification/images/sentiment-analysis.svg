@@ -1,0 +1,48 @@
+<svg viewBox="0 0 600 280" width="100%" xmlns="http://www.w3.org/2000/svg" font-family="Inter, 'Segoe UI', Roboto, system-ui, sans-serif">
+  <title>Types of Sentiment Analysis</title>
+
+  <!-- Outer card -->
+  <rect x="1" y="1" width="598" height="278" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Left terracotta box -->
+  <rect x="28" y="104" width="200" height="72" rx="12" fill="#C66A3D" stroke="#9C4F2B" stroke-width="1.5"/>
+  <text x="128" y="135" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Types of Sentiment</text>
+  <text x="128" y="160" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">Analysis</text>
+
+  <!-- Connectors -->
+  <g stroke="#CBBBA4" stroke-width="2" fill="none">
+    <!-- trunk from left box -->
+    <path d="M228 140 H266"/>
+    <!-- vertical spine -->
+    <path d="M266 56 V224"/>
+    <!-- branches to each box -->
+    <path d="M266 56 H338"/>
+    <path d="M266 112 H338"/>
+    <path d="M266 168 H338"/>
+    <path d="M266 224 H338"/>
+  </g>
+  <!-- arrowheads -->
+  <g fill="#CBBBA4">
+    <path d="M338 56 l-9 -5 v10 z"/>
+    <path d="M338 112 l-9 -5 v10 z"/>
+    <path d="M338 168 l-9 -5 v10 z"/>
+    <path d="M338 224 l-9 -5 v10 z"/>
+  </g>
+
+  <!-- Right boxes: alternate gold / green -->
+  <!-- Fine-grained Analysis (gold) -->
+  <rect x="340" y="36" width="232" height="40" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="456" y="61" text-anchor="middle" font-size="14" font-weight="600" fill="#B97F37">Fine-grained Analysis</text>
+
+  <!-- Aspect-based Analysis (green) -->
+  <rect x="340" y="92" width="232" height="40" rx="10" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="456" y="117" text-anchor="middle" font-size="14" font-weight="600" fill="#1F5B3F">Aspect-based Analysis</text>
+
+  <!-- Intent-based Analysis (gold) -->
+  <rect x="340" y="148" width="232" height="40" rx="10" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+  <text x="456" y="173" text-anchor="middle" font-size="14" font-weight="600" fill="#B97F37">Intent-based Analysis</text>
+
+  <!-- Emotion Detection (green) -->
+  <rect x="340" y="204" width="232" height="40" rx="10" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+  <text x="456" y="229" text-anchor="middle" font-size="14" font-weight="600" fill="#1F5B3F">Emotion Detection</text>
+</svg>

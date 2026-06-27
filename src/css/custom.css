@@ -8,31 +8,33 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  /* Opera-style indigo-purple. Used sparingly — buttons, links, eyebrow
-     tags, accent text. The rest of the page stays monochrome. */
-  --ifm-color-primary: #5B3DF5;        /* Opera indigo-purple */
-  --ifm-color-primary-dark: #4A28E8;   /* hover */
-  --ifm-color-primary-darker: #4422DB;
-  --ifm-color-primary-darkest: #3A1CB5;
-  --ifm-color-primary-light: #6F55F7;
-  --ifm-color-primary-lighter: #8670F9;
-  --ifm-color-primary-lightest: #C7BCFC;
+  /* Brand terracotta — the tree's trunk / the "Afri" accent. Used for
+     buttons, links, eyebrow tags, accent text. The rest stays monochrome. */
+  --ifm-color-primary: #C66A3D;        /* brand terracotta */
+  --ifm-color-primary-dark: #B25C33;   /* hover */
+  --ifm-color-primary-darker: #A55530;
+  --ifm-color-primary-darkest: #884628;
+  --ifm-color-primary-light: #D2855F;
+  --ifm-color-primary-lighter: #DB9A7B;
+  --ifm-color-primary-lightest: #F0D6C6;
   /* Same hue as primary — used in alpha tints for soft surfaces, callouts,
      and hover hints. Keeps RGB triplet centralised. */
-  --brand-rgb: 91, 61, 245;
-  /* Deep purple-navy — used for stat callout bands and CTA blocks
-     where the brand purple would be too saturated. */
-  --brand-navy: #1B1147;
-  /* Soft surface tint (peach-to-lavender family). Use for grouped card
+  --brand-rgb: 198, 106, 61;
+  /* The tree's foliage green — paired accent for icons and fine detail. */
+  --brand-green: #1F5B3F;
+  /* Deep forest band — used for stat callout bands and CTA blocks
+     where the brand terracotta would be too saturated. Ties to the leaves. */
+  --brand-navy: #173A2B;
+  /* Soft surface tint (warm sand family). Use for grouped card
      containers, not for full sections. */
-  --brand-surface-tint: #ECE8FE;
-  /* Meta-style neutral wash. Use for cards that should sit on a white
+  --brand-surface-tint: #F6E9DE;
+  /* Neutral warm wash. Use for cards that should sit on a white
      page without a border or shadow — barely-tinted off-white. */
-  --surface-wash: #F3F1FB;          /* lavender-grey card wash, syncs with brand purple */
-  --surface-wash-hover: #ECEAF6;
-  /* Opera-style text: near-black headings, dark cool-grey body, on white */
-  --ifm-heading-color: #16131F;
-  --ifm-font-color-base: #2C2935;
+  --surface-wash: #F7F2EC;          /* warm sand card wash, syncs with terracotta */
+  --surface-wash-hover: #F0E8DF;
+  /* Warm near-black headings, warm dark-grey body, on white */
+  --ifm-heading-color: #1C1712;
+  --ifm-font-color-base: #322C26;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
@@ -163,30 +165,31 @@ article p,
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  /* Opera purple, brightened for AA contrast on dark surfaces. Same
+  /* Terracotta, brightened for AA contrast on dark surfaces. Same
      hue as light mode so toggling stays coherent. */
-  --ifm-color-primary: #9B87F8;
-  --ifm-color-primary-dark: #8670F9;
-  --ifm-color-primary-darker: #7558F7;
-  --ifm-color-primary-darkest: #5B3DF5;
-  --ifm-color-primary-light: #B0A1FA;
-  --ifm-color-primary-lighter: #C7BCFC;
-  --ifm-color-primary-lightest: #E8E2FE;
+  --ifm-color-primary: #E0935F;
+  --ifm-color-primary-dark: #D9824A;
+  --ifm-color-primary-darker: #D4773D;
+  --ifm-color-primary-darkest: #BD6330;
+  --ifm-color-primary-light: #E7A479;
+  --ifm-color-primary-lighter: #EEB994;
+  --ifm-color-primary-lightest: #F6DCC8;
   /* Brighter brand RGB for low-alpha tints on dark bg. */
-  --brand-rgb: 155, 135, 248;
+  --brand-rgb: 224, 147, 95;
+  --brand-green: #7CBB98;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  /* Dark equivalent of the Meta wash — a touch lifted from the page bg. */
-  --surface-wash: #1f2128;
-  --surface-wash-hover: #262932;
-  /* Near-white cool headings + soft grey body on dark, synced with purple */
-  --ifm-heading-color: #F3F1FB;
-  --ifm-font-color-base: #D7D4E2;
+  /* Dark equivalent of the warm wash — a touch lifted from the page bg. */
+  --surface-wash: #241f19;
+  --surface-wash-hover: #2d271f;
+  /* Warm near-white headings + soft warm grey body on dark */
+  --ifm-heading-color: #F5EEE6;
+  --ifm-font-color-base: #DED6CB;
 }
 
-/* Hide sidebar toggle button and home icon */
+/* Hide breadcrumbs + home icon. NOTE: the mobile menu toggle (.navbar__toggle)
+   must stay visible — it's the only way to open the nav + sidebar drawer on
+   phones. Only the in-content desktop sidebar toggle is hidden (rule below). */
 .navbar-sidebar__brand,
-.navbar__toggle,
-button[aria-label="Toggle navigation bar"],
 .theme-doc-breadcrumbs,
 .breadcrumbs,
 .breadcrumbs__item:first-child,
@@ -801,6 +804,116 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 }
 
 
+/* ==========================================================================
+   Sleek footer — deep-forest band (ties to the tree's foliage), warm links,
+   terracotta hover. Matches the navbar hairline + brand palette.
+   ========================================================================== */
+.footer--dark {
+  --ifm-footer-background-color: #14301f;   /* deep forest green */
+  --ifm-footer-color: #d8e2da;
+  --ifm-footer-link-color: #c7d4cb;
+  --ifm-footer-title-color: #ffffff;
+  --ifm-footer-link-hover-color: var(--ifm-color-primary-light);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 3rem;
+  padding-bottom: 2.4rem;
+}
+
+.footer__title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  opacity: 0.66;
+  margin-bottom: 0.9rem;
+}
+
+.footer__link-item {
+  font-size: 0.92rem;
+  transition: color 0.15s ease;
+}
+.footer__link-item:hover {
+  color: var(--ifm-color-primary-light);
+  text-decoration: none;
+}
+
+/* Brand mark + copyright sit on a hairline-separated bottom row. */
+.footer__bottom {
+  margin-top: 1.6rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+.footer__logo {
+  width: 42px;
+  height: auto;
+  margin: 0 auto 0.6rem;
+  opacity: 0.95;
+}
+.footer__copyright {
+  font-size: 0.84rem;
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   Per-page discussion (Giscus / GitHub Discussions) — framed like a section,
+   not a bare embed. Hairline top, clear heading, quiet subtitle.
+   ========================================================================== */
+/* Clean, white discussion section — no wash, no glow. A top hairline separates
+   it from the article; the comment box carries a clear border line. */
+.giscus-wrap {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Heading row: subtle neutral icon + title + invitation. */
+.giscus-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 1.3rem;
+}
+.giscus-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ifm-color-emphasis-700);
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+.giscus-head-text { min-width: 0; }
+.giscus-heading {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0.1rem 0 0.25rem;
+  line-height: 1.2;
+}
+.giscus-sub {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 0;
+  max-width: none;
+}
+
+/* White comment surface with a clear, visible border line. */
+.giscus-embed {
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+}
+.giscus-loading {
+  color: var(--ifm-color-emphasis-500);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+}
+
 /* Per-page GitHub contributors (rendered by src/theme/DocItem/Footer) */
 .doc-contributors {
   display: flex;
@@ -842,4 +955,181 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 }
 .doc-contributors__avatar:hover img {
   box-shadow: 0 0 0 2px var(--ifm-color-primary);
+}
+
+/* ---------------------------------------------------------------------------
+   Admonitions / callouts — clean card look (no heavy coloured left stripe)
+   --------------------------------------------------------------------------- */
+.theme-admonition {
+  /* `border` shorthand overrides Infima's thick `border-left` stripe */
+  border: 1px solid color-mix(in srgb, var(--ifm-alert-border-color, currentColor) 32%, transparent);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(18, 58, 41, 0.05);
+  padding: 1rem 1.15rem;
+}
+.theme-admonition .admonition-heading {
+  margin-bottom: 0.45rem;
+}
+.theme-admonition .admonition-heading h5 {
+  text-transform: none;        /* calmer than the default ALL-CAPS title */
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
+.theme-admonition .admonition-icon svg {
+  vertical-align: -0.15em;
+}
+
+/* ---------------------------------------------------------------------------
+   Sleek navbar — short hairline bar, soft blur, items grouped by usefulness
+   --------------------------------------------------------------------------- */
+:root { --ifm-navbar-height: 3.4rem; }
+
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: none;
+  background: color-mix(in srgb, var(--ifm-background-color) 86%, transparent);
+  backdrop-filter: saturate(150%) blur(10px);
+  -webkit-backdrop-filter: saturate(150%) blur(10px);
+}
+/* On mobile the navbar contains the slide-out drawer (.navbar-sidebar), which
+   is position:fixed. backdrop-filter on the navbar would make it the containing
+   block for that drawer, so the drawer would size to the navbar instead of the
+   viewport and the page content would cover it. Drop the blur on mobile and use
+   an opaque bar so the drawer overlays the page correctly. */
+@media (max-width: 996px) {
+  .navbar {
+    background: var(--ifm-background-color);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+/* Tighter padding inside each item; grouping comes from the dividers below. */
+.navbar__link {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ifm-color-emphasis-800);
+  border-radius: 7px;
+  padding: 0.3rem 0.55rem;
+  transition: color .15s, background .15s;
+}
+.navbar__items--left .navbar__item { display: inline-flex; align-items: center; }
+
+/* Breathing room between the left nav items (Playbook · Annotate · Finder ·
+   AfriFellowship · About) — the brand keeps its sidebar-aligned position. */
+.navbar__items:not(.navbar__items--right) > *:not(.navbar__brand) {
+  margin-right: 0.55rem;
+}
+
+/* Align the nav with the doc layout: the brand sits in a fixed column the
+   width of the sidebar, so the main buttons begin exactly where the article
+   content (and the sidebar's right edge) starts. */
+@media (min-width: 997px) {
+  .navbar__items:not(.navbar__items--right) > .navbar__brand {
+    width: calc(var(--doc-sidebar-width, 300px) - var(--ifm-navbar-padding-horizontal, 1rem));
+    margin-right: 0;
+    flex-shrink: 0;
+  }
+  /* The brand fills a wide column, so don't paint the hover wash across all
+     of it — keep the brand quietly clickable. */
+  .navbar__items:not(.navbar__items--right) > .navbar__brand:hover {
+    background: transparent;
+    transform: none;
+  }
+}
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+  background: rgba(var(--brand-rgb), 0.07);
+  text-decoration: none;
+}
+.navbar__logo { height: 1.55rem; }
+/* Brand lockup: keep the tree + wordmark together and well clear of the
+   first nav item so "Waraka" never tucks under "AfriPlaybook". */
+.navbar__brand { margin-right: 0.9rem; padding: 0.2rem 0.4rem; }
+.navbar__title {
+  font-size: 1.02rem;
+  white-space: nowrap;
+  margin-left: 0.1rem;
+}
+/* The brand wordmark carries the terracotta; nav links stay neutral. */
+.navbar__title { color: var(--ifm-color-primary); }
+[data-theme='dark'] .navbar__title { color: var(--ifm-color-primary); }
+
+/* GitHub star: quieter, pill-clean */
+.navbar-gh-stars {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.85rem; font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 999px;
+  color: var(--ifm-color-emphasis-800);
+  transition: border-color .15s, background .15s;
+}
+.navbar-gh-stars:hover { border-color: var(--ifm-color-emphasis-500); background: var(--ifm-color-emphasis-100); text-decoration: none; }
+.navbar-gh-count { color: var(--ifm-color-emphasis-600); font-weight: 700; }
+
+/* Locale dropdown: drop the translate glyph, keep just the label */
+.navbar__item.dropdown--right > .navbar__link svg,
+.navbar__item.dropdown--right > .navbar__link img { display: none; }
+
+/* Replace Algolia's default navbar search box with our icon-only floating
+   search (custom-SearchNavbarItem). Hide the auto-injected DocSearch button. */
+.navbar .DocSearch-Button,
+.navbar__search-container,
+.navbar__search { display: none !important; }
+
+/* Right cluster — even spacing + vertical centering for search · star · language */
+.navbar__items--right {
+  gap: 0.45rem;
+  align-items: center;
+}
+.navbar__items--right > * {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Language switcher: a quiet control, not as loud as the primary nav links */
+.navbar__items--right .dropdown > .navbar__link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-700);
+  padding: 0.3rem 0.55rem;
+  border-radius: 7px;
+}
+.navbar__items--right .dropdown > .navbar__link:hover {
+  color: var(--ifm-color-primary);
+  background: rgba(var(--brand-rgb), 0.07);
+}
+
+/* External links in page content: the conventional underline + outward arrow,
+   so a reader can tell a link leaves the site (citations, formula references,
+   etc.). New-tab behaviour is added in src/clientModules/externalLinks.js. */
+.markdown a[href^="http://"]:not(:has(img)),
+.markdown a[href^="https://"]:not(:has(img)) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.markdown a[href^="http://"]:not(:has(img))::after,
+.markdown a[href^="https://"]:not(:has(img))::after {
+  content: "\2197"; /* ↗ outward arrow */
+  display: inline-block;
+  margin-left: 0.12em;
+  font-size: 0.8em;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+/* Tool screenshots & recordings embedded in the docs read as framed figures:
+   rounded corners, a hairline border and a soft shadow lift them off the page
+   so it is clear they are captures of the interface. SVG illustrations already
+   carry their own card, so they are left untouched. */
+.markdown img[src$=".png"],
+.markdown img[src$=".jpg"],
+.markdown img[src$=".gif"],
+.markdown video {
+  border-radius: 10px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 8px 28px rgba(31, 24, 16, 0.12);
+  margin-block: 0.6rem;
 }

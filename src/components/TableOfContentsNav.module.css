@@ -106,7 +106,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: white;
-  background: linear-gradient(135deg, #5b3df5 0%, #4626d6 100%);
+  background: linear-gradient(135deg, #c66a3d 0%, #a55530 100%);
   border: none;
   border-radius: 6px;
   text-decoration: none;
@@ -123,7 +123,7 @@
 }
 
 .navButton:hover {
-  background: linear-gradient(135deg, #4626d6 0%, #3a1cb5 100%);
+  background: linear-gradient(135deg, #a55530 0%, #884628 100%);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }

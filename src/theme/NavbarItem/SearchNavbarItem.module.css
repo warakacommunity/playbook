@@ -1,0 +1,87 @@
+/* Icon-only search trigger that expands a floating, shadowed input in place. */
+.wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  color: var(--ifm-color-emphasis-700);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  touch-action: manipulation;
+}
+
+.iconBtn:hover {
+  background: rgba(var(--brand-rgb), 0.08);
+  color: var(--ifm-color-primary);
+}
+
+.iconBtn:active {
+  transform: scale(0.94);
+}
+
+/* The floating panel — anchored to the icon, soft shadow, rounded. */
+.pop {
+  position: absolute;
+  top: calc(100% + 16px);
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  /* Explicit opaque fill — the popover is portaled to <body>, where
+     var(--ifm-background-color) doesn't resolve and falls through to
+     transparent. */
+  background: #ffffff;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.28);
+  padding: 0.35rem 0.5rem;
+  z-index: 4000;
+  animation: popIn 0.12s ease;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+[data-theme='dark'] .pop {
+  background: #1c1d21;
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.6);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+.popIcon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ifm-color-emphasis-500);
+  padding-left: 0.2rem;
+}
+
+.input {
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--ifm-font-color-base);
+  width: 240px;
+  padding: 0.35rem 0.3rem;
+}
+
+.input::placeholder {
+  color: var(--ifm-color-emphasis-500);
+}
+
+@media (max-width: 600px) {
+  .input { width: 150px; }
+}

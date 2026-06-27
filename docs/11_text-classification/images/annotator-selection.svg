@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 832 422" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif">
+  <title>Annotator selection: who to select and key considerations</title>
+
+  <!-- Outer self-contained card -->
+  <rect x="1" y="1" width="830" height="420" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ===================== WHO TO SELECT ===================== -->
+  <text x="24" y="34" font-size="12" font-weight="700" letter-spacing="1" fill="#8A7D6E">WHO TO SELECT</text>
+
+  <!-- Card 1: Fluent / native speaker (forest) -->
+  <g>
+    <rect x="24" y="44" width="184" height="118" rx="11" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="40" y="74" font-size="20" fill="#1F5B3F">&#xC1;</text>
+    <text x="40" y="98" font-size="14" font-weight="700" fill="#1F5B3F">Fluent / native speaker</text>
+    <text x="40" y="118" font-size="11.5" fill="#8A7D6E">Strong command of the</text>
+    <text x="40" y="134" font-size="11.5" fill="#8A7D6E">target language is non-</text>
+    <text x="40" y="150" font-size="11.5" fill="#8A7D6E">negotiable</text>
+  </g>
+
+  <!-- Card 2: Culturally aware (gold) -->
+  <g>
+    <rect x="220" y="44" width="184" height="118" rx="11" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="244" cy="66" r="9" fill="none" stroke="#B97F37" stroke-width="1.5"/>
+    <path d="M235 66 H253 M244 57 V75 M237 60 q7 6 14 0 M237 72 q7 -6 14 0" fill="none" stroke="#B97F37" stroke-width="1.2"/>
+    <text x="236" y="98" font-size="14" font-weight="700" fill="#B97F37">Culturally aware</text>
+    <text x="236" y="118" font-size="11.5" fill="#8A7D6E">Understands slang, sarcasm,</text>
+    <text x="236" y="134" font-size="11.5" fill="#8A7D6E">and local context</text>
+  </g>
+
+  <!-- Card 3: Domain-aware (terracotta) -->
+  <g>
+    <rect x="416" y="44" width="184" height="118" rx="11" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <path d="M432 73 l14 -14 a4 4 0 0 1 6 6 l-14 14 -7 1 z" fill="none" stroke="#C66A3D" stroke-width="1.5" stroke-linejoin="round"/>
+    <text x="432" y="98" font-size="14" font-weight="700" fill="#C66A3D">Domain-aware</text>
+    <text x="432" y="118" font-size="11.5" fill="#8A7D6E">Subject expertise required</text>
+    <text x="432" y="134" font-size="11.5" fill="#8A7D6E">for specialized tasks</text>
+  </g>
+
+  <!-- Card 4: Detail-oriented (deep rust) -->
+  <g>
+    <rect x="612" y="44" width="196" height="118" rx="11" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <path d="M628 66 q8 -9 16 0 q-8 9 -16 0 z" fill="none" stroke="#8A3B25" stroke-width="1.5"/>
+    <circle cx="636" cy="66" r="2.6" fill="#8A3B25"/>
+    <text x="628" y="98" font-size="14" font-weight="700" fill="#8A3B25">Detail-oriented</text>
+    <text x="628" y="118" font-size="11.5" fill="#8A7D6E">Consistent and meticulous</text>
+    <text x="628" y="134" font-size="11.5" fill="#8A7D6E">across annotation sessions</text>
+  </g>
+
+  <!-- divider -->
+  <line x1="24" y1="186" x2="808" y2="186" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- ===================== KEY CONSIDERATIONS ===================== -->
+  <text x="24" y="212" font-size="12" font-weight="700" letter-spacing="1" fill="#8A7D6E">KEY CONSIDERATIONS</text>
+
+  <!-- Row 1 -->
+  <!-- Screening test (terracotta) -->
+  <g>
+    <rect x="24" y="224" width="250" height="86" rx="11" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <rect x="40" y="240" width="13" height="15" rx="2" fill="none" stroke="#C66A3D" stroke-width="1.5"/>
+    <path d="M43 248 l2 2 4 -4" fill="none" stroke="#C66A3D" stroke-width="1.4" stroke-linecap="round"/>
+    <text x="62" y="252" font-size="13" font-weight="700" fill="#C66A3D">Screening test</text>
+    <text x="40" y="272" font-size="11" fill="#8A7D6E">Small labeled sample; retain only</text>
+    <text x="40" y="288" font-size="11" fill="#8A7D6E">high-performing candidates</text>
+  </g>
+
+  <!-- Training (forest) -->
+  <g>
+    <rect x="291" y="224" width="250" height="86" rx="11" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <path d="M307 246 l9 -4 9 4 -9 4 z" fill="none" stroke="#1F5B3F" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M312 249 v5 q4 2 8 0 v-5" fill="none" stroke="#1F5B3F" stroke-width="1.4"/>
+    <text x="333" y="252" font-size="13" font-weight="700" fill="#1F5B3F">Training</text>
+    <text x="307" y="272" font-size="11" fill="#8A7D6E">Clear guidelines with worked</text>
+    <text x="307" y="288" font-size="11" fill="#8A7D6E">examples covering tricky edge</text>
+    <text x="307" y="304" font-size="11" fill="#8A7D6E">cases</text>
+  </g>
+
+  <!-- Multiple annotators (gold) -->
+  <g>
+    <rect x="558" y="224" width="250" height="86" rx="11" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="576" cy="244" r="3.2" fill="none" stroke="#B97F37" stroke-width="1.4"/>
+    <path d="M571 254 q5 -6 10 0" fill="none" stroke="#B97F37" stroke-width="1.4"/>
+    <circle cx="586" cy="246" r="2.6" fill="none" stroke="#E0A458" stroke-width="1.4"/>
+    <path d="M582 254 q4 -5 8 0" fill="none" stroke="#E0A458" stroke-width="1.4"/>
+    <text x="600" y="252" font-size="13" font-weight="700" fill="#B97F37">Multiple annotators</text>
+    <text x="574" y="272" font-size="11" fill="#8A7D6E">At least 2&#x2013;3 annotators per item</text>
+    <text x="574" y="288" font-size="11" fill="#8A7D6E">for reliable label coverage</text>
+  </g>
+
+  <!-- Row 2 -->
+  <!-- Agreement check (muted/connector tone -> use gold-ish? keep forest? use terracotta-dark? Use deep rust soft) -->
+  <g>
+    <rect x="24" y="322" width="250" height="86" rx="11" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <rect x="40" y="340" width="4" height="10" fill="#8A3B25"/>
+    <rect x="47" y="336" width="4" height="14" fill="#8A3B25"/>
+    <rect x="54" y="343" width="4" height="7" fill="#8A3B25"/>
+    <text x="64" y="350" font-size="13" font-weight="700" fill="#8A3B25">Agreement check</text>
+    <text x="40" y="370" font-size="11" fill="#8A7D6E">Monitor consistency using inter-</text>
+    <text x="40" y="386" font-size="11" fill="#8A7D6E">rater metrics (e.g., Cohen's Kappa)</text>
+  </g>
+
+  <!-- Quality control (gold) -->
+  <g>
+    <rect x="291" y="322" width="250" height="86" rx="11" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <path d="M315 336 l8 3 v6 q0 6 -8 9 q-8 -3 -8 -9 v-6 z" fill="none" stroke="#B97F37" stroke-width="1.4" stroke-linejoin="round"/>
+    <path d="M311 346 l3 3 5 -5" fill="none" stroke="#B97F37" stroke-width="1.3" stroke-linecap="round"/>
+    <text x="333" y="350" font-size="13" font-weight="700" fill="#B97F37">Quality control</text>
+    <text x="307" y="370" font-size="11" fill="#8A7D6E">Embed gold-standard items; track</text>
+    <text x="307" y="386" font-size="11" fill="#8A7D6E">performance over time</text>
+  </g>
+
+  <!-- Bias & ethics (forest) -->
+  <g>
+    <rect x="558" y="322" width="250" height="86" rx="11" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <path d="M582 336 v15 M575 340 h14 M578 340 l-3 7 h6 z M586 340 l3 7 h-6 z M578 353 h8" fill="none" stroke="#1F5B3F" stroke-width="1.3" stroke-linejoin="round"/>
+    <text x="600" y="350" font-size="13" font-weight="700" fill="#1F5B3F">Bias &amp; ethics</text>
+    <text x="574" y="370" font-size="11" fill="#8A7D6E">Minimize subjective bias; ensure</text>
+    <text x="574" y="386" font-size="11" fill="#8A7D6E">fair and equitable treatment</text>
+  </g>
+</svg>

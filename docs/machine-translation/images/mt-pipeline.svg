@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 360" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif">
+  <title>Machine-translation data lifecycle pipeline for African languages</title>
+
+  <!-- Outer self-contained card -->
+  <rect x="1" y="1" width="1178" height="358" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <!-- Heading -->
+  <text x="24" y="42" font-size="17" font-weight="700" fill="#2B2218">Machine-translation data lifecycle</text>
+  <text x="24" y="62" font-size="13" fill="#8A7D6E">End-to-end pipeline the chapter follows, from parallel text to a responsibly released corpus</text>
+
+  <!-- ============ CONNECTORS (drawn first, behind steps) ============ -->
+  <!-- arrowhead marker -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+  <!-- five connectors between six steps, all on the step centre-line (y=180) -->
+  <line x1="200" y1="180" x2="222" y2="180" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="386" y1="180" x2="408" y2="180" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="572" y1="180" x2="594" y2="180" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="758" y1="180" x2="780" y2="180" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="944" y1="180" x2="966" y2="180" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ SIX PIPELINE STEPS (terracotta -> green -> gold -> rust -> terracotta -> green) ============ -->
+
+  <!-- Step 01 · Collect (Terracotta) -->
+  <g transform="translate(24,120)">
+    <rect x="0" y="0" width="176" height="120" rx="11" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="14" y="24" font-size="11.5" font-weight="700" fill="#9C4F2B">01 &#183; Collect</text>
+    <text x="14" y="46" font-size="14.5" font-weight="700" fill="#2B2218">Collect parallel data</text>
+    <text x="14" y="68" font-size="13" fill="#2B2218">Source or create text in</text>
+    <text x="14" y="85" font-size="13" fill="#2B2218">both languages; pick</text>
+    <text x="14" y="102" font-size="13" fill="#2B2218">sentence vs document</text>
+  </g>
+
+  <!-- Step 02 · Clean (Forest green) -->
+  <g transform="translate(210,120)">
+    <rect x="0" y="0" width="176" height="120" rx="11" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="14" y="24" font-size="11.5" font-weight="700" fill="#1F5B3F">02 &#183; Clean</text>
+    <text x="14" y="46" font-size="14.5" font-weight="700" fill="#2B2218">Clean &amp; normalise</text>
+    <text x="14" y="68" font-size="13" fill="#2B2218">De-duplicate, LangID</text>
+    <text x="14" y="85" font-size="13" fill="#2B2218">with AfroLID/GlotLID,</text>
+    <text x="14" y="102" font-size="13" fill="#2B2218">keep diacritics &amp; script</text>
+  </g>
+
+  <!-- Step 03 · Annotate (Gold) -->
+  <g transform="translate(396,120)">
+    <rect x="0" y="0" width="176" height="120" rx="11" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="14" y="24" font-size="11.5" font-weight="700" fill="#B97F37">03 &#183; Annotate</text>
+    <text x="14" y="46" font-size="14.5" font-weight="700" fill="#2B2218">Annotate translations</text>
+    <text x="14" y="68" font-size="13" fill="#2B2218">Fluent translators; rules</text>
+    <text x="14" y="85" font-size="13" fill="#2B2218">for coin / borrow / calque</text>
+    <text x="14" y="102" font-size="13" fill="#2B2218">&amp; domain-aware splits</text>
+  </g>
+
+  <!-- Step 04 · Assure (Deep rust) -->
+  <g transform="translate(582,120)">
+    <rect x="0" y="0" width="176" height="120" rx="11" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="14" y="24" font-size="11.5" font-weight="700" fill="#8A3B25">04 &#183; Assure</text>
+    <text x="14" y="46" font-size="14.5" font-weight="700" fill="#2B2218">Assure quality</text>
+    <text x="14" y="68" font-size="13" fill="#2B2218">Rate adequacy &amp;</text>
+    <text x="14" y="85" font-size="13" fill="#2B2218">fluency; measure</text>
+    <text x="14" y="102" font-size="13" fill="#2B2218">inter-annotator agreement</text>
+  </g>
+
+  <!-- Step 05 · Evaluate (Terracotta) -->
+  <g transform="translate(768,120)">
+    <rect x="0" y="0" width="176" height="120" rx="11" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="14" y="24" font-size="11.5" font-weight="700" fill="#9C4F2B">05 &#183; Evaluate</text>
+    <text x="14" y="46" font-size="14.5" font-weight="700" fill="#2B2218">Evaluate</text>
+    <text x="14" y="68" font-size="13" fill="#2B2218">Report chrF over BLEU;</text>
+    <text x="14" y="85" font-size="13" fill="#2B2218">add SSA-COMET; human</text>
+    <text x="14" y="102" font-size="13" fill="#2B2218">eval stays ground truth</text>
+  </g>
+
+  <!-- Step 06 · Release (Forest mid) -->
+  <g transform="translate(954,120)">
+    <rect x="0" y="0" width="202" height="120" rx="11" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="14" y="24" font-size="11.5" font-weight="700" fill="#2E7D5B">06 &#183; Release</text>
+    <text x="14" y="46" font-size="14.5" font-weight="700" fill="#2B2218">License &amp; release</text>
+    <text x="14" y="68" font-size="13" fill="#2B2218">CC / NOODL / Esethu;</text>
+    <text x="14" y="85" font-size="13" fill="#2B2218">share on Hugging Face,</text>
+    <text x="14" y="102" font-size="13" fill="#2B2218">Zenodo, Lanfrica; consent</text>
+  </g>
+
+  <!-- ============ CAPTION: parallel sentence pairs across two languages ============ -->
+  <g transform="translate(24,272)">
+    <rect x="0" y="0" width="1132" height="68" rx="11" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <!-- src chip -->
+    <rect x="16" y="16" width="300" height="36" rx="8" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="30" y="38" font-size="13" fill="#9C4F2B"><tspan font-weight="700">eng_Latn</tspan>  The clinic opens at eight&#8230;</text>
+    <!-- aligned arrow -->
+    <line x1="324" y1="34" x2="354" y2="34" stroke="#CBBBA4" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <!-- tgt chip -->
+    <rect x="362" y="16" width="300" height="36" rx="8" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="376" y="38" font-size="13" fill="#1F5B3F"><tspan font-weight="700">hau_Latn</tspan>  Asibitin yana budewa&#8230;</text>
+    <!-- caption text -->
+    <text x="690" y="26" font-size="13" font-weight="700" fill="#2B2218">Parallel sentence pairs across two languages</text>
+    <text x="690" y="44" font-size="13" fill="#8A7D6E"><tspan x="690" dy="0">Language tagged with script (e.g. hau_Latn, amh_Ethi);</tspan><tspan x="690" dy="16">each pair carries domain, source &amp; licence.</tspan></text>
+  </g>
+
+</svg>
