@@ -365,12 +365,6 @@ const config = {
         hideOnScroll: false,
         items: [
           {
-            to: "/",
-            label: "Waraka Playbook",
-            position: "left",
-            activeBaseRegex: "^/$",
-          },
-          {
             to: "/introduction",
             label: "Read the handbook",
             position: "left",
