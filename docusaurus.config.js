@@ -14,7 +14,7 @@ dotenv.config({ path: ".env.local" });
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "AfriPlaybook",
+  title: "Waraka Playbook",
   customFields: {
     // GitHub OAuth App for the "Connect GitHub" popup login in the Contribute dialog.
     GITHUB_OAUTH_CLIENT_ID: process.env.GITHUB_OAUTH_CLIENT_ID || "",
@@ -354,11 +354,11 @@ const config = {
         },
       },
       navbar: {
-        title: "AfriPlaybook",
+        title: "Waraka Playbook",
         logo: {
-          alt: "AfriPlaybook Home",
-          src: "img/community-tree.svg",
-          srcDark: "img/community-tree-dark.svg",
+          alt: "Waraka Playbook",
+          src: "img/playbook-mark.svg",
+          srcDark: "img/playbook-mark-dark.svg",
           href: "/",
           target: "_self",
         },
@@ -366,14 +366,40 @@ const config = {
         items: [
           {
             to: "/",
-            label: "Playbook",
+            label: "Waraka Playbook",
             position: "left",
-            activeBasePath: "/",
+            activeBaseRegex: "^/$",
           },
           {
-            href: "https://community.waraka.ai",
-            label: "← Community",
+            to: "/introduction",
+            label: "Read the handbook",
             position: "left",
+          },
+          {
+            // Ecosystem links grouped so the bar stays uncluttered.
+            // Interim targets point at the community hub until each tool gets
+            // its own live subdomain — this avoids dead links.
+            type: "dropdown",
+            label: "Tools",
+            position: "left",
+            items: [
+              {
+                href: "https://community.waraka.ai",
+                label: "Community",
+              },
+              {
+                href: "https://annotate.waraka.ai",
+                label: "Annotate",
+              },
+              {
+                href: "https://finder.waraka.ai",
+                label: "Finder",
+              },
+              {
+                href: "https://community.waraka.ai/fellowship",
+                label: "Fellowship",
+              },
+            ],
           },
           {
             type: "custom-SearchNavbarItem",
@@ -399,8 +425,8 @@ const config = {
       footer: {
         style: "dark",
         logo: {
-          alt: "Waraka Community",
-          src: "img/community-tree-dark.svg",
+          alt: "Waraka Playbook",
+          src: "img/playbook-mark-dark.svg",
           href: "/",
           width: 42,
         },
@@ -409,7 +435,7 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "AfriPlaybook",
+                label: "Waraka Playbook",
                 to: "/",
               },
               {
