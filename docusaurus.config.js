@@ -14,7 +14,7 @@ dotenv.config({ path: ".env.local" });
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Waraka Community AfriPlaybook",
+  title: "AfriPlaybook",
   customFields: {
     // GitHub OAuth App for the "Connect GitHub" popup login in the Contribute dialog.
     GITHUB_OAUTH_CLIENT_ID: process.env.GITHUB_OAUTH_CLIENT_ID || "",
@@ -22,7 +22,7 @@ const config = {
     // Dedicated translation proxy (proposal/translate-worker.js deployed to Cloudflare).
     TRANSLATION_PROXY_URL: process.env.TRANSLATION_PROXY_URL || "",
   },
-  tagline: "Democratizing machine translation for African languages",
+  tagline: "A Practical Guide for Building NLP Systems for African Languages",
   favicon: "img/favicon.ico",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -31,9 +31,8 @@ const config = {
   // },
 
   // Set the production url of your site here.
-  // This is the community hub (landing page + menubar) on the waraka.ai zone.
-  // The Playbook section will later move to its own playbook.waraka.ai deploy.
-  url: "https://community.waraka.ai",
+  // Standalone Playbook deploy: docs are served at the domain root.
+  url: "https://playbook.waraka.ai",
   // Served at the domain root, so baseUrl is '/'.
   baseUrl: "/",
 
@@ -90,7 +89,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: "/AfriPlaybook",
+          routeBasePath: "/",
           sidebarPath: "./sidebars.js",
           breadcrumbs: false,
           showLastUpdateTime: true,
@@ -100,20 +99,9 @@ const config = {
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
         },
-        blog: {
-          showReadingTime: true,
-          blogTitle: "AfriPlaybook Blog",
-          blogDescription: "Updates from the Waraka Community",
-          postsPerPage: 10,
-          blogSidebarTitle: "Recent posts",
-          blogSidebarCount: "ALL",
-          feedOptions: {
-            type: ["rss", "atom"],
-            title: "AfriPlaybook Blog",
-            copyright: `Copyright © ${new Date().getFullYear()} Masakhane.`,
-          },
-          // editUrl removed — "Suggest Edit" modal handles community edits instead.
-        },
+        // Blog removed — it was community content and now lives on
+        // community.waraka.ai.
+        blog: false,
 
         theme: {
           customCss: "./src/css/custom.css",
@@ -168,109 +156,6 @@ const config = {
         },
         async contentLoaded({ content, actions }) {
           actions.setGlobalData({ contributors: content || [] });
-        },
-      };
-    },
-    /* Tiny inline plugin: reads blog/*\/index.md at build time and exposes
-       the latest 6 posts as globalData. The homepage <BlogTeaserSection>
-       consumes this via usePluginData('recent-blog-posts').
-
-       Why fs-based instead of cross-plugin data: in Docusaurus 3, allContent
-       is undefined inside per-plugin contentLoaded (timing/scope), so we
-       read source files directly. Resolves authors from blog/authors.yml. */
-    function recentBlogPostsPlugin(context) {
-      return {
-        name: "recent-blog-posts",
-        async loadContent() {
-          const fs = require("fs");
-          const path = require("path");
-          const yaml = require("js-yaml");
-
-          const blogDir = path.join(context.siteDir, "blog");
-          if (!fs.existsSync(blogDir)) return [];
-
-          // Load author registry
-          let authorsRegistry = {};
-          const authorsPath = path.join(blogDir, "authors.yml");
-          if (fs.existsSync(authorsPath)) {
-            try {
-              authorsRegistry =
-                yaml.load(fs.readFileSync(authorsPath, "utf8")) || {};
-            } catch {}
-          }
-
-          // Permalinks are stored WITHOUT baseUrl — Docusaurus's <Link to>
-          // adds the baseUrl prefix at render time. Including it here would
-          // double-prefix to /baseUrl/baseUrl/blog/...
-          const posts = [];
-
-          for (const entry of fs.readdirSync(blogDir, {
-            withFileTypes: true,
-          })) {
-            if (!entry.isDirectory()) continue;
-            const indexPath = path.join(blogDir, entry.name, "index.md");
-            if (!fs.existsSync(indexPath)) continue;
-
-            const raw = fs.readFileSync(indexPath, "utf8");
-            const fmMatch = raw.match(/^---\n([\s\S]*?)\n---/);
-            if (!fmMatch) continue;
-            let fm;
-            try {
-              fm = yaml.load(fmMatch[1]);
-            } catch {
-              continue;
-            }
-            if (!fm) continue;
-
-            const dateMatch = entry.name.match(/^(\d{4}-\d{2}-\d{2})-/);
-            const date = dateMatch ? `${dateMatch[1]}T00:00:00.000Z` : null;
-            const slug =
-              fm.slug || entry.name.replace(/^\d{4}-\d{2}-\d{2}-/, "");
-
-            const authorKeys = Array.isArray(fm.authors)
-              ? fm.authors
-              : fm.authors
-              ? [fm.authors]
-              : [];
-            const authors = authorKeys.map((key) => {
-              if (typeof key === "string") {
-                const a = authorsRegistry[key];
-                return a
-                  ? {
-                      name: a.name,
-                      title: a.title,
-                      imageURL: a.image_url,
-                      url: a.url,
-                    }
-                  : { name: key };
-              }
-              return key;
-            });
-
-            const tagList = Array.isArray(fm.tags) ? fm.tags : [];
-            const tags = tagList.map((t) => ({
-              label: typeof t === "string" ? t : t.label,
-              permalink: `/blog/tags/${
-                typeof t === "string" ? t : t.permalink
-              }`,
-            }));
-
-            posts.push({
-              title: fm.title,
-              permalink: `/blog/${slug}`,
-              date,
-              description: fm.description || null,
-              frontMatter: { image: fm.image || null },
-              tags,
-              authors,
-            });
-          }
-
-          posts.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-          return posts.slice(0, 6);
-        },
-        async contentLoaded({ content, actions }) {
-          actions.setGlobalData({ recentPosts: content || [] });
         },
       };
     },
@@ -436,8 +321,8 @@ const config = {
         // Offline, build-time search index — no external service, no API keys.
         hashed: true,
         indexDocs: true,
-        indexBlog: true,
-        docsRouteBasePath: "/AfriPlaybook",
+        indexBlog: false,
+        docsRouteBasePath: "/",
         searchResultLimits: 8,
         highlightSearchTermsOnTargetPage: true,
       },
@@ -469,9 +354,9 @@ const config = {
         },
       },
       navbar: {
-        title: "Waraka",
+        title: "AfriPlaybook",
         logo: {
-          alt: "Waraka Community AfriPlaybook Home",
+          alt: "AfriPlaybook Home",
           src: "img/community-tree.svg",
           srcDark: "img/community-tree-dark.svg",
           href: "/",
@@ -480,24 +365,14 @@ const config = {
         hideOnScroll: false,
         items: [
           {
-            type: "custom-PlaybookNavbarItem",
+            to: "/",
+            label: "Playbook",
             position: "left",
+            activeBasePath: "/",
           },
           {
-            type: "custom-ToolNavbarItem",
-            position: "left",
-          },
-          {
-            type: "custom-AfriFinderNavbarItem",
-            position: "left",
-          },
-          {
-            to: "/fellowship",
-            label: "AfriFellowship",
-            position: "left",
-          },
-          {
-            type: "custom-AboutNavbarItem",
+            href: "https://community.waraka.ai",
+            label: "← Community",
             position: "left",
           },
           {
@@ -508,7 +383,7 @@ const config = {
             type: "html",
             position: "right",
             value:
-              '<a class="navbar-gh-stars" href="https://github.com/warakacommunity/AfriPlaybook" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub">' +
+              '<a class="navbar-gh-stars" href="https://github.com/warakacommunity/playbook" target="_blank" rel="noopener noreferrer" aria-label="Star on GitHub">' +
               '<svg class="navbar-gh-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' +
               '<path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.92.58.11.79-.25.79-.56 0-.27-.01-1-.02-1.96-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.1-.74.4-1.24.72-1.53-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.94 10.94 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.82 1.18 3.08 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.07.78 2.16 0 1.56-.01 2.81-.01 3.19 0 .31.21.68.8.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/>' +
               "</svg>" +
@@ -535,29 +410,29 @@ const config = {
             items: [
               {
                 label: "AfriPlaybook",
-                to: "/AfriPlaybook/",
+                to: "/",
               },
               {
-                label: "AfriAnnotate",
-                to: "/tool",
+                label: "Glossary",
+                to: "/glossary",
               },
               {
-                label: "AfriFinder",
-                to: "/afrifinder",
+                label: "References",
+                to: "/references",
               },
               {
-                label: "AfriFellowship",
-                to: "/fellowship",
-              },
-              {
-                label: "Blog",
-                to: "/blog",
+                label: "Cite this Playbook",
+                to: "/cite",
               },
             ],
           },
           {
             title: "Community",
             items: [
+              {
+                label: "Community Hub",
+                href: "https://community.waraka.ai",
+              },
               {
                 label: "Masakhane",
                 href: "https://www.masakhane.io/",
@@ -577,27 +452,19 @@ const config = {
             items: [
               {
                 label: "About",
-                to: "/about",
+                href: "https://community.waraka.ai/about",
               },
               {
                 label: "Roadmap",
-                to: "/roadmap",
+                href: "https://community.waraka.ai/roadmap",
               },
               {
                 label: "FAQ",
-                to: "/faq",
-              },
-              {
-                label: "Glossary",
-                to: "/AfriPlaybook/glossary",
-              },
-              {
-                label: "Cite this Playbook",
-                to: "/cite",
+                href: "https://community.waraka.ai/faq",
               },
               {
                 label: "GitHub Repository",
-                href: "https://github.com/warakacommunity/AfriPlaybook",
+                href: "https://github.com/warakacommunity/playbook",
               },
             ],
           },

@@ -34,7 +34,7 @@ There are three ways to make a change, from the quickest to the most hands-on. C
 Best for fixing typos, rewording a sentence, or adding a link. You never leave the browser.
 
 1. Open the page you want to change.
-2. Click **Suggest an edit** (or open the [online editor](/contribute-online) directly).
+2. Click **Suggest an edit** (or open the [online editor](https://community.waraka.ai/contribute-online) directly).
 3. Sign in with GitHub when prompted — this lets us credit your work and open the change under your name.
 4. Make your edit in the editor.
 5. Add a short note describing what you changed, then submit.

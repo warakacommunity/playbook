@@ -9,7 +9,7 @@ The tools a project uses shape what it can do and how reliably it can do it. For
 
 ## Annotation tools
 
-Choose an annotation tool by usability, scalability, and cost, weighed against the task and the team. Lightweight, self-hosted, or free tools often beat feature-rich paid platforms for a volunteer project, and a tool that works on modest hardware over a poor connection matters more than one with every feature. The companion tool **[AfriAnnotate](/tool)** is built for exactly these conditions. The annotation chapters cover tool choice for specific tasks in more detail.
+Choose an annotation tool by usability, scalability, and cost, weighed against the task and the team. Lightweight, self-hosted, or free tools often beat feature-rich paid platforms for a volunteer project, and a tool that works on modest hardware over a poor connection matters more than one with every feature. The companion tool **[AfriAnnotate](https://community.waraka.ai/tool)** is built for exactly these conditions. The annotation chapters cover tool choice for specific tasks in more detail.
 
 ## Pipelines, deployment, and access
 

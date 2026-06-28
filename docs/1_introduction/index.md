@@ -51,7 +51,7 @@ Almost every guide to building datasets quietly assumes English, a generous budg
 
 The AfriPlaybook is the manual we wish we had had. It is written for exactly those conditions, and its aim is narrow: to lower the barrier to getting started and to raise the floor on quality, so that the datasets this community produces are ones the world can trust and reuse.
 
-To do that, the playbook does not stand alone. It pairs the step-by-step guide with two companion tools: [AfriAnnotate](/tool), for setting up and running annotation tasks, and [AfriFinder](/afrifinder), for recruiting native-speaker annotators. Together they let a small team move from a plan to a documented, released dataset without reinventing the process each time. Lowering the cost of building data is how the balance in the charts above begins to shift.
+To do that, the playbook does not stand alone. It pairs the step-by-step guide with two companion tools: [AfriAnnotate](https://community.waraka.ai/tool), for setting up and running annotation tasks, and [AfriFinder](https://community.waraka.ai/afrifinder), for recruiting native-speaker annotators. Together they let a small team move from a plan to a documented, released dataset without reinventing the process each time. Lowering the cost of building data is how the balance in the charts above begins to shift.
 
 ## Built in the open
 
