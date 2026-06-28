@@ -21,3 +21,9 @@ yarn-error.log*
 
 # Local-only reference PDFs (source material, not for publication / copyright)
 docs/intro/*.pdf
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
