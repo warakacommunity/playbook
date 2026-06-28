@@ -396,7 +396,7 @@ const config = {
                 label: "Finder",
               },
               {
-                href: "https://community.waraka.ai/fellowship",
+                href: "https://fellowship.waraka.ai",
                 label: "Fellowship",
               },
             ],
