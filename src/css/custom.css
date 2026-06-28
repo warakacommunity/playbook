@@ -1133,3 +1133,27 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   box-shadow: 0 8px 28px rgba(31, 24, 16, 0.12);
   margin-block: 0.6rem;
 }
+
+/* "Read the handbook" navbar item: a dropdown rendered as a filled primary
+   button with the caret on the side, so visitors pick Read online vs
+   Download PDF from one merged control. */
+.navbar__readcta > .navbar__link {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.35rem 0.85rem;
+  margin: 0 0.4rem;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+.navbar__readcta > .navbar__link:hover,
+.navbar__readcta > .navbar__link:focus {
+  background: var(--ifm-color-primary-dark);
+  color: #fff;
+  text-decoration: none;
+}
+.navbar__readcta > .navbar__link::after {
+  border-top-color: currentColor;
+  opacity: 0.9;
+  margin-left: 0.45rem;
+}

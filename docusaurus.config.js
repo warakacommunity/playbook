@@ -365,9 +365,19 @@ const config = {
         hideOnScroll: false,
         items: [
           {
-            to: "/introduction",
+            type: "dropdown",
             label: "Read the handbook",
             position: "left",
+            className: "navbar__readcta",
+            items: [
+              { to: "/introduction", label: "Read online" },
+              {
+                href: "/downloads/masakhane-playbook.pdf",
+                label: "Download PDF",
+                target: "_blank",
+                rel: "noopener noreferrer",
+              },
+            ],
           },
           {
             // Ecosystem links grouped so the bar stays uncluttered.
