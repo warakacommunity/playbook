@@ -13,14 +13,12 @@ export default function HeroSection() {
     >
       <div className={styles.heroHomeInner}>
         <Heading as="h1" className={clsx(styles.heroTitle, styles.heroHomeTitle)}>
-          Build African language datasets,
-          <br />
-          <span className={styles.heroTitleAccent}>the right way.</span>
+          An <span className={styles.heroTitleAccent}>African language lab</span>.
         </Heading>
         <p className={styles.heroHomeTagline}>
-          An open playbook and annotation platform for grassroots NLP data
-          collection — designed with communities, for communities, across
-          the continent.
+          Learn the craft in the AfriPlaybook, annotate with AfriAnnotate, find
+          verified collaborators on AfriFinder, and get mentored to publication
+          in the AfriNLP Fellowship. One pipeline, open to everyone.
         </p>
         <div className={styles.heroHomeButtons}>
           <Link className={clsx('button', styles.primaryButton)} to="/AfriPlaybook/">
