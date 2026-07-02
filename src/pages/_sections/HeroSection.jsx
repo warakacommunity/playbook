@@ -12,7 +12,6 @@ export default function HeroSection() {
       data-visible=""
     >
       <div className={styles.heroHomeInner}>
-        <p className={styles.heroKicker}>Open data for African languages</p>
         <Heading as="h1" className={clsx(styles.heroTitle, styles.heroHomeTitle)}>
           Build African language datasets,
           <br />
