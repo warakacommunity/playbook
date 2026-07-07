@@ -27,6 +27,11 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: yarn }
       - run: yarn install --frozen-lockfile
+      # Enforce default-hide policy: chapters without `ready: true` in
+      # frontmatter get `wip: true` injected, which the DocItem/Layout
+      # swizzle renders as an "in development" placeholder.
+      - name: Enforce default-hide draft policy
+        run: bash scripts/mark-draft-chapters.sh docs
       - run: yarn build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

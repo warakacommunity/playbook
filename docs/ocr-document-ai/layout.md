@@ -1,6 +1,7 @@
 ---
 title: Layout & document understanding
 sidebar_position: 4
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

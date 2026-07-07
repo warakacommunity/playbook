@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 slug: /
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

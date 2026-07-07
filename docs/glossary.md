@@ -2,6 +2,7 @@
 sidebar_position: 99
 title: Glossary
 description: Definitions of key terms used throughout the AfriPlaybook.
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

@@ -2,6 +2,7 @@
 title: Data Quality
 sidebar_label: Overview
 sidebar_position: 1
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

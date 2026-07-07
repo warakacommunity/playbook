@@ -1,4 +1,5 @@
 ---
+wip: true
 title: Automatic Speech Recognition (ASR)
 last_update:
   date: 2026-07-07

@@ -1,4 +1,5 @@
 ---
+wip: true
 title: Speech Emotion Recognition
 last_update:
   date: 2026-07-07

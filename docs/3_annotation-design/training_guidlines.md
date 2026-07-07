@@ -1,4 +1,5 @@
 ---
+wip: true
 title: Training and Guidelines
 sidebar_position: 2
 last_update:

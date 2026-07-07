@@ -1,4 +1,5 @@
 ---
+wip: true
 title: "Case Study: Multimodal Data Collection"
 description: How ArtELingo-28, a 28-language cross-cultural image-emotion benchmark, was actually collected — and the decisions that don't show up in the Modalities, Sources, or API sections until you try to combine them.
 last_update:
