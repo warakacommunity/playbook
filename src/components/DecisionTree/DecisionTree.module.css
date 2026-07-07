@@ -1,0 +1,168 @@
+.tree {
+  background: var(--surface-wash);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 22px 24px 20px;
+  margin: 1.5rem 0 2rem;
+  font-family: var(--ifm-font-family-base);
+}
+
+/* ── Breadcrumb of choices taken so far ─────────────────────── */
+
+.breadcrumb {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: 12px;
+}
+.breadcrumbItem {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.4;
+}
+.stepQuestion {
+  color: var(--ifm-color-emphasis-600);
+}
+.stepArrow {
+  color: var(--ifm-color-primary);
+  font-weight: 700;
+}
+.stepAnswer {
+  color: var(--brand-navy);
+  font-weight: 600;
+}
+
+/* ── Question node ──────────────────────────────────────────── */
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.questionLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+}
+.questionText {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--brand-navy);
+  line-height: 1.4;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.optionButton {
+  background: #fff;
+  color: var(--ifm-color-primary);
+  border: 1.5px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-family: var(--ifm-font-family-base);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.15s, box-shadow 0.15s;
+  text-align: left;
+  line-height: 1.35;
+  max-width: 100%;
+}
+.optionButton:hover,
+.optionButton:focus-visible {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--brand-rgb), 0.25);
+  outline: none;
+}
+.optionButton:active {
+  transform: translateY(0);
+}
+
+/* ── Leaf recommendation ────────────────────────────────────── */
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.resultLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-green);
+}
+.resultText {
+  background: #fff;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ifm-font-color-base);
+}
+.resultText a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--ifm-color-primary);
+}
+.resultText a:hover,
+.resultText a:focus-visible {
+  border-bottom-style: solid;
+  outline: none;
+}
+
+/* ── Navigation actions (Back / Start over / Change answer) ── */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.btnSecondary,
+.btnPrimary {
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--ifm-font-family-base);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btnSecondary {
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+.btnSecondary:hover,
+.btnSecondary:focus-visible {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-900);
+  border-color: var(--ifm-color-emphasis-500);
+  outline: none;
+}
+.btnPrimary {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  border: 1px solid var(--ifm-color-primary);
+}
+.btnPrimary:hover,
+.btnPrimary:focus-visible {
+  background: var(--ifm-color-primary-dark);
+  border-color: var(--ifm-color-primary-dark);
+  outline: none;
+}

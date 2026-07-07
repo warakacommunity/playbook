@@ -3,6 +3,8 @@ sidebar_position: 9
 title: OCR and document AI
 ---
 
+import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
+
 # OCR and document AI
 
 *Last reviewed: 2026-07-07.*
@@ -39,6 +41,46 @@ OCR resources cluster by script. The Latin-script African-language landscape is 
 
 ## Fork or start fresh?
 
+<DecisionTree tree={{
+  question: "What is your target text?",
+  options: [
+    {
+      label: "Clean printed Latin-script African-language content",
+      next: {
+        question: "Is off-the-shelf accuracy adequate for your use case?",
+        options: [
+          {
+            label: "Yes",
+            result: <>Deploy Tesseract with the appropriate <code>.traineddata</code>, or a commercial API subject to the data-sovereignty constraints. <strong>Measure CER on a 500-page representative sample</strong>; do NOT rely on the API vendor's claimed accuracy.</>,
+          },
+          {
+            label: "No, accuracy is inadequate",
+            result: <>Fine-tune TrOCR on <strong>2,000–10,000</strong> character-annotated training images from your target document type. Feasible on Colab / Kaggle.</>,
+          },
+        ],
+      },
+    },
+    {
+      label: "Handwritten Latin-script content",
+      result: <>Requires either Kraken/Calamari with fine-tuning on your target handwriting style, or TrOCR fine-tuning. Budget <strong>3–6 months</strong> for <strong>10,000–20,000</strong> annotated character images, plus tooling for handwriting-specific evaluation.</>,
+    },
+    {
+      label: "Ge'ez script (Amharic, Tigrinya, Ge'ez liturgical)",
+      result: <>Read the Ethiopic OCR literature; there is no single canonical resource. Fine-tune TrOCR on the closest published corpus for your script variety. <strong>Handwritten and printed Ge'ez are separate projects</strong> at the model level.</>,
+    },
+    {
+      label: "Ajami (Arabic script Hausa / Wolof / Fulfulde / Kanuri etc.)",
+      result: <>This is genuinely research-grade. Start with a small pilot corpus (<strong>500–2,000</strong> character images), measure whether existing Arabic-script OCR transfers usefully to the Ajami variety, and scope from there. <strong>Involve script-community experts from the start.</strong></>,
+    },
+    {
+      label: "Any other non-Latin script (N'Ko, Vai, Tifinagh, others)",
+      result: <>Genuinely uncovered. Read the <a href="/long-tail-language/">long-tail language onboarding</a> chapter. Plan a multi-month corpus-building effort with script-community experts BEFORE attempting model training.</>,
+    },
+  ],
+}} />
+
+<div className="only-print">
+
 ```
 Is your target text clean printed Latin-script African-language content?
 ├── Yes — is off-the-shelf accuracy adequate for your use case?
@@ -71,6 +113,8 @@ Is your target text clean printed Latin-script African-language content?
       corpus-building effort with script-community experts BEFORE
       attempting model training.
 ```
+
+</div>
 
 ## What it will actually cost you
 

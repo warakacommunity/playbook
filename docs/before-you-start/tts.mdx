@@ -3,6 +3,8 @@ sidebar_position: 7
 title: Text-to-Speech
 ---
 
+import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
+
 # Text-to-Speech
 
 *Last reviewed: 2026-07-07.*
@@ -34,6 +36,46 @@ Unlike ASR, where Meta MMS covers a broad language set, TTS coverage for African
 
 ## Fork or start fresh?
 
+<DecisionTree tree={{
+  question: "Is your language covered by Meta MMS-TTS?",
+  options: [
+    {
+      label: "Yes",
+      next: {
+        question: "Is the out-of-the-box quality acceptable for your target text?",
+        options: [
+          {
+            label: "Yes",
+            result: <>Deploy MMS-TTS. <strong>Measure MOS with native listeners</strong> on your target text style (not on Common Voice sentences).</>,
+          },
+          {
+            label: "No, quality is inadequate",
+            result: <>Fine-tune VITS or a similar open architecture on <strong>5–20 hours</strong> of clean, single-speaker studio-quality audio. Use MMS-TTS as your quality floor.</>,
+          },
+        ],
+      },
+    },
+    {
+      label: "No",
+      next: {
+        question: "Is your language related to an MMS-TTS-covered language?",
+        options: [
+          {
+            label: "Yes, related to a covered language",
+            result: <>Fine-tune the closest covered MMS-TTS model on a small (<strong>2–5h</strong>) speech sample in your target language and <strong>MEASURE</strong>. Cross-lingual transfer is variable for TTS — see the known limitations below.</>,
+          },
+          {
+            label: "Genuinely uncovered",
+            result: <>Read the <a href="/long-tail-language/">long-tail language onboarding</a> chapter first. Then plan <strong>20–50 hours</strong> of clean studio-quality recording with a small number of speakers, aligned to text, before VITS/XTTS fine-tuning is worth attempting. <strong>Do NOT bootstrap TTS from Common Voice-style crowd-recorded speech</strong>; the quality bar is too high.</>,
+          },
+        ],
+      },
+    },
+  ],
+}} />
+
+<div className="only-print">
+
 ```
 Is your language covered by Meta MMS-TTS?
 ├── Yes — is the out-of-the-box quality acceptable for your target text?
@@ -55,6 +97,8 @@ Is your language covered by Meta MMS-TTS?
         TTS from Common Voice-style crowd-recorded speech; the
         quality bar is too high.
 ```
+
+</div>
 
 ## What it will actually cost you
 

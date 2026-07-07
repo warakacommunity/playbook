@@ -3,6 +3,8 @@ sidebar_position: 3
 title: Machine Translation
 ---
 
+import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
+
 # Machine Translation
 
 *Last reviewed: 2026-07-07.*
@@ -37,6 +39,34 @@ Four major bodies of work are the current reference points. Read this section to
 
 ## Fork or start fresh?
 
+<DecisionTree tree={{
+  question: "Is your language pair covered by LAFAND-MT (16 African-English pairs)?",
+  options: [
+    {
+      label: "Yes",
+      result: <>Use LAFAND-MT for the target-domain evaluation, fine-tune NLLB-200-distilled starting from Meta's checkpoint. <strong>Human-evaluate 200 random test outputs</strong> before publishing metrics.</>,
+    },
+    {
+      label: "No",
+      next: {
+        question: "Is it in NLLB-200's 200-language coverage?",
+        options: [
+          {
+            label: "Yes",
+            result: <>NLLB-200 out-of-the-box is your baseline. Collect a small (<strong>500–2000 sentence</strong>) native-speaker validation set in your target domain first — the NLLB numbers on out-of-distribution content can be misleading.</>,
+          },
+          {
+            label: "No — genuinely uncovered",
+            result: <>Read the <a href="/long-tail-language/">long-tail language onboarding</a> chapter first for the realistic milestones and community / orthography / IP decisions that must come before data collection. Then use the <a href="/cross-language-transfer/">cross-language transfer</a> chapter for family-by-family pivot guidance, build a small parallel corpus (<strong>500–2000 sentences</strong>) as an evaluation set FIRST, and only then decide whether corpus creation, cross-language transfer, or reliance on an LLM API is the right investment.</>,
+          },
+        ],
+      },
+    },
+  ],
+}} />
+
+<div className="only-print">
+
 ```
 Is your language pair covered by LAFAND-MT (16 African-English pairs)?
 ├── Yes → Use LAFAND-MT for the target-domain evaluation, fine-tune
@@ -58,6 +88,8 @@ Is your language pair covered by LAFAND-MT (16 African-English pairs)?
           language transfer, or reliance on an LLM API is the right
           investment.
 ```
+
+</div>
 
 ## What it will actually cost you
 

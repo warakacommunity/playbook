@@ -1194,6 +1194,20 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   border-color: var(--ifm-color-primary-dark) !important;
 }
 
+/* ── Global print-utility classes ───────────────────────────────
+   `.only-print` — hidden on screen, shown in print. Used to keep
+   ASCII decision-tree fallbacks alongside the interactive
+   DecisionTree component so the printed PDF still shows the full
+   tree flat.
+   `.no-print` — visible on screen, hidden in print. Used on
+   interactive-only components like DecisionTree and the TOC
+   action row so they don't leak into the PDF.
+   ─────────────────────────────────────────────────────────────── */
+.only-print { display: none !important; }
+@media print {
+  .only-print { display: block !important; }
+}
+
 /* ── Print-only: strip chrome, apply brand ───────────────────── */
 
 @media print {

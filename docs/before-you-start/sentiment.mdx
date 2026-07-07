@@ -3,6 +3,8 @@ sidebar_position: 5
 title: Sentiment
 ---
 
+import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
+
 # Sentiment analysis
 
 *Last reviewed: 2026-07-07.*
@@ -35,6 +37,46 @@ Two community-curated corpora anchor African-language sentiment analysis. Everyt
 
 ## Fork or start fresh?
 
+<DecisionTree tree={{
+  question: "Is your language covered by AfriSenti (14 languages) or NaijaSenti (4 Nigerian)?",
+  options: [
+    {
+      label: "Yes",
+      next: {
+        question: "Is the source domain (Twitter/X) close enough to your target?",
+        options: [
+          {
+            label: "Yes",
+            result: <><strong>Use AfriSenti/NaijaSenti. Fine-tune AfroXLMR-large.</strong> Human-evaluate 200 random test outputs. Done.</>,
+          },
+          {
+            label: "No, domain mismatch (formal writing, market speech, health, customer service)",
+            result: <>Use AfriSenti's model as a starting point, collect a <strong>500–2000 example</strong> in-domain evaluation set FIRST, and only if the transfer is inadequate collect a small (<strong>2000–5000 example</strong>) in-domain training set for adaptive fine-tuning.</>,
+          },
+        ],
+      },
+    },
+    {
+      label: "No",
+      next: {
+        question: "Is your language related to an AfriSenti-covered language?",
+        options: [
+          {
+            label: "Yes, same family / covered relative",
+            result: <>Start with cross-lingual transfer from the closest covered language. See the <a href="/cross-language-transfer/">cross-language transfer</a> chapter. Only then design a small validation corpus in your target language.</>,
+          },
+          {
+            label: "Genuinely uncovered",
+            result: <>Read the <a href="/long-tail-language/">long-tail language onboarding</a> chapter first. Then chapters 3 and 4 (Annotation Design, Data Quality). Start with a small (<strong>2000–5000 example</strong>) pilot corpus following AfriSenti's annotation guidelines.</>,
+          },
+        ],
+      },
+    },
+  ],
+}} />
+
+<div className="only-print">
+
 ```
 Is your language covered by AfriSenti (14 languages) or NaijaSenti (4 Nigerian)?
 ├── Yes — is the source domain (Twitter/X) close enough to your target?
@@ -57,6 +99,8 @@ Is your language covered by AfriSenti (14 languages) or NaijaSenti (4 Nigerian)?
         Data Quality). Start with a small (2000-5000 example)
         pilot corpus following AfriSenti's annotation guidelines.
 ```
+
+</div>
 
 ## What it will actually cost you
 

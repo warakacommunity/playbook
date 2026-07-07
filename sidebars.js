@@ -155,6 +155,7 @@ const sidebars = {
       'templates/model-card',
     ]),
     chapterIndexed('Case Studies', 'case-studies/index', [
+      'case-studies/masakhaner',
       'case-studies/retrospective-template',
     ]),
 

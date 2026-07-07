@@ -3,6 +3,8 @@ sidebar_position: 2
 title: NER
 ---
 
+import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
+
 # Named Entity Recognition
 
 *Last reviewed: 2026-07-07.*
@@ -53,6 +55,46 @@ The corpus is available on the [Hugging Face Hub](https://huggingface.co/dataset
 
 ## Fork or start fresh?
 
+<DecisionTree tree={{
+  question: "Is your language covered by MasakhaNER 2?",
+  options: [
+    {
+      label: "Yes",
+      next: {
+        question: "Is the label set (PER, ORG, LOC, DATE) enough for your task?",
+        options: [
+          {
+            label: "Yes",
+            result: <><strong>Use MasakhaNER 2. Fine-tune AfroXLMR-large. Done.</strong></>,
+          },
+          {
+            label: "No — I need extra entity types (MONEY, PRODUCT, culture-specific)",
+            result: <>Extend MasakhaNER 2 by annotating extra types on their splits. Reuse their guidelines. <strong>Do NOT re-annotate PER/ORG/LOC — merge.</strong></>,
+          },
+        ],
+      },
+    },
+    {
+      label: "No",
+      next: {
+        question: "Is your language related to any of the 20 covered?",
+        options: [
+          {
+            label: "Yes (same family / same script)",
+            result: <>Start with cross-lingual transfer from the closest MasakhaNER 2 language. See the <a href="/cross-language-transfer/">cross-language transfer</a> chapter for family-by-family pivot guidance. Only then design a small validation corpus in your target language.</>,
+          },
+          {
+            label: "No — genuinely uncovered",
+            result: <>You need to build a corpus. Read the <a href="/long-tail-language/">long-tail language onboarding</a> chapter first — it lays out the realistic milestones and the Step-0 community, orthography, and IP decisions that determine whether the project succeeds. Then chapters 2, 3, and 4 of this playbook (Data Collection, Annotation Design, Data Quality), and MasakhaNER 2's annotation guidelines before you write your own. Aim for <strong>5–10k sentences</strong> to start, following the MasakhaNER 2 partitioning.</>,
+          },
+        ],
+      },
+    },
+  ],
+}} />
+
+<div className="only-print">
+
 ```
 Is your language covered by MasakhaNER 2?
 ├── Yes — is the label set (PER, ORG, LOC, DATE) enough for your task?
@@ -77,6 +119,8 @@ Is your language covered by MasakhaNER 2?
           own. Aim for 5-10k sentences to start, following the MasakhaNER
           2 partitioning.
 ```
+
+</div>
 
 ## What it will actually cost you
 

@@ -3,6 +3,8 @@ sidebar_position: 6
 title: Hate speech and content safety
 ---
 
+import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
+
 # Hate speech and content safety
 
 *Last reviewed: 2026-07-07.*
@@ -40,6 +42,46 @@ Unlike NER (dominated by MasakhaNER 2), MT (dominated by NLLB-200 + LAFAND-MT), 
 
 ## Fork or start fresh?
 
+<DecisionTree tree={{
+  question: "Does a published hate-speech corpus exist for your target language?",
+  options: [
+    {
+      label: "Yes",
+      next: {
+        question: "Is its label set (typically hate / offensive / neutral, or graded) close enough to what your project needs?",
+        options: [
+          {
+            label: "Yes",
+            result: <>Fine-tune AfroXLMR-large on it. Human-evaluate <strong>300+</strong> random test outputs across the label set (not 200 — the class imbalance and cultural nuance need denser evaluation than most tasks). Publish the model card with an EXPLICIT "not for automated moderation without further work" caveat if that is the honest read.</>,
+          },
+          {
+            label: "No — different or additional labels needed",
+            result: <>Your project needs different or additional labels (specific target groups, incitement vs. slur, calls to violence vs. dehumanising language). Read the existing corpus's guidelines carefully, <strong>extend rather than replace</strong> them, and involve the affected communities in label design — not just annotation.</>,
+          },
+        ],
+      },
+    },
+    {
+      label: "No",
+      next: {
+        question: "Is your language related to a covered language?",
+        options: [
+          {
+            label: "Yes, related to a covered language",
+            result: <>Start with cross-lingual transfer, but treat the transferred model as <strong>pilot-only</strong> until you have a small (<strong>500–2000 example</strong>) target-language evaluation set. Cross-lingual transfer is unusually unreliable for this task because what counts as hate is culturally specific — see the <a href="#known-limitations-to-watch-for">known limitations</a> below.</>,
+          },
+          {
+            label: "Genuinely uncovered",
+            result: <>Read the <a href="/long-tail-language/">long-tail language onboarding</a> chapter and chapters 3 and 4 (Annotation Design, Data Quality) BEFORE writing guidelines. Involve the affected communities in label design from Step 0. <strong>Do not start this project without a psychologist or community-mental-health support commitment for annotators.</strong></>,
+          },
+        ],
+      },
+    },
+  ],
+}} />
+
+<div className="only-print">
+
 ```
 Does a published hate-speech corpus exist for your target language?
 ├── Yes — is its label set (typically hate / offensive / neutral, or
@@ -72,6 +114,8 @@ Does a published hate-speech corpus exist for your target language?
         this project without a psychologist or community-mental-
         health support commitment for annotators.
 ```
+
+</div>
 
 ## What it will actually cost you
 

@@ -3,6 +3,8 @@ sidebar_position: 4
 title: ASR
 ---
 
+import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
+
 # Automatic Speech Recognition
 
 *Last reviewed: 2026-07-07.*
@@ -40,6 +42,46 @@ Two large model releases (Meta MMS, OpenAI Whisper) and three community-curated 
 
 ## Fork or start fresh?
 
+<DecisionTree tree={{
+  question: "Is your language covered by Meta MMS (~1000 languages, includes many African)?",
+  options: [
+    {
+      label: "Yes",
+      next: {
+        question: "Does the domain match (read speech vs. spontaneous vs. broadcast)?",
+        options: [
+          {
+            label: "Yes",
+            result: <>Use MMS out of the box as your baseline. Collect a <strong>200–500 utterance</strong> native-speaker-verified in-domain evaluation set. Fine-tune the MMS adapter only if the baseline is inadequate.</>,
+          },
+          {
+            label: "No, domain mismatch",
+            result: <>Fine-tune the MMS adapter on your target domain. <strong>5–20 hours</strong> of clean transcribed speech in the target domain is typically enough to get a usable adapter for a covered language.</>,
+          },
+        ],
+      },
+    },
+    {
+      label: "No",
+      next: {
+        question: "Is Whisper's language list a plausible starting point?",
+        options: [
+          {
+            label: "Yes",
+            result: <>Whisper baseline + Whisper fine-tune are the fastest path. <strong>Verify with native speakers</strong> that Whisper's baseline accuracy is not misleading — its listed "language support" does NOT mean usable accuracy.</>,
+          },
+          {
+            label: "No, or Whisper baseline is unusable",
+            result: <>XLS-R fine-tune on the closest related language you have data for. See the <a href="/cross-language-transfer/">cross-language transfer</a> chapter for family-by-family pivot guidance, and the <a href="/long-tail-language/">long-tail language onboarding</a> chapter if this is the first time your target language is being taken through the ASR arc. Build a small evaluation set first, then decide whether corpus creation is the right investment.</>,
+          },
+        ],
+      },
+    },
+  ],
+}} />
+
+<div className="only-print">
+
 ```
 Is your language covered by Meta MMS (~1000 languages, includes many African)?
 ├── Yes — does the domain match (read speech vs. spontaneous vs. broadcast)?
@@ -65,6 +107,8 @@ Is your language covered by Meta MMS (~1000 languages, includes many African)?
         set first, then decide whether corpus creation is the right
         investment.
 ```
+
+</div>
 
 ## What it will actually cost you
 
