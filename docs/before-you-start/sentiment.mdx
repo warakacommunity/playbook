@@ -24,6 +24,7 @@ Two community-curated corpora anchor African-language sentiment analysis. Everyt
 
 - **[SemEval-2023 Task 12 AfriSenti-SemEval](https://afrisenti-semeval.github.io/)** — the shared-task version of AfriSenti, with published baseline results across the 14 languages and cross-lingual transfer tracks. Useful reference for expected out-of-the-box performance.
 - **[XED (Cross-lingual Emotion Detection)](https://aclanthology.org/2020.coling-main.575/)** — a multilingual emotion dataset with limited African coverage; useful when the project needs emotion labels rather than sentiment polarity.
+- **[AfriMTEB](https://arxiv.org/abs/2510.23896)** (Uemura, Zhang, Adelani, EACL 2026) — the African-language extension of MTEB. **59 African languages / 14 tasks / 38 datasets**, with **6 new datasets** added covering hate speech, intent detection, and **emotion classification**. Not itself a sentiment-classification benchmark, but the emotion-classification surface is the closest adjacent-evaluation harness in 2026 for teams whose downstream deployment needs *both* sentiment and emotion signals; run your candidate encoder / embedder against it for the multi-task read on generalisation before locking in a single-task fine-tune.
 - **Domain-specific sentiment work** — smaller published corpora exist for domains (health, market feedback, election monitoring) in specific languages. Search recent AfricaNLP workshop proceedings before starting a domain-specific corpus from scratch.
 
 ### Adjacent-but-distinct tasks — do not conflate the label sets
