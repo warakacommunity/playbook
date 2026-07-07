@@ -31,15 +31,17 @@ const config = {
   // },
 
   // Set the production url of your site here.
-  // This is the community hub (landing page + menubar) on the waraka.ai zone.
-  // The Playbook section will later move to its own playbook.waraka.ai deploy.
-  url: "https://community.waraka.ai",
-  // Served at the domain root, so baseUrl is '/'.
-  baseUrl: "/",
+  // Preview / GitHub Pages deploy at masakhanehubtoolingproject.github.io/playbook/.
+  // (The waraka.ai custom domain is still live at community.waraka.ai; that
+  // deploy uses the same source with baseUrl: "/" via env override.)
+  url: "https://masakhanehubtoolingproject.github.io",
+  baseUrl: "/playbook/",
 
-  // No GitHub Pages deploy config needed — Cloudflare Pages builds and
-  // publishes on push. (organizationName/projectName/deploymentBranch were
-  // only used by `docusaurus deploy` for the old gh-pages flow.)
+  // GH Pages deploy target — the preview site pushes to gh-pages on the
+  // MasakhaneHubToolingProject/playbook repo.
+  organizationName: "MasakhaneHubToolingProject",
+  projectName: "playbook",
+  deploymentBranch: "gh-pages",
   trailingSlash: false,
   onBrokenLinks: "throw",
 
