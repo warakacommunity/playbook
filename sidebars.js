@@ -46,8 +46,10 @@ const sidebars = {
             'introduction/how-to-contribute',
             'introduction/how-to-write',
             'introduction/core-principles',
+            'introduction/scope-and-strategy',
           ],
         },
+        chapter('Before You Start', 'before-you-start'),
         'project-management/index',
         chapter('Data Collection', '2_data-collection'),
         'data-governance/index',
@@ -122,6 +124,8 @@ const sidebars = {
       chapter('Documentation', '6_documentation'),
       chapter('Dataset Lifecycle', '9_dataset-lifecycle'),
     ]),
+
+    chapter('Case Studies', 'case-studies'),
 
     {
       type: 'category',

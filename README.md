@@ -1,6 +1,8 @@
 # Masakhane Playbook
 
-A community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. The Playbook collects practical, reproducible, and culturally grounded guidance for everything from dataset design and annotation through model training, evaluation, deployment, and ethics.
+**The decision framework for anyone starting an African-language NLP project — grounded in the empirical experience of Masakhane's own past projects.** An annotation-first dataset-lifecycle handbook covering data collection, annotation workforce, quality, documentation, evaluation, and community practice, for text, speech, translation, OCR, and adjacent modalities in low-resource African-language contexts.
+
+It is not a model-tuning tutorial (see the [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course) and the [Google Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook) for those); it is what those playbooks assume has already been done. It is intended for language experts, annotators, translators, and community leads in addition to ML practitioners — see [**What this playbook is (and isn't)**](https://warakacommunity.github.io/AfriPlaybook/introduction/scope-and-strategy) for the full scope statement and evidence base.
 
 **Live site:** <https://warakacommunity.github.io/>
 
@@ -26,18 +28,25 @@ This is a living resource maintained by the [Masakhane](https://www.masakhane.io
 
 ## What's in the playbook
 
-The chapters are organized by phase of the dataset/model lifecycle:
+**Foundations** — the shared spine of every project:
 
-1. **Introduction** — `docs/intro.md`
-2. **Data Collection, Curation, and Governance** — `docs/data-collection/`
-3. **Annotation Design and Workforce Management** — `docs/annotation-design/`
-4. **Data Quality Assurance and Validation** — `docs/data-quality/`
-5. **Modality-Specific Task Design** — `docs/modality-specific-task/`
-6. **Documentation, Data Release, and Governance** — `docs/documentation/`
-7. **LLM-Assisted and Synthetic Data Generation** — `docs/llm-assisted-task/`
-8. **Evaluation, Benchmarking, and Data Integrity** — `docs/model-building/`
-9. **Dataset Lifecycle Management and Release Checklist** — `docs/dataset-lifecycle/`
-10. **Community and Collaboration** — `docs/community-collaboration/`
+1. **Introduction** including [scope and strategy](docs/1_introduction/scope-and-strategy.md) — the "what this playbook is (and isn't)" statement.
+2. **[Before You Start](docs/before-you-start/index.md)** — per-task decision framework, resource tables, and honest cost estimates. Ships first for [NER](docs/before-you-start/ner.md); MT, ASR, sentiment, TTS, OCR to follow.
+3. **Data Collection, Curation, and Governance** — `docs/2_data-collection/`
+4. **Annotation Design and Workforce Management** — `docs/3_annotation-design/`
+5. **Data Quality Assurance and Validation** — `docs/4_data-quality/`
+6. **Community and Collaboration** — `docs/10_community-collaboration/`
+
+**Modality tracks** — text, speech, vision, multimodal. Each task chapter cross-references its Before-You-Start page.
+
+**Lifecycle & Release**:
+
+7. **Evaluation, Benchmarking, and Data Integrity** — `docs/8_model-building/`
+8. **Documentation, Data Release, and Governance** — `docs/6_documentation/`
+9. **LLM-Assisted and Synthetic Data Generation** — `docs/7_llm-assisted-task/`
+10. **Dataset Lifecycle Management and Release Checklist** — `docs/9_dataset-lifecycle/`
+
+**[Case Studies](docs/case-studies/index.md)** — retrospectives from real Masakhane projects, answering the same seventeen questions each. The evidence base the rest of the playbook draws on.
 
 The site is also available in **6 languages**: English, Hausa, Amharic, Swahili, French, and Portuguese (UI translated; chapter content awaits native-speaker translation).
 
