@@ -21,13 +21,13 @@ For every core task, this chapter answers the same four questions:
 - [Machine Translation](./machine-translation.md) — built on LAFAND-MT, MENYO-20k, FLORES-200, NLLB-200.
 - [Automatic Speech Recognition](./asr.md) — built on Common Voice, FLEURS, NCHLT, MakerereNLP, Meta MMS, and Whisper.
 - [Sentiment analysis](./sentiment.md) — built on AfriSenti (14 languages) and NaijaSenti.
+- [Hate speech and content safety](./hate-speech.md) — for teams working on a task whose failure modes are qualitatively different from classification-as-usual.
 
 ## Coming next
 
 The chapters below will be added in this order, each following the same four-part structure. Contribute a section for a task you know well — see the [contribution guide](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#ways-to-contribute).
 
 - **Question answering** — building on AfriQA, cross-lingual retrieval work.
-- **Hate speech and content safety** — building on Naija hate speech corpora and the safety literature.
 - **Text-to-Speech** — building on CVSS-C, Meta MMS, open TTS work for African languages.
 - **OCR and document AI** — building on Ajami, Ge'ez, and Latin-script African-language OCR corpora.
 
