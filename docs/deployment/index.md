@@ -13,7 +13,7 @@ This chapter is opinionated deployment guidance for the surfaces where African-l
 ## What this chapter covers
 
 - **[Offline and patchy-connectivity NLP](./offline.md)** — the design pattern where the model runs on-device or in a locally-cached scenario, syncs opportunistically, and degrades gracefully when the network drops mid-session. *Available now.*
-- **SMS, USSD, and WhatsApp as NLP surfaces** — the practical text-entry channels for hundreds of millions of African users. Coming next.
+- **[SMS, USSD, and WhatsApp as NLP surfaces](./sms-ussd-whatsapp.md)** — the three practical text-entry channels for hundreds of millions of African users, with channel-by-channel design implications and NLP problems each magnifies. *Available now.*
 - **Edge devices and cheap-hardware evaluation** — quantised model inference, Android Go targets, memory budgets that Kaggle Colab notebooks cannot exercise. Coming next.
 - **Multilingual switching within a session** — real users routinely code-switch across two or three languages in one conversation. Model behaviour and UI behaviour both need to handle this without a "language picker" round-trip. Coming next.
 - **Non-standard scripts in real UIs** — Ajami (Arabic-script Hausa/Wolof/Fulani), Ge'ez (Amharic/Tigrinya/Tigre), N'Ko (Manding), and the ongoing question of orthographic variants within a single language. Coming next.
