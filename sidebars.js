@@ -125,6 +125,7 @@ const sidebars = {
       chapter('Dataset Lifecycle', '9_dataset-lifecycle'),
       chapter('Deployment', 'deployment'),
       chapter('Cross-language transfer', 'cross-language-transfer'),
+      chapter('Long-tail language onboarding', 'long-tail-language'),
     ]),
 
     chapter('Case Studies', 'case-studies'),

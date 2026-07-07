@@ -67,11 +67,15 @@ Is your language covered by MasakhaNER 2?
     │     chapter for family-by-family pivot guidance. Only then design a
     │     small validation corpus in your target language.
     └── No — the language is genuinely uncovered.
-        → You need to build a corpus. Read chapters 2, 3, and 4 of this
-          playbook (Data Collection, Annotation Design, Data Quality) in
-          order, and MasakhaNER 2's annotation guidelines before you write
-          your own. Aim for 5-10k sentences to start, following the
-          MasakhaNER 2 partitioning.
+        → You need to build a corpus. Read the
+          [long-tail language onboarding](../long-tail-language/index.md)
+          chapter first — it lays out the realistic milestones and the
+          Step-0 community, orthography, and IP decisions that determine
+          whether the project succeeds. Then chapters 2, 3, and 4 of this
+          playbook (Data Collection, Annotation Design, Data Quality),
+          and MasakhaNER 2's annotation guidelines before you write your
+          own. Aim for 5-10k sentences to start, following the MasakhaNER
+          2 partitioning.
 ```
 
 ## What it will actually cost you

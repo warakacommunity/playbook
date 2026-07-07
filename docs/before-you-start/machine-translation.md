@@ -48,8 +48,10 @@ Is your language pair covered by LAFAND-MT (16 African-English pairs)?
     │         in your target domain first — the NLLB numbers on
     │         out-of-distribution content can be misleading.
     └── No — genuinely uncovered.
-        → Language selection is now the primary decision. See the
-          [cross-language transfer](../cross-language-transfer/index.md)
+        → Read the [long-tail language onboarding](../long-tail-language/index.md)
+          chapter first for the realistic milestones and community /
+          orthography / IP decisions that must come before data
+          collection. Then use the [cross-language transfer](../cross-language-transfer/index.md)
           chapter for family-by-family pivot guidance, build a small
           parallel corpus (500-2000 sentences) as an evaluation set
           FIRST, and only then decide whether corpus creation, cross-
