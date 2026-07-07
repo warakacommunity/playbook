@@ -13,8 +13,8 @@ Most published NLP benchmarks are run on hardware nobody in the target African-l
 
 There is no single "African phone" any more than there is a single European phone; but the practical device mix is heavily skewed toward the low end of what the ML press treats as normal. Design against the real distribution, not the median press review.
 
-- **Android Go phones (2 GB RAM, ARM Cortex-A53 class, no NNAPI).** Sub-$80 handsets. Still the fastest-growing tier in many African markets. Inference budget: <100 MB in RAM, <200 MB on disk, no acceleration.
-- **Mid-range Android (4-6 GB RAM, ARM Cortex-A75 class, NNAPI available on newer devices).** $80-$300 handsets. The majority tier in urban markets today. Inference budget: <400 MB in RAM, <800 MB on disk, NNAPI or on-device NPU on Snapdragon-8-Gen-adjacent chipsets.
+- **Android Go phones (2 GB RAM, ARM Cortex-A53 class, no NNAPI).** Sub-$80 handsets. Still the fastest-growing tier in many African markets. Inference budget: under 100 MB in RAM, under 200 MB on disk, no acceleration.
+- **Mid-range Android (4-6 GB RAM, ARM Cortex-A75 class, NNAPI available on newer devices).** $80-$300 handsets. The majority tier in urban markets today. Inference budget: under 400 MB in RAM, under 800 MB on disk, NNAPI or on-device NPU on Snapdragon-8-Gen-adjacent chipsets.
 - **High-end Android and modern iOS.** $300+. The lucrative tier commercial products target, and a shrinking share of the actual African deployment surface if reach matters. Inference budget: multi-GB models feasible, GPU or on-device NPU available.
 - **KaiOS feature phones (Cat B4B) with Firefox OS heritage.** 512 MB - 1 GB RAM. A large residual user base for text-only NLP use cases via web app or PWA. Inference budget: send-to-server, essentially no on-device NLP.
 - **Basic feature phones (no smart OS).** Text via SMS or USSD only; the [SMS/USSD/WhatsApp chapter](./sms-ussd-whatsapp.md) is the design reference.
@@ -31,8 +31,8 @@ Deployment code that targets one tier will not run acceptably on the others. Dec
 
 Reproducing the numbers from the [offline chapter](./offline.md#model-size-budget) because they are the load-bearing part of edge design, with elaboration on how to hit them.
 
-- **Android Go**: model on disk <200 MB, in RAM <100 MB, inference in tens to hundreds of milliseconds per short sentence. Sub-100M-parameter models quantised to INT8. Practical: distilled encoder-only models (mBERT-small, DistilBERT-multilingual with LoRA fine-tuning), quantised TrOCR-small, distilled TTS voice models. Full-scale Whisper is out; Whisper-tiny quantised is in.
-- **Mid-range Android**: <800 MB on disk, <400 MB in RAM. Distilled 600M-parameter models with careful INT8 quantisation. Practical: NLLB-200-distilled at INT8, AfroXLMR-base with LoRA adapters, MMS ASR adapters, Whisper-small quantised.
+- **Android Go**: model on disk under 200 MB, in RAM under 100 MB, inference in tens to hundreds of milliseconds per short sentence. Sub-100M-parameter models quantised to INT8. Practical: distilled encoder-only models (mBERT-small, DistilBERT-multilingual with LoRA fine-tuning), quantised TrOCR-small, distilled TTS voice models. Full-scale Whisper is out; Whisper-tiny quantised is in.
+- **Mid-range Android**: under 800 MB on disk, under 400 MB in RAM. Distilled 600M-parameter models with careful INT8 quantisation. Practical: NLLB-200-distilled at INT8, AfroXLMR-base with LoRA adapters, MMS ASR adapters, Whisper-small quantised.
 - **High-end phones**: multi-GB feasible but the download UX becomes the binding constraint. See the model-download UX section in the [offline chapter](./offline.md#model-download-ux-—-the-part-that-gets-ignored).
 
 The right question at any tier is not "will it fit"; it is "will it fit, run in a user-tolerable time, and stay under the thermal + battery envelope." All three tests must pass; passing only "will it fit" is a common failure.
