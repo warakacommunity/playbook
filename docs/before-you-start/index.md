@@ -23,12 +23,12 @@ For every core task, this chapter answers the same four questions:
 - [Sentiment analysis](./sentiment.md) — built on AfriSenti (14 languages) and NaijaSenti.
 - [Hate speech and content safety](./hate-speech.md) — for teams working on a task whose failure modes are qualitatively different from classification-as-usual.
 - [Text-to-Speech](./tts.md) — built on Meta MMS-TTS, VITS/XTTS/Kokoro architectures, and the voice-consent framing that TTS uniquely requires.
+- [Question Answering](./qa.md) — built on AfriQA, TyDi QA, mDPR / mContriever retrieval, with cross-lingual open-domain framing.
 
 ## Coming next
 
 The chapters below will be added in this order, each following the same four-part structure. Contribute a section for a task you know well — see the [contribution guide](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#ways-to-contribute).
 
-- **Question answering** — building on AfriQA, cross-lingual retrieval work.
 - **OCR and document AI** — building on Ajami, Ge'ez, and Latin-script African-language OCR corpora.
 
 ## The one rule
