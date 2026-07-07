@@ -24,12 +24,11 @@ For every core task, this chapter answers the same four questions:
 - [Hate speech and content safety](./hate-speech.md) — for teams working on a task whose failure modes are qualitatively different from classification-as-usual.
 - [Text-to-Speech](./tts.md) — built on Meta MMS-TTS, VITS/XTTS/Kokoro architectures, and the voice-consent framing that TTS uniquely requires.
 - [Question Answering](./qa.md) — built on AfriQA, TyDi QA, mDPR / mContriever retrieval, with cross-lingual open-domain framing.
+- [OCR and document AI](./ocr.md) — built on Tesseract, TrOCR, Kraken/Calamari, PaddleOCR, and community corpora across Latin, Ge'ez, Ajami, and other African scripts.
 
-## Coming next
+## What's next
 
-The chapters below will be added in this order, each following the same four-part structure. Contribute a section for a task you know well — see the [contribution guide](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#ways-to-contribute).
-
-- **OCR and document AI** — building on Ajami, Ge'ez, and Latin-script African-language OCR corpora.
+All seven initially-planned Before-You-Start pages are now available. Future additions — for languages, scripts, or task variants not yet covered — follow the same four-part structure: *what exists / fork-or-fresh / cost / canonical link*, with editorial opinions attached to each recommendation. See the [contribution guide](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#ways-to-contribute) to propose one.
 
 ## The one rule
 

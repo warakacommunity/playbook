@@ -1,0 +1,118 @@
+---
+sidebar_position: 9
+title: OCR and document AI
+---
+
+# Before You Start — OCR and document AI
+
+*Last reviewed: 2026-07-07.*
+
+Optical Character Recognition (OCR) is the modality where the gap between "widely-covered by commercial tools" and "usable for African-language documents" is largest. Off-the-shelf OCR services handle Latin-script African languages decently for clean printed text, degrade sharply on handwriting, historical scans, and non-standard fonts, and are essentially unusable on **Ajami** (Arabic-script African languages), **Ge'ez** (Ethiopic), **N'Ko** (Manding), and other non-Latin African writing systems. This page is the practical guide to what actually exists, and how to scope a new OCR project against the realities of the target document.
+
+## What already exists
+
+OCR resources cluster by script. The Latin-script African-language landscape is comparatively well-served by general OCR tools; the non-Latin script landscape is where community and research work is concentrated.
+
+### General-purpose OCR engines and their African-language coverage
+
+- **[Tesseract 5](https://github.com/tesseract-ocr/tesseract)** — the reference open-source OCR engine. Ships with trained models for many African languages (Amharic, Swahili, Hausa, Yoruba, and others). Quality varies: reasonable on clean printed Latin-script text, weaker on Ge'ez script, poor on handwriting. Language-specific `.traineddata` files are on the [Tesseract data repo](https://github.com/tesseract-ocr/tessdata_best).
+- **[EasyOCR](https://github.com/JaidedAI/EasyOCR)** — Python OCR library with broad script coverage; supports many African languages via community-contributed models. Easier to integrate than Tesseract for prototyping.
+- **[PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR)** — Baidu's OCR toolkit with strong multilingual support and good handling of layout / table extraction; African-language coverage varies by release.
+- **[TrOCR (Microsoft)](https://arxiv.org/abs/2109.10282)** ([Li et al., 2021](https://arxiv.org/abs/2109.10282)) — transformer-based OCR that is straightforward to fine-tune on a target script; a strong starting point for any African-language OCR project where the general engines are inadequate.
+- **[Kraken](https://kraken.re/)** and **[Calamari](https://github.com/Calamari-OCR/calamari)** — the historical-document OCR toolkits. Purpose-built for scanned print and manuscript work; used across the digital humanities community and applicable to African-language document archives.
+- **Commercial APIs** — [Google Cloud Vision OCR](https://cloud.google.com/vision/docs/ocr), [AWS Textract](https://aws.amazon.com/textract/), [Azure AI Vision](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview-ocr) — strong on clean printed Latin-script African-language text, weaker on Ajami and Ge'ez, weakest on handwriting. Data-sovereignty implications apply — see the [legal-consent chapter](../legal-consent/index.md).
+
+### Datasets — the confirmed set
+
+- **[Ge'ez script (Amharic, Tigrinya) OCR corpora](https://link.springer.com/article/10.1007/s10032-020-00352-2)** — several published Amharic printed and handwritten OCR datasets exist across recent years. Verify each corpus's guidelines, script variety, and quality before use; the Ethiopic OCR literature is fragmented across venues.
+- **[Kelela / OCR4All African community efforts](https://github.com/OCR4all)** — community-curated printed-text OCR corpora for African languages, small but growing. Check current releases before assuming coverage.
+- **[BibleOCR](https://arxiv.org/abs/2207.03546)** — the same BibleTTS project also produces OCR-relevant scanned Bible text data for many African languages. Domain-restricted (formal religious register) but useful as a bootstrap.
+- **Historical-newspaper archives** — where they exist for African languages (colonial-era papers, post-independence archives), they are the reference corpus for historical OCR work. Availability varies by country and institution.
+
+### Datasets — worth knowing about, use with care
+
+- **Ajami handwritten and printed corpora** — small research corpora exist for Ajami Hausa, Ajami Wolof, Ajami Fulfulde. Coverage is limited and the field is genuinely research-grade.
+- **N'Ko OCR** — small community efforts for Manding-language N'Ko script. Reference material is scarce.
+- **Web-scraped and PDF-derived text** — abundant in principle, quality-poor in practice. Kreutzer et al. (2022) type quality problems apply strongly.
+
+**Editorial opinion.** For clean printed Latin-script African-language text, a commercial OCR API or Tesseract with the appropriate `.traineddata` is often good enough for a pilot; measure error rate on your target document type before committing. For handwriting, non-standard fonts, degraded scans, or **any** non-Latin script (Ge'ez, Ajami, N'Ko), plan on a fine-tuning or from-scratch project — off-the-shelf tools will not meet a deployment bar. TrOCR fine-tuning is the practical baseline for these cases.
+
+## Fork or start fresh?
+
+```
+Is your target text clean printed Latin-script African-language content?
+├── Yes — is off-the-shelf accuracy adequate for your use case?
+│   ├── Yes → Deploy Tesseract with the appropriate .traineddata, or a
+│   │        commercial API subject to the data-sovereignty constraints.
+│   │        Measure CER on a 500-page representative sample; do NOT
+│   │        rely on the API vendor's claimed accuracy.
+│   └── No, accuracy is inadequate → Fine-tune TrOCR on 2,000-10,000
+│       character-annotated training images from your target document
+│       type. Feasible on Colab / Kaggle.
+├── Handwritten Latin-script content
+│   → Requires either Kraken/Calamari with fine-tuning on your target
+│     handwriting style, or TrOCR fine-tuning. Budget 3-6 months for
+│     10,000-20,000 annotated character images, plus tooling for
+│     handwriting-specific evaluation.
+├── Ge'ez script (Amharic, Tigrinya, Ge'ez liturgical)
+│   → Read the Ethiopic OCR literature; there is no single canonical
+│     resource. Fine-tune TrOCR on the closest published corpus for
+│     your script variety. Handwritten and printed Ge'ez are separate
+│     projects at the model level.
+├── Ajami (Arabic script Hausa / Wolof / Fulfulde / Kanuri etc.)
+│   → This is genuinely research-grade. Start with a small pilot
+│     corpus (500-2,000 character images), measure whether existing
+│     Arabic-script OCR transfers usefully to the Ajami variety, and
+│     scope from there. Involve script-community experts from the
+│     start.
+└── Any other non-Latin script (N'Ko, Vai, Tifinagh, others)
+    → Genuinely uncovered. Read the [long-tail language onboarding
+      chapter](../long-tail-language/index.md). Plan a multi-month
+      corpus-building effort with script-community experts BEFORE
+      attempting model training.
+```
+
+## What it will actually cost you
+
+OCR data costs differ dramatically between clean printed text (cheap) and handwritten or non-standard-script text (expensive). Rough order-of-magnitude:
+
+- **Deploying Tesseract or a commercial API on clean printed Latin-script.** One to two person-weeks including evaluation. Effectively free at pilot scale.
+- **Fine-tuning TrOCR on 2,000-10,000 annotated character images from a target domain.** Two to five person-weeks; twenty to eighty GPU-hours. Colab Pro / Kaggle. Annotation cost is the dominant term: character-box annotation runs $0.15-$0.50 per character-line at fair community rates, and a decent corpus is 5,000-15,000 lines.
+- **Building a handwriting OCR corpus for a single Latin-script African language.** Six to twelve months elapsed; four to ten person-months for annotation, plus 1-2 person-months of lead effort for guidelines and script-community consultation.
+- **Building a Ge'ez script OCR corpus (printed).** Six to twelve months; five to twelve person-months. Ge'ez script has hundreds of unique glyphs (character-variant combinations); scale annotation effort accordingly.
+- **Building an Ajami OCR corpus.** Nine to eighteen months; six to fifteen person-months. Ajami requires deep script-community expertise for consistent annotation; treat it as a research-grade effort with community-consultation baked in from the start.
+- **Historical-document OCR** for any African language — assume the printed-text budgets 2-3x higher because degraded scans, non-standard fonts, and layout complexity all add work.
+
+## Known limitations to watch for
+
+- **Font sensitivity dominates for printed text.** An OCR model trained on modern typefaces fails on colonial-era typefaces, on Bible-printing fonts, on newspaper condensed fonts. If your target document set uses fonts your training data did not, expect an accuracy drop of 5-20 CER points. Diversify training fonts.
+- **Layout and table extraction are separate problems.** A model that reads text well fails on tabular data, multi-column layouts, or forms — because the extraction task is layout-driven, not character-driven. If your use case involves forms, budgets, government documents, or newspapers, plan on a layout model alongside the text model. PaddleOCR handles this natively; TrOCR does not.
+- **Handwriting is not one problem — it is a spectrum.** Cursive vs printed handwriting; individual-writer vs multi-writer; consistent-instructions vs found-documents. Each cell in the matrix is essentially a separate model. Do not treat "handwritten Hausa" as a single training target.
+- **Ge'ez script variant complexity is under-appreciated.** The script has hundreds of composed characters (base × vowel/modification); annotators need explicit guidance on which variants are separate classes vs canonical unifications. Get this wrong and the model learns spurious distinctions.
+- **Ajami orthography is not standardised.** Different Ajami traditions (Hausa, Wolof, Fulfulde, Kanuri) use overlapping-but-distinct Arabic character subsets and diacritics. A single "Ajami OCR" model is not a coherent target; scope per tradition.
+- **Diacritics load-bearing in many scripts.** Yoruba tone marks, Hausa low-tone marks, Igbo diacritics — a model that reads the base character but misses the diacritic produces semantically-wrong output. Evaluate diacritic accuracy separately from base-character accuracy.
+- **Cross-script transfer is genuinely poor.** Unlike cross-lingual transfer for text tasks, cross-script transfer for OCR breaks quickly — a Latin-script model cannot bootstrap Ge'ez OCR without effectively starting from scratch on the visual side. See the [cross-language transfer chapter](../cross-language-transfer/index.md) for the script-barrier discussion.
+- **Historical documents need domain experts.** OCR of 19th- or early-20th-century African-language newspapers, missionary print, or colonial-era archives is a digital-humanities project as much as an ML project. Involve archivists and historians; do not treat these as a general OCR target.
+
+## The canonical fine-tuning link
+
+For fine-tuning TrOCR on a specific script and language, use the [Hugging Face TrOCR documentation](https://huggingface.co/docs/transformers/model_doc/trocr). For Tesseract retraining, the [Tesseract training documentation](https://tesseract-ocr.github.io/tessdoc/tess5/TrainingTesseract-5.html) is the reference; the process is more manual than TrOCR and typically produces smaller models suitable for embedded deployment. For Kraken and Calamari, the respective project websites carry the canonical training instructions and are the right choice for historical-document work.
+
+For evaluation:
+- **Character Error Rate (CER)** as the primary metric — playbook policy, and appropriate here because word-boundary conventions vary across African-language OCR conventions. Use [jiwer](https://github.com/jitsi/jiwer) or the OCR-specific tooling from the training toolkit.
+- **Layout-preserving evaluation** for forms and tables — compare extracted cell contents against reference structure, not just raw text.
+- **Human review** of a random sample — the CER number can hide systematic errors (specific character always misread, diacritic drop-off in specific contexts) that only human review catches.
+
+## Further reading
+
+- [Tesseract training documentation](https://tesseract-ocr.github.io/tessdoc/tess5/TrainingTesseract-5.html) — the canonical training reference for the widely-deployed open-source OCR engine.
+- [TrOCR paper (Li et al., 2021)](https://arxiv.org/abs/2109.10282) — the transformer OCR architecture that is the current fine-tuning workhorse.
+- [Kraken project documentation](https://kraken.re/) — the digital-humanities historical-document OCR toolkit; useful for anyone working on pre-1980 African-language print.
+- [Meyer et al., 2022 — BibleTTS + BibleOCR context](https://arxiv.org/abs/2207.03546) — background on Bible-derived OCR data for African languages.
+- [PaddleOCR paper (Du et al., 2020)](https://arxiv.org/abs/2009.09941) — the layout-aware multilingual OCR system, useful reading if forms / tables are in scope.
+- [Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/) — indirectly relevant: web-scraped OCR-derived corpora inherit the quality problems it identifies.
+- [Common Crawl statistics on African-language content](https://commoncrawl.org/) — for anyone considering web-scraped OCR-adjacent data at scale.
+
+---
+
+**Contributor's note.** This is the seventh and final of the initially-planned Before-You-Start pages. If you work with Ajami, Ge'ez, N'Ko, or historical-document OCR and want to contribute, the highest-value additions are per-script deep-dives (specific font varieties, specific archival corpora, annotation-workflow templates) that this landing page cannot cover at depth. Consider submitting a dedicated sub-page or a [Case Studies](../case-studies/index.md) entry.
