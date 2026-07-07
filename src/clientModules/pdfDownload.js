@@ -28,8 +28,22 @@ function ensureButton() {
   }
   if (existing) return; // already present on this page
 
+  // Anchor the button in the content flow, right after the H1, so it
+  // never overlaps with in-page callouts (:::tip / :::warning) that
+  // Docusaurus admonitions render at the top of a page. Fall back to
+  // the article start if the H1 is not yet in the DOM (rare — we run
+  // after two rAF beats already, but React lazy content can shift).
+  const article = document.querySelector('article');
+  if (!article) return;
+  const h1 = article.querySelector('h1');
+  const anchor = h1 || article.firstElementChild;
+  if (!anchor) return;
+
+  const wrapper = document.createElement('div');
+  wrapper.id = 'afri-pdf-download-button';
+  wrapper.className = 'afri-pdf-download-button-wrapper';
+
   const button = document.createElement('button');
-  button.id = 'afri-pdf-download-button';
   button.type = 'button';
   button.className = 'afri-pdf-download-button';
   button.setAttribute('aria-label', 'Download this template as PDF');
@@ -46,7 +60,8 @@ function ensureButton() {
     window.setTimeout(() => window.print(), 60);
   });
 
-  document.body.appendChild(button);
+  wrapper.appendChild(button);
+  anchor.insertAdjacentElement('afterend', wrapper);
 }
 
 export function onRouteDidUpdate() {
