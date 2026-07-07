@@ -1,6 +1,8 @@
 ---
 sidebar_position: 4
 title: Edge devices and cheap-hardware inference
+last_update:
+  date: 2026-07-07
 ---
 
 # Edge devices and cheap-hardware inference

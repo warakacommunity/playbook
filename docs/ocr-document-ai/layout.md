@@ -1,6 +1,8 @@
 ---
 title: Layout & document understanding
 sidebar_position: 4
+last_update:
+  date: 2026-07-07
 ---
 
 # Layout & document understanding

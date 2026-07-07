@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "inject-last-update": "node scripts/inject-last-update.mjs",
+    "prestart": "yarn inject-last-update",
+    "prebuild": "yarn inject-last-update",
     "start": "docusaurus start",
     "start:ha": "docusaurus start --locale ha",
     "start:am": "docusaurus start --locale am",

@@ -1,6 +1,8 @@
 ---
 title: Image captioning
 sidebar_position: 3
+last_update:
+  date: 2026-07-07
 ---
 
 # Image captioning

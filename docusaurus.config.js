@@ -93,13 +93,15 @@ const config = {
           routeBasePath: "/AfriPlaybook",
           sidebarPath: "./sidebars.js",
           breadcrumbs: false,
-          // Auto-generated "Last updated on <date> by <author>" is disabled
-          // because Docusaurus's git plugin falls back to "Oct 14, 2018 by Author"
-          // on shallow-clone builds and on files without commit history. Each
-          // playbook page maintains its own "Last reviewed: YYYY-MM-DD" line at
-          // the top of the body, which is the authoritative freshness signal.
-          showLastUpdateTime: false,
-          showLastUpdateAuthor: false,
+          // "Last updated" is populated primarily from each page's
+          // last_update frontmatter (auto-injected from the "Last reviewed:"
+          // line by scripts/inject-last-update.js, run as a prebuild step).
+          // On files without frontmatter, Docusaurus falls back to git commit
+          // metadata — and if that also fails, to its own "Oct 14, 2018 by
+          // Author" placeholder. The prebuild step is what prevents the
+          // placeholder from reaching users.
+          showLastUpdateTime: true,
+          showLastUpdateAuthor: true,
           // progress: false, // ADD THIS LINE TO PREVENT THE CRASH
           // editUrl removed — "Suggest Edit" modal handles community edits instead.
           remarkPlugins: [remarkMath],

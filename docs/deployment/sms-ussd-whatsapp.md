@@ -1,6 +1,8 @@
 ---
 sidebar_position: 3
 title: SMS, USSD, and WhatsApp
+last_update:
+  date: 2026-07-07
 ---
 
 # SMS, USSD, and WhatsApp as NLP surfaces

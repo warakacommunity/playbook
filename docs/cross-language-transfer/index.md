@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+last_update:
+  date: 2026-07-07
 ---
 
 # Cross-language transfer for African languages

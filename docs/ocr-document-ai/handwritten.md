@@ -1,6 +1,8 @@
 ---
 title: Handwritten text recognition
 sidebar_position: 3
+last_update:
+  date: 2026-07-07
 ---
 
 # Handwritten text recognition

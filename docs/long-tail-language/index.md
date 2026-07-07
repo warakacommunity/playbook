@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+last_update:
+  date: 2026-07-07
 ---
 
 # Long-tail language onboarding
