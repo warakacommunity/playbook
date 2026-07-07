@@ -5,7 +5,7 @@ slug: /
 
 # 1. Introduction
 
-:::tip[Help build the AfriPlaybook]
+:::tip[Contribute]
 This playbook is open source and community-owned. You don't need to write a whole chapter to help. Fixing an error, translating a page, or sharing what worked on a real project all count. See [**Built in the open**](#built-in-the-open) below, or jump straight to the [contribution guide](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#ways-to-contribute).
 :::
 

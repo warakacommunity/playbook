@@ -69,7 +69,7 @@ Something irreversible or unsafe — data loss, consent, security. Red.
 Give a box your own heading by putting it in square brackets:
 
 ```markdown
-:::tip[Help build the AfriPlaybook]
+:::tip[Contribute]
 You don't need to write a whole chapter to help.
 :::
 ```
@@ -147,7 +147,7 @@ So: don't type a chapter title at the top of your Word file. Start straight into
 Word has no built-in admonition, so use the convention below. The simplest, most reliable way is to **type the `:::` fences as plain text**, each on its own line, in a normal (Body) paragraph — *not* styled as a heading:
 ```
 
- :::tip[Help build the AfriPlaybook]
+ :::tip[Contribute]
 
  You don't need to write a whole chapter to help.
 
