@@ -13,30 +13,31 @@
 /* ── Breadcrumb: choices taken so far ─────────────────────── */
 .breadcrumb {
   list-style: none;
-  padding: 0 0 0 14px;
+  padding: 0;
   margin: 0 0 22px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-left: 3px solid var(--ifm-color-primary);
 }
+/* Natural text flow (not flex): the question wraps normally, and
+   the arrow+answer stick together as one nowrap unit so the arrow
+   never orphans onto its own line. */
 .breadcrumbItem {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 6px 10px;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.7;
 }
 .stepQuestion {
   color: var(--ifm-color-emphasis-700);
   font-weight: 400;
 }
+.stepArrowAnswer {
+  white-space: nowrap;
+}
 .stepArrow {
   color: var(--ifm-color-primary);
   font-weight: 700;
   font-size: 0.85rem;
-  margin: 0 2px;
+  margin-right: 4px;
 }
 .stepAnswer {
   color: var(--brand-navy);
@@ -44,7 +45,8 @@
   background: rgba(var(--brand-rgb), 0.09);
   padding: 2px 10px;
   border-radius: 999px;
-  line-height: 1.4;
+  display: inline-block;
+  vertical-align: baseline;
 }
 
 /* ── Question ─────────────────────────────────────────────── */
@@ -104,21 +106,37 @@
   box-shadow: 0 2px 8px rgba(var(--brand-rgb), 0.24);
 }
 
-/* ── Leaf recommendation ──────────────────────────────────── */
+/* ── Leaf recommendation ──────────────────────────────────────
+   Label + explanation box read as ONE unit: the eyebrow
+   sits inside the top of the card as a section header, with
+   a subtle divider between it and the recommendation prose. */
 .result {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
+.resultCard {
+  background: #fff;
+  /* Very slight forest-green tint — matches the ✓ eyebrow colour
+     without shouting; reads as "this is the outcome" without
+     drawing the eye off the prose. */
+  border: 1px solid rgba(31, 91, 63, 0.22);
+  border-radius: 10px;
+  overflow: hidden;
+}
 .resultLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px 10px;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--brand-green);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  width: 100%;
+  box-sizing: border-box;
 }
 .resultLabel::before {
   content: "✓";
@@ -128,11 +146,7 @@
   line-height: 1;
 }
 .resultText {
-  background: #fff;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-left: 4px solid var(--brand-green);
-  border-radius: 10px;
-  padding: 18px 22px;
+  padding: 18px 22px 20px;
   font-size: 1rem;
   line-height: 1.65;
   color: var(--ifm-font-color-base);

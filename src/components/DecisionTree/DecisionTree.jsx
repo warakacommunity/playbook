@@ -65,8 +65,11 @@ function DecisionTreeInner({ tree }) {
           {breadcrumb.map((step, i) => (
             <li key={i} className={styles.breadcrumbItem}>
               <span className={styles.stepQuestion}>{step.question}</span>
-              <span className={styles.stepArrow} aria-hidden="true">→</span>
-              <span className={styles.stepAnswer}>{step.chosen}</span>
+              {' '}
+              <span className={styles.stepArrowAnswer}>
+                <span className={styles.stepArrow} aria-hidden="true">→</span>
+                <span className={styles.stepAnswer}>{step.chosen}</span>
+              </span>
             </li>
           ))}
         </ol>
@@ -74,8 +77,10 @@ function DecisionTreeInner({ tree }) {
 
       {isLeaf ? (
         <div className={styles.result} role="status">
-          <div className={styles.resultLabel}>Recommendation</div>
-          <div className={styles.resultText}>{node.result}</div>
+          <div className={styles.resultCard}>
+            <div className={styles.resultLabel}>Recommendation</div>
+            <div className={styles.resultText}>{node.result}</div>
+          </div>
           <div className={styles.actions}>
             <button
               type="button"

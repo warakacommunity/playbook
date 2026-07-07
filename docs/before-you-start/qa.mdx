@@ -120,6 +120,7 @@ QA corpora cost more than sentiment or NER corpora of the same size, at every sc
 - **Building a new QA corpus for an uncovered language, aiming for 2,000-5,000 question-answer pairs.** Six to fifteen months elapsed; five to fifteen person-months. Question authoring is skilled work; two to four expert authors + adjudicators is the workable team size.
 - **A defensible evaluation-only QA set** (500-1,000 questions). Two to four months; one to three person-months.
 - **Human evaluation of QA outputs.** Two to three person-weeks per evaluator per 200 items — QA evaluation is slower than sentiment or NER evaluation because the evaluator has to read the question, the retrieved passage, and the answer and judge the joint quality.
+- **Embedding-based metrics for generative QA — a useful second opinion.** For generative-QA outputs (LLM readers, seq2seq readers producing free-form answers) where exact-match and token F1 under-report semantic correctness, run **[BERTScore](https://github.com/Tiiiger/bert_score)** or **[SSA-COMET](https://huggingface.co/masakhane/africomet-mtl)** (MT variant, applicable to reference-based free-text scoring on African languages) against a reference answer for a signal on semantic agreement. **[BLEURT](https://github.com/google-research/bleurt)** and **[LLM-as-judge](https://arxiv.org/abs/2306.05685)** setups are also worth spot-checking. Same discipline as MT: never a headline number, always a comparison-across-model-versions signal, always alongside human evaluation.
 
 ## Known limitations to watch for
 
