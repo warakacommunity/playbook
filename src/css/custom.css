@@ -1135,105 +1135,47 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Template PDF-download button + branded print stylesheet
+   TOC-rail action row: Contribute + (template pages) Download PDF
    ─────────────────────────────────────────────────────────────
-   Templates are content designed to be forked and printed. A
-   client module (src/clientModules/pdfDownload.js) injects a
-   floating "Download as PDF" button on template pages; this
-   block styles that button and the resulting print output so
-   the PDF carries the AfriAnnotate/Masakhane brand rather than
-   a plain white-on-black Docusaurus dump.
+   The right-hand TOC column carries the page's calls to action.
+   Contribute is on every doc; Download PDF joins it on template
+   pages. Layout: two buttons side by side, wrapping to a stack
+   only if the TOC column gets narrower than they can fit.
+   A companion @media print stylesheet below turns the whole
+   printed PDF into the AfriPlaybook brand palette.
    ───────────────────────────────────────────────────────────── */
 
-/* Fallback wrapper: sits in the content flow right after the H1
-   on template pages that don't open with an admonition. Small
-   top/bottom margins give the button breathing room. */
-.afri-pdf-download-button-wrapper {
-  display: block;
-  margin: 4px 0 20px;
+.toc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1rem;
 }
 
-/* Preferred layout: template pages that open with a :::tip /
-   :::warning / :::info / :::note get the admonition and the PDF
-   button laid out in a flex row (admonition left, button right).
-   The row is stickied at the top of the viewport so the "Start
-   to contribute" or "Disclaimer" callout stays visible as the
-   reader scrolls through the template, and the download button
-   is always one click away. */
-.afri-pdf-download-row {
-  position: sticky;
-  top: var(--ifm-navbar-height, 60px);
-  z-index: 10;
-  display: flex;
-  gap: 16px;
-  align-items: stretch;
-  margin: 4px 0 24px;
-  padding: 8px 0;
-  background: var(--ifm-background-color, #fff);
-}
-.afri-pdf-download-row > .theme-admonition,
-.afri-pdf-download-row > .admonition {
-  flex: 1;
+.toc-action-button {
+  font-size: 0.74rem !important;
+  font-weight: 600 !important;
+  padding: 0.4rem 0.7rem !important;
+  border-radius: 6px !important;
+  flex: 1 1 auto;
   min-width: 0;
-  margin: 0 !important;
-  align-self: stretch;
-}
-.afri-pdf-download-row__button-col {
-  flex-shrink: 0;
-  display: flex;
+  white-space: nowrap;
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  padding: 4px 0;
+  gap: 6px;
 }
 
-/* Mobile: mobile browser chrome (address bar) already competes
-   for the top viewport strip, so sticky admonitions there fight
-   the OS chrome and just feel cramped. Stack the row and disable
-   sticky below the tablet breakpoint. */
-@media (max-width: 768px) {
-  .afri-pdf-download-row {
-    position: static;
-    flex-direction: column;
-    padding: 0;
-  }
-  .afri-pdf-download-row__button-col {
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
+.toc-action-button--secondary {
+  background: transparent !important;
+  color: var(--ifm-color-primary) !important;
+  border: 1px solid var(--ifm-color-primary) !important;
 }
-
-.afri-pdf-download-button {
-  background: var(--ifm-color-primary);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-family: var(--ifm-font-family-base);
-  font-weight: 600;
-  font-size: 0.85rem;
-  letter-spacing: 0.01em;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 2px 8px rgba(var(--brand-rgb), 0.25),
-              0 1px 2px rgba(31, 24, 16, 0.08);
-  transition: background 0.18s ease, box-shadow 0.18s ease,
-              transform 0.18s ease;
-}
-.afri-pdf-download-button:hover,
-.afri-pdf-download-button:focus-visible {
-  background: var(--ifm-color-primary-dark);
-  box-shadow: 0 4px 14px rgba(var(--brand-rgb), 0.35),
-              0 2px 4px rgba(31, 24, 16, 0.12);
-  transform: translateY(-1px);
-  outline: none;
-}
-.afri-pdf-download-button:active {
-  transform: translateY(0);
-}
-.afri-pdf-download-button svg {
-  flex-shrink: 0;
+.toc-action-button--secondary:hover,
+.toc-action-button--secondary:focus-visible {
+  background: rgba(var(--brand-rgb), 0.08) !important;
+  color: var(--ifm-color-primary-dark) !important;
+  border-color: var(--ifm-color-primary-dark) !important;
 }
 
 /* ── Print-only: strip chrome, apply brand ───────────────────── */
@@ -1249,23 +1191,12 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   .theme-last-updated,
   .pagination-nav,
   .breadcrumbs,
-  .afri-pdf-download-button,
-  .afri-pdf-download-button-wrapper,
-  .afri-pdf-download-row__button-col,
+  .toc-actions,
+  .no-print,
   footer.footer,
   .toc-highlight,
   [class*="tableOfContents"] {
     display: none !important;
-  }
-
-  /* Sticky row on screen — flatten for print so the admonition
-     prints as a regular block and doesn't leave phantom space. */
-  .afri-pdf-download-row {
-    position: static !important;
-    display: block !important;
-    padding: 0 !important;
-    margin: 0 0 12px !important;
-    background: transparent !important;
   }
 
   html,

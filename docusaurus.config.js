@@ -62,7 +62,6 @@ const config = {
   clientModules: [
     require.resolve("./src/clientModules/githubStars.js"),
     require.resolve("./src/clientModules/externalLinks.js"),
-    require.resolve("./src/clientModules/pdfDownload.js"),
   ],
 
   // Cloudflare Web Analytics — privacy-friendly, no cookies, no consent banner needed.
