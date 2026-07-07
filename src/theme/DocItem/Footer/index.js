@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Footer from "@theme-original/DocItem/Footer";
-import Link from "@docusaurus/Link";
 import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import { usePluginData } from "@docusaurus/useGlobalData";
+import CitationModal from "@site/src/components/CitationModal";
 
 function useDocContributors(metadata) {
   const data = usePluginData("doc-contributors");
@@ -32,11 +32,18 @@ export default function FooterWrapper(props) {
   const minutes = useReadingTime();
   const { metadata } = useDoc();
   const contributors = useDocContributors(metadata);
+  const [showCite, setShowCite] = useState(false);
 
   return (
     <>
       <div className="theme-doc-meta-row">
-        <Link to="/cite" className="theme-doc-cite-this-page__link">
+        <button
+          type="button"
+          onClick={() => setShowCite(true)}
+          className="theme-doc-cite-this-page__link"
+          aria-haspopup="dialog"
+          aria-expanded={showCite}
+        >
           <svg
             fill="currentColor"
             height="16"
@@ -49,7 +56,7 @@ export default function FooterWrapper(props) {
             <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
           </svg>
           Cite this page
-        </Link>
+        </button>
         {minutes !== null && (
           <span
             className="theme-doc-reading-time"
@@ -93,6 +100,12 @@ export default function FooterWrapper(props) {
         </div>
       )}
       <Footer {...props} />
+      {showCite && (
+        <CitationModal
+          metadata={metadata}
+          onClose={() => setShowCite(false)}
+        />
+      )}
     </>
   );
 }

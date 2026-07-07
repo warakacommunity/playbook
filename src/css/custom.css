@@ -349,18 +349,30 @@ article p,
   font-size: 0.95rem;
 }
 
+/* The cite affordance is now a <button> (opens the CitationModal),
+   not a <Link>. Reset browser button chrome so it visually matches
+   the old link presentation. */
 .theme-doc-cite-this-page__link {
   display: inline-flex;
   align-items: center;
   color: var(--ifm-color-primary);
-  text-decoration: none;
+  background: transparent;
+  border: none;
   border-bottom: 1px dashed transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  text-decoration: none;
   transition: border-color 0.15s ease;
 }
 
-.theme-doc-cite-this-page__link:hover {
+.theme-doc-cite-this-page__link:hover,
+.theme-doc-cite-this-page__link:focus-visible {
   border-bottom-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary);
+  outline: none;
 }
 
 .theme-doc-reading-time {
