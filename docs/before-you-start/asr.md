@@ -3,7 +3,7 @@ sidebar_position: 4
 title: ASR
 ---
 
-# Before You Start — Automatic Speech Recognition
+# Automatic Speech Recognition
 
 *Last reviewed: 2026-07-07.*
 

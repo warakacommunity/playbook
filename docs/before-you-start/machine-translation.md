@@ -3,7 +3,7 @@ sidebar_position: 3
 title: Machine Translation
 ---
 
-# Before You Start — Machine Translation
+# Machine Translation
 
 *Last reviewed: 2026-07-07.*
 

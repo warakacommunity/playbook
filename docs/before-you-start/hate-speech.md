@@ -3,7 +3,7 @@ sidebar_position: 6
 title: Hate speech and content safety
 ---
 
-# Before You Start — Hate speech and content safety
+# Hate speech and content safety
 
 *Last reviewed: 2026-07-07.*
 

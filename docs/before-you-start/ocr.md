@@ -3,7 +3,7 @@ sidebar_position: 9
 title: OCR and document AI
 ---
 
-# Before You Start — OCR and document AI
+# OCR and document AI
 
 *Last reviewed: 2026-07-07.*
 

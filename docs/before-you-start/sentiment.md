@@ -3,7 +3,7 @@ sidebar_position: 5
 title: Sentiment
 ---
 
-# Before You Start — Sentiment analysis
+# Sentiment analysis
 
 *Last reviewed: 2026-07-07.*
 

@@ -49,7 +49,16 @@ const sidebars = {
             'introduction/scope-and-strategy',
           ],
         },
-        chapter('Before You Start', 'before-you-start'),
+        chapterIndexed('Before You Start', 'before-you-start/index', [
+          'before-you-start/ner',
+          'before-you-start/machine-translation',
+          'before-you-start/asr',
+          'before-you-start/sentiment',
+          'before-you-start/hate-speech',
+          'before-you-start/tts',
+          'before-you-start/qa',
+          'before-you-start/ocr',
+        ]),
         'project-management/index',
         chapter('Data Collection', '2_data-collection'),
         'data-governance/index',
@@ -123,7 +132,13 @@ const sidebars = {
       chapter('Evaluation', '8_model-building'),
       chapter('Documentation', '6_documentation'),
       chapter('Dataset Lifecycle', '9_dataset-lifecycle'),
-      chapter('Deployment', 'deployment'),
+      chapterIndexed('Deployment', 'deployment/index', [
+        'deployment/offline',
+        'deployment/sms-ussd-whatsapp',
+        'deployment/edge-devices',
+        'deployment/multilingual-switching',
+        'deployment/non-latin-scripts',
+      ]),
       chapter('Cross-language transfer', 'cross-language-transfer'),
       chapter('Long-tail language onboarding', 'long-tail-language'),
       chapter('Legal, consent, and community IP', 'legal-consent'),
@@ -131,8 +146,17 @@ const sidebars = {
       chapter('Finding current resources', 'finding-resources'),
     ]),
 
-    chapter('Templates', 'templates'),
-    chapter('Case Studies', 'case-studies'),
+    chapterIndexed('Templates', 'templates/index', [
+      'templates/dataset-card',
+      'templates/evaluation-script',
+      'templates/consent-form',
+      'templates/annotation-guidelines',
+      'templates/project-charter',
+      'templates/model-card',
+    ]),
+    chapterIndexed('Case Studies', 'case-studies/index', [
+      'case-studies/_retrospective-template',
+    ]),
 
     {
       type: 'category',

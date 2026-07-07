@@ -3,7 +3,7 @@ sidebar_position: 8
 title: Question Answering
 ---
 
-# Before You Start — Question Answering
+# Question Answering
 
 *Last reviewed: 2026-07-07.*
 

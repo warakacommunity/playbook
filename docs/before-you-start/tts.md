@@ -3,7 +3,7 @@ sidebar_position: 7
 title: Text-to-Speech
 ---
 
-# Before You Start — Text-to-Speech
+# Text-to-Speech
 
 *Last reviewed: 2026-07-07.*
 

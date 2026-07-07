@@ -3,7 +3,7 @@ sidebar_position: 2
 title: NER
 ---
 
-# Before You Start — Named Entity Recognition
+# Named Entity Recognition
 
 *Last reviewed: 2026-07-07.*
 
