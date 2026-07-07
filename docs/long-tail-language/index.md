@@ -42,7 +42,7 @@ The use case shapes everything: what genres to record, what vocabulary to priori
 
 Who owns what the project produces? Under whose licence is it released? Who has the right to re-license it if a commercial actor asks? Who decides if a foreign lab wants to use the data to train a commercial model? These questions belong at the start, in writing, agreed with the community whose language is being recorded — not left to be figured out at release time.
 
-The [Nekoto et al. (2020) participatory model](https://aclanthology.org/2020.findings-emnlp.195/) is the reference for how Masakhane handles this; adopt it or something equivalent, but do not skip it. See also the [core principles](../1_introduction/core-principles.md) — consent and community ownership are load-bearing here.
+The [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference for what needs to be agreed and how, including consent workflows for non-literate contributors, licence selection (why CC BY-NC 4.0 is the honest default for community-derived African-language data), and the anti-extraction release patterns that keep the community in control after release. The [Nekoto et al. (2020) participatory model](https://aclanthology.org/2020.findings-emnlp.195/) is the reference for how Masakhane handles this end-to-end; adopt it or something equivalent, but do not skip it. See also the [core principles](../1_introduction/core-principles.md) — consent and community ownership are load-bearing here.
 
 ## Step 1 — the team
 
