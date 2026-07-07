@@ -52,11 +52,11 @@ const STEPS = [
       <>
         Go to{' '}
         <a
-          href="https://github.com/warakacommunity/AfriPlaybook"
+          href="https://github.com/MasakhaneHubToolingProject/playbook"
           target="_blank"
           rel="noopener noreferrer"
         >
-          github.com/warakacommunity/AfriPlaybook
+          github.com/MasakhaneHubToolingProject/playbook
         </a>{' '}
         and click <strong>Fork</strong> (top-right corner). This creates your
         own copy under your GitHub account.
@@ -106,7 +106,7 @@ const STEPS = [
         <code>i18n/&lt;lang&gt;/docusaurus-plugin-content-docs/current/</code>.
         Follow the{' '}
         <a
-          href="https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md"
+          href="https://github.com/MasakhaneHubToolingProject/playbook/blob/main/README.md"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -173,7 +173,7 @@ export default function ContributeClone() {
             </div>
             <div className={styles.cfcActions}>
               <a
-                href="https://github.com/warakacommunity/AfriPlaybook/fork"
+                href="https://github.com/MasakhaneHubToolingProject/playbook/fork"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={clsx('button', styles.primaryButton)}
@@ -181,7 +181,7 @@ export default function ContributeClone() {
                 Fork on GitHub
               </a>
               <a
-                href="https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md"
+                href="https://github.com/MasakhaneHubToolingProject/playbook/blob/main/README.md"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={clsx('button', styles.secondaryButton)}

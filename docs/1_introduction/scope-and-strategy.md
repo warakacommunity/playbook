@@ -87,4 +87,4 @@ If yes, the chapter earns its place. If no, it is either rewritten to answer tha
 
 ---
 
-*This decision record will be revisited at each major playbook release. See the [changelog](https://github.com/warakacommunity/AfriPlaybook/releases) for the record of what changed and when.*
+*This decision record will be revisited at each major playbook release. See the [changelog](https://github.com/MasakhaneHubToolingProject/playbook/releases) for the record of what changed and when.*

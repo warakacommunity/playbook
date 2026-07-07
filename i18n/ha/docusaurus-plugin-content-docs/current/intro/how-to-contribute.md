@@ -15,7 +15,7 @@ You do not need to be an NLP researcher, and you do not need to write a whole ch
 - **Translate a page** — into Hausa, Amharic, Swahili, French, Portuguese, or another language.
 - **Open a discussion** — ask a question or challenge an approach. Disagreement makes the guide better.
 
-Everything lives in one repository: [github.com/warakacommunity/AfriPlaybook](https://github.com/warakacommunity/AfriPlaybook).
+Everything lives in one repository: [github.com/MasakhaneHubToolingProject/playbook](https://github.com/MasakhaneHubToolingProject/playbook).
 
 ## Pick the path that fits your change
 
@@ -45,7 +45,7 @@ The site opens a pull request for you automatically. A maintainer reviews it and
 
 Best for a small change when you would rather work on GitHub directly.
 
-1. Find the file in the repository. Chapters live under [`docs/`](https://github.com/warakacommunity/AfriPlaybook/tree/main/docs).
+1. Find the file in the repository. Chapters live under [`docs/`](https://github.com/MasakhaneHubToolingProject/playbook/tree/main/docs).
 2. Click the **pencil icon** (Edit this file) at the top right of the file.
 3. Make your change. GitHub creates a fork for you if you do not have write access.
 4. At the bottom, write a short description and click **Propose changes**.
@@ -57,11 +57,11 @@ Best for adding a new chapter or editing several files at once. This needs [git]
 
 ### Step 1 — Open an issue first
 
-Before writing a chapter, [open an issue](https://github.com/warakacommunity/AfriPlaybook/issues/new) describing what you plan to add. This avoids two people writing the same thing and lets maintainers point you in the right direction.
+Before writing a chapter, [open an issue](https://github.com/MasakhaneHubToolingProject/playbook/issues/new) describing what you plan to add. This avoids two people writing the same thing and lets maintainers point you in the right direction.
 
 ### Step 2 — Fork and clone
 
-Open [the repository](https://github.com/warakacommunity/AfriPlaybook) and click **Fork** (top right). Then clone your fork:
+Open [the repository](https://github.com/MasakhaneHubToolingProject/playbook) and click **Fork** (top right). Then clone your fork:
 
 ```bash
 git clone https://github.com/<your-username>/AfriPlaybook.git
@@ -142,15 +142,15 @@ A few things every contribution should follow:
 - **Write plainly.** Short sentences, active voice, one idea per paragraph. Explain jargon the first time you use it.
 - **Cite real sources.** Every claim and example must point to a real, verifiable paper, dataset, or project — never an invented or unchecked citation.
 
-For the full style rules and deeper repository details, see [CONTRIBUTING.md](https://github.com/warakacommunity/AfriPlaybook/blob/main/CONTRIBUTING.md).
+For the full style rules and deeper repository details, see [CONTRIBUTING.md](https://github.com/MasakhaneHubToolingProject/playbook/blob/main/CONTRIBUTING.md).
 
 ## Translating a page
 
-Translations are community-maintained. Use the language switcher in the top-right of the navbar to see which languages exist, and see [CONTRIBUTING.md](https://github.com/warakacommunity/AfriPlaybook/blob/main/CONTRIBUTING.md) for how the translation files are organised.
+Translations are community-maintained. Use the language switcher in the top-right of the navbar to see which languages exist, and see [CONTRIBUTING.md](https://github.com/MasakhaneHubToolingProject/playbook/blob/main/CONTRIBUTING.md) for how the translation files are organised.
 
 ## Get help
 
-- **Questions or ideas:** [GitHub Discussions](https://github.com/warakacommunity/AfriPlaybook/discussions)
+- **Questions or ideas:** [GitHub Discussions](https://github.com/MasakhaneHubToolingProject/playbook/discussions)
 - **Chat with the community:** [Discord](https://discord.gg/ChNPHV2PPS)
-- **Found a bug:** [open an issue](https://github.com/warakacommunity/AfriPlaybook/issues/new)
+- **Found a bug:** [open an issue](https://github.com/MasakhaneHubToolingProject/playbook/issues/new)
 

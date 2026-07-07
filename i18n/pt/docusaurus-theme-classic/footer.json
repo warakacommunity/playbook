@@ -45,7 +45,7 @@
   },
   "link.item.label.GitHub Repository": {
     "message": "Repositório do GitHub",
-    "description": "The label of footer link with label=GitHub Repository linking to https://github.com/warakacommunity/AfriPlaybook"
+    "description": "The label of footer link with label=GitHub Repository linking to https://github.com/MasakhaneHubToolingProject/playbook"
   },
   "copyright": {
     "message": "Direitos de autor © 2026 Masakhane. Construído com Docusaurus.",

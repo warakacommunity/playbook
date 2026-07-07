@@ -180,4 +180,4 @@ npm start        # opens a live preview at http://localhost:3000
 
 The preview reloads as you edit, so admonitions, headings, and images appear exactly as they will once published. Read the page on a narrow window too — most readers are on a phone.
 
-For the full style rules, see [CONTRIBUTING.md](https://github.com/warakacommunity/AfriPlaybook/blob/main/CONTRIBUTING.md).
+For the full style rules, see [CONTRIBUTING.md](https://github.com/MasakhaneHubToolingProject/playbook/blob/main/CONTRIBUTING.md).

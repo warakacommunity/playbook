@@ -37,8 +37,8 @@ signed up. Replace the blockquote above. Examples:
 
 ## Stay in the loop while we set up
 
-- ⭐ **Star the repo** — [github.com/warakacommunity/AfriPlaybook](https://github.com/warakacommunity/AfriPlaybook)
-- 💬 **Join discussions** — [GitHub Discussions](https://github.com/warakacommunity/AfriPlaybook/discussions)
+- ⭐ **Star the repo** — [github.com/MasakhaneHubToolingProject/playbook](https://github.com/MasakhaneHubToolingProject/playbook)
+- 💬 **Join discussions** — [GitHub Discussions](https://github.com/MasakhaneHubToolingProject/playbook/discussions)
 - 🌍 **Visit Masakhane** — [masakhane.io](https://www.masakhane.io/)
 - 📰 **Read the blog** — [latest posts](/blog)
 

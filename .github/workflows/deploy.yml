@@ -1,0 +1,48 @@
+name: Deploy preview to GitHub Pages
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  # New pushes cancel any in-flight deploy so we don't queue behind a
+  # stuck Pages "syncing_files" state. Latest commit always wins.
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Preview deploy reroots the build under /playbook/ to match the
+      # GitHub Pages path. Production (playbook.waraka.ai) uses the
+      # docusaurus.config.js defaults (baseUrl "/").
+      DOCUSAURUS_URL: https://masakhanehubtoolingproject.github.io
+      DOCUSAURUS_BASE_URL: /playbook/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history so inject-last-update.mjs gets real commit dates
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: yarn }
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: build }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # error_count bumped from default 10 to 40 (5s poll × 40 = ~3 min
+      # tolerance) to survive GitHub Pages' occasional slow syncing_files
+      # phase.
+      - id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          error_count: 40
+          timeout: 900000

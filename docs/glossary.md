@@ -96,5 +96,5 @@ This is a starting point — additions and corrections welcome via the "Edit thi
 ## See also
 
 - [How to cite the Playbook](/cite)
-- [How to contribute a chapter](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#how-to-contribute-a-chapter)
+- [How to contribute a chapter](https://github.com/MasakhaneHubToolingProject/playbook/blob/main/README.md#how-to-contribute-a-chapter)
 - [Discord community](https://discord.gg/ChNPHV2PPS)

@@ -9,7 +9,7 @@ This document covers local setup, the site features that are wired up, and the m
 **Requirements:** Node.js ≥ 20, [Yarn 1.x](https://classic.yarnpkg.com) (do **not** use npm — see Gotchas).
 
 ```bash
-git clone https://github.com/warakacommunity/AfriPlaybook.git
+git clone https://github.com/MasakhaneHubToolingProject/playbook.git
 cd AfriPlaybook
 yarn install --frozen-lockfile
 yarn start
@@ -68,7 +68,7 @@ Comments are wired up but won't render until configured.
 
 1. Repo **Settings → General → Features** → enable **Discussions**.
 2. Install the giscus app: <https://github.com/apps/giscus>
-3. Visit <https://giscus.app>, fill in the form for `warakacommunity/AfriPlaybook`. Use `pathname` mapping.
+3. Visit <https://giscus.app>, fill in the form for `MasakhaneHubToolingProject/playbook`. Use `pathname` mapping.
 4. Paste the `data-repo-id` and `data-category-id` values into `src/components/Comments.jsx`.
 
 ### 2. Apply for Algolia DocSearch
@@ -161,7 +161,7 @@ Pushes to `main` trigger `.github/workflows/deploy.yml`, which:
 3. Generates the PDF via `yarn pdf:built` (downloads Chromium, runs Puppeteer with `--no-sandbox`).
 4. Publishes `build/` to the `gh-pages` branch.
 
-Total CI time: ~3–5 min. Live URL: <https://warakacommunity.github.io/>.
+Total CI time: ~3–5 min. Live URL: <https://playbook.waraka.ai/>.
 
 ---
 
