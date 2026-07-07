@@ -125,17 +125,21 @@
   overflow: hidden;
 }
 .resultLabel {
-  display: inline-flex;
+  /* Subtle forest-green wash + a slightly heavier divider so the
+     header reads as a header, not as accidental empty space. Text
+     stays small (0.72rem uppercase) but sits on a tinted band that
+     signals "section header". */
+  display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 22px 10px;
-  font-size: 0.7rem;
+  padding: 10px 22px;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--brand-green);
-  border-bottom: 1px solid var(--ifm-color-emphasis-100);
-  width: 100%;
+  background: rgba(31, 91, 63, 0.07);
+  border-bottom: 1px solid rgba(31, 91, 63, 0.22);
   box-sizing: border-box;
 }
 .resultLabel::before {
