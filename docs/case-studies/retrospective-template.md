@@ -2,6 +2,9 @@
 sidebar_position: 2
 title: Retrospective template
 draft: true
+last_update:
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Retrospective template

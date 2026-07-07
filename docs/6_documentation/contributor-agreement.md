@@ -1,6 +1,9 @@
 ---
 sidebar_position: 3
 title: Contributor Agreement Template
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Contributor Agreement Template

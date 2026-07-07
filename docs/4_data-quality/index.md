@@ -2,6 +2,9 @@
 title: Data Quality
 sidebar_label: Overview
 sidebar_position: 1
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Data Quality Assurance

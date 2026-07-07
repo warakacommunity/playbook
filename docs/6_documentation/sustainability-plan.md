@@ -1,6 +1,9 @@
 ---
 sidebar_position: 6
 title: Sustainability Plan Template
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Sustainability Plan Template

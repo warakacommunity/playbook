@@ -1,6 +1,9 @@
 ---
 sidebar_position: 1
 slug: /
+last_update:
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # 1. Introduction

@@ -1,6 +1,9 @@
 ---
 sidebar_position: 8
 title: Tooling and Infrastructure
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Tooling and Infrastructure

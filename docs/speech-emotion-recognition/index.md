@@ -1,5 +1,8 @@
 ---
 title: Speech Emotion Recognition
+last_update:
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Speech Emotion Recognition

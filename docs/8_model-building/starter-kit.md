@@ -1,6 +1,9 @@
 ---
 title: Evaluation, Benchmarking, and Starter Kits
 sidebar_position: 1
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Evaluation, Benchmarking, and Starter Kits

@@ -1,6 +1,9 @@
 ---
 sidebar_position: 99
 sidebar_label: References
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # References

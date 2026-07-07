@@ -1,3 +1,8 @@
+---
+last_update:
+  date: 2026-06-25
+  author: Ibrahim Ahmad
+---
 # Cost and Resource Planning
 
 Learn how to effectively plan the resources required for dataset creation, including budgeting, timelines, and scaling strategies.

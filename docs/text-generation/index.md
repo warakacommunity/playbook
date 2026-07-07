@@ -1,5 +1,8 @@
 ---
 title: Text Generation
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Text Generation

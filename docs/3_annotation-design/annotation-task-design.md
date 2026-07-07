@@ -1,6 +1,9 @@
 ---
 title: Annotation Task Design and Human Factors
 sidebar_position: 1
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Annotation Task Design and Human Factors

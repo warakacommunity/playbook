@@ -1,6 +1,9 @@
 ---
 sidebar_position: 5
 title: Licensing and Compliance
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Licensing and Compliance

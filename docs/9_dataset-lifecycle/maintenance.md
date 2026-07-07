@@ -1,6 +1,9 @@
 ---
 title: Maintenance and Post-Release Strategy
 sidebar_position: 2
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Maintenance and Post-Release Strategy

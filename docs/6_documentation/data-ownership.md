@@ -1,6 +1,9 @@
 ---
 sidebar_position: 4
 title: Data Ownership Documentation Template
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Data Ownership Documentation Template

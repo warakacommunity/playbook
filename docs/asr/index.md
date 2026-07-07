@@ -1,5 +1,8 @@
 ---
 title: Automatic Speech Recognition (ASR)
+last_update:
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Automatic Speech Recognition (ASR)

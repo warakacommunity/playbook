@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+last_update:
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # How to Write a Chapter

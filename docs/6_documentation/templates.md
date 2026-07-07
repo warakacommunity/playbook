@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+last_update:
+  date: 2026-06-25
+  author: Ibrahim Ahmad
 ---
 
 # Templates & Artifacts

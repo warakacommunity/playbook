@@ -2,6 +2,9 @@
 sidebar_position: 2
 title: MasakhaNER 1 → 2
 draft: false
+last_update:
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # MasakhaNER 1 → 2

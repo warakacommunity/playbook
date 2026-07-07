@@ -1,6 +1,9 @@
 ---
 title: Application Programming Interfaces (APIs)
 description: How to collect data through official APIs, and why building a project's data plan around any single platform's API is riskier than it looks.
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Application Programming Interfaces (APIs)

@@ -1,3 +1,8 @@
+---
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
+---
 # Data Provenance and Traceability
 
 Learn how to track the origin, history, and transformations of your data to ensure transparency, reproducibility, and accountability.

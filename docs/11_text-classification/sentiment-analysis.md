@@ -1,6 +1,9 @@
 ---
 sidebar_position: 9
 sidebar_label: "Sentiment Analysis"
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 # Sentiment Analysis
 

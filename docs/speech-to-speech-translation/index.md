@@ -1,5 +1,8 @@
 ---
 title: Speech-to-Speech Translation
+last_update:
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Speech-to-Speech Translation

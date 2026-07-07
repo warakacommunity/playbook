@@ -1,5 +1,8 @@
 ---
 title: Data Governance
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Data Governance

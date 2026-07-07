@@ -1,5 +1,8 @@
 ---
 title: Machine Translation
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Machine Translation

@@ -1,3 +1,8 @@
+---
+last_update:
+  date: 2026-06-25
+  author: Ibrahim Ahmad
+---
 # Ethics, Bias, and Governance
 
 Learn how to ensure responsible dataset creation by addressing bias, protecting privacy, and maintaining transparency throughout the data lifecycle.

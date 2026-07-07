@@ -1,6 +1,9 @@
 ---
 title: Release Checklist
 sidebar_position: 1
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Release Checklist

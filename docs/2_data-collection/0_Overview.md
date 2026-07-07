@@ -1,3 +1,8 @@
+---
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
+---
 Every dataset starts the same way: someone has to go and get the raw material. This chapter is about that first step — what the rest of the playbook calls **data collection** or **data curation**. We mean this narrowly: the actual gathering of raw text, images, audio, or video, before anyone has cleaned it, labelled it, or decided what it means. What happens after collection — cleaning, annotation, quality control, and release — is covered in the chapters that follow.
 
 How you collect data depends almost entirely on its **modality** — the format the data takes, whether that's text, images, audio, or video. Each modality has its own sources, its own tools, and its own failure modes, and a method that works well for one (scraping news sites for text) can be close to useless for another (there is no equivalent "scrape the web" shortcut for spoken-language audio in a language with no written tradition).

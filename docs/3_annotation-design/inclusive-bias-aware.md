@@ -1,6 +1,9 @@
 ---
 title: Inclusive and Bias-Aware Annotation
 sidebar_position: 4
+last_update:
+  date: 2026-06-27
+  author: Idris Abdulmumin
 ---
 
 # Inclusive and Bias-Aware Annotation

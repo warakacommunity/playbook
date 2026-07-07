@@ -1,5 +1,8 @@
 ---
 title: Audio Understanding
+last_update:
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Audio Understanding
