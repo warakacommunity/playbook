@@ -93,8 +93,13 @@ const config = {
           routeBasePath: "/AfriPlaybook",
           sidebarPath: "./sidebars.js",
           breadcrumbs: false,
-          showLastUpdateTime: true,
-          showLastUpdateAuthor: true,
+          // Auto-generated "Last updated on <date> by <author>" is disabled
+          // because Docusaurus's git plugin falls back to "Oct 14, 2018 by Author"
+          // on shallow-clone builds and on files without commit history. Each
+          // playbook page maintains its own "Last reviewed: YYYY-MM-DD" line at
+          // the top of the body, which is the authoritative freshness signal.
+          showLastUpdateTime: false,
+          showLastUpdateAuthor: false,
           // progress: false, // ADD THIS LINE TO PREVENT THE CRASH
           // editUrl removed — "Suggest Edit" modal handles community edits instead.
           remarkPlugins: [remarkMath],
