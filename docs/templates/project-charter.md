@@ -16,11 +16,11 @@ last_update:
 
 1. Copy everything below the divider into a new file (`docs/project-charter.md` in your project repo or the community-owned repository).
 2. Fill in every `[BRACKETED FIELD]` with a real answer negotiated with the community, not decided by the project team alone.
-3. Convene the community consultation described in [Section C of the consent template](./consent-form.md#section-c-—-community-consent-addendum). The charter is the artefact that comes out of that consultation.
+3. Convene the community consultation described in [Section C of the consent template](./consent-form.md#section-c--community-consent-addendum). The charter is the artefact that comes out of that consultation.
 4. Sign it. All named parties — project lead, community stewards, institutional sponsor, ombudsperson — sign a physical or digitally-witnessed copy. Store one copy in each party's possession.
 5. Version it. The charter can be amended; amendments require the same signature process.
 
-Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.md#step-0-—-before-any-data-collection), the [legal, consent, and community IP](../legal-consent/index.md) chapter, and every Case Study in the playbook where a missing charter shows up as the root cause of a downstream dispute.
+Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.md#step-0--before-any-data-collection), the [legal, consent, and community IP](../legal-consent/index.md) chapter, and every Case Study in the playbook where a missing charter shows up as the root cause of a downstream dispute.
 
 ---
 
@@ -40,7 +40,7 @@ Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.
 - **Project lead:** [NAME + affiliation + contact + role.]
 - **Institutional sponsor:** [ORGANISATION legally responsible for the project + point-of-contact.]
 - **Community stewards:** [NAMED community representatives with the standing to speak for the community on this project.]
-- **Ombudsperson:** [NAME + contact — see the [ombudsperson role](./consent-form.md#section-d-—-ombudsperson-role) in the consent template.]
+- **Ombudsperson:** [NAME + contact — see the [ombudsperson role](./consent-form.md#section-d--ombudsperson-role) in the consent template.]
 - **Technical lead:** [NAME + role.]
 - **Community liaison:** [NAME + role, distinct from the annotator role.]
 - **Linguistic consultant, if any:** [NAME + role.]
@@ -78,7 +78,7 @@ The centre of the charter. Every question below is answered explicitly.
 
 ## 6. Team, timeline, and budget
 
-- **Timeline:** [Milestone dates. See the [long-tail chapter's milestone-0-to-4 arc](../long-tail-language/index.md#step-2-—-realistic-milestones) for reference; use a version realistic to this project.]
+- **Timeline:** [Milestone dates. See the [long-tail chapter's milestone-0-to-4 arc](../long-tail-language/index.md#step-2--realistic-milestones) for reference; use a version realistic to this project.]
 - **Effort estimate:** [Person-months per role.]
 - **Budget summary:** [Total budget + high-level breakdown. Detailed cost accounting can live in a separate financial document.]
 - **Compensation policy:** [Rate for annotators, translators, community liaison, ombudsperson. Rates are named to prevent the failure mode of paying different contributors differently for the same work.]
@@ -103,7 +103,7 @@ The centre of the charter. Every question below is answered explicitly.
 ## 9. Ethics and safeguards
 
 - **Ethics review:** [IRB or ethics-review-board name + date + outcome. If no formal ethics review is possible, describe the substitute community-review process.]
-- **Data protection compliance:** [Which country's law applies; how compliance is documented. See the [country reference](../legal-consent/index.md#data-protection-laws-in-africa-quick-country-reference).]
+- **Data protection compliance:** [Which country's law applies; how compliance is documented. See the [country reference](../legal-consent/index.md#data-protection-laws-in-africa--quick-country-reference).]
 - **Vulnerable-population protections:** [If the project touches specific vulnerable populations (children, refugees, minority-within-the-community groups), the additional protections in place.]
 - **Cultural-heritage protections:** [If the corpus includes traditional knowledge or culturally-sensitive material, the protections around it. See [WIPO's traditional knowledge framework](https://www.wipo.int/tk/en/).]
 

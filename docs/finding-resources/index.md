@@ -127,7 +127,7 @@ The alternative to this chapter was a curated living directory of every African-
 
 Our job is different: teach you the primary sources, the search patterns, and the trusted organisations. The rest is theirs to keep current.
 
-See the [scope-and-strategy chapter](../1_introduction/scope-and-strategy.md#phase-5-—-the-living-directory) for the reasoning behind this design choice.
+See the [scope-and-strategy chapter](../1_introduction/scope-and-strategy.md#phase-5--finding-current-resources-redesigned) for the reasoning behind this design choice.
 
 ---
 

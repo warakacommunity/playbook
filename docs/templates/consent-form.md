@@ -28,7 +28,7 @@ Every project needs all three parts. Skipping any of them is the failure mode th
 
 ### Before you fork this template
 
-- **Have a lawyer qualified in the applicable jurisdiction review the adapted version.** African data protection laws vary substantially in what a valid consent looks like (see the [country reference](../legal-consent/index.md#data-protection-laws-in-africa-quick-country-reference)); a form that passes review in Nigeria may not in South Africa.
+- **Have a lawyer qualified in the applicable jurisdiction review the adapted version.** African data protection laws vary substantially in what a valid consent looks like (see the [country reference](../legal-consent/index.md#data-protection-laws-in-africa--quick-country-reference)); a form that passes review in Nigeria may not in South Africa.
 - **Translate every part into the contributor's own language.** English or French versions are for the project's records, not for the contributor's understanding. Oral consent in a lingua franca while the contributor is more comfortable in a local language is not informed consent.
 - **Include a community-nominated reviewer** in the design step, not just the audit step. What is understood as "consent" varies across communities; what constitutes a meaningful IP framework varies across communities; both need community input at design time.
 - **Store the completed consent artefacts alongside the data.** The audio consent recording, the signed form, the community-consent minutes — all travel with the corpus so future reviewers can verify.
@@ -47,7 +47,7 @@ Every project needs all three parts. Skipping any of them is the failure mode th
 
 [PROJECT NAME] is a project run by [PROJECT ORGANISATION] to [ONE-SENTENCE PLAIN-LANGUAGE PURPOSE — NOT "TO ADVANCE NLP" — SOMETHING LIKE "TO BUILD A TEXT SYSTEM THAT CAN READ [LANGUAGE] SO PEOPLE CAN USE PHONES IN [LANGUAGE]"].
 
-The person leading this work is [PROJECT LEAD NAME], who you can contact at [EMAIL / PHONE / WHATSAPP]. If you have concerns about this project that you do not want to raise with [LEAD NAME], you can contact the project's independent ombudsperson [OMBUDSPERSON NAME] at [CONTACT] — see [Section D](#section-d-—-ombudsperson-role).
+The person leading this work is [PROJECT LEAD NAME], who you can contact at [EMAIL / PHONE / WHATSAPP]. If you have concerns about this project that you do not want to raise with [LEAD NAME], you can contact the project's independent ombudsperson [OMBUDSPERSON NAME] at [CONTACT] — see [Section D](#section-d--ombudsperson-role).
 
 #### What we are asking of you
 
@@ -127,7 +127,7 @@ By signing below, you confirm that:
 
 **Witness signature:** _____________________________________________________
 
-**Independent witness** (see [Section B](#section-b-—-oral-consent-protocol) — required for oral consent, recommended for written): ___________________
+**Independent witness** (see [Section B](#section-b--oral-consent-protocol) — required for oral consent, recommended for written): ___________________
 
 ---
 

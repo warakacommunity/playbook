@@ -60,7 +60,7 @@ Once the input language is understood, the response has to be chosen. This is no
 The training data + evaluation set determine whether the model can handle code-switching at all. Practical requirements:
 
 - **Include real code-switched examples in training data.** Even a small fraction (5-15%) of code-switched examples in fine-tuning data substantially improves model behaviour on mixed input, versus training exclusively on monolingual data.
-- **Evaluate on a code-switched test set specifically.** Reporting a headline BLEU/CER/F1 on monolingual test data hides catastrophic failure on mixed input. Split evaluation into monolingual and code-switched subsets, and report both. This is a per-language and per-modality decision — see [core principles](../1_introduction/core-principles).
+- **Evaluate on a code-switched test set specifically.** Reporting a headline BLEU/CER/F1 on monolingual test data hides catastrophic failure on mixed input. Split evaluation into monolingual and code-switched subsets, and report both. This is a per-language and per-modality decision — see [core principles](../1_introduction/core-principles.md).
 - **Do not artificially clean code-switched training data.** Correcting mixed-language text into monolingual before training removes the exact signal the model needs to handle real user input. Preserve the mix; treat it as ground truth.
 - **Consider adapter-based multilingual models** over single-language fine-tunes. Multilingual encoders (AfroXLMR, XLM-RoBERTa, mBERT) with per-language LoRA adapters handle code-switching more gracefully than a swarm of monolingual fine-tunes because the shared encoder builds cross-lingual representations that mixed input can draw on.
 
@@ -68,7 +68,7 @@ The training data + evaluation set determine whether the model can handle code-s
 
 - **Detected language shown to the user, editable but not required.** A small "detected as Hausa" chip on each turn, tappable to correct, is better than an intrusive language picker at the start of the session.
 - **Keyboard-agnostic input handling.** Users' phone keyboards are configured for their preferred language; do not require them to change keyboards to enter mixed input. This means diacritic-tolerant input processing, script-tolerant matching, and case-insensitive routing.
-- **Voice input as a first-class alternative.** Many African users voice-note more comfortably than they type in local languages, especially in the presence of complex diacritics or Ajami/Ge'ez scripts. Prominent voice-input support removes the friction. See the [ASR page](../before-you-start/asr).
+- **Voice input as a first-class alternative.** Many African users voice-note more comfortably than they type in local languages, especially in the presence of complex diacritics or Ajami/Ge'ez scripts. Prominent voice-input support removes the friction. See the [ASR page](../before-you-start/asr.mdx).
 - **Clear, tolerant error messages.** When the system cannot identify or handle input, it should say so in a lingua franca, offer options in a small number of likely languages, and not lock the user into their answer.
 - **Feedback loop.** Let the user report a mis-detection or a wrong response, and use that signal to update the session's language prior for the next turn.
 

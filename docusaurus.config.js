@@ -41,12 +41,7 @@ const config = {
   // publishes on push. (organizationName/projectName/deploymentBranch were
   // only used by `docusaurus deploy` for the old gh-pages flow.)
   trailingSlash: false,
-  // Broken-link check demoted to warn while a resolver quirk with
-  // routeBasePath: "/AfriPlaybook" is investigated — same-directory (./foo)
-  // and top-level cross-directory (../foo/index) links fail resolution
-  // even though the targets exist as tracked doc files. TODO: revert to
-  // "throw" once the link patterns are normalised.
-  onBrokenLinks: "warn",
+  onBrokenLinks: "throw",
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -95,7 +90,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: "/AfriPlaybook",
+          routeBasePath: "AfriPlaybook",
           sidebarPath: "./sidebars.js",
           breadcrumbs: false,
           // "Last updated" is populated primarily from each page's

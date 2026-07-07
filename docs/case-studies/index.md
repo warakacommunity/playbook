@@ -11,7 +11,7 @@ last_update:
 
 Most NLP writing is aspirational — how the pipeline is *supposed* to work, how the metrics are *supposed* to move, how the annotator workflow is *supposed* to scale. The interesting parts sit in the gap between the paper's methods section and what actually happened: what surprised the team, what was harder than they expected, what they would do differently. This chapter closes that gap.
 
-Every case study on this page answers the same seventeen questions, drawn from the [retrospective template](./retrospective-template). Same questions across every project, so a reader can compare across them and see the patterns.
+Every case study on this page answers the same seventeen questions, drawn from the [retrospective template](../case-studies/retrospective-template.md). Same questions across every project, so a reader can compare across them and see the patterns.
 
 ## Why this chapter exists
 
@@ -29,7 +29,7 @@ This is the whole reason Case Studies is worth building. The lightweight, honest
 
 Five projects are the initial reference set. Each is chosen because it is either a flagship community-lineage project, or the annotation and workforce decisions it embodies are directly relevant to a large number of downstream teams.
 
-### [MasakhaNER 1 → 2](./masakhaner)
+### [MasakhaNER 1 → 2](./masakhaner.md)
 
 20-language named entity recognition benchmark, and the reference for participatory annotation methodology used across subsequent Masakhane-lineage corpora.
 
@@ -65,7 +65,7 @@ The list above is the initial reference set, not the ceiling. Any Masakhane-line
 
 To add or claim one:
 
-1. Copy the [retrospective template](./retrospective-template).
+1. Copy the [retrospective template](../case-studies/retrospective-template.md).
 2. Rename it to the project slug (`docs/case-studies/afrisenti.md`, `docs/case-studies/lafand-mt.md`, etc.).
 3. Answer the seventeen questions. It is more valuable to answer honestly and briefly than to write a polished narrative. If a question is not applicable, say so and why.
 4. Open a pull request. Tag the original project leads for review before merging.
@@ -84,4 +84,4 @@ Case studies do not include unpublished information (funder names withheld by re
 
 ---
 
-*See also [**What this playbook is (and isn't)**](../1_introduction/scope-and-strategy) for why case studies were prioritised as the second Phase-1 addition to the playbook.*
+*See also [**What this playbook is (and isn't)**](../1_introduction/scope-and-strategy.md) for why case studies were prioritised as the second Phase-1 addition to the playbook.*

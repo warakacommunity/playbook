@@ -13,7 +13,7 @@ last_update:
 This chapter is practical guidance for scoping the legal and consent architecture of an African-language NLP project. It is **not legal advice**. Data protection law is jurisdiction-specific, changes often, and carries real consequences when mishandled. For jurisdiction-specific advice, consult a lawyer qualified in the country whose data protection law applies to your project. Where this chapter names a specific law, it does so to point you at the primary source; the primary source is authoritative, this chapter is not.
 :::
 
-Every question in this chapter should be answered *before* data collection begins, not after. Trying to retrofit consent, community IP, or a defensible licence onto a corpus that already exists is expensive, sometimes impossible, and always damaging to community trust. This is the operational reason [Step 0 of long-tail language onboarding](../long-tail-language/index.md#step-0-—-before-any-data-collection) is where it is.
+Every question in this chapter should be answered *before* data collection begins, not after. Trying to retrofit consent, community IP, or a defensible licence onto a corpus that already exists is expensive, sometimes impossible, and always damaging to community trust. This is the operational reason [Step 0 of long-tail language onboarding](../long-tail-language/index.md#step-0--before-any-data-collection) is where it is.
 
 ## The three questions every project must answer
 
@@ -58,7 +58,7 @@ Consent to record a person's voice for building an ASR corpus is not consent to 
 
 ### Withdrawal
 
-Contributors must be able to withdraw. This is a legal requirement under most African data protection laws (see the [country reference](#data-protection-laws-in-africa-quick-country-reference) below) and an ethical one everywhere else. Design withdrawal in from the start:
+Contributors must be able to withdraw. This is a legal requirement under most African data protection laws (see the [country reference](#data-protection-laws-in-africa--quick-country-reference) below) and an ethical one everywhere else. Design withdrawal in from the start:
 
 - The contributor is given a stable, memorable ID (not their name) that allows them to reach the project later and identify their contribution.
 - Withdrawal removes the data from the active corpus and from all future releases. Data that has been publicly released cannot be un-released; the withdrawal record acknowledges this and the project commits to not re-publishing.

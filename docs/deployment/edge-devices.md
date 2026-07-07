@@ -36,13 +36,13 @@ Reproducing the numbers from the [offline chapter](./offline.md#model-size-budge
 
 - **Android Go**: model on disk under 200 MB, in RAM under 100 MB, inference in tens to hundreds of milliseconds per short sentence. Sub-100M-parameter models quantised to INT8. Practical: distilled encoder-only models (mBERT-small, DistilBERT-multilingual with LoRA fine-tuning), quantised TrOCR-small, distilled TTS voice models. Full-scale Whisper is out; Whisper-tiny quantised is in.
 - **Mid-range Android**: under 800 MB on disk, under 400 MB in RAM. Distilled 600M-parameter models with careful INT8 quantisation. Practical: NLLB-200-distilled at INT8, AfroXLMR-base with LoRA adapters, MMS ASR adapters, Whisper-small quantised.
-- **High-end phones**: multi-GB feasible but the download UX becomes the binding constraint. See the model-download UX section in the [offline chapter](./offline.md#model-download-ux-—-the-part-that-gets-ignored).
+- **High-end phones**: multi-GB feasible but the download UX becomes the binding constraint. See the model-download UX section in the [offline chapter](./offline.md#model-download-ux--the-part-that-gets-ignored).
 
 The right question at any tier is not "will it fit"; it is "will it fit, run in a user-tolerable time, and stay under the thermal + battery envelope." All three tests must pass; passing only "will it fit" is a common failure.
 
 ## Quantisation revisited — the deployment-tuned view
 
-The [compute-poor chapter](../compute-poor/index.md#quantisation-—-the-deployment-lever) covers quantisation as a training-and-deployment technique in general. Here are the edge-specific choices:
+The [compute-poor chapter](../compute-poor/index.md#quantisation--the-deployment-lever) covers quantisation as a training-and-deployment technique in general. Here are the edge-specific choices:
 
 - **INT8 dynamic quantisation** — the safe default for on-device inference on Android and iOS. Memory roughly halved, throughput 1.5-2x higher, quality drop typically under 1 point on classification tasks and 1-2 chrF points on generation. Use unless you have measured a problem.
 - **INT8 static (per-channel) quantisation** — better quality retention than dynamic; requires a calibration pass. Worth the extra step for production deployments on mid-range and up.

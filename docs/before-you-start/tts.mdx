@@ -98,7 +98,7 @@ Is your language covered by Meta MMS-TTS?
     │   target language and MEASURE. Cross-lingual transfer is
     │   variable for TTS — see the known limitations below.
     └── Genuinely uncovered → Read the [long-tail language
-        onboarding](../long-tail-language/index) chapter first.
+        onboarding](../long-tail-language/index.md) chapter first.
         Then plan 20-50 hours of clean studio-quality recording
         with a small number of speakers, aligned to text, before
         VITS/XTTS fine-tuning is worth attempting. Do NOT bootstrap
@@ -138,7 +138,7 @@ TTS training and voice cloning both require voice recordings, and voice is uniqu
 - **Withdrawal is more complicated for voice.** Once a TTS model has been trained on a speaker's voice, "withdrawal" means retraining without that speaker's data, which may or may not be feasible. Be honest with speakers about this constraint at consent time.
 - **Consider the reversal — TTS as a defence against voice cloning.** For high-risk speakers (journalists, activists, public figures whose voices are already public), a well-governed community TTS model can be a defence against malicious cloning. Frame the ethical case honestly.
 
-The [legal, consent, and community IP](../legal-consent/index) chapter is the operational reference; the section on consent from non-literate speakers applies with additional weight here.
+The [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference; the section on consent from non-literate speakers applies with additional weight here.
 
 ## The canonical fine-tuning link
 
@@ -147,7 +147,7 @@ For fine-tuning VITS or similar TTS architectures, use the [Hugging Face TTS fin
 For evaluation:
 - **Subjective MOS** collected via native listeners on a 1–5 scale — the reporting standard.
 - **[UTMOS](https://arxiv.org/abs/2204.02152)** or **[NISQA](https://arxiv.org/abs/2104.09494)** — automatic MOS predictors, useful for development but not as the reporting number.
-- **Character-error-rate round-trip** — synthesise a test set, transcribe with an ASR (per the [ASR page](./asr)), compute CER against reference text. Useful as an intelligibility proxy.
+- **Character-error-rate round-trip** — synthesise a test set, transcribe with an ASR (per the [ASR page](./asr.mdx)), compute CER against reference text. Useful as an intelligibility proxy.
 
 ## Further reading
 

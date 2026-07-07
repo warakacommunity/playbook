@@ -10,7 +10,7 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-*A Model-Cards-derived template ([Mitchell et al., 2019](https://arxiv.org/abs/1810.03993)) extended with the deployment-realism sections the playbook's [deployment chapter](../deployment/index) argues are non-optional: target-tier latency, quantised quality drop, code-switched evaluation, script-variant coverage. Fork it, fill it in, ship it alongside the model release.*
+*A Model-Cards-derived template ([Mitchell et al., 2019](https://arxiv.org/abs/1810.03993)) extended with the deployment-realism sections the playbook's [deployment chapter](../deployment/index.md) argues are non-optional: target-tier latency, quantised quality drop, code-switched evaluation, script-variant coverage. Fork it, fill it in, ship it alongside the model release.*
 
 ## How to use this template
 
@@ -19,7 +19,7 @@ last_update:
 3. Delete any section that genuinely does not apply and add `Not applicable — [why]` in its place. Do not silently skip.
 4. Publish it alongside the model, not separately. A model without a card is a model that will be misused.
 
-Motivated by [Mitchell et al., 2019](https://arxiv.org/abs/1810.03993), the playbook's [Before You Start](../before-you-start/index) editorial rules, the [deployment chapter](../deployment/index), and the [legal-consent chapter](../legal-consent/index).
+Motivated by [Mitchell et al., 2019](https://arxiv.org/abs/1810.03993), the playbook's [Before You Start](../before-you-start/index.md) editorial rules, the [deployment chapter](../deployment/index.md), and the [legal-consent chapter](../legal-consent/index.md).
 
 ---
 
@@ -50,12 +50,12 @@ Motivated by [Mitchell et al., 2019](https://arxiv.org/abs/1810.03993), the play
 
 - **Primary intended use:** [Specific task and context. Not "NLP research" — the actual use case.]
 - **Primary intended users:** [Researchers, developers, community members, deployment teams — whichever applies.]
-- **Out-of-scope uses:** [Explicit list. Every model card should name the uses the developers do **not** endorse. See the [legal-consent chapter's "when to say no"](../legal-consent/index#when-to-say-no) — the same reasoning applies here.]
+- **Out-of-scope uses:** [Explicit list. Every model card should name the uses the developers do **not** endorse. See the [legal-consent chapter's "when to say no"](../legal-consent/index.md#when-to-say-no) — the same reasoning applies here.]
 
 ## 3. Training data
 
 - **Corpus / corpora used:** [Named datasets + URLs + licences. Include AfriSenti, MasakhaNER 2, LAFAND-MT, or your project-specific corpus.]
-- **Companion dataset cards:** [Link to the dataset cards for each corpus used. See the [dataset card template](./dataset-card).]
+- **Companion dataset cards:** [Link to the dataset cards for each corpus used. See the [dataset card template](./dataset-card.md).]
 - **Preprocessing applied:** [Tokenisation, normalisation, diacritic handling, script conversion, deduplication, filtering. Specific enough to reproduce.]
 - **Size of the training set:** [Per language, per split.]
 - **Known biases in the training data:** [Under-represented demographics, over-represented sources, domain narrowness, code-switching profile.]
@@ -63,7 +63,7 @@ Motivated by [Mitchell et al., 2019](https://arxiv.org/abs/1810.03993), the play
 
 ## 4. Evaluation
 
-Per the [core principles](../1_introduction/core-principles), evaluation must be per-language and per-class. See the [evaluation script template](./evaluation-script) for the compliant harness.
+Per the [core principles](../1_introduction/core-principles.md), evaluation must be per-language and per-class. See the [evaluation script template](./evaluation-script.md) for the compliant harness.
 
 - **Evaluation set(s) used:** [Named benchmarks + splits + preprocessing.]
 - **Primary metric:** [chrF for translation, CER for speech, per-class F1 for classification, top-k retrieval for QA. State the choice and the reasoning.]
@@ -92,7 +92,7 @@ Mandatory for generative output (translation, TTS, generative QA, LLM-based task
 
 ### 4.c Code-switched evaluation
 
-Required per the [multilingual switching chapter](../deployment/multilingual-switching).
+Required per the [multilingual switching chapter](../deployment/multilingual-switching.md).
 
 - **Code-switched test set used:** [Description + URL.]
 - **Score on code-switched inputs:** [Report separately from monolingual — a single number hides the code-switching failure.]
@@ -109,7 +109,7 @@ Beyond standard model-card fields, these sections are the playbook's non-negotia
 
 ### 5.a Target deployment tier
 
-- **Hardware class the model is intended to run on:** [Server GPU / mid-range Android / Android Go / Raspberry Pi 5 / etc. — see the [edge-devices chapter's phone tier map](../deployment/edge-devices#the-phone-tier-map-—-the-deployment-surface).]
+- **Hardware class the model is intended to run on:** [Server GPU / mid-range Android / Android Go / Raspberry Pi 5 / etc. — see the [edge-devices chapter's phone tier map](../deployment/edge-devices.md#the-phone-tier-map--the-deployment-surface).]
 - **Runtime supported:** [ONNX Runtime Mobile / TFLite / whisper.cpp / llama.cpp / MLC-LLM / etc.]
 - **Model size on disk:** [Full precision + quantised sizes.]
 - **RAM required at inference:** [Full precision + quantised.]
@@ -118,7 +118,7 @@ Beyond standard model-card fields, these sections are the playbook's non-negotia
 
 - **p50 latency on target hardware:** [ms per inference on a representative input.]
 - **p95 latency:** [The percentile that matters for UX.]
-- **Throughput under sustained load:** [Including thermal throttling — see the [edge-devices evaluation section](../deployment/edge-devices#evaluation-methodology-for-edge-deployment).]
+- **Throughput under sustained load:** [Including thermal throttling — see the [edge-devices evaluation section](../deployment/edge-devices.md#evaluation-methodology-for-edge-deployment).]
 - **Battery drain per 100 inferences on target phone tier:** [If applicable.]
 
 ### 5.c Quantisation
@@ -129,24 +129,24 @@ Beyond standard model-card fields, these sections are the playbook's non-negotia
 
 ### 5.d Offline behaviour
 
-For any model shipped as part of an offline-capable deployment. See the [offline chapter](../deployment/offline).
+For any model shipped as part of an offline-capable deployment. See the [offline chapter](../deployment/offline.md).
 
 - **Runs fully on-device:** [Yes / no.]
-- **Model-download UX for the target app:** [Wi-Fi-preferred, resumable, integrity-checked, cancellable — reference to the [offline chapter's model-download UX section](../deployment/offline#model-download-ux-—-the-part-that-gets-ignored).]
+- **Model-download UX for the target app:** [Wi-Fi-preferred, resumable, integrity-checked, cancellable — reference to the [offline chapter's model-download UX section](../deployment/offline.md#model-download-ux--the-part-that-gets-ignored).]
 
 ## 6. Limitations and known failure modes
 
-- **Known limitations:** [Specific to this model + task + languages. Draw from the "known limitations" section of the relevant [Before You Start](../before-you-start/index) page.]
+- **Known limitations:** [Specific to this model + task + languages. Draw from the "known limitations" section of the relevant [Before You Start](../before-you-start/index.md) page.]
 - **Known systematic errors:** [Where the model reliably gets things wrong, from the evaluation data.]
-- **What the metrics do NOT show:** [Per the [core principles](../1_introduction/core-principles) — the playbook's editorial position is that metric blind spots must be named on the card.]
+- **What the metrics do NOT show:** [Per the [core principles](../1_introduction/core-principles.md) — the playbook's editorial position is that metric blind spots must be named on the card.]
 - **Populations under-served:** [Dialects, registers, demographics where the model performs worse.]
 - **Recommendations for downstream users encountering an issue:** [Named contact + expected response time.]
 
 ## 7. Ethical considerations
 
-- **Consent basis for the training data:** [Reference to the corpus's consent architecture. See the [consent form template](./consent-form).]
+- **Consent basis for the training data:** [Reference to the corpus's consent architecture. See the [consent form template](./consent-form.md).]
 - **Community involvement in model development:** [Named community stewards + their role.]
-- **Deployment risks:** [Specific to the task. For hate-speech classifiers, deployment-as-automated-moderation risk (see the [hate-speech page](../before-you-start/hate-speech)). For TTS, voice-cloning risk (see the [TTS page](../before-you-start/tts#voice-consent-and-voice-cloning-risks)). For classifiers deployed against marginalised users, false-positive disparity.]
+- **Deployment risks:** [Specific to the task. For hate-speech classifiers, deployment-as-automated-moderation risk (see the [hate-speech page](../before-you-start/hate-speech.mdx)). For TTS, voice-cloning risk (see the [TTS page](../before-you-start/tts.mdx#voice-consent-and-voice-cloning-risks)). For classifiers deployed against marginalised users, false-positive disparity.]
 - **Mitigations:** [What the developers have done; what the deployer must still do.]
 
 ## 8. Reproducibility

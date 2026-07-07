@@ -20,7 +20,7 @@ last_update:
 4. Version this document. Annotation guidelines drift; a guidelines document without a version and a change log is untrustworthy.
 5. Store the guidelines alongside the corpus so future readers can verify what an annotator was actually told.
 
-Motivated by [Chapter 3 — Annotation Design](../3_annotation-design/index.md) and by every corpus retrospective in the [Case Studies](../case-studies/index) chapter that names annotation-guideline drift as a source of quality problems.
+Motivated by [Chapter 3 — Annotation Design](../3_annotation-design/annotation-task-design.md) and by every corpus retrospective in the [Case Studies](../case-studies/index.md) chapter that names annotation-guideline drift as a source of quality problems.
 
 ---
 
@@ -42,7 +42,7 @@ Motivated by [Chapter 3 — Annotation Design](../3_annotation-design/index.md) 
 - **Adjudicator:** [The person who resolves disagreements. Usually the lead annotator; can be someone else.]
 - **Linguistic consultant, if any:** [NAME + role]
 - **Reviewer / auditor:** [The person who periodically checks annotation quality without doing annotation themselves.]
-- **How annotators were compensated:** [Rate + benchmark. Fair-rate community-anchored rates are part of the [core principles](../1_introduction/core-principles); state what you paid.]
+- **How annotators were compensated:** [Rate + benchmark. Fair-rate community-anchored rates are part of the [core principles](../1_introduction/core-principles.md); state what you paid.]
 
 ## 3. Definitions
 
@@ -106,7 +106,7 @@ Load-bearing for African languages. Guidelines that skip this section produce co
 
 ## 7. Inter-annotator agreement
 
-- **Metric used:** [Cohen's kappa for two annotators, Krippendorff's alpha for more, span-level F1 for sequence tagging. See the [evaluation-script template](./evaluation-script) for the metric implementations.]
+- **Metric used:** [Cohen's kappa for two annotators, Krippendorff's alpha for more, span-level F1 for sequence tagging. See the [evaluation-script template](./evaluation-script.md) for the metric implementations.]
 - **Target level:** [E.g., "κ ≥ 0.7 by the end of the second round"; state what "acceptable" means for this project.]
 - **Cadence:** [How often IAA is measured — after every N examples per annotator, every round, etc.]
 - **What happens when IAA is below target:** [Additional training, guideline revision, annotator recalibration. The response is a design choice; state it.]
@@ -130,7 +130,7 @@ Every version of these guidelines is recorded, dated, and briefly annotated. Gui
 ## 10. Contact and community
 
 - **Guidelines maintainer:** [NAME + contact]
-- **How annotators raise concerns:** [Channel + response time commitment. See the [ombudsperson role](./consent-form.md#section-d-—-ombudsperson-role) in the consent template — the same principle applies for guideline issues.]
+- **How annotators raise concerns:** [Channel + response time commitment. See the [ombudsperson role](./consent-form.md#section-d--ombudsperson-role) in the consent template — the same principle applies for guideline issues.]
 - **Community reviewer, if any:** [NAME + role]
 
 ---
