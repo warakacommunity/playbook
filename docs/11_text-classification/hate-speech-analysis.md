@@ -2,7 +2,7 @@
 sidebar_position: 11
 sidebar_label: "Hate Speech Analysis"
 last_update:
-  date: 2026-06-27
+  date: 2026-07-07
   author: Idris Abdulmumin
 ---
 

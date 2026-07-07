@@ -3,6 +3,7 @@ sidebar_position: 2
 title: Offline and patchy connectivity
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Offline and patchy-connectivity NLP

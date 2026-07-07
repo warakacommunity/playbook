@@ -3,6 +3,7 @@ sidebar_position: 4
 title: Edge devices and cheap-hardware inference
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Edge devices and cheap-hardware inference

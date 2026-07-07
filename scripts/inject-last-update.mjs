@@ -1,14 +1,22 @@
 #!/usr/bin/env node
-// Injects `last_update: { date: "YYYY-MM-DD", author: "..." }` frontmatter
-// into every docs/*.md and docs/*.mdx file so Docusaurus's "Last updated"
-// footer shows real data instead of its "Oct 14, 2018 by Author (Simulated
-// during dev for better perf)" dev-mode placeholder. Priority for the date:
+// Injects / refreshes `last_update: { date, author }` frontmatter in every
+// docs/*.md and docs/*.mdx so Docusaurus's "Last updated" footer shows real
+// data instead of its "Oct 14, 2018 by Author (Simulated during dev for
+// better perf)" dev-mode placeholder.
+//
+// Author is ALWAYS taken from `git log -1 --format=%an` on the specific file
+// (falls back to FALLBACK_AUTHOR if git returns nothing). This keeps
+// attribution honest: whoever last committed the file is credited by name.
+//
+// Date priority:
 //   1. `*Last reviewed: YYYY-MM-DD*` line in the first 30 lines of the body
-//      (author-set, authoritative).
-//   2. `git log -1 --format=%cs %an` on the file (repo-derived).
-//   3. FALLBACK_DATE (never expected to trigger for tracked files).
-// Runs idempotently — an existing `last_update` block is left alone. Wired
-// as `prestart` and `prebuild` in package.json.
+//      (author-set, authoritative for editorial freshness).
+//   2. `git log -1 --format=%cs` on the file.
+//   3. FALLBACK_DATE.
+//
+// The script REFRESHES the last_update block on every run (overwrites the
+// existing one) so the footer stays in sync with the most recent commit.
+// Wired as `prestart` and `prebuild` in package.json.
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
@@ -23,6 +31,33 @@ const FALLBACK_AUTHOR = "AfriPlaybook contributors";
 
 const REVIEWED_RE = /^\*Last reviewed:\s*(\d{4}-\d{2}-\d{2})\.?\*\s*$/m;
 const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
+
+// Strip an existing top-level `last_update:` block (the key line itself
+// plus every indented child line following it), AND any orphan
+// `  date: ...` / `  author: ...` lines left behind by a previous buggy
+// pass (those two keys are only meaningful as children of `last_update:`,
+// so at indented top-of-frontmatter position they're always garbage).
+// Line-based rather than regex-based, so a missing trailing newline on
+// the final indented line doesn't leave junk behind.
+function stripExistingLastUpdate(frontmatter) {
+  const lines = frontmatter.split(/\r?\n/);
+  const out = [];
+  let inBlock = false;
+  for (const line of lines) {
+    if (inBlock) {
+      if (/^[ \t]+/.test(line)) continue; // indented child — drop
+      inBlock = false;
+    }
+    if (/^last_update\s*:/.test(line)) {
+      inBlock = true;
+      continue;
+    }
+    // Orphan indented date/author line (not under a live last_update block).
+    if (/^[ \t]+(?:date|author)\s*:/.test(line)) continue;
+    out.push(line);
+  }
+  return out.join("\n");
+}
 
 async function walk(dir) {
   const out = [];
@@ -43,10 +78,6 @@ function extractReviewedDate(body) {
   return m ? m[1] : null;
 }
 
-function hasLastUpdate(frontmatter) {
-  return /^last_update\s*:/m.test(frontmatter);
-}
-
 function gitLastUpdateFor(absPath) {
   try {
     const rel = path.relative(REPO_ROOT, absPath);
@@ -64,6 +95,10 @@ function gitLastUpdateFor(absPath) {
   }
 }
 
+function serializeLastUpdate(date, author) {
+  return `last_update:\n  date: ${date}\n  author: ${author}\n`;
+}
+
 async function processFile(file) {
   const raw = await fs.readFile(file, "utf8");
   const fmMatch = raw.match(FRONTMATTER_RE);
@@ -71,48 +106,51 @@ async function processFile(file) {
   const frontmatter = hasFm ? fmMatch[1] : "";
   const rest = hasFm ? raw.slice(fmMatch[0].length) : raw;
 
-  if (hasFm && hasLastUpdate(frontmatter)) {
-    return { file, skipped: "already has last_update" };
-  }
-
   const reviewed = extractReviewedDate(rest);
-  const gitInfo = reviewed ? null : gitLastUpdateFor(file);
+  const gitInfo = gitLastUpdateFor(file);
 
   const date =
     reviewed || (gitInfo && gitInfo.date) || FALLBACK_DATE;
   const author = (gitInfo && gitInfo.author) || FALLBACK_AUTHOR;
-  const source = reviewed ? "reviewed" : gitInfo ? "git" : "fallback";
+  const source = reviewed
+    ? gitInfo
+      ? "reviewed+git-author"
+      : "reviewed"
+    : gitInfo
+      ? "git"
+      : "fallback";
 
-  const lastUpdateBlock = `last_update:\n  date: ${date}\n  author: ${author}\n`;
+  const block = serializeLastUpdate(date, author);
 
-  const newFrontmatter = hasFm
-    ? frontmatter.replace(/\s+$/, "") + `\n${lastUpdateBlock}`
-    : lastUpdateBlock;
+  // Strip any existing block, then append the fresh one.
+  const strippedFm = stripExistingLastUpdate(frontmatter).replace(/\s+$/, "");
+  const newFrontmatter = strippedFm ? `${strippedFm}\n${block}` : block;
   const newRaw = `---\n${newFrontmatter}---\n${rest}`;
 
+  if (newRaw === raw) return { file, unchanged: true };
   await fs.writeFile(file, newRaw, "utf8");
-  return { file, injected: date, source };
+  return { file, updated: date, source };
 }
 
 async function main() {
   const files = await walk(DOCS_ROOT);
-  let injected = 0;
-  let skipped = 0;
+  let updated = 0;
+  let unchanged = 0;
   const sourceCounts = new Map();
   for (const file of files) {
     const r = await processFile(file);
-    if (r.injected) {
-      injected += 1;
+    if (r.updated) {
+      updated += 1;
       sourceCounts.set(r.source, (sourceCounts.get(r.source) ?? 0) + 1);
     } else {
-      skipped += 1;
+      unchanged += 1;
     }
   }
   const sourceSummary = Array.from(sourceCounts.entries())
     .map(([k, v]) => `${k}: ${v}`)
     .join(", ");
   console.log(
-    `[inject-last-update] injected ${injected}${sourceSummary ? ` (${sourceSummary})` : ""} / skipped ${skipped}`,
+    `[inject-last-update] updated ${updated}${sourceSummary ? ` (${sourceSummary})` : ""} / unchanged ${unchanged}`,
   );
 }
 

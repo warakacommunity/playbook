@@ -3,6 +3,7 @@ sidebar_position: 5
 title: Annotation guidelines template
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Annotation guidelines template

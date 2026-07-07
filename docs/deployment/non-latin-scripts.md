@@ -3,6 +3,7 @@ sidebar_position: 6
 title: Non-Latin scripts in real UIs
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Non-Latin scripts in real UIs

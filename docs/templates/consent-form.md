@@ -3,6 +3,7 @@ sidebar_position: 4
 title: Consent form template
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Consent form template

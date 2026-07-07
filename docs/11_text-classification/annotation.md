@@ -3,7 +3,7 @@ sidebar_position: 3
 title: Annotation
 sidebar_label: "Annotation"
 last_update:
-  date: 2026-06-27
+  date: 2026-07-07
   author: Idris Abdulmumin
 ---
 

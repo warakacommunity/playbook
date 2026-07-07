@@ -3,6 +3,7 @@ sidebar_position: 3
 title: SMS, USSD, and WhatsApp
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # SMS, USSD, and WhatsApp as NLP surfaces

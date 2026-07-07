@@ -3,6 +3,7 @@ sidebar_position: 7
 title: Model card template
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Model card template

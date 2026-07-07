@@ -3,6 +3,7 @@ sidebar_position: 5
 title: Multilingual switching within a session
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Multilingual switching within a session

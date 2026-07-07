@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Consent Form Template
 last_update:
-  date: 2026-06-27
+  date: 2026-07-07
   author: Idris Abdulmumin
 ---
 

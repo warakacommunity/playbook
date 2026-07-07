@@ -1,6 +1,6 @@
 ---
 last_update:
-  date: 2026-06-27
+  date: 2026-07-07
   author: Idris Abdulmumin
 ---
 Every dataset starts the same way: someone has to go and get the raw material. This chapter is about that first step — what the rest of the playbook calls **data collection** or **data curation**. We mean this narrowly: the actual gathering of raw text, images, audio, or video, before anyone has cleaned it, labelled it, or decided what it means. What happens after collection — cleaning, annotation, quality control, and release — is covered in the chapters that follow.

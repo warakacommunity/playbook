@@ -2,7 +2,7 @@
 title: Inclusive and Bias-Aware Annotation
 sidebar_position: 4
 last_update:
-  date: 2026-06-27
+  date: 2026-07-07
   author: Idris Abdulmumin
 ---
 

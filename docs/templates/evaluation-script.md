@@ -3,6 +3,7 @@ sidebar_position: 3
 title: Evaluation script skeleton
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Evaluation script skeleton

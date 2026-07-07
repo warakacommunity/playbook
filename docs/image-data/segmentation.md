@@ -3,6 +3,7 @@ title: Segmentation
 sidebar_position: 4
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Segmentation

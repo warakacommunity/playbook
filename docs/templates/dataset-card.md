@@ -3,6 +3,7 @@ sidebar_position: 2
 title: Dataset card template
 last_update:
   date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 
 # Dataset card template

@@ -1,7 +1,7 @@
 ---
 last_update:
-  date: 2026-06-25
-  author: Ibrahim Ahmad
+  date: 2026-07-07
+  author: Idris Abdulmumin
 ---
 # Cost and Resource Planning
 
