@@ -34,6 +34,8 @@ All seven initially-planned Before-You-Start pages are now available. Future add
 
 If any entry on any of these pages is more than **six months** out of date, it is broken and needs fixing. Datasets get superseded. Models get deprecated. Recommendations that were right a year ago rot. Each page ships with a "last reviewed" date at the top, and the community owns keeping that date fresh.
 
+If you find a page here past its six-month mark and need to know what has shipped since, the [Finding current resources](../finding-resources/index.md) chapter names the primary Hugging Face organisations, archives, and workshops where the current state of the ecosystem lives.
+
 ## What this is not
 
 This chapter is **not** a fine-tuning tutorial. It is the map you consult *before* you decide whether to fine-tune, what to fine-tune, and against what. The tutorial itself lives one link out.

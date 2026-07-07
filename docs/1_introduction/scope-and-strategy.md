@@ -60,9 +60,13 @@ The current playbook is a solid draft of the dataset-lifecycle spine. The next e
 
 - **Compute-poor training and evaluation.** Community-GPU, Colab, Kaggle patterns. LoRA and QLoRA (linked to canonical, not re-derived). Distillation for edge deployment. When cross-language transfer is a compute-saving strategy.
 
-### Phase 5 — the living directory
+### Phase 5 — finding current resources (redesigned)
 
-A **curated resource directory** — every African-language dataset, model, tool, and benchmark, with a one-line editorial opinion attached to each entry. **This phase does not ship until a semiannual review cadence and a named maintainer are secured.** A stale directory is worse than no directory.
+The original Phase 5 was a curated living directory — every African-language dataset, model, tool, and benchmark, with a one-line editorial opinion on each entry, updated on a semiannual review cadence. On honest reflection, the review cadence was the load-bearing part, and no team has capacity to eyeball 200+ entries semiannually and give each a fresh editorial line. A stale directory that says "SOTA as of 2026-Q3" in 2027 is worse than no directory.
+
+The redesigned Phase 5 ships as **[Finding current resources](../finding-resources/index.md)** — a short chapter that names the *primary sources* (trusted Hugging Face organisations, Zenodo, OpenSLR, SADiLaR, AfricaNLP workshop proceedings, Deep Learning Indaba) and teaches the search patterns that find current African-NLP resources on those platforms. The chapter does not list contents; the sources list themselves.
+
+**Tradeoff acknowledged**: we give up per-entry editorial opinion on every dataset and model (readers get that from the model card and the [Before You Start](../before-you-start/index.md) pages instead). We gain a chapter that stays honest for years without touch and does not require a named maintainer to unblock. The [scope note in *Finding current resources*](../finding-resources/index.md#why-this-chapter-is-short) documents this design choice for future readers.
 
 ## What we deprioritise
 

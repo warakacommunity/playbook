@@ -128,6 +128,7 @@ const sidebars = {
       chapter('Long-tail language onboarding', 'long-tail-language'),
       chapter('Legal, consent, and community IP', 'legal-consent'),
       chapter('Compute-poor training and evaluation', 'compute-poor'),
+      chapter('Finding current resources', 'finding-resources'),
     ]),
 
     chapter('Templates', 'templates'),
