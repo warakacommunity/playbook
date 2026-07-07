@@ -63,8 +63,9 @@ Is your language covered by MasakhaNER 2?
 └── No — is your language related to any of the 20 covered?
     ├── Yes (same family / same script)
     │   → Start with cross-lingual transfer from the closest MasakhaNER 2
-    │     language. Read the "cross-language transfer" chapter (Phase 2).
-    │     Only then design a small validation corpus in your target language.
+    │     language. See the [cross-language transfer](../cross-language-transfer/index.md)
+    │     chapter for family-by-family pivot guidance. Only then design a
+    │     small validation corpus in your target language.
     └── No — the language is genuinely uncovered.
         → You need to build a corpus. Read chapters 2, 3, and 4 of this
           playbook (Data Collection, Annotation Design, Data Quality) in

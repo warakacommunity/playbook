@@ -56,9 +56,11 @@ Is your language covered by Meta MMS (~1000 languages, includes many African)?
     │        not misleading — its listed "language support" does NOT mean
     │        usable accuracy.
     └── No, or Whisper baseline is unusable → XLS-R fine-tune on the
-        closest related language you have data for (see "cross-language
-        transfer" chapter). Build a small evaluation set first, then
-        decide whether corpus creation is the right investment.
+        closest related language you have data for. See the
+        [cross-language transfer](../cross-language-transfer/index.md)
+        chapter for family-by-family pivot guidance. Build a small
+        evaluation set first, then decide whether corpus creation is
+        the right investment.
 ```
 
 ## What it will actually cost you
