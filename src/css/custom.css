@@ -1157,7 +1157,11 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   font-weight: 600 !important;
   padding: 0.4rem 0.7rem !important;
   border-radius: 6px !important;
-  flex: 1 1 auto;
+  /* flex: 1 1 0 forces equal-width columns regardless of label
+     length, so Contribute and Download PDF match each other in the
+     TOC row. When only one button is present (non-template pages),
+     it still fills the row width. */
+  flex: 1 1 0;
   min-width: 0;
   white-space: nowrap;
   display: inline-flex !important;
