@@ -1,0 +1,95 @@
+---
+sidebar_position: 3
+title: Machine Translation
+---
+
+# Before You Start — Machine Translation
+
+*Last reviewed: 2026-07-07.*
+
+Machine translation is the most **operationally consequential** African-language NLP task — it is what unlocks education, government, commerce, and health information in a speaker's own language. It is also the task where the largest published parallel corpora, the largest model releases, and the largest amount of well-intentioned but noisy web-scraped data collide. Getting this right for a new language starts with knowing what already exists.
+
+## What already exists
+
+Four major bodies of work are the current reference points. Read this section top to bottom before deciding to build anything.
+
+### Community-curated parallel corpora
+
+- **[LAFAND-MT](https://aclanthology.org/2022.naacl-main.223/)** ([Adelani et al., 2022](https://aclanthology.org/2022.naacl-main.223/)) — 16 African-English news translation pairs, curated with a strong quality filter and human review. [Repo](https://github.com/masakhane-io/lafand-mt) and data on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/lafand). This is the highest-quality Masakhane-lineage MT resource; treat it as the reference.
+- **[MAFAND-MT (Masakhane MT initial release)](https://github.com/masakhane-io/masakhane-mt)** — the earlier community MT effort covering many African-English pairs. Superseded in coverage by LAFAND-MT for the languages both cover, but the repo remains the canonical directory of per-language Masakhane MT resources and links downstream.
+- **[MENYO-20k](https://aclanthology.org/2021.emnlp-main.55/)** ([Adelani et al., 2021](https://aclanthology.org/2021.emnlp-main.55/)) — 20,100 Yoruba-English news pairs, curated with an explicit focus on tone marks and morphological consistency. The reference bilingual corpus for Yoruba MT.
+- **[FLORES-200](https://arxiv.org/abs/2207.04672)** ([NLLB Team et al., 2022](https://arxiv.org/abs/2207.04672)) — evaluation benchmark covering 200 languages including ~40 African. Use as an evaluation set, not training data — the splits are small on purpose. Available on the [Hugging Face Hub](https://huggingface.co/datasets/facebook/flores).
+
+### Large web-scraped corpora — read with the retrievers' warnings
+
+- **[NLLB Multilingual MT dataset (No Language Left Behind)](https://arxiv.org/abs/2207.04672)** — training data behind Meta's NLLB-200 model. Includes many African languages. Aggregated from many sources; some pairs are cleaner than others. Read the paper's data quality section before training on any given pair.
+- **[JW300](https://aclanthology.org/P19-1310/)** ([Agić & Vulić, 2019](https://aclanthology.org/P19-1310/)) — parallel religious text (Jehovah's Witness publications) across 300+ languages, including most African. Very high-coverage but severely domain-restricted; models trained only on JW300 fail on any secular content. Use for bootstrapping, never as the sole source.
+- **[OPUS](https://opus.nlpl.eu/)** — the general OPUS aggregator hosts many African-language corpora with varied license and quality. [Kreutzer et al. (2022)](https://aclanthology.org/2022.tacl-1.4/) audited the low-resource end of these and found substantial mislabelling; the safe move is to spot-check any OPUS pair against native-speaker judgement before training.
+
+### Models — what has been trained on this data
+
+- **[NLLB-200](https://huggingface.co/facebook/nllb-200-distilled-600M)** and its larger variants (1.3B, 3.3B, 54B MoE) — Meta's dense and MoE MT models covering 200 languages. Strongest baseline for out-of-the-box translation on any language in its coverage set. The [distilled-600M variant](https://huggingface.co/facebook/nllb-200-distilled-600M) is the practical fine-tuning starting point for teams without deep-pocket compute.
+- **[AfriMT5](https://arxiv.org/abs/2110.05264)** and community fine-tunes on the [Hugging Face Hub under `masakhane/`](https://huggingface.co/masakhane) — smaller, per-language or per-family fine-tunes suited to constrained-compute deployment.
+- **[mT5](https://huggingface.co/google/mt5-base)** and [mBART-50](https://huggingface.co/facebook/mbart-large-50) — general multilingual seq2seq baselines. Still useful as a fine-tuning starting point when NLLB is over-parameterised for the deployment.
+- **[Meta MMS](https://ai.meta.com/blog/multilingual-model-speech-recognition/)** — while primarily a speech project, its supported-language list overlaps heavily with the African MT/ASR space and is worth knowing about for multimodal pipelines.
+
+**Editorial opinion.** For a new project on a language covered by NLLB-200, start there. Fine-tune NLLB-200-distilled on your best available parallel data (LAFAND-MT if the pair is covered, otherwise the best-curated corpus you have). Evaluate on FLORES-200's dev split for that pair, and do **not** trust the FLORES number without human review. If your language is not in NLLB-200, the task is genuinely research-grade — read the "cross-language transfer" chapter (Phase 2) before scoping.
+
+## Fork or start fresh?
+
+```
+Is your language pair covered by LAFAND-MT (16 African-English pairs)?
+├── Yes → Use LAFAND-MT for the target-domain evaluation, fine-tune
+│         NLLB-200-distilled starting from Meta's checkpoint.
+│         Human-evaluate 200 random test outputs before publishing metrics.
+└── No — is it in NLLB-200's 200-language coverage?
+    ├── Yes → NLLB-200 out-of-the-box is your baseline. Collect a
+    │         small (500-2000 sentence) native-speaker validation set
+    │         in your target domain first — the NLLB numbers on
+    │         out-of-distribution content can be misleading.
+    └── No — genuinely uncovered.
+        → Language selection is now the primary decision. Read the
+          "cross-language transfer" chapter for related-language
+          starting points, build a small parallel corpus (500-2000
+          sentences) as an evaluation set FIRST, and only then decide
+          whether corpus creation, cross-language transfer, or
+          reliance on an LLM API is the right investment.
+```
+
+## What it will actually cost you
+
+These are order-of-magnitude estimates. Your project will differ; the numbers below are the honest floor.
+
+- **Fine-tuning NLLB-200-distilled on an existing parallel corpus (LAFAND-MT or equivalent).** Two to four person-weeks. One to five GPU-days for the distilled model, more for the larger checkpoints. Most of the elapsed time is evaluation and human review, not training.
+- **Curating a new 5-10k-sentence parallel corpus for training** (news, government, health domains). Three to nine months elapsed; three to twelve person-months of translator work; ~$4-$15 per sentence at professional-translator rates, less when running through Masakhane-lineage community workflows with fair-rate volunteer coordination. Add one full person-month of lead effort for source selection, alignment, and quality review.
+- **Curating a new 500-2000-sentence evaluation-only set** (the minimum viable for defensible human evaluation of a fine-tuned NLLB model). Four to eight weeks; one to two person-months of translator effort.
+- **Human evaluation of a new model** on 200 randomly-sampled test outputs. Two person-weeks per evaluator; do this with at least two evaluators independently, then adjudicate disagreements. Do not trust a single-evaluator human eval.
+
+## Known limitations to watch for
+
+- **Domain drift is the dominant failure mode.** A model trained on JW300 fails on news; a model trained on news fails on legal text; a model trained on formal text fails on social media. Report the training domain and the evaluation domain separately, and never publish a single BLEU or chrF number without stating both.
+- **BLEU is not the right primary metric for morphology-rich languages.** Use [`chrF`](https://aclanthology.org/W15-3049/) (character n-gram F-score) via [sacrebleu](https://github.com/mjpost/sacrebleu). Report BLEU as a secondary number for comparison with prior work only. This is playbook-level editorial policy — see [core principles](../1_introduction/core-principles.md).
+- **The corpus you can find is not the corpus you should train on.** [Kreutzer et al. (2022)](https://aclanthology.org/2022.tacl-1.4/) audited widely-used web crawls of low-resource languages and found mislabelled, machine-translated, and off-language content at rates of 30-90% for many African pairs. Spot-check every corpus with a native speaker before training. This is not optional.
+- **Diacritic normalization changes results.** Yoruba, Igbo, Vietnamese-style diacritic-carrying languages are especially sensitive. Publish your preprocessing pipeline explicitly. Never rely on a downstream user to guess it.
+- **Human evaluation is not optional for generative output.** No automatic metric — including chrF, COMET, or BLEURT — replaces native-speaker judgement of adequacy and fluency. Budget human evaluation into every project from the start.
+- **Code-switching in training vs. test.** Real African-language text mixes languages; most published parallel corpora are strict monolingual. If your target text is code-switched (Hausa-English, French-Wolof), the published corpus numbers overstate what you will get in deployment.
+- **Culturally-sensitive translation.** Legal, medical, or religious content translated by a non-domain-expert translator is a liability, not an asset. Match translator expertise to content domain.
+
+## The canonical fine-tuning link
+
+For fine-tuning NLLB-200 (or any seq2seq encoder-decoder), use the [Hugging Face translation tutorial](https://huggingface.co/docs/transformers/tasks/translation). It covers `datasets` loading, tokenisation for multilingual models, training loop, and evaluation with sacrebleu. The [NLLB model card on the HF Hub](https://huggingface.co/facebook/nllb-200-distilled-600M) has the specific fine-tuning guidance for that model, including how to specify the source and target language tokens correctly (this is a common footgun).
+
+For sacrebleu itself (chrF and BLEU): [github.com/mjpost/sacrebleu](https://github.com/mjpost/sacrebleu). Use the `chrF` metric and report the raw score, not a percentage.
+
+## Further reading
+
+- [LAFAND-MT paper (Adelani et al., 2022)](https://aclanthology.org/2022.naacl-main.223/) — the reference methodology for community-curated African MT.
+- [NLLB paper (NLLB Team et al., 2022)](https://arxiv.org/abs/2207.04672) — the definitive technical report on large-scale multilingual MT for low-resource languages.
+- [Kreutzer et al., 2022 — quality of low-resource web crawls](https://aclanthology.org/2022.tacl-1.4/) — required reading before touching OPUS or CC-100 low-resource pairs.
+- [MENYO-20k paper (Adelani et al., 2021)](https://aclanthology.org/2021.emnlp-main.55/) — the Yoruba reference corpus and the discussion of tone-mark handling.
+- [sacrebleu docs](https://github.com/mjpost/sacrebleu) — the canonical evaluation implementation. Do not roll your own.
+- [chrF paper (Popović, 2015)](https://aclanthology.org/W15-3049/) — for readers who want to understand why the playbook prefers chrF over BLEU.
+
+---
+
+**Contributor's note.** This is the second exemplar of the "Before You Start" pattern. Read alongside the [NER page](./ner.md) for the shared structure — *what exists / fork-or-fresh / cost / canonical link* — and mirror it when adding pages for sentiment, ASR, TTS, QA, hate speech, or OCR.

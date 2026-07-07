@@ -18,12 +18,12 @@ For every core task, this chapter answers the same four questions:
 ## Available now
 
 - [Named Entity Recognition](./ner.md) — the flagship reference chapter, built on MasakhaNER 1 and 2.
+- [Machine Translation](./machine-translation.md) — built on LAFAND-MT, MENYO-20k, FLORES-200, NLLB-200.
 
 ## Coming next
 
 The chapters below will be added in this order, each following the same four-part structure. Contribute a section for a task you know well — see the [contribution guide](https://github.com/warakacommunity/AfriPlaybook/blob/main/README.md#ways-to-contribute).
 
-- **Machine Translation** — building on MasakhaneMT, LAFAND-MT, FLORES-200, NLLB.
 - **Sentiment and emotion analysis** — building on AfriSenti, NaijaNLP.
 - **Automatic Speech Recognition** — building on Common Voice, NCHLT, MakerereNLP speech, IndabaX ASR work.
 - **Question answering** — building on AfriQA, cross-lingual retrieval work.

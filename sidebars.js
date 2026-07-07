@@ -123,6 +123,7 @@ const sidebars = {
       chapter('Evaluation', '8_model-building'),
       chapter('Documentation', '6_documentation'),
       chapter('Dataset Lifecycle', '9_dataset-lifecycle'),
+      chapter('Deployment', 'deployment'),
     ]),
 
     chapter('Case Studies', 'case-studies'),
