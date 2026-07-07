@@ -60,9 +60,8 @@
 
 .pageInfo {
   background: var(--brand-surface-tint);
-  border-left: 3px solid var(--ifm-color-primary);
   padding: 10px 14px;
-  border-radius: 4px;
+  border-radius: 6px;
   margin-bottom: 14px;
 }
 .pageInfoTitle {
