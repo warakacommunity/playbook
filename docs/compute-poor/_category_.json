@@ -1,0 +1,9 @@
+{
+  "label": "Compute-poor training and evaluation",
+  "position": 88,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "compute-poor/index"
+  }
+}

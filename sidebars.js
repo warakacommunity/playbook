@@ -127,6 +127,7 @@ const sidebars = {
       chapter('Cross-language transfer', 'cross-language-transfer'),
       chapter('Long-tail language onboarding', 'long-tail-language'),
       chapter('Legal, consent, and community IP', 'legal-consent'),
+      chapter('Compute-poor training and evaluation', 'compute-poor'),
     ]),
 
     chapter('Case Studies', 'case-studies'),
