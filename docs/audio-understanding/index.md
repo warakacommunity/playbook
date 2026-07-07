@@ -19,7 +19,7 @@ Audio understanding is not one task but a family. The framing determines the lab
 
 - **Whole-clip classification.** One label (or a small set) per clip: "This is Kiswahili news broadcast", "This clip contains coughing", "This is a distress call". Simplest to annotate, cheapest to model, sufficient for many triage use cases (routing calls to the right desk, flagging health-relevant audio for review).
 - **Event detection with timestamps.** Where in a longer clip an event of interest occurs, with start and end times: "Coughing at 00:14–00:17 and 01:22–01:25", "Speech onset at 00:03". More expensive to annotate than classification, but load-bearing for any pipeline that must locate events, not just detect their presence.
-- **Keyword spotting (KWS).** A specialised detection variant: "Does this clip contain the phrase 'help' in any of {Kiswahili, English, Yoruba}?" Used in voice assistants (wake-word detection) and in emergency-triage systems. Latency-sensitive and often deployed on-device.
+- **Keyword spotting (KWS).** A specialised detection variant: "Does this clip contain the phrase 'help' in any of Kiswahili, English, or Yoruba?" Used in voice assistants (wake-word detection) and in emergency-triage systems. Latency-sensitive and often deployed on-device.
 - **Spoken language identification (LID).** Which language a clip contains — a first-pass gate for downstream ASR or MT routing. Simple in theory, hard in African contexts because of code-switching, dialect variation, and speakers whose accent in a lingua franca can trip general-purpose LID models.
 
 ## What "African audio" actually varies on

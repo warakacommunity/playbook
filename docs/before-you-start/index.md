@@ -20,14 +20,14 @@ For every core task, this chapter answers the same four questions:
 
 ## Available now
 
-- [Named Entity Recognition](./ner.md) — the flagship reference chapter, built on MasakhaNER 1 and 2.
-- [Machine Translation](./machine-translation.md) — built on LAFAND-MT, MENYO-20k, FLORES-200, NLLB-200.
-- [Automatic Speech Recognition](./asr.md) — built on Common Voice, FLEURS, NCHLT, MakerereNLP, Meta MMS, and Whisper.
-- [Sentiment analysis](./sentiment.md) — built on AfriSenti (14 languages) and NaijaSenti.
-- [Hate speech and content safety](./hate-speech.md) — for teams working on a task whose failure modes are qualitatively different from classification-as-usual.
-- [Text-to-Speech](./tts.md) — built on Meta MMS-TTS, VITS/XTTS/Kokoro architectures, and the voice-consent framing that TTS uniquely requires.
-- [Question Answering](./qa.md) — built on AfriQA, TyDi QA, mDPR / mContriever retrieval, with cross-lingual open-domain framing.
-- [OCR and document AI](./ocr.md) — built on Tesseract, TrOCR, Kraken/Calamari, PaddleOCR, and community corpora across Latin, Ge'ez, Ajami, and other African scripts.
+- [Named Entity Recognition](./ner) — the flagship reference chapter, built on MasakhaNER 1 and 2.
+- [Machine Translation](./machine-translation) — built on LAFAND-MT, MENYO-20k, FLORES-200, NLLB-200.
+- [Automatic Speech Recognition](./asr) — built on Common Voice, FLEURS, NCHLT, MakerereNLP, Meta MMS, and Whisper.
+- [Sentiment analysis](./sentiment) — built on AfriSenti (14 languages) and NaijaSenti.
+- [Hate speech and content safety](./hate-speech) — for teams working on a task whose failure modes are qualitatively different from classification-as-usual.
+- [Text-to-Speech](./tts) — built on Meta MMS-TTS, VITS/XTTS/Kokoro architectures, and the voice-consent framing that TTS uniquely requires.
+- [Question Answering](./qa) — built on AfriQA, TyDi QA, mDPR / mContriever retrieval, with cross-lingual open-domain framing.
+- [OCR and document AI](./ocr) — built on Tesseract, TrOCR, Kraken/Calamari, PaddleOCR, and community corpora across Latin, Ge'ez, Ajami, and other African scripts.
 
 ## What's next
 
@@ -37,10 +37,10 @@ All seven initially-planned Before-You-Start pages are now available. Future add
 
 If any entry on any of these pages is more than **six months** out of date, it is broken and needs fixing. Datasets get superseded. Models get deprecated. Recommendations that were right a year ago rot. Each page ships with a "last reviewed" date at the top, and the community owns keeping that date fresh.
 
-If you find a page here past its six-month mark and need to know what has shipped since, the [Finding current resources](../finding-resources/index.md) chapter names the primary Hugging Face organisations, archives, and workshops where the current state of the ecosystem lives.
+If you find a page here past its six-month mark and need to know what has shipped since, the [Finding current resources](../finding-resources/index) chapter names the primary Hugging Face organisations, archives, and workshops where the current state of the ecosystem lives.
 
 ## What this is not
 
 This chapter is **not** a fine-tuning tutorial. It is the map you consult *before* you decide whether to fine-tune, what to fine-tune, and against what. The tutorial itself lives one link out.
 
-For the strategic reasoning behind this chapter — why the playbook adds a "Before You Start" section instead of writing more model-training content — see [**What this playbook is (and isn't)**](../1_introduction/scope-and-strategy.md).
+For the strategic reasoning behind this chapter — why the playbook adds a "Before You Start" section instead of writing more model-training content — see [**What this playbook is (and isn't)**](../1_introduction/scope-and-strategy).

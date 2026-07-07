@@ -14,7 +14,7 @@ last_update:
 
 ## Why this template exists
 
-The playbook takes strong positions on evaluation ([core principles](../1_introduction/core-principles.md), and every [Before You Start](../before-you-start/index.md) page): report per-language and per-class, prefer character-level metrics for morphology-rich languages, never let an automatic score stand alone for generative output. It is easier to say those things than to enforce them across every project.
+The playbook takes strong positions on evaluation ([core principles](../1_introduction/core-principles), and every [Before You Start](../before-you-start/index) page): report per-language and per-class, prefer character-level metrics for morphology-rich languages, never let an automatic score stand alone for generative output. It is easier to say those things than to enforce them across every project.
 
 This template makes the compliance the default. The output has per-language and per-class breakdowns by construction; the primary metric for translation is chrF; the primary metric for speech is CER; a human-evaluation sampling hook is scaffolded in. Fork it, adapt the task-specific metric plug-in point, and any project using it inherits the policy without needing to remember it.
 
@@ -268,7 +268,7 @@ if __name__ == "__main__":
 ## What the template does not do
 
 - **It does not run the model.** The script assumes you have a JSONL of predictions and references already; the training loop and inference are project-specific.
-- **It does not enforce evaluation on the whole test set.** Sampling is legitimate for compute-poor iteration (see the [compute-poor chapter's evaluation section](../compute-poor/index.md#evaluation-under-a-compute-budget)); the harness reports what you feed it.
+- **It does not enforce evaluation on the whole test set.** Sampling is legitimate for compute-poor iteration (see the [compute-poor chapter's evaluation section](../compute-poor/index#evaluation-under-a-compute-budget)); the harness reports what you feed it.
 - **It does not replace task-specific tooling.** For NER, use `seqeval`; for QA, use the AfriQA companion repo scoring scripts; for TTS, use human MOS collection tooling. Plug the task-specific metric into the `TASKS` dictionary; keep the per-language and per-class scaffolding.
 - **It does not enforce reproducibility.** Every project that ships evaluation numbers should also commit the exact predictions JSONL, the metric library versions, and the random seed. Add those as commit artifacts alongside your evaluation script.
 
@@ -277,7 +277,7 @@ if __name__ == "__main__":
 The pattern for adding a new task is:
 
 1. Add a `def eval_yourtask(records)` function that returns a dict with `per_language` at the top level.
-2. Choose the metric that respects morphology-rich language reality (character-level over word-level where morphology matters; per-class for classification; retrieval-first for QA — see the [QA page](../before-you-start/qa.md)).
+2. Choose the metric that respects morphology-rich language reality (character-level over word-level where morphology matters; per-class for classification; retrieval-first for QA — see the [QA page](../before-you-start/qa)).
 3. Register in the `TASKS` dictionary.
 4. Add a docstring line describing what the primary metric is and why.
 

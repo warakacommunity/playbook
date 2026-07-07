@@ -75,7 +75,7 @@ Each channel serves a different user need. Design for the channel your users are
 **Design implications for NLP:**
 
 - **Rich input surface.** Users send text, voice notes, images (a photo of a form, a hand-written question), documents, and locations. The NLP model has to handle multimodal input if the use case is anything other than pure text-chat.
-- **Voice notes are ubiquitous** in African WhatsApp usage — often more natural for the user than typing, especially in code-switched conversation. Voice-to-text using MMS or Whisper (see [ASR Before You Start](../before-you-start/asr.md)) is a real design choice, not a research aside.
+- **Voice notes are ubiquitous** in African WhatsApp usage — often more natural for the user than typing, especially in code-switched conversation. Voice-to-text using MMS or Whisper (see [ASR Before You Start](../before-you-start/asr)) is a real design choice, not a research aside.
 - **Business API access is gated** through Meta and its business solution providers. The application takes weeks; templates for outbound messages must be pre-approved; abuse controls are strict. Plan for this in the project schedule.
 - **Template messages for outbound are pre-approved by Meta.** Anything with an NLP-generated body cannot be sent as an outbound-first message; NLP output only appears within an already-open 24-hour customer service window.
 - **Language switching within a session is standard.** WhatsApp users routinely mix English/French/Arabic + a local language in a single conversation. The model must handle this as normal input, not as an edge case.
@@ -95,7 +95,7 @@ Across all three channels, the same set of NLP problems show up amplified:
 2. **Robust input normalisation.** Users write phonetically, abbreviate freely, drop diacritics, mix scripts, and swap languages mid-sentence. The pipeline needs to survive this without silently mis-routing.
 3. **Response length control.** SMS's 160-character hard limit means model outputs must be constrained at generation time. USSD's per-menu budget is similar. WhatsApp is unconstrained on length but rewards short responses in practice.
 4. **Cost per interaction is user-visible or paid.** Unlike a web app where the marginal cost of a longer response is invisible, on these channels the cost is real. Design responses to minimise per-interaction billing.
-5. **Voice as first-class input for WhatsApp.** Text-only design misses the largest natural interaction pattern on the channel. ASR quality (per the [ASR page](../before-you-start/asr.md)) becomes a deployment blocker.
+5. **Voice as first-class input for WhatsApp.** Text-only design misses the largest natural interaction pattern on the channel. ASR quality (per the [ASR page](../before-you-start/asr)) becomes a deployment blocker.
 
 ## Anti-patterns to avoid
 
@@ -110,10 +110,10 @@ Across all three channels, the same set of NLP problems show up amplified:
 ## Where this connects to the rest of the playbook
 
 - **Language identification** for code-switched short user input is a task that deserves its own Before-You-Start page once we can source enough public evaluation data; there is a gap here today.
-- **Input normalisation** for SMS-noise text is part of the [data quality](../4_data-quality/index.md) chapter's scope; work on annotation guidelines that reflect real user text rather than clean-corpus text belongs there.
-- **ASR quality** on WhatsApp voice notes is directly the [ASR chapter's](../before-you-start/asr.md) scope; the channel just moves ASR from "feature" to "deployment blocker."
+- **Input normalisation** for SMS-noise text is part of the [data quality](../4_data-quality/index) chapter's scope; work on annotation guidelines that reflect real user text rather than clean-corpus text belongs there.
+- **ASR quality** on WhatsApp voice notes is directly the [ASR chapter's](../before-you-start/asr) scope; the channel just moves ASR from "feature" to "deployment blocker."
 - **Response-length control** is a training-time concern, not just a decoding-time one. Fine-tunes on short-response data (WhatsApp, SMS, Twitter-like text) generalise better to these channels than fine-tunes on long-form content.
-- **Deployment for offline / patchy connectivity** ([the previous page](./offline.md)) applies to WhatsApp as much as to any other channel that requires a data connection.
+- **Deployment for offline / patchy connectivity** ([the previous page](./offline)) applies to WhatsApp as much as to any other channel that requires a data connection.
 
 ## Further reading
 
@@ -125,4 +125,4 @@ Across all three channels, the same set of NLP problems show up amplified:
 
 ---
 
-**Contributor's note.** If you have shipped a production SMS, USSD, or WhatsApp deployment in an African language, the highest-value contribution here is a per-project note describing the language-identification approach you used, the noise patterns you had to normalise, and the cost realities of the channel at scale. Consider a [Case Studies](../case-studies/index.md) entry.
+**Contributor's note.** If you have shipped a production SMS, USSD, or WhatsApp deployment in an African language, the highest-value contribution here is a per-project note describing the language-identification approach you used, the noise patterns you had to normalise, and the cost realities of the channel at scale. Consider a [Case Studies](../case-studies/index) entry.

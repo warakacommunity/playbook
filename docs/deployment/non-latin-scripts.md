@@ -56,7 +56,7 @@ A UI that renders Ajami perfectly but has no way for the user to type it in is n
 - **Android** — Gboard supports many African languages and scripts natively, including Ajami-adjacent Arabic keyboards and Ethiopic. Coverage of N'Ko, Tifinagh, and Vai keyboards is thinner and typically requires third-party IMEs (GeezIME, Multiling O Keyboard, and similar).
 - **iOS** — native keyboard coverage for African scripts is thinner than Android. Amharic and Tigrinya have decent support; Ajami, N'Ko, Tifinagh users typically install third-party keyboard apps.
 - **Web** — no OS-level input method available; if your users lack a system keyboard, provide an on-screen software keyboard or a Latin-to-target-script transliteration input. Both are engineering work.
-- **KaiOS and feature phones** — input methods are very limited; the practical answer for these users is voice input (see [ASR chapter](../before-you-start/asr.md)) or transliterated Latin input.
+- **KaiOS and feature phones** — input methods are very limited; the practical answer for these users is voice input (see [ASR chapter](../before-you-start/asr)) or transliterated Latin input.
 
 For a deployment that expects users to type in the target script, **verify with users what keyboards they have installed and how they type**. Do not assume; the reality is usually that a substantial share of your users type in a Latin transliteration and switch mentally, which has downstream implications for search, storage, and matching.
 
