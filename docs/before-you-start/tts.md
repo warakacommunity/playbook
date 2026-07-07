@@ -1,0 +1,111 @@
+---
+sidebar_position: 7
+title: Text-to-Speech
+---
+
+# Before You Start — Text-to-Speech
+
+*Last reviewed: 2026-07-07.*
+
+Text-to-Speech (TTS) is the modality where deployment demand for African languages has grown fastest — driven by literacy access, education, radio-adjacent broadcasting, WhatsApp voice replies, and accessibility work — and where the responsibility gap between "we can synthesise it" and "we should synthesise it" is largest. Voice is uniquely personal data, and TTS is uniquely exposed to voice-cloning misuse. This page is the reference for how to scope a new TTS project, and what has to be true before it can responsibly ship.
+
+## What already exists
+
+Unlike ASR, where Meta MMS covers a broad language set, TTS coverage for African languages is more uneven — a few widely-covered pivots, many partially-covered targets, and substantial ongoing community work.
+
+### Models — the current baselines
+
+- **[Meta MMS-TTS](https://ai.meta.com/blog/multilingual-model-speech-recognition/)** ([Pratap et al., 2023](https://arxiv.org/abs/2305.13516)) — the TTS variant of the MMS release, covering over 1,000 languages including a substantial African set. Available on the [Hugging Face Hub as facebook/mms-tts-*](https://huggingface.co/facebook/mms-tts) (per-language variants). Strongest single starting point for TTS on a language in its coverage set. Quality varies by language — measure before deploying.
+- **[SeamlessM4T](https://ai.meta.com/research/seamless-communication/)** — Meta's speech-and-text foundation model with TTS as one component. Broad multilingual coverage; heavier than MMS-TTS and often overkill for single-language TTS but useful in speech-to-speech translation pipelines.
+- **[Coqui XTTS](https://huggingface.co/coqui/XTTS-v2)** ([Casanova et al., 2024](https://arxiv.org/abs/2406.04904)) — the widely-adopted open-source multilingual TTS with voice-cloning capability. The Coqui organisation itself is no longer maintained, but the models remain useful references. African-language coverage exists but is uneven.
+- **[VITS](https://arxiv.org/abs/2106.06103)** ([Kim et al., 2021](https://arxiv.org/abs/2106.06103)) and its many descendants — the reference open-source TTS architecture; the base most community fine-tunes for African languages start from.
+- **[Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M)** and other recent lightweight community TTS models — for constrained-deployment scenarios; check African-language coverage per model release.
+- **Community fine-tunes** on the [Hugging Face Hub under `masakhane/`](https://huggingface.co/masakhane), `sunbird/`, and country-specific research groups — coverage growing. Model-card quality is variable; do not deploy without independently measuring MOS on your target language.
+
+### Corpora — TTS training data
+
+- **[Common Voice validated splits](https://commonvoice.mozilla.org/)** — the CC0-licensed subset of validated Common Voice recordings is usable for TTS training when the recording quality allows. Not all voices work — TTS needs clean, single-speaker, prosodically consistent audio, which is a stricter filter than ASR needs.
+- **[NCHLT TTS](https://sadilar.org/en/resources/repository/)** — the South African TTS corpora developed alongside the NCHLT speech collection; the reference for South African official languages.
+- **[BibleTTS](https://arxiv.org/abs/2207.03546)** ([Meyer et al., 2022](https://arxiv.org/abs/2207.03546)) — a TTS corpus derived from Bible recordings across several African languages. Extremely domain-restricted (formal religious register) but useful as a bootstrap.
+- **[CVSS-C](https://arxiv.org/abs/2201.03713)** — the Common Voice speech-to-speech translation dataset; the target-side speech is TTS-generated and useful for research on synthesised-speech intelligibility.
+- **Community-collected studio corpora** — several African TTS projects (Sunbird for Luganda, various university groups for South African and West African languages) have released studio-recorded corpora. These are the highest quality but smallest in volume.
+
+**Editorial opinion.** For a language covered by MMS-TTS, start there. Evaluate the out-of-the-box quality on your target domain and text style before deciding whether to fine-tune — MMS-TTS quality on some African languages is deployment-ready as-is, on others is not. When it is not, VITS fine-tuning on 5–20 hours of clean studio speech is the practical path. Voice cloning via XTTS is a research capability, not a deployment default — see the [voice consent and voice-cloning risk](#voice-consent-and-voice-cloning-risks) section below.
+
+## Fork or start fresh?
+
+```
+Is your language covered by Meta MMS-TTS?
+├── Yes — is the out-of-the-box quality acceptable for your target text?
+│   ├── Yes → Deploy MMS-TTS. Measure MOS with native listeners on your
+│   │        target text style (not on Common Voice sentences).
+│   └── No, quality is inadequate → Fine-tune VITS or a similar
+│       open architecture on 5-20 hours of clean, single-speaker
+│       studio-quality audio. Use MMS-TTS as your quality floor.
+└── No — MMS-TTS does not cover your language.
+    ├── Is it related to a covered language? → Fine-tune the closest
+    │   covered MMS-TTS model on a small (2-5h) speech sample in your
+    │   target language and MEASURE. Cross-lingual transfer is
+    │   variable for TTS — see the known limitations below.
+    └── Genuinely uncovered → Read the [long-tail language
+        onboarding](../long-tail-language/index.md) chapter first.
+        Then plan 20-50 hours of clean studio-quality recording
+        with a small number of speakers, aligned to text, before
+        VITS/XTTS fine-tuning is worth attempting. Do NOT bootstrap
+        TTS from Common Voice-style crowd-recorded speech; the
+        quality bar is too high.
+```
+
+## What it will actually cost you
+
+TTS data is roughly **2-5x more expensive to produce than ASR data** because studio-quality single-speaker recording is required, and speaker selection matters far more than for ASR. Order-of-magnitude:
+
+- **Deploying MMS-TTS out of the box on a covered language.** Under one person-week. Evaluation on your target text style is the actual work.
+- **Fine-tuning VITS on 5-20 hours of clean single-speaker studio audio (existing recording).** Two to five person-weeks; twenty to sixty GPU-hours. Feasible on Colab Pro / Kaggle.
+- **Recording 5-20 hours of clean studio TTS training data with a single speaker.** Six to twelve weeks elapsed; two to five person-months of coordination (speaker recruitment, studio booking, prompt selection, quality review); studio hire and speaker compensation vary widely by market ($1,500 to $12,000 per released hour of audio at fair-rate community-anchored budgets, considerably higher at commercial studio rates).
+- **Recording 20-50 hours for a genuinely-uncovered language TTS effort.** Nine to eighteen months elapsed; six to fifteen person-months plus one to two person-months of lead effort. This is the milestone for a first releasable TTS system.
+- **Human MOS evaluation of a new model.** Two person-weeks per evaluator for 200 utterances judged on a 1–5 scale; do this with at least five evaluators for statistical stability. Automatic MOS predictors (UTMOS, NISQA) are useful proxies but do not replace human ratings.
+
+## Known limitations to watch for
+
+- **Voice cloning is not the default use case.** Modern TTS (XTTS in particular) can clone a voice from a few seconds of reference audio. That capability is a deployment liability, not a feature, unless the speaker whose voice is being cloned has given specific informed consent about that use. Default to non-cloning single-voice models unless voice cloning is explicitly required and appropriately governed. See the [voice consent](#voice-consent-and-voice-cloning-risks) section.
+- **Tone and prosody must be preserved.** Many African languages carry lexical distinctions in tone (Yoruba, Igbo, Bantu) that a TTS model can flatten if the training data does not consistently mark them. A tone-flattened synthesised voice can produce technically-correct-but-wrong output (right words, wrong meaning). Verify tone preservation in evaluation.
+- **Speaker and dialect selection are political.** Choosing "the" voice for a language is a choice — a specific dialect, a specific speech register, a specific speaker gender. That choice is heard by every listener as a claim about which variety is "standard." Involve the community in speaker selection; do not treat it as a technical detail.
+- **Common Voice-style crowd-recorded audio is usually not TTS-quality.** Microphone variation, background noise, prosodic inconsistency across speakers make crowd data unsuitable for single-speaker TTS training. Use it for ASR; use dedicated studio recording for TTS.
+- **Cross-lingual TTS transfer is variable and phoneme-dependent.** Transfer works best when source and target share phoneme inventory; it degrades sharply when the target has phonemes the source does not (clicks, ejectives, complex tones). Do not assume MMS-TTS coverage of language X extends usefully to unrelated language Y.
+- **Domain matters — but less than for ASR.** A TTS system trained on news-style prompts will synthesise novel-style text with reduced but usually acceptable quality. The domain sensitivity is much weaker than for ASR. Optimise data selection for prosodic and phonetic coverage, not text-domain match.
+- **Automatic evaluation is not enough.** UTMOS, NISQA, and character-error-rate-round-trip (synthesise + re-transcribe with an ASR) are useful development metrics; MOS with native listeners is the reporting standard. Do not publish a TTS system without a human MOS.
+
+## Voice consent and voice-cloning risks
+
+TTS training and voice cloning both require voice recordings, and voice is uniquely personal biometric data. The consent conversation is qualitatively different from other data consent.
+
+- **The consent form must be explicit about voice-cloning risk.** A speaker recording for a text-to-speech corpus is agreeing to have their voice reproduced, potentially indefinitely, in contexts they did not anticipate. This is not implicit in generic "we will record you" consent; it must be stated, in the speaker's own language, in terms they understand.
+- **The consent must cover downstream use, including model release.** Will the trained model be released open-source? Can commercial actors use it? Can the model be adapted to clone the speaker's voice for arbitrary text? Every answer is a policy decision, and the speaker must be informed of the specific answers.
+- **Withdrawal is more complicated for voice.** Once a TTS model has been trained on a speaker's voice, "withdrawal" means retraining without that speaker's data, which may or may not be feasible. Be honest with speakers about this constraint at consent time.
+- **Consider the reversal — TTS as a defence against voice cloning.** For high-risk speakers (journalists, activists, public figures whose voices are already public), a well-governed community TTS model can be a defence against malicious cloning. Frame the ethical case honestly.
+
+The [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference; the section on consent from non-literate speakers applies with additional weight here.
+
+## The canonical fine-tuning link
+
+For fine-tuning VITS or similar TTS architectures, use the [Hugging Face TTS fine-tuning tutorial](https://huggingface.co/learn/audio-course/en/chapter6/introduction) — part of the HF Audio Course. For MMS-TTS specifically, use the [MMS-TTS model card](https://huggingface.co/facebook/mms-tts) documentation. For Coqui XTTS, the community-maintained [Coqui TTS documentation](https://github.com/coqui-ai/TTS) covers the fine-tuning path even though the parent organisation is no longer active.
+
+For evaluation:
+- **Subjective MOS** collected via native listeners on a 1–5 scale — the reporting standard.
+- **[UTMOS](https://arxiv.org/abs/2204.02152)** or **[NISQA](https://arxiv.org/abs/2104.09494)** — automatic MOS predictors, useful for development but not as the reporting number.
+- **Character-error-rate round-trip** — synthesise a test set, transcribe with an ASR (per the [ASR page](./asr.md)), compute CER against reference text. Useful as an intelligibility proxy.
+
+## Further reading
+
+- [Meta MMS paper (Pratap et al., 2023)](https://arxiv.org/abs/2305.13516) — the definitive report on the massively-multilingual speech-and-TTS release.
+- [VITS paper (Kim et al., 2021)](https://arxiv.org/abs/2106.06103) — the foundational open-source TTS architecture that most current fine-tunes build on.
+- [XTTS paper (Casanova et al., 2024)](https://arxiv.org/abs/2406.04904) — the widely-used multilingual voice-cloning model; important reading for its discussion of the voice-cloning consent problem.
+- [BibleTTS paper (Meyer et al., 2022)](https://arxiv.org/abs/2207.03546) — the reference African-language TTS bootstrap corpus, useful for its guidelines on Bible-derived data.
+- [UTMOS paper](https://arxiv.org/abs/2204.02152) and [NISQA paper](https://arxiv.org/abs/2104.09494) — the current automatic MOS predictors.
+- [Sunbird AI blog](https://sunbird.ai/) — the working reference on running TTS + ASR + MT in production for African languages at small-team scale.
+- [Common Voice technical description](https://arxiv.org/abs/1912.06670) — for understanding what Common Voice data can and cannot support in TTS training.
+
+---
+
+**Contributor's note.** This is the sixth Before-You-Start exemplar. If you are adding QA (AfriQA) or OCR next, mirror the four-section structure. If you are contributing to this page — new corpora, per-language MOS numbers, deployment retrospectives — preserve the voice-consent framing. It is the ethical difference between a research release and a defensible deployment.
