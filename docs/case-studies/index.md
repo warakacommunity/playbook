@@ -8,7 +8,7 @@ sidebar_position: 1
 
 Most NLP writing is aspirational — how the pipeline is *supposed* to work, how the metrics are *supposed* to move, how the annotator workflow is *supposed* to scale. The interesting parts sit in the gap between the paper's methods section and what actually happened: what surprised the team, what was harder than they expected, what they would do differently. This chapter closes that gap.
 
-Every case study on this page answers the same seventeen questions, drawn from the [retrospective template](./_retrospective-template.md). Same questions across every project, so a reader can compare across them and see the patterns.
+Every case study on this page answers the same seventeen questions, drawn from the [retrospective template](./retrospective-template.md). Same questions across every project, so a reader can compare across them and see the patterns.
 
 ## Why this exists
 
@@ -18,7 +18,7 @@ They are also the fastest way to teach. A person starting an NER project will le
 
 ## Case studies available now
 
-*None yet — this chapter has just been opened. The retrospectives listed below are in various stages of drafting; if you led one of these projects, please pick up the questionnaire and fill in what you know. See the [template](./_retrospective-template.md).*
+*None yet — this chapter has just been opened. The retrospectives listed below are in various stages of drafting; if you led one of these projects, please pick up the questionnaire and fill in what you know. See the [template](./retrospective-template.md).*
 
 ## In progress
 
@@ -30,7 +30,7 @@ They are also the fastest way to teach. A person starting an NER project will le
 
 ## How to contribute a case study
 
-1. Copy the [retrospective template](./_retrospective-template.md).
+1. Copy the [retrospective template](./retrospective-template.md).
 2. Rename it to the project slug (`docs/case-studies/masakhaner.md`, `docs/case-studies/afrisenti.md`, etc.).
 3. Answer the seventeen questions. It is more valuable to answer honestly and briefly than to write a polished narrative. If a question is not applicable, say so and why.
 4. Open a pull request. Tag the original project leads for review before merging.

@@ -14,7 +14,7 @@ import { StructureEditorContent } from "@site/src/components/StructureEditor";
 function isTemplateOrRetrospective(pathname) {
   const path = (pathname || "").replace(/\/+$/, "");
   if (/\/templates\/[^/]+$/.test(path)) return true;
-  if (/\/case-studies\/_retrospective-template$/.test(path)) return true;
+  if (/\/case-studies\/retrospective-template$/.test(path)) return true;
   return false;
 }
 
