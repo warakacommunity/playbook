@@ -130,6 +130,7 @@ const sidebars = {
       chapter('Compute-poor training and evaluation', 'compute-poor'),
     ]),
 
+    chapter('Templates', 'templates'),
     chapter('Case Studies', 'case-studies'),
 
     {
