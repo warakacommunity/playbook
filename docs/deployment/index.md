@@ -16,7 +16,7 @@ This chapter is opinionated deployment guidance for the surfaces where African-l
 - **[SMS, USSD, and WhatsApp as NLP surfaces](./sms-ussd-whatsapp.md)** — the three practical text-entry channels for hundreds of millions of African users, with channel-by-channel design implications and NLP problems each magnifies. *Available now.*
 - **[Edge devices and cheap-hardware inference](./edge-devices.md)** — the phone tier map, quantised model inference, on-device runtimes (whisper.cpp / llama.cpp / ONNX Runtime Mobile / MLC-LLM), battery and thermal realities, single-board-computer edge servers. *Available now.*
 - **[Multilingual switching within a session](./multilingual-switching.md)** — code-switching as the majority interaction pattern for African users, four granularities of switching, detection strategies, response strategies, model training implications, and the UI patterns that make code-switched deployment usable. *Available now.*
-- **Non-standard scripts in real UIs** — Ajami (Arabic-script Hausa/Wolof/Fulani), Ge'ez (Amharic/Tigrinya/Tigre), N'Ko (Manding), and the ongoing question of orthographic variants within a single language. Coming next.
+- **[Non-Latin scripts in real UIs](./non-latin-scripts.md)** — Ajami, Ge'ez, N'Ko, Tifinagh, Vai, and Latin-with-diacritics; Unicode support, font shipping, input-method availability, rendering pitfalls, search and normalisation, testing methodology. *Available now.*
 
 ## Why this chapter belongs in a playbook, not a blog post
 
