@@ -104,7 +104,7 @@ export default function PlaybookNavbarItem() {
           <div className={styles.megaSection}>
             <div className={styles.megaSectionTitle}>Read the Playbook</div>
             <Link
-              to="/AfriPlaybook/"
+              to="/"
               role="menuitem"
               className={styles.aboutMegaItem}
               onClick={close}

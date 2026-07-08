@@ -1209,7 +1209,7 @@ export function StructureEditorContent({ onClose }) {
 
                   {submitError && (() => {
                     // Extract fork URL if present
-                    const forkUrlMatch = submitError.match(/https:\/\/github\.com\/[^/]+\/AfriPlaybook/);
+                    const forkUrlMatch = submitError.match(/https:\/\/github\.com\/[^/]+\/playbook/);
                     const forkUrl = forkUrlMatch ? forkUrlMatch[0] : null;
                     const isForkError = submitError.includes('don\'t have write access');
 
@@ -1257,7 +1257,7 @@ export function StructureEditorContent({ onClose }) {
                                       font: 'inherit',
                                       fontSize: '0.9rem'
                                     }}
-                                    onClick={() => window.open(`https://github.com/warakacommunity/AfriPlaybook/fork`, '_blank')}
+                                    onClick={() => window.open(`https://github.com/warakacommunity/fork`, '_blank')}
                                     type="button"
                                   >
                                     Click here to fork on GitHub →

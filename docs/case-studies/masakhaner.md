@@ -1,8 +1,8 @@
 ---
-wip: true
 sidebar_position: 2
 title: MasakhaNER 1 → 2
 draft: false
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

@@ -1,7 +1,7 @@
 ---
-wip: true
 sidebar_position: 9
 title: Data Storage and Release Infrastructure
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

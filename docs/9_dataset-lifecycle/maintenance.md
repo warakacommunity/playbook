@@ -1,7 +1,7 @@
 ---
-wip: true
 title: Maintenance and Post-Release Strategy
 sidebar_position: 2
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

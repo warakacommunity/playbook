@@ -1,7 +1,7 @@
 ---
-wip: true
 sidebar_position: 3
 title: Contributor Agreement Template
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

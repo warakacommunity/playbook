@@ -1,6 +1,6 @@
 ---
-wip: true
 title: Text-to-Speech
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

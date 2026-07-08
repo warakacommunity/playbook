@@ -68,7 +68,7 @@ Before writing a chapter, [open an issue](https://github.com/MasakhaneHubTooling
 Open [the repository](https://github.com/MasakhaneHubToolingProject/playbook) and click **Fork** (top right). Then clone your fork:
 
 ```bash
-git clone https://github.com/<your-username>/AfriPlaybook.git
+git clone https://github.com/<your-username>.git
 cd AfriPlaybook
 ```
 

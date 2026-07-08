@@ -1,7 +1,7 @@
 ---
-wip: true
 title: Data Sources
 description: A map of where raw data for African-language AI systems actually comes from, and how to weigh one source against another before choosing a collection method.
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

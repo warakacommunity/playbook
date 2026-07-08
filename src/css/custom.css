@@ -1263,7 +1263,7 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
       color: #7d6b56;
     }
     @top-right {
-      content: "warakacommunity.github.io/AfriPlaybook";
+      content: "playbook.waraka.ai";
       font-family: 'JetBrains Mono', monospace;
       font-size: 7.5pt;
       color: #9d8b76;

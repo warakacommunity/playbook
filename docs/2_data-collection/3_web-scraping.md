@@ -1,7 +1,7 @@
 ---
-wip: true
 title: Web Scraping
 description: What web scraping can and can't deliver for African-language data, the legal and ethical considerations, and the access landscape as it stands.
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

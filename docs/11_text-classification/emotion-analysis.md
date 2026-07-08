@@ -1,7 +1,7 @@
 ---
-wip: true
 sidebar_position: 10
 sidebar_label: "Emotion Analysis"
+ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin

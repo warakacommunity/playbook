@@ -12,7 +12,7 @@ const PHASES = [
       {
         title: "Introduction",
         blurb: "Why African-language data matters, and how this guide helps.",
-        href: "/AfriPlaybook/",
+        href: "/",
       },
     ],
   },
@@ -22,22 +22,22 @@ const PHASES = [
       {
         title: "Data Collection",
         blurb: "Plan scope, sources, cost, ethics, and provenance.",
-        href: "/AfriPlaybook/data-collection/cost-resource-planning",
+        href: "/data-collection/cost-resource-planning",
       },
       {
         title: "Annotation Design & Workforce",
         blurb: "Design tasks, write guidelines, and manage annotators.",
-        href: "/AfriPlaybook/annotation-design/annotation-task-design",
+        href: "/annotation-design/annotation-task-design",
       },
       {
         title: "Modality-Specific Task Design",
         blurb: "Text, speech, vision, and multimodal data.",
-        href: "/AfriPlaybook/sections/speech",
+        href: "/sections/speech",
       },
       {
         title: "LLM-Assisted & Synthetic Data",
         blurb: "Use models to help build data — with safeguards.",
-        href: "/AfriPlaybook/llm-assisted-task",
+        href: "/llm-assisted-task",
       },
     ],
   },
@@ -47,17 +47,17 @@ const PHASES = [
       {
         title: "Data Quality & Validation",
         blurb: "Agreement, review, and quality control.",
-        href: "/AfriPlaybook/data-quality",
+        href: "/data-quality",
       },
       {
         title: "Documentation & Governance",
         blurb: "Consent, licensing, ownership, and datasheets.",
-        href: "/AfriPlaybook/documentation/documentation",
+        href: "/documentation/documentation",
       },
       {
         title: "Lifecycle & Release",
         blurb: "Maintain, version, and release responsibly.",
-        href: "/AfriPlaybook/dataset-lifecycle/release",
+        href: "/dataset-lifecycle/release",
       },
     ],
   },
@@ -67,17 +67,17 @@ const PHASES = [
       {
         title: "Evaluation",
         blurb: "Check data integrity and get a modelling starter kit.",
-        href: "/AfriPlaybook/model-building/data-integrity",
+        href: "/model-building/data-integrity",
       },
       {
         title: "Community & Collaboration",
         blurb: "Work together and sustain the ecosystem.",
-        href: "/AfriPlaybook/community-collaboration/collaboration",
+        href: "/community-collaboration/collaboration",
       },
       {
         title: "Worked example: Text Classification",
         blurb: "An end-to-end task, from raw data to labels.",
-        href: "/AfriPlaybook/text-classification/defining-text-classification-tasks",
+        href: "/text-classification/defining-text-classification-tasks",
       },
     ],
   },
