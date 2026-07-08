@@ -95,7 +95,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: "AfriPlaybook",
+          routeBasePath: "/",
           sidebarPath: "./sidebars.js",
           breadcrumbs: false,
           // "Last updated" is populated primarily from each page's
@@ -481,9 +481,9 @@ const config = {
         },
       },
       navbar: {
-        title: "Waraka",
+        title: "Playbook",
         logo: {
-          alt: "Waraka Community AfriPlaybook Home",
+          alt: "AfriPlaybook Home",
           src: "img/community-tree.svg",
           srcDark: "img/community-tree-dark.svg",
           href: "/",
@@ -496,20 +496,8 @@ const config = {
             position: "left",
           },
           {
-            type: "custom-ToolNavbarItem",
-            position: "left",
-          },
-          {
-            type: "custom-AfriFinderNavbarItem",
-            position: "left",
-          },
-          {
-            to: "/fellowship",
-            label: "AfriFellowship",
-            position: "left",
-          },
-          {
-            type: "custom-AboutNavbarItem",
+            to: "/blog",
+            label: "Blog",
             position: "left",
           },
           {
@@ -546,24 +534,20 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "AfriPlaybook",
-                to: "/AfriPlaybook/",
-              },
-              {
-                label: "AfriAnnotate",
-                to: "/tool",
-              },
-              {
-                label: "AfriFinder",
-                to: "/afrifinder",
-              },
-              {
-                label: "AfriFellowship",
-                to: "/fellowship",
+                label: "Playbook",
+                to: "/",
               },
               {
                 label: "Blog",
                 to: "/blog",
+              },
+              {
+                label: "Glossary",
+                to: "/glossary",
+              },
+              {
+                label: "Cite this Playbook",
+                to: "/cite",
               },
             ],
           },
@@ -581,31 +565,6 @@ const config = {
               {
                 label: "HausaNLP",
                 href: "https://hausanlp.org/",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "About",
-                to: "/about",
-              },
-              {
-                label: "Roadmap",
-                to: "/roadmap",
-              },
-              {
-                label: "FAQ",
-                to: "/faq",
-              },
-              {
-                label: "Glossary",
-                to: "/AfriPlaybook/glossary",
-              },
-              {
-                label: "Cite this Playbook",
-                to: "/cite",
               },
               {
                 label: "GitHub Repository",

@@ -64,7 +64,7 @@ Three ways, pick whichever fits:
 
 1. **Discord** — say hi in [`#masakhane-tool`](https://discord.gg/ChNPHV2PPS) and a maintainer will reach out
 2. **GitHub Discussions** — open a thread in [the project's discussions](https://github.com/MasakhaneHubToolingProject/playbook/discussions) with a brief intro
-3. **Email** — write to the team via the address on the [About page](/about)
+3. **Email** — write to the team via the address on the About page (contact the Masakhane community)
 
 We'll get back within 48 hours with onboarding details and a tester invite.
 

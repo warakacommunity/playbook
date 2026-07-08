@@ -8,33 +8,32 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  /* Brand terracotta — the tree's trunk / the "Afri" accent. Used for
-     buttons, links, eyebrow tags, accent text. The rest stays monochrome. */
-  --ifm-color-primary: #C66A3D;        /* brand terracotta */
-  --ifm-color-primary-dark: #B25C33;   /* hover */
-  --ifm-color-primary-darker: #A55530;
-  --ifm-color-primary-darkest: #884628;
-  --ifm-color-primary-light: #D2855F;
-  --ifm-color-primary-lighter: #DB9A7B;
-  --ifm-color-primary-lightest: #F0D6C6;
+  /* Brand blue — the "Afri" accent. Used for buttons, links, eyebrow
+     tags, accent text. The rest stays monochrome. */
+  --ifm-color-primary: #2563eb;        /* Tailwind blue-600 */
+  --ifm-color-primary-dark: #1d4ed8;   /* hover — blue-700 */
+  --ifm-color-primary-darker: #1e40af; /* blue-800 */
+  --ifm-color-primary-darkest: #1e3a8a; /* blue-900 */
+  --ifm-color-primary-light: #3b82f6;  /* blue-500 */
+  --ifm-color-primary-lighter: #60a5fa; /* blue-400 */
+  --ifm-color-primary-lightest: #93c5fd; /* blue-300 */
   /* Same hue as primary — used in alpha tints for soft surfaces, callouts,
      and hover hints. Keeps RGB triplet centralised. */
-  --brand-rgb: 198, 106, 61;
-  /* The tree's foliage green — paired accent for icons and fine detail. */
-  --brand-green: #1F5B3F;
-  /* Deep forest band — used for stat callout bands and CTA blocks
-     where the brand terracotta would be too saturated. Ties to the leaves. */
-  --brand-navy: #173A2B;
-  /* Soft surface tint (warm sand family). Use for grouped card
+  --brand-rgb: 37, 99, 235;
+  /* Complementary teal accent — for icons and fine detail. */
+  --brand-green: #0d9488;
+  /* Deep navy band — used for stat callout bands and CTA blocks. */
+  --brand-navy: #0f172a;
+  /* Soft surface tint (cool blue family). Use for grouped card
      containers, not for full sections. */
-  --brand-surface-tint: #F6E9DE;
-  /* Neutral warm wash. Use for cards that should sit on a white
+  --brand-surface-tint: #dbeafe;
+  /* Neutral cool wash. Use for cards that should sit on a white
      page without a border or shadow — barely-tinted off-white. */
-  --surface-wash: #F7F2EC;          /* warm sand card wash, syncs with terracotta */
-  --surface-wash-hover: #F0E8DF;
-  /* Warm near-black headings, warm dark-grey body, on white */
-  --ifm-heading-color: #1C1712;
-  --ifm-font-color-base: #322C26;
+  --surface-wash: #f5f7fb;          /* cool card wash, syncs with blue primary */
+  --surface-wash-hover: #eaeff8;
+  /* Cool near-black headings, cool dark-grey body, on white */
+  --ifm-heading-color: #0f172a;
+  --ifm-font-color-base: #1f2937;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
@@ -165,24 +164,24 @@ article p,
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  /* Terracotta, brightened for AA contrast on dark surfaces. Same
-     hue as light mode so toggling stays coherent. */
-  --ifm-color-primary: #E0935F;
-  --ifm-color-primary-dark: #D9824A;
-  --ifm-color-primary-darker: #D4773D;
-  --ifm-color-primary-darkest: #BD6330;
-  --ifm-color-primary-light: #E7A479;
-  --ifm-color-primary-lighter: #EEB994;
-  --ifm-color-primary-lightest: #F6DCC8;
+  /* Blue, brightened for AA contrast on dark surfaces. Same hue as
+     light mode so toggling stays coherent. */
+  --ifm-color-primary: #60a5fa;        /* blue-400 */
+  --ifm-color-primary-dark: #3b82f6;   /* blue-500 */
+  --ifm-color-primary-darker: #2563eb; /* blue-600 */
+  --ifm-color-primary-darkest: #1d4ed8; /* blue-700 */
+  --ifm-color-primary-light: #93c5fd;  /* blue-300 */
+  --ifm-color-primary-lighter: #bfdbfe; /* blue-200 */
+  --ifm-color-primary-lightest: #dbeafe; /* blue-100 */
   /* Brighter brand RGB for low-alpha tints on dark bg. */
-  --brand-rgb: 224, 147, 95;
-  --brand-green: #7CBB98;
+  --brand-rgb: 96, 165, 250;
+  --brand-green: #2dd4bf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  /* Dark equivalent of the warm wash — a touch lifted from the page bg. */
-  --surface-wash: #241f19;
-  --surface-wash-hover: #2d271f;
-  /* Warm near-white headings + soft warm grey body on dark */
-  --ifm-heading-color: #F5EEE6;
+  /* Dark equivalent of the cool wash — a touch lifted from the page bg. */
+  --surface-wash: #1a2233;
+  --surface-wash-hover: #212b40;
+  /* Cool near-white headings + soft cool grey body on dark */
+  --ifm-heading-color: #f1f5f9;
   --ifm-font-color-base: #DED6CB;
 }
 

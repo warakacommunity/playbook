@@ -70,7 +70,7 @@ Annotators produce the labels, while reviewers and adjudicators resolve disagree
 
 ### Recruitment
 
-Finding qualified native speakers is often the binding constraint on the whole project, especially for smaller languages. The companion tool **[AfriFinder](/afrifinder)** exists to make this easier, by helping you reach and vet native-speaker annotators for the specific language and variety you need. Plan recruitment as a real work item with its own lead time, not an afterthought.
+Finding qualified native speakers is often the binding constraint on the whole project, especially for smaller languages. Plan recruitment as a real work item with its own lead time, not an afterthought.
 
 ## Coordinate and track
 

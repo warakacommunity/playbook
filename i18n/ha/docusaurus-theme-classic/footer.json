@@ -13,7 +13,7 @@
   },
   "link.item.label.AfriPlaybook": {
     "message": "AfriPlaybook",
-    "description": "The label of footer link with label=Playbook linking to /AfriPlaybook/"
+    "description": "The label of footer link with label=Playbook linking to /"
   },
   "link.item.label.MasakhaneTool": {
     "message": "MasakhaneTool",
