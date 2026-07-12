@@ -49,8 +49,12 @@ async function ghPost(path, body) {
 
 export default {
   async fetch(request, env) {
-    const allow = env.ALLOWED_ORIGIN || '*';
-    const cors = corsHeaders(allow);
+    // Echo back the single matching origin. ALLOWED_ORIGIN is a comma-separated
+    // allowlist, and `Access-Control-Allow-Origin` must be ONE origin (or *),
+    // never the whole list — otherwise the browser rejects it with a generic
+    // "NetworkError when attempting to fetch resource".
+    const origin = resolveOrigin(request, env);
+    const cors = corsHeaders(origin);
     const json = { ...cors, 'Content-Type': 'application/json' };
 
     if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
