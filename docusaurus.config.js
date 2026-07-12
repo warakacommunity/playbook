@@ -310,8 +310,8 @@ const config = {
             );
             return {};
           }
-          const OWNER = "warakacommunity";
-          const REPO = "AfriPlaybook";
+          const OWNER = "MasakhaneHubToolingProject";
+          const REPO = "playbook";
           const docsDir = path.join(context.siteDir, "docs");
           if (!fs.existsSync(docsDir)) return {};
 

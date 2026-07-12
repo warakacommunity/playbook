@@ -3,6 +3,24 @@ import TOC from "@theme-original/TOC";
 import ReactDOM from "react-dom";
 import { StructureEditorContent } from "@site/src/components/StructureEditor";
 
+// The in-browser editor signs contributors in through a GitHub OAuth App, and
+// an OAuth App permits exactly ONE authorization callback URL — the github.io
+// origin below. So the editor only runs where the popup/device flow can
+// succeed: the github.io site itself, or localhost (device flow, no callback).
+// Every other host this source is deployed to — notably the playbook.waraka.ai
+// Cloudflare mirror — hands the contributor off to github.io instead, carrying
+// the current chapter and a ?contribute=1 flag that auto-opens the editor there.
+const EDITOR_ORIGIN = "https://masakhanehubtoolingproject.github.io";
+const EDITOR_BASE = "/playbook";
+
+function isEditorHost() {
+  if (typeof window === "undefined") return false;
+  return (
+    window.location.origin === EDITOR_ORIGIN ||
+    window.location.hostname === "localhost"
+  );
+}
+
 // Adds the Contribute action (and, on template pages, a companion
 // Download-as-PDF action) to the top of the right-hand table-of-contents
 // column, so they sit with the page rail instead of breaking the flow
@@ -47,6 +65,27 @@ export default function TOCWrapper(props) {
     };
   }, []);
 
+  // Arriving via a hand-off link (github.io/playbook/…?contribute=1): open the
+  // editor automatically so the round-trip from the mirror is seamless.
+  useEffect(() => {
+    if (!isEditorHost()) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("contribute") === "1") setEditorOpen(true);
+  }, []);
+
+  const handleContribute = () => {
+    // On the editor host, open in place. On a mirror (e.g. playbook.waraka.ai),
+    // redirect to the same chapter on github.io, where GitHub sign-in works.
+    if (isEditorHost()) {
+      setEditorOpen(true);
+      return;
+    }
+    const qs = window.location.search
+      ? `${window.location.search}&contribute=1`
+      : "?contribute=1";
+    window.location.href = `${EDITOR_ORIGIN}${EDITOR_BASE}${window.location.pathname}${qs}`;
+  };
+
   const handlePdf = () => {
     if (typeof window === "undefined") return;
     // Small delay so any hover state settles before the print dialog
@@ -60,7 +99,7 @@ export default function TOCWrapper(props) {
         <button
           type="button"
           className="button button--primary button--sm toc-action-button"
-          onClick={() => setEditorOpen(true)}
+          onClick={handleContribute}
         >
           Contribute
         </button>

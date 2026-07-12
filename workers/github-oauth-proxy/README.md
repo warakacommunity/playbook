@@ -15,9 +15,14 @@ device endpoints don't send CORS headers. This worker handles both.
 ### 1. Register a GitHub OAuth App
 GitHub → Settings → Developer settings → **OAuth Apps** → **New OAuth App**:
 
-- **Homepage URL:** `https://afriannotate.github.io`
-- **Authorization callback URL:** `https://afriannotate.github.io/oauth-callback`
-- Tick **Enable Device Flow** (optional, used as a popup-blocked fallback).
+- **Homepage URL:** `https://masakhanehubtoolingproject.github.io/playbook`
+- **Authorization callback URL:** `https://masakhanehubtoolingproject.github.io/playbook/oauth-callback`
+
+  An OAuth App allows only ONE callback URL, so all sign-in happens on the
+  github.io origin. Other deploys of this source (e.g. the playbook.waraka.ai
+  Cloudflare mirror) redirect their "Contribute" button here rather than
+  authenticating on their own domain — see `src/theme/TOC/index.js`.
+- Tick **Enable Device Flow** (used on localhost and as a popup-blocked fallback).
 
 Copy the **Client ID**, then **Generate a new client secret** and copy it too.
 
