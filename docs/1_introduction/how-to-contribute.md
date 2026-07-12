@@ -38,12 +38,18 @@ There are three ways to make a change, from the quickest to the most hands-on. C
 Best for fixing typos, rewording a sentence, or adding a link. You never leave the browser.
 
 1. Open the page you want to change.
-2. Click **Suggest an edit** 
-3. Sign in with GitHub when prompted — this lets us credit your work and open the change under your name.
+2. Click **Contribute** at the top of the table of contents on the right of the page.
+3. Sign in with GitHub when prompted — one click authorises you securely on GitHub, so nothing is ever typed into this site. This lets us credit your work and open the change under your name.
 4. Make your edit in the editor.
 5. Add a short note describing what you changed, then submit.
 
 The site opens a pull request for you automatically. A maintainer reviews it and merges. That is the whole process — no git, no setup.
+
+:::note
+
+If **Contribute** takes you to `masakhanehubtoolingproject.github.io`, that is expected — GitHub sign-in runs on the project's editing site. It opens the same chapter you were reading, so just sign in and edit there.
+
+:::
 
 ## Path 2 — Edit one file on GitHub
 
@@ -68,8 +74,8 @@ Before writing a chapter, [open an issue](https://github.com/MasakhaneHubTooling
 Open [the repository](https://github.com/MasakhaneHubToolingProject/playbook) and click **Fork** (top right). Then clone your fork:
 
 ```bash
-git clone https://github.com/<your-username>.git
-cd AfriPlaybook
+git clone https://github.com/<your-username>/playbook.git
+cd playbook
 ```
 
 ### Step 3 — Install and run locally
