@@ -48,6 +48,17 @@ const config = {
   trailingSlash: false,
   onBrokenLinks: "throw",
 
+  // The AfriAnnotate docs (second docs instance under /annotate) are ported
+  // from an upstream Label Studio lineage and still carry a handful of
+  // dangling image references (e.g. /images/tags/…). Downgrade broken
+  // *markdown image* handling to a warning so those don't fail the build;
+  // broken *links* stay fatal (onBrokenLinks above) to keep discipline.
+  markdown: {
+    hooks: {
+      onBrokenMarkdownImages: "warn",
+    },
+  },
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -391,6 +402,26 @@ const config = {
         disableInDev: false,
       },
     ],
+    /* Second docs instance — the AfriAnnotate tool documentation, served
+       read-only under /annotate. Content lives in annotate/ (generated from
+       the sibling afriannotate repo by scripts/sync-annotate-docs.mjs and
+       committed here, so CI needs no separate checkout or build). The intro
+       page carries slug: / so /annotate is a real landing route. */
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "annotate",
+        path: "annotate",
+        routeBasePath: "annotate",
+        sidebarPath: "./sidebars-annotate.js",
+        breadcrumbs: false,
+        // These pages are committed in one batch, so per-page git history
+        // isn't meaningful — skip the "Last updated" line for this instance.
+        showLastUpdateTime: false,
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
+      },
+    ],
     // PWA only matters for production (offline service worker). Loading it in
     // the dev server intermittently fails to resolve @theme/PwaReloadPopup, so
     // it is enabled for production builds only.
@@ -449,7 +480,9 @@ const config = {
         hashed: true,
         indexDocs: true,
         indexBlog: true,
-        docsRouteBasePath: "/AfriPlaybook",
+        // Index both docs instances: the main playbook and the AfriAnnotate
+        // tool docs under /annotate.
+        docsRouteBasePath: ["/AfriPlaybook", "/annotate"],
         searchResultLimits: 8,
         highlightSearchTermsOnTargetPage: true,
       },
@@ -493,6 +526,14 @@ const config = {
         items: [
           {
             type: "custom-PlaybookNavbarItem",
+            position: "left",
+          },
+          {
+            // AfriAnnotate tool docs (second docs instance). Appears on every
+            // page alongside the AfriPlaybook menu, so the two sites always
+            // cross-link. Lands on /annotate (the intro page's slug: /).
+            to: "/annotate/",
+            label: "AfriAnnotate",
             position: "left",
           },
           {

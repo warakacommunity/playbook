@@ -1,0 +1,8 @@
+{
+  "label": "Distribution",
+  "position": 4,
+  "link": {
+    "type": "doc",
+    "id": "platform-admin/distribution/index"
+  }
+}

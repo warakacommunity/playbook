@@ -1,0 +1,5 @@
+GENERATED — do not edit by hand.
+
+These docs are produced by scripts/sync-annotate-docs.mjs from the
+sibling ../afriannotate/docs-site/docs checkout. Edit the source there
+and re-run the sync script, then commit the result.

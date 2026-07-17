@@ -1,0 +1,8 @@
+{
+  "label": "Host your own",
+  "position": 10,
+  "link": {
+    "type": "doc",
+    "id": "hosting/index"
+  }
+}

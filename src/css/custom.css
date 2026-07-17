@@ -1445,3 +1445,13 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
     break-inside: avoid;
   }
 }
+
+/* ── AfriAnnotate docs (second docs instance, served at /annotate) ──────────
+   These pages are a read-only reference — the in-browser Contribute editor
+   only targets the playbook repo. Docusaurus stamps the docs wrapper with
+   `plugin-id-annotate`, so hide the TOC Contribute action there at the CSS
+   layer (SSR-correct, no hydration flash). Comments are gated separately in
+   the DocItem/Layout swizzle. */
+.plugin-id-annotate .toc-actions {
+  display: none;
+}
