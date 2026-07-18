@@ -1,8 +1,0 @@
-{
-  "label": "Why AfriAnnotate",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "The three-layer stack, the tool-by-tool comparison, the full platform-feature enumeration, and what AfriAnnotate does specifically for African NLP teams. For anyone deciding whether to use AfriAnnotate, migrating from vanilla Label Studio, or evaluating it against another platform."
-  }
-}

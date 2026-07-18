@@ -65,16 +65,10 @@ export default function LayoutWrapper(props) {
     return <WipPlaceholder title={frontMatter.title || metadata?.title} />;
   }
 
-  // The AfriAnnotate docs (second docs instance under /annotate) are a
-  // read-only reference — no community comments thread there. Match the
-  // /annotate landing (permalink ".../annotate") and every sub-page
-  // (".../annotate/…"), independent of the deploy baseUrl prefix.
-  const isAnnotate = /\/annotate(\/|$)/.test(metadata?.permalink || "");
-
   return (
     <>
       <Layout {...props} />
-      {!isAnnotate && <Comments />}
+      <Comments />
     </>
   );
 }
