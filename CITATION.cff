@@ -11,8 +11,8 @@ abstract: >
 authors:
   - name: "Masakhane Community"
     website: "https://www.masakhane.io/"
-url: "https://masakhanehubnlp.github.io/AfriPlaybook/"
-repository-code: "https://github.com/warakacommunity/AfriPlaybook"
+url: "https://masakhanehubtoolingproject.github.io/playbook/"
+repository-code: "https://github.com/MasakhaneHubToolingProject/playbook"
 date-released: "2026-04-30"
 keywords:
   - "African languages"
