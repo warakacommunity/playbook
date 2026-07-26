@@ -32,7 +32,7 @@ For every core task, this chapter answers the same four questions:
 
 ## What's next
 
-All seven initially-planned Before-You-Start pages are now available. Future additions — for languages, scripts, or task variants not yet covered — follow the same four-part structure: *what exists / fork-or-fresh / cost / canonical link*, with editorial opinions attached to each recommendation. See the [contribution guide](https://github.com/MasakhaneHubToolingProject/playbook/blob/main/README.md#ways-to-contribute) to propose one.
+All seven initially-planned Before-You-Start pages are now available. Future additions — for languages, scripts, or task variants not yet covered — follow the same four-part structure: *what exists / fork-or-fresh / cost / canonical link*, with editorial opinions attached to each recommendation. See the [contribution guide](https://github.com/warakacommunity/playbook/blob/main/README.md#ways-to-contribute) to propose one.
 
 ## The one rule
 

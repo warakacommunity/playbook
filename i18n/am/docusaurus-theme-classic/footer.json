@@ -45,7 +45,7 @@
   },
   "link.item.label.GitHub Repository": {
     "message": "GitHub ማከማቻ",
-    "description": "The label of footer link with label=GitHub Repository linking to https://github.com/MasakhaneHubToolingProject/playbook"
+    "description": "The label of footer link with label=GitHub Repository linking to https://github.com/warakacommunity/playbook"
   },
   "copyright": {
     "message": "የቅጂ መብት © 2026 ማሳካኔ። በDocusaurus የተገነባ።",

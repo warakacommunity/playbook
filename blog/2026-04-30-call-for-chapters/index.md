@@ -40,7 +40,7 @@ We welcome chapter proposals on (but not limited to):
 
 1. **Submit a proposal** — a short abstract (200–400 words), an outline, target audience, and the languages/topics covered.
 2. **Review** — proposals are reviewed by the editorial team for fit, scope, and overlap with existing chapters.
-3. **Draft** — accepted authors work in the open on the [Playbook GitHub repository](https://github.com/MasakhaneHubToolingProject/playbook), with reviewer support.
+3. **Draft** — accepted authors work in the open on the [Playbook GitHub repository](https://github.com/warakacommunity/playbook), with reviewer support.
 4. **Publish** — accepted chapters are merged into the Playbook with author attribution and DOIs (where applicable).
 
 ## Key dates
@@ -56,8 +56,8 @@ We welcome chapter proposals on (but not limited to):
 
 ## How to get involved
 
-- **Read the existing Playbook**: [playbook.waraka.ai](/)
-- **Open a proposal issue** on the [GitHub repository](https://github.com/MasakhaneHubToolingProject/playbook/issues/new)
+- **Read the existing Playbook**: [waraka.org/playbook](/)
+- **Open a proposal issue** on the [GitHub repository](https://github.com/warakacommunity/playbook/issues/new)
 - **Join the Masakhane community**: [masakhane.io](https://www.masakhane.io/)
 - **Questions?** Reach out via the GitHub Discussions tab on the repo.
 
