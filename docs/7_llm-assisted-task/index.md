@@ -1,6 +1,6 @@
 ---
+wip: true
 title: LLM-Assisted Data
-ready: true
 last_update:
   date: 2026-07-07
   author: Idris Abdulmumin
