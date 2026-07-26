@@ -1,6 +1,6 @@
 import { slugify } from './markdown';
 
-const OWNER = 'MasakhaneHubToolingProject';
+const OWNER = 'warakacommunity';
 const REPO = 'playbook';
 const BASE_BRANCH = 'main';
 const API = 'https://api.github.com';

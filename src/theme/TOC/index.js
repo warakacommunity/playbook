@@ -10,7 +10,7 @@ import { StructureEditorContent } from "@site/src/components/StructureEditor";
 // Every other host this source is deployed to — notably the playbook.waraka.ai
 // Cloudflare mirror — hands the contributor off to github.io instead, carrying
 // the current chapter and a ?contribute=1 flag that auto-opens the editor there.
-const EDITOR_ORIGIN = "https://masakhanehubtoolingproject.github.io";
+const EDITOR_ORIGIN = "https://warakacommunity.github.io";
 const EDITOR_BASE = "/playbook";
 
 function isEditorHost() {

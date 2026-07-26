@@ -15,8 +15,8 @@ device endpoints don't send CORS headers. This worker handles both.
 ### 1. Register a GitHub OAuth App
 GitHub → Settings → Developer settings → **OAuth Apps** → **New OAuth App**:
 
-- **Homepage URL:** `https://masakhanehubtoolingproject.github.io/playbook`
-- **Authorization callback URL:** `https://masakhanehubtoolingproject.github.io/playbook/oauth-callback`
+- **Homepage URL:** `https://warakacommunity.github.io/playbook`
+- **Authorization callback URL:** `https://warakacommunity.github.io/playbook/oauth-callback`
 
   An OAuth App allows only ONE callback URL, so all sign-in happens on the
   github.io origin. Other deploys of this source (e.g. the playbook.waraka.ai

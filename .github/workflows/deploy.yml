@@ -18,7 +18,7 @@ jobs:
       # Preview deploy reroots the build under /playbook/ to match the
       # GitHub Pages path. Production (playbook.waraka.ai) uses the
       # docusaurus.config.js defaults (baseUrl "/").
-      DOCUSAURUS_URL: https://masakhanehubtoolingproject.github.io
+      DOCUSAURUS_URL: https://warakacommunity.github.io
       DOCUSAURUS_BASE_URL: /playbook/
       # OAuth App Client ID + deployed worker URL for the "Sign in with GitHub"
       # button in the Contribute editor. GitHub forbids secret names starting
