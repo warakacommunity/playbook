@@ -15,10 +15,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Preview deploy reroots the build under /playbook/ to match the
-      # GitHub Pages path. Production (playbook.waraka.ai) uses the
-      # docusaurus.config.js defaults (baseUrl "/").
-      DOCUSAURUS_URL: https://warakacommunity.github.io
+      # Deploy the playbook project site under /playbook/ on the waraka.org
+      # custom domain. The org site (warakacommunity.github.io) owns the apex
+      # domain and serves the landing page.
+      DOCUSAURUS_URL: https://waraka.org
       DOCUSAURUS_BASE_URL: /playbook/
       # OAuth App Client ID + deployed worker URL for the "Sign in with GitHub"
       # button in the Contribute editor. GitHub forbids secret names starting

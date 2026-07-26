@@ -2,7 +2,7 @@
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-07-12
+  date: 2026-07-26
   author: Seid Muhie Yimam
 ---
 
@@ -47,7 +47,7 @@ The site opens a pull request for you automatically. A maintainer reviews it and
 
 :::note
 
-If **Contribute** takes you to `warakacommunity.github.io`, that is expected — GitHub sign-in runs on the project's editing site. It opens the same chapter you were reading, so just sign in and edit there.
+If **Contribute** opens a new tab on `waraka.org/playbook`, that is expected — GitHub sign-in runs on the project's editing site. It opens the same chapter you were reading, so just sign in and edit there.
 
 :::
 

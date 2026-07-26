@@ -1257,7 +1257,7 @@ export function StructureEditorContent({ onClose }) {
                                       font: 'inherit',
                                       fontSize: '0.9rem'
                                     }}
-                                    onClick={() => window.open(`https://github.com/MasakhaneHubToolingProject/playbook/fork`, '_blank')}
+                                    onClick={() => window.open(`https://github.com/warakacommunity/playbook/fork`, '_blank')}
                                     type="button"
                                   >
                                     Click here to fork on GitHub →

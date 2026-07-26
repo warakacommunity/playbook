@@ -1263,7 +1263,7 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
       color: #7d6b56;
     }
     @top-right {
-      content: "playbook.waraka.ai";
+      content: "waraka.org/playbook";
       font-family: 'JetBrains Mono', monospace;
       font-size: 7.5pt;
       color: #9d8b76;

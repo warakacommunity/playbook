@@ -2,7 +2,7 @@
 wip: true
 title: Speech-to-Speech Translation
 last_update:
-  date: 2026-07-07
+  date: 2026-07-26
   author: Idris Abdulmumin
 ---
 

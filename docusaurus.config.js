@@ -30,18 +30,16 @@ const config = {
   //   v4: true, // Improve compatibility with the upcoming Docusaurus v4
   // },
 
-  // Two deploy targets, one source:
-  //   1. Production — https://playbook.waraka.ai (custom domain, baseUrl "/")
-  //   2. Preview    — https://warakacommunity.github.io/playbook/
-  //                   (GH Pages on warakacommunity/playbook)
-  // The preview deploy sets DOCUSAURUS_URL and DOCUSAURUS_BASE_URL env vars
-  // in the GitHub Actions workflow so the same build reroots correctly.
-  url: process.env.DOCUSAURUS_URL || "https://playbook.waraka.ai",
-  baseUrl: process.env.DOCUSAURUS_BASE_URL || "/",
+  // Deploy target: GitHub Pages project site for warakacommunity/playbook,
+  // served under the waraka.org custom domain as https://waraka.org/playbook/.
+  // The GitHub Actions workflow overrides these with DOCUSAURUS_URL and
+  // DOCUSAURUS_BASE_URL so local builds and CI share the same config.
+  url: process.env.DOCUSAURUS_URL || "https://waraka.org",
+  baseUrl: process.env.DOCUSAURUS_BASE_URL || "/playbook/",
 
-  // GH Pages deploy target — the preview site pushes to gh-pages on
-  // warakacommunity/playbook. Production (playbook.waraka.ai)
-  // is served from a separate Cloudflare Pages / custom-domain deploy.
+  // GH Pages deploy target — the playbook project site. The org site
+  // (warakacommunity.github.io) owns the waraka.org apex domain and serves
+  // the landing page, while this repo is served at /playbook.
   organizationName: "warakacommunity",
   projectName: "playbook",
   deploymentBranch: "gh-pages",

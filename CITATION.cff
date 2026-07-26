@@ -11,7 +11,7 @@ abstract: >
 authors:
   - name: "Masakhane Community"
     website: "https://www.masakhane.io/"
-url: "https://warakacommunity.github.io/playbook/"
+url: "https://waraka.org/playbook/"
 repository-code: "https://github.com/warakacommunity/playbook"
 date-released: "2026-04-30"
 keywords:

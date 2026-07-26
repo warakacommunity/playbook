@@ -3,7 +3,7 @@ wip: true
 title: Open-ended generation
 sidebar_position: 2
 last_update:
-  date: 2026-07-07
+  date: 2026-07-26
   author: Idris Abdulmumin
 ---
 

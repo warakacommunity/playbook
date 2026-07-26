@@ -15,13 +15,12 @@ device endpoints don't send CORS headers. This worker handles both.
 ### 1. Register a GitHub OAuth App
 GitHub → Settings → Developer settings → **OAuth Apps** → **New OAuth App**:
 
-- **Homepage URL:** `https://warakacommunity.github.io/playbook`
-- **Authorization callback URL:** `https://warakacommunity.github.io/playbook/oauth-callback`
+- **Homepage URL:** `https://waraka.org/playbook/`
+- **Authorization callback URL:** `https://waraka.org/playbook/oauth-callback`
 
-  An OAuth App allows only ONE callback URL, so all sign-in happens on the
-  github.io origin. Other deploys of this source (e.g. the playbook.waraka.ai
-  Cloudflare mirror) redirect their "Contribute" button here rather than
-  authenticating on their own domain — see `src/theme/TOC/index.js`.
+  An OAuth App allows only ONE callback URL, so all sign-in happens on
+  `waraka.org/playbook`. Any other mirror redirects its "Contribute" button here
+  rather than authenticating on its own domain — see `src/theme/TOC/index.js`.
 - Tick **Enable Device Flow** (used on localhost and as a popup-blocked fallback).
 
 Copy the **Client ID**, then **Generate a new client secret** and copy it too.

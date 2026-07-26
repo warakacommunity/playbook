@@ -4,13 +4,11 @@ import ReactDOM from "react-dom";
 import { StructureEditorContent } from "@site/src/components/StructureEditor";
 
 // The in-browser editor signs contributors in through a GitHub OAuth App, and
-// an OAuth App permits exactly ONE authorization callback URL — the github.io
-// origin below. So the editor only runs where the popup/device flow can
-// succeed: the github.io site itself, or localhost (device flow, no callback).
-// Every other host this source is deployed to — notably the playbook.waraka.ai
-// Cloudflare mirror — hands the contributor off to github.io instead, carrying
-// the current chapter and a ?contribute=1 flag that auto-opens the editor there.
-const EDITOR_ORIGIN = "https://warakacommunity.github.io";
+// an OAuth App permits exactly ONE authorization callback URL. The editor runs
+// on the canonical playbook URL (waraka.org/playbook) or localhost (device
+// flow, no callback). Any other mirror hands the contributor off to this URL
+// with a ?contribute=1 flag that auto-opens the editor there.
+const EDITOR_ORIGIN = "https://waraka.org";
 const EDITOR_BASE = "/playbook";
 
 function isEditorHost() {
@@ -65,7 +63,7 @@ export default function TOCWrapper(props) {
     };
   }, []);
 
-  // Arriving via a hand-off link (github.io/playbook/…?contribute=1): open the
+  // Arriving via a hand-off link (waraka.org/playbook/…?contribute=1): open the
   // editor automatically so the round-trip from the mirror is seamless.
   useEffect(() => {
     if (!isEditorHost()) return;
@@ -74,8 +72,8 @@ export default function TOCWrapper(props) {
   }, []);
 
   const handleContribute = () => {
-    // On the editor host, open in place. On a mirror (e.g. playbook.waraka.ai),
-    // redirect to the same chapter on github.io, where GitHub sign-in works.
+    // On the editor host, open in place. On a mirror, redirect to the same
+    // chapter on waraka.org/playbook, where GitHub sign-in works.
     if (isEditorHost()) {
       setEditorOpen(true);
       return;
