@@ -136,7 +136,7 @@ export default function PlaybookNavbarItem() {
           <div className={styles.megaSection}>
             <div className={styles.megaSectionTitle}>Contribute</div>
             <Link
-              to="/contribute-online"
+              to="/?contribute=1"
               role="menuitem"
               className={styles.aboutMegaItem}
               onClick={close}
@@ -148,7 +148,7 @@ export default function PlaybookNavbarItem() {
               </span>
             </Link>
             <Link
-              to="/contribute"
+              to="https://github.com/warakacommunity/playbook"
               role="menuitem"
               className={styles.aboutMegaItem}
               onClick={close}
