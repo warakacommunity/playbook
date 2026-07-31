@@ -21,3 +21,6 @@ yarn-error.log*
 
 # Local-only reference PDFs (source material, not for publication / copyright)
 docs/intro/*.pdf
+
+# Generated at build from sidebars.js (single source of truth for the editor)
+static/structure.json
