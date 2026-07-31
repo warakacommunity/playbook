@@ -102,6 +102,23 @@ function makeChapter(rawLabel, position) {
  *   onClose — called when the user clicks × or presses Escape; the portal
  *   wrapper is responsible for unmounting this component.
  */
+// Content-only unified editor: the tree mirrors the site sidebar (from
+// structure.json, resolved from sidebars.js at build), contributors edit
+// content only, and under-development chapters are locked. Set false to
+// restore the full folder-based structural editor.
+const CONTENT_ONLY = true;
+
+// Adapts structure.json into the tree-node shape the editor renders. Groups
+// become section (container) nodes; docs become page nodes whose `path` is the
+// source file, so the existing edit/PR flow is unchanged.
+function structureToTree(nodes) {
+  return (nodes || []).map((n) =>
+    n.type === 'doc'
+      ? { type: 'page', slug: n.id, path: n.path, label: n.label, ready: n.ready !== false, children: [] }
+      : { type: 'section', slug: n.label, path: `group:${n.label}`, label: n.label, ready: true, children: structureToTree(n.items) },
+  );
+}
+
 export function StructureEditorContent({ onClose }) {
   const { siteConfig } = useDocusaurusContext();
   const oauthClientId = siteConfig.customFields?.GITHUB_OAUTH_CLIENT_ID || '';
@@ -115,6 +132,18 @@ export function StructureEditorContent({ onClose }) {
 
   // Auth: read synchronously from localStorage so the first tree fetch can use the token
   const [auth, setAuth] = useLocalStorage(AUTH_KEY, null);
+
+  // Content-only mode reads the structure from structure.json (same origin as
+  // the deployed site), so the editor tree matches the sidebar exactly.
+  const [structure, setStructure] = useState(null);
+  const [structureError, setStructureError] = useState('');
+  useEffect(() => {
+    if (!CONTENT_ONLY) return;
+    fetch(`${siteConfig.baseUrl}structure.json`)
+      .then((r) => { if (!r.ok) throw new Error(`Could not load structure.json (${r.status})`); return r.json(); })
+      .then(setStructure)
+      .catch((e) => setStructureError(String(e.message || e)));
+  }, []);
 
   // Tree data
   const [gitFiles, setGitFiles] = useState([]);
@@ -241,7 +270,10 @@ export function StructureEditorContent({ onClose }) {
     document.addEventListener('mouseup',   onUp);
   }
 
-  const tree = useMemo(() => computeDocsTree(gitFiles, catData, changes), [gitFiles, catData, changes]);
+  const tree = useMemo(
+    () => (CONTENT_ONLY ? structureToTree(structure?.tree) : computeDocsTree(gitFiles, catData, changes)),
+    [structure, gitFiles, catData, changes],
+  );
 
   // Fetch tree — use auth token when available (5000 req/hr vs 60/hr unauthenticated)
   const loadTree = useCallback((token) => {
@@ -263,12 +295,13 @@ export function StructureEditorContent({ onClose }) {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => { loadTree(auth?.token); }, []);  // initial load
+  useEffect(() => { if (!CONTENT_ONLY) loadTree(auth?.token); }, []);  // initial load (structural mode only)
 
   // Retry tree load when user signs in (clears a previous 403 rate-limit error)
   const prevAuthToken = useRef(null);
   const uploadInputRef = useRef(null);
   useEffect(() => {
+    if (CONTENT_ONLY) return;
     if (auth?.token && auth.token !== prevAuthToken.current && error?.includes('rate limit')) {
       prevAuthToken.current = auth.token;
       loadTree(auth.token);
@@ -1063,6 +1096,7 @@ export function StructureEditorContent({ onClose }) {
                       ❮
                     </button>
                   </div>
+                  {!CONTENT_ONLY && (
                   <div className={styles.treePanelHeaderActions}>
                     <button
                       className={styles.addSectionBtn}
@@ -1091,14 +1125,15 @@ export function StructureEditorContent({ onClose }) {
                       onChange={handleUploadFile}
                     />
                   </div>
+                  )}
                 </div>
                 )}
 
-                {!leftHidden && loading ? (
-                  <div className={styles.stateBox}>Loading tree from GitHub…</div>
-                ) : error ? (
+                {!leftHidden && (CONTENT_ONLY ? (!structure && !structureError) : loading) ? (
+                  <div className={styles.stateBox}>Loading structure…</div>
+                ) : (CONTENT_ONLY ? structureError : error) ? (
                   <div className={styles.errorBox}>
-                    {error}
+                    {CONTENT_ONLY ? structureError : error}
                     {error.includes('rate limit') && !auth && (
                       <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', opacity: 0.85 }}>
                         Sign in with GitHub below to load the tree using your authenticated quota.
@@ -1142,6 +1177,7 @@ export function StructureEditorContent({ onClose }) {
                         editingPath={rightPanel?.path}
                         loadingPaths={loadingPaths}
                         locked={!auth}
+                        contentOnly={CONTENT_ONLY}
                       />
                     ))}
 

@@ -58,6 +58,7 @@ export function TreeRow({
   editingPath,
   loadingPaths,
   locked,
+  contentOnly,
 }) {
   const idx = siblings.indexOf(node);
   const canUp = idx > 0;
@@ -67,6 +68,11 @@ export function TreeRow({
   const formKey = `${node.path}:`;
   const isEditing = editingPath === node.path;
   const lockTitle = 'Sign in with GitHub to make changes';
+  // In content-only mode, under-development pages (ready:false) are shown but
+  // cannot be edited — they mirror the sidebar's "in development" chapters.
+  const draftLocked = contentOnly && node.type === 'page' && node.ready === false;
+  const draftTitle = 'This chapter is under development — editing is disabled';
+  const editLocked = locked || draftLocked;
 
   const indent = depth * 20;
 
@@ -87,11 +93,20 @@ export function TreeRow({
         <span className={styles.nodeIcon}>{node.type === 'section' ? '📁' : '📄'}</span>
         <span
           className={`${styles.nodeLabel} ${styles.nodeLabelClickable}`}
-          title={node.path}
-          onClick={() => node.type === 'page' ? onEditPage(node) : onEditSection(node)}
+          title={draftLocked ? draftTitle : node.path}
+          style={draftLocked ? { opacity: 0.55 } : undefined}
+          onClick={() => {
+            if (node.type === 'section') { contentOnly ? onToggle(node.path) : onEditSection(node); }
+            else if (!editLocked) { onEditPage(node); }
+          }}
         >
           {node.label}
         </span>
+        {draftLocked && (
+          <span style={{ marginLeft: 6, fontSize: '0.68rem', opacity: 0.6, whiteSpace: 'nowrap' }} title={draftTitle}>
+            🔒 in development
+          </span>
+        )}
 
         {isLoading && <span className={styles.loadingDot} title="Loading…">⋯</span>}
 
@@ -99,15 +114,15 @@ export function TreeRow({
           {node.type === 'page' && (
             <button
               className={`${styles.actionBtn} ${styles.editPageBtn}`}
-              title={locked ? lockTitle : 'Edit page content'}
-              onClick={locked ? undefined : () => onEditPage(node)}
-              disabled={locked}
+              title={editLocked ? (draftLocked ? draftTitle : lockTitle) : 'Edit page content'}
+              onClick={editLocked ? undefined : () => onEditPage(node)}
+              disabled={editLocked}
               type="button"
             >
               ✎
             </button>
           )}
-          {node.type === 'section' && (
+          {node.type === 'section' && !contentOnly && (
             <button
               className={`${styles.actionBtn} ${styles.editPageBtn}`}
               title={locked ? lockTitle : 'Edit section intro page'}
@@ -118,49 +133,21 @@ export function TreeRow({
               ✎
             </button>
           )}
-          {node.type === 'section' && (
-            <button
-              className={styles.actionBtn}
-              title={locked ? lockTitle : 'Add page inside this section'}
-              onClick={locked ? undefined : () => onSetActiveForm(`${formKey}add-page`)}
-              disabled={locked}
-              type="button"
-            >
-              + Page
-            </button>
-          )}
-          {node.type === 'page' && (
-            <button
-              className={styles.actionBtn}
-              title={locked ? lockTitle : 'Add a sub-page'}
-              onClick={locked ? undefined : () => onSetActiveForm(`${formKey}add-subpage`)}
-              disabled={locked}
-              type="button"
-            >
-              + Sub
-            </button>
-          )}
-          <button
-            className={styles.actionBtn}
-            title={locked ? lockTitle : 'Rename'}
-            onClick={locked ? undefined : () => onSetActiveForm(`${formKey}rename`)}
-            disabled={locked}
-            type="button"
-          >
-            ✏
-          </button>
-          <button className={`${styles.actionBtn} ${styles.arrowBtn}`} title={locked ? lockTitle : 'Move up'} onClick={locked ? undefined : () => onMoveUp(node)} disabled={locked || !canUp} type="button">↑</button>
-          <button className={`${styles.actionBtn} ${styles.arrowBtn}`} title={locked ? lockTitle : 'Move down'} onClick={locked ? undefined : () => onMoveDown(node)} disabled={locked || !canDown} type="button">↓</button>
-          {node.type === 'page' && (
-            <button
-              className={`${styles.actionBtn} ${styles.deleteBtn}`}
-              title={locked ? lockTitle : 'Delete page'}
-              onClick={locked ? undefined : () => onDelete(node)}
-              disabled={locked}
-              type="button"
-            >
-              🗑
-            </button>
+          {!contentOnly && (
+            <>
+              {node.type === 'section' && (
+                <button className={styles.actionBtn} title={locked ? lockTitle : 'Add page inside this section'} onClick={locked ? undefined : () => onSetActiveForm(`${formKey}add-page`)} disabled={locked} type="button">+ Page</button>
+              )}
+              {node.type === 'page' && (
+                <button className={styles.actionBtn} title={locked ? lockTitle : 'Add a sub-page'} onClick={locked ? undefined : () => onSetActiveForm(`${formKey}add-subpage`)} disabled={locked} type="button">+ Sub</button>
+              )}
+              <button className={styles.actionBtn} title={locked ? lockTitle : 'Rename'} onClick={locked ? undefined : () => onSetActiveForm(`${formKey}rename`)} disabled={locked} type="button">✏</button>
+              <button className={`${styles.actionBtn} ${styles.arrowBtn}`} title={locked ? lockTitle : 'Move up'} onClick={locked ? undefined : () => onMoveUp(node)} disabled={locked || !canUp} type="button">↑</button>
+              <button className={`${styles.actionBtn} ${styles.arrowBtn}`} title={locked ? lockTitle : 'Move down'} onClick={locked ? undefined : () => onMoveDown(node)} disabled={locked || !canDown} type="button">↓</button>
+              {node.type === 'page' && (
+                <button className={`${styles.actionBtn} ${styles.deleteBtn}`} title={locked ? lockTitle : 'Delete page'} onClick={locked ? undefined : () => onDelete(node)} disabled={locked} type="button">🗑</button>
+              )}
+            </>
           )}
         </div>
       </div>
@@ -216,6 +203,7 @@ export function TreeRow({
           editingPath={editingPath}
           loadingPaths={loadingPaths}
           locked={locked}
+          contentOnly={contentOnly}
         />
       ))}
     </>
