@@ -16,11 +16,11 @@ This chapter is designed for dataset creation and annotation. It does not cover 
 :::
 
 ### Task distinction
-Below is a short definition of the common NLP tasks. The details of each task are discussed later.
-- Sentiment analysis answers: Is the text positive, negative, neutral, or mixed?
-- Emotion analysis answers: What emotion or emotions are expressed?
-- Hate speech analysis answers: Does the text contain hateful, offensive, or discriminatory language, and who is targeted?
-- Topic classification answers: What is the main theme or domain of the text?
+Below is a short definition of the common NLP tasks (the question asks and answers). The details of each task are discussed later.
+- Sentiment analysis: Is the text positive, negative, neutral, or mixed?
+- Emotion analysis: What emotion or emotions are expressed?
+- Hate speech analysis: Does the text contain hateful, offensive, or discriminatory language, and who is targeted?
+- Topic classification: What is the main theme or domain of the text?
 
 
 ![Text classication NLP tasks taxonomy](images/text-classification.svg)
