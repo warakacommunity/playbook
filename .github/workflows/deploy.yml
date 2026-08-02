@@ -26,6 +26,10 @@ jobs:
       # mapped to the env vars docusaurus.config.js reads.
       GITHUB_OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
       GITHUB_OAUTH_PROXY_URL: ${{ secrets.OAUTH_PROXY_URL }}
+      # Cloudflare worker URL for the model-based "Auto-translate" button in the
+      # Contribute editor. Without it, docusaurus.config.js falls back to "" and
+      # the editor hides the button (Google Translate still works client-side).
+      TRANSLATION_PROXY_URL: ${{ secrets.TRANSLATION_PROXY_URL }}
     steps:
       - uses: actions/checkout@v4
         with:
