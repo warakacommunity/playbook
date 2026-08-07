@@ -30,6 +30,10 @@ jobs:
       # Contribute editor. Without it, docusaurus.config.js falls back to "" and
       # the editor hides the button (Google Translate still works client-side).
       TRANSLATION_PROXY_URL: ${{ secrets.TRANSLATION_PROXY_URL }}
+      # Raises the GitHub API rate limit (60 → 5000/hr) so the github-contributors
+      # plugin can fetch the repo's contributors for the "Thanks to our
+      # Contributors" band. Without it the fetch is skipped and the band is hidden.
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:

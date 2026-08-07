@@ -1,0 +1,244 @@
+/* ============================================================
+   Contributors + Supported-by bands shown above the site footer
+   (ported from the landing page). Uses the playbook's own theme
+   tokens, so it adopts the playbook palette rather than the
+   landing's.
+   ============================================================ */
+
+.section {
+  padding: 6rem 0 5rem;
+  background: var(--ifm-background-color);
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
+.sectionHeader {
+  max-width: 780px;
+  margin: 0 auto 3.25rem;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.1rem;
+}
+
+.sectionLead {
+  font-size: 1.12rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ---------- Contributors ---------- */
+.contributorsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem 1.4rem;
+  max-width: 960px;
+  margin: 0 auto 2.25rem;
+}
+
+.contributorCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--surface-wash);
+  border: 1px solid transparent;
+  border-radius: 22px;
+  padding: 1.7rem 1.4rem;
+  text-decoration: none !important;
+  color: inherit;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.contributorCard:hover {
+  background: var(--ifm-background-color);
+  border-color: rgba(var(--brand-rgb), 0.25);
+  box-shadow: 0 24px 48px -28px rgba(var(--brand-rgb), 0.35);
+  transform: translateY(-4px);
+}
+
+.contributorAvatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contributorCard:hover .contributorAvatar {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 6px 14px -8px rgba(var(--brand-rgb), 0.3);
+}
+
+.contributorLogin {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+  transition: color 0.15s ease;
+}
+
+.contributorCard:hover .contributorLogin {
+  color: var(--ifm-color-primary);
+}
+
+.contributorsCtaWrap {
+  text-align: center;
+}
+
+.contributorsCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.7rem;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-emphasis-1000);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  text-decoration: none !important;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.contributorsCta:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  background: rgba(var(--brand-rgb), 0.06);
+  transform: translateY(-1px);
+}
+
+/* ---------- Supported by — full-width band ---------- */
+.supportedByCard {
+  width: 100%;
+  padding: 3.5rem 0 3.25rem;
+  background: #f5f7fa;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .supportedByCard {
+  background: var(--ifm-background-surface-color);
+  border-top-color: var(--ifm-color-emphasis-300);
+  border-bottom-color: var(--ifm-color-emphasis-300);
+}
+
+.supportersLabel {
+  text-align: center;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
+  margin: 0 0 1.4rem;
+}
+
+.supportersMarquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+}
+
+.supportersTrack {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  width: max-content;
+  animation: supportersMarquee 42s linear infinite;
+  will-change: transform;
+}
+
+.supportersMarquee:hover .supportersTrack {
+  animation-play-state: paused;
+}
+
+.supporterLogo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 104px;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  opacity: 0.94;
+}
+
+.supporterLogo:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+}
+
+[data-theme='dark'] .supporterLogo {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.supporterLogo img {
+  height: 64px;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  display: block;
+}
+
+@keyframes supportersMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0 3.5rem;
+  }
+  .contributorsGrid {
+    gap: 1rem;
+  }
+  .contributorAvatar {
+    width: 56px;
+    height: 56px;
+  }
+  .contributorLogin {
+    font-size: 0.8rem;
+  }
+  .supportedByCard {
+    padding: 1.75rem 0 1.5rem;
+  }
+  .supportersTrack {
+    gap: 2.75rem;
+    animation-duration: 28s;
+  }
+  .supporterLogo {
+    height: 80px;
+    padding: 0.55rem 1rem;
+  }
+  .supporterLogo img {
+    height: 52px;
+    max-width: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .supportersTrack {
+    animation: none;
+    overflow-x: auto;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem 3rem;
+  }
+}
