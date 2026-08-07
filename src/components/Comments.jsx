@@ -9,10 +9,10 @@ import Giscus from "@giscus/react";
 // 3. Visit https://giscus.app and pick "warakacommunity"
 // 4. Copy the data-repo-id and data-category-id from the generated snippet
 // 5. Paste them below in REPO_ID and CATEGORY_ID
-const REPO = "warakacommunity";
-const REPO_ID = "R_kgDORJq3oQ";
-const CATEGORY = "Comments";
-const CATEGORY_ID = "DIC_kwDORJq3oc4C8EW7";
+const REPO = "warakacommunity/playbook";
+const REPO_ID = "R_kgDOTF6-1A";
+const CATEGORY = "Announcements";
+const CATEGORY_ID = "DIC_kwDOTF6-1M4DC3D5";
 
 function CommentsImpl() {
   const { colorMode } = useColorMode();
