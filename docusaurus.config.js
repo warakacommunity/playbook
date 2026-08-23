@@ -31,15 +31,15 @@ const config = {
   // },
 
   // Deploy target: GitHub Pages project site for warakacommunity/playbook,
-  // served under the waraka.org custom domain as https://waraka.org/playbook/.
+  // served on its own custom subdomain https://afriplaybook.waraka.org/ (root).
   // The GitHub Actions workflow overrides these with DOCUSAURUS_URL and
   // DOCUSAURUS_BASE_URL so local builds and CI share the same config.
-  url: process.env.DOCUSAURUS_URL || "https://waraka.org",
-  baseUrl: process.env.DOCUSAURUS_BASE_URL || "/playbook/",
+  url: process.env.DOCUSAURUS_URL || "https://afriplaybook.waraka.org",
+  baseUrl: process.env.DOCUSAURUS_BASE_URL || "/",
 
-  // GH Pages deploy target — the playbook project site. The org site
-  // (warakacommunity.github.io) owns the waraka.org apex domain and serves
-  // the landing page, while this repo is served at /playbook.
+  // GH Pages deploy target — the playbook project site, served at the root of
+  // its own subdomain afriplaybook.waraka.org (the org site owns the apex
+  // waraka.org and serves the community landing).
   organizationName: "warakacommunity",
   projectName: "playbook",
   deploymentBranch: "gh-pages",

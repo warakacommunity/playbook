@@ -90,6 +90,13 @@ export default {
         client_secret: env.GITHUB_CLIENT_SECRET,
         code: body.code,
       });
+      if (!data.access_token) {
+        console.log(
+          'token exchange failed:', JSON.stringify(data),
+          '| client_id:', env.GITHUB_CLIENT_ID,
+          '| secret_set:', !!env.GITHUB_CLIENT_SECRET,
+        );
+      }
       return new Response(JSON.stringify(data), { headers: json });
     } catch (e) {
       return new Response(

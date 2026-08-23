@@ -78,14 +78,14 @@ If the AfriPlaybook informs your research, teaching, or project, please cite it.
   title        = {AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages},
   year         = {2026},
   publisher    = {Masakhane},
-  url          = {https://waraka.org/playbook/},
+  url          = {https://afriplaybook.waraka.org/},
   note         = {Open-source community resource}
 }
 ```
 
 **Plain text (APA-style):**
 
-> Masakhane Community. (2026). *AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages*. [https://waraka.org/playbook/](https://waraka.org/playbook/)
+> Masakhane Community. (2026). *AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages*. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/)
 
 For other formats (MLA, Chicago, etc.) and a machine-readable [`CITATION.cff`](https://github.com/warakacommunity/playbook/blob/main/CITATION.cff), see the [/cite](/cite) page.
 

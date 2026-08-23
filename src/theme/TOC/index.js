@@ -5,11 +5,11 @@ import { StructureEditorContent } from "@site/src/components/StructureEditor";
 
 // The in-browser editor signs contributors in through a GitHub OAuth App, and
 // an OAuth App permits exactly ONE authorization callback URL. The editor runs
-// on the canonical playbook URL (waraka.org/playbook) or localhost (device
+// on the canonical playbook URL (afriplaybook.waraka.org) or localhost (device
 // flow, no callback). Any other mirror hands the contributor off to this URL
 // with a ?contribute=1 flag that auto-opens the editor there.
-const EDITOR_ORIGIN = "https://waraka.org";
-const EDITOR_BASE = "/playbook";
+const EDITOR_ORIGIN = "https://afriplaybook.waraka.org";
+const EDITOR_BASE = "";
 
 function isEditorHost() {
   if (typeof window === "undefined") return false;
@@ -63,7 +63,7 @@ export default function TOCWrapper(props) {
     };
   }, []);
 
-  // Arriving via a hand-off link (waraka.org/playbook/…?contribute=1): open the
+  // Arriving via a hand-off link (afriplaybook.waraka.org/…?contribute=1): open the
   // editor automatically so the round-trip from the mirror is seamless.
   useEffect(() => {
     if (!isEditorHost()) return;
@@ -73,7 +73,7 @@ export default function TOCWrapper(props) {
 
   const handleContribute = () => {
     // On the editor host, open in place. On a mirror, redirect to the same
-    // chapter on waraka.org/playbook, where GitHub sign-in works.
+    // chapter on afriplaybook.waraka.org, where GitHub sign-in works.
     if (isEditorHost()) {
       setEditorOpen(true);
       return;

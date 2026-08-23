@@ -2,9 +2,9 @@
 
 **The decision framework for anyone starting an African-language NLP project — grounded in the empirical experience of Masakhane's own past projects.** An annotation-first dataset-lifecycle handbook covering data collection, annotation workforce, quality, documentation, evaluation, and community practice, for text, speech, translation, OCR, and adjacent modalities in low-resource African-language contexts.
 
-It is not a model-tuning tutorial (see the [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course) and the [Google Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook) for those); it is what those playbooks assume has already been done. It is intended for language experts, annotators, translators, and community leads in addition to ML practitioners — see [**What this playbook is (and isn't)**](https://waraka.org/playbook/introduction/scope-and-strategy) for the full scope statement and evidence base.
+It is not a model-tuning tutorial (see the [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course) and the [Google Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook) for those); it is what those playbooks assume has already been done. It is intended for language experts, annotators, translators, and community leads in addition to ML practitioners — see [**What this playbook is (and isn't)**](https://afriplaybook.waraka.org/introduction/scope-and-strategy) for the full scope statement and evidence base.
 
-**Live site:** <https://waraka.org/playbook/>
+**Live site:** <https://afriplaybook.waraka.org/>
 
 This is a living resource maintained by the [Masakhane](https://www.masakhane.io/) community. We welcome contributions from researchers, practitioners, students, language experts, and translators.
 
@@ -270,7 +270,7 @@ A maintainer will review, suggest edits, and merge once it's ready.
 
 ### What happens after merge
 
-Your chapter is live at <https://waraka.org/playbook/...> within ~5 minutes (CI rebuilds and deploys all 6 locales).
+Your chapter is live at <https://afriplaybook.waraka.org/...> within ~5 minutes (CI rebuilds and deploys all 6 locales).
 
 ---
 
@@ -320,7 +320,7 @@ Blog posts go in `blog/` (separate from chapters). Use them for announcements, c
 
 ## FAQ
 
-Quick answers to the questions we hear most. The full version with more detail lives at [**waraka.org/playbook/faq**](https://waraka.org/playbook/faq).
+Quick answers to the questions we hear most. The full version with more detail lives at [**afriplaybook.waraka.org/faq**](https://afriplaybook.waraka.org/faq).
 
 ### Is the Playbook free to use?
 
@@ -332,7 +332,7 @@ Yes. Open an issue with a brief outline first, then write your chapter and open 
 
 ### How do I cite the Playbook?
 
-Every chapter page has a "Cite this page" link. The dedicated [`/cite`](https://waraka.org/playbook/cite) page provides BibTeX, APA, MLA, Chicago, and a machine-readable [`CITATION.cff`](CITATION.cff). See also [How to cite](#how-to-cite) below.
+Every chapter page has a "Cite this page" link. The dedicated [`/cite`](https://afriplaybook.waraka.org/cite) page provides BibTeX, APA, MLA, Chicago, and a machine-readable [`CITATION.cff`](CITATION.cff). See also [How to cite](#how-to-cite) below.
 
 ### Is the Masakhane Tool deployable on-prem?
 
@@ -344,13 +344,13 @@ The site UI is translated into 6 languages (English, Hausa, Amharic, Swahili, Fr
 
 ### How can I get involved?
 
-5 minutes: star the repo or join Discord. 30 minutes: fix a typo via "Edit this page". A few hours: write a [blog post case study](#how-to-write-a-blog-post). A few weeks: lead a chapter — see the open [Call for Chapter Development Proposals](https://waraka.org/playbook/blog/call-for-chapters-masakhane-playbook).
+5 minutes: star the repo or join Discord. 30 minutes: fix a typo via "Edit this page". A few hours: write a [blog post case study](#how-to-write-a-blog-post). A few weeks: lead a chapter — see the open [Call for Chapter Development Proposals](https://afriplaybook.waraka.org/blog/call-for-chapters-masakhane-playbook).
 
 ### What's the difference between the Playbook and the Masakhane Tool?
 
 They're complementary, not competing. The Playbook is a **guide** you read; the Tool is a **piece of software** you run. Both are open from day one and were designed together.
 
-For more questions and longer answers, see the [full FAQ page](https://waraka.org/playbook/faq).
+For more questions and longer answers, see the [full FAQ page](https://afriplaybook.waraka.org/faq).
 
 ---
 
@@ -374,7 +374,7 @@ If you use the Masakhane Playbook in your research, teaching, or work, please ci
   title        = {Masakhane Playbook: A Practical Guide for Building NLP Systems for African Languages},
   year         = {2026},
   publisher    = {Masakhane},
-  url          = {https://waraka.org/playbook/},
+  url          = {https://afriplaybook.waraka.org/},
   note         = {Open-source community resource}
 }
 ```

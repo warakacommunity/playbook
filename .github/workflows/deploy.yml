@@ -18,8 +18,8 @@ jobs:
       # Deploy the playbook project site under /playbook/ on the waraka.org
       # custom domain. The org site (warakacommunity.github.io) owns the apex
       # domain and serves the landing page.
-      DOCUSAURUS_URL: https://waraka.org
-      DOCUSAURUS_BASE_URL: /playbook/
+      DOCUSAURUS_URL: https://afriplaybook.waraka.org
+      DOCUSAURUS_BASE_URL: /
       # OAuth App Client ID + deployed worker URL for the "Sign in with GitHub"
       # button in the Contribute editor. GitHub forbids secret names starting
       # with GITHUB_, so the repo secrets are named without that prefix and

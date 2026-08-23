@@ -7,7 +7,7 @@ compatibility_date = "2024-11-01"
 # dev. List every site this worker serves so you never have to redeploy on a move.
 [vars]
 GITHUB_CLIENT_ID = "Ov23liug363vYqxGu644"
-ALLOWED_ORIGIN = "https://waraka.org"
+ALLOWED_ORIGIN = "https://afriplaybook.waraka.org"
 
 # The client secret is NOT set here. Add it as an encrypted secret:
 #   wrangler secret put GITHUB_CLIENT_SECRET
