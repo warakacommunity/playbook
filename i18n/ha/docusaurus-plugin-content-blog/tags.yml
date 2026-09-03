@@ -1,12 +1,12 @@
 call-for-chapters:
   label: Call for Chapters
   permalink: /call-for-chapters
-  description: Open calls to contribute chapters to the Masakhane Playbook
+  description: Open calls to contribute chapters to AfriPlaybook
 
 playbook:
   label: Playbook
   permalink: /
-  description: Posts about the Masakhane Playbook
+  description: Posts about AfriPlaybook
 
 announcement:
   label: Announcement

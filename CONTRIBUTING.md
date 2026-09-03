@@ -1,4 +1,4 @@
-# Contributing to the Masakhane Playbook
+# Contributing to AfriPlaybook
 
 This document covers local setup, the site features that are wired up, and the most common contribution tasks. If you're here to translate or write a chapter, skip to **Common tasks**.
 
@@ -134,7 +134,7 @@ import diagram from './assets/diagram.png';
 yarn pdf
 ```
 
-Output: `build/downloads/masakhane-playbook.pdf`. CI does this automatically on every push to `main`.
+Output: `build/downloads/afriplaybook.pdf`. CI does this automatically on every push to `main`.
 
 ### Re-run UI translations
 

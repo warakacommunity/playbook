@@ -116,7 +116,7 @@ export default function PlaybookNavbarItem() {
               </span>
             </Link>
             <a
-              href="/downloads/masakhane-playbook.pdf"
+              href="/downloads/afriplaybook.pdf"
               role="menuitem"
               className={styles.aboutMegaItem}
               target="_blank"

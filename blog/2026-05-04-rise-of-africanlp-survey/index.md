@@ -34,7 +34,7 @@ A few things stood out to us in the data (the paper has the full picture):
 - Community-led collaborations like **Masakhane**, **HausaNLP**, **EthioNLP**, and others account for a meaningful share of the recent growth, especially for low-resource languages that don't have institutional NLP labs of their own.
 - **Annotation, dataset construction, and evaluation** remain disproportionately under-cited relative to the engineering effort they require — a structural issue this survey hopes to nudge.
 
-## Why this is on the Masakhane Playbook blog
+## Why this is on the AfriPlaybook blog
 
 Several of the survey's authors — including the lead authors and reviewers — are active in the Masakhane community. The work intersects directly with what the **Playbook** documents: how annotation, dataset, and benchmark contributions accumulate over time and shape what's possible.
 

@@ -1,9 +1,9 @@
 # See https://citation-file-format.github.io/ for the full schema.
 # GitHub renders a "Cite this repository" button from this file.
 cff-version: 1.2.0
-message: "If you use the Masakhane Playbook in your research or work, please cite it as below."
+message: "If you use AfriPlaybook in your research or work, please cite it as below."
 type: software
-title: "Masakhane Playbook: A Practical Guide for Building NLP Systems for African Languages"
+title: "AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages"
 abstract: >
   A community-driven, open guide for building, evaluating, and deploying
   natural language processing systems for African languages. Covers dataset

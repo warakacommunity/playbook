@@ -1,13 +1,13 @@
 ---
-slug: call-for-chapters-masakhane-playbook
-title: "Call for Chapters: Masakhane Playbook"
+slug: call-for-chapters-afriplaybook
+title: "Call for Chapters: AfriPlaybook"
 description: We're inviting researchers and language experts to lead chapters in the Playbook. USD $1,000 honorarium per accepted chapter, open through 30 June 2026.
 authors: [shamsuddeen]
 tags: [call-for-chapters, playbook, announcement]
 image: https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1200&h=675&q=80
 ---
 
-The Masakhane community is opening a **Call for Chapters** for the Masakhane Playbook — a community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. We invite researchers, practitioners, students, language experts, and community members to contribute chapters that shape how the next generation of African language technology is built.
+The Masakhane community is opening a **Call for Chapters** for AfriPlaybook — a community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. We invite researchers, practitioners, students, language experts, and community members to contribute chapters that shape how the next generation of African language technology is built.
 
 <!-- truncate -->
 

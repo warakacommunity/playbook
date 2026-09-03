@@ -581,7 +581,7 @@ const config = {
             items: [
               // Icon-only horizontal social row.
               // TODO: replace placeholder Twitter / X and LinkedIn URLs once
-              // the official Masakhane Playbook accounts are confirmed.
+              // the official AfriPlaybook accounts are confirmed.
               {
                 html: `<div class="footer-socials">
                   <a href="https://twitter.com/masakhanenlp" target="_blank" rel="noreferrer noopener" class="footer-social-icon" aria-label="Twitter / X (placeholder)">

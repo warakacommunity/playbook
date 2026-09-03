@@ -1,12 +1,12 @@
 ---
-slug: call-for-chapters-masakhane-playbook
-title: "Call for Chapters: Masakhane Playbook"
+slug: call-for-chapters-afriplaybook
+title: "Call for Chapters: AfriPlaybook"
 authors: [shamsuddeen]
 tags: [call-for-chapters, playbook, announcement]
 image: /img/social-card.png
 ---
 
-The Masakhane community is opening a **Call for Chapters** for the Masakhane Playbook — a community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. We invite researchers, practitioners, students, language experts, and community members to contribute chapters that shape how the next generation of African language technology is built.
+The Masakhane community is opening a **Call for Chapters** for AfriPlaybook — a community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. We invite researchers, practitioners, students, language experts, and community members to contribute chapters that shape how the next generation of African language technology is built.
 
 <!-- truncate -->
 

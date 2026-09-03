@@ -1,4 +1,4 @@
-# Masakhane Playbook
+# AfriPlaybook
 
 **The decision framework for anyone starting an African-language NLP project — grounded in the empirical experience of Masakhane's own past projects.** An annotation-first dataset-lifecycle handbook covering data collection, annotation workforce, quality, documentation, evaluation, and community practice, for text, speech, translation, OCR, and adjacent modalities in low-resource African-language contexts.
 
@@ -344,7 +344,7 @@ The site UI is translated into 6 languages (English, Hausa, Amharic, Swahili, Fr
 
 ### How can I get involved?
 
-5 minutes: star the repo or join Discord. 30 minutes: fix a typo via "Edit this page". A few hours: write a [blog post case study](#how-to-write-a-blog-post). A few weeks: lead a chapter — see the open [Call for Chapter Development Proposals](https://afriplaybook.waraka.org/blog/call-for-chapters-masakhane-playbook).
+5 minutes: star the repo or join Discord. 30 minutes: fix a typo via "Edit this page". A few hours: write a [blog post case study](#how-to-write-a-blog-post). A few weeks: lead a chapter — see the open [Call for Chapter Development Proposals](https://afriplaybook.waraka.org/blog/call-for-chapters-afriplaybook).
 
 ### What's the difference between the Playbook and the Masakhane Tool?
 
@@ -364,14 +364,14 @@ For more questions and longer answers, see the [full FAQ page](https://afriplayb
 
 ## How to cite
 
-If you use the Masakhane Playbook in your research, teaching, or work, please cite it.
+If you use AfriPlaybook in your research, teaching, or work, please cite it.
 
 **BibTeX:**
 
 ```bibtex
-@misc{masakhane2026playbook,
+@misc{afriplaybook2026,
   author       = {{Masakhane Community}},
-  title        = {Masakhane Playbook: A Practical Guide for Building NLP Systems for African Languages},
+  title        = {AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages},
   year         = {2026},
   publisher    = {Masakhane},
   url          = {https://afriplaybook.waraka.org/},

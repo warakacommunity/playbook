@@ -1,6 +1,6 @@
 # Newsletter infra (Listmonk + Amazon SES + Caddy)
 
-Self-hosted newsletter for the Masakhane Playbook. **AGPLv3 / fully open source.**
+Self-hosted newsletter for AfriPlaybook. **AGPLv3 / fully open source.**
 
 ```
 Docusaurus site (GitHub Pages)
