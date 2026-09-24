@@ -54,7 +54,7 @@
     <circle cx="384" cy="354" r="9" fill="#9C4F2B"/>
     <text x="403" y="359" font-size="15" font-weight="700" fill="#9C4F2B">Abstractive</text>
     <text x="384" y="382" font-size="12.8" fill="#2B2218">Rewrites the content in new</text>
-    <text x="384" y="400" font-size="12.8" fill="#2B2218">words — harder, more useful.</text>
+    <text x="384" y="400" font-size="12.8" fill="#2B2218">words: harder, more useful.</text>
     <text x="384" y="426" font-size="12.5" fill="#C66A3D" font-weight="600">+ More natural, more useful</text>
     <text x="384" y="443" font-size="12.5" fill="#8A7D6E">– More prone to error</text>
   </g>

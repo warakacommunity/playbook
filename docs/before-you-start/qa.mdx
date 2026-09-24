@@ -13,34 +13,34 @@ import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
 
 *Last reviewed: 2026-07-07.*
 
-Question Answering (QA) is the task where NLP promises to actually *serve* a user — turn a question they ask in their own language into a useful answer. It is also structurally the hardest task in this chapter, because a useful QA system requires **both** good retrieval **and** good reading or reasoning. A failure in either half is a failure of the whole. For African languages, both halves are typically under-resourced, and cross-lingual configurations (question in an African language, answers drawn from English or French sources) often work better than monolingual ones. Read this page before scoping.
+Question Answering (QA) is the task where NLP promises to actually *serve* a user: turn a question they ask in their own language into a useful answer. It is also structurally the hardest task in this chapter, because a useful QA system requires **both** good retrieval **and** good reading or reasoning. A failure in either half is a failure of the whole. For African languages, both halves are typically under-resourced, and cross-lingual configurations (question in an African language, answers drawn from English or French sources) often work better than monolingual ones. Read this page before scoping.
 
 ## What already exists
 
 QA for African languages has one flagship community resource and a small number of adjacent multilingual benchmarks worth knowing about.
 
-### Datasets — the core set
+### Datasets: the core set
 
-- **[AfriQA](https://arxiv.org/abs/2305.06897)** ([Ogundepo et al., 2023](https://arxiv.org/abs/2305.06897)) — the reference cross-lingual open-domain QA benchmark for African languages. Covers 10 African languages (Bemba, Fon, Hausa, Igbo, Kinyarwanda, Swahili, Twi, Wolof, Yoruba, Zulu). Questions are authored in the target African language; answers are retrieved from English Wikipedia. This *cross-lingual open-domain* framing is not incidental — the paper argues it is the practical setting for African-language QA today, and the numbers back the argument. Available on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/afriqa) and the [Masakhane AfriQA repo](https://github.com/masakhane-io/afriqa).
-- **[TyDi QA](https://arxiv.org/abs/2003.05002)** ([Clark et al., 2020](https://arxiv.org/abs/2003.05002)) — Google's typologically-diverse QA benchmark with 11 languages including Swahili. Extractive-style; questions and answers are in the same language. Useful reference for the monolingual QA setting where AfriQA takes the cross-lingual one.
-- **[Afri-MCQA](https://aclanthology.org/2024.acl-long/)** (ACL 2026) — a multiple-choice QA benchmark for African languages covering **15 languages** with roughly **7,500 QA pairs** and both text- and speech-based configurations. The reference multi-modal QA benchmark in 2026 for African languages, and worth adding to any QA measurement plan alongside AfriQA. Adds a discrete-choice evaluation surface AfriQA does not cover.
-- **[IrokoBench](https://arxiv.org/abs/2406.03368)** ([Adelani et al., NAACL 2025](https://arxiv.org/abs/2406.03368)) — 17-language reasoning and QA benchmark for African languages spanning natural-language inference, mathematical reasoning, and knowledge-based multiple-choice QA (AfriMMLU / AfriMGSM / AfriXNLI). Complements AfriQA on the *reasoning* and *knowledge* fronts specifically; useful for scoring generative-QA systems whose failure modes are reasoning rather than retrieval.
-- **[XQuAD](https://arxiv.org/abs/1910.11856)** and **[MLQA](https://aclanthology.org/2020.acl-main.653/)** — multilingual reading-comprehension benchmarks derived from SQuAD; extremely limited African coverage but useful reference for the extractive QA setting.
-- **[MKQA](https://arxiv.org/abs/2007.15207)** — multilingual open-domain QA covering 26 languages; includes some coverage relevant to African-language work.
-- **[AfriMTEB](https://arxiv.org/abs/2510.23896)** (Uemura, Zhang, Adelani, EACL 2026) — the African-language extension of MTEB. **59 African languages, 14 tasks, 38 datasets**, with **6 new datasets** added covering hate speech, intent detection, and emotion classification. Use as the umbrella evaluation surface for any embedding-based system that participates in your QA stack — retrieval-only, reranker, or embedding-based semantic scoring — before you commit to a specific retriever choice.
+- **[AfriQA](https://arxiv.org/abs/2305.06897)** ([Ogundepo et al., 2023](https://arxiv.org/abs/2305.06897)): the reference cross-lingual open-domain QA benchmark for African languages. Covers 10 African languages (Bemba, Fon, Hausa, Igbo, Kinyarwanda, Swahili, Twi, Wolof, Yoruba, Zulu). Questions are authored in the target African language; answers are retrieved from English Wikipedia. This *cross-lingual open-domain* framing is not incidental: the paper argues it is the practical setting for African-language QA today, and the numbers back the argument. Available on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/afriqa) and the [Masakhane AfriQA repo](https://github.com/masakhane-io/afriqa).
+- **[TyDi QA](https://arxiv.org/abs/2003.05002)** ([Clark et al., 2020](https://arxiv.org/abs/2003.05002)): Google's typologically-diverse QA benchmark with 11 languages including Swahili. Extractive-style; questions and answers are in the same language. Useful reference for the monolingual QA setting where AfriQA takes the cross-lingual one.
+- **[Afri-MCQA](https://aclanthology.org/2024.acl-long/)** (ACL 2026): a multiple-choice QA benchmark for African languages covering **15 languages** with roughly **7,500 QA pairs** and both text- and speech-based configurations. The reference multi-modal QA benchmark in 2026 for African languages, and worth adding to any QA measurement plan alongside AfriQA. Adds a discrete-choice evaluation surface AfriQA does not cover.
+- **[IrokoBench](https://arxiv.org/abs/2406.03368)** ([Adelani et al., NAACL 2025](https://arxiv.org/abs/2406.03368)): 17-language reasoning and QA benchmark for African languages spanning natural-language inference, mathematical reasoning, and knowledge-based multiple-choice QA (AfriMMLU / AfriMGSM / AfriXNLI). Complements AfriQA on the *reasoning* and *knowledge* fronts specifically; useful for scoring generative-QA systems whose failure modes are reasoning rather than retrieval.
+- **[XQuAD](https://arxiv.org/abs/1910.11856)** and **[MLQA](https://aclanthology.org/2020.acl-main.653/)**: multilingual reading-comprehension benchmarks derived from SQuAD; extremely limited African coverage but useful reference for the extractive QA setting.
+- **[MKQA](https://arxiv.org/abs/2007.15207)**: multilingual open-domain QA covering 26 languages; includes some coverage relevant to African-language work.
+- **[AfriMTEB](https://arxiv.org/abs/2510.23896)** (Uemura, Zhang, Adelani, EACL 2026): the African-language extension of MTEB. **59 African languages, 14 tasks, 38 datasets**, with **6 new datasets** added covering hate speech, intent detection, and emotion classification. Use as the umbrella evaluation surface for any embedding-based system that participates in your QA stack (retrieval-only, reranker, or embedding-based semantic scoring) before you commit to a specific retriever choice.
 
-### Datasets — worth knowing about
+### Datasets: worth knowing about
 
-- **[Cross-Lingual Open-Retrieval QA (Asai et al., 2021)](https://arxiv.org/abs/2104.01931)** — the setting AfriQA generalises. The precursor methodology, useful reading for the design decisions.
-- **Domain-specific QA corpora** — small published corpora for African-language QA in health, agriculture, and civic-tech domains exist across recent AfricaNLP proceedings. Search before scoping a domain-specific corpus from scratch.
+- **[Cross-Lingual Open-Retrieval QA (Asai et al., 2021)](https://arxiv.org/abs/2104.01931)**: the setting AfriQA generalises. The precursor methodology, useful reading for the design decisions.
+- **Domain-specific QA corpora**: small published corpora for African-language QA in health, agriculture, and civic-tech domains exist across recent AfricaNLP proceedings. Search before scoping a domain-specific corpus from scratch.
 
-### Models — what works for the task
+### Models: what works for the task
 
-- **Retrieval models.** [mDPR (multilingual Dense Passage Retrieval)](https://arxiv.org/abs/2004.04906) and [mContriever](https://arxiv.org/abs/2112.09118) are the AfriQA-paper baselines and the honest starting point when you want to reproduce the paper's numbers. For a *stronger* retrieval baseline in 2026, **[AfriE5](https://arxiv.org/abs/2510.23896)** (Uemura, Zhang, Adelani, EACL 2026) — cross-lingual contrastive distillation of instruction-tuned **mE5** on **59 African languages**, CC-BY-4.0, purpose-built for African-language retrieval — is the current honest first-choice for cross-lingual retrieval in this class of language. Alongside it, **[BGE-M3](https://huggingface.co/BAAI/bge-m3)** (BAAI, 2024) remains the strongest broadly-multilingual open reference (XLM-RoBERTa-large base, 100+ languages, 8k-token context, dense + multi-vector + sparse simultaneously, MIT-licensed, tops MIRACL and MKQA); teams have reported that **BGE-M3 fine-tuned on target-language data outperforms base BGE-M3** on AfriQA-family test sets. **[mE5-large](https://huggingface.co/intfloat/multilingual-e5-large)** and **[Cohere Embed Multilingual v3](https://cohere.com/embed)** are the other current cross-lingual retrievers worth measuring against on your target language pair. Start with the AfriQA baselines for reproducibility, then compare **AfriE5 and fine-tuned BGE-M3 vs. mDPR** on the same test set before committing to a retrieval choice.
-- **Reader / reasoning models.** For extractive QA, fine-tuned AfroXLMR is the classification-style path. For generative QA, general multilingual LLMs are the practical baselines: **Cohere Aya** (Aya-101, Aya-Expanse, Tiny Aya at 3B for constrained deploy), **[AfriqueLLM](https://huggingface.co/collections/McGill-NLP/afriquellm)** (Yu et al. 2026 — AfriqueQwen / AfriqueGemma / AfriqueLlama in 4B–14B variants, purpose-built on 20 African languages), mT5, NLLB-family, or larger applied via fine-tuning or in-context learning. Measure per-language before committing.
-- **Multilingual LLMs.** [Cohere Aya](https://cohere.com/research/aya) covers many African languages and is a defensible baseline for generative QA. Commercial APIs (Gemini, GPT-family, Claude, Cohere) increasingly claim African-language coverage; measure per language before deploying — see the API caveats in the [compute-poor chapter](../compute-poor/index.md#api-based-approaches--legitimate-but-not-free).
+- **Retrieval models.** [mDPR (multilingual Dense Passage Retrieval)](https://arxiv.org/abs/2004.04906) and [mContriever](https://arxiv.org/abs/2112.09118) are the AfriQA-paper baselines and the honest starting point when you want to reproduce the paper's numbers. For a *stronger* retrieval baseline in 2026, **[AfriE5](https://arxiv.org/abs/2510.23896)** (Uemura, Zhang, Adelani, EACL 2026), a cross-lingual contrastive distillation of instruction-tuned **mE5** on **59 African languages**, CC-BY-4.0, purpose-built for African-language retrieval, is the current honest first-choice for cross-lingual retrieval in this class of language. Alongside it, **[BGE-M3](https://huggingface.co/BAAI/bge-m3)** (BAAI, 2024) remains the strongest broadly-multilingual open reference (XLM-RoBERTa-large base, 100+ languages, 8k-token context, dense + multi-vector + sparse simultaneously, MIT-licensed, tops MIRACL and MKQA); teams have reported that **BGE-M3 fine-tuned on target-language data outperforms base BGE-M3** on AfriQA-family test sets. **[mE5-large](https://huggingface.co/intfloat/multilingual-e5-large)** and **[Cohere Embed Multilingual v3](https://cohere.com/embed)** are the other current cross-lingual retrievers worth measuring against on your target language pair. Start with the AfriQA baselines for reproducibility, then compare **AfriE5 and fine-tuned BGE-M3 vs. mDPR** on the same test set before committing to a retrieval choice.
+- **Reader / reasoning models.** For extractive QA, fine-tuned AfroXLMR is the classification-style path. For generative QA, general multilingual LLMs are the practical baselines: **Cohere Aya** (Aya-101, Aya-Expanse, Tiny Aya at 3B for constrained deploy), **[AfriqueLLM](https://huggingface.co/collections/McGill-NLP/afriquellm)** (Yu et al. 2026: AfriqueQwen / AfriqueGemma / AfriqueLlama in 4B–14B variants, purpose-built on 20 African languages), mT5, NLLB-family, or larger applied via fine-tuning or in-context learning. Measure per-language before committing.
+- **Multilingual LLMs.** [Cohere Aya](https://cohere.com/research/aya) covers many African languages and is a defensible baseline for generative QA. Commercial APIs (Gemini, GPT-family, Claude, Cohere) increasingly claim African-language coverage; measure per language before deploying. See the API caveats in the [compute-poor chapter](../compute-poor/index.md#api-based-approaches-legitimate-but-not-free).
 
-**Editorial opinion.** For a new project on a language covered by AfriQA, the shortest defensible path is: use AfriQA's baselines as the honest floor, evaluate a stronger retrieval + reader combination on the AfriQA test set, and human-evaluate a sample of outputs before deploying. Do not skip human evaluation — QA metrics on cross-lingual open-domain settings are known to over-report system quality relative to human judgement.
+**Editorial opinion.** For a new project on a language covered by AfriQA, the shortest defensible path is: use AfriQA's baselines as the honest floor, evaluate a stronger retrieval + reader combination on the AfriQA test set, and human-evaluate a sample of outputs before deploying. Do not skip human evaluation: QA metrics on cross-lingual open-domain settings are known to over-report system quality relative to human judgement.
 
 ## Fork or start fresh?
 
@@ -57,7 +57,7 @@ QA for African languages has one flagship community resource and a small number 
             result: <>Use AfriQA as the training and evaluation set. Fine-tune the retrieval + reader stack from the paper. <strong>Human-evaluate 200–500 outputs</strong> before deployment.</>,
           },
           {
-            label: "No — monolingual, domain-specific, or non-Wikipedia grounding",
+            label: "No: monolingual, domain-specific, or non-Wikipedia grounding",
             result: <>Your use case is monolingual (questions AND answers in the target language), domain-specific, or grounded in a different corpus (not Wikipedia). Use AfriQA as a starting point for the retriever, but collect a domain-specific evaluation set FIRST. Extending to a monolingual corpus for reading is expensive; consider whether the cross-lingual setting can serve the underlying need before committing.</>,
           },
         ],
@@ -74,7 +74,7 @@ QA for African languages has one flagship community resource and a small number 
           },
           {
             label: "Genuinely uncovered",
-            result: <>Read the <a href="/long-tail-language">long-tail language onboarding</a> chapter. QA corpora are more expensive to build than sentiment or NER corpora — question authoring is a skill; not every native speaker can author good questions; answer span annotation requires character-level precision. Start with a <strong>500–1000 question</strong> pilot and scale only if the pilot's IAA holds.</>,
+            result: <>Read the <a href="/long-tail-language">long-tail language onboarding</a> chapter. QA corpora are more expensive to build than sentiment or NER corpora: question authoring is a skill; not every native speaker can author good questions; answer span annotation requires character-level precision. Start with a <strong>500–1000 question</strong> pilot and scale only if the pilot's IAA holds.</>,
           },
         ],
       },
@@ -86,13 +86,13 @@ QA for African languages has one flagship community resource and a small number 
 
 ```
 Is your language covered by AfriQA (10 languages)?
-├── Yes — is the cross-lingual open-domain setting (question in
+├── Yes. Is the cross-lingual open-domain setting (question in
 │        target language, answers from English Wikipedia) close
 │        enough to your use case?
 │   ├── Yes → Use AfriQA as the training and evaluation set.
 │   │        Fine-tune the retrieval + reader stack from the paper.
 │   │        Human-evaluate 200-500 outputs before deployment.
-│   └── No — your use case is monolingual (questions AND answers
+│   └── No. Your use case is monolingual (questions AND answers
 │       in the target language), domain-specific, or grounded in a
 │       different corpus (not Wikipedia).
 │       → Use AfriQA as a starting point for the retriever, but
@@ -100,7 +100,7 @@ Is your language covered by AfriQA (10 languages)?
 │         to a monolingual corpus for reading is expensive; consider
 │         whether the cross-lingual setting can serve the underlying
 │         need before committing.
-└── No — your language is not covered by AfriQA.
+└── No. Your language is not covered by AfriQA.
     ├── Is Swahili covered? (Yes, in AfriQA and TyDi QA.) Is your
     │   target related? → Cross-lingual transfer via a related covered
     │   language is worth trying before building. See the
@@ -109,7 +109,7 @@ Is your language covered by AfriQA (10 languages)?
     └── Genuinely uncovered → Read the [long-tail language
         onboarding](../long-tail-language/index.md) chapter.
         QA corpora are more expensive to build than sentiment or
-        NER corpora — question authoring is a skill; not every
+        NER corpora: question authoring is a skill; not every
         native speaker can author good questions; answer span
         annotation requires character-level precision. Start with
         a 500-1000 question pilot and scale only if the pilot's
@@ -126,8 +126,8 @@ QA corpora cost more than sentiment or NER corpora of the same size, at every sc
 - **Extending AfriQA with domain-specific questions on covered languages.** Two to six months elapsed; two to six person-months of question-authoring work; one person-month of lead effort. Question-authoring throughput is 2-4x slower than labelling; budget accordingly.
 - **Building a new QA corpus for an uncovered language, aiming for 2,000-5,000 question-answer pairs.** Six to fifteen months elapsed; five to fifteen person-months. Question authoring is skilled work; two to four expert authors + adjudicators is the workable team size.
 - **A defensible evaluation-only QA set** (500-1,000 questions). Two to four months; one to three person-months.
-- **Human evaluation of QA outputs.** Two to three person-weeks per evaluator per 200 items — QA evaluation is slower than sentiment or NER evaluation because the evaluator has to read the question, the retrieved passage, and the answer and judge the joint quality.
-- **Embedding-based metrics for generative QA — a useful second opinion.** For generative-QA outputs (LLM readers, seq2seq readers producing free-form answers) where exact-match and token F1 under-report semantic correctness, run **[BERTScore](https://github.com/Tiiiger/bert_score)** or **[SSA-COMET](https://huggingface.co/masakhane/africomet-mtl)** (MT variant, applicable to reference-based free-text scoring on African languages) against a reference answer for a signal on semantic agreement. **[BLEURT](https://github.com/google-research/bleurt)** and **[LLM-as-judge](https://arxiv.org/abs/2306.05685)** setups are also worth spot-checking. Same discipline as MT: never a headline number, always a comparison-across-model-versions signal, always alongside human evaluation.
+- **Human evaluation of QA outputs.** Two to three person-weeks per evaluator per 200 items. QA evaluation is slower than sentiment or NER evaluation because the evaluator has to read the question, the retrieved passage, and the answer and judge the joint quality.
+- **Embedding-based metrics for generative QA: a useful second opinion.** For generative-QA outputs (LLM readers, seq2seq readers producing free-form answers) where exact-match and token F1 under-report semantic correctness, run **[BERTScore](https://github.com/Tiiiger/bert_score)** or **[SSA-COMET](https://huggingface.co/masakhane/africomet-mtl)** (MT variant, applicable to reference-based free-text scoring on African languages) against a reference answer for a signal on semantic agreement. **[BLEURT](https://github.com/google-research/bleurt)** and **[LLM-as-judge](https://arxiv.org/abs/2306.05685)** setups are also worth spot-checking. Same discipline as MT: never a headline number, always a comparison-across-model-versions signal, always alongside human evaluation.
 
 ## Known limitations to watch for
 
@@ -142,26 +142,26 @@ QA corpora cost more than sentiment or NER corpora of the same size, at every sc
 
 ## The canonical fine-tuning link
 
-For extractive QA, use the [Hugging Face question-answering tutorial](https://huggingface.co/docs/transformers/tasks/question_answering). For retriever fine-tuning, use the [DPR training documentation](https://huggingface.co/docs/transformers/model_doc/dpr) as a starting point, and the [AfriQA paper's companion repo](https://github.com/masakhane-io/afriqa) for the specific cross-lingual retrieval configuration that works on their benchmark. For generative QA fine-tuning, use the [HF summarisation tutorial](https://huggingface.co/docs/transformers/tasks/summarization) as the closest structural analogue — the training loop is the same; the loss and data preparation differ.
+For extractive QA, use the [Hugging Face question-answering tutorial](https://huggingface.co/docs/transformers/tasks/question_answering). For retriever fine-tuning, use the [DPR training documentation](https://huggingface.co/docs/transformers/model_doc/dpr) as a starting point, and the [AfriQA paper's companion repo](https://github.com/masakhane-io/afriqa) for the specific cross-lingual retrieval configuration that works on their benchmark. For generative QA fine-tuning, use the [HF summarisation tutorial](https://huggingface.co/docs/transformers/tasks/summarization) as the closest structural analogue: the training loop is the same; the loss and data preparation differ.
 
 For evaluation, the AfriQA repo has the canonical scoring scripts. Use them rather than rolling your own; QA evaluation quirks (answer normalisation, alias handling, multiple-answer scoring) are subtle enough to get wrong.
 
 ## Further reading
 
-- [AfriQA paper (Ogundepo et al., 2023)](https://arxiv.org/abs/2305.06897) — the reference community QA resource for African languages, with a substantial methodological discussion of why cross-lingual open-domain is the workable setting for this class of language.
-- [DPR paper (Karpukhin et al., 2020)](https://arxiv.org/abs/2004.04906) — the foundational dense retrieval architecture that most current open-domain QA builds on.
-- [TyDi QA paper (Clark et al., 2020)](https://arxiv.org/abs/2003.05002) — the typologically-diverse multilingual QA benchmark including Swahili; the reference for the monolingual QA setting where AfriQA takes the cross-lingual one.
+- [AfriQA paper (Ogundepo et al., 2023)](https://arxiv.org/abs/2305.06897): the reference community QA resource for African languages, with a substantial methodological discussion of why cross-lingual open-domain is the workable setting for this class of language.
+- [DPR paper (Karpukhin et al., 2020)](https://arxiv.org/abs/2004.04906): the foundational dense retrieval architecture that most current open-domain QA builds on.
+- [TyDi QA paper (Clark et al., 2020)](https://arxiv.org/abs/2003.05002): the typologically-diverse multilingual QA benchmark including Swahili; the reference for the monolingual QA setting where AfriQA takes the cross-lingual one.
 
 <details>
 <summary>Additional references</summary>
 
-- [XOR QA (Asai et al., 2021)](https://arxiv.org/abs/2104.01931) — the cross-lingual open-retrieval QA setup AfriQA generalises.
-- [Cohere Aya (Üstün et al., 2024)](https://arxiv.org/abs/2402.07827) — the multilingual instruction-tuned base model with meaningful African-language coverage; the workable open baseline for generative QA.
-- [Nekoto et al., 2020 — participatory approach](https://aclanthology.org/2020.findings-emnlp.195/) — the participatory MT methodology; AfriQA inherits its workforce model for question-authoring coordination.
-- [Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/) — indirectly relevant: retrieval corpora for African-language QA often draw on multilingual web resources whose quality problems it identifies.
+- [XOR QA (Asai et al., 2021)](https://arxiv.org/abs/2104.01931): the cross-lingual open-retrieval QA setup AfriQA generalises.
+- [Cohere Aya (Üstün et al., 2024)](https://arxiv.org/abs/2402.07827): the multilingual instruction-tuned base model with meaningful African-language coverage; the workable open baseline for generative QA.
+- [Nekoto et al., 2020: participatory approach](https://aclanthology.org/2020.findings-emnlp.195/): the participatory MT methodology; AfriQA inherits its workforce model for question-authoring coordination.
+- [Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/): indirectly relevant: retrieval corpora for African-language QA often draw on multilingual web resources whose quality problems it identifies.
 
 </details>
 
 ---
 
-**Contributor's note.** If you are contributing to this page — a domain-specific extension, a monolingual QA note, an LLM-QA evaluation retrospective — preserve the retrieval-first framing. Skipping retrieval quality to talk about reader quality is the modelling failure this page most wants to prevent.
+**Contributor's note.** If you are contributing to this page (a domain-specific extension, a monolingual QA note, an LLM-QA evaluation retrospective), preserve the retrieval-first framing. Skipping retrieval quality to talk about reader quality is the modelling failure this page most wants to prevent.

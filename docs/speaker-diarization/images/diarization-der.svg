@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="diagTitle">
-  <title id="diagTitle">Speaker diarization — who spoke when, plus the Diarization Error Rate breakdown</title>
+  <title id="diagTitle">Speaker diarization: who spoke when, plus the Diarization Error Rate breakdown</title>
 
   <!-- Outer self-contained card -->
   <rect x="8" y="8" width="904" height="604" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
 
   <!-- Header -->
   <text x="32" y="52" font-size="22" font-weight="700" fill="#2B2218">Who spoke when</text>
-  <text x="32" y="76" font-size="14" fill="#8A7D6E">Speaker turns on a shared time axis — and how the error rate breaks down</text>
+  <text x="32" y="76" font-size="14" fill="#8A7D6E">Speaker turns on a shared time axis, and how the error rate breaks down</text>
 
   <!-- ============ TIMELINE PANEL ============ -->
   <rect x="32" y="100" width="856" height="208" rx="12" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>

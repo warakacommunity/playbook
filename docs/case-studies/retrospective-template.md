@@ -27,11 +27,11 @@ Answer each. Skip nothing. If a question does not apply, say so and why in one s
 
 ### 1. What was the goal at the start?
 
-*What did the team set out to build, and what did success look like on day one? Not the paper's abstract — the internal target, before scope changes.*
+*What did the team set out to build, and what did success look like on day one? Not the paper's abstract but the internal target, before scope changes.*
 
 ### 2. Who was on the team?
 
-*Total headcount, roles (lead annotator, native-speaker annotator, ML engineer, project manager, community liaison), and how the team was assembled — recruited how, from where, paid or volunteer.*
+*Total headcount, roles (lead annotator, native-speaker annotator, ML engineer, project manager, community liaison), and how the team was assembled: recruited how, from where, paid or volunteer.*
 
 ### 3. How long did it take? (Planned vs. actual)
 
@@ -41,11 +41,11 @@ Answer each. Skip nothing. If a question does not apply, say so and why in one s
 
 *Approximate budget in dollars or the local currency of the largest cost centre, and total effort in person-months. Split by cost centre if you can: annotator pay, compute, coordination, adjudication. If the project ran on volunteer time, say so and estimate the volunteer effort in person-hours.*
 
-### 5. What was the hardest problem — technical?
+### 5. What was the hardest problem (technical)?
 
 *The one that nearly derailed the project. Data collection issue? Metric that would not converge? Tooling that could not do what was needed? Be specific.*
 
-### 6. What was the hardest problem — social or political?
+### 6. What was the hardest problem (social or political)?
 
 *The one that had nothing to do with the code. Community pushback, unclear consent, licensing disagreement, funder pressure, credit dispute, translation-quality tension.*
 
@@ -79,7 +79,7 @@ Answer each. Skip nothing. If a question does not apply, say so and why in one s
 
 ### 14. What would you do differently with the same budget?
 
-*Not "with more budget" — that is a wish. With the actual budget the project had, what would you cut and what would you shift?*
+*Not "with more budget"; that is a wish. With the actual budget the project had, what would you cut and what would you shift?*
 
 ### 15. What advice would you give a team starting the same task today?
 
@@ -95,7 +95,7 @@ Answer each. Skip nothing. If a question does not apply, say so and why in one s
 
 ## Appendix (optional)
 
-- **Public materials** — links to the paper, dataset, code, annotation guidelines, evaluation scripts.
+- **Public materials**: links to the paper, dataset, code, annotation guidelines, evaluation scripts.
 - **Related case studies in this playbook.**
 - **Follow-up projects** you are aware of.
 

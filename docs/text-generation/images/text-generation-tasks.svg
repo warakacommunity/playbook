@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 700" width="100%" font-family="Inter, 'Segoe UI', Roboto, system-ui, sans-serif" role="img" aria-labelledby="tgTitle">
-  <title id="tgTitle">Text generation tasks — open-ended generation, summarization and question answering, their data and weak automatic metrics, all converging on native-speaker human evaluation</title>
+  <title id="tgTitle">Text generation tasks: open-ended generation, summarization and question answering, their data and weak automatic metrics, all converging on native-speaker human evaluation</title>
 
   <!-- Outer branded card -->
   <rect x="2" y="2" width="1236" height="696" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
@@ -29,7 +29,7 @@
   <rect x="430" y="44" width="380" height="48" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
   <text x="620" y="74" text-anchor="middle" font-size="20" font-weight="700" fill="#9C4F2B">Text generation tasks</text>
 
-  <!-- ============ COLUMN 1 — Open-ended generation (terracotta) ============ -->
+  <!-- ============ COLUMN 1: Open-ended generation (terracotta) ============ -->
   <!-- card -->
   <rect x="36" y="134" width="348" height="350" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
   <!-- title bar -->
@@ -56,7 +56,7 @@
   <text x="64" y="453" font-size="12.5" font-weight="500" fill="#2B2218">Fluency, factuality,</text>
   <text x="64" y="470" font-size="12.5" font-weight="500" fill="#2B2218">cultural appropriateness</text>
 
-  <!-- ============ COLUMN 2 — Summarization (forest green) ============ -->
+  <!-- ============ COLUMN 2: Summarization (forest green) ============ -->
   <rect x="446" y="134" width="348" height="350" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
   <rect x="466" y="152" width="308" height="46" rx="11" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
   <text x="620" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#1F5B3F">Summarization</text>
@@ -80,7 +80,7 @@
   <text x="474" y="453" font-size="12.5" font-weight="500" fill="#2B2218">Faithfulness to the source</text>
   <text x="474" y="470" font-size="12.5" font-weight="500" fill="#2B2218">(catch invented content)</text>
 
-  <!-- ============ COLUMN 3 — Question answering (gold) ============ -->
+  <!-- ============ COLUMN 3: Question answering (gold) ============ -->
   <rect x="856" y="134" width="348" height="350" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
   <rect x="876" y="152" width="308" height="46" rx="11" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
   <text x="1030" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#B97F37">Question answering</text>

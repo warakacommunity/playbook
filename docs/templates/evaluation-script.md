@@ -80,7 +80,7 @@ def load_predictions(path: Path) -> list[dict[str, Any]]:
     if not records:
         raise ValueError(f"No records found in {path}")
     if not all("language" in r for r in records):
-        raise ValueError("Every record must have a 'language' field — the "
+        raise ValueError("Every record must have a 'language' field: the "
                          "playbook mandates per-language reporting.")
     return records
 
@@ -149,7 +149,7 @@ def eval_translation(records: list[dict[str, Any]]) -> dict[str, Any]:
 
     out: dict[str, Any] = {"per_language": {}}
     for lang, d in sorted(by_lang.items()):
-        # chrF is primary — playbook editorial policy (see core-principles).
+        # chrF is primary: playbook editorial policy (see core-principles).
         chrf = sacrebleu.corpus_chrf(d["hyps"], [d["refs"]])
         # BLEU is secondary, kept for comparison with prior work only.
         bleu = sacrebleu.corpus_bleu(d["hyps"], [d["refs"]])
@@ -177,7 +177,7 @@ def eval_speech(records: list[dict[str, Any]]) -> dict[str, Any]:
 
     out: dict[str, Any] = {"per_language": {}}
     for lang, d in sorted(by_lang.items()):
-        # CER is primary — word-boundary conventions in agglutinative
+        # CER is primary: word-boundary conventions in agglutinative
         # African languages make WER noisy.
         cer = jiwer.cer(d["refs"], d["hyps"])
         wer = jiwer.wer(d["refs"], d["hyps"])
@@ -260,7 +260,7 @@ if __name__ == "__main__":
 
 ## What the template enforces
 
-- **Every record must have a `language` field.** The loader refuses to run without it — you cannot silently produce a headline number that hides per-language variance.
+- **Every record must have a `language` field.** The loader refuses to run without it, so you cannot silently produce a headline number that hides per-language variance.
 - **Classification output ships per-class F1 with support disclosed.** The playbook's per-class reporting requirement is baked into the output shape; a project that adopts this script cannot easily strip it out.
 - **Translation output ships chrF as the primary number, BLEU as a labelled secondary.** The `chrf` field is listed first; the `bleu` field is present for comparison against prior work but visibly demoted.
 - **Speech output ships CER as the primary number, WER as a labelled secondary.** Same demotion pattern.
@@ -278,7 +278,7 @@ if __name__ == "__main__":
 The pattern for adding a new task is:
 
 1. Add a `def eval_yourtask(records)` function that returns a dict with `per_language` at the top level.
-2. Choose the metric that respects morphology-rich language reality (character-level over word-level where morphology matters; per-class for classification; retrieval-first for QA — see the [QA page](../before-you-start/qa.mdx)).
+2. Choose the metric that respects morphology-rich language reality (character-level over word-level where morphology matters; per-class for classification; retrieval-first for QA; see the [QA page](../before-you-start/qa.mdx)).
 3. Register in the `TASKS` dictionary.
 4. Add a docstring line describing what the primary metric is and why.
 
@@ -291,12 +291,12 @@ The pattern for adding a new task is:
 
 ## Further reading
 
-- [sacrebleu documentation](https://github.com/mjpost/sacrebleu) — chrF and BLEU implementations.
-- [jiwer documentation](https://github.com/jitsi/jiwer) — CER and WER implementations.
-- [scikit-learn classification report](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) — per-class F1 with support.
-- [seqeval](https://github.com/chakki-works/seqeval) — the standard NER-specific evaluation library, useful reference for how sequence tagging is scored.
-- [AfriQA companion repo](https://github.com/masakhane-io/afriqa) — the QA-specific scoring reference; alias handling and multi-answer scoring are subtle enough to defer to this rather than reimplement.
+- [sacrebleu documentation](https://github.com/mjpost/sacrebleu): chrF and BLEU implementations.
+- [jiwer documentation](https://github.com/jitsi/jiwer): CER and WER implementations.
+- [scikit-learn classification report](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html): per-class F1 with support.
+- [seqeval](https://github.com/chakki-works/seqeval): the standard NER-specific evaluation library, useful reference for how sequence tagging is scored.
+- [AfriQA companion repo](https://github.com/masakhane-io/afriqa): the QA-specific scoring reference; alias handling and multi-answer scoring are subtle enough to defer to this rather than reimplement.
 
 ---
 
-**Contributor's note.** If you extend this template for a task with materially different evaluation semantics (retrieval, structured output, sequence generation with alignment), keep the per-language + per-class output shape intact — that shape is what makes the playbook's editorial policy portable. New task functions add fields; they do not remove the ones that enforce compliance.
+**Contributor's note.** If you extend this template for a task with materially different evaluation semantics (retrieval, structured output, sequence generation with alignment), keep the per-language + per-class output shape intact. That shape is what makes the playbook's editorial policy portable. New task functions add fields; they do not remove the ones that enforce compliance.

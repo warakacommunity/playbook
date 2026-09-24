@@ -64,11 +64,11 @@ The point of reading the full report rather than a single accuracy figure is tha
 
 Image classification in 2026 has largely converged on a small number of workable open backbones. Fine-tuning any of them on 1,000-5,000 target-domain images produces a competitive African-context classifier for most use cases:
 
-- **[ConvNeXt V2](https://arxiv.org/abs/2301.00808)** (Meta, 2023) — the modern successor to ResNet, MIT-licensed, strong on medical and agricultural imagery, workable on modest GPUs. The defensible default for a new classification project.
-- **[EVA-02](https://arxiv.org/abs/2303.11331)** (BAAI, 2023) and **[DINOv2 / DINOv3](https://github.com/facebookresearch/dinov2)** (Meta, 2023-2025) — vision-transformer foundation models with strong transfer to downstream classification with modest fine-tuning data. DINOv3 (2025) is particularly strong on transfer to novel domains without labelled data.
-- **[EfficientNet V2](https://arxiv.org/abs/2104.00298)** (Google, 2021) and **[MobileNetV4](https://arxiv.org/abs/2404.10518)** (Google, 2024) — the workable edge-deployable backbones for on-device classification (phone-based crop-disease screening, agricultural extension apps). Apache-2.0 licensed. See the [edge devices chapter](../deployment/edge-devices.md) for the on-device deployment discipline.
-- **[SigLIP 2 / SigLIP-B](https://arxiv.org/abs/2502.14786)** (Google, 2025) — the CLIP-lineage joint-embedding model with strong zero-shot and few-shot classification behaviour. Useful when the classification task has few labelled examples or a growing vocabulary.
-- **General MLLMs.** **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)**, **[Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs)**, **[GPT-4o](https://openai.com/index/hello-gpt-4o/)** — capable of zero-shot open-vocabulary classification from natural-language descriptions. Useful when the deployment permits a large inference call and the vocabulary is not fixed.
+- **[ConvNeXt V2](https://arxiv.org/abs/2301.00808)** (Meta, 2023): the modern successor to ResNet, MIT-licensed, strong on medical and agricultural imagery, workable on modest GPUs. The defensible default for a new classification project.
+- **[EVA-02](https://arxiv.org/abs/2303.11331)** (BAAI, 2023) and **[DINOv2 / DINOv3](https://github.com/facebookresearch/dinov2)** (Meta, 2023-2025): vision-transformer foundation models with strong transfer to downstream classification with modest fine-tuning data. DINOv3 (2025) is particularly strong on transfer to novel domains without labelled data.
+- **[EfficientNet V2](https://arxiv.org/abs/2104.00298)** (Google, 2021) and **[MobileNetV4](https://arxiv.org/abs/2404.10518)** (Google, 2024): the workable edge-deployable backbones for on-device classification (phone-based crop-disease screening, agricultural extension apps). Apache-2.0 licensed. See the [edge devices chapter](../deployment/edge-devices.md) for the on-device deployment discipline.
+- **[SigLIP 2 / SigLIP-B](https://arxiv.org/abs/2502.14786)** (Google, 2025): the CLIP-lineage joint-embedding model with strong zero-shot and few-shot classification behaviour. Useful when the classification task has few labelled examples or a growing vocabulary.
+- **General MLLMs.** **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)**, **[Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs)**, **[GPT-4o](https://openai.com/index/hello-gpt-4o/)**: capable of zero-shot open-vocabulary classification from natural-language descriptions. Useful when the deployment permits a large inference call and the vocabulary is not fixed.
 
 **Editorial opinion.** For a new African-context classification project (agriculture, health, environment), the shortest defensible path is: fine-tune ConvNeXt V2 or DINOv3 on 1,000-5,000 target-domain images collected in target conditions (same phones, same lighting, same seasons), evaluate on a held-out set collected the same way, and report per-class F1 alongside accuracy. For on-device deployment, distil to MobileNetV4 after training. For domains with few labelled examples but growing vocabulary, evaluate SigLIP 2 few-shot before committing to fine-tuning.
 
@@ -86,7 +86,7 @@ Classification is the cheapest vision modality per-record but expensive when the
 
 - **Domain shift is the primary failure mode.** A classifier trained on clean lab photos of leaves fails on phone photos of leaves in a field. Collect in target conditions or expect the model to fail in them.
 - **Class imbalance hides rare-class failure.** A screening tool exists to catch the rare disease; the rare disease is the class with fewest examples; overall accuracy hides its per-class failure. Read the per-class F1 as the honest number.
-- **Expert-labelled ground truth has expert disagreement.** Two agronomists on the same leaf disagree ~10-20% of the time on which disease is present; two clinicians on the same lesion disagree ~15-30%. Report inter-expert agreement alongside model accuracy — a model that reaches inter-expert agreement has reached the ceiling of the label.
+- **Expert-labelled ground truth has expert disagreement.** Two agronomists on the same leaf disagree ~10-20% of the time on which disease is present; two clinicians on the same lesion disagree ~15-30%. Report inter-expert agreement alongside model accuracy: a model that reaches inter-expert agreement has reached the ceiling of the label.
 - **Device / phone / lighting confounds.** If all photos of the healthy class were taken on Phone A and all photos of the diseased class were taken on Phone B, the model learns to distinguish phones, not diseases. Rebalance across confounds during collection.
 - **Seasonality and environment.** Crop diseases look different in early vs. late season; skin conditions look different in different lighting; landscape imagery looks different across dry and rainy seasons. A corpus taken at one moment does not train a year-round classifier.
 - **The "unsure" label is load-bearing.** Forcing an annotator to pick a definite class from a doubtful photo teaches the model to be over-confident on doubtful test images. Preserve the unsure label through to training; discard the unsure examples from training if necessary, but do not discard the annotator's expressed uncertainty.
@@ -94,16 +94,16 @@ Classification is the cheapest vision modality per-record but expensive when the
 
 ## Further reading
 
-- [ConvNeXt V2 (Woo et al., 2023)](https://arxiv.org/abs/2301.00808) — the workable modern open backbone; the defensible default for African-context fine-tuning.
-- [DINOv3 (Meta, 2025)](https://github.com/facebookresearch/dinov2) — the strongest current self-supervised foundation model for transfer to novel classification domains.
-- [State of CV in Africa (2024)](https://arxiv.org/abs/) — the reference survey of the field on the continent; useful for understanding where classification sits and where the open datasets are.
+- [ConvNeXt V2 (Woo et al., 2023)](https://arxiv.org/abs/2301.00808): the workable modern open backbone; the defensible default for African-context fine-tuning.
+- [DINOv3 (Meta, 2025)](https://github.com/facebookresearch/dinov2): the strongest current self-supervised foundation model for transfer to novel classification domains.
+- [State of CV in Africa (2024)](https://arxiv.org/abs/): the reference survey of the field on the continent; useful for understanding where classification sits and where the open datasets are.
 
 <details>
 <summary>Additional references</summary>
 
-- [EfficientNet V2 (Tan & Le, 2021)](https://arxiv.org/abs/2104.00298) — the edge-deployable backbone; useful for on-device classification.
-- [MobileNetV4 (Qin et al., 2024)](https://arxiv.org/abs/2404.10518) — the modern on-device backbone, purpose-built for mobile deployment.
-- [SigLIP 2 (Zhai et al., 2025)](https://arxiv.org/abs/2502.14786) — CLIP-lineage joint embedding with strong few-shot behaviour.
-- [EVA-02 (Fang et al., 2023)](https://arxiv.org/abs/2303.11331) — vision-transformer foundation model with strong transfer.
+- [EfficientNet V2 (Tan & Le, 2021)](https://arxiv.org/abs/2104.00298): the edge-deployable backbone; useful for on-device classification.
+- [MobileNetV4 (Qin et al., 2024)](https://arxiv.org/abs/2404.10518): the modern on-device backbone, purpose-built for mobile deployment.
+- [SigLIP 2 (Zhai et al., 2025)](https://arxiv.org/abs/2502.14786): CLIP-lineage joint embedding with strong few-shot behaviour.
+- [EVA-02 (Fang et al., 2023)](https://arxiv.org/abs/2303.11331): vision-transformer foundation model with strong transfer.
 
 </details>

@@ -69,7 +69,7 @@ export const WORKSHOPS = [
     ],
     agenda: [
       { time: '10 min', title: 'Introduction to the platform and its goals', detail: '' },
-      { time: '20 min', title: 'Live demo — text and MT annotation workflows', detail: '' },
+      { time: '20 min', title: 'Live demo: text and MT annotation workflows', detail: '' },
       { time: '20 min', title: 'Participants try a sample task', detail: '' },
       { time: '20 min', title: 'Q&A and feedback collection', detail: '' },
     ],
@@ -105,7 +105,7 @@ export const WORKSHOPS = [
       { time: '40 min', title: 'Setting up and managing an annotation project', detail: '' },
       { time: '40 min', title: 'Hands-on annotation across language groups', detail: '' },
       { time: '30 min', title: 'Quality control and validation workflows', detail: '' },
-      { time: '30 min', title: 'Discussion — sustainability and long-term engagement', detail: '' },
+      { time: '30 min', title: 'Discussion: sustainability and long-term engagement', detail: '' },
     ],
     outcomes: [
       'Participants able to independently run annotation projects.',

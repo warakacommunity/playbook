@@ -11,9 +11,9 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-Three of every five African mobile phone users interact with digital services primarily through SMS, USSD, or WhatsApp — not through native apps. Whether the user is checking a bank balance, receiving a health reminder, applying for a service, or asking a question of a government helpline, the interaction almost certainly happens on one of these three channels. Any NLP system aiming for real African-market reach lands here. Any NLP system designed for a native-app-with-full-keyboard input will not reach most of the intended users.
+Three of every five African mobile phone users interact with digital services primarily through SMS, USSD, or WhatsApp, not through native apps. Whether the user is checking a bank balance, receiving a health reminder, applying for a service, or asking a question of a government helpline, the interaction almost certainly happens on one of these three channels. Any NLP system aiming for real African-market reach lands here. Any NLP system designed for a native-app-with-full-keyboard input will not reach most of the intended users.
 
-This page is the practical guide to the three channels — what each is good for, what breaks NLP models on them, and the design choices that separate a chatbot that ships from a demo that never gets adopted.
+This page is the practical guide to the three channels: what each is good for, what breaks NLP models on them, and the design choices that separate a chatbot that ships from a demo that never gets adopted.
 
 ## The three channels compared
 
@@ -31,7 +31,7 @@ This page is the practical guide to the three channels — what each is good for
 
 Each channel serves a different user need. Design for the channel your users are actually on, not the one the demo was easiest to build for.
 
-## SMS — asynchronous, universal, character-poor
+## SMS: asynchronous, universal, character-poor
 
 **What SMS is good for.** One-shot outbound notifications (appointment reminders, exam results, market prices, weather alerts). Inbound short reports (crop condition, health check-in). Any use case where the transaction is *complete in one message each way* and the recipient does not need to be online.
 
@@ -46,47 +46,47 @@ Each channel serves a different user need. Design for the channel your users are
 
 **Reference platforms and aggregators:**
 
-- **[Africa's Talking](https://africastalking.com/)** — SMS + USSD aggregator with coverage across most sub-Saharan African countries. The de-facto reference for cross-country SMS deployment.
-- **[Twilio](https://www.twilio.com/)** — global SMS with African coverage; more expensive per-message than local aggregators but more familiar to teams coming from a US/EU background.
-- **[MTN](https://developers.mtn.com/), [Airtel](https://developers.airtel.africa/), [Vodacom](https://vodacombusiness.co.za/) aggregator APIs** — direct-to-operator, cheaper at scale, more setup effort per country.
+- **[Africa's Talking](https://africastalking.com/)**: SMS + USSD aggregator with coverage across most sub-Saharan African countries. The de-facto reference for cross-country SMS deployment.
+- **[Twilio](https://www.twilio.com/)**: global SMS with African coverage; more expensive per-message than local aggregators but more familiar to teams coming from a US/EU background.
+- **[MTN](https://developers.mtn.com/), [Airtel](https://developers.airtel.africa/), [Vodacom](https://vodacombusiness.co.za/) aggregator APIs**: direct-to-operator, cheaper at scale, more setup effort per country.
 
-## USSD — session-based, universal, menu-driven
+## USSD: session-based, universal, menu-driven
 
-**What USSD is good for.** Menu-driven interactions where the flow is predictable — money transfer, service subscription, balance check, structured data collection (crop yields, health survey), voter registration. Government services with well-defined transaction shapes.
+**What USSD is good for.** Menu-driven interactions where the flow is predictable: money transfer, service subscription, balance check, structured data collection (crop yields, health survey), voter registration. Government services with well-defined transaction shapes.
 
-**What USSD is bad for.** Open-ended conversation. Anything requiring more than ~30 seconds of thought per menu. Anything the user needs to reference later — USSD sessions leave no record on the handset.
+**What USSD is bad for.** Open-ended conversation. Anything requiring more than ~30 seconds of thought per menu. Anything the user needs to reference later, because USSD sessions leave no record on the handset.
 
 **Design implications for NLP:**
 
 - **USSD is mostly not NLP.** The interaction is menu-based (`1`. Send money `2`. Check balance `3`. Airtime); the "NLP" component is usually only in service naming and message-string localisation. Design the flow as a state machine and the localisation as a translation catalogue.
-- **Session timeouts are aggressive.** Most operators time out at 30 seconds of user inactivity, some at 180 seconds. Menu depth and text length both matter — a long welcome message eats the session budget.
+- **Session timeouts are aggressive.** Most operators time out at 30 seconds of user inactivity, some at 180 seconds. Menu depth and text length both matter; a long welcome message eats the session budget.
 - **Each menu screen is roughly 182 characters** including the numbered options. Design copy to fit.
 - **Handsets are inconsistent.** Older Nokia and Symbian feature phones display USSD differently from modern KaiOS and Android USSD popups. Test on real handsets across the low end.
 - **Diacritics are as constrained as SMS**; falling back to UCS-2 shortens the per-menu character budget further. Prefer diacritic-free rendering for the options-list layer even if the payload data is diacritic-preserving.
-- **NLP can enter USSD flows** at the free-text field level ("*What is your complaint?*" text-entry, followed by a classification into a routing category). At those points the same SMS-noise-tolerant design applies. Keep the free-text opportunity limited — every free-text field increases session length.
+- **NLP can enter USSD flows** at the free-text field level ("*What is your complaint?*" text-entry, followed by a classification into a routing category). At those points the same SMS-noise-tolerant design applies. Keep the free-text opportunity limited, because every free-text field increases session length.
 
 **Cost structure:** USSD short codes (`*XXX#`) are leased per country per operator, typically several hundred to several thousand USD per year plus per-session charges. Aggregators like Africa's Talking wrap the short code leasing and give you a single API surface across countries; this is usually the right choice for anything below a very large-scale deployment.
 
-## WhatsApp — rich, persistent, gated
+## WhatsApp: rich, persistent, gated
 
-**What WhatsApp is good for.** Consumer-facing chatbots that need media (images, voice notes, documents). Persistent conversations that survive across days or weeks. Rich UI patterns (quick-reply buttons, list menus, media carousels). Anything where the user is on a smartphone with data — which is a growing but non-universal share of the African market.
+**What WhatsApp is good for.** Consumer-facing chatbots that need media (images, voice notes, documents). Persistent conversations that survive across days or weeks. Rich UI patterns (quick-reply buttons, list menus, media carousels). Anything where the user is on a smartphone with data, which is a growing but non-universal share of the African market.
 
 **What WhatsApp is bad for.** Rural, no-data, feature-phone users. Users who cannot afford the data bundle for the WhatsApp Business chat window (though WhatsApp bundles are cheap in many markets and often zero-rated by operators). One-off outbound notifications at very large scale (per-conversation-window pricing adds up).
 
 **Design implications for NLP:**
 
 - **Rich input surface.** Users send text, voice notes, images (a photo of a form, a hand-written question), documents, and locations. The NLP model has to handle multimodal input if the use case is anything other than pure text-chat.
-- **Voice notes are ubiquitous** in African WhatsApp usage — often more natural for the user than typing, especially in code-switched conversation. Voice-to-text using MMS or Whisper (see [ASR Before You Start](../before-you-start/asr.mdx)) is a real design choice, not a research aside.
+- **Voice notes are ubiquitous** in African WhatsApp usage, often more natural for the user than typing, especially in code-switched conversation. Voice-to-text using MMS or Whisper (see [ASR Before You Start](../before-you-start/asr.mdx)) is a real design choice, not a research aside.
 - **Business API access is gated** through Meta and its business solution providers. The application takes weeks; templates for outbound messages must be pre-approved; abuse controls are strict. Plan for this in the project schedule.
 - **Template messages for outbound are pre-approved by Meta.** Anything with an NLP-generated body cannot be sent as an outbound-first message; NLP output only appears within an already-open 24-hour customer service window.
 - **Language switching within a session is standard.** WhatsApp users routinely mix English/French/Arabic + a local language in a single conversation. The model must handle this as normal input, not as an edge case.
 
 **Reference platforms:**
 
-- **[WhatsApp Business API](https://business.whatsapp.com/products/business-platform)** — the direct route; requires a business solution provider (BSP).
-- **[Twilio](https://www.twilio.com/whatsapp), [MessageBird](https://messagebird.com/products/whatsapp), [Vonage](https://www.vonage.com/communications-apis/messages/features/whatsapp/)** — BSPs with global reach.
-- **[360dialog](https://www.360dialog.com/) and [Turn.io](https://www.turn.io/)** — specialised WhatsApp BSPs with strong support for social-impact and civic-tech deployments; Turn.io specifically was purpose-built for large-scale social-purpose messaging on WhatsApp.
-- **[Africa's Talking WhatsApp](https://africastalking.com/whatsapp)** — combined SMS+USSD+WhatsApp for cross-channel deployments.
+- **[WhatsApp Business API](https://business.whatsapp.com/products/business-platform)**: the direct route; requires a business solution provider (BSP).
+- **[Twilio](https://www.twilio.com/whatsapp), [MessageBird](https://messagebird.com/products/whatsapp), [Vonage](https://www.vonage.com/communications-apis/messages/features/whatsapp/)**: BSPs with global reach.
+- **[360dialog](https://www.360dialog.com/) and [Turn.io](https://www.turn.io/)**: specialised WhatsApp BSPs with strong support for social-impact and civic-tech deployments; Turn.io specifically was purpose-built for large-scale social-purpose messaging on WhatsApp.
+- **[Africa's Talking WhatsApp](https://africastalking.com/whatsapp)**: combined SMS+USSD+WhatsApp for cross-channel deployments.
 
 ## The NLP problems these channels magnify
 
@@ -118,11 +118,11 @@ Across all three channels, the same set of NLP problems show up amplified:
 
 ## Further reading
 
-- [Africa's Talking developer docs](https://developers.africastalking.com/) — the reference for SMS + USSD + WhatsApp cross-channel deployment across most of sub-Saharan Africa.
-- [WhatsApp Business Platform docs](https://developers.facebook.com/docs/whatsapp) — Meta's official technical reference.
-- [Turn.io case studies](https://www.turn.io/case-studies) — worked examples of large-scale WhatsApp deployments for social-impact use cases, including several in African languages.
-- [GSMA Mobile Economy Sub-Saharan Africa report](https://www.gsma.com/mobileeconomy/sub-saharan-africa/) — the industry data on channel usage, connectivity, and handset mix; useful for scoping which channels reach which populations.
-- [Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/) — indirectly relevant: many of the low-resource-language corpus quality problems it identifies are magnified in SMS-style user-generated text.
+- [Africa's Talking developer docs](https://developers.africastalking.com/): the reference for SMS + USSD + WhatsApp cross-channel deployment across most of sub-Saharan Africa.
+- [WhatsApp Business Platform docs](https://developers.facebook.com/docs/whatsapp): Meta's official technical reference.
+- [Turn.io case studies](https://www.turn.io/case-studies): worked examples of large-scale WhatsApp deployments for social-impact use cases, including several in African languages.
+- [GSMA Mobile Economy Sub-Saharan Africa report](https://www.gsma.com/mobileeconomy/sub-saharan-africa/): the industry data on channel usage, connectivity, and handset mix; useful for scoping which channels reach which populations.
+- [Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/): indirectly relevant, since many of the low-resource-language corpus quality problems it identifies are magnified in SMS-style user-generated text.
 
 ---
 

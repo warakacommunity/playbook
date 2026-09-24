@@ -21,7 +21,7 @@ Audio understanding is not one task but a family. The framing determines the lab
 - **Whole-clip classification.** One label (or a small set) per clip: "This is Kiswahili news broadcast", "This clip contains coughing", "This is a distress call". Simplest to annotate, cheapest to model, sufficient for many triage use cases (routing calls to the right desk, flagging health-relevant audio for review).
 - **Event detection with timestamps.** Where in a longer clip an event of interest occurs, with start and end times: "Coughing at 00:14–00:17 and 01:22–01:25", "Speech onset at 00:03". More expensive to annotate than classification, but load-bearing for any pipeline that must locate events, not just detect their presence.
 - **Keyword spotting (KWS).** A specialised detection variant: "Does this clip contain the phrase 'help' in any of Kiswahili, English, or Yoruba?" Used in voice assistants (wake-word detection) and in emergency-triage systems. Latency-sensitive and often deployed on-device.
-- **Spoken language identification (LID).** Which language a clip contains — a first-pass gate for downstream ASR or MT routing. Simple in theory, hard in African contexts because of code-switching, dialect variation, and speakers whose accent in a lingua franca can trip general-purpose LID models.
+- **Spoken language identification (LID).** Which language a clip contains: a first-pass gate for downstream ASR or MT routing. Simple in theory, hard in African contexts because of code-switching, dialect variation, and speakers whose accent in a lingua franca can trip general-purpose LID models.
 
 ## What "African audio" actually varies on
 
@@ -67,10 +67,10 @@ For event detection with timestamps, add a `spans` field with start and end time
 
 The raw audio comes from wherever the deployment target uses it. Match the collection surface to the deployment surface.
 
-- **Community-radio archives** — the highest-volume source for African-language audio. Access typically requires the radio station's agreement (which is often forthcoming for research and community-benefit projects). Consent is the tricky part: broadcast audio was consented for broadcast, not necessarily for downstream ML use. The consent conversation must extend to the specific new use case.
-- **Environmental sensors and passive recording** — for wildlife acoustics, agricultural monitoring, or crowd-context audio. Collection is cheap once deployed; annotation is expensive because sensor-collected audio is often uneventful (long silences interrupted by rare events of interest). Design a sampling strategy that yields useful annotator throughput.
-- **Call-centre and helpline archives** — for spoken-language ID, keyword spotting for distress terms, or classification of call topics. Consent is the load-bearing decision: callers did not consent to ML training when they called the helpline. Retroactive extension of consent is not consent; if the archive is being repurposed, treat it as a research artefact only and do not release the underlying audio.
-- **Health screenings and clinical audio** — for coughing, breathing, or vocalisation-based diagnostic tasks. Regulatory regimes vary; the [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference, plus jurisdiction-specific medical-data compliance (NDPA, PoPIA, etc.).
+- **Community-radio archives**: the highest-volume source for African-language audio. Access typically requires the radio station's agreement (which is often forthcoming for research and community-benefit projects). Consent is the tricky part: broadcast audio was consented for broadcast, not necessarily for downstream ML use. The consent conversation must extend to the specific new use case.
+- **Environmental sensors and passive recording**: for wildlife acoustics, agricultural monitoring, or crowd-context audio. Collection is cheap once deployed; annotation is expensive because sensor-collected audio is often uneventful (long silences interrupted by rare events of interest). Design a sampling strategy that yields useful annotator throughput.
+- **Call-centre and helpline archives**: for spoken-language ID, keyword spotting for distress terms, or classification of call topics. Consent is the load-bearing decision: callers did not consent to ML training when they called the helpline. Retroactive extension of consent is not consent; if the archive is being repurposed, treat it as a research artefact only and do not release the underlying audio.
+- **Health screenings and clinical audio**: for coughing, breathing, or vocalisation-based diagnostic tasks. Regulatory regimes vary; the [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference, plus jurisdiction-specific medical-data compliance (NDPA, PoPIA, etc.).
 
 ## Label taxonomy design
 
@@ -107,10 +107,10 @@ Classifying an audio clip in the AfriAnnotate editor:
 
 **Evaluation depends on the task:**
 
-- **Whole-clip classification** — macro F1 as the headline metric so rare but important labels are not drowned out by common ones. Aggregate accuracy is misleading for imbalanced label sets and hides class-specific failures.
-- **Event detection** — mean average precision (mAP), which checks the model located events in time as well as named them. An event detected at the wrong time is not a correct detection.
-- **Keyword spotting** — precision at fixed recall (or the reverse), with the specific point on the curve driven by the deployment use case. A wake-word detector that misses commands is a broken product; a health-triage detector that false-flags too often overwhelms clinicians.
-- **Language ID** — per-language accuracy AND per-code-switching-condition accuracy. Aggregate LID accuracy on monolingual clips is unrelated to LID performance on real code-switched deployment input.
+- **Whole-clip classification**: macro F1 as the headline metric so rare but important labels are not drowned out by common ones. Aggregate accuracy is misleading for imbalanced label sets and hides class-specific failures.
+- **Event detection**: mean average precision (mAP), which checks the model located events in time as well as named them. An event detected at the wrong time is not a correct detection.
+- **Keyword spotting**: precision at fixed recall (or the reverse), with the specific point on the curve driven by the deployment use case. A wake-word detector that misses commands is a broken product; a health-triage detector that false-flags too often overwhelms clinicians.
+- **Language ID**: per-language accuracy AND per-code-switching-condition accuracy. Aggregate LID accuracy on monolingual clips is unrelated to LID performance on real code-switched deployment input.
 
 **Per-source evaluation.** Split evaluation by data source (radio, community recording, sensor, call-centre) and report per-source metrics. A model whose overall F1 is acceptable but whose call-centre F1 is catastrophic will silently under-serve exactly the deployment use case that motivated the project.
 
@@ -121,7 +121,7 @@ Classifying an audio clip in the AfriAnnotate editor:
 - **False-positive cost is deployment-specific.** A health-triage detector that flags a normal breath as a cough sends a clinician a false alert; a security keyword-spotter that flags a benign phrase as a distress call escalates unnecessarily. Choose the operating point on the precision-recall curve deliberately for the specific deployment.
 - **Audio privacy is data privacy.** Any audio-understanding pipeline that logs input for retraining or debugging is collecting personal audio data, subject to the same jurisdictional protections as other biometric data. See [legal, consent, and community IP](../legal-consent/index.md).
 
-## What breaks — common failure modes
+## What breaks: common failure modes
 
 - **Borrowed-taxonomy corpus that doesn't match deployment.** Model achieves high F1 on the training labels; deployment users experience it as consistently wrong because the labels don't map to their categories. Fix: build the taxonomy with the deployment community from the start.
 - **Code-switching invisible to LID.** Language ID model trained on monolingual clips fails on real code-switched user input. Fix: include code-switched training examples and evaluate LID separately on code-switched subset.

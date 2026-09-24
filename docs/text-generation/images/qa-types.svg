@@ -6,7 +6,7 @@
 
   <!-- Header -->
   <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Question answering, three forms</text>
-  <text x="30" y="72" font-size="13" fill="#8A7D6E">Returning a correct answer to a question — one of the most useful, and hardest, tasks for African languages</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Returning a correct answer to a question: one of the most useful, and hardest, tasks for African languages</text>
   <line x1="30" y1="86" x2="850" y2="86" stroke="#E7DDCB" stroke-width="1.5"/>
 
   <!-- ============ Column 1: Extractive QA (terracotta) ============ -->
@@ -37,7 +37,7 @@
     <!-- Answer -->
     <rect x="50" y="382" width="222" height="40" rx="10" fill="#F8ECD6" stroke="#C66A3D" stroke-width="1.5"/>
     <text x="62" y="400" font-size="11" font-weight="700" fill="#9C4F2B">ANSWER (span)</text>
-    <text x="62" y="415" font-size="13" font-weight="700" fill="#2B2218">"Kano" — answer_start 0</text>
+    <text x="62" y="415" font-size="13" font-weight="700" fill="#2B2218">"Kano" (answer_start 0)</text>
 
     <text x="50" y="446" font-size="12" fill="#8A7D6E">SQuAD shape: text + offset.</text>
     <text x="50" y="463" font-size="12" fill="#8A7D6E">Scored by Exact Match &amp; F1.</text>
@@ -95,7 +95,7 @@
     <path d="M719 260 l-6 -10 h12 z" fill="#B97F37"/>
     <rect x="608" y="264" width="222" height="92" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
     <text x="620" y="284" font-size="11" font-weight="700" fill="#E0A458">MODEL KNOWLEDGE</text>
-    <text x="620" y="302" font-size="13" fill="#2B2218">No passage supplied —</text>
+    <text x="620" y="302" font-size="13" fill="#2B2218">No passage supplied, so</text>
     <text x="620" y="320" font-size="13" fill="#2B2218">answer from what the</text>
     <text x="620" y="338" font-size="13" fill="#2B2218">model has read.</text>
 
@@ -108,12 +108,12 @@
     <text x="620" y="400" font-size="11" font-weight="700" fill="#B97F37">ANSWER (free text)</text>
     <text x="620" y="415" font-size="13" font-weight="700" fill="#2B2218">"Birnin Kano ne..."</text>
 
-    <text x="608" y="446" font-size="12" fill="#8A7D6E">Auto scoring unreliable —</text>
+    <text x="608" y="446" font-size="12" fill="#8A7D6E">Auto scoring unreliable;</text>
     <text x="608" y="463" font-size="12" fill="#8A7D6E">native-speaker eval needed.</text>
   </g>
 
   <!-- Footer note -->
   <line x1="30" y1="492" x2="850" y2="492" stroke="#E7DDCB" stroke-width="1.5"/>
   <text x="30" y="516" font-size="12.5" fill="#8A7D6E">Shared challenge: the knowledge gap and answer boundaries in morphologically rich languages, where the</text>
-  <text x="30" y="534" font-size="12.5" fill="#8A7D6E">same answer ("Kano" vs. "birnin Kano") appears in inflected forms — clear annotation guidelines are essential.</text>
+  <text x="30" y="534" font-size="12.5" fill="#8A7D6E">same answer ("Kano" vs. "birnin Kano") appears in inflected forms; clear annotation guidelines are essential.</text>
 </svg>

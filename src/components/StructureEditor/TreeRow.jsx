@@ -73,7 +73,7 @@ export function TreeRow({
   // In content-only mode, under-development pages (ready:false) are shown but
   // cannot be edited — they mirror the sidebar's "in development" chapters.
   const draftLocked = contentOnly && node.type === 'page' && node.ready === false;
-  const draftTitle = 'This chapter is under development — editing is disabled';
+  const draftTitle = 'This chapter is under development, so editing is disabled';
   const editLocked = locked || draftLocked;
 
   const indent = depth * 20;
@@ -110,7 +110,7 @@ export function TreeRow({
           </span>
         )}
         {node.pending && (
-          <span style={{ marginLeft: 6, fontSize: '0.62rem', fontWeight: 700, color: '#16a34a', whiteSpace: 'nowrap' }} title="New page — will be created when you submit the PR">
+          <span style={{ marginLeft: 6, fontSize: '0.62rem', fontWeight: 700, color: '#16a34a', whiteSpace: 'nowrap' }} title="New page: it will be created when you submit the PR">
             NEW
           </span>
         )}

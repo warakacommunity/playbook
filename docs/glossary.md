@@ -10,21 +10,21 @@ last_update:
 
 A reference of terms used throughout the Playbook. Cross-references point back to the chapters where each concept is introduced in depth.
 
-This is a starting point — additions and corrections welcome via the "Edit this page" link at the bottom.
+This is a starting point. Additions and corrections are welcome via the "Edit this page" link at the bottom.
 
 ## A
 
 **Adjudication.** The process of resolving disagreements between annotators, typically by a senior annotator or a designated adjudicator. Common when multiple annotators label the same item and a final "gold" label is needed. See the *Annotation Design and Workforce Management* chapter.
 
-**Annotation.** Attaching structured information — labels, spans, categories, ratings — to raw data so it can be used to train or evaluate language models.
+**Annotation.** Attaching structured information (labels, spans, categories, ratings) to raw data so it can be used to train or evaluate language models.
 
 **Annotation guidelines.** The written specification that tells annotators exactly how to label each kind of input. Includes definitions, decision rules, worked examples, and edge cases. The single most important artifact for high inter-annotator agreement.
 
-**Annotation schema.** The structural definition of what can be labeled — e.g., the set of allowed entity types in NER, or the rating scale in sentiment analysis. The schema constrains what guidelines can describe.
+**Annotation schema.** The structural definition of what can be labeled: e.g., the set of allowed entity types in NER, or the rating scale in sentiment analysis. The schema constrains what guidelines can describe.
 
 ## B
 
-**Backtranslation.** Translating from the target language back to the source language to generate additional training pairs. Often used to augment low-resource translation datasets. Quality varies — verify with native speakers before training on backtranslated data.
+**Backtranslation.** Translating from the target language back to the source language to generate additional training pairs. Often used to augment low-resource translation datasets. Quality varies, so verify with native speakers before training on backtranslated data.
 
 **Benchmark.** A standardised dataset and evaluation protocol used to compare models. Examples relevant to African NLP: AfriSenti, NaijaSenti, AfriHate, BRIGHTER, AmhEn.
 
@@ -32,11 +32,11 @@ This is a starting point — additions and corrections welcome via the "Edit thi
 
 **Cohen's kappa (κ).** An inter-annotator-agreement metric for two annotators on categorical labels, corrected for chance agreement. Range: −1 to 1; conventionally κ > 0.6 is "substantial," κ > 0.8 is "almost perfect."
 
-**Consent.** Documented permission from the people contributing speech, text, or images, usually including provisions on use, retention, and the right to revoke. Required for ethical and legal data work — see the *Data Collection, Curation, and Governance* chapter.
+**Consent.** Documented permission from the people contributing speech, text, or images, usually including provisions on use, retention, and the right to revoke. Required for ethical and legal data work; see the *Data Collection, Curation, and Governance* chapter.
 
 **Corpus** *(pl. corpora)*. A structured collection of texts, speech, or other linguistic data used for analysis or model training.
 
-**Crowdsourcing.** Recruiting many distributed annotators — often online — to label data. Trade-off: scale vs. quality. Quality control techniques (gold-standard items, agreement metrics, qualification tests) become more important as crowd size grows.
+**Crowdsourcing.** Recruiting many distributed annotators, often online, to label data. Trade-off: scale vs. quality. Quality control techniques (gold-standard items, agreement metrics, qualification tests) become more important as crowd size grows.
 
 ## D
 
@@ -46,7 +46,7 @@ This is a starting point — additions and corrections welcome via the "Edit thi
 
 ## F
 
-**Fleiss' kappa.** Inter-annotator-agreement metric for more than two annotators on categorical labels — a generalisation of Cohen's kappa.
+**Fleiss' kappa.** Inter-annotator-agreement metric for more than two annotators on categorical labels; a generalisation of Cohen's kappa.
 
 ## G
 
@@ -62,19 +62,19 @@ This is a starting point — additions and corrections welcome via the "Edit thi
 
 ## L
 
-**License.** The legal terms under which a dataset or piece of code can be used, modified, and redistributed. Common open licenses: Apache 2.0, MIT, CC-BY-SA, CC-BY-NC. Consent and license are different things — covered in the *Documentation, Data Release, and Governance* chapter.
+**License.** The legal terms under which a dataset or piece of code can be used, modified, and redistributed. Common open licenses: Apache 2.0, MIT, CC-BY-SA, CC-BY-NC. Consent and license are different things, covered in the *Documentation, Data Release, and Governance* chapter.
 
 **Low-resource language.** A language for which little digital data and few NLP resources exist. Most African languages fall in this category. Building useful systems requires deliberate data collection and often careful transfer from related higher-resource languages.
 
 ## M
 
-**Modality.** The type of input data — text, speech, image, video, or some combination. Modality-specific annotation is covered in the *Modality-Specific Task Design* chapter.
+**Modality.** The type of input data: text, speech, image, video, or some combination. Modality-specific annotation is covered in the *Modality-Specific Task Design* chapter.
 
 **Multilingual.** Covering or working across multiple languages, often with shared model parameters.
 
 ## N
 
-**Named Entity Recognition (NER).** Identifying spans of text that refer to named things — people, places, organisations, etc. — and labeling them with their type.
+**Named Entity Recognition (NER).** Identifying spans of text that refer to named things (people, places, organisations, etc.) and labeling them with their type.
 
 ## P
 
@@ -92,7 +92,7 @@ This is a starting point — additions and corrections welcome via the "Edit thi
 
 ## T
 
-**Tokenisation.** Splitting text into the basic units a model operates on. Choices around tokenisation (subword, BPE, SentencePiece, character) materially affect downstream performance — especially in morphologically rich languages.
+**Tokenisation.** Splitting text into the basic units a model operates on. Choices around tokenisation (subword, BPE, SentencePiece, character) materially affect downstream performance, especially in morphologically rich languages.
 
 ## See also
 

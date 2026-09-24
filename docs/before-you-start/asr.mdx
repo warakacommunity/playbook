@@ -15,44 +15,44 @@ import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
 
 *Sweep note.* The 2026-Q3 currency sweep did not surface a verified displacer of the ASR recommendations on this page. The MMS / Whisper-large-v3-turbo / w2v-BERT 2.0 / AfriHuBERT / Voxtral stack was expanded most recently in July 2026; treat the recommendations as **unverified in this pass** rather than "confirmed unchanged", and validate against the current [Open ASR Leaderboard](https://huggingface.co/spaces/hf-audio/open_asr_leaderboard) before committing to a base model for a new deployment.
 
-Automatic Speech Recognition (ASR) is the second most operationally consequential African-language task after machine translation — it is what lets a market trader use a service in Igbo without literacy in Latin script, what puts government information into radio broadcasts, and what unlocks accessibility for the majority of African users whose most fluent modality is speech, not text. It is also the task where the cost gap between "we could build this" and "we shipped this" is largest. Read this page before scoping a new speech project.
+Automatic Speech Recognition (ASR) is the second most operationally consequential African-language task after machine translation. It is what lets a market trader use a service in Igbo without literacy in Latin script, what puts government information into radio broadcasts, and what unlocks accessibility for the majority of African users whose most fluent modality is speech, not text. It is also the task where the cost gap between "we could build this" and "we shipped this" is largest. Read this page before scoping a new speech project.
 
 ## What already exists
 
 Two large model releases (Meta MMS, OpenAI Whisper) and three community-curated corpora anchor the current landscape. Everything else builds on these.
 
-### Datasets — the core set
+### Datasets: the core set
 
-- **[Mozilla Common Voice](https://commonvoice.mozilla.org/)** — the largest community-contributed multilingual speech corpus. African-language coverage varies dramatically by language and grows with community effort — Kinyarwanda, Kabyle, Luganda, and Kiswahili have serious volumes; many others sit at pilot scale. Contribution UX is well-designed and reusable. All data CC0. The [datasets page](https://commonvoice.mozilla.org/en/datasets) has the current per-language totals; check before starting your own recording.
-- **[FLEURS (Few-shot Learning Evaluation of Universal Representations of Speech)](https://arxiv.org/abs/2205.12446)** ([Conneau et al., 2022](https://arxiv.org/abs/2205.12446)) — Google's evaluation-focused speech benchmark spanning 102 languages including ~40 African. Use as an evaluation set, not training data. Available on the [Hugging Face Hub](https://huggingface.co/datasets/google/fleurs).
-- **[NCHLT Speech Corpora](https://sadilar.org/en/resources/repository/)** — South African government-funded speech corpora across the 11 official South African languages (isiZulu, isiXhosa, Setswana, Sesotho, Sepedi, Xitsonga, Tshivenda, Siswati, isiNdebele, Afrikaans, English). Read-speech domain; the standard reference for South African ASR. Hosted at SADiLaR.
-- **[MakerereNLP speech corpora](https://sunbird.ai/)** — Luganda ASR, community-collected. Used in production by Sunbird AI. Notable for combining speech data with translation, giving a rare integrated speech-and-text African-language dataset.
-- **[SLR (Open Speech and Language Resources)](https://openslr.org/)** — the umbrella project hosting many low-resource speech datasets, including several African languages. Coverage is idiosyncratic and quality varies — read each dataset's card before use. Notable entries: SLR100 (Yoruba), SLR86 (Kiswahili), and various regional-language collections.
-- **[NaijaVoices](https://arxiv.org/abs/2503.03980)** ([Emezue et al., 2025](https://arxiv.org/abs/2503.03980)) — 1,800 hours of Igbo, Hausa, and Yorùbá everyday speech, community-collected. One of the largest single-project African-language speech releases. Reference for Nigerian-language ASR at scale.
-- **[African Next Voices](https://www.africannextvoices.org/)** — ~9,000 hours of everyday speech across eighteen African languages recorded in Kenya, Nigeria, and South Africa. Major recent release; check the licence and per-language totals on the project page before scoping a fine-tune.
-- **[WAXAL](https://arxiv.org/abs/2510.05644)** — Google's large multilingual African speech set for ASR and TTS. Coverage across many African languages; check the release version and per-language totals.
-- **[AfriSpeech-200](https://arxiv.org/abs/2310.00274)** ([Olatunji et al., 2023](https://arxiv.org/abs/2310.00274)) — 200 hours of accented English across thirteen countries, clinical + general domains. The reference for African-accent English ASR, and useful as an out-of-domain evaluation for models trained on standard English.
-- **[Kallaama](https://arxiv.org/abs/2404.02516)** ([Gauthier et al., 2024](https://arxiv.org/abs/2404.02516)) — agricultural-domain speech in three Senegalese languages (Wolof, Pulaar, Serer). Domain-specific reference for agricultural NLP applications.
-- **[Zambezi Voice](https://zambezi-voice.github.io/)** ([Sikasote et al., 2023](https://arxiv.org/abs/2306.04428)) — four Zambian languages (Bemba, Nyanja, Tonga, Lozi). Reference for Zambian ASR.
+- **[Mozilla Common Voice](https://commonvoice.mozilla.org/)**: the largest community-contributed multilingual speech corpus. African-language coverage varies dramatically by language and grows with community effort. Kinyarwanda, Kabyle, Luganda, and Kiswahili have serious volumes; many others sit at pilot scale. Contribution UX is well-designed and reusable. All data CC0. The [datasets page](https://commonvoice.mozilla.org/en/datasets) has the current per-language totals; check before starting your own recording.
+- **[FLEURS (Few-shot Learning Evaluation of Universal Representations of Speech)](https://arxiv.org/abs/2205.12446)** ([Conneau et al., 2022](https://arxiv.org/abs/2205.12446)): Google's evaluation-focused speech benchmark spanning 102 languages including ~40 African. Use as an evaluation set, not training data. Available on the [Hugging Face Hub](https://huggingface.co/datasets/google/fleurs).
+- **[NCHLT Speech Corpora](https://sadilar.org/en/resources/repository/)**: South African government-funded speech corpora across the 11 official South African languages (isiZulu, isiXhosa, Setswana, Sesotho, Sepedi, Xitsonga, Tshivenda, Siswati, isiNdebele, Afrikaans, English). Read-speech domain; the standard reference for South African ASR. Hosted at SADiLaR.
+- **[MakerereNLP speech corpora](https://sunbird.ai/)**: Luganda ASR, community-collected. Used in production by Sunbird AI. Notable for combining speech data with translation, giving a rare integrated speech-and-text African-language dataset.
+- **[SLR (Open Speech and Language Resources)](https://openslr.org/)**: the umbrella project hosting many low-resource speech datasets, including several African languages. Coverage is idiosyncratic and quality varies, so read each dataset's card before use. Notable entries: SLR100 (Yoruba), SLR86 (Kiswahili), and various regional-language collections.
+- **[NaijaVoices](https://arxiv.org/abs/2503.03980)** ([Emezue et al., 2025](https://arxiv.org/abs/2503.03980)): 1,800 hours of Igbo, Hausa, and Yorùbá everyday speech, community-collected. One of the largest single-project African-language speech releases. Reference for Nigerian-language ASR at scale.
+- **[African Next Voices](https://www.africannextvoices.org/)**: ~9,000 hours of everyday speech across eighteen African languages recorded in Kenya, Nigeria, and South Africa. Major recent release; check the licence and per-language totals on the project page before scoping a fine-tune.
+- **[WAXAL](https://arxiv.org/abs/2510.05644)**: Google's large multilingual African speech set for ASR and TTS. Coverage across many African languages; check the release version and per-language totals.
+- **[AfriSpeech-200](https://arxiv.org/abs/2310.00274)** ([Olatunji et al., 2023](https://arxiv.org/abs/2310.00274)): 200 hours of accented English across thirteen countries, clinical + general domains. The reference for African-accent English ASR, and useful as an out-of-domain evaluation for models trained on standard English.
+- **[Kallaama](https://arxiv.org/abs/2404.02516)** ([Gauthier et al., 2024](https://arxiv.org/abs/2404.02516)): agricultural-domain speech in three Senegalese languages (Wolof, Pulaar, Serer). Domain-specific reference for agricultural NLP applications.
+- **[Zambezi Voice](https://zambezi-voice.github.io/)** ([Sikasote et al., 2023](https://arxiv.org/abs/2306.04428)): four Zambian languages (Bemba, Nyanja, Tonga, Lozi). Reference for Zambian ASR.
 
-### Datasets — worth knowing about, use with care
+### Datasets: worth knowing about, use with care
 
-- **[VoxPopuli](https://arxiv.org/abs/2101.00390)** — European Parliament recordings; limited African-language content but included because it is often confused with a general multilingual resource.
-- **[LibriVox](https://librivox.org/)-derived corpora** — audiobook read speech; almost no African-language content, but a common baseline for read-speech ASR research.
-- **[Kencorpus](https://ojs.mruni.eu/index.php/social/article/view/6903)** — Kenyan language speech and text; smaller scale, useful for Swahili + related work.
-- **Aggregated collections on Hugging Face** — search `masakhane/`, `sunbird/`, `keleafrica/`, and `google/fleurs`. Check license and domain per dataset; do not assume aggregators enforce quality.
+- **[VoxPopuli](https://arxiv.org/abs/2101.00390)**: European Parliament recordings; limited African-language content but included because it is often confused with a general multilingual resource.
+- **[LibriVox](https://librivox.org/)-derived corpora**: audiobook read speech; almost no African-language content, but a common baseline for read-speech ASR research.
+- **[Kencorpus](https://ojs.mruni.eu/index.php/social/article/view/6903)**: Kenyan language speech and text; smaller scale, useful for Swahili + related work.
+- **Aggregated collections on Hugging Face**: search `masakhane/`, `sunbird/`, `keleafrica/`, and `google/fleurs`. Check license and domain per dataset; do not assume aggregators enforce quality.
 
-### Models — what has been trained on this data
+### Models: what has been trained on this data
 
-- **[Meta MMS (Massively Multilingual Speech)](https://ai.meta.com/blog/multilingual-model-speech-recognition/)** ([Pratap et al., 2023](https://arxiv.org/abs/2305.13516)) — the strongest baseline for African-language ASR coverage. Supports over 1,000 languages including a substantial African set. Available on the [Hugging Face Hub as facebook/mms-1b-all](https://huggingface.co/facebook/mms-1b-all) with adapter variants per language.
-- **[OpenAI Whisper](https://arxiv.org/abs/2212.04356)** — supports ~99 languages including a few African. Quality is uneven; strong on high-resource languages (Kiswahili is decent, most others are weak). Ubiquitously deployed. Available on the Hugging Face Hub as [`whisper-large-v3`](https://huggingface.co/openai/whisper-large-v3) and [`whisper-large-v3-turbo`](https://huggingface.co/openai/whisper-large-v3-turbo) — the turbo variant (released late 2024) is roughly half the parameters and 3–6× faster at comparable quality on high-resource languages, and is now the honest default for production deployment when Whisper is the right model. Do not assume Whisper's listed language support translates into usable accuracy — measure it.
-- **[Meta Voxtral](https://ai.meta.com/blog/voxtral-speech-recognition/)** — Meta's 2024–2025 open speech recognition release, expanded multilingual coverage. Check per-language performance on your target before committing; the release notes are the authoritative source.
-- **[Wav2Vec2 XLS-R](https://arxiv.org/abs/2111.09296)** ([Babu et al., 2021](https://arxiv.org/abs/2111.09296)) — the widely-used self-supervised speech model. A common starting point for fine-tuning on a specific low-resource language, especially when MMS coverage is thin. Newer general-purpose alternatives include **[w2v-BERT 2.0](https://huggingface.co/facebook/w2v-bert-2.0)** and **[Wav2Vec2-BERT](https://huggingface.co/facebook/wav2vec2-bert-2.0)** for the same fine-tuning slot.
-- **[AfriHuBERT](https://arxiv.org/abs/2409.12836)** ([Alabi et al., 2024/2025](https://arxiv.org/abs/2409.12836)) — a purpose-built HuBERT variant pretrained on African-language speech. When your target is African and MMS coverage is thin, this is usually a better fine-tuning starting point than general XLS-R.
-- **[NVIDIA Canary and Parakeet](https://developer.nvidia.com/canary)** — general multilingual ASR models; limited African-language coverage but strong engineering. Consider if latency is a hard constraint.
+- **[Meta MMS (Massively Multilingual Speech)](https://ai.meta.com/blog/multilingual-model-speech-recognition/)** ([Pratap et al., 2023](https://arxiv.org/abs/2305.13516)): the strongest baseline for African-language ASR coverage. Supports over 1,000 languages including a substantial African set. Available on the [Hugging Face Hub as facebook/mms-1b-all](https://huggingface.co/facebook/mms-1b-all) with adapter variants per language.
+- **[OpenAI Whisper](https://arxiv.org/abs/2212.04356)**: supports ~99 languages including a few African. Quality is uneven; strong on high-resource languages (Kiswahili is decent, most others are weak). Ubiquitously deployed. Available on the Hugging Face Hub as [`whisper-large-v3`](https://huggingface.co/openai/whisper-large-v3) and [`whisper-large-v3-turbo`](https://huggingface.co/openai/whisper-large-v3-turbo). The turbo variant (released late 2024) is roughly half the parameters and 3–6× faster at comparable quality on high-resource languages, and is now the honest default for production deployment when Whisper is the right model. Do not assume Whisper's listed language support translates into usable accuracy; measure it.
+- **[Meta Voxtral](https://ai.meta.com/blog/voxtral-speech-recognition/)**: Meta's 2024–2025 open speech recognition release, expanded multilingual coverage. Check per-language performance on your target before committing; the release notes are the authoritative source.
+- **[Wav2Vec2 XLS-R](https://arxiv.org/abs/2111.09296)** ([Babu et al., 2021](https://arxiv.org/abs/2111.09296)): the widely-used self-supervised speech model. A common starting point for fine-tuning on a specific low-resource language, especially when MMS coverage is thin. Newer general-purpose alternatives include **[w2v-BERT 2.0](https://huggingface.co/facebook/w2v-bert-2.0)** and **[Wav2Vec2-BERT](https://huggingface.co/facebook/wav2vec2-bert-2.0)** for the same fine-tuning slot.
+- **[AfriHuBERT](https://arxiv.org/abs/2409.12836)** ([Alabi et al., 2024/2025](https://arxiv.org/abs/2409.12836)): a purpose-built HuBERT variant pretrained on African-language speech. When your target is African and MMS coverage is thin, this is usually a better fine-tuning starting point than general XLS-R.
+- **[NVIDIA Canary and Parakeet](https://developer.nvidia.com/canary)**: general multilingual ASR models; limited African-language coverage but strong engineering. Consider if latency is a hard constraint.
 - **Community fine-tunes** on the [Hugging Face Hub under `masakhane/`](https://huggingface.co/masakhane), `sunbird/`, and per-country research groups. Quality varies; the cards usually state training data.
 
-**Editorial opinion.** For a new project on a language covered by MMS, start with MMS. Fine-tune the language-specific adapter on your best available in-domain speech data. Evaluate on FLEURS if available, and on a small (~500-utterance) native-speaker-verified in-domain set otherwise. If Whisper covers your language and the domain is close to Whisper's training distribution, run it as a second baseline — but do not deploy Whisper-only without independently measuring its accuracy on your target language. If your language is in neither MMS nor Whisper, the task is genuinely research-grade — read the "cross-language transfer" chapter and consider fine-tuning XLS-R on related-language data before scoping a full corpus effort.
+**Editorial opinion.** For a new project on a language covered by MMS, start with MMS. Fine-tune the language-specific adapter on your best available in-domain speech data. Evaluate on FLEURS if available, and on a small (~500-utterance) native-speaker-verified in-domain set otherwise. If Whisper covers your language and the domain is close to Whisper's training distribution, run it as a second baseline, but do not deploy Whisper-only without independently measuring its accuracy on your target language. If your language is in neither MMS nor Whisper, the task is genuinely research-grade. Read the "cross-language transfer" chapter and consider fine-tuning XLS-R on related-language data before scoping a full corpus effort.
 
 ## Fork or start fresh?
 
@@ -82,7 +82,7 @@ Two large model releases (Meta MMS, OpenAI Whisper) and three community-curated 
         options: [
           {
             label: "Yes",
-            result: <>Whisper baseline + Whisper fine-tune are the fastest path. <strong>Verify with native speakers</strong> that Whisper's baseline accuracy is not misleading — its listed "language support" does NOT mean usable accuracy.</>,
+            result: <>Whisper baseline + Whisper fine-tune are the fastest path. <strong>Verify with native speakers</strong> that Whisper's baseline accuracy is not misleading: its listed "language support" does NOT mean usable accuracy.</>,
           },
           {
             label: "No, or Whisper baseline is unusable",
@@ -98,7 +98,7 @@ Two large model releases (Meta MMS, OpenAI Whisper) and three community-curated 
 
 ```
 Is your language covered by Meta MMS (~1000 languages, includes many African)?
-├── Yes — does the domain match (read speech vs. spontaneous vs. broadcast)?
+├── Yes. Does the domain match (read speech vs. spontaneous vs. broadcast)?
 │   ├── Yes → Use MMS out of the box as your baseline. Collect a 200-500
 │   │        utterance native-speaker-verified in-domain evaluation set.
 │   │        Fine-tune the MMS adapter only if the baseline is inadequate.
@@ -106,10 +106,10 @@ Is your language covered by Meta MMS (~1000 languages, includes many African)?
 │       domain. 5-20 hours of clean transcribed speech in the target
 │       domain is typically enough to get a usable adapter for a covered
 │       language.
-└── No — is Whisper's language list a plausible starting point?
+└── No. Is Whisper's language list a plausible starting point?
     ├── Yes → Whisper baseline + Whisper fine-tune are the fastest path.
     │        Verify with native speakers that Whisper's baseline accuracy is
-    │        not misleading — its listed "language support" does NOT mean
+    │        not misleading: its listed "language support" does NOT mean
     │        usable accuracy.
     └── No, or Whisper baseline is unusable → XLS-R fine-tune on the
         closest related language you have data for. See the
@@ -130,7 +130,7 @@ Speech data is roughly **10 to 30x more expensive to produce than text**. Every 
 
 - **Fine-tuning MMS or Whisper on an existing per-language corpus.** One to three person-weeks; three to ten GPU-days for meaningful convergence; more evaluation than training. If your target corpus is small (under 20 hours), most of the effort is data-preparation, not modelling.
 - **Recording and transcribing 100 hours of read speech** (Common-Voice-style, crowd-sourced with community organisation). Four to nine months elapsed; ten to twenty-five person-months of coordination, community recruitment, verification, and processing; costs vary by pay model but $8-$30 per verified hour of speech is a realistic band for community-fair rates. Sitting-down studio recording is 3-5x higher per hour.
-- **Recording and transcribing 100 hours of spontaneous speech** (interviews, broadcasts, conversation). Six to twelve months elapsed; twenty to fifty person-months. Transcription is the dominant cost — spontaneous speech is 3-5x slower to transcribe than read speech.
+- **Recording and transcribing 100 hours of spontaneous speech** (interviews, broadcasts, conversation). Six to twelve months elapsed; twenty to fifty person-months. Transcription is the dominant cost: spontaneous speech is 3-5x slower to transcribe than read speech.
 - **Building a defensible test set only** (200-500 utterances, native-speaker verified, in-domain). Four to eight weeks elapsed; one to two person-months.
 - **Human evaluation of ASR output.** Two person-weeks per evaluator for 200 utterances; do this with at least two evaluators independently.
 
@@ -138,7 +138,7 @@ These are order-of-magnitude estimates. Every project varies. The message is: **
 
 ## Known limitations to watch for
 
-- **CER, not WER, is the primary metric for morphologically rich African languages.** Word-boundary conventions in Bantu languages are unstable across annotators; word-level metrics amplify boundary disagreement into apparent error. Compute both, report both, but treat character error rate as the headline. This is playbook editorial policy — see [core principles](../1_introduction/core-principles.md) and the sacrebleu / [jiwer](https://github.com/jitsi/jiwer) documentation.
+- **CER, not WER, is the primary metric for morphologically rich African languages.** Word-boundary conventions in Bantu languages are unstable across annotators; word-level metrics amplify boundary disagreement into apparent error. Compute both, report both, but treat character error rate as the headline. This is playbook editorial policy; see [core principles](../1_introduction/core-principles.md) and the sacrebleu / [jiwer](https://github.com/jitsi/jiwer) documentation.
 - **Tone languages need tone-preserving transcription conventions.** Yoruba, Igbo, several Bantu languages, and many others carry lexical distinctions in tone. A transcription that drops tone marks makes the corpus useless for anything requiring lexical fidelity. Establish the tone convention in the annotation guidelines, verify it in the first 500 utterances, and do not proceed until agreement is stable.
 - **Code-switching is the rule, not the exception.** Real African-language spontaneous speech mixes languages within a sentence. Models trained on strictly monolingual read speech fail immediately on real-world input. Test on code-switched data before deployment, not after.
 - **Dialect and variety matter more than the language name.** Kiswahili in Tanzania differs from Kiswahili in Uganda, and both differ from the Kenyan coastal variety. Nigerian English is not South African English. If your corpus is monolectal and your deployment is multilectal, expect degradation.
@@ -148,31 +148,31 @@ These are order-of-magnitude estimates. Every project varies. The message is: **
 
 ## The canonical fine-tuning link
 
-For fine-tuning Meta MMS on a specific language and domain, use the [MMS fine-tuning documentation](https://huggingface.co/facebook/mms-1b-all#adapter-weights) — the MMS "adapter" approach is designed for exactly this. For Whisper fine-tuning, use the [Hugging Face Whisper fine-tuning guide](https://huggingface.co/blog/fine-tune-whisper). For general Wav2Vec2/XLS-R fine-tuning, use the [Hugging Face audio classification/ASR tutorial](https://huggingface.co/docs/transformers/tasks/asr).
+For fine-tuning Meta MMS on a specific language and domain, use the [MMS fine-tuning documentation](https://huggingface.co/facebook/mms-1b-all#adapter-weights). The MMS "adapter" approach is designed for exactly this. For Whisper fine-tuning, use the [Hugging Face Whisper fine-tuning guide](https://huggingface.co/blog/fine-tune-whisper). For general Wav2Vec2/XLS-R fine-tuning, use the [Hugging Face audio classification/ASR tutorial](https://huggingface.co/docs/transformers/tasks/asr).
 
 For evaluation: [jiwer](https://github.com/jitsi/jiwer) is the canonical Python library for WER and CER computation. Report both, headline the CER.
 
 ## Further reading
 
-- [Meta MMS paper (Pratap et al., 2023)](https://arxiv.org/abs/2305.13516) — the definitive technical report on massively-multilingual speech recognition and the strongest African-coverage baseline.
-- [Whisper paper (Radford et al., 2022)](https://arxiv.org/abs/2212.04356) — the widely-deployed baseline, useful reading for its discussion of what makes an ASR model robust versus fragile.
-- [FLEURS paper (Conneau et al., 2022)](https://arxiv.org/abs/2205.12446) — the standard cross-lingual evaluation benchmark.
+- [Meta MMS paper (Pratap et al., 2023)](https://arxiv.org/abs/2305.13516): the definitive technical report on massively-multilingual speech recognition and the strongest African-coverage baseline.
+- [Whisper paper (Radford et al., 2022)](https://arxiv.org/abs/2212.04356): the widely-deployed baseline, useful reading for its discussion of what makes an ASR model robust versus fragile.
+- [FLEURS paper (Conneau et al., 2022)](https://arxiv.org/abs/2205.12446): the standard cross-lingual evaluation benchmark.
 
 <details>
-<summary>Additional references — recent corpora and models</summary>
+<summary>Additional references: recent corpora and models</summary>
 
-- [XLS-R paper (Babu et al., 2021)](https://arxiv.org/abs/2111.09296) — the model behind most low-resource ASR fine-tuning work of the last three years.
-- [Common Voice technical description](https://arxiv.org/abs/1912.06670) — how the Common Voice contribution model is structured; useful reading before designing a community-recording effort.
-- [Sunbird AI blog](https://sunbird.ai/) — a working reference for how a small team runs ASR + MT in production for African languages.
-- [NaijaVoices paper (Emezue et al., 2025)](https://arxiv.org/abs/2503.03980) — 1,800 h Igbo/Hausa/Yorùbá everyday speech; methodology reference for large-scale African-language speech collection.
-- [African Next Voices](https://www.africannextvoices.org/) — project page for the ~9,000 h across 18 African languages recording effort in Kenya, Nigeria, and South Africa.
-- [AfriSpeech-200 paper (Olatunji et al., 2023)](https://arxiv.org/abs/2310.00274) — 200 h accented English across 13 African countries; methodology reference for accented-English ASR data collection.
-- [Kallaama paper (Gauthier et al., 2024)](https://arxiv.org/abs/2404.02516) — Senegalese agricultural speech; useful reading for domain-specific speech collection.
-- [Zambezi Voice paper (Sikasote et al., 2023)](https://arxiv.org/abs/2306.04428) — Zambian language speech collection reference.
-- [AfriHuBERT paper (Alabi et al., 2024/2025)](https://arxiv.org/abs/2409.12836) — purpose-built HuBERT for African-language speech.
-- [Whisper large-v3-turbo model card](https://huggingface.co/openai/whisper-large-v3-turbo) — the 2024 lightweight Whisper variant with details on its distillation and speed-quality tradeoffs.
-- [Meta Voxtral announcement](https://ai.meta.com/blog/voxtral-speech-recognition/) — Meta's 2024-2025 open speech recognition release.
-- [w2v-BERT 2.0 model card](https://huggingface.co/facebook/w2v-bert-2.0) — newer general-purpose self-supervised speech model useful as a fine-tuning base.
+- [XLS-R paper (Babu et al., 2021)](https://arxiv.org/abs/2111.09296): the model behind most low-resource ASR fine-tuning work of the last three years.
+- [Common Voice technical description](https://arxiv.org/abs/1912.06670): how the Common Voice contribution model is structured; useful reading before designing a community-recording effort.
+- [Sunbird AI blog](https://sunbird.ai/): a working reference for how a small team runs ASR + MT in production for African languages.
+- [NaijaVoices paper (Emezue et al., 2025)](https://arxiv.org/abs/2503.03980): 1,800 h Igbo/Hausa/Yorùbá everyday speech; methodology reference for large-scale African-language speech collection.
+- [African Next Voices](https://www.africannextvoices.org/): project page for the ~9,000 h across 18 African languages recording effort in Kenya, Nigeria, and South Africa.
+- [AfriSpeech-200 paper (Olatunji et al., 2023)](https://arxiv.org/abs/2310.00274): 200 h accented English across 13 African countries; methodology reference for accented-English ASR data collection.
+- [Kallaama paper (Gauthier et al., 2024)](https://arxiv.org/abs/2404.02516): Senegalese agricultural speech; useful reading for domain-specific speech collection.
+- [Zambezi Voice paper (Sikasote et al., 2023)](https://arxiv.org/abs/2306.04428): Zambian language speech collection reference.
+- [AfriHuBERT paper (Alabi et al., 2024/2025)](https://arxiv.org/abs/2409.12836): purpose-built HuBERT for African-language speech.
+- [Whisper large-v3-turbo model card](https://huggingface.co/openai/whisper-large-v3-turbo): the 2024 lightweight Whisper variant with details on its distillation and speed-quality tradeoffs.
+- [Meta Voxtral announcement](https://ai.meta.com/blog/voxtral-speech-recognition/): Meta's 2024-2025 open speech recognition release.
+- [w2v-BERT 2.0 model card](https://huggingface.co/facebook/w2v-bert-2.0): newer general-purpose self-supervised speech model useful as a fine-tuning base.
 
 </details>
 

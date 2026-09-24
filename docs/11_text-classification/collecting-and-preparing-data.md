@@ -118,7 +118,7 @@ print("Send these to annotators next:", to_label)
 
 ![Active learning-based sample selection](images/active-learning.svg)
 
-**Stratified Sampling**: Divide the corpus into strata — subgroups by class, source, time period, or demographic — and sample proportionally or equally from each. Ensures minority classes and subgroups are always represented in the annotation set.
+**Stratified Sampling**: Divide the corpus into strata (subgroups by class, source, time period, or demographic) and sample proportionally or equally from each. Ensures minority classes and subgroups are always represented in the annotation set.
 
 ![Stratified sample selection](images/stratified-sampling.svg)
 
@@ -135,12 +135,12 @@ Any combination of the above also works well to filter quality data.
 
 | Method | Cost | Label noise | Bias risk | Best for |
 |--------|------|-------------|-----------|----------|
-| Keyword / lexicon | Low | — | High (toward keywords) | Hate speech, rare phenomena |
-| Location-based | Low | — | Medium | Dialect / regional studies |
+| Keyword / lexicon | Low | n/a | High (toward keywords) | Hate speech, rare phenomena |
+| Location-based | Low | n/a | Medium | Dialect / regional studies |
 | Distant supervision | Low | High | Medium | Large weakly-labelled emotion sets |
-| Random sampling | Low | — | None | Estimating true distribution |
-| Stratified | Medium | — | Low | Guaranteeing rare-class coverage |
-| Active learning | High setup | — | Toward decision boundary | Maximising labels-per-dollar |
+| Random sampling | Low | n/a | None | Estimating true distribution |
+| Stratified | Medium | n/a | Low | Guaranteeing rare-class coverage |
+| Active learning | High setup | n/a | Toward decision boundary | Maximising labels-per-dollar |
 
 :::info[Tips ]
 Always store metadata such as source, timestamp, language, and collection method. This makes later analysis, error inspection, and dataset documentation much easier.

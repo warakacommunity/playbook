@@ -10,7 +10,7 @@ last_update:
 # Text
 
 Building text datasets for African languages. Every task below shares the same
-groundwork — these pages differ only in what is **labelled** and how it is **evaluated**.
+groundwork; these pages differ only in what is **labelled** and how it is **evaluated**.
 
 ## Shared across text data
 - Source selection (news, web, social media, books, religious & educational texts)

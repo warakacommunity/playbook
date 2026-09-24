@@ -36,7 +36,7 @@ const PHASES = [
       },
       {
         title: "LLM-Assisted & Synthetic Data",
-        blurb: "Use models to help build data — with safeguards.",
+        blurb: "Use models to help build data, with safeguards.",
         href: "/llm-assisted-task",
       },
     ],

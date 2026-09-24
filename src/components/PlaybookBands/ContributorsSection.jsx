@@ -23,7 +23,7 @@ export default function ContributorsSection() {
           <p className={styles.sectionLead}>
             The Playbook is built by a growing community of researchers,
             students, and language experts. If you've contributed code,
-            content, or review — thank you.
+            content, or review, thank you.
           </p>
         </div>
         <div className={styles.contributorsGrid}>
@@ -34,7 +34,7 @@ export default function ContributorsSection() {
               target="_blank"
               rel="noreferrer noopener"
               className={styles.contributorCard}
-              title={`${c.login} — ${c.contributions} contribution${
+              title={`${c.login}: ${c.contributions} contribution${
                 c.contributions === 1 ? '' : 's'
               }`}>
               <img

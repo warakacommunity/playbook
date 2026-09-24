@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 760" width="100%" font-family="Inter, 'Segoe UI', Roboto, system-ui, sans-serif" role="img" aria-labelledby="auTitle">
-  <title id="auTitle">Audio understanding tasks beyond transcription — one audio clip fans out to whole-clip classification, event detection in time, keyword spotting and language identification, with African-specific notes on taxonomy and code-switching and evaluation by macro F1 and mean average precision</title>
+  <title id="auTitle">Audio understanding tasks beyond transcription: one audio clip fans out to whole-clip classification, event detection in time, keyword spotting and language identification, with African-specific notes on taxonomy and code-switching and evaluation by macro F1 and mean average precision</title>
 
   <!-- Outer branded card -->
   <rect x="2" y="2" width="1236" height="756" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
@@ -40,7 +40,7 @@
     <path d="M1070 228 L1070 256"/>
   </g>
 
-  <!-- ============ TASK CARD 1 — Whole-clip classification (terracotta) ============ -->
+  <!-- ============ TASK CARD 1: Whole-clip classification (terracotta) ============ -->
   <rect x="36" y="256" width="268" height="234" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
   <rect x="56" y="274" width="228" height="44" rx="11" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
   <text x="170" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#9C4F2B">Whole-clip classification</text>
@@ -54,7 +54,7 @@
   <rect x="64" y="448" width="212" height="32" rx="10" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
   <text x="170" y="468" text-anchor="middle" font-size="12.5" font-weight="600" fill="#9C4F2B">Cough &#183; Singing &#183; Silence</text>
 
-  <!-- ============ TASK CARD 2 — Event detection in time (forest green) ============ -->
+  <!-- ============ TASK CARD 2: Event detection in time (forest green) ============ -->
   <rect x="336" y="256" width="268" height="234" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
   <rect x="356" y="274" width="228" height="44" rx="11" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
   <text x="470" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#1F5B3F">Event detection in time</text>
@@ -69,7 +69,7 @@
   <text x="528" y="443" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1F5B3F">event</text>
   <text x="470" y="476" text-anchor="middle" font-size="12.5" font-weight="500" fill="#2B2218">name it and locate it</text>
 
-  <!-- ============ TASK CARD 3 — Keyword spotting (gold) ============ -->
+  <!-- ============ TASK CARD 3: Keyword spotting (gold) ============ -->
   <rect x="636" y="256" width="268" height="234" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
   <rect x="656" y="274" width="228" height="44" rx="11" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
   <text x="770" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#B97F37">Keyword spotting</text>
@@ -81,7 +81,7 @@
   <rect x="664" y="448" width="212" height="32" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
   <text x="770" y="468" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B97F37">a cough in a screening</text>
 
-  <!-- ============ TASK CARD 4 — Language identification (deep rust) ============ -->
+  <!-- ============ TASK CARD 4: Language identification (deep rust) ============ -->
   <rect x="936" y="256" width="268" height="234" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
   <rect x="956" y="274" width="228" height="44" rx="11" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
   <text x="1070" y="302" text-anchor="middle" font-size="15" font-weight="700" fill="#8A3B25">Language identification</text>

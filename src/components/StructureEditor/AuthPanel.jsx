@@ -31,7 +31,7 @@ export function AuthPanel({ auth, clientId, proxyUrl, callbackUrl, onConnect, on
       if (e.message === 'cancelled') { setPhase('idle'); return; }
       // Popup was blocked → fall back to device flow silently
       if (e.message?.includes('Popup')) {
-        setError('Popup blocked — switching to device flow.');
+        setError('Popup blocked. Switching to device flow.');
         await handleDeviceFlow();
         return;
       }
@@ -124,8 +124,8 @@ export function AuthPanel({ auth, clientId, proxyUrl, callbackUrl, onConnect, on
       </button>
       <p className={styles.authHint}>
         {canDevice
-          ? 'One click — you authorise securely on GitHub. Nothing is typed here.'
-          : 'One-click GitHub sign-in is being set up — check back soon.'}
+          ? 'One click: you authorise securely on GitHub. Nothing is typed here.'
+          : 'One-click GitHub sign-in is being set up. Check back soon.'}
       </p>
       {error && <p className={styles.authError}>{error}</p>}
     </div>

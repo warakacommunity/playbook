@@ -65,15 +65,15 @@ Based on how annotators are sourced and where the data is hosted, annotation too
 
 #### Crowdsourcing platforms
 
-Crowdsourcing platforms give you access to a large, on-demand pool of remote annotators who are recruited and paid through the platform. Annotators are typically selected based on profile attributes — language, location, demographics, prior approval rating, or qualification tests — rather than being known to you personally. This makes crowdsourcing well suited to large volumes of data and widely spoken languages, where a broad annotator pool is readily available.
+Crowdsourcing platforms give you access to a large, on-demand pool of remote annotators who are recruited and paid through the platform. Annotators are typically selected based on profile attributes (language, location, demographics, prior approval rating, or qualification tests) rather than being known to you personally. This makes crowdsourcing well suited to large volumes of data and widely spoken languages, where a broad annotator pool is readily available.
 
 Common platforms include:
 
-- Toloka AI — [https://toloka.ai](https://toloka.ai/)
-- Amazon Mechanical Turk (MTurk) — [https://www.mturk.com](https://www.mturk.com/)
-- Prolific — [https://www.prolific.com](https://www.prolific.com/)
-- Appen — [https://www.appen.com](https://www.appen.com/)
-- Label Studio Enterprise — [https://labelstud.io](https://labelstud.io/)
+- Toloka AI: [https://toloka.ai](https://toloka.ai/)
+- Amazon Mechanical Turk (MTurk): [https://www.mturk.com](https://www.mturk.com/)
+- Prolific: [https://www.prolific.com](https://www.prolific.com/)
+- Appen: [https://www.appen.com](https://www.appen.com/)
+- Label Studio Enterprise: [https://labelstud.io](https://labelstud.io/)
 
 Many of these platforms support multiple data modalities (text, image, audio, video) and increasingly offer AI-assisted features such as pre-labeling, model-in-the-loop suggestions, and automated quality checks.
 
@@ -81,22 +81,22 @@ Trade-offs. Crowdsourcing scales easily and reduces recruitment overhead, but it
 
 #### In-house (self-hosted) tools
 
-In-house tools are typically open-source applications that can be customized, deployed, and hosted on your own machine or server. You create accounts for a hand-picked set of annotators — often colleagues, domain experts, or recruited native speakers — giving you full control over who labels the data and where the data lives. This category is preferred for sensitive data, specialized domains, and low-resource languages, where annotator expertise matters more than raw scale.
+In-house tools are typically open-source applications that can be customized, deployed, and hosted on your own machine or server. You create accounts for a hand-picked set of annotators (often colleagues, domain experts, or recruited native speakers), giving you full control over who labels the data and where the data lives. This category is preferred for sensitive data, specialized domains, and low-resource languages, where annotator expertise matters more than raw scale.
 
 Common self-hosted tools include:
 
-- AfriAnnotate — the playbook's companion annotation tool, built on the Label Studio configuration format — [https://docs.afriannotate.org](https://docs.afriannotate.org)
-- POTATO — Portable Text Annotation Tool — [https://github.com/davidjurgens/potato](https://github.com/davidjurgens/potato)
-- Label Studio (open-source edition) — [https://labelstud.io](https://labelstud.io/)
-- Doccano — [https://github.com/doccano/doccano](https://github.com/doccano/doccano)
-- INCEpTION (the successor to WebAnno) — [https://inception-project.github.io](https://inception-project.github.io/)
-- brat — [https://brat.nlplab.org](https://brat.nlplab.org/)
+- AfriAnnotate, the playbook's companion annotation tool, built on the Label Studio configuration format: [https://docs.afriannotate.org](https://docs.afriannotate.org)
+- POTATO (Portable Text Annotation Tool): [https://github.com/davidjurgens/potato](https://github.com/davidjurgens/potato)
+- Label Studio (open-source edition): [https://labelstud.io](https://labelstud.io/)
+- Doccano: [https://github.com/doccano/doccano](https://github.com/doccano/doccano)
+- INCEpTION (the successor to WebAnno): [https://inception-project.github.io](https://inception-project.github.io/)
+- brat: [https://brat.nlplab.org](https://brat.nlplab.org/)
 
 Trade-offs. Self-hosted tools keep data fully under your control and can be tailored to bespoke label schemes and guidelines, but they require setup, hosting, and maintenance effort, and the annotation throughput is limited by the size of your recruited team.
 
 #### Lightweight tools for small datasets
 
-For small annotation efforts, a dedicated platform may be unnecessary. Spreadsheets — Google Sheets or Microsoft Excel — are a practical, zero-setup option: one column holds the text, and one or more columns capture the label(s), with data validation or dropdown lists used to constrain inputs to the allowed label set. Spreadsheets are easy to share and require no technical onboarding, which makes them convenient for pilot studies, guideline development, and very small in-house tasks.
+For small annotation efforts, a dedicated platform may be unnecessary. Spreadsheets (Google Sheets or Microsoft Excel) are a practical, zero-setup option: one column holds the text, and one or more columns capture the label(s), with data validation or dropdown lists used to constrain inputs to the allowed label set. Spreadsheets are easy to share and require no technical onboarding, which makes them convenient for pilot studies, guideline development, and very small in-house tasks.
 
 However, these tools lack the quality-control and management features; they are not recommended beyond small or exploratory datasets.
 
@@ -128,7 +128,7 @@ Emotion analysis is usually multi-label, since one sentence can carry several em
   <View style="background:#FBF7F0; border:1px solid #E7DDCB; border-radius:8px; padding:14px 16px; margin-bottom:18px;">
     <Text name="text" value="$text"/>
   </View>
-  <Header value="Rate each emotion's intensity — no stars = absent, 1 low, 2 medium, 3 high"/>
+  <Header value="Rate each emotion's intensity (no stars = absent, 1 low, 2 medium, 3 high)"/>
   <Header value="Joy"/>
   <Rating name="joy" toName="text" maxRating="3"/>
   <Header value="Sadness"/>
@@ -300,24 +300,24 @@ Transparent reporting of annotation agreement improves the credibility, reproduc
 - Use Fleiss' kappa when there are three or more annotators and each item has the same number of labels.
 - Use Krippendorff's alpha when annotations may be missing or when you want a more flexible reliability measure.
 
-Note that agreement metrics are not only those listed above — explore more agreement metrics that suit the targeted task.
+Note that agreement metrics are not only those listed above. Explore more agreement metrics that suit the targeted task.
 
 ```python
 from sklearn.metrics import cohen_kappa_score
 from statsmodels.stats.inter_rater import fleiss_kappa, aggregate_raters
 import krippendorff, numpy as np
 
-# Cohen's kappa — exactly two annotators
+# Cohen's kappa: exactly two annotators
 # Cohen's κ = (Pₒ − Pₑ) / (1 − Pₑ) where Pₒ = observed agreement, Pₑ = Σₙ pₙ₁·pₙ₂ (chance agreement)
 cohen_kappa_score(a1, a2)
 
-# Fleiss' kappa — items x raters matrix, equal number of raters each
+# Fleiss' kappa: items x raters matrix, equal number of raters each
 # Fleiss' κ = (P̄ − P̄ₑ) / (1 − P̄ₑ) over n raters, k categories
 
 table, _ = aggregate_raters(ratings)      # -> items x categories counts
 fleiss_kappa(table)
 
-# Krippendorff's alpha — raters x items, np.nan for missing
+# Krippendorff's alpha: raters x items, np.nan for missing
 # Krippendorff's α = 1 − Dₒ / Dₑ (Dₒ observed disagreement, Dₑ expected; handles missing data & any #raters)
 
 krippendorff.alpha(reliability_data=data, level_of_measurement="nominal")
@@ -325,7 +325,7 @@ krippendorff.alpha(reliability_data=data, level_of_measurement="nominal")
 
 :::info[📚 Tips]
 For subjective tasks such as emotion and offensiveness annotation, lower agreement is not always a failure; it can reflect real ambiguity in human interpretation.
-So, lower scores can still be valid — genuine human disagreement is signal, not just noise.
+So, lower scores can still be valid: genuine human disagreement is signal, not just noise.
 :::
 
 ## Quality control

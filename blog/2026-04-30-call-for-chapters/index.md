@@ -7,7 +7,7 @@ tags: [call-for-chapters, playbook, announcement]
 image: https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1200&h=675&q=80
 ---
 
-The Masakhane community is opening a **Call for Chapters** for AfriPlaybook — a community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. We invite researchers, practitioners, students, language experts, and community members to contribute chapters that shape how the next generation of African language technology is built.
+The Masakhane community is opening a **Call for Chapters** for AfriPlaybook, a community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. We invite researchers, practitioners, students, language experts, and community members to contribute chapters that shape how the next generation of African language technology is built.
 
 <!-- truncate -->
 
@@ -19,13 +19,13 @@ African languages remain underrepresented in mainstream NLP. The Playbook exists
 
 We welcome chapter proposals on (but not limited to):
 
-- **Data** — curation, licensing, dialectal coverage, low-resource bootstrapping, parallel corpora, speech datasets.
-- **Annotation** — guidelines for African languages, inter-annotator agreement, tooling, working with native-speaker annotators.
-- **Modeling** — machine translation, ASR/TTS, NER, POS, sentiment, multilingual pretraining, adapters, and small/efficient models.
-- **Evaluation** — human evaluation protocols, benchmarks, error analysis specific to African language families.
-- **Deployment** — productionizing models on the continent, edge devices, offline-first applications, language ID, code-switching.
-- **Ethics & Community** — consent, data sovereignty, fair compensation for contributors, language preservation.
-- **Case Studies** — end-to-end stories from real projects (Hausa, Amharic, Swahili, Yoruba, Igbo, Zulu, Wolof, and many more).
+- **Data**: curation, licensing, dialectal coverage, low-resource bootstrapping, parallel corpora, speech datasets.
+- **Annotation**: guidelines for African languages, inter-annotator agreement, tooling, working with native-speaker annotators.
+- **Modeling**: machine translation, ASR/TTS, NER, POS, sentiment, multilingual pretraining, adapters, and small/efficient models.
+- **Evaluation**: human evaluation protocols, benchmarks, error analysis specific to African language families.
+- **Deployment**: productionizing models on the continent, edge devices, offline-first applications, language ID, code-switching.
+- **Ethics & Community**: consent, data sovereignty, fair compensation for contributors, language preservation.
+- **Case Studies**: end-to-end stories from real projects (Hausa, Amharic, Swahili, Yoruba, Igbo, Zulu, Wolof, and many more).
 
 ## Who can contribute?
 
@@ -38,10 +38,10 @@ We welcome chapter proposals on (but not limited to):
 
 ## How to propose a chapter
 
-1. **Submit a proposal** — a short abstract (200–400 words), an outline, target audience, and the languages/topics covered.
-2. **Review** — proposals are reviewed by the editorial team for fit, scope, and overlap with existing chapters.
-3. **Draft** — accepted authors work in the open on the [Playbook GitHub repository](https://github.com/warakacommunity/playbook), with reviewer support.
-4. **Publish** — accepted chapters are merged into the Playbook with author attribution and DOIs (where applicable).
+1. **Submit a proposal**: a short abstract (200–400 words), an outline, target audience, and the languages/topics covered.
+2. **Review**: proposals are reviewed by the editorial team for fit, scope, and overlap with existing chapters.
+3. **Draft**: accepted authors work in the open on the [Playbook GitHub repository](https://github.com/warakacommunity/playbook), with reviewer support.
+4. **Publish**: accepted chapters are merged into the Playbook with author attribution and DOIs (where applicable).
 
 ## Key dates
 
@@ -61,6 +61,6 @@ We welcome chapter proposals on (but not limited to):
 - **Join the Masakhane community**: [masakhane.io](https://www.masakhane.io/)
 - **Questions?** Reach out via the GitHub Discussions tab on the repo.
 
-We are building a resource *by* the community, *for* the community. If you have a perspective, an experiment, or a story that deserves to be in the Playbook — we want to hear from you.
+We are building a resource *by* the community, *for* the community. If you have a perspective, an experiment, or a story that deserves to be in the Playbook, we want to hear from you.
 
 *Ǹbá! Karibu! Welkom! Bienvenue! Bem-vindos!*

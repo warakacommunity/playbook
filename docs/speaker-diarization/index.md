@@ -46,7 +46,7 @@ The right diarization corpus depends on the downstream deployment.
 - **Broadcast radio panels and podcasts.** Multiple speakers, clean-ish microphones (each participant often on their own mic), predictable acoustic environment. Easy to annotate; easy for models. The reference source when the deployment target is broadcast content transcription and speaker attribution.
 - **Community meetings and focus groups.** Multiple speakers, single-microphone or table-microphone setup, natural overlaps, background noise. Hard to annotate; hard for models. The reference source when the deployment target is community-work transcription, oral-history archival, or civic-tech feedback processing.
 - **Phone-recorded field interviews.** Two speakers typically, phone-quality audio, variable acoustics between interviewer and interviewee, sometimes recorded on speakerphone. The reference source when the deployment is journalism, health-worker debriefs, or NGO field research.
-- **Call-centre and helpline audio.** Two speakers (agent + caller) typically, telephony-band audio, well-defined turn structure. Easier for models than community meetings; harder than broadcast because of the audio-quality ceiling. Consent framework is the load-bearing decision — see the [audio-understanding chapter's call-centre note](../audio-understanding/index.md#data-collection-specifics-for-african-contexts).
+- **Call-centre and helpline audio.** Two speakers (agent + caller) typically, telephony-band audio, well-defined turn structure. Easier for models than community meetings; harder than broadcast because of the audio-quality ceiling. Consent framework is the load-bearing decision; see the [audio-understanding chapter's call-centre note](../audio-understanding/index.md#data-collection-specifics-for-african-contexts).
 
 Match the training corpus's acoustic-and-turn-taking profile to the deployment target. A diarizer trained on broadcast panels and deployed on community-meeting audio will halve its accuracy in production; a diarizer trained on community meetings and deployed on broadcast will over-fragment turns because the model has learned to expect noise where there isn't any.
 
@@ -73,10 +73,10 @@ The `Overlap` label gives annotators an explicit way to mark the two-voices-at-o
 **Six annotation conventions to fix in writing before starting:**
 
 - **Minimum turn length.** How brief can a "speaker turn" be before it counts as noise or a backchannel (`mhm`, `yeah`) rather than a genuine turn? Sub-500ms utterances are the grey zone. Fix a threshold and apply it consistently.
-- **Backchannel handling.** A listener saying `mhm` while another speaker holds the floor — is that a separate turn (creating an overlap) or discarded (keeping the main speaker's turn intact)? Both conventions are defensible; document which and apply consistently.
+- **Backchannel handling.** A listener saying `mhm` while another speaker holds the floor: is that a separate turn (creating an overlap) or discarded (keeping the main speaker's turn intact)? Both conventions are defensible; document which and apply consistently.
 - **Overlap onset and offset precision.** Annotators disagree on where overlap starts and ends by 100–300 ms routinely. Decide on a precision tolerance and reflect it in the collar during evaluation.
 - **Speaker-count uncertainty.** In community-meeting audio, distinguishing a fourth speaker from a re-appearance of an earlier speaker is genuinely hard. Guidelines should document how to flag uncertain speaker-count decisions for adjudication rather than forcing annotators to commit.
-- **Non-speech marking.** Music, silence, background noise, laughter — mark as distinct labels or as absence of any speaker label? Absence is simpler but loses the information that "there is nothing happening" is different from "there is background noise here"; a formal `Music` or `Noise` label is often worth the extra annotation work.
+- **Non-speech marking.** Music, silence, background noise, laughter: mark as distinct labels or as absence of any speaker label? Absence is simpler but loses the information that "there is nothing happening" is different from "there is background noise here"; a formal `Music` or `Noise` label is often worth the extra annotation work.
 - **Named speakers vs anonymous labels.** In broadcast panels with public figures, are speakers labelled by name or by anonymous ID? Publishing a corpus with named speakers has consent implications; the safer default is anonymous IDs and a separate mapping table that only the project team holds.
 
 Dragging a speaker segment across the audio timeline in AfriAnnotate:
@@ -87,7 +87,7 @@ Dragging a speaker segment across the audio timeline in AfriAnnotate:
 
 - **Per-batch second-pass review.** A second annotator, independent of the first, re-diarises a random 5–10% sample of each batch. Compute per-file Diarization Error Rate between the two annotations; anything above a threshold (typically DER > 0.10 with reasonable collar) is flagged for adjudication. This is the cheapest quality signal for diarization corpora.
 - **Overlap-region focused review.** Overlap regions are where annotator disagreement is highest. Sample-audit overlap regions separately from clean-turn regions; the disagreement rate in overlaps sets the effective ceiling on downstream model performance.
-- **Speaker-consistency checks.** Verify that the same speaker gets the same label across the entire recording — a speaker who is re-labelled halfway through as a "new" voice invalidates the recording. Automated voice-embedding similarity across annotator-labelled turns is a cheap catch for this.
+- **Speaker-consistency checks.** Verify that the same speaker gets the same label across the entire recording. A speaker who is re-labelled halfway through as a "new" voice invalidates the recording. Automated voice-embedding similarity across annotator-labelled turns is a cheap catch for this.
 - **Per-condition inter-annotator agreement.** Track IAA separately for broadcast, community-meeting, and phone-recorded segments. A corpus whose IAA is 0.85 overall but 0.55 on community-meeting audio has a systematic weakness that aggregate IAA hides.
 
 ## Evaluation
@@ -121,7 +121,7 @@ The `collar` forgives small timing differences at speaker boundaries, which are 
 **Beyond aggregate DER.** DER is single-number-summarising in the same way ASR CER is; the aggregate hides where the model fails. Additional reporting to include:
 
 - **Per-source DER.** Split evaluation by source (broadcast / community meeting / phone / call-centre) and report separately. A model whose overall DER is 15% and whose community-meeting DER is 40% has a source-specific problem the aggregate hides.
-- **Per-condition DER.** Split by acoustic condition (studio / phone / outdoor) and report separately. Same reasoning — the aggregate flatters models that fail on the condition you actually deploy in.
+- **Per-condition DER.** Split by acoustic condition (studio / phone / outdoor) and report separately. Same reasoning: the aggregate flatters models that fail on the condition you actually deploy in.
 - **Overlap-region DER.** Compute DER on the subset of the audio where two or more speakers are talking. This is where most model failure lives in real conversation; the metric on overlap regions specifically is what predicts production performance.
 - **Speaker-count accuracy.** Did the model estimate the right number of distinct speakers in each recording? Over-splitting a two-speaker interview into five apparent speakers is a common failure mode DER partly captures but does not fully expose.
 
@@ -129,10 +129,10 @@ The `collar` forgives small timing differences at speaker boundaries, which are 
 
 - **Streaming vs offline.** Real-time diarization for live captioning is a different engineering problem from offline diarization for post-hoc transcription. Streaming diarization must commit to speaker assignments as they occur; offline can revise earlier decisions when the whole recording is seen. Choose at scoping; streaming diarization is materially harder.
 - **Diarization-then-ASR vs joint modelling.** Traditional pipelines diarise first, then ASR each speaker's segments. Newer joint models (streaming ASR with speaker attribution) do both at once. For African languages the pipeline approach reuses existing ASR and diarization work; joint models are more research-forward.
-- **Diarization as a privacy tool** — a diarised recording where speakers are anonymised (`Speaker 1`, `Speaker 2`) is safer to share for research than raw multi-speaker audio where speaker identity is inferrable. Consider whether the released artefact should be diarised-with-anonymous-labels rather than raw audio.
+- **Diarization as a privacy tool**: a diarised recording where speakers are anonymised (`Speaker 1`, `Speaker 2`) is safer to share for research than raw multi-speaker audio where speaker identity is inferrable. Consider whether the released artefact should be diarised-with-anonymous-labels rather than raw audio.
 - **On-device diarization** is unusual as a deployment target but relevant for privacy-preserving voice assistants and edge health-triage. The compute cost is higher than on-device ASR because voice embedding + clustering is a distinct workload; expect a larger model footprint.
 
-## What breaks — common failure modes
+## What breaks: common failure modes
 
 - **Studio-training / community-deployment collapse.** DER on clean training data looks acceptable; deployment on noisy community meetings triples DER. Fix: train on data whose acoustic conditions match deployment.
 - **Overlap invisible in aggregate DER.** Overall DER is 15%; overlap-region DER is 45%. Fix: report overlap DER separately and treat it as the load-bearing number for conversational deployment.
@@ -140,4 +140,4 @@ The `collar` forgives small timing differences at speaker boundaries, which are 
 - **Speaker-count over-estimation on short turns.** Model treats every backchannel or brief sound as a new speaker. Fix: enforce minimum turn length in inference post-processing; audit annotation guidelines for backchannel handling.
 - **Boundary sloppiness at high collar.** DER measured at `collar=0.5` looks acceptable; measured at `collar=0.1` reveals boundaries are consistently 300 ms off. Fix: measure at the collar the deployment actually tolerates.
 - **Consent gap on multi-speaker archives.** Broadcast panel audio consented for broadcast; downstream ML release without new consent breaches the original agreement. Fix: consent must be re-negotiated for each speaker in a multi-speaker recording.
-- **Named-speaker leak.** Corpus intended to be anonymous but downstream metadata reveals speaker identity through timestamps + broadcast schedules + context. Fix: anonymisation of speaker labels is not enough — audit the full metadata for identity leakage.
+- **Named-speaker leak.** Corpus intended to be anonymous but downstream metadata reveals speaker identity through timestamps + broadcast schedules + context. Fix: anonymisation of speaker labels is not enough; audit the full metadata for identity leakage.

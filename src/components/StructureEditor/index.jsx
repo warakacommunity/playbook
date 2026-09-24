@@ -38,7 +38,7 @@ async function autoTranslateChunk(text, tgtLang, proxyUrl) {
   });
   const contentType = res.headers.get('Content-Type') || '';
   if (!contentType.includes('application/json')) {
-    throw new Error(`Worker returned unexpected response (HTTP ${res.status}) — check TRANSLATION_PROXY_URL`);
+    throw new Error(`Worker returned unexpected response (HTTP ${res.status}). Check TRANSLATION_PROXY_URL`);
   }
   const data = await res.json();
   if (data.error) {
@@ -1758,7 +1758,7 @@ export function StructureEditorContent({ onClose }) {
                     <span className={styles.rightPanelPlaceholderIcon}>📄</span>
                     <p>Click <strong>✎</strong> next to any page to edit its content here.</p>
                     <p className={styles.rightPanelPlaceholderHint}>
-                      Changes are saved locally — close and reopen this dialog anytime without losing your work.
+                      Changes are saved locally. Close and reopen this dialog anytime without losing your work.
                     </p>
                   </div>
                 )}

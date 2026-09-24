@@ -12,18 +12,18 @@ last_update:
 
 *Public-record draft. Last reviewed: 2026-07-07.*
 
-:::warning[Public-record draft — awaiting project-lead review]
+:::warning[Public-record draft: awaiting project-lead review]
 This retrospective is assembled from the published papers ([Adelani et al., 2021](https://aclanthology.org/2021.tacl-1.66/); [Adelani et al., 2022](https://arxiv.org/abs/2210.12391)), the [MasakhaNER GitHub repository](https://github.com/masakhane-io/masakhane-ner), and the [MasakhaNER 2 dataset card on the Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2). **It has not been reviewed or approved by the project leads.** Numbers, dates, and social/political narrative may be incomplete, wrong at the margins, or missing what actually happened.
 
-If you led this project, please open a pull request replacing this draft with your own voice — the questionnaire below is exactly the structure the retrospective needs, and the public-record answers give you a starting point to correct rather than a blank page.
+If you led this project, please open a pull request replacing this draft with your own voice. The questionnaire below is exactly the structure the retrospective needs, and the public-record answers give you a starting point to correct rather than a blank page.
 :::
 
 ## Front matter
 
 - **Project name:** MasakhaNER 1 (2021) → MasakhaNER 2 (2022)
 - **Task and modality:** Named Entity Recognition, text
-- **Languages covered:** MasakhaNER 1 — 10 African languages: Amharic, Hausa, Igbo, Kinyarwanda, Luganda, Luo, Nigerian Pidgin, Swahili, Wolof, Yoruba. MasakhaNER 2 — 20: Amharic, Bambara, Ewe, Fon, Ghomala, Hausa, Igbo, Kinyarwanda, Luganda, Luo, Mossi, Chichewa, Chishona, Kiswahili, Setswana, Twi, Wolof, isiXhosa, Yoruba, isiZulu.
-- **Release date(s):** v1 — 2021 (TACL); v2 — 2022 (arXiv preprint).
+- **Languages covered:** MasakhaNER 1 (10 African languages): Amharic, Hausa, Igbo, Kinyarwanda, Luganda, Luo, Nigerian Pidgin, Swahili, Wolof, Yoruba. MasakhaNER 2 (20): Amharic, Bambara, Ewe, Fon, Ghomala, Hausa, Igbo, Kinyarwanda, Luganda, Luo, Mossi, Chichewa, Chishona, Kiswahili, Setswana, Twi, Wolof, isiXhosa, Yoruba, isiZulu.
+- **Release date(s):** v1, 2021 (TACL); v2, 2022 (arXiv preprint).
 - **Canonical paper / repo / dataset URL(s):**
   - v1: [Adelani et al., 2021 (TACL)](https://aclanthology.org/2021.tacl-1.66/)
   - v2: [Adelani et al., 2022 (arXiv)](https://arxiv.org/abs/2210.12391)
@@ -58,13 +58,13 @@ Not stated in the papers or the public repo. Community-led participatory annotat
 
 *[Awaiting project-lead answers on: approximate budget, split by cost centre, effort in person-months, whether volunteer time dominated and its estimated hours.]*
 
-### 5. What was the hardest problem — technical?
+### 5. What was the hardest problem: technical?
 
 Public-record inference: consistent annotation guidelines across ten (later twenty) typologically diverse languages, and adjudicating disagreements over entity boundaries where diacritic conventions and code-switching complicated the definition of a single token. The v2 paper notes cross-lingual transfer analysis as a substantial technical piece of the work.
 
 *[Awaiting project-lead confirmation of the specific hardest technical problem.]*
 
-### 6. What was the hardest problem — social or political?
+### 6. What was the hardest problem: social or political?
 
 Not stated in the papers. Participatory-annotation projects at this scale typically deal with coordinating volunteer annotators across time zones and unequal internet access, and negotiating whether guidelines apply uniformly across languages that categorise entities differently. *[Awaiting project-lead account.]*
 
@@ -114,7 +114,7 @@ Public-record from the repo: annotation was conducted using a mix of shared anno
 
 Public-record inference from the papers and community practice:
 
-1. Read the MasakhaNER 2 annotation guidelines before writing your own — they are the reference for how to disambiguate PER/ORG/LOC for African-language content, and their reasoning documents years of adjudication decisions.
+1. Read the MasakhaNER 2 annotation guidelines before writing your own. They are the reference for how to disambiguate PER/ORG/LOC for African-language content, and their reasoning documents years of adjudication decisions.
 2. Do not skip the participatory workflow. Guideline drift is the single largest source of annotation quality problems, and native-speaker adjudicators catch drift that cross-cultural annotators miss.
 3. Publish per-language + per-class F1, not aggregate macro-F1. The aggregate hides where the corpus's coverage is thin and misleads downstream users.
 4. Budget for one full round of annotator recalibration after the first 500 sentences per language.
@@ -134,16 +134,16 @@ Widely. As of the v2 paper's citation count and downstream releases:
 
 ### 17. What is the current state of the project?
 
-Actively maintained; the [MasakhaNER GitHub repo](https://github.com/masakhane-io/masakhane-ner) receives updates and community contributions. Not superseded — v2 remains the reference corpus for African-language NER.
+Actively maintained; the [MasakhaNER GitHub repo](https://github.com/masakhane-io/masakhane-ner) receives updates and community contributions. Not superseded: v2 remains the reference corpus for African-language NER.
 
 *[Awaiting project-lead answer on: whether a v3 is under way, current maintenance model, and named steward for re-use requests.]*
 
 ## Appendix
 
-- **Public materials** — [v1 paper (TACL 2021)](https://aclanthology.org/2021.tacl-1.66/); [v2 paper (arXiv 2022)](https://arxiv.org/abs/2210.12391); [GitHub repo](https://github.com/masakhane-io/masakhane-ner); [HF Hub dataset](https://huggingface.co/datasets/masakhane/masakhaner2).
-- **Related case studies in this playbook** — AfriSenti (draft pending), AfriQA (draft pending), LAFAND-MT (draft pending).
-- **Follow-up projects** — the annotation methodology of MasakhaNER influenced AfriSenti (14-language sentiment) and later Masakhane corpora across sentiment, MT, and QA.
+- **Public materials**: [v1 paper (TACL 2021)](https://aclanthology.org/2021.tacl-1.66/); [v2 paper (arXiv 2022)](https://arxiv.org/abs/2210.12391); [GitHub repo](https://github.com/masakhane-io/masakhane-ner); [HF Hub dataset](https://huggingface.co/datasets/masakhane/masakhaner2).
+- **Related case studies in this playbook**: AfriSenti (draft pending), AfriQA (draft pending), LAFAND-MT (draft pending).
+- **Follow-up projects**: the annotation methodology of MasakhaNER influenced AfriSenti (14-language sentiment) and later Masakhane corpora across sentiment, MT, and QA.
 
 ---
 
-**Contributor's note.** This is the first Case Study in the chapter, and it is a public-record draft. Its purpose is to prove the seventeen-question format works at scale; its purpose is *not* to replace the project leads' voice. If you led MasakhaNER 1 or 2, please open a pull request rewriting this in your own words — even a partial rewrite of a few sections adds more value than an entirely public-record page.
+**Contributor's note.** This is the first Case Study in the chapter, and it is a public-record draft. Its purpose is to prove the seventeen-question format works at scale; its purpose is *not* to replace the project leads' voice. If you led MasakhaNER 1 or 2, please open a pull request rewriting this in your own words. Even a partial rewrite of a few sections adds more value than an entirely public-record page.

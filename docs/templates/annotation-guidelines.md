@@ -11,13 +11,13 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-*A task-agnostic starting point for a new corpus's annotation guidelines document, modelled on the structure MasakhaNER 2 ([Adelani et al., 2022](https://arxiv.org/abs/2210.12391)) and AfriSenti ([Muhammad et al., 2023](https://arxiv.org/abs/2302.08956)) use. Fork this file, rename it, drop your task in, and adapt the sections. The section structure is what matters — it is the same structure the playbook's Case Studies chapter compares projects against.*
+*A task-agnostic starting point for a new corpus's annotation guidelines document, modelled on the structure MasakhaNER 2 ([Adelani et al., 2022](https://arxiv.org/abs/2210.12391)) and AfriSenti ([Muhammad et al., 2023](https://arxiv.org/abs/2302.08956)) use. Fork this file, rename it, drop your task in, and adapt the sections. The section structure is what matters: it is the same structure the playbook's Case Studies chapter compares projects against.*
 
 ## How to use this template
 
 1. Copy everything below the divider into a new file (`docs/annotation-guidelines.md` in your project repo).
 2. Replace every `[BRACKETED FIELD]` with a real answer.
-3. Delete task-inappropriate sections and add a one-line `Not applicable — [why]` note in place of what you removed.
+3. Delete task-inappropriate sections and add a one-line `Not applicable: [why]` note in place of what you removed.
 4. Version this document. Annotation guidelines drift; a guidelines document without a version and a change log is untrustworthy.
 5. Store the guidelines alongside the corpus so future readers can verify what an annotator was actually told.
 
@@ -32,7 +32,7 @@ Motivated by the [Annotation Design](../3_annotation-design/annotation-task-desi
 ## 1. What we are annotating and why
 
 - **The task in one sentence:** [E.g., "Classify each Twitter post in Hausa, Igbo, or Yoruba as positive, negative, or neutral sentiment."]
-- **What the annotated corpus will be used for:** [Training a specific model, benchmark release, downstream deployment. Be specific — annotators annotate differently when they know the use case.]
+- **What the annotated corpus will be used for:** [Training a specific model, benchmark release, downstream deployment. Be specific; annotators annotate differently when they know the use case.]
 - **What the corpus is NOT for:** [Avoid uses the community has agreed on. Explicit here helps the annotator make judgement calls at the margin.]
 - **Reference project(s) this is modelled on:** [E.g., "MasakhaNER 2 guidelines, adapted for [DOMAIN]."]
 
@@ -55,11 +55,11 @@ Every term the annotator uses is defined here, in one place, in plain language. 
 
 Add every term the annotator will encounter. Cross-reference to definitions used in the reference project (MasakhaNER 2, AfriSenti, LAFAND-MT) explicitly, noting any differences.
 
-## 4. The annotation itself — decision procedure
+## 4. The annotation itself: decision procedure
 
 Written as a step-by-step procedure the annotator can follow for a single example, from opening the labelling tool to submitting the annotation.
 
-1. **Read the example fully before assigning any label.** [Especially important for classification tasks — snap judgements based on the first few words are the main source of low-quality labels.]
+1. **Read the example fully before assigning any label.** [Especially important for classification tasks, since snap judgements based on the first few words are the main source of low-quality labels.]
 2. **Check the context.** [If the example is a tweet, what is the thread? If the example is a sentence in a document, what is the surrounding paragraph? Instructions on how much context to consider.]
 3. **Assign the label using the decision tree below.**
 4. **If uncertain, mark the example as UNCERTAIN with a short note.** [Uncertain examples go to the adjudicator; do not force a label when unsure.]
@@ -70,9 +70,9 @@ Written as a step-by-step procedure the annotator can follow for a single exampl
 ```
 Is [DIAGNOSTIC QUESTION 1]?
 ├── Yes → label = [LABEL 1]
-└── No — is [DIAGNOSTIC QUESTION 2]?
+└── No: is [DIAGNOSTIC QUESTION 2]?
     ├── Yes → label = [LABEL 2]
-    └── No — mark UNCERTAIN with a note explaining the ambiguity.
+    └── No: mark UNCERTAIN with a note explaining the ambiguity.
 ```
 
 Replace with your task's diagnostic questions. The tree should be depth ≤ 4; deeper trees indicate the label set is not well-defined.
@@ -92,9 +92,9 @@ If the task has more than three labels, name them here explicitly with examples.
 | --- | --- | --- | --- |
 | [LABEL 1] | [DEFINITION] | [EXAMPLE] | [WHAT LOOKS LIKE BUT ISN'T] |
 | [LABEL 2] | [DEFINITION] | [EXAMPLE] | [WHAT LOOKS LIKE BUT ISN'T] |
-| UNCERTAIN | Ambiguous; adjudicator will resolve. | — | — |
+| UNCERTAIN | Ambiguous; adjudicator will resolve. | n/a | n/a |
 
-For sequence-labelling tasks (NER, POS), replace with the tag inventory and the span-boundary rules — see the specific per-tag guidance in [MasakhaNER 2](https://arxiv.org/abs/2210.12391) as the reference.
+For sequence-labelling tasks (NER, POS), replace with the tag inventory and the span-boundary rules; see the specific per-tag guidance in [MasakhaNER 2](https://arxiv.org/abs/2210.12391) as the reference.
 
 ## 6. Orthography, script, and diacritics
 
@@ -102,14 +102,14 @@ Load-bearing for African languages. Guidelines that skip this section produce co
 
 - **Script(s) used:** [E.g., "Latin only. Ajami content is out of scope for this corpus."]
 - **Orthographic convention:** [Which spelling standard applies. If the language has more than one, name the one the corpus follows and cite the reference.]
-- **Diacritic handling:** [Preserve fully, normalise to NFC, strip — with the reasoning.]
+- **Diacritic handling:** [Preserve fully, normalise to NFC, strip, with the reasoning.]
 - **Handling of code-switched or mixed-script examples:** [Include, exclude, mark separately.]
 
 ## 7. Inter-annotator agreement
 
 - **Metric used:** [Cohen's kappa for two annotators, Krippendorff's alpha for more, span-level F1 for sequence tagging. See the [evaluation-script template](./evaluation-script.md) for the metric implementations.]
 - **Target level:** [E.g., "κ ≥ 0.7 by the end of the second round"; state what "acceptable" means for this project.]
-- **Cadence:** [How often IAA is measured — after every N examples per annotator, every round, etc.]
+- **Cadence:** [How often IAA is measured: after every N examples per annotator, every round, etc.]
 - **What happens when IAA is below target:** [Additional training, guideline revision, annotator recalibration. The response is a design choice; state it.]
 
 ## 8. Adjudication
@@ -125,13 +125,13 @@ Every version of these guidelines is recorded, dated, and briefly annotated. Gui
 
 | Version | Date | Change | Impact on prior annotations |
 | --- | --- | --- | --- |
-| 1.0 | [YYYY-MM-DD] | Initial. | — |
+| 1.0 | [YYYY-MM-DD] | Initial. | None |
 | [NEXT] | [YYYY-MM-DD] | [CHANGE] | [Re-annotate? Discard? Keep as-is?] |
 
 ## 10. Contact and community
 
 - **Guidelines maintainer:** [NAME + contact]
-- **How annotators raise concerns:** [Channel + response time commitment. See the [ombudsperson role](./consent-form.md#section-d--ombudsperson-role) in the consent template — the same principle applies for guideline issues.]
+- **How annotators raise concerns:** [Channel + response time commitment. See the [ombudsperson role](./consent-form.md#section-d-ombudsperson-role) in the consent template; the same principle applies for guideline issues.]
 - **Community reviewer, if any:** [NAME + role]
 
 ---

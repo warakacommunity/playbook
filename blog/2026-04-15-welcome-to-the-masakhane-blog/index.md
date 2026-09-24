@@ -13,10 +13,10 @@ This is the first post on the new Masakhane blog. We'll use this space to share 
 
 ## What you can expect here
 
-- **Calls for contribution** — chapters, datasets, annotations, reviewers.
-- **Release notes** — when new versions of the Playbook ship.
-- **Community spotlights** — research, tools, and projects from across the Masakhane network.
-- **Tutorials & how-tos** — short, practical pieces that complement the Playbook.
+- **Calls for contribution**: chapters, datasets, annotations, reviewers.
+- **Release notes**: when new versions of the Playbook ship.
+- **Community spotlights**: research, tools, and projects from across the Masakhane network.
+- **Tutorials & how-tos**: short, practical pieces that complement the Playbook.
 
 ## Subscribe
 
@@ -38,4 +38,4 @@ image: /img/blog/your-thumbnail.png
 
 Add a `<!-- truncate -->` marker after the intro paragraph so the blog index shows only that intro on the card.
 
-That's it — open a PR, and we'll publish it.
+That's it: open a PR, and we'll publish it.

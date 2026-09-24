@@ -143,7 +143,7 @@ function DecisionTreeInner({ tree }) {
 export default function DecisionTree({ tree }) {
   return (
     <div className="no-print">
-      <BrowserOnly fallback={<noscript>Interactive decision tree — see the fallback below.</noscript>}>
+      <BrowserOnly fallback={<noscript>Interactive decision tree. See the fallback below.</noscript>}>
         {() => <DecisionTreeInner tree={tree} />}
       </BrowserOnly>
     </div>

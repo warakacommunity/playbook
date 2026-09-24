@@ -17,7 +17,7 @@ last_update:
 
 1. Copy the whole thing below the `---` divider into a new file.
 2. Replace every `[SQUARE BRACKET]` placeholder with a real answer.
-3. Delete any question that genuinely does not apply and add a `Not applicable — [why]` line in its place. Do not silently skip.
+3. Delete any question that genuinely does not apply and add a `Not applicable: [why]` line in its place. Do not silently skip.
 4. Keep the section structure and the header text unchanged, so downstream readers can search across dataset cards for the same field.
 5. Add a `last-reviewed` date at the top so future readers know when the card was current.
 
@@ -35,12 +35,12 @@ Short one-line description: **[ONE LINE]**
 - **Release date:** [YYYY-MM-DD]
 - **Last reviewed:** [YYYY-MM-DD]
 - **Canonical URL:** [DATASET PAGE]
-- **Licence:** [SPDX identifier — e.g., CC BY-NC 4.0]
+- **Licence:** [SPDX identifier, e.g., CC BY-NC 4.0]
 - **DOI / preferred citation:** [BibTeX or plain-text]
 
 ## 1. Motivation
 
-- **For what purpose was the dataset created?** [Not a generic "for NLP research" — the specific task and use case.]
+- **For what purpose was the dataset created?** [Not a generic "for NLP research", but the specific task and use case.]
 - **Who created the dataset?** [Named individuals + affiliations + the community whose language it is derived from.]
 - **Who funded its creation?** [Names + grant IDs.]
 - **What was left out and why?** [The languages, dialects, domains, or content categories that were intentionally excluded.]
@@ -59,14 +59,14 @@ Short one-line description: **[ONE LINE]**
 - **Is the dataset self-contained, or does it link to external resources?** [If external, how stable are those links?]
 - **Does the dataset contain data that might be considered confidential or sensitive?** [Personal identifiers, health information, protected categories under the [legal-consent chapter](../legal-consent/index.md).]
 
-## 3. Collection process — the African-context extension
+## 3. Collection process: the African-context extension
 
 Beyond the standard datasheet questions, this section is where the playbook's African-context requirements land. Do not skip.
 
 - **What data acquisition mechanism was used?** [Community recording? Elicited translation? Web scrape? Combination?]
-- **Who was involved in the data collection?** [Named annotators, translators, or contributors — with consent for named attribution. Volunteer or paid; if paid, at what rate against what benchmark.]
+- **Who was involved in the data collection?** [Named annotators, translators, or contributors, with consent for named attribution. Volunteer or paid; if paid, at what rate against what benchmark.]
 - **Over what timeframe was the data collected?** [Start and end dates.]
-- **Was the collection process reviewed by any board or committee?** [IRB, ethics review, community steering committee — name the body and the review date.]
+- **Was the collection process reviewed by any board or committee?** [IRB, ethics review, community steering committee. Name the body and the review date.]
 - **What was the informed consent process?** [Individual + community consent. If contributors are non-literate, what specific pattern was used (see [legal-consent chapter](../legal-consent/index.md#consent-from-non-literate-speakers)).]
 - **Does the dataset relate to people?** [If yes, the sub-questions below all apply.]
 - **How is consent withdrawn?** [The stable ID, the contact channel, the practical mechanics.]
@@ -87,8 +87,8 @@ Beyond the standard datasheet questions, this section is where the playbook's Af
 
 - **Has the dataset been used for any tasks already?** [Papers, deployments, downstream benchmarks.]
 - **Is there a repository that links to any or all papers or systems that use the dataset?** [If yes, URL.]
-- **What tasks could the dataset be used for?** [Author's recommendation — grounded in what the corpus was actually collected for.]
-- **Are there tasks for which the dataset should NOT be used?** [The playbook's strong editorial position is that dataset cards should name explicit AVOID uses — surveillance applications, commercial re-use without community consultation, downstream retraining that produces derivative models under weakened licences. State them.]
+- **What tasks could the dataset be used for?** [Author's recommendation, grounded in what the corpus was actually collected for.]
+- **Are there tasks for which the dataset should NOT be used?** [The playbook's strong editorial position is that dataset cards should name explicit AVOID uses: surveillance applications, commercial re-use without community consultation, downstream retraining that produces derivative models under weakened licences. State them.]
 
 ## 6. Distribution
 
@@ -96,7 +96,7 @@ Beyond the standard datasheet questions, this section is where the playbook's Af
 - **Is the dataset restricted to non-commercial use?** [Yes or no, with the rationale.]
 - **How can the dataset be accessed?** [Direct download, request-and-review, Zenodo, Hugging Face Hub, etc.]
 - **Are there any fees or access restrictions?**
-- **Who is the named steward for re-use requests?** [Named person or body, with contact — see the [anti-extraction release patterns](../legal-consent/index.md#anti-extraction-release-patterns) in the legal-consent chapter.]
+- **Who is the named steward for re-use requests?** [Named person or body, with contact. See the [anti-extraction release patterns](../legal-consent/index.md#anti-extraction-release-patterns) in the legal-consent chapter.]
 - **How will the dataset be updated?** [Cadence, versioning scheme.]
 - **How long will the dataset be available?** [Institutional commitment, if any.]
 

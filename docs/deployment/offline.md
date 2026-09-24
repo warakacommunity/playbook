@@ -11,7 +11,7 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-The offline case is not exotic. On [ITU 2024 figures](https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx), around 37% of the world's population is still unconnected, and connectivity within Africa is heavily unequal — urban fibre coexists with rural mobile connections that are metered by the megabyte and drop several times per hour. Any deployment that assumes a steady round-trip to a cloud region will fail invisibly for a large share of its intended users. The failure mode is silent: the app opens, the user tries to interact, nothing happens, and the user closes the app and does not come back. This page is about designing so that does not happen.
+The offline case is not exotic. On [ITU 2024 figures](https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx), around 37% of the world's population is still unconnected, and connectivity within Africa is heavily unequal: urban fibre coexists with rural mobile connections that are metered by the megabyte and drop several times per hour. Any deployment that assumes a steady round-trip to a cloud region will fail invisibly for a large share of its intended users. The failure mode is silent: the app opens, the user tries to interact, nothing happens, and the user closes the app and does not come back. This page is about designing so that does not happen.
 
 ## The three connectivity classes to design for
 
@@ -21,7 +21,7 @@ Every African-language deployment has to answer this question up-front: *which o
 2. **Metered mobile connectivity.** 3G/4G/5G paid per megabyte, often prepaid, often bundled cheaply for specific apps (Free Basics, MTN Ayoba, WhatsApp bundles) but expensive for everything else. The user is intensely aware of data cost. Design for **small payloads, cached models, and no background refresh**.
 3. **Patchy or offline.** Connectivity comes and goes multiple times per hour, or the user has no connectivity for hours or days at a time. Design for **local-first**: the model runs on-device, the app is fully usable offline, and sync happens opportunistically.
 
-Deciding this correctly at project kickoff shapes every downstream decision — model size, evaluation targets, UI patterns, error messages. Getting it wrong is one of the two most common causes of "great in the lab, dead in the field" African NLP products.
+Deciding this correctly at project kickoff shapes every downstream decision: model size, evaluation targets, UI patterns, error messages. Getting it wrong is one of the two most common causes of "great in the lab, dead in the field" African NLP products.
 
 ## The local-first design pattern
 
@@ -30,7 +30,7 @@ The pattern that consistently ships in low-connectivity deployments is **local-f
 ### What "local-first" means in practice
 
 - **Model runs on-device.** For text classification, NER, sentiment, small MT, and simple ASR, this is now feasible with quantised sub-1B models. For larger models (NLLB-200 distilled, medium ASR), on-device is possible on newer phones but tight.
-- **The user can open the app, use it, close it, and reopen it — with no network — and every core action works.** Login, task selection, model inference, saving a result, browsing history. If any of these blocks on the network, the pattern is broken.
+- **The user can open the app, use it, close it, and reopen it, with no network, and every core action works.** Login, task selection, model inference, saving a result, browsing history. If any of these blocks on the network, the pattern is broken.
 - **New writes queue in a durable local store** (SQLite, IndexedDB, or a file journal) and drain when connectivity returns. See the [outbox pattern](https://microservices.io/patterns/data/transactional-outbox.html) for the reference architecture.
 - **Sync is idempotent.** Every queued write carries an application-generated unique ID; the server treats duplicates as no-ops. This handles the case where the client thought the sync failed but the server actually received the write.
 - **Model updates are staged, versioned, and rollback-safe.** A phone that failed mid-download does not end up with a corrupt model on next launch.
@@ -52,7 +52,7 @@ For on-device inference on the phones actually used in African contexts, budget:
 
 The right question is not "will it fit"; it is "how do we tell the user how much data they are about to spend, and on what". Every download over Wi-Fi is close to free; every download over metered mobile is a decision the user should make consciously.
 
-## Model download UX — the part that gets ignored
+## Model download UX: the part that gets ignored
 
 Model downloads are the single most-underdesigned surface in African-context NLP apps. The pattern that works:
 
@@ -81,11 +81,11 @@ The evaluation set for an offline deployment should include:
 
 ## Further reading
 
-- [Meta MMS on-device speech recognition writeup](https://ai.meta.com/blog/multilingual-model-speech-recognition/) — Meta's technical report on the constraints and compromises of on-device multilingual ASR.
-- [The Progressive Web App offline pattern](https://web.dev/learn/pwa/offline/) — the web-side of the same design pattern, useful when the deployment surface is a PWA rather than a native app.
-- [ITU Facts and Figures 2024](https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx) — the current global connectivity statistics and the source of the "37% unconnected" number.
-- [Kreutzer et al., 2022 — quality of low-resource web crawls](https://aclanthology.org/2022.tacl-1.4/) — indirectly relevant: many of the quality issues in low-resource models are magnified when the model then runs on-device with no server-side quality filter to catch them.
+- [Meta MMS on-device speech recognition writeup](https://ai.meta.com/blog/multilingual-model-speech-recognition/): Meta's technical report on the constraints and compromises of on-device multilingual ASR.
+- [The Progressive Web App offline pattern](https://web.dev/learn/pwa/offline/): the web-side of the same design pattern, useful when the deployment surface is a PWA rather than a native app.
+- [ITU Facts and Figures 2024](https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx): the current global connectivity statistics and the source of the "37% unconnected" number.
+- [Kreutzer et al., 2022, quality of low-resource web crawls](https://aclanthology.org/2022.tacl-1.4/). Indirectly relevant: many of the quality issues in low-resource models are magnified when the model then runs on-device with no server-side quality filter to catch them.
 
 ---
 
-**Contributor's note.** This is the first real page in the deployment chapter. If you are adding SMS/USSD, edge-device, multilingual-switching, or non-Latin-script pages, mirror the structure — *the class(es) to design for / the pattern that works / the anti-patterns to avoid* — and keep the practical, opinionated stance. Deployment guidance that fails to take a position is not useful.
+**Contributor's note.** This is the first real page in the deployment chapter. If you are adding SMS/USSD, edge-device, multilingual-switching, or non-Latin-script pages, mirror the structure (*the class(es) to design for / the pattern that works / the anti-patterns to avoid*) and keep the practical, opinionated stance. Deployment guidance that fails to take a position is not useful.

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 560" width="100%" font-family="Inter, 'Segoe UI', Roboto, system-ui, sans-serif" role="img" aria-labelledby="tcTitle">
-  <title id="tcTitle">Text classification NLP tasks — taxonomy of sentiment, emotion, topic, toxicity and information quality tasks</title>
+  <title id="tcTitle">Text classification NLP tasks: taxonomy of sentiment, emotion, topic, toxicity and information quality tasks</title>
 
   <!-- Outer branded card -->
   <rect x="2" y="2" width="1236" height="556" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
@@ -17,7 +17,7 @@
     <path d="M864 104 L864 126"/>
     <path d="M1107 104 L1107 126"/>
 
-    <!-- Column 1: Sentiment & opinion — 6 items -->
+    <!-- Column 1: Sentiment & opinion (6 items) -->
     <path d="M52 178 L52 440"/>
     <path d="M52 200 L74 200"/>
     <path d="M52 246 L74 246"/>
@@ -26,20 +26,20 @@
     <path d="M52 384 L74 384"/>
     <path d="M52 430 L74 430"/>
 
-    <!-- Column 2: Emotion — 4 items -->
+    <!-- Column 2: Emotion (4 items) -->
     <path d="M295 178 L295 348"/>
     <path d="M295 200 L317 200"/>
     <path d="M295 246 L317 246"/>
     <path d="M295 292 L317 292"/>
     <path d="M295 338 L317 338"/>
 
-    <!-- Column 3: Topic — 3 items -->
+    <!-- Column 3: Topic (3 items) -->
     <path d="M539 178 L539 302"/>
     <path d="M539 200 L561 200"/>
     <path d="M539 246 L561 246"/>
     <path d="M539 292 L561 292"/>
 
-    <!-- Column 4: Toxicity — 5 items -->
+    <!-- Column 4: Toxicity (5 items) -->
     <path d="M783 178 L783 394"/>
     <path d="M783 200 L805 200"/>
     <path d="M783 246 L805 246"/>
@@ -47,7 +47,7 @@
     <path d="M783 338 L805 338"/>
     <path d="M783 384 L805 384"/>
 
-    <!-- Column 5: Information quality — 3 items -->
+    <!-- Column 5: Information quality (3 items) -->
     <path d="M1027 178 L1027 316"/>
     <path d="M1027 200 L1049 200"/>
     <path d="M1027 254 L1049 254"/>

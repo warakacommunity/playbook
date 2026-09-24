@@ -121,7 +121,7 @@ function ModalContent({ onClose, mode, filePath, itemId, itemData, pageTitle, in
         const raw = await fetchRawFile(filePath);
         const arr = JSON.parse(raw);
         const idx = arr.findIndex((item) => item.id === itemId);
-        if (idx === -1) throw new Error('Item not found. The data may have changed — please refresh and try again.');
+        if (idx === -1) throw new Error('Item not found. The data may have changed. Please refresh and try again.');
         arr[idx] = { ...arr[idx], ...formData };
         newContent = JSON.stringify(arr, null, 2) + '\n';
         prTitle = `Edit ${mode} card: "${formData.title || formData.name || itemId}"`;
@@ -142,7 +142,7 @@ function ModalContent({ onClose, mode, filePath, itemId, itemData, pageTitle, in
   };
 
   const modeLabel = mode === 'markdown'
-    ? `Suggest an edit — ${pageTitle || filePath}`
+    ? `Suggest an edit: ${pageTitle || filePath}`
     : mode === 'news'
     ? 'Edit news card'
     : 'Edit community card';

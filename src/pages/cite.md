@@ -33,7 +33,7 @@ If the AfriPlaybook informs your research, teaching, or project, please cite it.
 
 ## Citation File Format (CFF)
 
-The repository ships a [`CITATION.cff`](https://github.com/warakacommunity/playbook/blob/main/CITATION.cff) file. GitHub auto-renders a **"Cite this repository"** button on the right sidebar of the [repo page](https://github.com/warakacommunity/playbook) — click it for any of the formats above plus a few more.
+The repository ships a [`CITATION.cff`](https://github.com/warakacommunity/playbook/blob/main/CITATION.cff) file. GitHub auto-renders a **"Cite this repository"** button on the right sidebar of the [repo page](https://github.com/warakacommunity/playbook). Click it for any of the formats above plus a few more.
 
 ## Citing a specific chapter
 
@@ -43,7 +43,7 @@ When you reference a specific chapter rather than the playbook as a whole, inclu
 
 ## Versioning and DOIs
 
-The playbook is a living document — chapters change as the community refines guidance. If you need a stable, citable version (for a paper that will be peer-reviewed years from now), please [open an issue](https://github.com/warakacommunity/playbook/issues/new) and we'll cut a versioned release with a [Zenodo](https://zenodo.org) DOI you can cite directly.
+The playbook is a living document: chapters change as the community refines guidance. If you need a stable, citable version (for a paper that will be peer-reviewed years from now), please [open an issue](https://github.com/warakacommunity/playbook/issues/new) and we'll cut a versioned release with a [Zenodo](https://zenodo.org) DOI you can cite directly.
 
 ## Questions
 

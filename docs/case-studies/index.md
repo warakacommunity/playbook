@@ -10,7 +10,7 @@ last_update:
 
 *Retrospectives from real African-language NLP projects, written by the people who built them.*
 
-Most NLP writing is aspirational — how the pipeline is *supposed* to work, how the metrics are *supposed* to move, how the annotator workflow is *supposed* to scale. The interesting parts sit in the gap between the paper's methods section and what actually happened: what surprised the team, what was harder than they expected, what they would do differently. This chapter closes that gap.
+Most NLP writing is aspirational: how the pipeline is *supposed* to work, how the metrics are *supposed* to move, how the annotator workflow is *supposed* to scale. The interesting parts sit in the gap between the paper's methods section and what actually happened: what surprised the team, what was harder than they expected, what they would do differently. This chapter closes that gap.
 
 Every case study on this page answers the same seventeen questions, drawn from the [retrospective template](../case-studies/retrospective-template.md). Same questions across every project, so a reader can compare across them and see the patterns.
 
@@ -22,9 +22,9 @@ They are also the fastest way to teach. A person starting an NER project will le
 
 ## The editorial contract
 
-Case studies **must be authored** — written by, or reviewed and approved by, the project's own leads. A case study assembled from published sources with no author attribution is not a case study; it is a paper summary. Where the playbook cannot yet secure a project-lead's own words, we ship a **public-record draft** with a prominent banner, so the page is a starting point for correction rather than a claim of authority.
+Case studies **must be authored**: written by, or reviewed and approved by, the project's own leads. A case study assembled from published sources with no author attribution is not a case study; it is a paper summary. Where the playbook cannot yet secure a project-lead's own words, we ship a **public-record draft** with a prominent banner, so the page is a starting point for correction rather than a claim of authority.
 
-This is the whole reason Case Studies is worth building. The lightweight, honest alternative — a bibliography of citations — already exists in every referenced paper. This chapter's value is the seventeenth question ("What is the current state of the project?"), asked and answered by the person who knows.
+This is the whole reason Case Studies is worth building. The lightweight, honest alternative, a bibliography of citations, already exists in every referenced paper. This chapter's value is the seventeenth question ("What is the current state of the project?"), asked and answered by the person who knows.
 
 ## The reference retrospectives
 
@@ -71,9 +71,9 @@ To add or claim one:
 3. Answer the seventeen questions. It is more valuable to answer honestly and briefly than to write a polished narrative. If a question is not applicable, say so and why.
 4. Open a pull request. Tag the original project leads for review before merging.
 
-To **claim** an existing public-record draft (e.g., MasakhaNER above): open a pull request rewriting the sections you have first-hand knowledge of. Partial rewrites are welcome — a project-lead's answer on the three or four questions that most surprised the team is worth more than a whole page of public-record inference.
+To **claim** an existing public-record draft (e.g., MasakhaNER above): open a pull request rewriting the sections you have first-hand knowledge of. Partial rewrites are welcome. A project-lead's answer on the three or four questions that most surprised the team is worth more than a whole page of public-record inference.
 
-The value is in the honest answers. If your project had a hard week, a wrong assumption, a mistake that cost time — those are the answers that make the case study useful. Save the marketing for the conference paper.
+The value is in the honest answers. If your project had a hard week, a wrong assumption, a mistake that cost time: those are the answers that make the case study useful. Save the marketing for the conference paper.
 
 ## Editorial policy
 

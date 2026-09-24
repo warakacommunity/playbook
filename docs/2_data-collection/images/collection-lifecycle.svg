@@ -7,7 +7,7 @@
 
   <!-- header -->
   <text x="32" y="52" font-size="24" font-weight="700" fill="#2B2218">The data-collection lifecycle</text>
-  <text x="32" y="78" font-size="14" fill="#8A7D6E">Gathering raw material for African-language datasets — modality and sources through to governance</text>
+  <text x="32" y="78" font-size="14" fill="#8A7D6E">Gathering raw material for African-language datasets: modality and sources through to governance</text>
   <line x1="32" y1="94" x2="1148" y2="94" stroke="#E7DDCB" stroke-width="1.5"/>
 
   <!-- ===================== STAGE 1: modality & sources ===================== -->
@@ -19,7 +19,7 @@
   <text x="48" y="228" font-size="13" fill="#2B2218">Images</text>
   <text x="48" y="250" font-size="13" fill="#2B2218">Video</text>
   <text x="48" y="272" font-size="13" fill="#2B2218">Multimodal data</text>
-  <text x="48" y="300" font-size="12" fill="#8A7D6E">Decided first — it drives everything</text>
+  <text x="48" y="300" font-size="12" fill="#8A7D6E">Decided first: it drives everything</text>
 
   <!-- Sources box -->
   <rect x="280" y="130" width="244" height="190" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
@@ -53,21 +53,21 @@
   <!-- Web scraping (less stable) -->
   <rect x="588" y="268" width="262" height="58" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
   <text x="604" y="292" font-size="13.5" font-weight="700" fill="#9C4F2B">Web scraping</text>
-  <text x="604" y="312" font-size="12" fill="#C66A3D">Brittle — pages and layouts change</text>
+  <text x="604" y="312" font-size="12" fill="#C66A3D">Brittle: pages and layouts change</text>
   <circle cx="834" cy="286" r="6" fill="#C66A3D"/>
 
   <!-- APIs (less stable) -->
   <rect x="588" y="336" width="262" height="58" rx="10" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
   <text x="604" y="360" font-size="12" font-weight="700" fill="#9C4F2B">Application programming interfaces</text>
-  <text x="604" y="380" font-size="12" fill="#C66A3D">Brittle — terms, limits &amp; access shift</text>
+  <text x="604" y="380" font-size="12" fill="#C66A3D">Brittle: terms, limits &amp; access shift</text>
   <circle cx="834" cy="354" r="6" fill="#C66A3D"/>
 
   <!-- stability legend -->
   <rect x="588" y="410" width="262" height="58" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
   <circle cx="606" cy="430" r="6" fill="#2E7D5B"/>
-  <text x="620" y="435" font-size="12" fill="#2B2218">Community / purpose-built — more stable</text>
+  <text x="620" y="435" font-size="12" fill="#2B2218">Community / purpose-built: more stable</text>
   <circle cx="606" cy="452" r="6" fill="#C66A3D"/>
-  <text x="620" y="457" font-size="12" fill="#2B2218">Scraping / APIs — less stable, higher upkeep</text>
+  <text x="620" y="457" font-size="12" fill="#2B2218">Scraping / APIs: less stable, higher upkeep</text>
 
   <!-- connector sources -> methods (fan in) -->
   <line x1="524" y1="225" x2="560" y2="225" stroke="#CBBBA4" stroke-width="2.5"/>
@@ -99,16 +99,16 @@
   <!-- Provenance -->
   <rect x="280" y="540" width="412" height="180" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
   <text x="300" y="570" font-size="15" font-weight="700" fill="#B97F37">5 · Provenance &amp; traceability</text>
-  <text x="300" y="598" font-size="13" fill="#2B2218">Source tracking — URLs &amp; references, contributors</text>
-  <text x="300" y="620" font-size="13" fill="#2B2218">Collection context — when, where &amp; how</text>
-  <text x="300" y="642" font-size="13" fill="#2B2218">Data lineage — evolution &amp; versioning</text>
+  <text x="300" y="598" font-size="13" fill="#2B2218">Source tracking: URLs &amp; references, contributors</text>
+  <text x="300" y="620" font-size="13" fill="#2B2218">Collection context: when, where &amp; how</text>
+  <text x="300" y="642" font-size="13" fill="#2B2218">Data lineage: evolution &amp; versioning</text>
   <text x="300" y="672" font-size="12" fill="#8A7D6E">Supports reproducibility, auditing</text>
   <text x="300" y="690" font-size="12" fill="#8A7D6E">and accountability across the pipeline.</text>
 
   <!-- Ethics -->
   <rect x="724" y="540" width="424" height="180" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
   <text x="744" y="570" font-size="15" font-weight="700" fill="#8A3B25">6 · Ethics, bias &amp; governance</text>
-  <text x="744" y="598" font-size="13" fill="#2B2218">Bias detection &amp; mitigation — source &amp; annotation bias</text>
+  <text x="744" y="598" font-size="13" fill="#2B2218">Bias detection &amp; mitigation: source &amp; annotation bias</text>
   <text x="744" y="620" font-size="13" fill="#2B2218">PII detection &amp; removal</text>
   <text x="744" y="642" font-size="13" fill="#2B2218">Consent, licensing &amp; transparency</text>
   <text x="744" y="672" font-size="12" fill="#8A7D6E">Responsible practice spanning the</text>

@@ -49,7 +49,7 @@ function WipPlaceholder({ title }) {
         </div>
         <p style={{ margin: 0 }}>
           This chapter is being written. It'll appear here once the authors are
-          happy with it. Nothing to see yet — check the sidebar for chapters
+          happy with it. Nothing to see yet. Check the sidebar for chapters
           that are ready, or come back later.
         </p>
       </div>

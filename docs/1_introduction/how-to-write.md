@@ -40,11 +40,11 @@ Headings build the structure of the page and the table of contents on the right.
 Rules that keep pages clean:
 
 - **Never use a single `#`.** That is the chapter title, and the playbook owns it.
-- **Don't skip levels** — a `##` is followed by `###`, not `####`.
+- **Don't skip levels.** A `##` is followed by `###`, not `####`.
 - **Keep headings short.** They become menu entries; a full sentence breaks the layout.
 - **One idea per section.** If a section runs past a screen or two, split it.
 
-### Admonitions — the colored callout boxes
+### Admonitions: the colored callout boxes
 
 Admonitions are the boxed callouts (like the green "golden rule" box above) that pull a reader's eye to something important. Wrap text in `:::` fences:
 
@@ -58,7 +58,7 @@ Best practice, or what worked on a real project. Green.
 :::
 
 :::info
-Something the reader needs to know first — a prerequisite or definition. Blue.
+Something the reader needs to know first: a prerequisite or definition. Blue.
 :::
 
 :::warning
@@ -66,7 +66,7 @@ A common mistake or gotcha. Yellow.
 :::
 
 :::danger
-Something irreversible or unsafe — data loss, consent, security. Red.
+Something irreversible or unsafe: data loss, consent, security. Red.
 :::
 ```
 
@@ -81,7 +81,7 @@ You don't need to write a whole chapter to help.
 **Rules:**
 
 - Leave a **blank line before and after** each `:::` fence and around the content inside.
-- You can put normal Markdown inside — **bold**, links, lists, code.
+- You can put normal Markdown inside: **bold**, links, lists, code.
 - Use them sparingly: **at most one per section**, or the page reads like a warning label.
 
 ### When to use which box
@@ -96,7 +96,7 @@ You don't need to write a whole chapter to help.
 
 ### Other things that make a page nicer
 
-- **Code blocks** — always set the language (such as **python**, **java**) so it gets highlighted, and add a title if helpful:
+- **Code blocks**: always set the language (such as **python**, **java**) so it gets highlighted, and add a title if helpful:
 
   ````markdown
   ```python title="train.py"
@@ -105,14 +105,14 @@ You don't need to write a whole chapter to help.
   ````
 
 This is important specially for chapters that talks about technical aspects such as data cleaning, visualization and so on.
-- **Images** — put them in the chapter's **`images/`** folder and always write alt text describing the figure:
+- **Images**: put them in the chapter's **`images/`** folder and always write alt text describing the figure:
 
   ```markdown
   ![AfricaNLP papers grew roughly fourteenfold between 2006 and 2024.](images/africanlp-growth.svg)
   ```
 
-- **Links** — link to other pages with a relative path so the build can check them: `[Core principles](./core-principles)`.
-- **Collapsible detail** — hide long, optional content:
+- **Links**: link to other pages with a relative path so the build can check them: `[Core principles](./core-principles)`.
+- **Collapsible detail**: hide long, optional content:
 
   ```markdown
   <details>
@@ -123,13 +123,14 @@ This is important specially for chapters that talks about technical aspects such
   </details>
   ```
 
-- **Tables** — keep them narrow. Most contributors read on a phone, and wide tables break the layout.
+- **Tables**: keep them narrow. Most contributors read on a phone, and wide tables break the layout.
+- **No em-dashes**: don't use the long dash. Use a colon, a comma, parentheses or a new sentence instead.
 
 ---
 
 ## Writing in Microsoft Word
 
-You can draft in **Word** and let a maintainer convert it. To make the conversion clean, use Word's **built-in styles** (the Heading 1 / Heading 2 buttons), not manual bold text or bigger fonts — the converter only understands real styles.
+You can draft in **Word** and let a maintainer convert it. To make the conversion clean, use Word's **built-in styles** (the Heading 1 / Heading 2 buttons), not manual bold text or bigger fonts. The converter only understands real styles.
 
 ### Headings map one level down
 
@@ -148,7 +149,7 @@ So: don't type a chapter title at the top of your Word file. Start straight into
 
 ### Admonitions in Word
 
-Word has no built-in admonition, so use the convention below. The simplest, most reliable way is to **type the `:::` fences as plain text**, each on its own line, in a normal (Body) paragraph — *not* styled as a heading:
+Word has no built-in admonition, so use the convention below. The simplest, most reliable way is to **type the `:::` fences as plain text**, each on its own line, in a normal (Body) paragraph, *not* styled as a heading:
 ```
 
  :::tip[Contribute]
@@ -165,9 +166,9 @@ When the document is converted, those lines survive as-is and the playbook rende
 
 ### A few more Word tips
 
-- **Images** — paste them inline where they belong, and write a one-line caption underneath each so it can become alt text.
-- **Links** — use Word's real hyperlinks (Insert → Link), not bare pasted URLs, so they convert correctly.
-- **Don't fake structure** — avoid manual numbering, hand-drawn boxes, or extra blank lines for spacing. Let styles do the work; the layout is applied for you on the site.
+- **Images**: paste them inline where they belong, and write a one-line caption underneath each so it can become alt text.
+- **Links**: use Word's real hyperlinks (Insert → Link), not bare pasted URLs, so they convert correctly.
+- **Don't fake structure**: avoid manual numbering, hand-drawn boxes, or extra blank lines for spacing. Let styles do the work; the layout is applied for you on the site.
 
 ---
 
@@ -179,6 +180,6 @@ Whichever format you write in, check how it looks before opening a pull request.
 npm start        # opens a live preview at http://localhost:3000
 ```
 
-The preview reloads as you edit, so admonitions, headings, and images appear exactly as they will once published. Read the page on a narrow window too — most readers are on a phone.
+The preview reloads as you edit, so admonitions, headings, and images appear exactly as they will once published. Read the page on a narrow window too, since most readers are on a phone.
 
 For the full style rules, see [CONTRIBUTING.md](https://github.com/warakacommunity/playbook/blob/main/CONTRIBUTING.md).

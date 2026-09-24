@@ -12,12 +12,12 @@ You do not need to be an NLP researcher, and you do not need to write a whole ch
 
 ## Ways to contribute
 
-- **Fix or improve a page** — correct an error, clarify a sentence, add a missing reference.
-- **Write a chapter or section** — fill a gap the playbook does not yet cover.
-- **Share a case study** — what you did on a real project, including what went wrong.
-- **Add an example** — a real, verifiable dataset or paper that illustrates a point.
-- **Translate a page** — into Hausa, Amharic, Swahili, French, Portuguese, or another language.
-- **Open a discussion** — ask a question or challenge an approach. Disagreement makes the guide better.
+- **Fix or improve a page**: correct an error, clarify a sentence, add a missing reference.
+- **Write a chapter or section**: fill a gap the playbook does not yet cover.
+- **Share a case study**: what you did on a real project, including what went wrong.
+- **Add an example**: a real, verifiable dataset or paper that illustrates a point.
+- **Translate a page**: into Hausa, Amharic, Swahili, French, Portuguese, or another language.
+- **Open a discussion**: ask a question or challenge an approach. Disagreement makes the guide better.
 
 Everything lives in one repository: [github.com/warakacommunity/playbook](https://github.com/warakacommunity/playbook).
 
@@ -33,25 +33,25 @@ There are three ways to make a change, from the quickest to the most hands-on. C
 
 ---
 
-## Path 1 — Edit on the site (easiest)
+## Path 1: Edit on the site (easiest)
 
 Best for fixing typos, rewording a sentence, or adding a link. You never leave the browser.
 
 1. Open the page you want to change.
 2. Click **Contribute** at the top of the table of contents on the right of the page.
-3. Sign in with GitHub when prompted — one click authorises you securely on GitHub, so nothing is ever typed into this site. This lets us credit your work and open the change under your name.
+3. Sign in with GitHub when prompted. One click authorises you securely on GitHub, so nothing is ever typed into this site. This lets us credit your work and open the change under your name.
 4. Make your edit in the editor.
 5. Add a short note describing what you changed, then submit.
 
-The site opens a pull request for you automatically. A maintainer reviews it and merges. That is the whole process — no git, no setup.
+The site opens a pull request for you automatically. A maintainer reviews it and merges. That is the whole process: no git, no setup.
 
 :::note
 
-If **Contribute** opens a new tab on `afriplaybook.waraka.org`, that is expected — GitHub sign-in runs on the project's editing site. It opens the same chapter you were reading, so just sign in and edit there.
+If **Contribute** opens a new tab on `afriplaybook.waraka.org`, that is expected. GitHub sign-in runs on the project's editing site. It opens the same chapter you were reading, so just sign in and edit there.
 
 :::
 
-## Path 2 — Edit one file on GitHub
+## Path 2: Edit one file on GitHub
 
 Best for a small change when you would rather work on GitHub directly.
 
@@ -61,15 +61,15 @@ Best for a small change when you would rather work on GitHub directly.
 4. At the bottom, write a short description and click **Propose changes**.
 5. Click **Create pull request**.
 
-## Path 3 — Fork and pull request (for chapters and larger changes)
+## Path 3: Fork and pull request (for chapters and larger changes)
 
 Best for adding a new chapter or editing several files at once. This needs [git](https://git-scm.com/) and [Node.js 18+](https://nodejs.org/) on your computer. Even if you are new to git, you can follow these steps.
 
-### Step 1 — Open an issue first
+### Step 1: Open an issue first
 
 Before writing a chapter, [open an issue](https://github.com/warakacommunity/playbook/issues/new) describing what you plan to add. This avoids two people writing the same thing and lets maintainers point you in the right direction.
 
-### Step 2 — Fork and clone
+### Step 2: Fork and clone
 
 Open [the repository](https://github.com/warakacommunity/playbook) and click **Fork** (top right). Then clone your fork:
 
@@ -78,7 +78,7 @@ git clone https://github.com/<your-username>/playbook.git
 cd playbook
 ```
 
-### Step 3 — Install and run locally
+### Step 3: Install and run locally
 
 ```bash
 npm install      # Node 18+ required
@@ -87,7 +87,7 @@ npm start        # opens a live preview at http://localhost:3000
 
 The preview reloads as you edit, so you can see your change immediately.
 
-### Step 4 — Create a branch
+### Step 4: Create a branch
 
 Never work on `main` directly. Create a branch named for your change:
 
@@ -95,7 +95,7 @@ Never work on `main` directly. Create a branch named for your change:
 git checkout -b chapter/your-topic-slug
 ```
 
-### Step 5 — Add or edit your content
+### Step 5: Add or edit your content
 
 Chapters are Markdown files under `docs/`, grouped into folders by topic. To add a page, create a new `.md` file in the right folder and start it with frontmatter:
 
@@ -111,15 +111,15 @@ Your content here.
 
 `sidebar_position` controls where the page appears in the sidebar. Pick the number for the slot you want, and bump the pages after it if needed.
 
-### Step 6 — The sidebar updates itself
+### Step 6: The sidebar updates itself
 
 The sidebar is generated automatically from the folder structure and each page's `sidebar_position`, so there is nothing extra to edit. To rename a folder's label, edit its `_category_.json`.
 
-### Step 7 — Preview your change
+### Step 7: Preview your change
 
-Check your page in the running preview (`http://localhost:3000`). Read it on a narrow window too — most contributors read on a phone.
+Check your page in the running preview (`http://localhost:3000`). Read it on a narrow window too; most contributors read on a phone.
 
-### Step 8 — Run the build
+### Step 8: Run the build
 
 This catches broken links and other errors before you open a pull request:
 
@@ -129,7 +129,7 @@ npm run build
 
 Fix anything it flags. A clean build is the main thing reviewers check for.
 
-### Step 9 — Commit and push
+### Step 9: Commit and push
 
 ```bash
 git add .
@@ -137,7 +137,7 @@ git commit -m "Add chapter on <your topic>"
 git push origin chapter/your-topic-slug
 ```
 
-### Step 10 — Open a pull request
+### Step 10: Open a pull request
 
 1. Go to your fork on GitHub and click **Compare & pull request**.
 2. Write a short description of what you added and why. Link the issue from Step 1.
@@ -150,9 +150,9 @@ A maintainer will review it, suggest any changes, and merge it once it is ready.
 A few things every contribution should follow:
 
 - **Write plainly.** Short sentences, active voice, one idea per paragraph. Explain jargon the first time you use it.
-- **Cite real sources.** Every claim and example must point to a real, verifiable paper, dataset, or project — never an invented or unchecked citation.
+- **Cite real sources.** Every claim and example must point to a real, verifiable paper, dataset, or project, never an invented or unchecked citation.
 
-For how to structure a page, add sections and subsections, and use the colored callout boxes — in **Markdown or Word** — see [How to Write the Document](./how-to-write). For the full style rules and deeper repository details, see [CONTRIBUTING.md](https://github.com/warakacommunity/playbook/blob/main/CONTRIBUTING.md).
+For how to structure a page, add sections and subsections, and use the colored callout boxes (in **Markdown or Word**), see [How to Write the Document](./how-to-write). For the full style rules and deeper repository details, see [CONTRIBUTING.md](https://github.com/warakacommunity/playbook/blob/main/CONTRIBUTING.md).
 
 ## Translating a page
 

@@ -58,7 +58,7 @@ export default function Comments() {
           <h2 className="giscus-heading">Join the discussion</h2>
           <p className="giscus-sub">
             Spotted an error, have a question, or want to share what worked on a real
-            project? Sign in with GitHub to add your voice — every thread lives in the
+            project? Sign in with GitHub to add your voice. Every thread lives in the
             open, powered by GitHub Discussions.
           </p>
         </div>

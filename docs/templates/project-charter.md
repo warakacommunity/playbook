@@ -17,15 +17,15 @@ last_update:
 
 1. Copy everything below the divider into a new file (`docs/project-charter.md` in your project repo or the community-owned repository).
 2. Fill in every `[BRACKETED FIELD]` with a real answer negotiated with the community, not decided by the project team alone.
-3. Convene the community consultation described in [Section C of the consent template](./consent-form.md#section-c--community-consent-addendum). The charter is the artefact that comes out of that consultation.
-4. Sign it. All named parties — project lead, community stewards, institutional sponsor, ombudsperson — sign a physical or digitally-witnessed copy. Store one copy in each party's possession.
+3. Convene the community consultation described in [Section C of the consent template](./consent-form.md#section-c-community-consent-addendum). The charter is the artefact that comes out of that consultation.
+4. Sign it. All named parties (project lead, community stewards, institutional sponsor, ombudsperson) sign a physical or digitally-witnessed copy. Store one copy in each party's possession.
 5. Version it. The charter can be amended; amendments require the same signature process.
 
-Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.md#step-0--before-any-data-collection), the [legal, consent, and community IP](../legal-consent/index.md) chapter, and every Case Study in the playbook where a missing charter shows up as the root cause of a downstream dispute.
+Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.md#step-0-before-any-data-collection), the [legal, consent, and community IP](../legal-consent/index.md) chapter, and every Case Study in the playbook where a missing charter shows up as the root cause of a downstream dispute.
 
 ---
 
-## Project charter — [PROJECT NAME]
+## Project charter: [PROJECT NAME]
 
 **Version:** [X.Y] · **Effective date:** [YYYY-MM-DD] · **Language(s):** [LANGUAGE(S)] · **Community(ies):** [NAMED COMMUNITIES]
 
@@ -41,7 +41,7 @@ Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.
 - **Project lead:** [NAME + affiliation + contact + role.]
 - **Institutional sponsor:** [ORGANISATION legally responsible for the project + point-of-contact.]
 - **Community stewards:** [NAMED community representatives with the standing to speak for the community on this project.]
-- **Ombudsperson:** [NAME + contact — see the [ombudsperson role](./consent-form.md#section-d--ombudsperson-role) in the consent template.]
+- **Ombudsperson:** [NAME + contact; see the [ombudsperson role](./consent-form.md#section-d-ombudsperson-role) in the consent template.]
 - **Technical lead:** [NAME + role.]
 - **Community liaison:** [NAME + role, distinct from the annotator role.]
 - **Linguistic consultant, if any:** [NAME + role.]
@@ -56,11 +56,11 @@ Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.
 - **Diacritic and tone convention:** [The specific rules that apply. Reference for annotators.]
 - **How orthographic decisions can be revisited:** [Which body has standing to revise, and by what process. Orthographic conventions drift; the charter names how the corpus will handle drift.]
 
-## 4. Data — what is collected, from whom, how
+## 4. Data: what is collected, from whom, how
 
 - **Types of data collected:** [Speech, text, image, video, annotations, translations. Be specific.]
 - **Sources of data:** [Community-produced original content, existing texts, elicited translations. Ranked and justified. See the [long-tail chapter's source-selection ranking](../long-tail-language/index.md#source-selection).]
-- **Contributors:** [Who contributes — recording speakers, translators, annotators. Anonymised or named-with-consent.]
+- **Contributors:** [Who contributes: recording speakers, translators, annotators. Anonymised or named-with-consent.]
 - **Consent framework:** [Reference to the [consent form template](./consent-form.md) or the project's specific consent artefact.]
 - **Storage:** [Location (country + institution + system), access controls, retention period.]
 
@@ -68,10 +68,10 @@ Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.
 
 The centre of the charter. Every question below is answered explicitly.
 
-- **Who owns the raw data?** [Contributor, community, project — with the reasoning.]
+- **Who owns the raw data?** [Contributor, community, project, with the reasoning.]
 - **Who owns the annotated corpus?** [Named party or shared-ownership arrangement.]
 - **Who owns the models built from the corpus?** [Same.]
-- **Under what licence is the corpus released?** [SPDX identifier + reasoning. See the [licence selection section](../legal-consent/index.md#licence-selection) — CC BY-NC 4.0 is the playbook's honest default; document why if choosing something different.]
+- **Under what licence is the corpus released?** [SPDX identifier + reasoning. See the [licence selection section](../legal-consent/index.md#licence-selection). CC BY-NC 4.0 is the playbook's honest default; document why if choosing something different.]
 - **Under what licence are models released?** [Model release is a separate decision from data release; document it.]
 - **What re-use requires community approval?** [E.g., "commercial use", "inclusion in a downstream release under a different licence", "use in a foreign-owned model's training data".]
 - **Who has the standing to approve re-use requests?** [Named body or steward.]
@@ -79,7 +79,7 @@ The centre of the charter. Every question below is answered explicitly.
 
 ## 6. Team, timeline, and budget
 
-- **Timeline:** [Milestone dates. See the [long-tail chapter's milestone-0-to-4 arc](../long-tail-language/index.md#step-2--realistic-milestones) for reference; use a version realistic to this project.]
+- **Timeline:** [Milestone dates. See the [long-tail chapter's milestone-0-to-4 arc](../long-tail-language/index.md#step-2-realistic-milestones) for reference; use a version realistic to this project.]
 - **Effort estimate:** [Person-months per role.]
 - **Budget summary:** [Total budget + high-level breakdown. Detailed cost accounting can live in a separate financial document.]
 - **Compensation policy:** [Rate for annotators, translators, community liaison, ombudsperson. Rates are named to prevent the failure mode of paying different contributors differently for the same work.]
@@ -89,7 +89,7 @@ The centre of the charter. Every question below is answered explicitly.
 ## 7. Governance and decision-making
 
 - **Who makes technical decisions:** [Named person or role.]
-- **Who makes community-facing decisions:** [Named person or role — usually a community steward, not the project lead.]
+- **Who makes community-facing decisions:** [Named person or role, usually a community steward, not the project lead.]
 - **How disputes are resolved:** [Escalation path; ombudsperson role; final arbiter.]
 - **How the charter is amended:** [Amendment process; who has to agree; documentation requirements.]
 - **How the project can be paused or halted:** [The ombudsperson's authority; the community's authority; the sponsor's authority. State them.]
@@ -104,7 +104,7 @@ The centre of the charter. Every question below is answered explicitly.
 ## 9. Ethics and safeguards
 
 - **Ethics review:** [IRB or ethics-review-board name + date + outcome. If no formal ethics review is possible, describe the substitute community-review process.]
-- **Data protection compliance:** [Which country's law applies; how compliance is documented. See the [country reference](../legal-consent/index.md#data-protection-laws-in-africa--quick-country-reference).]
+- **Data protection compliance:** [Which country's law applies; how compliance is documented. See the [country reference](../legal-consent/index.md#data-protection-laws-in-africa-quick-country-reference).]
 - **Vulnerable-population protections:** [If the project touches specific vulnerable populations (children, refugees, minority-within-the-community groups), the additional protections in place.]
 - **Cultural-heritage protections:** [If the corpus includes traditional knowledge or culturally-sensitive material, the protections around it. See [WIPO's traditional knowledge framework](https://www.wipo.int/tk/en/).]
 

@@ -79,7 +79,7 @@ export async function pollDeviceFlow(clientId, deviceCode, proxyUrl, intervalSec
     if (data.access_token) return data.access_token;
     if (data.error === 'authorization_pending') continue;
     if (data.error === 'slow_down') { wait += 5; continue; }
-    if (data.error === 'expired_token') throw new Error('Code expired — please try again.');
+    if (data.error === 'expired_token') throw new Error('Code expired. Please try again.');
     if (data.error === 'access_denied') throw new Error('Access denied on GitHub.');
     throw new Error(data.error_description || data.error || 'Device flow failed.');
   }

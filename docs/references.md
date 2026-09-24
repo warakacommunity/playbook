@@ -126,7 +126,7 @@ emotion-in-text datasets covering many African languages; a useful taxonomy refe
 ### Carroll, S. R., Garba, I., et al. (2020) {#carroll-2020}
 
 *The CARE Principles for Indigenous Data Governance.* Data Science Journal, 19(1), 43. Collective
-benefit, Authority to control, Responsibility, Ethics — the community's right to govern data about it.
+benefit, Authority to control, Responsibility, Ethics: the community's right to govern data about it.
 [doi.org/10.5334/dsj-2020-043](https://doi.org/10.5334/dsj-2020-043)
 
 ### Deep Learning Indaba {#deep-learning-indaba}
@@ -194,7 +194,7 @@ for Computational Linguistics (TACL), 10. [aclanthology.org/2022.tacl-1.4](https
 
 ### Lacuna Fund (n.d.) {#lacuna-fund}
 
-*Language — Lacuna Fund.* Co-founded in 2020 by The Rockefeller Foundation, Google.org, and Canada's
+*Language: Lacuna Fund.* Co-founded in 2020 by The Rockefeller Foundation, Google.org, and Canada's
 International Development Research Centre (IDRC) to fund the creation and labelling of machine-learning
 datasets in low-resource settings, including a dedicated stream for sub-Saharan African languages.
 [lacunafund.org/language](https://lacunafund.org/language/)
@@ -205,7 +205,7 @@ datasets in low-resource settings, including a dedicated stream for sub-Saharan 
 models, papers, policies) that tackles the discoverability problem of work scattered across repositories,
 PDFs, and dead project pages, and also creates bespoke datasets through "data farming." [lanfrica.com](https://lanfrica.com/)
 
-### Lanfrica — Licensing as a Barrier (n.d.) {#lanfrica-licensing}
+### Lanfrica: Licensing as a Barrier (n.d.) {#lanfrica-licensing}
 
 *Licensing as a Barrier to the Usability of African Language Datasets.* Lanfrica Blog. Many African
 datasets carry missing or unclear licences, which leaves them legally unusable for reusers.
@@ -220,13 +220,13 @@ synthetic generation often fails for the lowest-resource languages. [arxiv.org/a
 ### Malabo Convention (2023) {#malabo-2023}
 
 *African Union Convention on Cyber Security and Personal Data Protection (Malabo Convention).* Adopted
-by the African Union in 2014; entered into force June 2023 — the continent's first comprehensive treaty
+by the African Union in 2014; entered into force June 2023 as the continent's first comprehensive treaty
 on personal-data protection and cybersecurity.
 [au.int/en/treaties](https://au.int/en/treaties/african-union-convention-cyber-security-and-personal-data-protection)
 
 ### Masakhane {#masakhane}
 
-*Masakhane — a grassroots NLP community for Africa* (isiZulu: "we build together"). Holds that Africans
+*Masakhane: a grassroots NLP community for Africa* (isiZulu: "we build together"). Holds that Africans
 should decide what data represents their communities, retain ownership of it, and know how it is used.
 [masakhane.io](https://www.masakhane.io/)
 
@@ -275,7 +275,7 @@ Meta AI; arXiv:2207.04672. Translation and evaluation across 200 languages, incl
 
 *The Nwulite Obodo Open Data License: A New Licence for Sharing African Datasets* (Igbo: "raising,
 reviving, and building the community"). Data Science Law Lab / Centre for Intellectual Property and
-Information Technology Law (CIPIT), Strathmore University. A tiered, community-centred data licence —
+Information Technology Law (CIPIT), Strathmore University. A tiered, community-centred data licence:
 free, share-alike reuse within Africa and developing nations; royalties / benefit-sharing required of
 users elsewhere. [datasciencelawlab.africa](https://datasciencelawlab.africa/nwulite-obodo-open-data-license/)
 
@@ -342,7 +342,7 @@ arXiv:2506.04557. A learned MT-evaluation metric adapted to sub-Saharan African 
 *The State of Computer Vision Research in Africa.* arXiv:2401.11617. A survey finding African computer
 vision concentrated in agriculture and health and constrained by data scarcity. [arxiv.org/abs/2401.11617](https://arxiv.org/abs/2401.11617)
 
-### Te Hiku Media — Kaitiakitanga License {#tehiku-kaitiakitanga}
+### Te Hiku Media: Kaitiakitanga License {#tehiku-kaitiakitanga}
 
 *Data Sovereignty and the Kaitiakitanga License.* Te Hiku Media (Papa Reo), Aotearoa New Zealand. Treats
 data as cared-for under guardianship rather than owned; benefit flows to the source community; forbids

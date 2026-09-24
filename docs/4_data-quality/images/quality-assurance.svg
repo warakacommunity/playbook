@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="qa-title qa-desc">
   <title id="qa-title">Quality assurance as a continuous loop</title>
-  <desc id="qa-desc">A cycle of four data-quality practices — measure inter-annotator agreement, use gold and control checks, audit and spot-check by hand, and close the feedback loop — with a return arrow showing errors feed back into guidelines and training.</desc>
+  <desc id="qa-desc">A cycle of four data-quality practices (measure inter-annotator agreement, use gold and control checks, audit and spot-check by hand, and close the feedback loop), with a return arrow showing errors feed back into guidelines and training.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -16,7 +16,7 @@
 
   <!-- Header -->
   <text x="460" y="56" text-anchor="middle" font-size="24" font-weight="700" fill="#2B2218">Quality assurance is a loop, not a checkpoint</text>
-  <text x="460" y="82" text-anchor="middle" font-size="14" fill="#8A7D6E">Keep the discipline up from pilot to the last item — not a final inspection before release</text>
+  <text x="460" y="82" text-anchor="middle" font-size="14" fill="#8A7D6E">Keep the discipline up from pilot to the last item, not a final inspection before release</text>
 
   <!-- ===================== CYCLE ===================== -->
   <!-- Connector arcs between nodes (clockwise) -->
@@ -48,7 +48,7 @@
     <text x="154" y="181" font-size="15" font-weight="700" fill="#9C4F2B">Measure agreement</text>
     <text x="123" y="208" font-size="13" fill="#2B2218">Chance-corrected metrics:</text>
     <text x="123" y="226" font-size="13" fill="#2B2218">Cohen / Fleiss kappa,</text>
-    <text x="123" y="244" font-size="13" fill="#2B2218">Krippendorff alpha — read honestly.</text>
+    <text x="123" y="244" font-size="13" fill="#2B2218">Krippendorff alpha, read honestly.</text>
   </g>
 
   <!-- ============ NODE 2: Gold & control checks (gold) top-right ============ -->
@@ -89,5 +89,5 @@
   <circle cx="58" cy="570" r="9" fill="#C66A3D"/>
   <text x="58" y="575" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">!</text>
   <text x="78" y="566" font-size="13" font-weight="600" fill="#9C4F2B">African stakes:</text>
-  <text x="78" y="584" font-size="13" fill="#2B2218">datasets are small and expensive with no clean pool to dilute mistakes — catch problems in week two, not at release.</text>
+  <text x="78" y="584" font-size="13" fill="#2B2218">datasets are small and expensive with no clean pool to dilute mistakes: catch problems in week two, not at release.</text>
 </svg>

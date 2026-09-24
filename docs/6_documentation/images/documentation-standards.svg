@@ -7,7 +7,7 @@
 
   <!-- Header -->
   <text x="32" y="56" font-size="22" font-weight="700" fill="#2B2218">Documentation standards</text>
-  <text x="32" y="80" font-size="14" fill="#8A7D6E">Don't invent one — use a standard others already know how to read.</text>
+  <text x="32" y="80" font-size="14" fill="#8A7D6E">Don't invent one. Use a standard others already know how to read.</text>
   <line x1="32" y1="96" x2="848" y2="96" stroke="#E7DDCB" stroke-width="1.5"/>
 
   <!-- ===== Card 1: Datasheet (terracotta) ===== -->
@@ -77,6 +77,6 @@
     <text x="62" y="460" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">!</text>
     <text x="88" y="453" font-size="14" font-weight="700" fill="#8A3B25">Especially valuable for African datasets</text>
     <text x="88" y="474" font-size="13" fill="#2B2218">The data statement records the precise language, variety, region, and speaker profile that decide</text>
-    <text x="88" y="492" font-size="13" fill="#2B2218">whether the data fits a use — and that get lost when unwritten.</text>
+    <text x="88" y="492" font-size="13" fill="#2B2218">whether the data fits a use, and that get lost when unwritten.</text>
   </g>
 </svg>
