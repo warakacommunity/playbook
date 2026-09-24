@@ -23,21 +23,21 @@ function buildCitations({ title, url, year, accessed, bibkey }) {
   const displayUrl = url.replace(/^https?:\/\//, '');
   return {
     bibtex:
-      `@misc{Masakhane_AfriPlaybook_${bibkey},\n` +
+      `@misc{Waraka_AfriPlaybook_${bibkey},\n` +
       `  title        = {${title}},\n` +
-      `  author       = {{Masakhane Community}},\n` +
+      `  author       = {{Waraka Community}},\n` +
       `  booktitle    = {AfriPlaybook: A Community-Driven Playbook for African-Language NLP},\n` +
       `  year         = {${year}},\n` +
       `  url          = {${url}},\n` +
       `  urldate      = {${accessed}},\n` +
-      `  publisher    = {Masakhane}\n` +
+      `  publisher    = {Waraka Community}\n` +
       `}`,
     apa:
-      `Masakhane Community. (${year}). ${title}. In AfriPlaybook: A Community-Driven Playbook for African-Language NLP. Retrieved ${accessed}, from ${url}`,
+      `Waraka Community. (${year}). ${title}. In AfriPlaybook: A Community-Driven Playbook for African-Language NLP. Retrieved ${accessed}, from ${url}`,
     mla:
-      `Masakhane Community. "${title}." AfriPlaybook: A Community-Driven Playbook for African-Language NLP, ${year}, ${displayUrl}. Accessed ${accessed}.`,
+      `Waraka Community. "${title}." AfriPlaybook: A Community-Driven Playbook for African-Language NLP, ${year}, ${displayUrl}. Accessed ${accessed}.`,
     chicago:
-      `Masakhane Community. "${title}." AfriPlaybook: A Community-Driven Playbook for African-Language NLP. ${year}. ${url}.`,
+      `Waraka Community. "${title}." AfriPlaybook: A Community-Driven Playbook for African-Language NLP. ${year}. ${url}.`,
   };
 }
 

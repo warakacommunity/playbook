@@ -6,7 +6,7 @@ It is not a model-tuning tutorial (see the [Hugging Face NLP Course](https://hug
 
 **Live site:** <https://afriplaybook.waraka.org/>
 
-This is a living resource maintained by the [Masakhane](https://www.masakhane.io/) community. We welcome contributions from researchers, practitioners, students, language experts, and translators.
+This is a living resource maintained by the [Waraka](https://waraka.org/) community in collaboration with AfricaNLP and [Masakhane](https://www.masakhane.io/). We welcome contributions from researchers, practitioners, students, language experts, and translators.
 
 ---
 
@@ -370,10 +370,10 @@ If you use AfriPlaybook in your research, teaching, or work, please cite it.
 
 ```bibtex
 @misc{afriplaybook2026,
-  author       = {{Masakhane Community}},
+  author       = {{Waraka Community}},
   title        = {AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages},
   year         = {2026},
-  publisher    = {Masakhane},
+  publisher    = {Waraka Community},
   url          = {https://afriplaybook.waraka.org/},
   note         = {Open-source community resource}
 }

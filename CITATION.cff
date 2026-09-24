@@ -9,8 +9,8 @@ abstract: >
   natural language processing systems for African languages. Covers dataset
   design, annotation, model training, evaluation, deployment, and ethics.
 authors:
-  - name: "Masakhane Community"
-    website: "https://www.masakhane.io/"
+  - name: "Waraka Community"
+    website: "https://waraka.org/"
 url: "https://afriplaybook.waraka.org/"
 repository-code: "https://github.com/warakacommunity/playbook"
 date-released: "2026-04-30"
