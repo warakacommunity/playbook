@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TOC from "@theme-original/TOC";
 import ReactDOM from "react-dom";
+import Link from "@docusaurus/Link";
 import { StructureEditorContent } from "@site/src/components/StructureEditor";
 
 // The in-browser editor signs contributors in through a GitHub OAuth App, and
@@ -9,7 +10,6 @@ import { StructureEditorContent } from "@site/src/components/StructureEditor";
 // flow, no callback). Any other mirror hands the contributor off to this URL
 // with a ?contribute=1 flag that auto-opens the editor there.
 const EDITOR_ORIGIN = "https://afriplaybook.waraka.org";
-const EDITOR_BASE = "";
 
 function isEditorHost() {
   if (typeof window === "undefined") return false;
@@ -71,19 +71,6 @@ export default function TOCWrapper(props) {
     if (params.get("contribute") === "1") setEditorOpen(true);
   }, []);
 
-  const handleContribute = () => {
-    // On the editor host, open in place. On a mirror, redirect to the same
-    // chapter on afriplaybook.waraka.org, where GitHub sign-in works.
-    if (isEditorHost()) {
-      setEditorOpen(true);
-      return;
-    }
-    const qs = window.location.search
-      ? `${window.location.search}&contribute=1`
-      : "?contribute=1";
-    window.location.href = `${EDITOR_ORIGIN}${EDITOR_BASE}${window.location.pathname}${qs}`;
-  };
-
   const handlePdf = () => {
     if (typeof window === "undefined") return;
     // Small delay so any hover state settles before the print dialog
@@ -94,13 +81,14 @@ export default function TOCWrapper(props) {
   return (
     <>
       <div className="toc-actions no-print">
-        <button
-          type="button"
+        {/* The in-browser editor stays reachable from the navbar's Contribute
+            menu (/?contribute=1); this button points to the how-to guide. */}
+        <Link
+          to="/introduction/how-to-contribute"
           className="button button--primary button--sm toc-action-button"
-          onClick={handleContribute}
         >
           Contribute
-        </button>
+        </Link>
         {isTemplate && (
           <button
             type="button"
