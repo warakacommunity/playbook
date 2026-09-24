@@ -1,7 +1,6 @@
 ---
 sidebar_position: 1
 slug: /
-title: Welcome
 ready: true
 last_update:
   date: 2026-09-24
@@ -14,19 +13,26 @@ last_update:
 
 This is the website of the **AfriPlaybook**, an open guide to building datasets for African languages. It follows a dataset from first idea to public release: deciding what to collect and from whom, designing the annotation task, recruiting and paying the people who do it, checking their work, documenting the result, and publishing it so that others can build on it.
 
-Africa is home to roughly a third of the world's languages, yet most of them have almost none of the text and speech that language technology depends on. The reason is not a shortage of speakers. It is that building good data is slow, careful work, and few people are ever taught how to do it. Most guidance on dataset creation assumes English, a comfortable budget, and a task someone has solved before. This playbook assumes instead the conditions most African-language projects face: modest funding, volunteer or part-time teams, several languages and scripts at once, and communities who should remain the owners of what they help to create.
+Africa is home to roughly a third of the world's languages, yet most of them have almost none of the text and speech that language technology depends on. The reason is that building good data is expensive, careful work, and few people are ever taught how to do it. Most guidance on dataset creation assumes English, a comfortable budget, and a task someone has solved before. This playbook assumes instead the conditions most African-language projects face: modest funding, volunteer or part-time teams, several languages and scripts at once, and communities who should remain the owners of what they help to create.
 
 ## Who this playbook is for
 
-The playbook is written for anyone who builds, or wants to build, a dataset for an African language. Among its readers we expect graduate students beginning a thesis, researchers planning a shared task or benchmark, linguists and language activists who want their language to be usable by machines, community organisers running a collection drive, and engineers who have discovered that the data they need does not exist. No background in machine learning is assumed. What is assumed is a language you care about and a willingness to do careful work.
+The playbook is written for anyone who builds, or wants to build, a dataset for an African language, and for NLP researchers working on any language where data is scarce. It draws its examples from African projects, but the problems it deals with are not unique to Africa: little usable text online, several scripts or dialects within one language, small budgets, and communities whose consent and ownership must be respected. Most of its advice applies wherever those conditions hold. Among its readers we expect graduate students beginning a thesis, researchers planning a shared task or benchmark, linguists and language activists who want their language to be usable by machines, community organisers running a collection drive, and engineers who have discovered that the data they need does not exist. No background in machine learning is assumed. What is assumed is a language you care about and a willingness to do careful work.
 
 ## What you will learn
 
-The chapters are grouped into parts. **Foundations** covers the work common to every project: planning, collecting data, designing annotation, governing data, assuring its quality, and working with communities. The next four parts, **Text**, **Speech**, **Vision** and **Multimodal**, turn to particular tasks, among them sentiment analysis, machine translation, speech recognition, text-to-speech and document AI, and explain what changes when you build data for each. **Lifecycle & Release** covers evaluation, documentation, release, deployment, and the law and ethics of consent. The book closes with templates you can adapt, such as consent forms, annotation guidelines and dataset cards, and with case studies of real projects written by the people who ran them.
+The chapters are grouped into parts:
 
-## What this playbook is not
+- **Foundations** covers the work common to every project: planning, collecting data, designing annotation, governing data, assuring its quality, and working with communities.
+- **[Text](../sections/text.md)** covers text classification, text generation and machine translation.
+- **[Speech](../sections/speech.md)** covers speech recognition, text-to-speech, speech translation, audio understanding, emotion recognition and speaker diarization.
+- **[Vision](../sections/vision.md)** covers image data, document AI and OCR, and sign language and video.
+- **[Multimodal](../sections/multimodal.md)** covers tasks that pair images with text, and the use of large language models to help build data.
+- **[Lifecycle & Release](../sections/lifecycle.md)** covers evaluation, documentation, release, deployment, cross-language transfer, and the law and ethics of consent.
+- **[Templates](../templates/index.md)** gives you documents to adapt, such as consent forms, annotation guidelines and dataset cards.
+- **[Case Studies](../case-studies/index.md)** describes real projects, written by the people who ran them.
 
-It is not a course on training models, and it is not a textbook of NLP theory. Both are well served elsewhere, and where you need them we point you to the best free sources rather than rewrite them. Nor is it neutral. It takes positions, argued from evidence and from the experience of the projects behind it: that speakers belong at the centre of dataset work, that consent and community ownership come first, and that a small, clean, well-documented dataset is worth more than a large, noisy one. The [core principles](./core-principles.md) set these positions out, and [What this playbook is (and isn't)](./scope-and-strategy.md) explains where we drew the boundaries and why.
+Each of the task parts explains what changes when you build data for that kind of task.
 
 ## How to read it
 
