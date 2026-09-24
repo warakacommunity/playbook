@@ -10,7 +10,7 @@ last_update:
 # Introduction
 
 :::tip[Contribute]
-This playbook is open source and community-owned. You don't need to write a whole chapter to help. Fixing an error, translating a page, or sharing what worked on a real project all count. See [**Built in the open**](#built-in-the-open) below, or jump straight to the [contribution guide](https://github.com/warakacommunity/playbook/blob/main/README.md#ways-to-contribute).
+This playbook is open source and community-owned. You don't need to write a whole chapter to help. Fixing an error, translating a page, or sharing what worked on a real project all count. See [**Contribute**](how-to-contribute.md).
 :::
 
 > The bullet was the means of the physical subjugation. Language was the means of the spiritual subjugation.

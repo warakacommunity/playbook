@@ -485,15 +485,11 @@ const config = {
         hideOnScroll: false,
         items: [
           {
-            type: "custom-ContributeNavbarItem",
+            // Plain link, not a menu: the guide explains every way to help
+            // (online editor, GitHub, cloning).
+            to: "/introduction/how-to-contribute",
+            label: "Contribute",
             position: "left",
-          },
-          {
-            // Plain <a>: a Docusaurus Link would route the PDF through the SPA.
-            type: "html",
-            position: "left",
-            value:
-              '<a class="navbar__link" href="/downloads/afriplaybook.pdf" target="_blank" rel="noopener noreferrer">Download PDF</a>',
           },
           {
             to: "/blog",
@@ -501,8 +497,29 @@ const config = {
             position: "left",
           },
           {
+            // Phones hide the "Waraka /" breadcrumb, so the hamburger menu
+            // carries the way back instead. Hidden in the desktop bar (CSS).
+            href: "https://waraka.org",
+            label: "Waraka community",
+            target: "_self",
+            position: "left",
+            className: "navbar-item--mobile-only",
+          },
+          {
             type: "custom-SearchNavbarItem",
             position: "right",
+          },
+          {
+            // Utility action, so it sits with search and GitHub. Plain <a>:
+            // a Docusaurus Link would route the PDF through the SPA. Size is
+            // shown because many readers are on slow or metered connections.
+            type: "html",
+            position: "right",
+            className: "navbar-item--pdf",
+            value:
+              '<a class="navbar__link navbar-pdf-link" href="/downloads/afriplaybook.pdf" download aria-label="Download the playbook as PDF, 4.8 MB">' +
+              '<svg class="navbar-pdf-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
+              'PDF <span class="navbar-pdf-size">4.8 MB</span></a>',
           },
           {
             type: "html",
@@ -559,6 +576,10 @@ const config = {
             title: "Community",
             items: [
               {
+                label: "Waraka Community",
+                href: "https://waraka.org",
+              },
+              {
                 label: "Masakhane",
                 href: "https://www.masakhane.io/",
               },
@@ -601,7 +622,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Built in the open by the Waraka community · © ${new Date().getFullYear()} Masakhane.`,
+        copyright: `Built in the open by the <a href="https://waraka.org">Waraka community</a> · © ${new Date().getFullYear()} Masakhane.`,
       },
       prism: {
         theme: prismThemes.github,

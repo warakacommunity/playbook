@@ -133,11 +133,6 @@
   }
 }
 
-/* One-section menu (Contribute): no second column to fill. */
-.megaMenuSingle {
-  width: 300px;
-}
-
 [data-theme='dark'] .megaMenu {
   background: var(--ifm-navbar-background-color, #1b1b1d);
 }

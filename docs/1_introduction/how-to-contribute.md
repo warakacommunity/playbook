@@ -37,11 +37,10 @@ There are three ways to make a change, from the quickest to the most hands-on. C
 
 Best for fixing typos, rewording a sentence, or adding a link. You never leave the browser.
 
-1. Open the page you want to change.
-2. Click **Contribute** at the top of the table of contents on the right of the page.
-3. Sign in with GitHub when prompted. One click authorises you securely on GitHub, so nothing is ever typed into this site. This lets us credit your work and open the change under your name.
-4. Make your edit in the editor.
-5. Add a short note describing what you changed, then submit.
+1. Open the **[online editor](/?contribute=1)**.
+2. Sign in with GitHub when prompted. One click authorises you securely on GitHub, so nothing is ever typed into this site. This lets us credit your work and open the change under your name.
+3. Find the page you want to change and make your edit.
+4. Add a short note describing what you changed, then submit.
 
 The site opens a pull request for you automatically. A maintainer reviews it and merges. That is the whole process: no git, no setup.
 
