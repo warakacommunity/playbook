@@ -2,26 +2,28 @@
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-07-07
-  author: Idris Abdulmumin
+  date: 2026-09-24
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 import ChapterMap from '@site/src/components/ChapterMap';
 
 # How to read this playbook
 
-The playbook runs end-to-end through the dataset lifecycle. Here is the whole book at a glance — every chapter, grouped into the four phases of building a dataset. Click any chapter to jump straight to it.
+The playbook follows a dataset from start to finish. The map below groups its chapters into the four phases of building a dataset. Select any chapter to go straight to it.
 
 <ChapterMap />
 
-You don't have to read it in order. Pick the path that fits where you are:
+You do not have to read it in order. Pick the route that fits where you are:
 
-- **New to dataset design.** Start here, then read chapters 2–4 in order: Data Collection, Annotation Design, Data Quality. They build on each other and cover the foundations everyone needs.
-- **You already have raw data and want help annotating it.** Go to chapter 3 (Annotation Design and Workforce Management), then chapter 4 (Data Quality Assurance and Validation).
-- **You're working with a specific modality** (speech, multimodal, low-resource scripts). Skip to chapter 5 (Modality-Specific Task Design).
-- **You're using LLMs to generate or augment data.** Read chapter 7 (LLM-Assisted and Synthetic Data Generation) for the trade-offs and safeguards.
-- **You're preparing a dataset for release.** Read chapter 6 (Documentation, Data Release, and Governance) and chapter 9 (Dataset Lifecycle Management and Release Checklist).
-- **You're offline or on a slow connection.** Use **Download PDF** in the navbar. The whole playbook bundles into one file, rebuilt on every release.
-- **You'd rather read in another language.** Use the language switcher at the top-right. Translations are community-maintained and grow over time.
+- **You are new to building datasets.** Read the [Introduction](./introduction.md), then work through the Foundations chapters in order: [Project Management](../project-management/index.md), [Data Collection](../2_data-collection/0_Overview.md), [Data Governance](../data-governance/index.md), [Annotation Design](../3_annotation-design/annotation-task-design.md) and [Data Quality](../4_data-quality/index.md). Each builds on the one before.
+- **You know your task and want to avoid repeating work.** Start with [Before You Start](../before-you-start/index.md). It lists existing datasets and models for common tasks and helps you decide whether to extend one or build your own.
+- **You already have raw data and need it annotated.** Go to [Annotation Design](../3_annotation-design/annotation-task-design.md), then [Data Quality](../4_data-quality/index.md).
+- **You are working with speech, images, video or documents.** Go to the part for your modality: [Speech](../sections/speech.md), [Vision](../sections/vision.md) or [Multimodal](../sections/multimodal.md). Each explains what changes once you move beyond text.
+- **Your language has little or no digital text.** Read [Long-tail language onboarding](../long-tail-language/index.md) before anything else. It covers the orthography, community and ownership decisions that come first.
+- **You are using LLMs to generate or augment data.** Read [LLM-Assisted Data](../7_llm-assisted-task/index.md) for the trade-offs and safeguards.
+- **You are preparing a dataset for release.** Read [Documentation](../6_documentation/documentation.md), [Dataset Lifecycle](../9_dataset-lifecycle/release.md) and [Legal, consent, and community IP](../legal-consent/index.md).
+- **You are offline or on a slow connection.** Download the whole playbook as one PDF from the **AfriPlaybook** menu in the navbar. It is rebuilt with every release.
+- **You would rather read in another language.** Use the language switcher at the top right. Translations are maintained by the community and grow over time.
 
-Throughout, you'll find practical templates (consent forms, annotation guidelines, governance checklists), worked examples from real African-language projects, and links to datasets and tools you can reuse. New terms are defined in the [glossary](/glossary).
+Throughout the book you will find templates you can adapt, such as consent forms, annotation guidelines and governance checklists, along with worked examples from real African-language projects and links to datasets and tools you can reuse. New terms are defined in the [glossary](../glossary.md).

@@ -1,98 +1,39 @@
 ---
 sidebar_position: 1
 slug: /
+title: Welcome
 ready: true
 last_update:
   date: 2026-09-24
   author: Shamsudddeen Hassan Muhammad
 ---
 
-# Introduction
+# Welcome
 
 ![AfriPlaybook cover: a baobab tree against a low ochre sun under an indigo sky, framed by earth-tone kente cloth, with the word for language in Hausa, Amharic, Swahili, Yorùbá, Igbo, Zulu, Somali, Kinyarwanda, Luganda and Wolof linked like a network across the sky.](images/afriplaybook-cover.svg)
 
-:::tip[Contribute]
-This playbook is open source and community-owned. You don't need to write a whole chapter to help. Fixing an error, translating a page, or sharing what worked on a real project all count. See [**Built in the open**](#built-in-the-open) below, or jump straight to the [contribution guide](https://github.com/warakacommunity/playbook/blob/main/README.md#ways-to-contribute).
-:::
+This is the website of the **AfriPlaybook**, an open guide to building datasets for African languages. It follows a dataset from first idea to public release: deciding what to collect and from whom, designing the annotation task, recruiting and paying the people who do it, checking their work, documenting the result, and publishing it so that others can build on it.
 
-> The bullet was the means of the physical subjugation. Language was the means of the spiritual subjugation.
->
-> — Ngũgĩ wa Thiong'o, *Decolonising the Mind: The Politics of Language in African Literature* (1986)
+Africa is home to roughly a third of the world's languages, yet most of them have almost none of the text and speech that language technology depends on. The reason is not a shortage of speakers. It is that building good data is slow, careful work, and few people are ever taught how to do it. Most guidance on dataset creation assumes English, a comfortable budget, and a task someone has solved before. This playbook assumes instead the conditions most African-language projects face: modest funding, volunteer or part-time teams, several languages and scripts at once, and communities who should remain the owners of what they help to create.
 
-Africa is home to almost a third of the world's living languages — about 2,140 of the roughly 7,160 spoken on Earth ([Ethnologue, 2024](../references.md#ethnologue-2024)). Almost none of them are visible to the systems now reshaping how the rest of the world reads, writes, searches, translates, and speaks. When a language model stumbles over Yorùbá, Chichewa, or Wolof, the cause is rarely the model. It is the data. The text and speech these systems learn from barely exist in a usable form.
+## Who this playbook is for
 
-[Joshi et al. (2020)](../references.md#joshi-2020) sort the world's languages into six tiers by how many resources they have. The bottom tier, the *left-behinds*, with essentially no labelled data and little prospect of being served by current methods, holds the overwhelming majority of languages, and African languages crowd into it. Most have no annotated corpus, no benchmark, no tools. They are missing not because they are small. Many have tens of millions of speakers. They are missing because no one has built the data. The picture still holds, though the field now treats *low-resource* as multidimensional — a matter of tools, speakers, funding, and institutional support as much as raw data, with no single agreed definition ([Ranathunga & de Silva, 2022](../references.md#ranathunga-desilva-2022); [Nigatu et al., 2024](../references.md#nigatu-2024)).
+The playbook is written for anyone who builds, or wants to build, a dataset for an African language. Among its readers we expect graduate students beginning a thesis, researchers planning a shared task or benchmark, linguists and language activists who want their language to be usable by machines, community organisers running a collection drive, and engineers who have discovered that the data they need does not exist. No background in machine learning is assumed. What is assumed is a language you care about and a willingness to do careful work.
 
-![Joshi et al.'s six language resource classes, plotted by how much labelled and unlabelled data each has. Class 0, the left-behinds, holds the overwhelming majority of languages and sits at the bottom with almost no data; African languages crowd into classes 0 and 1. The better-resourced classes hold only a handful of languages each.](images/africanlp-language-classes.svg)
+## What you will learn
 
-## Scraping will not fix this
+The chapters are grouped into parts. **Foundations** covers the work common to every project: planning, collecting data, designing annotation, governing data, assuring its quality, and working with communities. The next four parts, **Text**, **Speech**, **Vision** and **Multimodal**, turn to particular tasks, among them sentiment analysis, machine translation, speech recognition, text-to-speech and document AI, and explain what changes when you build data for each. **Lifecycle & Release** covers evaluation, documentation, release, deployment, and the law and ethics of consent. The book closes with templates you can adapt, such as consent forms, annotation guidelines and dataset cards, and with case studies of real projects written by the people who ran them.
 
-When a language has no data, the instinct is to go and scrape more of it: crawl a wider slice of the web and trust that coverage will follow. For African languages, that instinct fails.
+## What this playbook is not
 
-The web does not contain much African-language text, and what it contains is thin and noisy. When [Kreutzer et al. (2022)](../references.md#kreutzer-2022) audited the large multilingual crawls everyone trains on, they found that for many low-resource languages a large share of the data was mislabelled, machine-translated, or not language at all. At the tail, quality collapses along with quantity.
+It is not a course on training models, and it is not a textbook of NLP theory. Both are well served elsewhere, and where you need them we point you to the best free sources rather than rewrite them. Nor is it neutral. It takes positions, argued from evidence and from the experience of the projects behind it: that speakers belong at the centre of dataset work, that consent and community ownership come first, and that a small, clean, well-documented dataset is worth more than a large, noisy one. The [core principles](./core-principles.md) set these positions out, and [What this playbook is (and isn't)](./scope-and-strategy.md) explains where we drew the boundaries and why.
 
-The only sure way to get high-quality data for African languages is to build it with the people who speak them, the people who know the words, the grammar, the idioms, and the culture. One of the main blockers to AfricaNLP is that the people who speak these languages are not the ones building the data. The people who build it often cannot tell what is correct, what is offensive, or what is missing. They do not know what matters to the communities behind the language, or how to keep the data they collect from causing harm.
+## How to read it
 
-That gap has real consequences. Data built without its speakers can look clean while being quietly wrong, and any model trained on it inherits every mistake. Such errors spread, into search results, translations, and the everyday tools that millions of people are starting to depend on. Getting the data right decides whether a language is served well, served badly, or left out of these tools altogether.
+You do not have to read the playbook in order. If you are starting a project from nothing, begin with the [Introduction](./introduction.md), which explains why African languages lack data and why scraping the web will not fix it, and then read the Foundations chapters in sequence. If you already know your task, go to [Before You Start](../before-you-start/index.md), which lists existing resources for common tasks and helps you decide whether to extend an existing dataset or build a new one. [How to read this playbook](./how-to-read.mdx) suggests other routes through the book, and the [glossary](../glossary.md) defines its terms. If you work offline or on a slow connection, the whole playbook is available as a single PDF from the **AfriPlaybook** menu at the top of the page.
 
-This playbook is about how to fix that problem. It is a practical, opinionated, step-by-step guide to building high-quality datasets for African languages, drawing on the direct experience of the people who speak and understand them. The playbook is built by the people who know the languages, for the people who want to build datasets for them. It is about how to do it right, and how to do it safely.
+## Free and open
 
-## The field is growing, the data is not keeping up
+This website is free to read and will remain so. The playbook is maintained by the Waraka community in collaboration with AfricaNLP and Masakhane, and it improves only as far as its readers improve it. If you find an error, have run a project whose lessons others should hear, or can translate a page, please [contribute](./how-to-contribute.md). The site interface is available in Hausa, Amharic, Swahili, French and Portuguese, and translations of the chapters are added as volunteers complete them. Questions and disagreements are welcome in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) and on [Discord](https://discord.gg/ChNPHV2PPS).
 
-Over two decades, AfricaNLP has grown from a niche interest into an established field. A survey of the period counted 1,902 papers by 4,901 authors between 2005 and 2025: just 21 papers from 78 researchers in 2006, rising to 287 from 1,103 in 2024 ([Belay et al., 2025](../references.md#belay-2025)).
-
-![AfricaNLP papers and authors grew roughly fourteenfold between 2006 and 2024.](images/africanlp-growth.svg)
-
-But more papers has not meant more data. When the same survey sorted nearly 7,800 contributions by what they actually produced, methods made up 53 percent and new datasets just 21 percent; the rest were benchmarks, surveys, and other work that adds no new data ([Belay et al., 2025](../references.md#belay-2025)). The field is learning to model far faster than it is building the data those models learn from.
-
-![Methods make up 53 percent of AfricaNLP contributions; new datasets just 21 percent.](images/africanlp-contributions.svg)
-
-Methods and datasets are not made the same way. A method can be carried from one language to the next; a dataset has to be built for each one, from scratch, by people who speak it. That means recruiting annotators, writing guidelines, running quality control, and securing consent. It is slow, unglamorous work, and it is rarely funded.
-
-This guide solves that problem. It is a practical, step-by-step manual for building datasets for African languages, from deciding what to collect, through annotation design, quality control, and documentation, to release. It lays out each step so you do not have to work it out from scratch, which makes a good dataset far quicker and easier to build. It is written for the real conditions of African-language NLP: low resources, multilingual teams, scarce funding, and communities who must stay the owners of what they help create.
-
-## Why we wrote this playbook
-
-Almost every guide to building datasets quietly assumes English, a generous budget, and a problem someone has already solved once. Little of that holds when you are starting a corpus for a language with no prior resources, a volunteer team, and decisions to make that the literature never covers.
-
-The AfriPlaybook is the manual we wish we had had. It is written for exactly those conditions, and its aim is narrow: to lower the barrier to getting started and to raise the floor on quality, so that the datasets this community produces are ones the world can trust and reuse.
-
-To do that, the playbook is a living, community-driven resource. Lowering the cost of building data is how the balance in the charts above begins to shift.
-
-## Built in the open
-
-This playbook is open source, maintained by the Waraka coomunity in collaboration with AfricaNLP and Masakhane. It is not just for researchers. It is for everyone who builds datasets for African languages, volunteers, students, community organizers, and professionals alike. The people who build datasets know best what a guide like this should say, so it is only as good as the people who contribute to it. There are many ways to help:
-
-- **Write** a chapter or section that fills a gap.
-- **Review** existing chapters: correct an error, sharpen a claim, add a reference.
-- **Share a case study** from a real project, including what went wrong.
-- **Open a discussion** when you disagree with an approach. Disagreement makes the guide better.
-
-Start with the [contribution guide](https://github.com/warakacommunity/playbook/blob/main/README.md#ways-to-contribute), raise an idea in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions), or join us on [Discord](https://discord.gg/ChNPHV2PPS). If you build datasets for African languages, or want to learn how, you are already part of who this is for. Come and build it with us.
-
----
-
-## How to cite this playbook
-
-If the AfriPlaybook informs your research, teaching, or project, please cite it.
-
-**BibTeX:**
-
-```bibtex
-@misc{masakhane2026playbook,
-  author       = {{Masakhane Community}},
-  title        = {AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages},
-  year         = {2026},
-  publisher    = {Masakhane},
-  url          = {https://afriplaybook.waraka.org/},
-  note         = {Open-source community resource}
-}
-```
-
-**Plain text (APA-style):**
-
-> Masakhane Community. (2026). *AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages*. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/)
-
-For other formats (MLA, Chicago, etc.) and a machine-readable [`CITATION.cff`](https://github.com/warakacommunity/playbook/blob/main/CITATION.cff), see the [/cite](/cite) page.
-
-If you reference a specific chapter, please include the chapter title and its URL.
+If the playbook informs your research or teaching, please [cite it](/cite).

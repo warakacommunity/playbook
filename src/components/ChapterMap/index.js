@@ -12,7 +12,7 @@ const PHASES = [
       {
         title: "Introduction",
         blurb: "Why African-language data matters, and how this guide helps.",
-        href: "/",
+        href: "/introduction",
       },
     ],
   },
@@ -22,7 +22,7 @@ const PHASES = [
       {
         title: "Data Collection",
         blurb: "Plan scope, sources, cost, ethics, and provenance.",
-        href: "/data-collection/cost-resource-planning",
+        href: "/data-collection/Overview",
       },
       {
         title: "Annotation Design & Workforce",

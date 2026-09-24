@@ -36,6 +36,7 @@ const sidebars = {
   tutorialSidebar: [
     // Home page, shown as a bold "Welcome" entry like a Quarto book.
     { type: 'doc', id: 'introduction/index', label: 'Welcome', className: 'sidebar-welcome' },
+    'introduction/introduction',
     {
       type: 'category',
       label: 'Foundations',

@@ -18,7 +18,7 @@ It's easy to conflate *where data comes from* with *how you get it*. They're sep
 ## The main categories
 
 ### The open web
-News sites, blogs, forums, encyclopedias. Reachable by scraping or, where available, by API. For African languages this is the source most people reach for first and, per Chapter 1, the one that disappoints most often — not because the web is poorly indexed, but because the underlying text in many target languages barely exists there in the first place.
+News sites, blogs, forums, encyclopedias. Reachable by scraping or, where available, by API. For African languages this is the source most people reach for first and, as the [Introduction](../1_introduction/introduction.md) shows, the one that disappoints most often — not because the web is poorly indexed, but because the underlying text in many target languages barely exists there in the first place.
 
 ### Institutional and government archives
 Court records, parliamentary proceedings, census documents, ministry publications. Often higher-quality and more consistently in the target language than open-web text, since institutions are required to publish in official or regional languages. Access is usually slower (requests, sometimes fees) but the resulting text tends to need far less cleaning.

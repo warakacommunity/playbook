@@ -21,7 +21,7 @@ last_update:
 4. Version this document. Annotation guidelines drift; a guidelines document without a version and a change log is untrustworthy.
 5. Store the guidelines alongside the corpus so future readers can verify what an annotator was actually told.
 
-Motivated by [Chapter 3 — Annotation Design](../3_annotation-design/annotation-task-design.md) and by every corpus retrospective in the [Case Studies](../case-studies/index.md) chapter that names annotation-guideline drift as a source of quality problems.
+Motivated by the [Annotation Design](../3_annotation-design/annotation-task-design.md) chapter and by every corpus retrospective in the [Case Studies](../case-studies/index.md) chapter that names annotation-guideline drift as a source of quality problems.
 
 ---
 
