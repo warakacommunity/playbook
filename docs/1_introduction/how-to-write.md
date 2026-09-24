@@ -2,8 +2,8 @@
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-07-07
-  author: Idris Abdulmumin
+  date: 2026-07-26
+  author: Seid Muhie Yimam
 ---
 
 # How to Write a Chapter

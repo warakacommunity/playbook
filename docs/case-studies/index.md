@@ -3,7 +3,7 @@ wip: true
 sidebar_position: 1
 last_update:
   date: 2026-07-26
-  author: Idris Abdulmumin
+  author: Seid Muhie Yimam
 ---
 
 # Case Studies

@@ -3,8 +3,8 @@ sidebar_position: 1
 sidebar_label: "Overview"
 ready: true
 last_update:
-  date: 2026-07-07
-  author: Idris Abdulmumin
+  date: 2026-07-31
+  author: Tadesse Destaw Belay
 ---
 
 # Defining text classification tasks:

@@ -4,7 +4,7 @@ sidebar_position: 2
 title: Retrospective template
 last_update:
   date: 2026-07-26
-  author: Idris Abdulmumin
+  author: Seid Muhie Yimam
 ---
 
 # Retrospective template

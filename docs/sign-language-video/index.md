@@ -3,7 +3,7 @@ wip: true
 title: Video
 last_update:
   date: 2026-07-26
-  author: Idris Abdulmumin
+  author: Seid Muhie Yimam
 ---
 
 # Video

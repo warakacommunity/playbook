@@ -58,7 +58,7 @@ The Playbook is a [Docusaurus 3](https://docusaurus.io) site. To install and pre
 
 ### Requirements
 
-- Node.js ≥ 20 ([download](https://nodejs.org))
+- Node.js 22 (recommended, matches CI and `.nvmrc`; [download](https://nodejs.org)). Node 23 is not supported by the test dependencies.
 - Yarn 1.x — install with `npm install -g yarn` if you don't have it (do **not** use npm for this project; the lockfile is yarn-managed)
 
 ### Clone, install, and run
@@ -155,7 +155,7 @@ cd AfriPlaybook
 
 Requirements:
 
-- Node.js ≥ 20 ([download](https://nodejs.org))
+- Node.js 22 (recommended, matches CI and `.nvmrc`; [download](https://nodejs.org)). Node 23 is not supported by the test dependencies.
 - Yarn 1.x — install with `npm install -g yarn` if you don't have it (do **not** use npm for this project)
 
 Install dependencies and start the dev server:

@@ -4,7 +4,7 @@ title: Open-ended generation
 sidebar_position: 2
 last_update:
   date: 2026-07-26
-  author: Idris Abdulmumin
+  author: Seid Muhie Yimam
 ---
 
 # Open-ended generation
