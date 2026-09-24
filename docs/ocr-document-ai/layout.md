@@ -4,7 +4,7 @@ title: Layout & document understanding
 sidebar_position: 4
 last_update:
   date: 2026-07-07
-  author: Idris Abdulmumin
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Layout & document understanding

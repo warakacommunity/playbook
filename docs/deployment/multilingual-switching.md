@@ -4,7 +4,7 @@ title: Multilingual switching within a session
 ready: true
 last_update:
   date: 2026-07-07
-  author: Idris Abdulmumin
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Multilingual switching within a session

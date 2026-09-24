@@ -1,11 +1,11 @@
 import ComponentTypes from '@theme-original/NavbarItem/ComponentTypes';
-import PlaybookNavbarItem from './PlaybookNavbarItem';
+import ContributeNavbarItem from './ContributeNavbarItem';
 import SearchNavbarItem from './SearchNavbarItem';
 import LocaleNavbarItem from './LocaleNavbarItem';
 
 export default {
   ...ComponentTypes,
-  'custom-PlaybookNavbarItem': PlaybookNavbarItem,
+  'custom-ContributeNavbarItem': ContributeNavbarItem,
   'custom-SearchNavbarItem': SearchNavbarItem,
   'custom-LocaleNavbarItem': LocaleNavbarItem,
 };

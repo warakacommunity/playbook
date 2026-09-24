@@ -4,7 +4,7 @@ title: Image classification
 sidebar_position: 2
 last_update:
   date: 2026-07-07
-  author: Idris Abdulmumin
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Image classification

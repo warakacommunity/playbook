@@ -4,7 +4,7 @@ title: Offline and patchy connectivity
 ready: true
 last_update:
   date: 2026-07-07
-  author: Idris Abdulmumin
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Offline and patchy-connectivity NLP

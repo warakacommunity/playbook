@@ -4,7 +4,7 @@ sidebar_position: 2
 ready: true
 last_update:
   date: 2026-07-07
-  author: Idris Abdulmumin
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Visual question answering

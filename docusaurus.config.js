@@ -473,7 +473,8 @@ const config = {
         },
       },
       navbar: {
-        title: "Playbook",
+        // No title: src/theme/Navbar/Logo renders the "Waraka / AfriPlaybook"
+        // lockup next to the tree mark.
         logo: {
           alt: "AfriPlaybook Home",
           src: "img/community-tree.svg",
@@ -484,22 +485,15 @@ const config = {
         hideOnScroll: false,
         items: [
           {
-            // Readers usually arrive from the Waraka community site; take
-            // them back there in the same tab.
+            type: "custom-ContributeNavbarItem",
+            position: "left",
+          },
+          {
+            // Plain <a>: a Docusaurus Link would route the PDF through the SPA.
             type: "html",
             position: "left",
             value:
-              '<a class="navbar__link navbar-back-waraka" href="https://waraka.org" aria-label="Back to Waraka Community">← Waraka</a>',
-          },
-          {
-            type: "custom-PlaybookNavbarItem",
-            position: "left",
-          },
-          {
-            // AfriAnnotate tool documentation lives on its own site.
-            href: "https://docs.afriannotate.org/",
-            label: "AfriAnnotate",
-            position: "left",
+              '<a class="navbar__link" href="/downloads/afriplaybook.pdf" target="_blank" rel="noopener noreferrer">Download PDF</a>',
           },
           {
             to: "/blog",
@@ -554,6 +548,10 @@ const config = {
               {
                 label: "Cite this Playbook",
                 to: "/cite",
+              },
+              {
+                label: "AfriAnnotate",
+                href: "https://docs.afriannotate.org/",
               },
             ],
           },

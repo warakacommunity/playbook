@@ -4,7 +4,7 @@ title: Object detection
 sidebar_position: 3
 last_update:
   date: 2026-07-07
-  author: Idris Abdulmumin
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Object detection

@@ -4,7 +4,7 @@ title: Project charter template
 ready: true
 last_update:
   date: 2026-07-07
-  author: Idris Abdulmumin
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Project charter template

@@ -1029,7 +1029,7 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 
 /* Breathing room between the left nav items (Playbook · Annotate · Finder ·
    AfriFellowship · About) — the brand keeps its sidebar-aligned position. */
-.navbar__items:not(.navbar__items--right) > *:not(.navbar__brand) {
+.navbar__items:not(.navbar__items--right) > *:not(.navbar-lockup) {
   margin-right: 0.55rem;
 }
 
@@ -1037,14 +1037,14 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
    width of the sidebar, so the main buttons begin exactly where the article
    content (and the sidebar's right edge) starts. */
 @media (min-width: 997px) {
-  .navbar__items:not(.navbar__items--right) > .navbar__brand {
+  .navbar__items:not(.navbar__items--right) > .navbar-lockup {
     width: calc(var(--doc-sidebar-width, 300px) - var(--ifm-navbar-padding-horizontal, 1rem));
     margin-right: 0;
     flex-shrink: 0;
   }
   /* The brand fills a wide column, so don't paint the hover wash across all
      of it — keep the brand quietly clickable. */
-  .navbar__items:not(.navbar__items--right) > .navbar__brand:hover {
+  .navbar-lockup .navbar__brand:hover {
     background: transparent;
     transform: none;
   }
@@ -1472,13 +1472,33 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 }
 
 /* "← Waraka" link back to the community site, set apart from playbook links. */
-.navbar-back-waraka {
+/* Brand lockup: [tree] Waraka / AfriPlaybook (src/theme/Navbar/Logo). */
+.navbar-lockup {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.navbar-lockup .navbar__brand { margin-right: 0.35rem; }
+.navbar-lockup__parent {
   font-weight: 600;
-  padding-right: 0.9rem;
-  margin-right: 0.35rem;
-  border-right: 1px solid var(--ifm-color-emphasis-300);
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-700);
   white-space: nowrap;
 }
-.navbar-sidebar .navbar-back-waraka {
-  border-right: 0;
+.navbar-lockup__parent:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+.navbar-lockup__sep {
+  margin: 0 0.4rem;
+  color: var(--ifm-color-emphasis-400);
+}
+.navbar-lockup__title:hover { text-decoration: none; }
+/* Phones: the bar is crowded, so keep just [tree] AfriPlaybook. */
+@media (max-width: 996px) {
+  .navbar-lockup__parent,
+  .navbar-lockup__sep { display: none; }
+}
+@media (max-width: 480px) {
+  .navbar-lockup__title { display: none; }
 }
