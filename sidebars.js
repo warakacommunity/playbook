@@ -38,37 +38,40 @@ const sidebars = {
     { type: 'doc', id: 'introduction/index', label: 'Welcome', className: 'sidebar-welcome' },
     {
       type: 'category',
-      label: 'Preliminary',
-      className: 'sidebar-chapter',
-      collapsed: false,
+      label: 'Foundations',
+      className: 'sidebar-numbered',
+      collapsible: false,
       items: [
-        'introduction/how-to-read',
-        'introduction/how-to-contribute',
-        'introduction/how-to-write',
-        'introduction/core-principles',
-        'introduction/scope-and-strategy',
+        {
+          type: 'category',
+          label: 'Preliminary',
+          collapsed: false,
+          items: [
+            'introduction/how-to-read',
+            'introduction/how-to-contribute',
+            'introduction/how-to-write',
+            'introduction/core-principles',
+            'introduction/scope-and-strategy',
+          ],
+        },
+        chapterIndexed('Before You Start', 'before-you-start/index', [
+          'before-you-start/ner',
+          'before-you-start/machine-translation',
+          'before-you-start/asr',
+          'before-you-start/sentiment',
+          'before-you-start/hate-speech',
+          'before-you-start/tts',
+          'before-you-start/qa',
+          'before-you-start/ocr',
+        ]),
+        'project-management/index',
+        chapter('Data Collection', '2_data-collection'),
+        'data-governance/index',
+        chapter('Annotation Design', '3_annotation-design'),
+        chapterIndexed('Data Quality', 'data-quality/index', ['data-quality/equipment-setup']),
+        chapter('Community', '10_community-collaboration'),
       ],
     },
-    // Foundation chapters sit at the top level, numbered via `sidebar-chapter`
-    // like Preliminary above.
-    ...[
-      chapterIndexed('Before You Start', 'before-you-start/index', [
-        'before-you-start/ner',
-        'before-you-start/machine-translation',
-        'before-you-start/asr',
-        'before-you-start/sentiment',
-        'before-you-start/hate-speech',
-        'before-you-start/tts',
-        'before-you-start/qa',
-        'before-you-start/ocr',
-      ]),
-      { type: 'doc', id: 'project-management/index' },
-      chapter('Data Collection', '2_data-collection'),
-      { type: 'doc', id: 'data-governance/index' },
-      chapter('Annotation Design', '3_annotation-design'),
-      chapterIndexed('Data Quality', 'data-quality/index', ['data-quality/equipment-setup']),
-      chapter('Community', '10_community-collaboration'),
-    ].map((item) => ({ ...item, className: 'sidebar-chapter' })),
 
     section('Text', 'sections/text', [
       chapterIndexed('Text Classification', 'text-classification/defining-text-classification-tasks', [

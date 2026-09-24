@@ -1447,16 +1447,14 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 }
 
 /* Book-style chapter numbers in the docs sidebar (like a Quarto book TOC).
-   Chapters are top-level `sidebar-chapter` items or the direct children of a
-   `sidebar-numbered` section in sidebars.js; one counter runs across all sections. Labels stay untouched,
+   Chapters are the direct children of a `sidebar-numbered` section in
+   sidebars.js; one counter runs across all sections. Labels stay untouched,
    so sidebar translations keep working. */
 .theme-doc-sidebar-menu {
   counter-reset: chapter;
 }
-.sidebar-chapter > .menu__link::before,
-.sidebar-chapter > .menu__list-item-collapsible > .menu__link::before,
-.sidebar-numbered > .menu__list > li:not(.sidebar-unnumbered) > .menu__link::before,
-.sidebar-numbered > .menu__list > li:not(.sidebar-unnumbered) > .menu__list-item-collapsible > .menu__link::before {
+.sidebar-numbered > .menu__list > li > .menu__link::before,
+.sidebar-numbered > .menu__list > li > .menu__list-item-collapsible > .menu__link::before {
   counter-increment: chapter;
   content: counter(chapter);
   flex: none;
@@ -1466,8 +1464,7 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   font-variant-numeric: tabular-nums;
 }
 /* Line sub-pages up under the chapter title, past the number column. */
-.sidebar-chapter > .menu__list,
-.sidebar-numbered > .menu__list > li:not(.sidebar-unnumbered) > .menu__list {
+.sidebar-numbered > .menu__list > li > .menu__list {
   padding-left: 1.95em;
 }
 .sidebar-welcome > .menu__link {
