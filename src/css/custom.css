@@ -1470,3 +1470,15 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 .sidebar-welcome > .menu__link {
   font-weight: 700;
 }
+
+/* "← Waraka" link back to the community site, set apart from playbook links. */
+.navbar-back-waraka {
+  font-weight: 600;
+  padding-right: 0.9rem;
+  margin-right: 0.35rem;
+  border-right: 1px solid var(--ifm-color-emphasis-300);
+  white-space: nowrap;
+}
+.navbar-sidebar .navbar-back-waraka {
+  border-right: 0;
+}

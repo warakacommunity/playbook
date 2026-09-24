@@ -461,14 +461,6 @@ const config = {
     ({
       // Open Graph / social card image (1200 x 630)
       image: "img/social-card.png",
-      announcementBar: {
-        id: "live-soon-2026-04",
-        content:
-          '✓ <strong>Workshop at Indaba 2026</strong> — Data, Culture, and Community  Interactive Exhibition of the AfricaNLP Playbook and Annotation Tool. <a href="https://inworkshops.github.io/afriplaybookntool/">Register now →</a>',
-        backgroundColor: "#e8f5ec",
-        textColor: "#0f3d2b",
-        isCloseable: true,
-      },
       colorMode: {
         defaultMode: "light",
         disableSwitch: true,
@@ -491,6 +483,14 @@ const config = {
         },
         hideOnScroll: false,
         items: [
+          {
+            // Readers usually arrive from the Waraka community site; take
+            // them back there in the same tab.
+            type: "html",
+            position: "left",
+            value:
+              '<a class="navbar__link navbar-back-waraka" href="https://waraka.org" aria-label="Back to Waraka Community">← Waraka</a>',
+          },
           {
             type: "custom-PlaybookNavbarItem",
             position: "left",
