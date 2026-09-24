@@ -1,7 +1,7 @@
 {
   "label": "Before You Start",
   "position": 15,
-  "collapsed": true,
+  "collapsed": false,
   "link": {
     "type": "doc",
     "id": "before-you-start/index"

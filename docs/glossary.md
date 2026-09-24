@@ -4,8 +4,8 @@ title: Glossary
 description: Definitions of key terms used throughout the AfriPlaybook.
 ready: true
 last_update:
-  date: 2026-07-26
-  author: Seid Muhie Yimam
+  date: 2026-09-24
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 A reference of terms used throughout the Playbook. Cross-references point back to the chapters where each concept is introduced in depth.

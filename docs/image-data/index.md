@@ -2,8 +2,8 @@
 wip: true
 title: Image Data
 last_update:
-  date: 2026-07-26
-  author: Seid Muhie Yimam
+  date: 2026-09-24
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Image Data

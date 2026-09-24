@@ -1,7 +1,7 @@
 {
   "label": "Finding current resources",
   "position": 91,
-  "collapsed": true,
+  "collapsed": false,
   "link": {
     "type": "doc",
     "id": "finding-resources/index"

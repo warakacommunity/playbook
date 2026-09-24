@@ -3,8 +3,8 @@ wip: true
 title: Open-ended generation
 sidebar_position: 2
 last_update:
-  date: 2026-07-26
-  author: Seid Muhie Yimam
+  date: 2026-09-24
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Open-ended generation

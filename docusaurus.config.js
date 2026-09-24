@@ -95,6 +95,8 @@ const config = {
         docs: {
           routeBasePath: "/",
           sidebarPath: "./sidebars.js",
+          // Show every chapter and sub-chapter expanded, like a Quarto book TOC.
+          sidebarCollapsed: false,
           breadcrumbs: false,
           // "Last updated" is populated primarily from each page's
           // last_update frontmatter (auto-injected from the "Last reviewed:"

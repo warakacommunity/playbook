@@ -2,8 +2,8 @@
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-08-23
-  author: Seid Muhie Yimam
+  date: 2026-09-24
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # How to Contribute

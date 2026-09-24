@@ -1,7 +1,7 @@
 {
   "label": "Case Studies",
   "position": 90,
-  "collapsed": true,
+  "collapsed": false,
   "link": {
     "type": "doc",
     "id": "case-studies/index"

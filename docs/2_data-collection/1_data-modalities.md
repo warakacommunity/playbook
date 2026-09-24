@@ -3,8 +3,8 @@ title: Data Modalities
 description: What data modality means, why it's the first fork in the road for any collection plan, and how it shapes cost, sourcing, and tooling long before anyone writes an annotation guideline.
 ready: true
 last_update:
-  date: 2026-08-23
-  author: Seid Muhie Yimam
+  date: 2026-09-24
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Data Modalities

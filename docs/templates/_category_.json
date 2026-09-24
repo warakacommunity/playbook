@@ -1,7 +1,7 @@
 {
   "label": "Templates you can fork",
   "position": 92,
-  "collapsed": true,
+  "collapsed": false,
   "link": {
     "type": "doc",
     "id": "templates/index"

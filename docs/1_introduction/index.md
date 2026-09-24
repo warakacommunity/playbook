@@ -3,13 +3,13 @@ sidebar_position: 1
 slug: /
 ready: true
 last_update:
-  date: 2026-08-23
-  author: Seid Muhie Yimam
+  date: 2026-09-24
+  author: Shamsudddeen Hassan Muhammad
 ---
 
-# 1. Introduction
+# Introduction
 
-![AfriPlaybook cover: a baobab tree against a setting sun over the savanna, framed by kente cloth, with the word for "language" in Hausa, Amharic, Swahili, Yorùbá, Igbo, Zulu, Somali, Kinyarwanda, Luganda and Wolof linked like a network across the sky.](images/afriplaybook-cover.svg)
+![AfriPlaybook cover: a baobab tree against a low ochre sun under an indigo sky, framed by earth-tone kente cloth, with the word for language in Hausa, Amharic, Swahili, Yorùbá, Igbo, Zulu, Somali, Kinyarwanda, Luganda and Wolof linked like a network across the sky.](images/afriplaybook-cover.svg)
 
 :::tip[Contribute]
 This playbook is open source and community-owned. You don't need to write a whole chapter to help. Fixing an error, translating a page, or sharing what worked on a real project all count. See [**Built in the open**](#built-in-the-open) below, or jump straight to the [contribution guide](https://github.com/warakacommunity/playbook/blob/main/README.md#ways-to-contribute).
