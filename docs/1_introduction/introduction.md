@@ -15,11 +15,11 @@ This playbook is open source and community-owned. You don't need to write a whol
 
 > The bullet was the means of the physical subjugation. Language was the means of the spiritual subjugation.
 >
-> — Ngũgĩ wa Thiong'o, *Decolonising the Mind: The Politics of Language in African Literature* (1986)
+> Ngũgĩ wa Thiong'o, *Decolonising the Mind: The Politics of Language in African Literature* (1986)
 
-Africa is home to almost a third of the world's living languages — about 2,140 of the roughly 7,160 spoken on Earth ([Ethnologue, 2024](../references.md#ethnologue-2024)). Almost none of them are visible to the systems now reshaping how the rest of the world reads, writes, searches, translates, and speaks. When a language model stumbles over Yorùbá, Chichewa, or Wolof, the cause is rarely the model. It is the data. The text and speech these systems learn from barely exist in a usable form.
+Africa is home to almost a third of the world's living languages: about 2,140 of the roughly 7,160 spoken on Earth ([Ethnologue, 2024](../references.md#ethnologue-2024)). Most of them remain out of reach of the systems now reshaping how the rest of the world reads, writes, searches, translates, and speaks. Even the best-supported, such as Swahili, Hausa and Amharic, lag far behind high-resource languages. When a language model mangles Yorùbá, Chichewa, or Wolof, the cause is usually not the model but the data. The text and speech these systems learn from barely exist in a usable form.
 
-[Joshi et al. (2020)](../references.md#joshi-2020) sort the world's languages into six tiers by how many resources they have. The bottom tier, the *left-behinds*, with essentially no labelled data and little prospect of being served by current methods, holds the overwhelming majority of languages, and African languages crowd into it. Most have no annotated corpus, no benchmark, no tools. They are missing not because they are small. Many have tens of millions of speakers. They are missing because no one has built the data. The picture still holds, though the field now treats *low-resource* as multidimensional — a matter of tools, speakers, funding, and institutional support as much as raw data, with no single agreed definition ([Ranathunga & de Silva, 2022](../references.md#ranathunga-desilva-2022); [Nigatu et al., 2024](../references.md#nigatu-2024)).
+[Joshi et al. (2020)](../references.md#joshi-2020) sort the world's languages into six tiers by how many resources they have. The bottom tier, the *left-behinds*, with essentially no labelled data and little prospect of being served by current methods, holds the overwhelming majority of languages, and African languages crowd into it. Most have no annotated corpus, no benchmark, no tools. Many have tens of millions of speakers. What they lack is data, because almost no one has built it. The picture still holds, though the field now treats *low-resource* as multidimensional: a matter of tools, speakers, funding, and institutional support as much as raw data, with no single agreed definition ([Ranathunga & de Silva, 2022](../references.md#ranathunga-desilva-2022); [Nigatu et al., 2024](../references.md#nigatu-2024)).
 
 ![Joshi et al.'s six language resource classes, plotted by how much labelled and unlabelled data each has. Class 0, the left-behinds, holds the overwhelming majority of languages and sits at the bottom with almost no data; African languages crowd into classes 0 and 1. The better-resourced classes hold only a handful of languages each.](images/africanlp-language-classes.svg)
 
@@ -37,25 +37,25 @@ This playbook is about how to fix that problem. It is a practical, opinionated, 
 
 ## The field is growing, the data is not keeping up
 
-Over two decades, AfricaNLP has grown from a niche interest into an established field. A survey of the period counted 1,902 papers by 4,901 authors between 2005 and 2025: just 21 papers from 78 researchers in 2006, rising to 287 from 1,103 in 2024 ([Belay et al., 2025](../references.md#belay-2025)).
+Over the past two decades, AfricaNLP has grown from a niche interest into an established field. Research output has grown more than tenfold, from about 20 papers a year in 2006 to nearly 300 in 2024 ([Belay et al., 2025](../references.md#belay-2025)).
 
 ![AfricaNLP papers and authors grew roughly fourteenfold between 2006 and 2024.](images/africanlp-growth.svg)
 
-But more papers has not meant more data. When the same survey sorted nearly 7,800 contributions by what they actually produced, methods made up 53 percent and new datasets just 21 percent; the rest were benchmarks, surveys, and other work that adds no new data ([Belay et al., 2025](../references.md#belay-2025)). The field is learning to model far faster than it is building the data those models learn from.
+But more papers have not meant more data. More than half of this work proposes new methods, while only about one in five contributions introduces a new dataset ([Belay et al., 2025](../references.md#belay-2025)). We are getting better at building models faster than we are building the data they learn from.
 
 ![Methods make up 53 percent of AfricaNLP contributions; new datasets just 21 percent.](images/africanlp-contributions.svg)
 
-Methods and datasets are not made the same way. A method can be carried from one language to the next; a dataset has to be built for each one, from scratch, by people who speak it. That means recruiting annotators, writing guidelines, running quality control, and securing consent. It is slow, unglamorous work, and it is rarely funded.
+Methods and datasets are not made the same way. A method can often be reused across languages; a dataset has to be built for each one, from scratch, by people who speak it. That means recruiting annotators, writing guidelines, running quality control, and securing consent. It is slow, unglamorous work, and it is rarely funded, least of all for African languages.
 
-This playbook exists to lower that cost. It sets out each stage of building a dataset for an African language, from deciding what to collect, through annotation design, quality control, and documentation, to release, so that no team has to work it out from scratch. It is written for the real conditions of African-language NLP: low resources, multilingual teams, scarce funding, and communities who must stay the owners of what they help create.
+This playbook exists to make that work easier. It walks through each stage of building a dataset: deciding what to collect, designing the annotation, checking quality, documenting, and releasing. It is written for the real conditions of African-language NLP: limited data, multilingual teams, scarce funding, and communities who should remain the owners of what they help create.
 
 ## Why we wrote this playbook
 
 Almost every guide to building datasets quietly assumes English, a generous budget, and a problem someone has already solved once. Little of that holds when you are starting a corpus for a language with no prior resources, a volunteer team, and decisions to make that the literature never covers.
 
-The AfriPlaybook is the manual we wish we had had. It is written for exactly those conditions, and its aim is narrow: to lower the barrier to getting started and to raise the floor on quality, so that the datasets this community produces are ones the world can trust and reuse.
+The AfriPlaybook is the manual we wish we had had. Many of us learned to build datasets for African languages the hard way, through trial and error, with little written down and few people to ask. That is part of why datasets have lagged so far behind methods. This playbook collects what we learned so that the next team can start sooner, avoid the mistakes we made, and build data the world can trust and reuse.
 
-To do that, the playbook is a living, community-driven resource. Lowering the cost of building data is how the balance in the charts above begins to shift.
+The playbook will keep growing as the community shares what it learns. The more we pool our experience, the cheaper it becomes to build data, and the sooner datasets can catch up with methods.
 
 ## Built in the open
 

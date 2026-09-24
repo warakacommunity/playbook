@@ -33,25 +33,25 @@ This playbook is about how to fix that problem. It is a practical, opinionated, 
 
 ## The field is growing, the data is not keeping up
 
-Over two decades, AfricaNLP has grown from a niche interest into an established field. A survey of the period counted 1,902 papers by 4,901 authors between 2005 and 2025: just 21 papers from 78 researchers in 2006, rising to 287 from 1,103 in 2024 ([Belay et al., 2025](https://arxiv.org/abs/2509.25477)).
+Over the past two decades, AfricaNLP has grown from a niche interest into an established field. Research output has grown more than tenfold, from about 20 papers a year in 2006 to nearly 300 in 2024 ([Belay et al., 2025](https://arxiv.org/abs/2509.25477)).
 
 ![AfricaNLP papers and authors grew roughly fourteenfold between 2006 and 2024.](./africanlp-growth.svg)
 
-But more papers has not meant more data. When the same survey sorted nearly 7,800 contributions by what they actually produced, methods made up 53 percent and new datasets just 21 percent; the rest were benchmarks, surveys, and other work that adds no new data ([Belay et al., 2025](https://arxiv.org/abs/2509.25477)). The field is learning to model far faster than it is building the data those models learn from.
+But more papers have not meant more data. More than half of this work proposes new methods, while only about one in five contributions introduces a new dataset ([Belay et al., 2025](https://arxiv.org/abs/2509.25477)). We are getting better at building models faster than we are building the data they learn from.
 
 ![Methods make up 53 percent of AfricaNLP contributions; new datasets just 21 percent.](./africanlp-contributions.svg)
 
-Methods and datasets are not made the same way. A method can be carried from one language to the next; a dataset has to be built for each one, from scratch, by people who speak it. That means recruiting annotators, writing guidelines, running quality control, and securing consent. It is slow, unglamorous work, and it is rarely funded.
+Methods and datasets are not made the same way. A method can often be reused across languages; a dataset has to be built for each one, from scratch, by people who speak it. That means recruiting annotators, writing guidelines, running quality control, and securing consent. It is slow, unglamorous work, and it is rarely funded, least of all for African languages.
 
-This guide solves that problem. It is a practical, step-by-step manual for building datasets for African languages, from deciding what to collect, through annotation design, quality control, and documentation, to release. It lays out each step so you do not have to work it out from scratch, which makes a good dataset far quicker and easier to build. It is written for the real conditions of African-language NLP: low resources, multilingual teams, scarce funding, and communities who must stay the owners of what they help create.
+This playbook exists to make that work easier. It walks through each stage of building a dataset: deciding what to collect, designing the annotation, checking quality, documenting, and releasing. It is written for the real conditions of African-language NLP: limited data, multilingual teams, scarce funding, and communities who should remain the owners of what they help create.
 
 ## Why we wrote this playbook
 
 Almost every guide to building datasets quietly assumes English, a generous budget, and a problem someone has already solved once. Little of that holds when you are starting a corpus for a language with no prior resources, a volunteer team, and decisions to make that the literature never covers.
 
-The AfriPlaybook is the manual we wish we had had. It is written for exactly those conditions, and its aim is narrow: to lower the barrier to getting started and to raise the floor on quality, so that the datasets this community produces are ones the world can trust and reuse.
+The AfriPlaybook is the manual we wish we had had. Many of us learned to build datasets for African languages the hard way, through trial and error, with little written down and few people to ask. That is part of why datasets have lagged so far behind methods. This playbook collects what we learned so that the next team can start sooner, avoid the mistakes we made, and build data the world can trust and reuse.
 
-To do that, the playbook does not stand alone. It pairs the step-by-step guide with two companion tools: AfriAnnotate (tool page removed), for setting up and running annotation tasks, and AfriFinder (finder page removed), for recruiting native-speaker annotators. Together they let a small team move from a plan to a documented, released dataset without reinventing the process each time. Lowering the cost of building data is how the balance in the charts above begins to shift.
+The playbook will keep growing as the community shares what it learns. The more we pool our experience, the cheaper it becomes to build data, and the sooner datasets can catch up with methods.
 
 ## Built in the open
 
