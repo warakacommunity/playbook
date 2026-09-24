@@ -6,7 +6,7 @@ It is not a model-tuning tutorial (see the [Hugging Face NLP Course](https://hug
 
 **Live site:** <https://afriplaybook.waraka.org/>
 
-This is a living resource maintained by the [Waraka](https://waraka.org/) community in collaboration with AfricaNLP and [Masakhane](https://www.masakhane.io/). We welcome contributions from researchers, practitioners, students, language experts, and translators.
+This is a living resource maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers. We welcome contributions from researchers, practitioners, students, language experts, and translators.
 
 ---
 

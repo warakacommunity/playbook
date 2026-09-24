@@ -59,7 +59,7 @@ The playbook will keep growing as the community shares what it learns. The more 
 
 ## Built in the open
 
-This playbook is open source, maintained by the Waraka community in collaboration with AfricaNLP and Masakhane. It is not just for researchers. It is for everyone who builds datasets for African languages: volunteers, students, community organizers, and professionals alike. The people who build datasets know best what a guide like this should say, so it is only as good as the people who contribute to it. There are many ways to help:
+This playbook is open source, maintained by the Waraka community, Masakhane, and AfricaNLP researchers. It is not just for researchers. It is for everyone who builds datasets for African languages: volunteers, students, community organizers, and professionals alike. The people who build datasets know best what a guide like this should say, so it is only as good as the people who contribute to it. There are many ways to help:
 
 - **Write** a chapter or section that fills a gap.
 - **Review** existing chapters: correct an error, sharpen a claim, add a reference.
