@@ -15,7 +15,7 @@ last_update:
 
 ## Why this template exists
 
-The playbook takes strong positions on evaluation ([core principles](../1_introduction/core-principles.md), and every [Before You Start](../before-you-start/index.md) page): report per-language and per-class, prefer character-level metrics for morphology-rich languages, never let an automatic score stand alone for generative output. It is easier to say those things than to enforce them across every project.
+The playbook takes strong positions on evaluation ([core principles](../1_introduction/core-principles.md)): report per-language and per-class, prefer character-level metrics for morphology-rich languages, never let an automatic score stand alone for generative output. It is easier to say those things than to enforce them across every project.
 
 This template makes the compliance the default. The output has per-language and per-class breakdowns by construction; the primary metric for translation is chrF; the primary metric for speech is CER; a human-evaluation sampling hook is scaffolded in. Fork it, adapt the task-specific metric plug-in point, and any project using it inherits the policy without needing to remember it.
 
@@ -278,7 +278,7 @@ if __name__ == "__main__":
 The pattern for adding a new task is:
 
 1. Add a `def eval_yourtask(records)` function that returns a dict with `per_language` at the top level.
-2. Choose the metric that respects morphology-rich language reality (character-level over word-level where morphology matters; per-class for classification; retrieval-first for QA; see the [QA page](../before-you-start/qa.mdx)).
+2. Choose the metric that respects morphology-rich language reality (character-level over word-level where morphology matters; per-class for classification; retrieval-first for QA).
 3. Register in the `TASKS` dictionary.
 4. Add a docstring line describing what the primary metric is and why.
 

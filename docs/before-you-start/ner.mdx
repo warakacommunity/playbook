@@ -3,7 +3,7 @@ sidebar_position: 2
 title: NER
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-09-24
   author: Shamsudddeen Hassan Muhammad
 ---
 
@@ -11,55 +11,35 @@ import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
 
 # Named Entity Recognition
 
-*Last reviewed: 2026-07-07.*
+*Worked example. Last reviewed: 2026-07-07.*
 
-Named Entity Recognition (NER) is the most well-served African-language NLP task. If your project is NER for a language covered by [MasakhaNER 2](https://arxiv.org/abs/2210.12391), you probably do not need to build a new corpus; you need to extend an existing one, or fine-tune on top of a released model. This page is here to make that decision fast.
+This page applies the [four steps from Before You Start](./index.md) to named entity recognition (NER): finding people, organisations, places, and dates in text. It uses **MasakhaNER** as the example because it is the best-documented NER effort for African languages. **It is not a complete list.** If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
 
-## What already exists
+## Step 1: What a search turns up
 
-The definitive resource is **MasakhaNER 2** ([Adelani et al., 2022](https://arxiv.org/abs/2210.12391)), a 20-language named entity recognition benchmark for African languages, released with data, annotation guidelines, baselines, and evaluation scripts. It supersedes but does not replace [MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/) ([Adelani et al., 2021](https://aclanthology.org/2021.tacl-1.66/)), which covers 10 languages and is still worth reading for its retrospective on what changed between versions.
+Search Hugging Face, Lanfrica, or the ACL Anthology for NER in almost any major African language and you will quickly reach two datasets:
 
-### Datasets: per language
+- **[MasakhaNER 2](https://arxiv.org/abs/2210.12391)** ([Adelani et al., 2022](https://arxiv.org/abs/2210.12391)): 20 languages. Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Kiswahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, and Yoruba.
+- **[MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** ([Adelani et al., 2021](https://aclanthology.org/2021.tacl-1.66/)): the first 10 languages. Version 2 covers most of them, but version 1 is still the one to use for **Amharic**, which version 2 does not include. Its paper also explains how the annotation process was designed.
 
-| Language | Family | Corpus | Splits | License | Notes |
-| --- | --- | --- | --- | --- | --- |
-| Amharic (amh) | Semitic | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | Ge'ez script; MasakhaNER 1 also covers it |
-| Bambara (bam) | Mande | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Ewe (ewe) | Gbe | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | Tone marks; check preprocessing |
-| Fon (fon) | Gbe | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Ghomala (bbj) | Grassfields | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Hausa (hau) | Chadic | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | Ajami variant not covered; Latin only |
-| Igbo (ibo) | Volta-Niger | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | Diacritics matter for evaluation |
-| Kinyarwanda (kin) | Bantu | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | High-agglutinative; see morphology notes below |
-| Luganda (lug) | Bantu | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | |
-| Luo (luo) | Nilotic | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | |
-| Mossi (mos) | Gur | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Chichewa/Nyanja (nya) | Bantu | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Chishona (sna) | Bantu | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Kiswahili (swa) | Bantu | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | Largest split in the corpus |
-| Setswana (tsn) | Bantu | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Twi (twi) | Tano | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Wolof (wol) | Senegambian | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | |
-| isiXhosa (xho) | Bantu | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
-| Yoruba (yor) | Volta-Niger | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | Tone diacritics load-bearing |
-| isiZulu (zul) | Bantu | MasakhaNER 2 | train/dev/test | CC BY-NC 4.0 | New in v2 |
+The data is on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2), and the [GitHub repository](https://github.com/masakhane-io/masakhane-ner) has the annotation guidelines and evaluation scripts.
 
-The corpus is available on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2) and the [GitHub repository](https://github.com/masakhane-io/masakhane-ner) has the annotation guidelines and evaluation scripts.
+You will also find **automatically labelled ("silver") NER data** that covers many more languages, built by projecting labels from Wikipedia links rather than by human annotators. It is tempting because of its coverage. Step 2 is where you find out whether its quality is good enough for your purpose.
 
-**Editorial opinion.** MasakhaNER 2 is the state of the art for African-language NER. If your language is in that table, use it. If your language is not, read the MasakhaNER papers for the annotation guidelines and workforce model before designing your own corpus. They are the reference for how to do this well.
+## Step 2: Judging MasakhaNER 2 against the checklist
 
-### Models: what has been trained on this data
+- **Licence.** CC BY-NC 4.0: free for research, **not for commercial use**. If you are building a product, check this first.
+- **Access.** Openly downloadable from Hugging Face and GitHub.
+- **Fit.** News text. Social media, government documents, or speech transcripts look different, so expect lower accuracy on them.
+- **Script.** Latin script only. Hausa Ajami, Arabic-script Wolof, and Ge'ez-script languages are not covered.
+- **Code-switching.** The sentences are monolingual. Real text often mixes languages within a sentence (Hausa–English, Swahili–English, French–Wolof). If yours does, expect results to be worse than the published numbers.
+- **Labels.** Person, organisation, location, and date. "Organisation" may not match what your use case means by it, so read the guidelines before assuming the label set fits.
+- **Splits.** Fixed train, development, and test splits, so results are comparable across papers.
+- **Guidelines.** Released. Even if your language is not covered, the guidelines are the best starting point for writing your own.
+- **Quality.** Annotated by native speakers through a participatory process. The papers describe it in detail.
+- **Diacritics.** In Yoruba, Igbo, and several other languages, tone marks carry meaning. Check that your text processing keeps them, or entity boundaries will shift and results will look worse than they are.
 
-- **[AfroXLMR](https://huggingface.co/Davlan/afro-xlmr-large)** and [AfroXLMR-76L](https://huggingface.co/Davlan/afro-xlmr-large-76L): multilingual encoder base models fine-tuned or adapted on African-language data, widely used as the NER fine-tuning starting point.
-- **[AfriBERTa](https://huggingface.co/castorini/afriberta_large)** ([Ogueji et al., 2021](https://aclanthology.org/2021.mrl-1.11/)): a purpose-built multilingual model pretrained on African-language corpora.
-- **[SERENGETI](https://arxiv.org/abs/2212.10785)** ([Adebara et al., ACL Findings 2023](https://arxiv.org/abs/2212.10785)): UBC-NLP's massively multilingual foundation model for **517 African languages and language varieties**, pretrained on 42GB of African-language text. Explicitly designed as a competitor / complement to AfroXLMR and AfriBERTa. Worth measuring against AfroXLMR-large on your target language before locking in a base. For languages with sparse pretraining data in the XLMR lineage, SERENGETI's coverage can matter.
-- **[AfriqueLLM](https://huggingface.co/collections/McGill-NLP/afriquellm)** ([Yu et al. 2026, ACL 2026 Main](https://arxiv.org/abs/2601.06395)): 2026 continued-pretraining recipe applied to Llama 3.1, Gemma 3, Qwen 3 for 20 African languages on 26B tokens. Nine variants (AfriqueQwen 4B/8B/14B, AfriqueGemma 4B/12B, AfriqueLlama 8B). CC BY 4.0. Larger decoder-only alternative to AfroXLMR when compute permits an LLM-based NER pipeline; worth measuring against AfroXLMR fine-tuning on your target language.
-- **Per-language fine-tunes** for many of the MasakhaNER 2 languages exist on the [Hugging Face Hub under `masakhane/`](https://huggingface.co/masakhane).
-- **XLM-RoBERTa large** ([Conneau et al., 2020](https://arxiv.org/abs/1911.02116)) is a defensible baseline if you want to compare against a general multilingual encoder; the MasakhaNER 2 paper reports its numbers alongside the specialised models.
-
-**Editorial opinion.** For a new project on a MasakhaNER 2 language, the shortest path to a good NER model is: fine-tune AfroXLMR-large on the MasakhaNER 2 split for your language. That is the recipe MasakhaNER 2 itself used and the numbers in the paper are the honest floor.
-
-## Fork or start fresh?
+## Step 3: Reuse, extend, or build
 
 <DecisionTree tree={{
   question: "Is your language covered by MasakhaNER 2?",
@@ -67,15 +47,15 @@ The corpus is available on the [Hugging Face Hub](https://huggingface.co/dataset
     {
       label: "Yes",
       next: {
-        question: "Is the label set (PER, ORG, LOC, DATE) enough for your task?",
+        question: "Is the label set (person, organisation, location, date) enough for your task?",
         options: [
           {
             label: "Yes",
-            result: <><strong>Use MasakhaNER 2. Fine-tune AfroXLMR-large. Done.</strong></>,
+            result: <><strong>Reuse MasakhaNER 2.</strong> Do not build a new corpus for these labels.</>,
           },
           {
-            label: "No, I need extra entity types (MONEY, PRODUCT, culture-specific)",
-            result: <>Extend MasakhaNER 2 by annotating extra types on their splits. Reuse their guidelines. <strong>Do NOT re-annotate PER/ORG/LOC; merge.</strong></>,
+            label: "No, I need extra entity types (money, products, culture-specific)",
+            result: <><strong>Extend it.</strong> Annotate the extra types on the existing splits and reuse the guidelines. <strong>Do not re-annotate person, organisation, and location; merge.</strong></>,
           },
         ],
       },
@@ -83,15 +63,15 @@ The corpus is available on the [Hugging Face Hub](https://huggingface.co/dataset
     {
       label: "No",
       next: {
-        question: "Is your language related to any of the 20 covered?",
+        question: "Is your language related to one of the 20 covered (same family or script)?",
         options: [
           {
-            label: "Yes (same family / same script)",
-            result: <>Start with cross-lingual transfer from the closest MasakhaNER 2 language. See the <a href="/cross-language-transfer">cross-language transfer</a> chapter for family-by-family pivot guidance. Only then design a small validation corpus in your target language.</>,
+            label: "Yes",
+            result: <>Try <a href="/cross-language-transfer">cross-language transfer</a> from the closest covered language, then build a small evaluation set in your own language using the MasakhaNER guidelines.</>,
           },
           {
-            label: "No, genuinely uncovered",
-            result: <>You need to build a corpus. Read the <a href="/long-tail-language">long-tail language onboarding</a> chapter first. It lays out the realistic milestones and the Step-0 community, orthography, and IP decisions that determine whether the project succeeds. Then the <a href="/data-collection/Overview">Data Collection</a>, <a href="/annotation-design/annotation-task-design">Annotation Design</a> and <a href="/data-quality">Data Quality</a> chapters of this playbook, and MasakhaNER 2's annotation guidelines before you write your own. Aim for <strong>5–10k sentences</strong> to start, following the MasakhaNER 2 partitioning.</>,
+            label: "No",
+            result: <>You need to build a corpus. Start with the <a href="/long-tail-language">long-tail language onboarding</a> chapter, then <a href="/data-collection/Overview">Data Collection</a>, <a href="/annotation-design/annotation-task-design">Annotation Design</a>, and <a href="/data-quality">Data Quality</a>. Read the MasakhaNER guidelines before writing your own, and aim for <strong>5,000–10,000 sentences</strong> to start.</>,
           },
         ],
       },
@@ -103,63 +83,43 @@ The corpus is available on the [Hugging Face Hub](https://huggingface.co/dataset
 
 ```
 Is your language covered by MasakhaNER 2?
-├── Yes. Is the label set (PER, ORG, LOC, DATE) enough for your task?
-│   ├── Yes → Use MasakhaNER 2. Fine-tune AfroXLMR-large. Done.
-│   └── No, you need extra entity types (MONEY, PRODUCT, CULTURE-specific)
-│       → Extend MasakhaNER 2 by annotating extra types on their splits.
-│         Reuse their guidelines. Do NOT re-annotate PER/ORG/LOC; merge.
-└── No. Is your language related to any of the 20 covered?
-    ├── Yes (same family / same script)
-    │   → Start with cross-lingual transfer from the closest MasakhaNER 2
-    │     language. See the [cross-language transfer](../cross-language-transfer/index.md)
-    │     chapter for family-by-family pivot guidance. Only then design a
-    │     small validation corpus in your target language.
-    └── No, the language is genuinely uncovered.
-        → You need to build a corpus. Read the
-          [long-tail language onboarding](../long-tail-language/index.md)
-          chapter first. It lays out the realistic milestones and the
-          Step-0 community, orthography, and IP decisions that determine
-          whether the project succeeds. Then the Data Collection,
-          Annotation Design and Data Quality chapters of this playbook,
-          and MasakhaNER 2's annotation guidelines before you write your
-          own. Aim for 5-10k sentences to start, following the MasakhaNER
-          2 partitioning.
+├── Yes. Is the label set (person, organisation, location, date) enough?
+│   ├── Yes → Reuse MasakhaNER 2. Do not build a new corpus.
+│   └── No, you need extra entity types
+│       → Extend it: annotate the extra types on the existing splits and
+│         reuse the guidelines. Do not re-annotate PER/ORG/LOC; merge.
+└── No. Is your language related to one of the 20 covered?
+    ├── Yes → Try cross-language transfer from the closest covered
+    │         language, then build a small evaluation set in your language.
+    └── No → Build a corpus. Start with the long-tail language onboarding
+             chapter, then Data Collection, Annotation Design, and Data
+             Quality. Read the MasakhaNER guidelines first; aim for
+             5,000–10,000 sentences.
 ```
 
 </div>
 
-## What it will actually cost you
+## Step 4: Learning from the people who built it
 
-These are order-of-magnitude estimates drawn from the MasakhaNER papers and the participatory workflow they describe. They will not be exact for your project. They are here so nobody submits a proposal claiming NER for a new language is a two-week task.
+MasakhaNER was built by a distributed community of volunteer researchers and native-speaker annotators across Africa. How they organised that work is as useful as the data itself.
 
-- **Fine-tuning on an existing language (MasakhaNER 2 covered).** One to two person-weeks, one GPU-day. Most of that is evaluation, not training.
-- **Extending MasakhaNER 2 with new entity types on covered languages.** Four to eight person-weeks per language, depending on how many new types. Includes writing the guideline addendum, training annotators, and adjudication.
-- **Building a new NER corpus for an uncovered language, aiming for 5–10k sentences.** Three to six months elapsed, one to three person-months of annotator work, plus one person-month of lead annotator effort for guidelines and adjudication. This assumes a participatory setup with two to four native-speaker annotators and one senior annotator.
-- **Achieving MasakhaNER-2-comparable inter-annotator agreement** on a new language. Budget one full round of annotator recalibration after the first 500 sentences; do not treat the first pass as production.
+- Read the **[MasakhaNER case study](../case-studies/masakhaner.md)** in this playbook.
+- Read the **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** ([Nekoto et al., 2020](https://aclanthology.org/2020.findings-emnlp.195/)) that MasakhaNER's way of working grew out of.
+- Questions worth asking the authors: How did you recruit and coordinate annotators in 20 countries? Where did annotators disagree most, and how did you resolve it? What changed between version 1 and version 2, and why?
 
-## Known limitations to watch for
+## What it will cost
 
-- **Diacritics and tone marks.** Yoruba, Igbo, and several other languages carry semantic information in diacritics. Losing them in preprocessing changes entity boundaries and inflates apparent error rates. Verify your tokenisation preserves them end-to-end.
-- **Ajami and non-Latin scripts.** MasakhaNER 2 is Latin-script only. Hausa Ajami, Arabic-script Wolof, and Ge'ez script for Ethiopic languages are not covered. Cross-script transfer is a research problem, not a solved one.
-- **Code-switching.** Real African-language text mixes languages within a sentence (Hausa-English, Swahili-English, French-Wolof). MasakhaNER 2 splits are monolingual by construction. If your target text is code-switched, the corpus numbers are optimistic.
-- **Named entity classes are culturally specific.** "Organisation" in a MasakhaNER-2 sentence may not map to the same concept a Nigerian government agency uses. Read the annotation guidelines before assuming the label set fits your use case.
+These are rough estimates based on the MasakhaNER papers and the participatory workflow they describe. They will not be exact for your project. They are here so nobody plans NER for a new language as a two-week task.
 
-## The canonical fine-tuning link
-
-For the mechanics of fine-tuning an encoder model on a NER dataset, use the [Hugging Face token-classification tutorial](https://huggingface.co/docs/transformers/tasks/token_classification). It is maintained, versioned, and covers everything from `datasets` loading to evaluation with `seqeval`. Point your team there rather than writing your own training loop. Your job is the corpus and the evaluation choices, not the boilerplate.
+- **Reusing MasakhaNER 2 for a covered language.** One to two person-weeks, mostly spent on evaluation.
+- **Adding new entity types for a covered language.** Four to eight person-weeks per language: writing a guideline addendum, training annotators, and resolving disagreements.
+- **Building a new corpus of 5,000–10,000 sentences.** Three to six months elapsed. One to three person-months of annotator work, plus about one person-month from a lead annotator for guidelines and adjudication. This assumes two to four native-speaker annotators and one senior annotator.
+- **Reaching good inter-annotator agreement.** Plan one full round of recalibration after the first 500 sentences. Do not treat the first pass as final.
 
 ## Further reading
 
-- [MasakhaNER 2 paper (Adelani et al., 2022)](https://arxiv.org/abs/2210.12391): the extended benchmark, model comparisons, and cross-lingual transfer analysis.
-- [MasakhaNER 1 paper (Adelani et al., 2021)](https://aclanthology.org/2021.tacl-1.66/): the annotation methodology and participatory workflow for the NER corpus.
-- [Alabi et al., 2022: AfroXLMR](https://aclanthology.org/2022.coling-1.382/): the base encoder MasakhaNER 2 fine-tunes on and the recipe most current African-language NER releases start from.
+- [MasakhaNER 2 (Adelani et al., 2022)](https://arxiv.org/abs/2210.12391): the 20-language dataset and its analysis.
+- [MasakhaNER 1 (Adelani et al., 2021)](https://aclanthology.org/2021.tacl-1.66/): the annotation method and participatory workflow.
+- [Participatory research for low-resourced machine translation (Nekoto et al., 2020)](https://aclanthology.org/2020.findings-emnlp.195/): the Masakhane way of working that MasakhaNER inherits.
 
-<details>
-<summary>Additional references</summary>
-
-- [AfriSenti (Muhammad et al., 2023)](https://arxiv.org/abs/2302.08956): companion work on sentiment; useful reference for annotation-workforce practice.
-- [Ogueji et al., 2021: AfriBERTa paper](https://aclanthology.org/2021.mrl-1.11/): a study on training language models with limited African-language data.
-- [Nekoto et al., 2020: participatory approach](https://aclanthology.org/2020.findings-emnlp.195/): the foundational Masakhane paper on participatory MT methodology; MasakhaNER inherits its workforce model.
-
-</details>
-
+Once you have your data, training a model is well covered elsewhere. The [Hugging Face token classification tutorial](https://huggingface.co/docs/transformers/tasks/token_classification) is a good start.

@@ -8,9 +8,7 @@ last_update:
 
 # Deployment for African contexts
 
-*The chapter that nobody else writes.*
-
-Most NLP deployment writing assumes a fibre connection, a GPU-backed cloud region a short round-trip away, a modern laptop or high-end phone, and a monolingual user typing standard-orthography input. **None of these assumptions hold across the majority of African deployment surfaces.** Connectivity is patchy or expensive; a large share of interactions happen on Android Go phones with 2 GB of RAM; users switch languages within a single conversation; and the practical text-entry surface is often SMS or WhatsApp, not a native app. Deployment writing that ignores this is written for someone else's market.
+Most NLP deployment writing assumes a fibre connection, a GPU-backed cloud region a short round-trip away, a modern laptop or high-end phone, and a monolingual user typing standard-orthography input. **None of these assumptions hold across the majority of African deployment surfaces.** Connectivity is patchy or expensive; a large share of interactions happen on Android Go phones with 2 GB of RAM; users switch languages within a single conversation; and the practical text-entry surface is often SMS or WhatsApp, not a native app.
 
 This chapter is opinionated deployment guidance for the surfaces where African-language NLP actually meets its users. It is not a general MLOps guide. For cloud deployment, latency budgets in low-hundreds-of-milliseconds, and standard-issue Kubernetes practice, use [ML Systems (Chip Huyen)](https://huyenchip.com/ml-interviews-book/) or the cloud providers' own material. This chapter picks up where those leave off.
 

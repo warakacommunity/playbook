@@ -8,8 +8,6 @@ last_update:
 
 # What this playbook is (and isn't)
 
-*A decision record. Written 2026-07 to make the playbook's scope and its next expansion honest and legible to anyone picking it up: readers, contributors, and funders alike.*
-
 ## The one-sentence framing
 
 **AfriPlaybook is the canonical decision framework for anyone starting an African-language NLP project, grounded in the empirical experience of Masakhane's own past projects.**
@@ -47,7 +45,7 @@ The current playbook is a solid draft of the dataset-lifecycle spine. The next e
 
 ### Phase 1: the two highest-leverage additions
 
-- **[Before You Start](../before-you-start/index.md)** per task. For each task (NER, MT, ASR, sentiment, TTS, OCR): a living resource table of every existing dataset and model per African language; a fork-or-scratch decision tree; a realistic effort estimate; a single canonical fine-tuning tutorial to link out to. Written to save an incoming project two to four weeks of duplicated groundwork. Ships first for NER (because MasakhaNER is the flagship reference project) and extends across the task set.
+- **[Before You Start](../before-you-start/index.md)**. A four-step method for checking prior work before building a dataset: search for what exists, judge it against a checklist, decide whether to reuse, extend, or build, and learn from the people who built it. Three worked examples (NER, sentiment, and hate speech) apply the method to well-known datasets. They are examples, not complete lists, because no hand-written list can keep up with the field.
 - **[Case Studies](../case-studies/index.md)**: real retrospectives from Masakhane's own body of work: MasakhaNER 1 and 2, AfriSenti, AfroBench, LAFAND-MT, AfriQA. Each answers the same set of questions (team size, timeline, budget, hardest problem, biggest mistake, what surprised the team) from the people who did the work. Two case studies of this quality are worth more than ten chapters of general prose.
 
 ### Phase 2: cross-cutting realism
@@ -70,7 +68,7 @@ The original Phase 5 was a curated living directory: every African-language data
 
 The redesigned Phase 5 ships as **[Finding current resources](../finding-resources/index.md)**, a short chapter that names the *primary sources* (trusted Hugging Face organisations, Zenodo, OpenSLR, SADiLaR, AfricaNLP workshop proceedings, Deep Learning Indaba) and teaches the search patterns that find current African-NLP resources on those platforms. The chapter does not list contents; the sources list themselves.
 
-**Tradeoff acknowledged**: we give up per-entry editorial opinion on every dataset and model (readers get that from the model card and the [Before You Start](../before-you-start/index.md) pages instead). We gain a chapter that stays honest for years without touch and does not require a named maintainer to unblock. The [scope note in *Finding current resources*](../finding-resources/index.md#why-this-chapter-is-short) documents this design choice for future readers.
+**Tradeoff acknowledged**: we give up per-entry editorial opinion on every dataset and model (readers learn to judge entries themselves with the checklist in [Before You Start](../before-you-start/index.md#step-2-judge-what-you-find)). We gain a chapter that stays honest for years without touch and does not require a named maintainer to unblock. The [scope note in *Finding current resources*](../finding-resources/index.md#why-this-chapter-is-short) documents this design choice for future readers.
 
 ## What we deprioritise
 

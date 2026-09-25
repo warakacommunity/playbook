@@ -10,14 +10,14 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-The [Before You Start](../before-you-start/index.md) pages tell you which African-language NLP resources exist and what our editorial opinion is on each. Those pages age. Datasets get superseded, models get deprecated, new work drops at every AfricaNLP workshop. This chapter is the small companion that stays honest for years: **it names the primary sources (the organisations, archives, workshops, and search patterns) where the truth lives, and points you at them.**
+[Before You Start](../before-you-start/index.md) teaches you how to check for prior work before building a dataset. This chapter is its reference list, and it stays honest for years: **it names the primary sources (the organisations, archives, workshops, and search patterns) where the truth lives, and points you at them.**
 
 The rule that makes this chapter survive without a maintainer: we name *sources*, not *contents*. A Hugging Face organisation page updates itself; a Zenodo community indexes new uploads automatically; a workshop's proceedings arrive on schedule every year. We do not try to list what is on those pages today. We point you at them and trust the sources to be current.
 
 ## When to use this chapter
 
-- The Before You Start page for your task was last reviewed more than **six months ago**, and you need to know what has shipped since. The dates at the top of each Before You Start page are the tripwire.
-- Your task is not covered by a Before You Start page, so you need to find your own primary sources.
+- You are doing [Step 1 of Before You Start](../before-you-start/index.md#step-1-search-for-prior-work) and want more places to search.
+- Your task or language is not covered by a Before You Start worked example.
 - You are scoping a new project and want the current state of the ecosystem, not a snapshot.
 
 ## Where the corpora and models actually live
@@ -116,11 +116,11 @@ If you take one action away from this chapter, make it joining one of these. Cur
 
 ## Anti-patterns
 
-1. **Treating a Before You Start page more than six months old as current.** The playbook's "last reviewed" date is the tripwire; if the page is older, cross-check against the primary sources above.
+1. **Treating any snapshot as current, including the Before You Start worked examples.** Check each page's "last reviewed" date, and cross-check against the primary sources above.
 2. **Trusting a general "African NLP" claim from an LLM without cross-check.** The LLM was probably trained on scraped web summaries, not on the primary sources; verify against the HF Hub or Zenodo before acting on the claim.
 3. **Missing the workshop proceedings.** Most recent African-language NLP work first appears at an AfricaNLP workshop; not skimming the latest proceedings means missing the current baseline.
 4. **Building on a single dataset without checking whether a newer version has been released.** Check the dataset's HF Hub page for the current version tag before starting a fine-tune.
-5. **Adopting a model based on the model card's headline number.** Read the "known limitations" section of the [Before You Start](../before-you-start/index.md) page for the task, then read the model card's full evaluation section, then measure on your target language before deploying.
+5. **Adopting a model based on the model card's headline number.** Read the model card's full evaluation section, then measure on your target language before deploying.
 
 ## Why this chapter is short
 

@@ -8,9 +8,7 @@ last_update:
 
 # Case Studies
 
-*Retrospectives from real African-language NLP projects, written by the people who built them.*
-
-Most NLP writing is aspirational: how the pipeline is *supposed* to work, how the metrics are *supposed* to move, how the annotator workflow is *supposed* to scale. The interesting parts sit in the gap between the paper's methods section and what actually happened: what surprised the team, what was harder than they expected, what they would do differently. This chapter closes that gap.
+Most NLP writing is aspirational: how the pipeline is *supposed* to work, how the metrics are *supposed* to move, how the annotator workflow is *supposed* to scale. The interesting parts sit in the gap between the paper's methods section and what actually happened: what surprised the team, what was harder than they expected, what they would do differently. This chapter records those parts.
 
 Every case study on this page answers the same seventeen questions, drawn from the [retrospective template](../case-studies/retrospective-template.md). Same questions across every project, so a reader can compare across them and see the patterns.
 

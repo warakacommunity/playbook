@@ -8,9 +8,7 @@ last_update:
 
 # Templates you can fork
 
-*Every chapter ends with "template", "starting point", or "example". This is where they live.*
-
-Reading the playbook is one thing; sitting in front of an empty document at the start of a project is another. This chapter holds the actual reusable templates the rest of the playbook points at (dataset cards, evaluation scripts, consent forms, project charters) as concrete starting points you can copy, rename, and adapt.
+This chapter holds the reusable templates the rest of the playbook points at (dataset cards, evaluation scripts, consent forms, project charters) as concrete starting points you can copy, rename, and adapt.
 
 The rule for what belongs here: **every template is one file, forkable, with an editorial opinion attached, and cross-linked to the chapter that motivates it.** If a template does not have a chapter behind it explaining the rationale, it does not belong here yet.
 
@@ -46,7 +44,7 @@ If you are building a new African-language NLP project from Step 0 to deployment
 - **A short header explaining what to change and why.** Every template ships with usage notes at the top; a raw file with no context is a link-farm, not a template.
 - **Opinionated defaults.** A template that leaves every field blank is not a template, it is a form. Fill the defaults with the playbook's editorial preferences (chrF, per-language reporting, CC BY-NC 4.0, participatory workflow) and let the forking project override where its context differs.
 - **Cross-linked back to the chapter that motivates it.** Any reader who finds a template first and does not know why the fields are what they are should be one click away from the reasoning.
-- **Reviewed on the same six-month cadence as [Before You Start](../before-you-start/index.md).** Templates rot faster than prose; libraries change, licences update, sample data ages out. Every template ships with a "last reviewed" date.
+- **Reviewed every six months.** Templates rot faster than prose; libraries change, licences update, sample data ages out. Every template ships with a "last reviewed" date.
 
 ## The one anti-pattern
 

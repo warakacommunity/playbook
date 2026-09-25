@@ -3,7 +3,7 @@ sidebar_position: 5
 title: Sentiment
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-09-24
   author: Shamsudddeen Hassan Muhammad
 ---
 
@@ -11,63 +11,54 @@ import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
 
 # Sentiment analysis
 
-*Last reviewed: 2026-07-07.*
+*Worked example. Last reviewed: 2026-07-07.*
 
-Sentiment analysis is the most-frequently requested African-language NLP task after machine translation, asked for by every civic-tech project, every social listening effort, every consumer feedback pipeline touching African markets. It is also the task where the community-lineage resources have unusually good coverage relative to the size of the ask. Read this page before scoping a new sentiment project so you do not end up re-annotating what AfriSenti or NaijaSenti already ship.
+This page applies the [four steps from Before You Start](./index.md) to sentiment analysis: deciding whether a text is positive, negative, or neutral. It uses **AfriSenti** and **NaijaSenti** as the examples because they are the largest community-built sentiment datasets for African languages, annotated by native speakers. **It is not a complete list.** If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
 
-## What already exists
+## Step 1: What a search turns up
 
-Two community-curated corpora anchor African-language sentiment analysis. Everything else builds on or complements them.
+Search Hugging Face, Lanfrica, or the ACL Anthology for sentiment in almost any major African language and you will quickly reach two datasets:
 
-### Datasets: the core set
+- **[AfriSenti](https://arxiv.org/abs/2302.08956)** ([Muhammad et al., 2023](https://aclanthology.org/2023.emnlp-main.862/)): more than 110,000 tweets in 14 languages. Amharic, Algerian Arabic, Hausa, Igbo, Kinyarwanda, Moroccan Arabic, Mozambican Portuguese, Nigerian Pidgin, Oromo, Swahili, Tigrinya, Twi, Xitsonga, and Yoruba. It was also used in the [AfriSenti-SemEval 2023 shared task](https://afrisenti-semeval.github.io/), so many published systems report results on it.
+- **[NaijaSenti](https://arxiv.org/abs/2201.08277)** ([Muhammad et al., 2022](https://aclanthology.org/2022.lrec-1.63/)): the earlier Nigerian dataset that AfriSenti grew from. Hausa, Igbo, Nigerian Pidgin, and Yoruba, with around 30,000 tweets per language (about 14,000 for Nigerian Pidgin). Its paper also released sentiment lexicons.
 
-- **[AfriSenti](https://arxiv.org/abs/2302.08956)** ([Muhammad et al., 2023](https://arxiv.org/abs/2302.08956)): the reference sentiment corpus for African languages. Covers 14 languages (Amharic, Algerian Arabic/Darja, Hausa, Igbo, Kinyarwanda, Moroccan Arabic/Darija, Mozambican Portuguese, Nigerian Pidgin, Oromo, Swahili, Tigrinya, Twi, Xitsonga, Yoruba). Three-class annotation (positive, negative, neutral). Twitter/X-domain source with community-curated annotation and quality review. Data on the [Hugging Face Hub](https://huggingface.co/datasets/afrisenti) and code and paper via the [AfriSenti page](https://afrisenti-semeval.github.io/).
-- **[NaijaSenti](https://arxiv.org/abs/2201.08277)** ([Muhammad et al., 2022](https://arxiv.org/abs/2201.08277)): four Nigerian languages (Hausa, Igbo, Nigerian Pidgin, Yoruba) with sentiment and emotion annotation, again Twitter-derived. The precursor and complement to AfriSenti's Nigerian coverage; useful when a project wants the additional emotion labels beyond three-class sentiment.
+AfriSenti is on the [Hugging Face Hub](https://huggingface.co/datasets/shmuhammad/AfriSenti-twitter-sentiment), and the [GitHub repository](https://github.com/afrisenti-semeval/afrisent-semeval-2023) has the data, the evaluation script, and individual annotator labels for several languages. NaijaSenti is on the Hub as [HausaNLP/NaijaSenti-Twitter](https://huggingface.co/datasets/HausaNLP/NaijaSenti-Twitter).
 
-### Datasets: worth knowing about
+You will also find **copies of the same data** uploaded by other accounts, and small **sentiment datasets built by translating English data** or labelling tweets automatically with emojis or keywords. Copies are tempting because they load easily. Translated and auto-labelled data is tempting because it is cheap. Step 2 is where you check the licence of the copy you actually download, and whether auto-generated labels reflect how people in your language express feeling.
 
-- **[SemEval-2023 Task 12 AfriSenti-SemEval](https://afrisenti-semeval.github.io/)**: the shared-task version of AfriSenti, with published baseline results across the 14 languages and cross-lingual transfer tracks. Useful reference for expected out-of-the-box performance.
-- **[XED (Cross-lingual Emotion Detection)](https://aclanthology.org/2020.coling-main.575/)**: a multilingual emotion dataset with limited African coverage; useful when the project needs emotion labels rather than sentiment polarity.
-- **[AfriMTEB](https://arxiv.org/abs/2510.23896)** (Uemura, Zhang, Adelani, EACL 2026): the African-language extension of MTEB. **59 African languages / 14 tasks / 38 datasets**, with **6 new datasets** added covering hate speech, intent detection, and **emotion classification**. Not itself a sentiment-classification benchmark, but the emotion-classification surface is the closest adjacent-evaluation harness in 2026 for teams whose downstream deployment needs *both* sentiment and emotion signals; run your candidate encoder / embedder against it for the multi-task read on generalisation before locking in a single-task fine-tune.
-- **Domain-specific sentiment work**: smaller published corpora exist for domains (health, market feedback, election monitoring) in specific languages. Search recent AfricaNLP workshop proceedings before starting a domain-specific corpus from scratch.
+## Step 2: Judging AfriSenti against the checklist
 
-### Adjacent-but-distinct tasks: do not conflate the label sets
+- **Licence.** Check the copy you use. The main Hugging Face card says CC BY 4.0, but other copies on the Hub are tagged CC BY-NC-SA (non-commercial, share-alike). If you are building a product, confirm the licence with the authors first.
+- **Access.** Openly downloadable from Hugging Face and GitHub.
+- **Fit.** Twitter/X text only. It is short, informal, and full of abbreviations and hashtags. Customer service transcripts, health surveys, formal writing, or long comments look very different. Always build an evaluation set from your own target domain.
+- **Culture.** What reads as negative in one culture can read as neutral or even polite in another. Indirect criticism is common in many African-language contexts and is often labelled neutral by annotators from outside the culture. Read the paper's annotation section before writing your own guidelines.
+- **Code-switching.** Normal, not an edge case. Tweets in every covered language mix in English, French, Arabic, or a regional lingua franca. Your data will too.
+- **Script.** Amharic and Tigrinya are in Ge'ez script. Algerian and Moroccan Arabic tweets may appear in Arabic or Latin script. Check that your text processing handles both.
+- **Labels.** Three classes: positive, negative, neutral. Neutral is the hardest class. Sarcasm, mixed feelings, indirect expression, and plain facts all end up there. Report results per class, not only an overall score (see [core principles](../1_introduction/core-principles.md)).
+- **Label scope.** Polarity is not emotion, stance, polarization, or harm. If you need emotion labels, see [emotion analysis](../11_text-classification/emotion-analysis.md). If you need content moderation, see [hate speech analysis](../11_text-classification/hate-speech-analysis.md). If you need to detect hostility between groups, look at polarization data such as [POLAR (SemEval-2026 Task 9)](https://aclanthology.org/2026.semeval-1.453/). Do not reuse AfriSenti labels for these tasks.
+- **Splits.** Fixed train, development, and test splits for every language, so results are comparable across papers. The test sets have been public since 2023.
+- **Guidelines.** Partial. The repository has a guidelines file for Algerian Arabic only. The paper describes the annotation process for each language.
+- **Quality.** Annotated by native speakers. Individual annotator labels are released for several languages, so you can measure agreement yourself.
+- **Privacy.** The tweets were anonymised: user mentions were replaced with `@user` and URLs were removed. If you collect new social media data, do the same, and check the platform's terms before you redistribute it.
+- **Transfer.** Sentiment depends on culture-specific words and idioms. It transfers less well between languages than structural tasks such as NER. Measure transfer before you rely on it.
 
-Three recent (SemEval-2026) shared tasks sit next to sentiment analysis in the labelling space and are increasingly asked for by downstream teams. Their label sets do not mean the same thing as AfriSenti's polarity, and using them interchangeably produces silently wrong models. Know which one your project actually needs.
-
-- **[POLAR (SemEval-2026 Task 9)](https://aclanthology.org/2026.semeval-1.453/)** ([Naseem et al., 2026](https://aclanthology.org/2026.semeval-1.453/); task site: [polar-semeval.github.io](https://polar-semeval.github.io/)): polarization detection across 22 languages including **Amharic, Hausa, and Swahili**. 110k+ annotated instances across news, Reddit, blogs, Bluesky, and regional forums. Three sub-tasks: detect polarization presence, identify polarization type, recognise polarization manifestation. **This is not sentiment.** Polarization is *"sharp divisions or hostility between social, political, religious, ethnic, gender-based, or other identity groups"*. A text can be simultaneously positive-in-sentiment and highly polarizing (a celebratory post about an in-group victory that dehumanises the out-group is a paradigm case). Macro-F1 evaluation. If your project is about civic-tech deployment, election monitoring, or content-moderation triage, this is likely the task you actually want, not sentiment.
-- **[DimABSA (SemEval-2026 Task 3, Track A)](https://aclanthology.org/2026.semeval-1.452/)** ([Yu et al., 2026](https://aclanthology.org/2026.semeval-1.452/)): dimensional aspect-based sentiment analysis. Models sentiment as a **valence–arousal regression** rather than a three-way polarity classification, and combines it with aspect-triplet or -quadruplet extraction over public discourse (political, energy, climate issues). Three sub-tasks covering dimensional regression, triplet extraction, quadruplet extraction. Evaluated with continuous F1 (cF1). Not a strict African-language-first release, but co-organised by African-NLP researchers (Muhammad et al.) and the framework is directly applicable to African-language aspect sentiment where the three-way pos/neg/neutral of AfriSenti is too coarse. Use when you need sentiment *toward specific aspects of an entity* (e.g., a health service's cost vs. its friendliness) rather than a whole-document polarity.
-- **[DimStance (SemEval-2026 Task 3, Track B)](https://aclanthology.org/2026.semeval-1.452/)**: the stance-detection track of the same DimABSA effort, using the same valence–arousal regression frame for stance targets. Stance detection asks whether an author is *in favour of, against, or neutral toward a specific claim or target*, which is different from both sentiment (polarity toward whatever is discussed) and polarization (hostility between groups). Use when your evaluation target is a specific claim (e.g., "vaccine safety") and you need to know each post's stance toward it.
-
-**Editorial position on the four tasks.** Sentiment answers "is this positive?"; aspect-based sentiment (DimABSA) answers "how does the author feel about this specific aspect of the thing?"; stance detection (DimStance) answers "is the author for or against this claim?"; polarization detection (POLAR) answers "is this text sowing division between groups?". They are complementary. A civic-tech deployment for election monitoring might legitimately need all four running in parallel on the same input stream.
-
-### Models: what has been trained on this data
-
-- **[AfroXLMR-large](https://huggingface.co/Davlan/afro-xlmr-large)** ([Alabi et al., 2022](https://aclanthology.org/2022.coling-1.382/)) and its 76-language variant: the standard fine-tuning base for African-language classification tasks. Fine-tuned on AfriSenti for each covered language; several community releases on the Hub under `Davlan/`.
-- **[XLM-RoBERTa large](https://huggingface.co/xlm-roberta-large)** ([Conneau et al., 2020](https://arxiv.org/abs/1911.02116)): the general multilingual baseline. AfriSenti paper reports its scores alongside AfroXLMR for direct comparison.
-- **[AfriBERTa](https://huggingface.co/castorini/afriberta_large)** ([Ogueji et al., 2021](https://aclanthology.org/2021.mrl-1.11/)): the African-language-pretrained encoder; a strong alternative to AfroXLMR for constrained-compute deployments.
-- **[AfriqueLLM](https://huggingface.co/collections/McGill-NLP/afriquellm)** ([Yu et al. 2026](https://arxiv.org/abs/2601.06395)): decoder-only alternative to encoder-based classification for LLM-native prompt-based sentiment (with the caveat that generative LLMs for classification tasks are stronger on rare classes but noisier on high-frequency ones than task-specific fine-tuned encoders). Nine variants across Qwen / Gemma / Llama bases. Worth measuring against AfroXLMR fine-tuning when the deployment permits an LLM inference call.
-- **Language-specific fine-tunes** on the [Hugging Face Hub under `masakhane/`](https://huggingface.co/masakhane) and `Davlan/`: most AfriSenti-covered languages have a published fine-tune. Check the model card for the training split and expected metric before treating any single release as authoritative.
-
-**Editorial opinion.** For a new project on a language covered by AfriSenti, the shortest path is: fine-tune AfroXLMR-large on the AfriSenti split for your language. That is the recipe the AfriSenti paper itself uses and the reported numbers are the honest floor. Deploy only after human-evaluating a random sample of outputs. Automatic sentiment metrics on Twitter-domain data are notoriously optimistic about model quality.
-
-## Fork or start fresh?
+## Step 3: Reuse, extend, or build
 
 <DecisionTree tree={{
-  question: "Is your language covered by AfriSenti (14 languages) or NaijaSenti (4 Nigerian)?",
+  question: "Is your language covered by AfriSenti (14 languages) or NaijaSenti (4 Nigerian languages)?",
   options: [
     {
       label: "Yes",
       next: {
-        question: "Is the source domain (Twitter/X) close enough to your target?",
+        question: "Is Twitter/X text close enough to your target domain?",
         options: [
           {
             label: "Yes",
-            result: <><strong>Use AfriSenti/NaijaSenti. Fine-tune AfroXLMR-large.</strong> Human-evaluate 200 random test outputs. Done.</>,
+            result: <><strong>Reuse AfriSenti or NaijaSenti.</strong> Do not build a new corpus. Check the licence, then spend your effort on a careful human review of results on your own data.</>,
           },
           {
-            label: "No, domain mismatch (formal writing, market speech, health, customer service)",
-            result: <>Use AfriSenti's model as a starting point, collect a <strong>500–2000 example</strong> in-domain evaluation set FIRST, and only if the transfer is inadequate collect a small (<strong>2000–5000 example</strong>) in-domain training set for adaptive fine-tuning.</>,
+            label: "No (formal writing, market speech, health, customer service)",
+            result: <><strong>Extend it.</strong> First build a <strong>500–2,000 example</strong> evaluation set from your own domain. Only if AfriSenti does not work well enough, add a small <strong>2,000–5,000 example</strong> in-domain training set, using the same three labels.</>,
           },
         ],
       },
@@ -75,15 +66,15 @@ Three recent (SemEval-2026) shared tasks sit next to sentiment analysis in the l
     {
       label: "No",
       next: {
-        question: "Is your language related to an AfriSenti-covered language?",
+        question: "Is your language related to one of the covered languages?",
         options: [
           {
-            label: "Yes, same family / covered relative",
-            result: <>Start with cross-lingual transfer from the closest covered language. See the <a href="/cross-language-transfer">cross-language transfer</a> chapter. Only then design a small validation corpus in your target language.</>,
+            label: "Yes",
+            result: <>Try <a href="/cross-language-transfer">cross-language transfer</a> from the closest covered language, then build a small evaluation set in your own language. Sentiment transfers weakly, so measure before you rely on it.</>,
           },
           {
-            label: "Genuinely uncovered",
-            result: <>Read the <a href="/long-tail-language">long-tail language onboarding</a> chapter first. Then the <a href="/annotation-design/annotation-task-design">Annotation Design</a> and <a href="/data-quality">Data Quality</a> chapters. Start with a small (<strong>2000–5000 example</strong>) pilot corpus following AfriSenti's annotation guidelines.</>,
+            label: "No",
+            result: <>You need to build a corpus. Start with the <a href="/long-tail-language">long-tail language onboarding</a> chapter, then <a href="/data-collection/Overview">Data Collection</a>, <a href="/annotation-design/annotation-task-design">Annotation Design</a>, and <a href="/data-quality">Data Quality</a>. Read the AfriSenti paper before writing your guidelines, and start with a pilot of <strong>2,000–5,000 examples</strong>.</>,
           },
         ],
       },
@@ -94,69 +85,47 @@ Three recent (SemEval-2026) shared tasks sit next to sentiment analysis in the l
 <div className="only-print">
 
 ```
-Is your language covered by AfriSenti (14 languages) or NaijaSenti (4 Nigerian)?
-├── Yes: is the source domain (Twitter/X) close enough to your target?
-│   ├── Yes → Use AfriSenti/NaijaSenti. Fine-tune AfroXLMR-large.
-│   │        Human-evaluate 200 random test outputs. Done.
-│   └── No, domain mismatch (formal writing, market speech, health,
-│       customer service) → Use AfriSenti's model as a starting point,
-│       collect a 500-2000 example in-domain evaluation set FIRST,
-│       and only if the transfer is inadequate collect a small
-│       (2000-5000 example) in-domain training set for adaptive
-│       fine-tuning.
-└── No, your language is not covered.
-    ├── Is it related to an AfriSenti-covered language? → Start with
-    │   cross-lingual transfer from the closest covered language.
-    │   See the [cross-language transfer](../cross-language-transfer/index.md)
-    │   chapter. Only then design a small validation corpus in your
-    │   target language.
-    └── Genuinely uncovered → Read the [long-tail language onboarding](../long-tail-language/index.md)
-        chapter first. Then the Annotation Design and Data
-        Quality chapters. Start with a small (2000-5000 example)
-        pilot corpus following AfriSenti's annotation guidelines.
+Is your language covered by AfriSenti (14) or NaijaSenti (4 Nigerian)?
+├── Yes. Is Twitter/X text close enough to your target domain?
+│   ├── Yes → Reuse AfriSenti or NaijaSenti. Do not build a new corpus.
+│   └── No (formal writing, market speech, health, customer service)
+│       → Extend it: build a 500-2,000 example evaluation set from your
+│         domain first. Only if needed, add a 2,000-5,000 example
+│         in-domain training set with the same three labels.
+└── No. Is your language related to one of the covered languages?
+    ├── Yes → Try cross-language transfer from the closest covered
+    │         language, then build a small evaluation set in your language.
+    └── No → Build a corpus. Start with the long-tail language onboarding
+             chapter, then Data Collection, Annotation Design, and Data
+             Quality. Read the AfriSenti paper first; start with a
+             2,000-5,000 example pilot.
 ```
 
 </div>
 
-## What it will actually cost you
+## Step 4: Learning from the people who built it
 
-Order-of-magnitude estimates drawn from the AfriSenti and NaijaSenti papers and the participatory workflow they used:
+AfriSenti was built by native-speaker researchers and annotators in many African countries, working in a participatory way. There is no AfriSenti case study in this playbook yet. If you worked on it, the [retrospective template](../case-studies/retrospective-template.md) is the place to start one.
 
-- **Fine-tuning AfroXLMR-large on AfriSenti for a covered language.** One to two person-weeks, four to twelve GPU-hours on a T4 or better. Feasible on Colab free tier if chunked. Most of the effort is evaluation and human review, not training.
-- **Extending AfriSenti with domain-specific data (health, market, customer service).** Two to four months elapsed; two to five person-months of annotator work; one person-month of lead effort for guidelines and adjudication.
-- **Building a new sentiment corpus for an uncovered language, aiming for 5-10k examples.** Three to seven months elapsed; three to nine person-months of annotator work, plus one person-month of lead annotator effort for guidelines. Assumes participatory setup with two to four native-speaker annotators. Twitter-domain sourcing is cheapest; verified in-domain sourcing (transcribed voice notes, curated market speech) is 2-5x more expensive per example.
-- **Achieving AfriSenti-comparable inter-annotator agreement on a new language.** Budget one full round of annotator recalibration after the first 500 examples. AfriSenti's IAA was hard-won and is the reference for what is achievable.
+- Read the **[AfriSenti paper](https://aclanthology.org/2023.emnlp-main.862/)**, especially the section on the challenges of curating each language.
+- Read the **[NaijaSenti paper](https://aclanthology.org/2022.lrec-1.63/)** for how tweets were collected, filtered, and labelled.
+- Read the **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** ([Nekoto et al., 2020](https://aclanthology.org/2020.findings-emnlp.195/)) for the Masakhane way of working.
+- Questions worth asking the authors: How did you decide what counts as neutral, and where did annotators disagree most? How did you find enough tweets in languages with little Twitter activity? What would you change about the guidelines if you started again?
 
-## Known limitations to watch for
+## What it will cost
 
-- **Twitter is not your target domain.** AfriSenti and NaijaSenti are Twitter-derived; models trained on them systematically over-fit to Twitter-style language (short, abbreviated, hashtag-carrying, code-switched). A model trained on AfriSenti and deployed on customer service transcripts, health surveys, or long-form comments will underperform. Always evaluate on your target domain before deployment.
-- **Sentiment is culturally-specific.** What reads as negative in one culture reads as neutral or even respectful in another. Direct criticism norms differ; irony conventions differ; indirect negative expression is common in many African-language contexts and is often mis-classified as neutral by cross-cultural annotators. Read AfriSenti's guidelines closely before writing your own.
-- **Code-switching is the rule.** Every AfriSenti-covered language shows heavy code-switching with English, French, or a regional lingua franca. Models must handle this as normal input, not as an edge case.
-- **Neutral is the hardest class.** Sarcasm, irony, indirect expression, mixed sentiment, and factual statements all cluster into "neutral" and lose distinguishability. Per-class F1 reporting (playbook policy; see [core principles](../1_introduction/core-principles.md)) is not optional; a headline macro-F1 hides catastrophic neutral-class recall.
-- **Emotion is not sentiment.** Three-class polarity (positive / negative / neutral) is the standard sentiment task; the multi-class emotion task (anger, joy, fear, sadness, surprise, disgust, love) is a distinct and harder problem. Use NaijaSenti or XED if you specifically need emotion labels. See also the [emotion analysis chapter](../11_text-classification/emotion-analysis.md) elsewhere in the playbook.
-- **Hate speech and toxic content are separate tasks.** Sentiment models detect polarity, not harm. Do not deploy a sentiment classifier as a content moderator. See the [hate speech analysis chapter](../11_text-classification/hate-speech-analysis.md).
-- **Cross-lingual sentiment transfer is unusually weak** compared to structural tasks like NER. Sentiment expression relies on culture-specific vocabulary and idiom that transfer poorly even between related languages. Do not assume cross-lingual transfer will close a covered-language gap without measurement.
+These are rough estimates based on the AfriSenti and NaijaSenti papers and the participatory workflow they describe. They will not be exact for your project.
 
-## The canonical fine-tuning link
-
-For fine-tuning an encoder model on a sentiment classification dataset, use the [Hugging Face sequence-classification tutorial](https://huggingface.co/docs/transformers/tasks/sequence_classification). It covers `datasets` loading, tokenisation, training loop, and evaluation with sklearn's `classification_report` (which the playbook's [core principles](../1_introduction/core-principles.md) require you to use for per-class reporting).
-
-For sentiment specifically, the AfriSenti paper's [companion GitHub repo](https://github.com/afrisenti-semeval/afrisent-semeval-2023) has the annotation guidelines, the exact preprocessing, and reference fine-tuning scripts for each covered language. Follow it before writing your own.
+- **Reusing AfriSenti for a covered language.** One to two person-weeks, mostly spent on evaluation and human review.
+- **Extending AfriSenti with domain-specific data (health, market, customer service).** Two to four months elapsed. Two to five person-months of annotator work, plus one person-month from a lead annotator for guidelines and adjudication.
+- **Building a new corpus of 5,000–10,000 examples for an uncovered language.** Three to seven months elapsed. Three to nine person-months of annotator work, plus one person-month from a lead annotator for guidelines. This assumes two to four native-speaker annotators. Twitter/X data is the cheapest to source. Verified in-domain data (transcribed voice notes, curated market speech) costs two to five times more per example.
+- **Reaching good inter-annotator agreement.** Plan one full round of recalibration after the first 500 examples. Do not treat the first pass as final.
 
 ## Further reading
 
-- [AfriSenti paper (Muhammad et al., 2023)](https://arxiv.org/abs/2302.08956): the reference community sentiment resource for African languages, with a substantial retrospective on annotation methodology and per-language IAA.
-- [Alabi et al., 2022, AfroXLMR](https://aclanthology.org/2022.coling-1.382/): the base encoder that most current African-language classification fine-tunes start from.
-- [POLAR paper (Naseem et al., 2026)](https://aclanthology.org/2026.semeval-1.453/): the SemEval-2026 Task 9 description of the 22-language polarization corpus and its label scheme; required reading before conflating polarization with sentiment or hate speech.
+- [AfriSenti (Muhammad et al., 2023)](https://aclanthology.org/2023.emnlp-main.862/): the 14-language dataset, how it was collected, and the challenges per language.
+- [NaijaSenti (Muhammad et al., 2022)](https://aclanthology.org/2022.lrec-1.63/): the four Nigerian languages, with collection, filtering, and labelling methods.
+- [Quality at a glance (Kreutzer et al., 2022)](https://aclanthology.org/2022.tacl-1.4/): an audit of web-crawled low-resource data. Useful before you trust scraped or auto-labelled sentiment data.
+- [Participatory research for low-resourced machine translation (Nekoto et al., 2020)](https://aclanthology.org/2020.findings-emnlp.195/): the Masakhane way of working that AfriSenti inherits.
 
-<details>
-<summary>Additional references</summary>
-
-- [NaijaSenti paper (Muhammad et al., 2022)](https://arxiv.org/abs/2201.08277): the Nigerian-language precursor with the emotion-label extension.
-- [AfriSenti-SemEval 2023 shared task page](https://afrisenti-semeval.github.io/): baseline numbers, cross-lingual tracks, and the community's published system descriptions.
-- [Kreutzer et al., 2022, quality of low-resource corpora](https://aclanthology.org/2022.tacl-1.4/). Indirectly relevant: Twitter-scraped low-resource sentiment corpora inherit the quality problems it identifies.
-- [Nekoto et al., 2020, participatory approach](https://aclanthology.org/2020.findings-emnlp.195/): the workflow reference for how the AfriSenti team recruited and coordinated native-speaker annotators.
-- [DimABSA / DimStance paper (Yu et al., 2026)](https://aclanthology.org/2026.semeval-1.452/): SemEval-2026 Task 3; dimensional (valence-arousal) aspect-based sentiment and stance regression, useful reading for teams whose three-way pos/neg/neutral is too coarse.
-
-</details>
-
+Once you have your data, training a model is well covered elsewhere. The [Hugging Face sequence classification tutorial](https://huggingface.co/docs/transformers/tasks/sequence_classification) is a good start.

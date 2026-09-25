@@ -10,7 +10,7 @@ last_update:
 
 Text-to-speech (TTS) is the reverse of ASR: it turns written text into spoken audio. A good TTS voice makes a language usable by people who cannot read it or cannot see a screen, which matters enormously where literacy and connectivity vary widely. TTS is data-hungry in a particular way, because it needs not just a lot of speech but very clean, consistent speech from voices you have the right to reproduce. This chapter covers the deeper how-to: the data shape, the recording pipeline, the text preparation, the annotation and consent choices, the quality assurance during collection, and evaluation.
 
-For the higher-level decision (should you build a corpus, fine-tune MMS-TTS, or use a released model?), start with the [Before You Start · Text-to-Speech](../before-you-start/tts.mdx) page. The two chapters are complementary: that page decides which path to take, this page details how the chosen path is actually executed.
+Before building a TTS corpus, check what already exists with [Before You Start](../before-you-start/index.md). That chapter helps you decide whether to reuse, extend, or build; this page details how to carry out the path you choose.
 
 ![What a text-to-speech corpus needs: clean single-speaker audio, phonetic coverage, tone labelling, and consent](images/tts-data.svg)
 
@@ -83,7 +83,7 @@ TTS models learn to pronounce whatever is written; garbage in, garbage out is li
 
 Beyond transcription, TTS data often needs pronunciation or phoneme labelling, especially for tone languages where the same spelling carries different pitches and meanings, and getting tone right is the difference between a natural voice and an unintelligible one. The consent question is also sharper here than anywhere else in the playbook, because a TTS dataset reproduces a specific person's voice. A speaker must understand and agree that their voice will be synthesised, and the licence should constrain misuse such as impersonation or voice cloning. The Kaitiakitanga model from the [data governance](../data-governance/index.md) chapter, which forbids harmful uses outright, is a good template for voice data.
 
-The consent conversation for a TTS speaker must specifically cover **voice-cloning risk**: modern TTS models can be adapted from a released voice to say arbitrary content, and once a model is public, that risk cannot be revoked. Frame this explicitly at consent time, in the speaker's own language, and record the acknowledgement as part of the consent artefact. The [legal, consent, and community IP](../legal-consent/index.md) chapter and the [consent form template](../templates/consent-form.md) cover the operational patterns; the [Before You Start · TTS](../before-you-start/tts.mdx) page carries the editorial position.
+The consent conversation for a TTS speaker must specifically cover **voice-cloning risk**: modern TTS models can be adapted from a released voice to say arbitrary content, and once a model is public, that risk cannot be revoked. Frame this explicitly at consent time, in the speaker's own language, and record the acknowledgement as part of the consent artefact. The [legal, consent, and community IP](../legal-consent/index.md) chapter and the [consent form template](../templates/consent-form.md) cover the operational patterns.
 
 ## Quality assurance during collection
 
@@ -122,7 +122,7 @@ Alongside MOS, run one or more of the automatic proxies during development, reme
 
 ## Deployment realities
 
-For a language covered by [Meta MMS-TTS](https://huggingface.co/facebook/mms-tts), the out-of-the-box model is often good enough for a first deployment. Measure MOS with native listeners on your target text style (not on Common Voice sentences) before committing to a full fine-tune. When MMS-TTS quality is inadequate, VITS or XTTS fine-tuning on 5–20 hours of studio-quality single-speaker audio is the practical next step; see [Before You Start · TTS](../before-you-start/tts.mdx) for the model-selection tree.
+For a language covered by [Meta MMS-TTS](https://huggingface.co/facebook/mms-tts), the out-of-the-box model is often good enough for a first deployment. Measure MOS with native listeners on your target text style (not on Common Voice sentences) before committing to a full fine-tune. When MMS-TTS quality is inadequate, VITS or XTTS fine-tuning on 5–20 hours of studio-quality single-speaker audio is the practical next step.
 
 For deployment on constrained hardware (phones, low-power edge servers), quantisation matters as much as it does for other modalities. The [edge devices](../deployment/edge-devices.md) chapter covers the phone-tier map, runtime choices, and the model-size budgets you have to design against. Voice-note replies over WhatsApp, an increasingly common African deployment surface, are covered in the [SMS, USSD, and WhatsApp](../deployment/sms-ussd-whatsapp.md) chapter.
 

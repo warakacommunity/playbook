@@ -69,7 +69,7 @@ The training data + evaluation set determine whether the model can handle code-s
 
 - **Detected language shown to the user, editable but not required.** A small "detected as Hausa" chip on each turn, tappable to correct, is better than an intrusive language picker at the start of the session.
 - **Keyboard-agnostic input handling.** Users' phone keyboards are configured for their preferred language; do not require them to change keyboards to enter mixed input. This means diacritic-tolerant input processing, script-tolerant matching, and case-insensitive routing.
-- **Voice input as a first-class alternative.** Many African users voice-note more comfortably than they type in local languages, especially in the presence of complex diacritics or Ajami/Ge'ez scripts. Prominent voice-input support removes the friction. See the [ASR page](../before-you-start/asr.mdx).
+- **Voice input as a first-class alternative.** Many African users voice-note more comfortably than they type in local languages, especially in the presence of complex diacritics or Ajami/Ge'ez scripts. Prominent voice-input support removes the friction. See the [ASR page](../asr/index.md).
 - **Clear, tolerant error messages.** When the system cannot identify or handle input, it should say so in a lingua franca, offer options in a small number of likely languages, and not lock the user into their answer.
 - **Feedback loop.** Let the user report a mis-detection or a wrong response, and use that signal to update the session's language prior for the next turn.
 

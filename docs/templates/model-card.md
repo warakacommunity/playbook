@@ -20,7 +20,7 @@ last_update:
 3. Delete any section that genuinely does not apply and add `Not applicable: [why]` in its place. Do not silently skip.
 4. Publish it alongside the model, not separately. A model without a card is a model that will be misused.
 
-Motivated by [Mitchell et al., 2019](https://arxiv.org/abs/1810.03993), the playbook's [Before You Start](../before-you-start/index.md) editorial rules, the [deployment chapter](../deployment/index.md), and the [legal-consent chapter](../legal-consent/index.md).
+Motivated by [Mitchell et al., 2019](https://arxiv.org/abs/1810.03993), the playbook's [Before You Start](../before-you-start/index.md) checklist, the [deployment chapter](../deployment/index.md), and the [legal-consent chapter](../legal-consent/index.md).
 
 ---
 
@@ -137,7 +137,7 @@ For any model shipped as part of an offline-capable deployment. See the [offline
 
 ## 6. Limitations and known failure modes
 
-- **Known limitations:** [Specific to this model + task + languages. Draw from the "known limitations" section of the relevant [Before You Start](../before-you-start/index.md) page.]
+- **Known limitations:** [Specific to this model + task + languages. The Step 2 checklist on the relevant [Before You Start](../before-you-start/index.md) worked example is a good starting point.]
 - **Known systematic errors:** [Where the model reliably gets things wrong, from the evaluation data.]
 - **What the metrics do NOT show:** [Per the [core principles](../1_introduction/core-principles.md), the playbook's editorial position is that metric blind spots must be named on the card.]
 - **Populations under-served:** [Dialects, registers, demographics where the model performs worse.]
@@ -147,7 +147,7 @@ For any model shipped as part of an offline-capable deployment. See the [offline
 
 - **Consent basis for the training data:** [Reference to the corpus's consent architecture. See the [consent form template](./consent-form.md).]
 - **Community involvement in model development:** [Named community stewards + their role.]
-- **Deployment risks:** [Specific to the task. For hate-speech classifiers, deployment-as-automated-moderation risk (see the [hate-speech page](../before-you-start/hate-speech.mdx)). For TTS, voice-cloning risk (see the [TTS page](../before-you-start/tts.mdx#voice-consent-and-voice-cloning-risks)). For classifiers deployed against marginalised users, false-positive disparity.]
+- **Deployment risks:** [Specific to the task. For hate-speech classifiers, deployment-as-automated-moderation risk (see the [hate-speech page](../before-you-start/hate-speech.mdx)). For TTS, voice-cloning risk (see the [Text-to-Speech chapter](../text-to-speech/index.md)). For classifiers deployed against marginalised users, false-positive disparity.]
 - **Mitigations:** [What the developers have done; what the deployer must still do.]
 
 ## 8. Reproducibility

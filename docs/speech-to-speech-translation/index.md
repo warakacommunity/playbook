@@ -10,7 +10,7 @@ last_update:
 
 Speech-to-speech translation (S2ST) takes speech in one language and produces speech in another, the spoken equivalent of a human interpreter. For African languages it is the most ambitious speech task and the least resourced, because it sits on top of three hard tasks at once. This page is the practical guide to how to assemble a working system from the pieces that exist, how to evaluate it honestly, and what has to be true before deployment.
 
-For the higher-level MT and ASR and TTS decisions this task composes, start with [Before You Start · MT](../before-you-start/machine-translation.mdx), [Before You Start · ASR](../before-you-start/asr.mdx), and [Before You Start · TTS](../before-you-start/tts.mdx). This page details how the three fit together, and the deep-dive decisions specific to speech-in-speech-out.
+Before building data for any of the three tasks this one combines (MT, ASR, and TTS), check what already exists with [Before You Start](../before-you-start/index.md). The [ASR](../asr/index.md) and [Text-to-Speech](../text-to-speech/index.md) chapters cover those tasks in depth. This page details how the three fit together, and the deep-dive decisions specific to speech-in-speech-out.
 
 ![Cascaded (ASR to MT to TTS) versus direct speech-to-speech translation](images/s2st-cascaded-direct.svg)
 

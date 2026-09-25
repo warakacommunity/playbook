@@ -3,7 +3,7 @@ sidebar_position: 6
 title: Hate speech and content safety
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-09-24
   author: Shamsudddeen Hassan Muhammad
 ---
 
@@ -11,59 +11,52 @@ import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
 
 # Hate speech and content safety
 
-*Last reviewed: 2026-07-07.*
+*Worked example. Last reviewed: 2026-07-07.*
 
-*Sweep note.* The 2026-Q3 currency sweep did not surface a verified displacer of the hate-speech recommendations on this page. Treat these recommendations as **unverified in this pass** rather than "confirmed unchanged". Hate-speech corpora are politically-contested and rapidly-evolving, and a specific-language 2026 release may well exist that the sweep did not surface. Verify against the [AfricaNLP workshop 2026 accepted papers](https://africanlp-workshop.github.io/) before scoping a new corpus.
+This page applies the [four steps from Before You Start](./index.md) to hate speech and abusive language detection. It uses **AfriHate** as the example because it is the largest community-built hate speech collection for African languages, with native-speaker annotators and a published paper. **It is not a complete list.** Many smaller, single-language datasets exist, and new ones appear often. If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
 
-:::warning Read this preamble before scoping
-Hate-speech and content-safety projects are not classification projects with an ugly label set. They differ from the other tasks in this chapter in three material ways: **annotators repeatedly read harmful content and need psychological support built in from Day 1**, **deployment as automated moderation carries real risk of amplifying the same harms the project is trying to reduce**, and **the label set is politically and culturally contested in ways sentiment or NER never are**. Scope, staff, and evaluate accordingly. If your project cannot support annotator wellbeing infrastructure, or cannot resource the ethical review and external audit that responsible deployment requires, this is the wrong task.
-:::
+This task is different from the others in this chapter in three ways. Annotators read harmful content for hours, so they need support from the first day. A classifier used for automated moderation can cause the same harm it is meant to reduce. And what counts as hate is contested, culturally and politically. Plan, staff, and budget for all three, or choose a different task.
 
-Hate speech, content safety, and toxic language detection for African languages sit at the intersection where NLP capability is most-requested by civic-tech, social-media platforms, and government partners, and where the risks of getting it wrong are highest. This page is the practical guide to what resources exist, why the task is harder than it looks, and what has to be true before a project can responsibly deploy.
+## Step 1: What a search turns up
 
-## What already exists
+Search Hugging Face, Lanfrica, or the ACL Anthology for hate speech in a major African language and you will find many small datasets, each with its own labels and guidelines. The one that brings most of them together is:
 
-Unlike NER (dominated by MasakhaNER 2), MT (dominated by NLLB-200 + LAFAND-MT), or sentiment (dominated by AfriSenti), **African-language hate-speech resources are fragmented**. There is no single community-flagship corpus. Multiple per-language efforts exist, they use different label schemes, different sources, and different annotation guidelines. Treat the landscape accordingly: expect to consolidate, not to fork one canonical resource.
+- **[AfriHate](https://aclanthology.org/2025.naacl-long.92/)** ([Muhammad et al., 2025](https://aclanthology.org/2025.naacl-long.92/)): tweets in 15 languages. Algerian Arabic, Amharic, Hausa, Igbo, Kinyarwanda, Moroccan Arabic, Nigerian Pidgin, Oromo, Somali, Swahili, Tigrinya, Twi, isiXhosa, Yoruba, and isiZulu. Each tweet is labelled hate, abusive, or normal, and hateful tweets also carry a target (ethnicity, politics, gender, disability, religion, or other).
 
-### Corpora: the confirmed set
+The data is on the [Hugging Face Hub](https://huggingface.co/datasets/afrihate/afrihate). The [GitHub repository](https://github.com/AfriHate/AfriHate) lists the language coordinators, who are good people to contact.
 
-- **[HausaHate and Hausa hate-speech corpora](https://aclanthology.org/2020.trac-1.15/)**: several published efforts on Hausa hate speech classification, largely Twitter-derived. Coverage and label schemes vary by paper; verify the specific corpus's guidelines before use.
-- **[Amharic hate speech corpora (Yimam et al., 2020 and successors)](https://aclanthology.org/2020.lrec-1.375/)**: one of the earlier published African-language hate-speech resources; used as the reference in subsequent Ethiopic-language safety work.
-- **NaijaSenti emotion + subjectivity labels** ([Muhammad et al., 2022](https://arxiv.org/abs/2201.08277)): not a hate-speech corpus per se, but its emotion labels (including anger, disgust) are useful auxiliary signals when combined with a dedicated hate-speech dataset for Nigerian languages.
-- **Community-published efforts** on the Hugging Face Hub under `masakhane/`, `Davlan/`, `keleAfrica/`, and country-specific research groups. Coverage is growing; check the model cards for training-corpus provenance before treating any single release as authoritative.
-- **[SemEval-2020 Task 12 OffensEval](https://aclanthology.org/2020.semeval-1.188/)** and its follow-ups: general multilingual offensive-language benchmark, with limited African coverage but useful as a reference for label schemes.
-- **[POLAR (SemEval-2026 Task 9)](https://aclanthology.org/2026.semeval-1.453/)** ([Naseem et al., 2026](https://aclanthology.org/2026.semeval-1.453/); task site: [polar-semeval.github.io](https://polar-semeval.github.io/)): polarization detection across 22 languages including **Amharic, Hausa, and Swahili**. 110k+ annotated instances across news, Reddit, blogs, Bluesky, and regional forums. **Adjacent but not equivalent to hate speech**: polarization detects *"sharp divisions or hostility between social, political, religious, ethnic, gender-based, or other identity groups"*. The label captures divisive content that may or may not meet hate-speech thresholds. Useful as a complementary signal on the same content stream (a piece of content may be polarizing without being hate speech, and vice versa), and as a training-data source for the between-group-hostility axis specifically. Do not repurpose POLAR labels as hate-speech labels; the target concept differs and the misuse will silently shift your model's decision boundary. See the [Before You Start · Sentiment](./sentiment.mdx#adjacent-but-distinct-tasks-do-not-conflate-the-label-sets) chapter for the full polarization / sentiment / hate speech / stance framing.
+You will also find datasets for **nearby tasks** that look useful: sentiment and emotion data (for example, the anger and disgust labels in [NaijaSenti](https://arxiv.org/abs/2201.08277)), or polarization data such as [POLAR](https://aclanthology.org/2026.semeval-1.453/) (SemEval-2026 Task 9, which includes Amharic, Hausa, and Swahili). They are tempting because the content overlaps. But negative or polarizing text is not the same as hate speech, and the labels measure a different thing. The "Labels" check in Step 2 is where you catch this. Use such data as extra context, never as hate speech labels.
 
-### Corpora: worth knowing about
+## Step 2: Judging AfriHate against the checklist
 
-- **[English-language hate-speech survey work](https://arxiv.org/abs/1908.11049)** ([Vidgen et al., 2019](https://arxiv.org/abs/1908.11049); [Waseem & Hovy, 2016](https://aclanthology.org/N16-2013/)): while not African-language, the methodological literature on hate-speech annotation, label design, and inter-annotator agreement is essential background. Do not design African-language guidelines without reading it.
-- **[Perspective API](https://perspectiveapi.com/)**: Google's content-safety scoring API with limited African-language coverage. Useful as a baseline for comparison; not appropriate as a primary detector for African languages given the coverage gap.
+- **Licence.** The Hugging Face card lists Apache 2.0, which allows commercial use. The text is tweets, so also check whether the platform's terms affect what you plan to do.
+- **Access.** Gated. You must log in to Hugging Face and agree to share your contact details before you can download it.
+- **Fit.** Twitter/X posts from 2012 to 2023. Comments on other platforms, radio call-ins, WhatsApp messages, or forums look different. Hate speech also changes fast: new slurs, codewords, and spellings appear all the time, so older data misses them.
+- **Script.** Mostly Latin script. Amharic and Tigrinya are in Ethiopic script, Algerian Arabic is in Arabic script, and Moroccan Arabic appears in both Arabic and Latin script.
+- **Code-switching.** African-language hate speech often mixes in English, French, or Arabic, and the offensive part is often exactly where the switch happens. Check how much of your target text mixes languages, and include such text in your evaluation.
+- **Labels.** Hate, abusive, and normal, plus a target for hateful tweets. What counts as hate is specific to a culture, a region, and a time: a word that is neutral in one place can carry a history of violence in another. Read the paper's definitions before assuming they match yours. Do not import a label scheme from an English corpus without consulting the affected communities.
+- **Splits.** Fixed splits. Each test set has at least 100 examples of each class, so the rare hate class can be measured. Real content is mostly not hate, so also report results per class with the number of examples, not just one overall score.
+- **Guidelines.** The paper describes the definitions, the keyword lists, and the annotation process. Check what has been released before planning to reuse them, and ask the authors if you cannot find the full guidelines.
+- **Quality.** Annotated by native speakers from the local communities, with three or four annotators per tweet. Agreement is reported per language and ranges from 0.46 to 0.81 (Randolph's kappa), so quality varies by language. Look at the number for yours. The individual annotations are released, which helps if you want to study disagreement. This matters: annotators from outside the community label hate speech less accurately and with more bias ([Sap et al., 2019](https://aclanthology.org/P19-1163/)).
+- **Documentation.** The paper has limitations and ethics sections. Tweets were found with keyword lists, so the data has selection bias: it only contains hate that matches the words the team searched for. The Twitter/X academic API used to collect it is no longer free, so extending the data the same way is harder today.
 
-### Models
-
-- **[AfroXLMR-large fine-tunes](https://huggingface.co/Davlan/afro-xlmr-large)** are the standard base for African-language classification and are the natural starting point when a corpus for your language exists.
-- **[HateBERT](https://huggingface.co/GroNLP/hateBERT)** and general toxic-language classifiers are English-centric and should not be used directly on African-language content; they can misfire in ways that reinforce the harms they were meant to detect.
-- **Community fine-tunes per language** on the HF Hub: variable quality and provenance. Do not deploy any hate-speech classifier without independently measuring its false-positive rate on your target community's content.
-
-**Editorial opinion.** For a language where a published corpus exists (Hausa, Amharic, some Nigerian coverage via NaijaSenti's auxiliary labels), fine-tune AfroXLMR-large on that corpus, but treat the resulting model as a research artifact, not a moderation-ready tool. The gap between "the model detects the labelled category with reasonable F1" and "the model can be responsibly deployed as an automated moderator" is enormous, and closing it is a project of its own (see the [deployment considerations](#deployment-considerations-more-than-a-classification-question) below).
-
-## Fork or start fresh?
+## Step 3: Reuse, extend, or build
 
 <DecisionTree tree={{
-  question: "Does a published hate-speech corpus exist for your target language?",
+  question: "Is your language covered by AfriHate?",
   options: [
     {
       label: "Yes",
       next: {
-        question: "Is its label set (typically hate / offensive / neutral, or graded) close enough to what your project needs?",
+        question: "Are the labels (hate, abusive, normal, plus target) and the domain (Twitter/X) close enough to your task?",
         options: [
           {
             label: "Yes",
-            result: <>Fine-tune AfroXLMR-large on it. Human-evaluate <strong>300+</strong> random test outputs across the label set (not 200; the class imbalance and cultural nuance need denser evaluation than most tasks). Publish the model card with an EXPLICIT "not for automated moderation without further work" caveat if that is the honest read.</>,
+            result: <><strong>Reuse AfriHate.</strong> Do not build a new corpus for these labels. Spend your effort on a small evaluation set from the platform you actually care about.</>,
           },
           {
-            label: "No, different or additional labels needed",
-            result: <>Your project needs different or additional labels (specific target groups, incitement vs. slur, calls to violence vs. dehumanising language). Read the existing corpus's guidelines carefully, <strong>extend rather than replace</strong> them, and involve the affected communities in label design, not just annotation.</>,
+            label: "No, I need other labels or another platform",
+            result: <><strong>Extend it.</strong> For example, split incitement from slurs, or add calls to violence. Read the AfriHate paper first, <strong>extend its definitions rather than replace them</strong>, and involve the affected communities in label design, not just annotation. Do not re-annotate hate, abusive, and normal; merge.</>,
           },
         ],
       },
@@ -71,15 +64,15 @@ Unlike NER (dominated by MasakhaNER 2), MT (dominated by NLLB-200 + LAFAND-MT), 
     {
       label: "No",
       next: {
-        question: "Is your language related to a covered language?",
+        question: "Is your language related to one of the 15 covered?",
         options: [
           {
-            label: "Yes, related to a covered language",
-            result: <>Start with cross-lingual transfer, but treat the transferred model as <strong>pilot-only</strong> until you have a small (<strong>500–2000 example</strong>) target-language evaluation set. Cross-lingual transfer is unusually unreliable for this task because what counts as hate is culturally specific (see the <a href="#known-limitations-to-watch-for">known limitations</a> below).</>,
+            label: "Yes",
+            result: <>Try <a href="/cross-language-transfer">cross-language transfer</a> from the closest covered language, but treat it as a pilot only. What counts as hate does not transfer well between cultures. Build a target-language evaluation set of <strong>500–2,000 examples</strong> before trusting any result.</>,
           },
           {
-            label: "Genuinely uncovered",
-            result: <>Read the <a href="/long-tail-language">long-tail language onboarding</a> chapter and the <a href="/annotation-design/annotation-task-design">Annotation Design</a> and <a href="/data-quality">Data Quality</a> chapters BEFORE writing guidelines. Involve the affected communities in label design from Step 0. <strong>Do not start this project without a psychologist or community-mental-health support commitment for annotators.</strong></>,
+            label: "No",
+            result: <>You need to build a corpus. Start with the <a href="/long-tail-language">long-tail language onboarding</a> chapter, then <a href="/data-collection/Overview">Data Collection</a>, <a href="/annotation-design/annotation-task-design">Annotation Design</a>, and <a href="/data-quality">Data Quality</a>. Involve the affected communities in label design from the start, and aim for <strong>5,000–10,000 examples</strong>. <strong>Do not start without counselling support in place for annotators.</strong></>,
           },
         ],
       },
@@ -90,107 +83,68 @@ Unlike NER (dominated by MasakhaNER 2), MT (dominated by NLLB-200 + LAFAND-MT), 
 <div className="only-print">
 
 ```
-Does a published hate-speech corpus exist for your target language?
-├── Yes: is its label set (typically hate / offensive / neutral, or
-│        graded) close enough to what your project needs?
-│   ├── Yes → Fine-tune AfroXLMR-large on it. Human-evaluate 300+
-│   │        random test outputs across the label set (not 200;
-│   │        the class imbalance and cultural nuance need denser
-│   │        evaluation than most tasks). Publish the model card
-│   │        with an EXPLICIT "not for automated moderation without
-│   │        further work" caveat if that is the honest read.
-│   └── No → your project needs different or additional labels
-│       (specific target groups, incitement vs. slur, calls to
-│       violence vs. dehumanising language). Read the existing
-│       corpus's guidelines carefully, extend rather than
-│       replace them, and involve the affected communities in
-│       label design, not just annotation.
-└── No published corpus for your language.
-    ├── Is your language related to a covered language? → Start
-    │   with cross-lingual transfer, but treat the transferred
-    │   model as pilot-only until you have a small (500-2000
-    │   example) target-language evaluation set. Cross-lingual
-    │   transfer is unusually unreliable for this task because
-    │   what counts as hate is culturally specific (see the
-    │   [known limitations](#known-limitations-to-watch-for) below).
-    └── Genuinely uncovered → Read the [long-tail language
-        onboarding](../long-tail-language/index.md) chapter and
-        the Annotation Design and Data Quality chapters
-        BEFORE writing guidelines. Involve the affected
-        communities in label design from Step 0. Do not start
-        this project without a psychologist or community-mental-
-        health support commitment for annotators.
+Is your language covered by AfriHate?
+├── Yes. Are the labels and the domain (Twitter/X) close enough?
+│   ├── Yes → Reuse AfriHate. Do not build a new corpus. Build a small
+│   │         evaluation set from the platform you care about.
+│   └── No, you need other labels or another platform
+│       → Extend it: extend the definitions rather than replace them,
+│         and involve affected communities in label design.
+│         Do not re-annotate hate/abusive/normal; merge.
+└── No. Is your language related to one of the 15 covered?
+    ├── Yes → Try cross-language transfer, as a pilot only. Build a
+    │         500–2,000 example evaluation set in your language first.
+    └── No → Build a corpus. Start with the long-tail language onboarding
+             chapter, then Data Collection, Annotation Design, and Data
+             Quality. Involve communities in label design; aim for
+             5,000–10,000 examples. Put annotator counselling in place
+             before you start.
 ```
 
 </div>
 
-## What it will actually cost you
+## Protecting annotators and users
 
-Hate-speech projects cost more than sentiment projects of the same size, and much more than the naïve estimate suggests. The additional cost is annotator support, ethical review, external audit, and slower annotation cadence. Rough order-of-magnitude:
+**Annotators.** Reading hateful content causes real harm. This is well documented from content moderation work ([Roberts, 2019](https://yalebooks.yale.edu/9780300235883/behind-the-screen)). If you cannot fund the following, do not start the project:
 
-- **Fine-tuning AfroXLMR-large on an existing corpus.** One to three person-weeks of ML work, four to twenty GPU-hours. This is the cheap part.
-- **Building a new hate-speech corpus, aiming for 5,000-10,000 labelled examples.** Six to twelve months elapsed; four to twelve person-months of annotator work; one to two person-months of lead effort for guidelines, community consultation on label design, and adjudication. **Add 20-40% for annotator mental health support, ethics review, and slower per-example throughput because annotators cannot process this content at sentiment-analysis speed.**
-- **Deployment audit and iteration.** Any project moving toward deployment as automated moderation should budget **at least equal time to model training** for external audit, false-positive characterisation on real user content, community consultation on error tolerance, and iteration. Skipping this step is the failure mode this preamble warns about.
-- **Ongoing model maintenance.** Hate-speech patterns evolve. A model trained on data from 2024 is stale by 2026 and often actively wrong (new slurs, new codewords, new evasion patterns). Budget for maintenance retraining, not one-off release.
+- **Limited exposure:** no more than a few hours a day on harmful content, with required breaks.
+- **Counselling:** a mental-health professional that annotators can reach in confidence.
+- **Regular debriefs** where annotators can talk about the material without stigma.
+- **Opt-out:** anyone can stop at any time, without penalty or explanation.
+- **Fair pay** that reflects the harm of the work, not just the hours.
+- **A named contact** other than the project lead, to whom annotators can raise concerns.
 
-## Known limitations to watch for
+**Users.** A dataset that trains a hate speech classifier does not make that classifier a moderation system. The AfriHate authors state that models built on their data should not be used for automated removal, and that any deployed system should keep native or near-native speakers in the loop. Before any deployment, you need:
 
-- **What counts as hate is culturally, politically, and temporally specific.** A term that is neutral in one region carries historical violence in another; a joke among an in-group is a slur to outsiders; incitement conventions differ. Do not import a label scheme from an English-language corpus without extensive community consultation.
-- **Cross-cultural annotators mis-label.** The most-cited hate-speech corpora (English, mostly US context) were annotated by workers who did not share the linguistic-community context of the writers. This is a documented source of bias ([Sap et al., 2019](https://aclanthology.org/P19-1163/)). African-language corpora that use cross-cultural crowdworkers inherit the same problem at higher rates. Annotators must be from the affected communities.
-- **Class imbalance is severe and evaluation-consequential.** Real user content is majority non-hate; test sets that mirror this distribution give very noisy per-class F1. Do not treat headline macro-F1 or accuracy as meaningful. Per-class F1 with class support disclosed is the minimum reporting standard.
-- **Code-switching hides hate.** African-language hate speech often mixes with English, French, or Arabic, and the switch points are often exactly where the offensive content sits. Monolingual models miss it. Code-switched evaluation sets are not optional.
-- **Cross-lingual transfer is unusually weak.** Cross-lingual sentiment transfer is already weak (see the [sentiment page](./sentiment.mdx)); for hate speech the gap is larger because the harm categories, in-group codewords, and cultural triggers do not transfer at all. Treat transferred hate-speech models as pilot signal, not deployment-ready.
-- **Adversarial evasion is constant.** Users evade classifiers with orthographic variants, code-switching, and coded terms. A static model degrades faster in this task than in any other in this playbook.
-- **False positives disproportionately harm marginalised users.** A moderator that over-flags a specific dialect, minority language variety, or reclaimed in-group vocabulary silences the community it was meant to protect. Measure false-positive rates disaggregated by the demographics of the content producer, not just aggregated.
-- **Automated moderation is a policy decision, not a technical one.** A model that "detects hate speech" does not automatically justify automated removal. What speech is moderated, by whom, and with what appeal process, are decisions that require community consultation, ethics review, and legal input (see the [legal, consent, and community IP](../legal-consent/index.md) chapter).
+- a written moderation policy decided by the deploying organisation and its community, not left to the model;
+- human review of borderline cases, and an appeal process for users;
+- false-positive rates measured separately for each dialect, language variety, and community. A classifier that over-flags one group silences the people it was meant to protect;
+- a plan to refresh the data as evasion patterns change.
 
-## Deployment considerations: more than a classification question
+Who is moderated, how, and with what appeal, is a policy decision. It needs community consultation, ethics review, and legal input. See the [legal, consent, and community IP](../legal-consent/index.md) chapter. If you cannot commit to this, use the output only as an advisory tool for human moderators.
 
-A hate-speech classifier is a starting point, not a moderation system. Any project moving toward deployment needs at minimum:
+## Step 4: Learning from the people who built it
 
-- **A stated moderation policy** (what content is removed / demoted / labelled / passed through) decided by the deploying institution and its community, not implicit in the model.
-- **A human-in-the-loop review layer** for at least the borderline decisions. Fully automated moderation on African-language content is not the responsible default.
-- **An appeal process** for users whose content is actioned. Silent removal without explanation is the failure mode that erodes user trust fastest.
-- **Disaggregated false-positive tracking**, reported publicly at cadence, so the community can see whether the model is over-flagging any particular demographic.
-- **A retraining and update cadence** matched to how quickly evasion patterns evolve (quarterly at minimum for consumer-facing deployments).
+AfriHate was built by language teams across Africa, each with a coordinator, working under a shared set of labels. Its hardest problems were finding hateful posts in languages the Twitter API did not support, and handling honest disagreement about what counts as hate.
 
-If your project cannot commit to these, deploy as an advisory / triage tool for human moderators only, not as an automated enforcement system.
+- There is no case study for AfriHate in this playbook yet. If you work on it, the [retrospective template](../case-studies/retrospective-template.md) is a good way to share what you learn.
+- Read the **[AfriHate paper](https://aclanthology.org/2025.naacl-long.92/)**, especially the data collection, limitations, and ethics sections.
+- Read the **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** ([Nekoto et al., 2020](https://aclanthology.org/2020.findings-emnlp.195/)) on how to involve communities in dataset work. This matters more for label design here than for most tasks.
+- Questions worth asking the authors: How did you build the keyword lists, and what hate did they miss? Where did annotators disagree most, and did disagreement follow region, age, or politics? What support did annotators need, and what would you add next time?
 
-## Annotator wellbeing: non-negotiable
+## What it will cost
 
-Reading hate content is harmful to annotators. This is well-documented from content-moderation work at scale ([Roberts, 2019](https://yalebooks.yale.edu/9780300235883/behind-the-screen)). Every hate-speech project needs, from Day 1:
+Hate speech projects cost more than sentiment projects of the same size. The extra cost is annotator support, ethics review, external audit, and slower annotation. These are rough estimates, not exact figures for your project.
 
-- **Bounded exposure**: no annotator processes hate content for more than a few hours per day, with mandatory breaks.
-- **Access to counselling**: a psychologist or mental-health professional retained for the project, with confidential access for annotators.
-- **Team debriefs**: regular group check-ins where annotators can discuss the material without stigma.
-- **Rotation and opt-out**: annotators who need to stop for any reason must be able to, without penalty and without needing to explain.
-- **Fair pay** that reflects the harm of the work, not just the time.
-- **A named ombudsperson** distinct from the project lead, whom annotators can raise concerns to.
-
-If your project cannot fund this, do not start it. Extractive annotation work on harmful content is a common failure mode; it is preventable.
-
-## The canonical fine-tuning link
-
-For fine-tuning an encoder model on a hate-speech classification dataset, use the [Hugging Face sequence-classification tutorial](https://huggingface.co/docs/transformers/tasks/sequence_classification). Report per-class F1 with class support disclosed, disaggregated by demographic where possible, and human-evaluate a random sample of both correct and incorrect predictions. Automatic metrics on hate-speech data are notoriously unreliable indicators of deployment-readiness.
+- **Reusing AfriHate for a covered language.** One to three person-weeks. This is the cheap part.
+- **Building a new corpus of 5,000–10,000 labelled examples.** Six to twelve months elapsed. Four to twelve person-months of annotator work, plus one to two person-months of lead effort for guidelines, community consultation on labels, and adjudication. **Add 20–40% for annotator mental-health support, ethics review, and slower annotation**, because people cannot read this content at the speed they read sentiment data.
+- **Audit before deployment.** If the work is heading toward automated moderation, budget at least as much time for external audit, false-positive checks on real user content, and community consultation as for building the classifier itself.
+- **Keeping the data current.** Hate speech changes quickly: data from 2024 is out of date by 2026, and often wrong about new slurs and codewords. Budget for regular data refreshes, not a one-off release.
 
 ## Further reading
 
-- [Muhammad et al., 2022, NaijaSenti](https://arxiv.org/abs/2201.08277): the Nigerian-language sentiment + emotion corpus whose anger / disgust auxiliary labels are the most directly-usable African-language signal for Nigerian-language safety work.
-- [Yimam et al., 2020, Amharic hate speech](https://aclanthology.org/2020.lrec-1.375/): the reference Ethiopic-language study, useful as a template for guidelines and annotator workflow.
-- [Vidgen et al., 2019, challenges and frontiers in abusive language detection](https://arxiv.org/abs/1908.11049): the reference survey on the state of the field and its methodological pitfalls.
+- [AfriHate (Muhammad et al., 2025)](https://aclanthology.org/2025.naacl-long.92/): the 15-language dataset, how it was collected, and its limitations.
+- [Challenges and frontiers in abusive content detection (Vidgen et al., 2019)](https://aclanthology.org/W19-3509/): a survey of the method problems in this field. Read it before writing guidelines.
+- [The risk of racial bias in hate speech detection (Sap et al., 2019)](https://aclanthology.org/P19-1163/): how annotator background creates biased labels.
 
-<details>
-<summary>Additional references</summary>
-
-- [Sap et al., 2019, the risk of racial bias in hate speech detection](https://aclanthology.org/P19-1163/): the foundational paper on how annotator background produces biased corpora.
-- [Waseem & Hovy, 2016](https://aclanthology.org/N16-2013/): an early influential paper on hate-speech annotation methodology; useful reading for what went wrong with early corpora.
-- [Roberts, 2019, Behind the Screen](https://yalebooks.yale.edu/9780300235883/behind-the-screen): the definitive book on content-moderation labour; required reading for anyone scoping annotator support.
-- [Nekoto et al., 2020, participatory approach](https://aclanthology.org/2020.findings-emnlp.195/): the community-consultation reference; particularly load-bearing for label design in hate-speech projects.
-- [POLAR paper (Naseem et al., 2026)](https://aclanthology.org/2026.semeval-1.453/): SemEval-2026 Task 9 description; read for its label-scheme discussion of polarization as distinct from hate speech and the between-group hostility axis specifically.
-- [Perspective API research](https://arxiv.org/abs/1908.06024): for the methodological framing of scaled content-safety scoring, including its limitations.
-
-</details>
-
----
-
-**Contributor's note.** Hate-speech projects fail badly when they are treated as ordinary classification tasks. If you are adding to this chapter (a per-language corpus note, a specific annotation-workflow template, a deployment case study), retain the wellbeing, ethics, and deployment-caution framing. Removing those framings is not a stylistic preference; it is the failure mode.
+Once you have your data, training a model is well covered elsewhere. The [Hugging Face sequence classification tutorial](https://huggingface.co/docs/transformers/tasks/sequence_classification) is a good start.

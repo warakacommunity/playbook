@@ -57,13 +57,8 @@ const sidebars = {
         },
         chapterIndexed('Before You Start', 'before-you-start/index', [
           'before-you-start/ner',
-          'before-you-start/machine-translation',
-          'before-you-start/asr',
           'before-you-start/sentiment',
           'before-you-start/hate-speech',
-          'before-you-start/tts',
-          'before-you-start/qa',
-          'before-you-start/ocr',
         ]),
         'project-management/index',
         chapter('Data Collection', '2_data-collection'),
