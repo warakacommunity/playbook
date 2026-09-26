@@ -401,4 +401,6 @@ The Playbook content is shared under the same terms as the Masakhane community. 
 
 ## Acknowledgements
 
-Built by the Masakhane NLP community. Powered by [Docusaurus](https://docusaurus.io/). Search by [Algolia DocSearch](https://docsearch.algolia.com/). Comments by [giscus](https://giscus.app/).
+The AfriPlaybook is supported by the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub), a pan-African initiative building open, culturally grounded datasets for African languages. We are grateful for its support.
+
+Built by the Waraka community, Masakhane, and AfricaNLP researchers, in collaboration with Bayero University Kano, Bahir Dar University, HausaNLP, and EthioNLP. Powered by [Docusaurus](https://docusaurus.io/). Search by [Algolia DocSearch](https://docsearch.algolia.com/). Comments by [giscus](https://giscus.app/).

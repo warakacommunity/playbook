@@ -151,64 +151,107 @@
   margin: 0 0 1.4rem;
 }
 
-.supportersMarquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
-}
-
-.supportersTrack {
-  display: flex;
+/* Featured supporter: the Hub's own graphic beside a written acknowledgement. */
+.supporterFeature {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 2.5rem;
   align-items: center;
-  gap: 4rem;
-  width: max-content;
-  animation: supportersMarquee 42s linear infinite;
-  will-change: transform;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px -28px rgba(15, 23, 42, 0.35);
 }
 
-.supportersMarquee:hover .supportersTrack {
-  animation-play-state: paused;
+.supporterImage {
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
 }
+
+.supporterImage img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.supporterImage:hover img { transform: scale(1.02); }
+
+.supporterText .supportersLabel {
+  text-align: left;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-primary);
+}
+
+.supporterName {
+  margin: 0 0 0.75rem;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.supporterBody {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.supporterLink {
+  font-weight: 600;
+}
+
+.supporterLink::after { content: ' \2192'; }
+
+/* Partners: a calm, static row of logos. */
+.partnersLabel { margin-top: 2.75rem; }
+
+.partnerRow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem 1.5rem;
+}
+
+.partnerRow li { margin: 0; }
 
 .supporterLogo {
-  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 104px;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
+  height: 88px;
+  padding: 0.75rem 1.25rem;
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid rgba(15, 23, 42, 0.06);
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-  opacity: 0.94;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .supporterLogo:hover {
-  opacity: 1;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
 }
 
 [data-theme='dark'] .supporterLogo {
-  background: #ffffff;
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .supporterLogo img {
-  height: 64px;
+  height: 56px;
   width: auto;
-  max-width: 280px;
+  max-width: 220px;
   object-fit: contain;
   display: block;
-}
-
-@keyframes supportersMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 
 @media (max-width: 768px) {
@@ -228,10 +271,12 @@
   .supportedByCard {
     padding: 1.75rem 0 1.5rem;
   }
-  .supportersTrack {
-    gap: 2.75rem;
-    animation-duration: 28s;
+  .supporterFeature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1rem;
   }
+  .supporterName { font-size: 1.35rem; }
   .supporterLogo {
     height: 80px;
     padding: 0.55rem 1rem;
@@ -243,12 +288,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .supportersTrack {
-    animation: none;
-    overflow-x: auto;
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem 3rem;
-  }
+  .supporterImage img { transition: none; }
+  .supporterImage:hover img { transform: none; }
 }
