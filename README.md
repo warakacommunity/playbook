@@ -65,7 +65,7 @@ The Playbook is a [Docusaurus 3](https://docusaurus.io) site. To install and pre
 
 ```bash
 git clone https://github.com/warakacommunity/playbook.git
-cd AfriPlaybook
+cd playbook
 yarn install --frozen-lockfile
 yarn start
 ```
@@ -148,7 +148,7 @@ If you're already a maintainer with write access:
 
 ```bash
 git clone https://github.com/warakacommunity/playbook.git
-cd AfriPlaybook
+cd playbook
 ```
 
 ### Step 3 — Set up the project locally

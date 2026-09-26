@@ -79,9 +79,11 @@ cd playbook
 
 ### Step 3: Install and run locally
 
+You need Node.js 22 and Yarn 1.x (install it with `npm install -g yarn`). Use Yarn, not npm, so you get the exact versions the project is tested with.
+
 ```bash
-npm install      # Node 18+ required
-npm start        # opens a live preview at http://localhost:3000
+yarn install --frozen-lockfile
+yarn start       # opens a live preview at http://localhost:3000
 ```
 
 The preview reloads as you edit, so you can see your change immediately.

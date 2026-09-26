@@ -27,3 +27,6 @@ static/structure.json
 
 # Generated on every deploy from the built site (see .github/workflows/deploy.yml)
 /static/downloads/afriplaybook.pdf
+
+# This project uses Yarn; an npm lockfile would conflict with yarn.lock
+package-lock.json

@@ -1254,7 +1254,7 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
     margin: 20mm 15mm 22mm 15mm;
 
     @top-left {
-      content: "AfriPlaybook · Masakhane";
+      content: "AfriPlaybook · Waraka";
       font-family: 'Exo 2', sans-serif;
       font-size: 8.5pt;
       color: #7d6b56;
@@ -1271,6 +1271,14 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
       font-size: 8.5pt;
       color: #7d6b56;
     }
+  }
+
+  /* No running header or page number on the first page: in the book PDF
+     that page is the cover. */
+  @page :first {
+    @top-left { content: none; }
+    @top-right { content: none; }
+    @bottom-center { content: none; }
   }
 
   /* Terracotta / forest gradient bar on the first article page so
