@@ -32,14 +32,25 @@ Use this log while you work through [Before You Start](../before-you-start/index
 
 Record every search, including those that found nothing. A search with no results is still useful evidence.
 
+**Build your search terms from three parts**, and try several combinations:
+
+- **Language:** every name and code, for example `Hausa`, `Harshen Hausa`, `hau`, `ha`.
+- **Task:** the task name and its synonyms, for example `sentiment`, `opinion`, `polarity`, `emotion`.
+- **Resource word:** `dataset`, `corpus`, `benchmark`, `annotated`, `shared task`.
+
+The table shows example searches for a Hausa sentiment project. Replace them with your own.
+
 | Date | Where | Exact search terms | Relevant results |
 |---|---|---|---|
-| | ACL Anthology | | |
-| | Lanfrica | | |
-| | Hugging Face (language filter) | | |
-| | AfricaNLP workshop proceedings | | |
-| | Google Scholar / arXiv | | |
-| | Asked the community (where?) | | |
+| | ACL Anthology | e.g. `Hausa sentiment`, `Hausa corpus`, `Hausa dataset` | |
+| | Lanfrica | e.g. `Hausa`, then filter by task | |
+| | AtlasNLP | e.g. language: Hausa; task: sentiment analysis | |
+| | Hugging Face (language filter) | e.g. language `hau`, task `text-classification` | |
+| | AfricaNLP workshop proceedings | e.g. skim the last two years' paper titles for "Hausa" and "sentiment" | |
+| | Google Scholar / arXiv | e.g. `"Hausa" sentiment dataset 2020..2026` | |
+| | Asked the community (where?) | e.g. Masakhane Slack: "Does anyone know of Hausa sentiment data?" | |
+| | | | |
+| | | | |
 
 ## Step 2: Datasets found
 

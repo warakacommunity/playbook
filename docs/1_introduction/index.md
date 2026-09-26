@@ -7,9 +7,14 @@ last_update:
   author: Shamsudddeen Hassan Muhammad
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Welcome
 
-![AfriPlaybook cover: a baobab tree against a low ochre sun under an indigo sky, framed by earth-tone kente cloth, with the word for language in Hausa, Amharic, Swahili, Yorùbá, Igbo, Zulu, Somali, Kinyarwanda, Luganda and Wolof linked like a network across the sky.](images/afriplaybook-cover.svg)
+<picture>
+  <source media="(max-width: 600px)" srcSet={useBaseUrl('/img/cover/afriplaybook-cover-mobile.svg')} />
+  <img src={useBaseUrl('/img/cover/afriplaybook-cover.svg')} alt="AfriPlaybook: a practical guide to building high-quality datasets for African languages. An indigo woven cloth whose threads form a data grid, with ochre adire and mudcloth marks as labelled cells." width="1200" height="600" style={{width: '100%', height: 'auto'}} />
+</picture>
 
 This is the website of the **AfriPlaybook**, an open guide to building datasets for African languages. It follows a dataset from first idea to public release: deciding what to collect and from whom, designing the annotation task, recruiting and paying the people who do it, checking their work, documenting the result, and publishing it so that others can build on it.
 

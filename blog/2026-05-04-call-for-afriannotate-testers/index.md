@@ -1,20 +1,20 @@
 ---
-slug: call-for-masakhane-tool-testers
-title: "We're looking for testers: try MasakhaneTool early"
-description: Calling annotators, students, and researchers to try MasakhaneTool, our open annotation platform for African languages, before v1 ships.
+slug: call-for-afriannotate-testers
+title: "We're looking for testers: try AfriAnnotate early"
+description: Calling annotators, students, and researchers to try AfriAnnotate, our open annotation platform for African languages, before v1 ships.
 authors: [shamsuddeen]
-tags: [call-for-testers, tool, beta, masakhane-tool]
+tags: [call-for-testers, tool, beta, afriannotate]
 image: /img/blog/tool-testers.png
 draft: false
 ---
 
-We're opening up **MasakhaneTool**, the Masakhane community's open annotation platform, for early testing. If you annotate text or speech for African languages, work on community datasets, or teach data-collection workflows, we'd love your help shaping what we ship in v1.
+We're opening up **[AfriAnnotate](https://docs.afriannotate.org/)**, our open annotation platform, for early testing. If you annotate text or speech for African languages, work on community datasets, or teach data-collection workflows, we'd love your help shaping what we ship in v1.
 
 <!-- truncate -->
 
-## What MasakhaneTool is
+## What AfriAnnotate is
 
-MasakhaneTool is an **Apache 2.0**, mobile-first, **offline-capable** Progressive Web App for African-language NLP data collection. We built it because most existing annotation tools assume desktop browsers, fast connectivity, and Latin script. Those assumptions don't hold for the African contexts we work in.
+AfriAnnotate is an **Apache 2.0**, mobile-first, **offline-capable** Progressive Web App for African-language NLP data collection. We built it because most existing annotation tools assume desktop browsers, fast connectivity, and Latin script. Those assumptions don't hold for the African contexts we work in.
 
 In its current shape, the tool supports:
 
@@ -63,7 +63,7 @@ If your work touches African-language data in any way, you fit the profile.
 
 Three ways, pick whichever fits:
 
-1. **Discord**: say hi in [`#masakhane-tool`](https://discord.gg/ChNPHV2PPS) and a maintainer will reach out
+1. **Discord**: say hi in [`#afriannotate`](https://discord.gg/ChNPHV2PPS) and a maintainer will reach out
 2. **GitHub Discussions**: open a thread in [the project's discussions](https://github.com/warakacommunity/playbook/discussions) with a brief intro
 3. **Email**: write to the team via the address on the About page (contact the Masakhane community)
 

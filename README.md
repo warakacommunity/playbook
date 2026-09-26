@@ -326,7 +326,7 @@ Quick answers to the questions we hear most. The full version with more detail l
 
 ### Is the Playbook free to use?
 
-Yes — entirely. Playbook content is community-maintained and openly licensed; the Masakhane Tool annotation platform is **Apache 2.0**. No closed version, no paid tier, no commercial fork.
+Yes — entirely. Playbook content is community-maintained and openly licensed; the AfriAnnotate annotation platform is **Apache 2.0**. No closed version, no paid tier, no commercial fork.
 
 ### Can I contribute a chapter?
 
@@ -336,21 +336,21 @@ Yes. Open an issue with a brief outline first, then write your chapter and open 
 
 Every chapter page has a "Cite this page" link. The dedicated [`/cite`](https://afriplaybook.waraka.org/cite) page provides BibTeX, APA, MLA, Chicago, and a machine-readable [`CITATION.cff`](CITATION.cff). See also [How to cite](#how-to-cite) below.
 
-### Is the Masakhane Tool deployable on-prem?
+### Is AfriAnnotate deployable on-prem?
 
 Yes. Apache 2.0 licensed, ships as a Progressive Web App. Self-host on any server, install on a phone for offline-first work, or deploy inside an institutional network. Pilots are running at Bayero University and Bahir Dar University ICT4D.
 
 ### Which African languages are supported?
 
-The site UI is translated into 6 languages (English, Hausa, Amharic, Swahili, French, Portuguese) with chapter content gradually following. The Tool supports any African language and script through Unicode, with virtual keyboards and RTL handling where applicable.
+The site UI is translated into 6 languages (English, Hausa, Amharic, Swahili, French, Portuguese) with chapter content gradually following. AfriAnnotate supports any African language and script through Unicode, with virtual keyboards and RTL handling where applicable.
 
 ### How can I get involved?
 
-5 minutes: star the repo or join Discord. 30 minutes: fix a typo via "Edit this page". A few hours: write a [blog post case study](#how-to-write-a-blog-post). A few weeks: lead a chapter — see the open [Call for Chapter Development Proposals](https://afriplaybook.waraka.org/blog/call-for-chapters-afriplaybook).
+5 minutes: star the repo or join Discord. 30 minutes: fix a typo via "Edit this page". A few hours: write a [blog post case study](#how-to-write-a-blog-post). A few weeks: write or improve a chapter. See [How to contribute](https://afriplaybook.waraka.org/introduction/how-to-contribute).
 
-### What's the difference between the Playbook and the Masakhane Tool?
+### What's the difference between the Playbook and AfriAnnotate?
 
-They're complementary, not competing. The Playbook is a **guide** you read; the Tool is a **piece of software** you run. Both are open from day one and were designed together.
+They're complementary, not competing. The Playbook is a **guide** you read; AfriAnnotate is a **piece of software** you run. Both are open from day one and were designed together.
 
 For more questions and longer answers, see the [full FAQ page](https://afriplaybook.waraka.org/faq).
 

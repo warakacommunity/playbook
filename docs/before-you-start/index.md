@@ -28,6 +28,7 @@ Search for your language and task together (for example, "Hausa sentiment") to f
 
 - **[ACL Anthology](https://aclanthology.org/)**: the main archive of NLP research papers, from the major conferences, journals, and workshops. Search for your language and task, then check each paper for a released dataset. For a larger, systematic search, the Anthology's [Python package](https://aclanthology.org/faq/api/) (`pip install acl-anthology`) gives you the metadata of every paper to filter yourself.
 - **[Lanfrica](https://lanfrica.com/)**: a continually updated catalogue of African language resources, including datasets, models, and papers.
+- **[AtlasNLP](https://lit.eecs.umich.edu/AtlasNLP/)**: a map of more than 13,000 NLP datasets described in ACL Anthology papers, which you can filter by task, language, and country. Use it to see which datasets already exist for your language or country.
 - **[Hugging Face datasets, filtered by language](https://huggingface.co/datasets?language=swa)**: replace `swa` with your language's code (`hau` Hausa, `yor` Yoruba, `amh` Amharic, `zul` isiZulu). Add a task filter, such as `text-classification`, to narrow the results.
 - **[AfricaNLP workshop proceedings](https://aclanthology.org/venues/africanlp/)**: papers from the annual workshop on African-language NLP. Skim the latest year to see what is new.
 - **Google Scholar and [arXiv](https://arxiv.org/list/cs.CL/recent)**: new work often appears here first. Combine your language, task, and a date range, for example `"Hausa" sentiment dataset 2023..2026`.

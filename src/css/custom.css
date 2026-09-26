@@ -1587,3 +1587,8 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   .decision-table td:nth-child(2)::before { content: "Your choice"; }
   .decision-table td:nth-child(3)::before { content: "What to do"; }
 }
+
+/* Hide the "#" that Docusaurus shows beside headings on hover. Readers took it
+   for a stray symbol; section links still work and can be copied from the
+   "On this page" list. */
+.hash-link { display: none; }
