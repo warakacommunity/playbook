@@ -3,7 +3,7 @@ slug: welcome-to-the-waraka-blog
 title: "Welcome to the Waraka Blog"
 authors: [shamsuddeen]
 tags: [announcement, playbook]
-image: /img/blog/sample-post.svg
+image: /img/blog/welcome-to-waraka.png
 ---
 
 This is the first post on the new Waraka blog. We'll use this space to share community updates, calls for contribution, project milestones, and stories from teams building NLP for African languages.
@@ -21,20 +21,3 @@ This is the first post on the new Waraka blog. We'll use this space to share com
 
 The blog publishes an RSS feed at [`/blog/rss.xml`](pathname:///blog/rss.xml) and an Atom feed at [`/blog/atom.xml`](pathname:///blog/atom.xml). Drop either into your feed reader to follow along.
 
-## How to write a post
-
-Posts live in the `blog/` folder of the [AfriPlaybook repo](https://github.com/warakacommunity/playbook). Each post is a markdown file (or a folder containing `index.md` if you have images). The frontmatter looks like this:
-
-```yaml
----
-slug: your-post-slug
-title: "Your post title"
-authors: [shamsuddeen]
-tags: [announcement]
-image: /img/blog/your-thumbnail.png
----
-```
-
-Add a `<!-- truncate -->` marker after the intro paragraph so the blog index shows only that intro on the card.
-
-That's it — open a PR, and we'll publish it.

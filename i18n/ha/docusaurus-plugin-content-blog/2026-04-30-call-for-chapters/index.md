@@ -1,12 +1,17 @@
 ---
 slug: call-for-chapters-afriplaybook
 title: "Call for Chapters: AfriPlaybook"
+description: We're inviting researchers and language experts to lead chapters in the Playbook. USD $1,000 honorarium per accepted chapter, open through 30 June 2026.
 authors: [shamsuddeen]
 tags: [call-for-chapters, playbook, announcement]
-image: /img/social-card.png
+image: /img/blog/call-for-chapters.png
 ---
 
-The Masakhane community is opening a **Call for Chapters** for AfriPlaybook — a community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. We invite researchers, practitioners, students, language experts, and community members to contribute chapters that shape how the next generation of African language technology is built.
+:::info[This call is closed]
+Proposals closed on 30 June 2026. You can still contribute to the playbook at any time: see [How to contribute](/introduction/how-to-contribute).
+:::
+
+The Waraka community, with Masakhane and AfricaNLP researchers, is opening a **Call for Chapters** for AfriPlaybook, a community-driven, open guide for building, evaluating, and deploying NLP systems for African languages. We invite researchers, practitioners, students, language experts, and community members to contribute chapters that shape how the next generation of African language technology is built.
 
 <!-- truncate -->
 
@@ -18,13 +23,13 @@ African languages remain underrepresented in mainstream NLP. The Playbook exists
 
 We welcome chapter proposals on (but not limited to):
 
-- **Data** — curation, licensing, dialectal coverage, low-resource bootstrapping, parallel corpora, speech datasets.
-- **Annotation** — guidelines for African languages, inter-annotator agreement, tooling, working with native-speaker annotators.
-- **Modeling** — machine translation, ASR/TTS, NER, POS, sentiment, multilingual pretraining, adapters, and small/efficient models.
-- **Evaluation** — human evaluation protocols, benchmarks, error analysis specific to African language families.
-- **Deployment** — productionizing models on the continent, edge devices, offline-first applications, language ID, code-switching.
-- **Ethics & Community** — consent, data sovereignty, fair compensation for contributors, language preservation.
-- **Case Studies** — end-to-end stories from real projects (Hausa, Amharic, Swahili, Yoruba, Igbo, Zulu, Wolof, and many more).
+- **Data**: curation, licensing, dialectal coverage, low-resource bootstrapping, parallel corpora, speech datasets.
+- **Annotation**: guidelines for African languages, inter-annotator agreement, tooling, working with native-speaker annotators.
+- **Modeling**: machine translation, ASR/TTS, NER, POS, sentiment, multilingual pretraining, adapters, and small/efficient models.
+- **Evaluation**: human evaluation protocols, benchmarks, error analysis specific to African language families.
+- **Deployment**: productionizing models on the continent, edge devices, offline-first applications, language ID, code-switching.
+- **Ethics & Community**: consent, data sovereignty, fair compensation for contributors, language preservation.
+- **Case Studies**: end-to-end stories from real projects (Hausa, Amharic, Swahili, Yoruba, Igbo, Zulu, Wolof, and many more).
 
 ## Who can contribute?
 
@@ -33,14 +38,14 @@ We welcome chapter proposals on (but not limited to):
 - First-time authors paired with mentors from the community
 - Native speakers and linguists working alongside ML practitioners
 - Students, independent researchers, and industry contributors
-- Cross-organizational collaborations (Masakhane, EthioNLP, HausaNLP, Lanfrica, Zindi, and others)
+- Cross-organizational collaborations (Waraka, Masakhane, EthioNLP, HausaNLP, Lanfrica, Zindi, and others)
 
 ## How to propose a chapter
 
-1. **Submit a proposal** — a short abstract (200–400 words), an outline, target audience, and the languages/topics covered.
-2. **Review** — proposals are reviewed by the editorial team for fit, scope, and overlap with existing chapters.
-3. **Draft** — accepted authors work in the open on the [Playbook GitHub repository](https://github.com/warakacommunity/playbook), with reviewer support.
-4. **Publish** — accepted chapters are merged into the Playbook with author attribution and DOIs (where applicable).
+1. **Submit a proposal**: a short abstract (200–400 words), an outline, target audience, and the languages/topics covered.
+2. **Review**: proposals are reviewed by the editorial team for fit, scope, and overlap with existing chapters.
+3. **Draft**: accepted authors work in the open on the [Playbook GitHub repository](https://github.com/warakacommunity/playbook), with reviewer support.
+4. **Publish**: accepted chapters are merged into the Playbook with author attribution and DOIs (where applicable).
 
 ## Key dates
 
@@ -55,11 +60,12 @@ We welcome chapter proposals on (but not limited to):
 
 ## How to get involved
 
-- **Read the existing Playbook**: [/](/)
+- **Read the existing Playbook**: [afriplaybook.waraka.org](/)
 - **Open a proposal issue** on the [GitHub repository](https://github.com/warakacommunity/playbook/issues/new)
+- **Join the Waraka community**: [Discord](https://discord.gg/ChNPHV2PPS)
 - **Join the Masakhane community**: [masakhane.io](https://www.masakhane.io/)
 - **Questions?** Reach out via the GitHub Discussions tab on the repo.
 
-We are building a resource *by* the community, *for* the community. If you have a perspective, an experiment, or a story that deserves to be in the Playbook — we want to hear from you.
+We are building a resource *by* the community, *for* the community. If you have a perspective, an experiment, or a story that deserves to be in the Playbook, we want to hear from you.
 
 *Ǹbá! Karibu! Welkom! Bienvenue! Bem-vindos!*
