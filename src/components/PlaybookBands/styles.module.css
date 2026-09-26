@@ -70,6 +70,18 @@
   transition: color 0.15s ease;
 }
 
+/* Small role label on maintainers' cards. */
+.maintainerBadge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2b3c66;
+  background: #eef2fb;
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+}
+
 .contributorCard:hover .contributorLogin {
   color: var(--ifm-color-primary);
 }

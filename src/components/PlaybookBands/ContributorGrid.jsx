@@ -3,13 +3,21 @@ import styles from './styles.module.css';
 
 // Everyone who has committed to the playbook repo, pulled at build time by the
 // `github-contributors` plugin (docusaurus.config.js). Shown on the
-// Contributors page, sorted alphabetically so no one is ranked by commit count.
+// Contributors page: maintainers first, then everyone else, each group
+// ordered by number of commits (the counts themselves are not shown).
 const nameOf = (c) => (c.login || c.name).toLowerCase();
+
+// The project's maintainers (GitHub usernames). Edit this list by hand.
+const MAINTAINERS = ['abumafrim', 'seyyaw', 'shmuhammadd', 'Tadesse-Destaw'];
+const isMaintainer = (c) => MAINTAINERS.includes(c.login);
 
 export default function ContributorGrid() {
   const data = usePluginData('github-contributors');
-  const contributors = [...(data?.contributors ?? [])].sort((a, b) =>
-    nameOf(a).localeCompare(nameOf(b)),
+  const contributors = [...(data?.contributors ?? [])].sort(
+    (a, b) =>
+      isMaintainer(b) - isMaintainer(a) ||
+      (b.contributions ?? 0) - (a.contributions ?? 0) ||
+      nameOf(a).localeCompare(nameOf(b)),
   );
 
   // Empty in local previews built without a GITHUB_TOKEN.
@@ -35,6 +43,7 @@ export default function ContributorGrid() {
               decoding="async"
             />
             <span className={styles.contributorLogin}>@{c.login}</span>
+            {isMaintainer(c) && <span className={styles.maintainerBadge}>Maintainer</span>}
           </a>
         ) : (
           // Commit email not linked to a GitHub account: no profile or
