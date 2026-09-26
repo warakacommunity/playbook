@@ -1,12 +1,12 @@
 ---
-slug: welcome-to-the-masakhane-blog
-title: "Welcome to the Masakhane Blog"
+slug: welcome-to-the-waraka-blog
+title: "Welcome to the Waraka Blog"
 authors: [shamsuddeen]
 tags: [announcement, playbook]
 image: /img/blog/sample-post.svg
 ---
 
-This is the first post on the new Masakhane blog. We'll use this space to share community updates, calls for contribution, project milestones, and stories from teams building NLP for African languages.
+This is the first post on the new Waraka blog. We'll use this space to share community updates, calls for contribution, project milestones, and stories from teams building NLP for African languages.
 
 <!-- truncate -->
 
@@ -14,7 +14,7 @@ This is the first post on the new Masakhane blog. We'll use this space to share 
 
 - **Calls for contribution** — chapters, datasets, annotations, reviewers.
 - **Release notes** — when new versions of the Playbook ship.
-- **Community spotlights** — research, tools, and projects from across the Masakhane network.
+- **Community spotlights** — research, tools, and projects from across the Waraka community.
 - **Tutorials & how-tos** — short, practical pieces that complement the Playbook.
 
 ## Subscribe
