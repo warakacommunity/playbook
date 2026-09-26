@@ -4,7 +4,7 @@ title: "We're looking for testers: try MasakhaneTool early"
 description: Calling annotators, students, and researchers to try MasakhaneTool, our open annotation platform for African languages, before v1 ships.
 authors: [shamsuddeen]
 tags: [call-for-testers, tool, beta, masakhane-tool]
-image: https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&h=675&q=80
+image: /img/blog/tool-testers.png
 draft: false
 ---
 
