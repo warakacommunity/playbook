@@ -129,10 +129,9 @@
 /* ---------- Supported by — full-width band ---------- */
 .supportedByCard {
   width: 100%;
-  padding: 3.5rem 0 3.25rem;
-  background: #f5f7fa;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 3.5rem 0 3.5rem;
+  background: #eef2fb; /* pale tint of the footer's indigo */
+  border-top: 3px solid #2b3c66;
 }
 
 [data-theme='dark'] .supportedByCard {
@@ -147,7 +146,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--ifm-color-emphasis-600);
+  color: #52607a;
   margin: 0 0 1.4rem;
 }
 
@@ -160,10 +159,10 @@
   max-width: 980px;
   margin: 0 auto;
   padding: 1.25rem;
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
+  background: #ffffff;
+  border: 1px solid #dbe3f3;
   border-radius: 18px;
-  box-shadow: 0 18px 40px -28px rgba(15, 23, 42, 0.35);
+  box-shadow: 0 8px 24px rgba(12, 21, 48, 0.08);
 }
 
 .supporterImage {
@@ -171,6 +170,7 @@
   border-radius: 12px;
   overflow: hidden;
   line-height: 0;
+  box-shadow: inset 0 0 0 1px rgba(12, 21, 48, 0.08);
 }
 
 .supporterImage img {
@@ -186,11 +186,12 @@
 .supporterText .supportersLabel {
   text-align: left;
   margin-bottom: 0.5rem;
-  color: var(--ifm-color-primary);
+  color: #2b3c66;
 }
 
 .supporterName {
   margin: 0 0 0.75rem;
+  color: #0c1530;
   font-size: 1.6rem;
   line-height: 1.2;
 }
@@ -199,11 +200,12 @@
   margin: 0 0 1rem;
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--ifm-color-emphasis-800);
+  color: #334155;
 }
 
 .supporterLink {
   font-weight: 600;
+  color: #1d4ed8;
 }
 
 .supporterLink::after { content: ' \2192'; }
@@ -224,15 +226,16 @@
 .partnerRow li { margin: 0; }
 
 .supporterLogo {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 88px;
+  width: 220px;
+  height: 96px;
   padding: 0.75rem 1.25rem;
+  box-sizing: border-box;
   background: #ffffff;
   border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+  border: 1px solid #dbe3f3;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -247,12 +250,17 @@
 }
 
 .supporterLogo img {
-  height: 56px;
+  max-height: 48px;
+  max-width: 100%;
   width: auto;
-  max-width: 220px;
+  height: auto;
   object-fit: contain;
   display: block;
 }
+
+/* Square marks look small at the shared height; give them more room so all
+   logos carry similar visual weight. The marks themselves are untouched. */
+.supporterLogoTall img { max-height: 72px; }
 
 @media (max-width: 768px) {
   .section {
@@ -277,14 +285,19 @@
     padding: 1rem;
   }
   .supporterName { font-size: 1.35rem; }
+  /* Phones: partners as an even 2 x 2 grid of equal tiles. */
+  .partnerRow {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
   .supporterLogo {
+    width: 100%;
     height: 80px;
-    padding: 0.55rem 1rem;
+    padding: 0.55rem 0.75rem;
   }
-  .supporterLogo img {
-    height: 52px;
-    max-width: 180px;
-  }
+  .supporterLogo img { max-height: 40px; }
+  .supporterLogoTall img { max-height: 60px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

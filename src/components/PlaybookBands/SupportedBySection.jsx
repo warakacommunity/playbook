@@ -13,7 +13,7 @@ const PARTNERS = [
   { name: 'Bayero University, Kano', logo: '/img/supporters/bayero.png', url: 'https://www.buk.edu.ng/' },
   { name: 'Bahir Dar University', logo: '/img/supporters/bahir-dar.png', url: 'https://www.bdu.edu.et/' },
   { name: 'HausaNLP', logo: '/img/supporters/hausanlp.svg', url: 'https://hausanlp.org/' },
-  { name: 'EthioNLP', logo: '/img/supporters/EthioNLP_logo.png', url: 'https://ethionlp.github.io/' },
+  { name: 'EthioNLP', logo: '/img/supporters/EthioNLP_logo.png', url: 'https://ethionlp.github.io/', tall: true },
 ];
 
 export default function SupportedBySection() {
@@ -64,7 +64,7 @@ export default function SupportedBySection() {
             <li key={p.name}>
               <a
                 href={p.url}
-                className={styles.supporterLogo}
+                className={p.tall ? `${styles.supporterLogo} ${styles.supporterLogoTall}` : styles.supporterLogo}
                 target="_blank"
                 rel="noreferrer noopener">
                 <img src={withBaseUrl(p.logo)} alt={p.name} loading="lazy" decoding="async" />

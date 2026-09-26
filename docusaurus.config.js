@@ -127,7 +127,7 @@ const config = {
           feedOptions: {
             type: ["rss", "atom"],
             title: "AfriPlaybook Blog",
-            copyright: `Copyright © ${new Date().getFullYear()} Masakhane.`,
+            copyright: `Copyright © ${new Date().getFullYear()} Waraka.`,
           },
           // editUrl removed — "Suggest Edit" modal handles community edits instead.
         },
@@ -631,7 +631,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Built in the open by the <a href="https://waraka.org">Waraka community</a> · © ${new Date().getFullYear()} Masakhane.`,
+        copyright: `Built in the open by the <a href="https://waraka.org">Waraka community</a> · © ${new Date().getFullYear()} Waraka.`,
       },
       prism: {
         theme: prismThemes.github,
