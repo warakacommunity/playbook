@@ -165,3 +165,4 @@ Translations are community-maintained. Use the language switcher in the top-righ
 - **Chat with the community:** [Discord](https://discord.gg/ChNPHV2PPS)
 - **Found a bug:** [open an issue](https://github.com/warakacommunity/playbook/issues/new)
 
+See everyone who has contributed so far on the [Contributors](./contributors.mdx) page.

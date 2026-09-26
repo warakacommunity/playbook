@@ -601,6 +601,10 @@ const config = {
                 href: "https://hausanlp.org/",
               },
               {
+                label: "Contributors",
+                to: "/contributors",
+              },
+              {
                 label: "GitHub Repository",
                 href: "https://github.com/warakacommunity/playbook",
               },

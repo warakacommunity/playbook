@@ -71,6 +71,7 @@ const sidebars = {
           items: [
             'introduction/how-to-read',
             'introduction/how-to-contribute',
+            'introduction/contributors',
             'introduction/how-to-write',
             'introduction/core-principles',
             'introduction/scope-and-strategy',

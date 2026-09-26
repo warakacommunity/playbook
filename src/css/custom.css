@@ -1224,6 +1224,7 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   .toc-actions,
   .no-print,
   footer.footer,
+  section[aria-labelledby="supported-by-title"],
   .toc-highlight,
   [class*="tableOfContents"] {
     display: none !important;
