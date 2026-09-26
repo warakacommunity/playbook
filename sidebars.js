@@ -69,8 +69,8 @@ const sidebars = {
         chapterIndexed('Project Management', 'project-management/index', [
           templateRef('project-charter', 'Project charter'),
         ]),
-        chapter('Data Collection', '2_data-collection'),
         'data-governance/index',
+        chapter('Data Collection', '2_data-collection'),
         chapter('Annotation Design', '3_annotation-design', [templateRef('annotation-guidelines', 'Annotation guidelines')]),
         chapterIndexed('Data Quality', 'data-quality/index', ['data-quality/equipment-setup']),
         chapter('Community', '10_community-collaboration'),
