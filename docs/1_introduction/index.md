@@ -12,8 +12,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 # Welcome
 
 <picture>
-  <source media="(max-width: 600px)" srcSet={useBaseUrl('/img/cover/afriplaybook-cover-mobile.svg')} />
-  <img src={useBaseUrl('/img/cover/afriplaybook-cover.svg')} alt="AfriPlaybook: a practical guide to building high-quality datasets for African languages. An indigo woven cloth whose threads form a data grid, with ochre adire and mudcloth marks as labelled cells." width="1200" height="600" style={{width: '100%', height: 'auto'}} />
+  <source media="(max-width: 600px)" srcSet={useBaseUrl('/img/cover/afriplaybook-cover-mobile.svg') + '?v=2026-09-26'} />
+  <img src={useBaseUrl('/img/cover/afriplaybook-cover.svg') + '?v=2026-09-26'} alt="AfriPlaybook: a practical guide to building high-quality datasets for African languages. An indigo woven cloth whose threads form a data grid, with ochre adire and mudcloth marks as labelled cells." width="1200" height="600" style={{width: '100%', height: 'auto'}} />
 </picture>
 
 This is the website of the **AfriPlaybook**, an open guide to building datasets for African languages. It follows a dataset from first idea to public release: deciding what to collect and from whom, designing the annotation task, recruiting and paying the people who do it, checking their work, documenting the result, and publishing it so that others can build on it.
