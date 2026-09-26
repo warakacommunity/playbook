@@ -3,7 +3,7 @@ sidebar_position: 5
 title: Sentiment
 ready: true
 last_update:
-  date: 2026-09-25
+  date: 2026-09-26
   author: Shamsudddeen Hassan Muhammad
 ---
 
@@ -57,18 +57,22 @@ Find the row that matches your situation, then follow it across. The first quest
 
 ## Step 4: Learning from the people who built it
 
-AfriSenti was built by native-speaker researchers and annotators in many African countries, working in a participatory way. There is no AfriSenti case study in this playbook yet. If you worked on it, the [retrospective template](../case-studies/retrospective-template.md) is the place to start one.
+AfriSenti was built by native-speaker researchers and annotators in many African countries, working in a participatory way.
 
-- Read the **[AfriSenti paper](https://aclanthology.org/2023.emnlp-main.862/)**, especially the section on the challenges of curating each language.
-- Read the **[NaijaSenti paper](https://aclanthology.org/2022.lrec-1.63/)** for how tweets were collected, filtered, and labelled.
-- Read the **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** ([Nekoto et al., 2020](https://aclanthology.org/2020.findings-emnlp.195/)) for the Masakhane way of working.
-- Questions worth asking the authors: How did you decide what counts as neutral, and where did annotators disagree most? How did you find enough tweets in languages with little Twitter activity? What would you change about the guidelines if you started again?
+**Read first:**
+
+- The **[AfriSenti paper](https://aclanthology.org/2023.emnlp-main.862/)** (Muhammad et al., 2023): the 14-language dataset, especially the section on the challenges of curating each language.
+- The **[NaijaSenti paper](https://aclanthology.org/2022.lrec-1.63/)** (Muhammad et al., 2022): how tweets in four Nigerian languages were collected, filtered, and labelled.
+- The **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto et al., 2020): the Masakhane way of working that AfriSenti follows.
+
+**Questions to ask the authors:**
+
+1. How did you decide what counts as neutral, and where did annotators disagree most?
+2. How did you find enough tweets in languages with little Twitter activity?
+3. What would you change about the guidelines if you started again?
 
 ## Further reading
 
-- [AfriSenti (Muhammad et al., 2023)](https://aclanthology.org/2023.emnlp-main.862/): the 14-language dataset, how it was collected, and the challenges per language.
-- [NaijaSenti (Muhammad et al., 2022)](https://aclanthology.org/2022.lrec-1.63/): the four Nigerian languages, with collection, filtering, and labelling methods.
-- [Quality at a glance (Kreutzer et al., 2022)](https://aclanthology.org/2022.tacl-1.4/): an audit of web-crawled low-resource data. Useful before you trust scraped or auto-labelled sentiment data.
-- [Participatory research for low-resourced machine translation (Nekoto et al., 2020)](https://aclanthology.org/2020.findings-emnlp.195/): the Masakhane way of working that AfriSenti inherits.
+- [Quality at a glance (Kreutzer et al., 2022)](https://aclanthology.org/2022.tacl-1.4/): an audit of web-crawled low-resource data. Read it before you trust scraped or automatically labelled sentiment data.
 
 Once you have your data, training a model is well covered elsewhere. The [Hugging Face sequence classification tutorial](https://huggingface.co/docs/transformers/tasks/sequence_classification) is a good start.

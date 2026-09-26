@@ -2,7 +2,7 @@
 title: Automatic Speech Recognition (ASR)
 ready: true
 last_update:
-  date: 2026-09-25
+  date: 2026-09-26
   author: Shamsudddeen Hassan Muhammad
 ---
 

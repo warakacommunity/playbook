@@ -3,7 +3,7 @@ sidebar_position: 2
 title: NER
 ready: true
 last_update:
-  date: 2026-09-25
+  date: 2026-09-26
   author: Shamsudddeen Hassan Muhammad
 ---
 
@@ -17,8 +17,8 @@ This page applies the [four steps from Before You Start](./index.md) to named en
 
 Search Hugging Face, Lanfrica, or the ACL Anthology for NER in almost any major African language and you will quickly reach two datasets:
 
-- **[MasakhaNER 2](https://arxiv.org/abs/2210.12391)** ([Adelani et al., 2022](https://arxiv.org/abs/2210.12391)): 20 languages. Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Kiswahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, and Yoruba.
-- **[MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** ([Adelani et al., 2021](https://aclanthology.org/2021.tacl-1.66/)): the first 10 languages. Version 2 covers most of them, but version 1 is still the one to use for **Amharic**, which version 2 does not include. Its paper also explains how the annotation process was designed.
+- **[MasakhaNER 2](https://arxiv.org/abs/2210.12391)** (Adelani et al., 2022): 20 languages. Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Kiswahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, and Yoruba.
+- **[MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** (Adelani et al., 2021): the first 10 languages. Version 2 covers most of them, but version 1 is still the one to use for **Amharic**, which version 2 does not include. Its paper also explains how the annotation process was designed.
 
 The data is on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2), and the [GitHub repository](https://github.com/masakhane-io/masakhane-ner) has the annotation guidelines and evaluation scripts.
 
@@ -54,16 +54,19 @@ Find the row that matches your situation, then follow it across. The first quest
 
 ## Step 4: Learning from the people who built it
 
-MasakhaNER was built by a distributed community of volunteer researchers and native-speaker annotators across Africa. How they organised that work is as useful as the data itself.
+MasakhaNER was built by volunteer researchers and native-speaker annotators across Africa. Their way of organising the work is worth studying before you design your own project.
 
-- Read the **[MasakhaNER case study](../case-studies/masakhaner.md)** in this playbook.
-- Read the **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** ([Nekoto et al., 2020](https://aclanthology.org/2020.findings-emnlp.195/)) that MasakhaNER's way of working grew out of.
-- Questions worth asking the authors: How did you recruit and coordinate annotators in 20 countries? Where did annotators disagree most, and how did you resolve it? What changed between version 1 and version 2, and why?
+**Read first:**
 
-## Further reading
+- The **[MasakhaNER case study](../case-studies/masakhaner.md)** in this playbook: how the project was organised and what the team learned.
+- The **[MasakhaNER 2 paper](https://arxiv.org/abs/2210.12391)** (Adelani et al., 2022): the 20-language dataset and its analysis.
+- The **[MasakhaNER 1 paper](https://aclanthology.org/2021.tacl-1.66/)** (Adelani et al., 2021): how the annotation process was designed.
+- The **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto et al., 2020): the Masakhane way of working that MasakhaNER grew out of.
 
-- [MasakhaNER 2 (Adelani et al., 2022)](https://arxiv.org/abs/2210.12391): the 20-language dataset and its analysis.
-- [MasakhaNER 1 (Adelani et al., 2021)](https://aclanthology.org/2021.tacl-1.66/): the annotation method and participatory workflow.
-- [Participatory research for low-resourced machine translation (Nekoto et al., 2020)](https://aclanthology.org/2020.findings-emnlp.195/): the Masakhane way of working that MasakhaNER inherits.
+**Questions to ask the authors:**
+
+1. How did you recruit and coordinate annotators in 20 countries?
+2. Where did annotators disagree most, and how did you resolve it?
+3. What changed between version 1 and version 2, and why?
 
 Once you have your data, training a model is well covered elsewhere. The [Hugging Face token classification tutorial](https://huggingface.co/docs/transformers/tasks/token_classification) is a good start.

@@ -3,7 +3,7 @@ sidebar_position: 6
 title: Hate speech and content safety
 ready: true
 last_update:
-  date: 2026-09-25
+  date: 2026-09-26
   author: Shamsudddeen Hassan Muhammad
 ---
 
@@ -19,7 +19,7 @@ This task is different from the others in this chapter in three ways. Annotators
 
 Search Hugging Face, Lanfrica, or the ACL Anthology for hate speech in a major African language and you will find many small datasets, each with its own labels and guidelines. The one that brings most of them together is:
 
-- **[AfriHate](https://aclanthology.org/2025.naacl-long.92/)** ([Muhammad et al., 2025](https://aclanthology.org/2025.naacl-long.92/)): tweets in 15 languages. Algerian Arabic, Amharic, Hausa, Igbo, Kinyarwanda, Moroccan Arabic, Nigerian Pidgin, Oromo, Somali, Swahili, Tigrinya, Twi, isiXhosa, Yoruba, and isiZulu. Each tweet is labelled hate, abusive, or normal, and hateful tweets also carry a target (ethnicity, politics, gender, disability, religion, or other).
+- **[AfriHate](https://aclanthology.org/2025.naacl-long.92/)** (Muhammad et al., 2025): tweets in 15 languages. Algerian Arabic, Amharic, Hausa, Igbo, Kinyarwanda, Moroccan Arabic, Nigerian Pidgin, Oromo, Somali, Swahili, Tigrinya, Twi, isiXhosa, Yoruba, and isiZulu. Each tweet is labelled hate, abusive, or normal, and hateful tweets also carry a target (ethnicity, politics, gender, disability, religion, or other).
 
 The data is on the [Hugging Face Hub](https://huggingface.co/datasets/afrihate/afrihate). The [GitHub repository](https://github.com/AfriHate/AfriHate) lists the language coordinators, who are good people to contact.
 
@@ -57,14 +57,19 @@ Find the row that matches your situation, then follow it across. The first quest
 
 AfriHate was built by language teams across Africa, each with a coordinator, working under a shared set of labels. Its hardest problems were finding hateful posts in languages the Twitter API did not support, and handling honest disagreement about what counts as hate.
 
-- There is no case study for AfriHate in this playbook yet. If you work on it, the [retrospective template](../case-studies/retrospective-template.md) is a good way to share what you learn.
-- Read the **[AfriHate paper](https://aclanthology.org/2025.naacl-long.92/)**, especially the data collection, limitations, and ethics sections.
-- Read the **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** ([Nekoto et al., 2020](https://aclanthology.org/2020.findings-emnlp.195/)) on how to involve communities in dataset work. This matters more for label design here than for most tasks.
-- Questions worth asking the authors: How did you build the keyword lists, and what hate did they miss? Where did annotators disagree most, and did disagreement follow region, age, or politics? What support did annotators need, and what would you add next time?
+**Read first:**
+
+- The **[AfriHate paper](https://aclanthology.org/2025.naacl-long.92/)** (Muhammad et al., 2025): the 15-language dataset, especially the data collection, limitations, and ethics sections.
+- The **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto et al., 2020): how to involve communities in dataset work. This matters more for label design here than for most tasks.
+
+**Questions to ask the authors:**
+
+1. How did you build the keyword lists, and what hate did they miss?
+2. Where did annotators disagree most, and did disagreement follow region, age, or politics?
+3. What support did annotators need, and what would you add next time?
 
 ## Further reading
 
-- [AfriHate (Muhammad et al., 2025)](https://aclanthology.org/2025.naacl-long.92/): the 15-language dataset, how it was collected, and its limitations.
 - [Challenges and frontiers in abusive content detection (Vidgen et al., 2019)](https://aclanthology.org/W19-3509/): a survey of the method problems in this field. Read it before writing guidelines.
 - [The risk of racial bias in hate speech detection (Sap et al., 2019)](https://aclanthology.org/P19-1163/): how annotator background creates biased labels.
 

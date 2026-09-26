@@ -4,8 +4,8 @@ title: Tools index
 description: A quick-reference list of the tools mentioned across the AfriPlaybook.
 ready: true
 last_update:
-  date: 2026-07-07
-  author: AfriPlaybook contributors
+  date: 2026-09-26
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Tools index
