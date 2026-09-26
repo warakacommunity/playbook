@@ -1524,11 +1524,6 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   gap: 0.3rem;
   white-space: nowrap;
 }
-.navbar-pdf-size {
-  font-weight: 400;
-  font-size: 0.8em;
-  color: var(--ifm-color-emphasis-600);
-}
 /* Phones: the bar has no room; the drawer lists it instead. */
 @media (max-width: 996px) {
   .navbar__item.navbar-item--pdf { display: none; }

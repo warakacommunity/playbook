@@ -12,6 +12,11 @@ dotenv.config({ path: ".env.local" });
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// The PDF is regenerated on every deploy (see .github/workflows/deploy.yml).
+// Tagging its link with the commit makes every deploy a new URL, so browsers
+// and the CDN never serve a cached copy of an older PDF.
+const PDF_VERSION = (process.env.GITHUB_SHA || 'dev').slice(0, 7);
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Waraka Community AfriPlaybook",
@@ -515,15 +520,15 @@ const config = {
           },
           {
             // Utility action, so it sits with search and GitHub. Plain <a>:
-            // a Docusaurus Link would route the PDF through the SPA. Size is
-            // shown because many readers are on slow or metered connections.
+            // a Docusaurus Link would route the PDF through the SPA. No size
+            // label: the PDF is rebuilt on each deploy, so its size changes.
             type: "html",
             position: "right",
             className: "navbar-item--pdf",
             value:
-              '<a class="navbar__link navbar-pdf-link" href="/downloads/afriplaybook.pdf" download aria-label="Download the playbook as PDF, 4.8 MB">' +
+              `<a class="navbar__link navbar-pdf-link" href="/downloads/afriplaybook.pdf?v=${PDF_VERSION}" download="afriplaybook.pdf" aria-label="Download the playbook as PDF">` +
               '<svg class="navbar-pdf-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
-              'PDF <span class="navbar-pdf-size">4.8 MB</span></a>',
+              'PDF</a>',
           },
           {
             type: "html",

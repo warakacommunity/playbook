@@ -24,3 +24,6 @@ docs/intro/*.pdf
 
 # Generated at build from sidebars.js (single source of truth for the editor)
 static/structure.json
+
+# Generated on every deploy from the built site (see .github/workflows/deploy.yml)
+/static/downloads/afriplaybook.pdf

@@ -40,6 +40,11 @@ jobs:
           fetch-depth: 0  # full history so inject-last-update.mjs gets real commit dates
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: yarn }
+      # docs-to-pdf's Puppeteer downloads Chrome during install; cache it.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/puppeteer
+          key: puppeteer-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
       - run: yarn install --frozen-lockfile
       # Enforce default-hide policy: chapters without `ready: true` in
       # frontmatter get `wip: true` injected, which the DocItem/Layout
@@ -47,6 +52,25 @@ jobs:
       - name: Enforce default-hide draft policy
         run: bash scripts/mark-draft-chapters.sh docs
       - run: yarn build
+      # The downloadable PDF is rebuilt from the site just built, on every
+      # deploy, so it always matches the live pages. It is never committed.
+      # Noto fonts let Chrome render Ge'ez and African Latin letters.
+      - name: Install fonts for the PDF
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-core
+      - name: Generate and check PDF
+        id: pdf
+        continue-on-error: true
+        timeout-minutes: 15
+        run: yarn pdf:built && yarn pdf:check
+      # A failed or broken PDF never blocks a site update and is never
+      # published: keep serving the last good PDF and flag it in the run.
+      - name: Keep the last good PDF if generation failed
+        if: steps.pdf.outcome != 'success'
+        run: |
+          echo "::warning::PDF generation or check failed; keeping the currently deployed PDF."
+          rm -f build/downloads/afriplaybook.pdf
+          curl -fsSL -o build/downloads/afriplaybook.pdf https://afriplaybook.waraka.org/downloads/afriplaybook.pdf \
+            || echo "::warning::Could not fetch the live PDF either; the PDF link will be broken until the next successful deploy."
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with: { path: build }
