@@ -816,19 +816,23 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 
 
 /* ==========================================================================
-   Sleek footer — deep-forest band (ties to the tree's foliage), warm links,
-   terracotta hover. Matches the navbar hairline + brand palette.
+   Footer: the same deep indigo gradient and white text as the home cover
+   (static/img/cover), so the page opens and closes in one colour.
    ========================================================================== */
 .footer--dark {
-  --ifm-footer-background-color: #14301f;   /* deep forest green */
-  --ifm-footer-color: #d8e2da;
-  --ifm-footer-link-color: #c7d4cb;
+  --ifm-footer-background-color: #0c1530;   /* fallback under the gradient */
+  --ifm-footer-color: #e2e8f0;
+  --ifm-footer-link-color: #e2e8f0;
   --ifm-footer-title-color: #ffffff;
-  --ifm-footer-link-hover-color: var(--ifm-color-primary-light);
+  --ifm-footer-link-hover-color: #93c5fd;
+  background: linear-gradient(135deg, #0c1530 0%, #2b3c66 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 3rem;
   padding-bottom: 2.4rem;
 }
+
+.footer__copyright a { color: #93c5fd; }
+.footer__copyright a:hover { color: #ffffff; }
 
 .footer__title {
   font-size: 0.72rem;
@@ -844,7 +848,7 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   transition: color 0.15s ease;
 }
 .footer__link-item:hover {
-  color: var(--ifm-color-primary-light);
+  color: #93c5fd;
   text-decoration: none;
 }
 
