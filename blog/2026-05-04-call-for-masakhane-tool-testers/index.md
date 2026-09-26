@@ -5,6 +5,7 @@ description: Calling annotators, students, and researchers to try MasakhaneTool,
 authors: [shamsuddeen]
 tags: [call-for-testers, tool, beta, masakhane-tool]
 image: https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&h=675&q=80
+draft: false
 ---
 
 We're opening up **MasakhaneTool**, the Masakhane community's open annotation platform, for early testing. If you annotate text or speech for African languages, work on community datasets, or teach data-collection workflows, we'd love your help shaping what we ship in v1.

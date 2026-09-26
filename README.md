@@ -303,6 +303,7 @@ Blog posts go in `blog/` (separate from chapters). Use them for announcements, c
    authors: [shamsuddeen]
    tags: [announcement]
    image: /img/blog/your-thumbnail.png
+   draft: true   # hidden from the live site; change to false (or delete) to publish
    ---
 
    Intro paragraph (this is what shows on the blog index card).
@@ -314,7 +315,8 @@ Blog posts go in `blog/` (separate from chapters). Use them for announcements, c
 
 3. To add yourself as an author, edit `blog/authors.yml` and add an entry with your name, GitHub URL, and image (the simplest is `https://github.com/<your-username>.png`).
 4. Drop a thumbnail at `static/img/blog/your-thumbnail.png` (recommended size: 1200×675).
-5. Preview, commit, push, PR (same flow as chapters).
+5. **Draft or live.** While `draft: true`, the post shows only on your local preview (`npm start`) and is left out of the live site. When it is ready, set `draft: false` (or delete the line) and push. It goes live on the next deploy. If the post also has translated copies in `i18n/<language>/docusaurus-plugin-content-blog/`, set `draft` in each copy too: every language reads its own copy, so a translated copy without `draft: true` goes live on that language's site even while the English post is a draft.
+6. Preview, commit, push, PR (same flow as chapters).
 
 ---
 
