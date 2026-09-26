@@ -41,7 +41,7 @@ Search for your language and task together (for example, "Hausa sentiment") to f
 **Keep a simple record** of everything you find: name, link, task, languages, size, licence, and whether guidelines were released. You will need it for Step 2, and it becomes the related-work section of your own paper.
 
 :::tip[Template: Dataset search log]
-A fill-in log that follows the four steps on this page: your language's names and codes, every search you ran, a Pass, Partly, or Fail mark for each dataset against the Step 2 checklist, your Step 3 decision, and the people you contacted. [Open the dataset search log template](../templates/search-log.md).
+A fill-in log that follows the four steps on this page: your language's names and codes, every search you ran, a Pass, Partly, or Fail mark for each dataset against the Step 2 checklist, your Step 3 decision, and the people you contacted. [Open the dataset search log template](../templates/search-log.md) or [download it as a Word document](pathname:///downloads/templates/dataset-search-log.docx).
 :::
 
 ## Step 2: Judge what you find

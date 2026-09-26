@@ -3,8 +3,8 @@ title: Evaluation, Benchmarking, and Starter Kits
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-07-07
-  author: Idris Abdulmumin
+  date: 2026-09-26
+  author: Shamsudddeen Hassan Muhammad
 ---
 
 # Evaluation, Benchmarking, and Starter Kits

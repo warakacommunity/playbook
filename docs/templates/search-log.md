@@ -9,7 +9,11 @@ last_update:
 
 # Dataset search log
 
-Use this log while you work through [Before You Start](../before-you-start/index.md). Fill in one copy per project. Keep it with your project files, and share it with your team and your funder. It shows that you checked for existing work, and it gives you the related-work section of your paper.
+Use this log while you work through [Before You Start](../before-you-start/index.md). Fill in one copy per project. Keep it with your project files, and share it with your team. It shows that you checked for existing work, and it gives you the related-work section of your paper.
+
+:::tip[Download]
+[Download this template as a Word document (.docx)](pathname:///downloads/templates/dataset-search-log.docx), fill it in on your computer, or print it and fill it in by hand.
+:::
 
 ## Project
 
