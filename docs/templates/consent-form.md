@@ -27,6 +27,8 @@ Consent is a **workflow**, not a form. The workflow has three parts, all of whic
 
 Every project needs all three parts. Skipping any of them is the failure mode this template exists to prevent.
 
+Use the workflow **before** you collect any data from people, whether recordings, photographs, translations, or annotations. Consent gathered after collection is rarely valid.
+
 ### Before you fork this template
 
 - **Have a lawyer qualified in the applicable jurisdiction review the adapted version.** African data protection laws vary substantially in what a valid consent looks like (see the [country reference](../legal-consent/index.md#data-protection-laws-in-africa-quick-country-reference)); a form that passes review in Nigeria may not in South Africa.
@@ -52,10 +54,10 @@ The person leading this work is [PROJECT LEAD NAME], who you can contact at [EMA
 
 #### What we are asking of you
 
-We are asking you to contribute [DESCRIBE THE CONTRIBUTION, e.g., "one hour of recorded speech in [LANGUAGE]", "one hundred short written sentences in [LANGUAGE]", "consent for images of your handwritten notes to be photographed"].
+We are asking you to contribute [DESCRIBE THE CONTRIBUTION, e.g., "one hour of recorded speech in [LANGUAGE]", "one hundred short written sentences in [LANGUAGE]", "labels for 500 social media posts", "translations of 200 sentences into [LANGUAGE]", "consent for images of your handwritten notes to be photographed"].
 
 Your contribution will:
-- Be [PAID / UNPAID / VOLUNTEER WITH SMALL COMPENSATION]. If paid: [AMOUNT + CURRENCY + PAYMENT SCHEDULE].
+- Be [PAID / UNPAID / VOLUNTEER WITH SMALL COMPENSATION]. If paid: [AMOUNT + CURRENCY + PAYMENT SCHEDULE + PAYMENT METHOD, e.g., mobile money].
 - Take approximately [TIME ESTIMATE].
 - Be recorded [WHERE, IN WHAT FORMAT: audio / text / image].
 - Be [ANONYMISED / NAME-ATTRIBUTED / NAME-OPTIONAL (pick one)].
@@ -71,6 +73,7 @@ We will **not**:
 - [SPECIFIC AVOID ONE, e.g., "sell your voice recording to companies without asking you first"]
 - [SPECIFIC AVOID TWO, e.g., "share your name with anyone outside the project without asking you first"]
 - [SPECIFIC AVOID THREE, for voice or biometric data: "use your voice to make it say things you did not actually say"]
+- [SPECIFIC AVOID FOUR, e.g., "allow it to be used for surveillance or to identify you"]
 
 If we decide to use your contribution for something not on this list, we will contact you to ask permission first.
 
@@ -97,7 +100,7 @@ If the community's decision changes about how the data should be released, [NAME
 You have the right to:
 - **Withdraw your contribution at any time before the public release**, by contacting [NAMED CONTACT + CHANNEL] and mentioning your contributor code (see below).
 - **Ask for a copy of what we have collected from you** at any time.
-- **Refuse to contribute any specific piece** even after signing this form. You do not need to give a reason.
+- **Refuse to contribute any specific piece, take a break, or stop at any time** even after signing this form, without penalty. You do not need to give a reason.
 - **Ask questions** about the project, your contribution, or your data at any time. The team commits to answering within [TIME, e.g., "seven days"].
 
 After public release, your contribution cannot be withdrawn from copies already in circulation. We will not include your contribution in any future releases.

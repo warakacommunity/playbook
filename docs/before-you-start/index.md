@@ -26,9 +26,10 @@ Search for your language and task together (for example, "Hausa sentiment") to f
 
 **Where to look first:**
 
+- **[ACL Anthology](https://aclanthology.org/)**: the main archive of NLP research papers, from the major conferences, journals, and workshops. Search for your language and task, then check each paper for a released dataset. For a larger, systematic search, the Anthology's [Python package](https://aclanthology.org/faq/api/) (`pip install acl-anthology`) gives you the metadata of every paper to filter yourself.
 - **[Lanfrica](https://lanfrica.com/)**: a continually updated catalogue of African language resources, including datasets, models, and papers.
 - **[Hugging Face datasets, filtered by language](https://huggingface.co/datasets?language=swa)**: replace `swa` with your language's code (`hau` Hausa, `yor` Yoruba, `amh` Amharic, `zul` isiZulu). Add a task filter, such as `text-classification`, to narrow the results.
-- **[AfricaNLP workshop proceedings](https://aclanthology.org/venues/africanlp/)**: papers from the annual workshop on African-language NLP, in the [ACL Anthology](https://aclanthology.org/). Skim the latest year to see what is new.
+- **[AfricaNLP workshop proceedings](https://aclanthology.org/venues/africanlp/)**: papers from the annual workshop on African-language NLP. Skim the latest year to see what is new.
 - **Google Scholar and [arXiv](https://arxiv.org/list/cs.CL/recent)**: new work often appears here first. Combine your language, task, and a date range, for example `"Hausa" sentiment dataset 2023..2026`.
 
 **How to search well:**
@@ -38,6 +39,10 @@ Search for your language and task together (for example, "Hausa sentiment") to f
 - **Ask.** Post a short question in the [Masakhane](https://www.masakhane.io/) community or a language-specific group: *"Does anyone know of X data for Y?"* Much work is unpublished or hard to find.
 
 **Keep a simple record** of everything you find: name, link, task, languages, size, licence, and whether guidelines were released. You will need it for Step 2, and it becomes the related-work section of your own paper.
+
+:::tip[Template: Dataset search log]
+A fill-in log that follows the four steps on this page: your language's names and codes, every search you ran, a Pass, Partly, or Fail mark for each dataset against the Step 2 checklist, your Step 3 decision, and the people you contacted. [Open the dataset search log template](../templates/search-log.md).
+:::
 
 ## Step 2: Judge what you find
 

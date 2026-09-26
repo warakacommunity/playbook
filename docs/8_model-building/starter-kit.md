@@ -48,3 +48,11 @@ if __name__ == "__main__":
 ```
 
 The illustrative output makes the case for shipping it this way: an overall 0.73 looks healthy until the per-language breakdown shows one language at 0.52, which is the number the people who speak it actually experience. Defining the official splits and a leaderboard, or at least published baseline scores, gives the community a shared yardstick and positions the dataset against existing benchmarks such as IrokoBench and AfroBench ([Adelani et al., 2024](../references.md#irokobench-2024); [AfroBench](../references.md#afrobench)). The easier you make it to get a first number, the more people will build on your work.
+
+:::tip[Template: Evaluation script]
+A Python starting point that reports results per language and per class, uses chrF for translation and CER for speech, and includes a hook for human evaluation. [Open the evaluation script template](../templates/evaluation-script.md).
+:::
+
+:::tip[Template: Model card]
+A model card for the baselines you release. It follows Model Cards for Model Reporting and adds deployment checks: speed on low-cost phones, quality after compression, and results on code-switched text and each script. [Open the model card template](../templates/model-card.md).
+:::

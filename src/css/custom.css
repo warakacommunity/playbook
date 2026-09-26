@@ -1330,12 +1330,17 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 
   table {
     border-collapse: collapse;
-    width: 100%;
+    /* Infima makes tables display:block with overflow, which clips wide
+       tables at the page edge; display:table keeps every column and border. */
+    display: table;
+    width: calc(100% - 2px);
     margin: 1em 0;
     page-break-inside: avoid;
     break-inside: avoid;
     font-size: 9.5pt;
   }
+  /* Blank cells in fill-in templates need room to write by hand. */
+  td:empty { height: 3.2em; }
   th, td {
     border: 1px solid #d9cfc3;
     padding: 6px 10px;
@@ -1581,7 +1586,4 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   .decision-table td:nth-child(2) { background: var(--ifm-color-emphasis-100); }
   .decision-table td:nth-child(2)::before { content: "Your choice"; }
   .decision-table td:nth-child(3)::before { content: "What to do"; }
-}
-@media print {
-  .decision-table table { display: table; width: calc(100% - 2px); }
 }

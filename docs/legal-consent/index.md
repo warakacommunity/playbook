@@ -65,6 +65,10 @@ Contributors must be able to withdraw. This is a legal requirement under most Af
 - Withdrawal removes the data from the active corpus and from all future releases. Data that has been publicly released cannot be un-released; the withdrawal record acknowledges this and the project commits to not re-publishing.
 - Withdrawal does not require the contributor to justify the request or to speak in the project's working language. A native-speaker channel for withdrawal requests is part of the design, not an afterthought.
 
+:::tip[Template: Consent form]
+A starting point for your project's consent process: a written consent form, an oral consent protocol for contributors who do not read, a community consent addendum, and the role of an independent ombudsperson. Adapt it to the data protection law of each country you work in. [Open the consent form template](../templates/consent-form.md).
+:::
+
 ## Data protection laws in Africa: quick country reference
 
 African data protection legislation has expanded rapidly. The list below is a starting reference: laws change, enforcement varies, and this is not a substitute for jurisdiction-specific legal advice. For most projects, three questions matter for each country: **does a general data protection law exist**, **does it require a data protection officer or notification**, **and does it restrict cross-border data transfer**.
