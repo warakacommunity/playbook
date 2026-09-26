@@ -1194,13 +1194,10 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 }
 
 /* ── Global print-utility classes ───────────────────────────────
-   `.only-print` — hidden on screen, shown in print. Used to keep
-   ASCII decision-tree fallbacks alongside the interactive
-   DecisionTree component so the printed PDF still shows the full
-   tree flat.
-   `.no-print` — visible on screen, hidden in print. Used on
-   interactive-only components like DecisionTree and the TOC
-   action row so they don't leak into the PDF.
+   `.only-print`: hidden on screen, shown in print.
+   `.no-print`: visible on screen, hidden in print. Used on
+   interactive-only elements like the TOC action row so they don't
+   leak into the PDF.
    ─────────────────────────────────────────────────────────────── */
 .only-print { display: none !important; }
 @media print {
@@ -1550,4 +1547,41 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Decision table (Before You Start, Step 3). On phones each row becomes a
+   stacked card with its column name above each cell, so nothing is squeezed. */
+@media (max-width: 600px) {
+  .decision-table table,
+  .decision-table tbody,
+  .decision-table tr,
+  .decision-table td {
+    display: block;
+    width: 100%;
+  }
+  .decision-table thead { display: none; }
+  .decision-table tr,
+  .decision-table tr:nth-child(2n) {
+    margin-bottom: 1rem;
+    border: 1px solid var(--ifm-color-emphasis-300);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--ifm-background-color);
+  }
+  .decision-table td { border: 0; padding: 0.5rem 0.9rem; }
+  .decision-table td::before {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ifm-color-emphasis-600);
+  }
+  .decision-table td:nth-child(1)::before { content: "What you found"; }
+  .decision-table td:nth-child(2) { background: var(--ifm-color-emphasis-100); }
+  .decision-table td:nth-child(2)::before { content: "Your choice"; }
+  .decision-table td:nth-child(3)::before { content: "What to do"; }
+}
+@media print {
+  .decision-table table { display: table; width: calc(100% - 2px); }
 }

@@ -2,11 +2,9 @@
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-09-24
+  date: 2026-09-25
   author: Shamsudddeen Hassan Muhammad
 ---
-
-import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
 
 # Before You Start
 
@@ -24,23 +22,19 @@ A complete list of African-language datasets would not solve this, because new d
 
 ## Step 1: Search for prior work
 
-Set aside an afternoon. Search for your **language** and your **task** together, then each on its own.
+Search for your language and task together (for example, "Hausa sentiment") to find datasets you might reuse as they are. Plan a few hours for these searches, and keep notes as you go.
 
 **Where to look first:**
 
-- **[Lanfrica](https://lanfrica.com/)**: a continually updated catalogue of African language resources (datasets, models, papers). A good place to start.
-- **[Hugging Face datasets, filtered by language](https://huggingface.co/datasets?language=swa)**: replace `swa` with your language's ISO 639 code (`hau` Hausa, `yor` Yoruba, `amh` Amharic, `zul` isiZulu).
-- **[Masakhane on Hugging Face](https://huggingface.co/masakhane)**: many community benchmarks live here.
-- **[ACL Anthology](https://aclanthology.org/)**: the main archive of NLP papers, including the AfricaNLP workshop proceedings.
-- **Google Scholar and [arXiv](https://arxiv.org/list/cs.CL/recent)**: new work often appears here first.
-
-The [Finding current resources](../finding-resources/index.md) chapter lists more archives, community organisations, and search patterns.
+- **[Lanfrica](https://lanfrica.com/)**: a continually updated catalogue of African language resources, including datasets, models, and papers.
+- **[Hugging Face datasets, filtered by language](https://huggingface.co/datasets?language=swa)**: replace `swa` with your language's code (`hau` Hausa, `yor` Yoruba, `amh` Amharic, `zul` isiZulu). Add a task filter, such as `text-classification`, to narrow the results.
+- **[AfricaNLP workshop proceedings](https://aclanthology.org/venues/africanlp/)**: papers from the annual workshop on African-language NLP, in the [ACL Anthology](https://aclanthology.org/). Skim the latest year to see what is new.
+- **Google Scholar and [arXiv](https://arxiv.org/list/cs.CL/recent)**: new work often appears here first. Combine your language, task, and a date range, for example `"Hausa" sentiment dataset 2023..2026`.
 
 **How to search well:**
 
 - **Try every name and code the language goes by**: its English name, its own name for itself, alternative spellings, and all of its ISO codes (for Swahili: `sw`, `swa`, and `swh`). Older papers may use names the community no longer uses.
 - **Search for related languages too.** A dataset for a closely related language can still give you guidelines, a label set, or a starting point.
-- **Read the related-work sections** of the papers you find. They point to work your search missed.
 - **Ask.** Post a short question in the [Masakhane](https://www.masakhane.io/) community or a language-specific group: *"Does anyone know of X data for Y?"* Much work is unpublished or hard to find.
 
 **Keep a simple record** of everything you find: name, link, task, languages, size, licence, and whether guidelines were released. You will need it for Step 2, and it becomes the related-work section of your own paper.
@@ -50,78 +44,33 @@ The [Finding current resources](../finding-resources/index.md) chapter lists mor
 Check each dataset you find against this list:
 
 - **Licence.** Does it allow your use? Many African-language datasets are released for non-commercial use only (CC BY-NC).
-- **Access.** Can you download it today, or is it "available on request" from an author who no longer replies?
+- **Access.** Can you download it today, or is it "available on request" from an author who no longer replies? Are you looking at the latest version?
 - **Fit.** Does it match your language variety, dialect, script, and domain? News text does not stand in for social media or conversational speech.
 - **Labels.** Is the label set right for your task, or would you need to relabel?
-- **Splits.** Are there fixed train, development, and test splits? If the test set is public, check whether large models may have already seen it.
+- **Splits.** Is the data divided into fixed training, development, and test sets, so that results can be compared across papers? If the test set is public, large language models may have been trained on it, which makes their scores look better than they are.
 - **Guidelines.** Were the annotation guidelines released? You can reuse good guidelines even if you cannot use the data.
-- **Quality.** Who annotated it: native speakers or crowd workers? Is inter-annotator agreement reported?
-- **Documentation.** Is there a datasheet or data card? Is consent described?
+- **Quality.** Who annotated it: native speakers or crowd workers? Is inter-annotator agreement reported? It measures how often annotators chose the same label, and low agreement is a warning sign.
+- **Documentation.** Is there a datasheet or data card: a document that describes how the data was collected and what it contains? Is consent described?
 
 A dataset that fails several of these checks may still be worth studying, even if you cannot build on it.
 
 ## Step 3: Reuse, extend, or build
 
-<DecisionTree tree={{
-  question: "Does a dataset already exist for your language and task?",
-  options: [
-    {
-      label: "Yes",
-      next: {
-        question: "Does it pass the checks in Step 2 for your purpose?",
-        options: [
-          {
-            label: "Yes",
-            result: <><strong>Reuse it.</strong> Spend your effort on what is still missing: evaluation, a new domain, or a deployment.</>,
-          },
-          {
-            label: "Partly (wrong domain, missing labels, or a different dialect)",
-            result: <><strong>Extend it.</strong> Add the missing domain, labels, or variety. Reuse the original guidelines, keep your splits compatible, and tell the original authors.</>,
-          },
-          {
-            label: "No (unusable licence, poor quality, or unavailable)",
-            result: <><strong>Build a new one, but learn from the old one.</strong> Read its paper and guidelines first, and explain in your documentation why it could not be reused.</>,
-          },
-        ],
-      },
-    },
-    {
-      label: "No",
-      next: {
-        question: "Does one exist for a related language, or for your language on a related task?",
-        options: [
-          {
-            label: "Yes",
-            result: <>Borrow its guidelines and label set. Try <a href="/cross-language-transfer">cross-language transfer</a> first, then build a small, high-quality evaluation set in your language.</>,
-          },
-          {
-            label: "No",
-            result: <>You are building from scratch. Start with the <a href="/long-tail-language">long-tail language onboarding</a> chapter, then <a href="/data-collection/Overview">Data Collection</a>, <a href="/annotation-design/annotation-task-design">Annotation Design</a>, and <a href="/data-quality">Data Quality</a>.</>,
-          },
-        ],
-      },
-    },
-  ],
-}} />
+Use your notes from Steps 1 and 2 to choose what to do. Find the row that matches what your search turned up and how it did against the Step 2 checklist, then follow that row across.
 
-<div className="only-print">
+<div className="decision-table">
 
-```
-Does a dataset already exist for your language and task?
-├── Yes. Does it pass the checks in Step 2 for your purpose?
-│   ├── Yes → Reuse it. Spend your effort on what is still missing.
-│   ├── Partly → Extend it. Reuse the guidelines, keep splits
-│   │            compatible, and tell the original authors.
-│   └── No → Build a new one, but read its paper and guidelines first.
-└── No. Does one exist for a related language or a related task?
-    ├── Yes → Borrow its guidelines; try cross-language transfer;
-    │         build a small evaluation set in your language.
-    └── No → Build from scratch. Start with the long-tail language
-              onboarding chapter, then Data Collection, Annotation
-              Design, and Data Quality.
-```
+| What you found | Your choice | What to do |
+| --- | --- | --- |
+| A dataset for your language and task that **passes** the Step 2 checks | **Reuse it** | Do not build a new one. Spend your effort on what is still missing, such as evaluation, a new domain, or a deployment. |
+| A dataset for your language and task that **partly** fits (wrong domain, missing labels, or a different dialect) | **Extend it** | Add the missing domain, labels, or dialect. Reuse the original guidelines, keep your data splits compatible with theirs, and tell the original authors. |
+| A dataset for your language and task that **fails** the checks (unusable licence, poor quality, or unavailable) | **Build a new one, learning from the old one** | Read its paper and guidelines before you start, and explain in your documentation why you could not reuse it. |
+| A dataset only for a **related language**, or for your language on a **related task** | **Borrow, then build small** | Borrow its guidelines and label set. Try [cross-language transfer](/cross-language-transfer) first, then build a small, high-quality evaluation set in your language. |
+| **Nothing** relevant | **Build from scratch** | Start with the [long-tail language onboarding](/long-tail-language) chapter, then [Data Collection](/data-collection/Overview), [Annotation Design](/annotation-design/annotation-task-design), and [Data Quality](/data-quality). |
 
 </div>
+
+If more than one row applies, choose the one nearest the top. Reusing or extending data usually costs less than building it.
 
 ## Step 4: Learn from the people who built it
 
@@ -141,7 +90,7 @@ Papers describe what worked. They rarely describe what went wrong, what took lon
 
 ## Worked examples
 
-The three pages below apply these four steps to real tasks, using well-known datasets as examples. **They are examples, not complete lists.** If your language or task is missing, search for it using Step 1.
+The three pages below apply these four steps to real tasks, using well-known datasets as examples. If your language or task is missing, search for it using Step 1.
 
 - [Named Entity Recognition](./ner.mdx): a well-covered task, where the usual answer is to reuse or extend.
 - [Sentiment analysis](./sentiment.mdx): where domain and culture decide whether existing data fits.

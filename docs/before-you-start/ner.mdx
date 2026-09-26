@@ -3,17 +3,15 @@ sidebar_position: 2
 title: NER
 ready: true
 last_update:
-  date: 2026-09-24
+  date: 2026-09-25
   author: Shamsudddeen Hassan Muhammad
 ---
-
-import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
 
 # Named Entity Recognition
 
 *Worked example. Last reviewed: 2026-07-07.*
 
-This page applies the [four steps from Before You Start](./index.md) to named entity recognition (NER): finding people, organisations, places, and dates in text. It uses **MasakhaNER** as the example because it is the best-documented NER effort for African languages. **It is not a complete list.** If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
+This page applies the [four steps from Before You Start](./index.md) to named entity recognition (NER): finding people, organisations, places, and dates in text. It uses **MasakhaNER** as the example because it is the best-documented NER effort for African languages. If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
 
 ## Step 1: What a search turns up
 
@@ -41,61 +39,16 @@ You will also find **automatically labelled ("silver") NER data** that covers ma
 
 ## Step 3: Reuse, extend, or build
 
-<DecisionTree tree={{
-  question: "Is your language covered by MasakhaNER 2?",
-  options: [
-    {
-      label: "Yes",
-      next: {
-        question: "Is the label set (person, organisation, location, date) enough for your task?",
-        options: [
-          {
-            label: "Yes",
-            result: <><strong>Reuse MasakhaNER 2.</strong> Do not build a new corpus for these labels.</>,
-          },
-          {
-            label: "No, I need extra entity types (money, products, culture-specific)",
-            result: <><strong>Extend it.</strong> Annotate the extra types on the existing splits and reuse the guidelines. <strong>Do not re-annotate person, organisation, and location; merge.</strong></>,
-          },
-        ],
-      },
-    },
-    {
-      label: "No",
-      next: {
-        question: "Is your language related to one of the 20 covered (same family or script)?",
-        options: [
-          {
-            label: "Yes",
-            result: <>Try <a href="/cross-language-transfer">cross-language transfer</a> from the closest covered language, then build a small evaluation set in your own language using the MasakhaNER guidelines.</>,
-          },
-          {
-            label: "No",
-            result: <>You need to build a corpus. Start with the <a href="/long-tail-language">long-tail language onboarding</a> chapter, then <a href="/data-collection/Overview">Data Collection</a>, <a href="/annotation-design/annotation-task-design">Annotation Design</a>, and <a href="/data-quality">Data Quality</a>. Read the MasakhaNER guidelines before writing your own, and aim for <strong>5,000–10,000 sentences</strong> to start.</>,
-          },
-        ],
-      },
-    },
-  ],
-}} />
+Find the row that matches your situation, then follow it across. The first question is whether your language is covered by MasakhaNER 2.
 
-<div className="only-print">
+<div className="decision-table">
 
-```
-Is your language covered by MasakhaNER 2?
-├── Yes. Is the label set (person, organisation, location, date) enough?
-│   ├── Yes → Reuse MasakhaNER 2. Do not build a new corpus.
-│   └── No, you need extra entity types
-│       → Extend it: annotate the extra types on the existing splits and
-│         reuse the guidelines. Do not re-annotate PER/ORG/LOC; merge.
-└── No. Is your language related to one of the 20 covered?
-    ├── Yes → Try cross-language transfer from the closest covered
-    │         language, then build a small evaluation set in your language.
-    └── No → Build a corpus. Start with the long-tail language onboarding
-             chapter, then Data Collection, Annotation Design, and Data
-             Quality. Read the MasakhaNER guidelines first; aim for
-             5,000–10,000 sentences.
-```
+| What you found | Your choice | What to do |
+| --- | --- | --- |
+| Your language is **covered** by MasakhaNER 2, and its labels (person, organisation, location, date) are enough for your task | **Reuse MasakhaNER 2** | Do not build a new corpus for these labels. |
+| Your language is **covered**, but you need **extra entity types** (money, products, culture-specific) | **Extend it** | Annotate the extra types on the existing splits and reuse the guidelines. Do not re-annotate person, organisation, and location; merge. |
+| Your language is **not covered**, but it is **related** to one of the 20 (same family or script) | **Borrow, then build small** | Try [cross-language transfer](/cross-language-transfer) from the closest covered language, then build a small evaluation set in your own language using the MasakhaNER guidelines. |
+| Your language is **not covered** and **not related** to any of the 20 | **Build from scratch** | Start with the [long-tail language onboarding](/long-tail-language) chapter, then [Data Collection](/data-collection/Overview), [Annotation Design](/annotation-design/annotation-task-design), and [Data Quality](/data-quality). Read the MasakhaNER guidelines before writing your own, and aim for 5,000–10,000 sentences to start. |
 
 </div>
 
@@ -106,15 +59,6 @@ MasakhaNER was built by a distributed community of volunteer researchers and nat
 - Read the **[MasakhaNER case study](../case-studies/masakhaner.md)** in this playbook.
 - Read the **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** ([Nekoto et al., 2020](https://aclanthology.org/2020.findings-emnlp.195/)) that MasakhaNER's way of working grew out of.
 - Questions worth asking the authors: How did you recruit and coordinate annotators in 20 countries? Where did annotators disagree most, and how did you resolve it? What changed between version 1 and version 2, and why?
-
-## What it will cost
-
-These are rough estimates based on the MasakhaNER papers and the participatory workflow they describe. They will not be exact for your project. They are here so nobody plans NER for a new language as a two-week task.
-
-- **Reusing MasakhaNER 2 for a covered language.** One to two person-weeks, mostly spent on evaluation.
-- **Adding new entity types for a covered language.** Four to eight person-weeks per language: writing a guideline addendum, training annotators, and resolving disagreements.
-- **Building a new corpus of 5,000–10,000 sentences.** Three to six months elapsed. One to three person-months of annotator work, plus about one person-month from a lead annotator for guidelines and adjudication. This assumes two to four native-speaker annotators and one senior annotator.
-- **Reaching good inter-annotator agreement.** Plan one full round of recalibration after the first 500 sentences. Do not treat the first pass as final.
 
 ## Further reading
 

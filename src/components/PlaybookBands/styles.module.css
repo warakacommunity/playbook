@@ -74,6 +74,16 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Initials stand in for the avatar when a contributor has no GitHub account. */
+.contributorInitials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+}
+
 .contributorCard:hover .contributorAvatar {
   border-color: var(--ifm-color-primary);
   box-shadow: 0 6px 14px -8px rgba(var(--brand-rgb), 0.3);

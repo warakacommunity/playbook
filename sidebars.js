@@ -144,7 +144,6 @@ const sidebars = {
       chapter('Long-tail language onboarding', 'long-tail-language'),
       chapter('Legal, consent, and community IP', 'legal-consent'),
       chapter('Compute-poor training and evaluation', 'compute-poor'),
-      chapter('Finding current resources', 'finding-resources'),
     ]),
 
     chapterIndexed('Templates', 'templates/index', [
@@ -164,7 +163,7 @@ const sidebars = {
       type: 'category',
       label: 'Appendix',
       collapsed: false,
-      items: ['glossary', 'references'],
+      items: ['glossary', 'references', 'tools-index'],
     },
   ],
 };

@@ -141,14 +141,15 @@ const config = {
        (so offline builds still succeed). Set GITHUB_TOKEN env var to raise
        the GitHub rate limit from 60 to 5000 requests/hour in CI. */
     function contributorsPlugin() {
-      // Hardcoded exclude list — contributors who should never appear on the
-      // homepage Thanks-to-Contributors section. Add lowercase logins here.
-      const EXCLUDED_LOGINS = new Set(["keduog"]);
+      // Everyone who has committed to the repo is listed, including authors
+      // whose commit email is not linked to a GitHub account (anon=1).
+      // Excluded: bots, and commits made by Claude Code under its own name.
+      const isClaude = (name) => /^claude\b/i.test(name || "");
       return {
         name: "github-contributors",
         async loadContent() {
           const url =
-            "https://api.github.com/repos/warakacommunity/playbook/contributors?per_page=30";
+            "https://api.github.com/repos/warakacommunity/playbook/contributors?per_page=100&anon=1";
           try {
             const headers = { "User-Agent": "AfriPlaybook-build" };
             const ghToken = process.env.GITHUB_TOKEN || process.env.GITHUB_EDIT_TOKEN;
@@ -164,15 +165,18 @@ const config = {
             }
             const data = await res.json();
             return data
-              .filter((c) => c.type === "User") // strip bots (type: "Bot")
-              .filter((c) => !EXCLUDED_LOGINS.has(c.login.toLowerCase()))
-              .slice(0, 12)
-              .map((c) => ({
-                login: c.login,
-                avatarUrl: c.avatar_url,
-                htmlUrl: c.html_url,
-                contributions: c.contributions,
-              }));
+              .filter((c) => c.type === "User" || c.type === "Anonymous")
+              .filter((c) => !isClaude(c.login || c.name))
+              .map((c) =>
+                c.type === "Anonymous"
+                  ? { name: c.name, contributions: c.contributions }
+                  : {
+                      login: c.login,
+                      avatarUrl: c.avatar_url,
+                      htmlUrl: c.html_url,
+                      contributions: c.contributions,
+                    },
+              );
           } catch (err) {
             console.warn("[github-contributors] fetch failed:", err.message);
             return [];
