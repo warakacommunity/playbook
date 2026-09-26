@@ -12,8 +12,15 @@ const chapter = (label, dirName, extra = []) => ({
 });
 
 /** A template from the Templates section, listed under the chapter that uses
- * it. One file, one URL: the page is shown in both places, never copied. */
-const templateRef = (id, label) => ({ type: 'ref', id: `templates/${id}`, label: `Template: ${label}` });
+ * it. One file, one URL: the page is shown in both places, never copied.
+ * `where` names the chapter; it makes the translation key unique, because the
+ * i18n build fails when the same template is listed under two chapters. */
+const templateRef = (id, label, where) => ({
+  type: 'ref',
+  id: `templates/${id}`,
+  label: `Template: ${label}`,
+  key: `template-${id}-${where}`,
+});
 
 /** A chapter with a landing page (the index) plus explicit child pages. */
 const chapterIndexed = (label, indexId, items) => ({
@@ -64,14 +71,14 @@ const sidebars = {
           'before-you-start/ner',
           'before-you-start/sentiment',
           'before-you-start/hate-speech',
-          templateRef('search-log', 'Dataset search log'),
+          templateRef('search-log', 'Dataset search log', 'before-you-start'),
         ]),
         chapterIndexed('Project Management', 'project-management/index', [
-          templateRef('project-charter', 'Project charter'),
+          templateRef('project-charter', 'Project charter', 'project-management'),
         ]),
         'data-governance/index',
         chapter('Data Collection', '2_data-collection'),
-        chapter('Annotation Design', '3_annotation-design', [templateRef('annotation-guidelines', 'Annotation guidelines')]),
+        chapter('Annotation Design', '3_annotation-design', [templateRef('annotation-guidelines', 'Annotation guidelines', 'annotation-design')]),
         chapterIndexed('Data Quality', 'data-quality/index', ['data-quality/equipment-setup']),
         chapter('Community', '10_community-collaboration'),
       ],
@@ -139,12 +146,12 @@ const sidebars = {
 
     section('Lifecycle & Release', 'sections/lifecycle', [
       chapter('Evaluation', '8_model-building', [
-        templateRef('evaluation-script', 'Evaluation script'),
-        templateRef('model-card', 'Model card'),
+        templateRef('evaluation-script', 'Evaluation script', 'evaluation'),
+        templateRef('model-card', 'Model card', 'evaluation'),
       ]),
       chapter('Documentation', '6_documentation', [
-        templateRef('dataset-card', 'Dataset card'),
-        templateRef('consent-form', 'Consent form'),
+        templateRef('dataset-card', 'Dataset card', 'documentation'),
+        templateRef('consent-form', 'Consent form', 'documentation'),
       ]),
       chapter('Dataset Lifecycle', '9_dataset-lifecycle'),
       chapterIndexed('Deployment', 'deployment/index', [
@@ -156,7 +163,7 @@ const sidebars = {
       ]),
       chapter('Cross-language transfer', 'cross-language-transfer'),
       chapter('Long-tail language onboarding', 'long-tail-language'),
-      chapter('Legal, consent, and community IP', 'legal-consent', [templateRef('consent-form', 'Consent form')]),
+      chapter('Legal, consent, and community IP', 'legal-consent', [templateRef('consent-form', 'Consent form', 'legal-consent')]),
       chapter('Compute-poor training and evaluation', 'compute-poor'),
     ]),
 
