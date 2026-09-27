@@ -1088,11 +1088,7 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 .navbar__item.dropdown--right > .navbar__link svg,
 .navbar__item.dropdown--right > .navbar__link img { display: none; }
 
-/* Replace Algolia's default navbar search box with our icon-only floating
-   search (custom-SearchNavbarItem). Hide the auto-injected DocSearch button. */
-.navbar .DocSearch-Button,
-.navbar__search-container,
-.navbar__search { display: none !important; }
+
 
 /* Right cluster — even spacing + vertical centering for search · star · language */
 .navbar__items--right {
@@ -1600,3 +1596,9 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
    for a stray symbol; section links still work and can be copied from the
    "On this page" list. */
 .hash-link { display: none; }
+
+/* Local-search mode: the navbar uses the site's own popover, so hide the
+   search box Docusaurus injects when no built-in search item is configured.
+   Does not touch the Algolia DocSearch button, which is a separate element. */
+.navbar__search-container,
+.navbar__search { display: none !important; }

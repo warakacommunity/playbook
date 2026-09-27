@@ -17,6 +17,17 @@ dotenv.config({ path: ".env.local" });
 // and the CDN never serve a cached copy of an older PDF.
 const PDF_VERSION = (process.env.GITHUB_SHA || 'dev').slice(0, 7);
 
+// Search. Algolia DocSearch is used when its credentials are present (repo
+// secrets, mapped to env vars in .github/workflows/deploy.yml); otherwise the
+// offline local search index is built. Only one can be active: both register
+// the theme's SearchBar component.
+const ALGOLIA = {
+  appId: process.env.ALGOLIA_APP_ID || "",
+  apiKey: process.env.ALGOLIA_API_KEY || "", // public, search-only key
+  indexName: process.env.ALGOLIA_INDEX_NAME || "",
+};
+const USE_ALGOLIA = Boolean(ALGOLIA.appId && ALGOLIA.apiKey && ALGOLIA.indexName);
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Waraka Community AfriPlaybook",
@@ -450,7 +461,7 @@ const config = {
       : []),
   ],
 
-  themes: [
+  themes: USE_ALGOLIA ? [] : [
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
@@ -458,8 +469,17 @@ const config = {
         hashed: true,
         indexDocs: true,
         indexBlog: true,
-        docsRouteBasePath: "/AfriPlaybook",
+        indexPages: false,
+        // Must match the docs plugin's routeBasePath ("/"), or no chapter is
+        // indexed and only blog posts are searchable.
+        docsRouteBasePath: "/",
+        blogRouteBasePath: "/blog",
+        // lunr-languages has no Hausa, Amharic or Swahili; those sites fall
+        // back to English word matching (their chapters are mostly English).
+        language: ["en", "fr", "pt"],
+        explicitSearchResultPath: true,
         searchResultLimits: 8,
+        searchResultContextMaxLength: 80,
         highlightSearchTermsOnTargetPage: true,
       },
     ],
@@ -470,6 +490,17 @@ const config = {
     ({
       // Open Graph / social card image (1200 x 630)
       image: "img/social-card.png",
+      ...(USE_ALGOLIA && {
+        algolia: {
+          appId: ALGOLIA.appId,
+          apiKey: ALGOLIA.apiKey,
+          indexName: ALGOLIA.indexName,
+          // Filter results to the current language (en, ha, am, sw, fr, pt).
+          contextualSearch: true,
+          searchPagePath: "search",
+          insights: false,
+        },
+      }),
       colorMode: {
         defaultMode: "light",
         disableSwitch: true,
@@ -514,10 +545,11 @@ const config = {
             position: "left",
             className: "navbar-item--mobile-only",
           },
-          {
-            type: "custom-SearchNavbarItem",
-            position: "right",
-          },
+          // Algolia: the DocSearch modal (results as you type, Ctrl/Cmd+K).
+          // Local search: the site's own popover that opens the results page.
+          USE_ALGOLIA
+            ? { type: "search", position: "right" }
+            : { type: "custom-SearchNavbarItem", position: "right" },
           {
             // Utility action, so it sits with search and GitHub. Plain <a>:
             // a Docusaurus Link would route the PDF through the SPA. No size

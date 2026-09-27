@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useHistory } from '@docusaurus/router';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './SearchNavbarItem.module.css';
 
 const Glass = ({ size = 18 }) => (
@@ -10,7 +11,7 @@ const Glass = ({ size = 18 }) => (
   </svg>
 );
 
-export default function SearchNavbarItem() {
+export default function PlaybookSearchNavbarItem() {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
   const [coords, setCoords] = useState({ top: 0, right: 0 });
@@ -18,6 +19,8 @@ export default function SearchNavbarItem() {
   const popRef = useRef(null);
   const inputRef = useRef(null);
   const history = useHistory();
+  // Locale-aware, so /ha/ pages search the Hausa site's index, and so on.
+  const searchPath = useBaseUrl('/search');
 
   const place = () => {
     if (!btnRef.current) return;
@@ -68,7 +71,7 @@ export default function SearchNavbarItem() {
     const term = q.trim();
     if (!term) return;
     setOpen(false);
-    history.push(`/search?q=${encodeURIComponent(term)}`);
+    history.push(`${searchPath}?q=${encodeURIComponent(term)}`);
   };
 
   return (
@@ -98,6 +101,8 @@ export default function SearchNavbarItem() {
               ref={inputRef}
               className={styles.input}
               type="search"
+              enterKeyHint="search"
+              aria-label="Search the playbook"
               placeholder="Search the playbook…"
               value={q}
               onChange={(e) => setQ(e.target.value)}
