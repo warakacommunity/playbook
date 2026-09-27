@@ -86,7 +86,7 @@ Everyone who commits to the repository appears here and on the site's [Contribut
 
 The AfriPlaybook is supported by the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub), a pan-African initiative building open, culturally grounded datasets for African languages. We are grateful for its support.
 
-Built in collaboration with Bayero University Kano, Bahir Dar University, [HausaNLP](https://hausanlp.org/), and [EthioNLP](https://ethionlp.github.io/). Powered by [Docusaurus](https://docusaurus.io/), with search by [Algolia DocSearch](https://docsearch.algolia.com/) and comments by [giscus](https://giscus.app/).
+Built in collaboration with Bayero University Kano, Bahir Dar University, [HausaNLP](https://hausanlp.org/), and [EthioNLP](https://ethionlp.github.io/).
 
 ## Code of conduct and licence
 
