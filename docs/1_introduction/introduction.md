@@ -3,7 +3,7 @@ sidebar_position: 2
 slug: /introduction
 ready: true
 last_update:
-  date: 2026-09-24
+  date: 2026-09-27
   author: Shamsudddeen Hassan Muhammad
 ---
 

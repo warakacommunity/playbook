@@ -13,9 +13,7 @@ Read it at **<https://afriplaybook.waraka.org>**.
 
 The AfriPlaybook follows a dataset from first idea to public release: deciding what to collect and from whom, designing the annotation task, recruiting and paying the people who do it, checking their work, documenting the result, and publishing it so that others can build on it. It draws its examples from African projects, but most of its advice applies wherever data is scarce.
 
-It is written for anyone who builds, or wants to build, a dataset for an African language: students, researchers, linguists, language activists, community organisers, and engineers. No background in machine learning is assumed.
-
-It is not a model-training tutorial. Once you have decided what data you need, the playbook shows you how to build it. See [What this playbook is (and isn't)](https://afriplaybook.waraka.org/introduction/scope-and-strategy) for the full scope.
+It is written for anyone who builds, or wants to build, a dataset for an African language: students, researchers, linguists, language activists, community organisers, and engineers. No background in machine learning is assumed and it is not a model-training tutorial.
 
 The playbook is maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers, with support from the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub).
 
@@ -32,7 +30,7 @@ The whole book is also available as a [PDF](https://afriplaybook.waraka.org/down
 
 ## Contributing
 
-The playbook is written by its readers. You can help by fixing a sentence, reviewing a chapter, translating a page, adding a case study, or writing up what you learned on your own project.
+You can help by fixing a sentence, reviewing a chapter, translating a page, adding a case study, or writing up what you learned on your own project.
 
 ### Three ways to contribute
 
@@ -44,17 +42,9 @@ Full steps for all three are in [How to contribute](https://afriplaybook.waraka.
 
 **Translations** live under `i18n/<locale>/`. Edit the matching file in place and preview with `yarn start --locale ha` (or `am`, `sw`, `fr`, `pt`). **Blog posts** and case studies go in `blog/YYYY-MM-DD-slug/index.md` and start as `draft: true`, which keeps them off the live site until they are ready. Both are described in [CONTRIBUTING.md](CONTRIBUTING.md#common-tasks).
 
-### What reviewers look for
-
-A maintainer reviews every pull request, suggests edits, and merges when it is ready. Ready means: `yarn build` passes with no broken links, the page follows the [writing guidelines](https://afriplaybook.waraka.org/introduction/how-to-write), and every claim points to a source a reader can check. Small edits are usually merged quickly. New chapters take longer, because we ask a second reader who knows the topic. A chapter goes live only once its front matter has `ready: true`; until then the site shows it as in development. Merged changes are on the live site in about ten minutes.
-
 ### Getting help
 
 Ask in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) or on [Discord](https://discord.gg/ChNPHV2PPS). If you are new to git, ask and we will help.
-
-### Recognition
-
-Everyone who commits to the repository appears on the site's [Contributors page](https://afriplaybook.waraka.org/contributors) and in the list at the end of this README. If you reviewed, translated, or annotated without committing to GitHub, open an issue or tell us on Discord so we can credit you.
 
 ## Run it locally
 
@@ -104,7 +94,7 @@ Thank you to everyone who has contributed.
 - [@keduog](https://github.com/keduog)
 - Ibrahim Ahmad (no GitHub account linked)
 
-The image above updates automatically and shows people whose commits are linked to a GitHub account. The list is kept by hand, so it also includes people the image misses. If you have contributed and are not listed, open an issue or a pull request adding your name. The same list is on the site's [Contributors page](https://afriplaybook.waraka.org/contributors).
+Everyone who commits to the repository appears here and on the site's [Contributors page](https://afriplaybook.waraka.org/contributors). If you reviewed, translated, or annotated without committing to GitHub, open an issue or tell us on Discord so we can credit you.
 
 ## Acknowledgements
 
