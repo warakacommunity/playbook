@@ -31,6 +31,13 @@ const USE_ALGOLIA = Boolean(ALGOLIA.appId && ALGOLIA.apiKey && ALGOLIA.indexName
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Waraka Community AfriPlaybook",
+  headTags: [
+    // Proves to Algolia that we own this domain (DocSearch crawler).
+    {
+      tagName: "meta",
+      attributes: { name: "algolia-site-verification", content: "5DD5009DA17F14F0" },
+    },
+  ],
   customFields: {
     // GitHub OAuth App for the "Connect GitHub" popup login in the Contribute dialog.
     GITHUB_OAUTH_CLIENT_ID: process.env.GITHUB_OAUTH_CLIENT_ID || "",
