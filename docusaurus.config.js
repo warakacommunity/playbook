@@ -410,6 +410,7 @@ const config = {
         },
       };
     },
+    "docusaurus-plugin-image-zoom",
     [
       "@docusaurus/plugin-ideal-image",
       {
@@ -499,6 +500,13 @@ const config = {
     ({
       // Open Graph / social card image (1200 x 630)
       image: "img/social-card.png",
+      // Click-to-enlarge for images in chapter and blog bodies. Add
+      // className="no-zoom" to opt an image out (the home cover does).
+      zoom: {
+        selector: ".markdown img:not(.no-zoom)",
+        background: { light: "rgba(255, 255, 255, 0.95)", dark: "rgba(20, 24, 40, 0.95)" },
+        config: {},
+      },
       ...(USE_ALGOLIA && {
         docsearch: {
           appId: ALGOLIA.appId,
