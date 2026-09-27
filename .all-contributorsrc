@@ -1,0 +1,18 @@
+{
+  "projectName": "playbook",
+  "projectOwner": "warakacommunity",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": ["README.md"],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributorsPerLine": 7,
+  "contributors": [
+    { "login": "shmuhammadd", "name": "Shamsuddeen Hassan Muhammad", "avatar_url": "https://avatars.githubusercontent.com/u/38854463?v=4", "profile": "https://github.com/shmuhammadd", "contributions": ["code", "content", "doc", "maintenance"] },
+    { "login": "seyyaw", "name": "Seid Muhie Yimam", "avatar_url": "https://avatars.githubusercontent.com/u/1056051?v=4", "profile": "https://github.com/seyyaw", "contributions": ["code", "content", "doc"] },
+    { "login": "abumafrim", "name": "Idris Abdulmumin", "avatar_url": "https://avatars.githubusercontent.com/u/25594170?v=4", "profile": "https://github.com/abumafrim", "contributions": ["code", "content", "doc"] },
+    { "login": "Tadesse-Destaw", "name": "Tadesse Destaw Belay", "avatar_url": "https://avatars.githubusercontent.com/u/75490713?v=4", "profile": "https://github.com/Tadesse-Destaw", "contributions": ["code", "content", "doc"] },
+    { "login": "keduog", "name": "keduog", "avatar_url": "https://avatars.githubusercontent.com/u/104138942?v=4", "profile": "https://github.com/keduog", "contributions": ["code", "content"] }
+  ]
+}

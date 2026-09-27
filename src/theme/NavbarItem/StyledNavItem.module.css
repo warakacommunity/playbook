@@ -319,3 +319,9 @@
 [data-theme='dark'] .aboutMegaItemDesc {
   color: var(--ifm-color-emphasis-600);
 }
+/* Single-column variant of the megamenu (Learn / Community). */
+.singleMenu {
+  flex-direction: column;
+  width: 280px;
+  gap: 0.1rem;
+}

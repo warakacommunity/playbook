@@ -5,32 +5,26 @@ import { registerDropdown, openExclusive } from './dropdownBus';
 import dd from './StyledNavItem.module.css';
 import { IconBookOpen, IconNewspaper, IconUsers, IconFileText, IconClipboardCheck, IconRocket } from '@site/src/components/Icons';
 
-const SECTIONS = [
-  {
-    title: 'Learn',
-    items: [
-      { to: '/blog', label: 'Blog', desc: 'News, calls, and essays from the community.', Icon: IconNewspaper },
-      { to: '/glossary', label: 'Glossary', desc: 'Definitions of terms used in the playbook.', Icon: IconBookOpen },
-      { to: '/templates', label: 'Templates', desc: 'Guidelines, cards, and forms to copy.', Icon: IconFileText },
-    ],
-  },
-  {
-    title: 'Community',
-    items: [
-      { href: 'https://waraka.org', label: 'Waraka Community', desc: 'The community behind this playbook.', Icon: IconUsers },
-      { href: 'https://docs.afriannotate.org/', label: 'AfriAnnotate', desc: 'Annotation platform for African languages.', Icon: IconClipboardCheck },
-      { href: 'https://www.waraka.ai', label: 'Waraka Enterprise', desc: 'Commercial services from Waraka.', Icon: IconRocket },
-    ],
-  },
-];
+const SECTIONS = {
+  Learn: [
+    { to: '/blog', label: 'Blog', desc: 'News, calls, and essays from the community.', Icon: IconNewspaper },
+    { to: '/glossary', label: 'Glossary', desc: 'Definitions of terms used in the playbook.', Icon: IconBookOpen },
+    { to: '/templates', label: 'Templates', desc: 'Guidelines, cards, and forms to copy.', Icon: IconFileText },
+  ],
+  Community: [
+    { href: 'https://waraka.org', label: 'Waraka Community', desc: 'The community behind this playbook.', Icon: IconUsers },
+    { href: 'https://docs.afriannotate.org/', label: 'AfriAnnotate', desc: 'Annotation platform for African languages.', Icon: IconClipboardCheck },
+    { href: 'https://www.waraka.ai', label: 'Waraka Enterprise', desc: 'Commercial services from Waraka.', Icon: IconRocket },
+  ],
+};
 
 // Hamburger drawer (≤996px): Docusaurus renders left items here with mobile=true.
-function MobileList() {
+function MobileList({ section }) {
   return (
     <li className="menu__list-item">
-      <div className="menu__link" style={{ fontWeight: 700, cursor: 'default' }}>Resources</div>
+      <div className="menu__link" style={{ fontWeight: 700, cursor: 'default' }}>{section}</div>
       <ul className="menu__list">
-        {SECTIONS.flatMap((s) => s.items).map(({ to, href, label }) => (
+        {SECTIONS[section].map(({ to, href, label }) => (
           <li key={label} className="menu__list-item">
             <Link to={to} href={href} className="menu__link">{label}{href && ' ↗'}</Link>
           </li>
@@ -40,7 +34,8 @@ function MobileList() {
   );
 }
 
-export default function ResourcesNavbarItem({ mobile }) {
+// One instance per section: navbar config passes section: 'Learn' | 'Community'.
+export default function ResourcesNavbarItem({ mobile, section }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
   // Stable identity: dropdownBus compares closers by reference.
@@ -58,7 +53,7 @@ export default function ResourcesNavbarItem({ mobile }) {
     };
   }, []);
 
-  if (mobile) return <MobileList />;
+  if (mobile) return <MobileList section={section} />;
 
   const toggle = () => setOpen((v) => { if (!v) openExclusive(close); return !v; });
 
@@ -72,26 +67,18 @@ export default function ResourcesNavbarItem({ mobile }) {
         aria-expanded={open}
         onClick={toggle}
       >
-        Resources <Chevron open={open} />
+        {section} <Chevron open={open} />
       </button>
       {open && (
-        <div className={`${dd.dropdown} ${dd.megaMenu}`}>
-          {SECTIONS.map((s, i) => (
-            <React.Fragment key={s.title}>
-              {i > 0 && <div className={dd.megaDivider} />}
-              <div className={dd.megaSection}>
-                <div className={dd.megaSectionTitle}>{s.title}</div>
-                {s.items.map(({ to, href, label, desc, Icon }) => (
-                  <Link key={label} to={to} href={href} className={dd.aboutMegaItem} onClick={close}>
-                    <span className={dd.aboutMegaItemIcon}><Icon /></span>
-                    <span className={dd.aboutMegaItemText}>
-                      <span className={dd.aboutMegaItemTitle}>{label}{href && ' ↗'}</span>
-                      <span className={dd.aboutMegaItemDesc}>{desc}</span>
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </React.Fragment>
+        <div className={`${dd.dropdown} ${dd.megaMenu} ${dd.singleMenu}`}>
+          {SECTIONS[section].map(({ to, href, label, desc, Icon }) => (
+            <Link key={label} to={to} href={href} className={dd.aboutMegaItem} onClick={close}>
+              <span className={dd.aboutMegaItemIcon}><Icon /></span>
+              <span className={dd.aboutMegaItemText}>
+                <span className={dd.aboutMegaItemTitle}>{label}{href && ' ↗'}</span>
+                <span className={dd.aboutMegaItemDesc}>{desc}</span>
+              </span>
+            </Link>
           ))}
         </div>
       )}
