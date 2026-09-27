@@ -1,12 +1,10 @@
 # Contributing to AfriPlaybook
 
-This document covers local setup, the site features that are wired up, and the most common contribution tasks. If you're here to translate or write a chapter, skip to **Common tasks**.
+This file covers local setup and how the repository is put together. For the three ways to contribute (edit on the site, edit one file on GitHub, or fork and open a pull request), see [How to contribute](https://afriplaybook.waraka.org/introduction/how-to-contribute) on the site.
 
----
+## Run the site locally
 
-## Quick start
-
-**Requirements:** Node.js 22, [Yarn 1.x](https://classic.yarnpkg.com) (do **not** use npm — see Gotchas).
+You need Node.js 22 and [Yarn 1.x](https://classic.yarnpkg.com). Use Yarn, not npm: the lockfile is Yarn's.
 
 ```bash
 git clone https://github.com/warakacommunity/playbook.git
@@ -15,89 +13,38 @@ yarn install --frozen-lockfile
 yarn start
 ```
 
-Site runs at <http://localhost:3000/>.
-
-To preview a non-English locale:
+The site runs at <http://localhost:3000/> and reloads as you edit.
 
 ```bash
-yarn start --locale fr     # or ha, am, sw, pt
+yarn start --locale ha   # preview a translation (ha, am, sw, fr, pt)
+yarn build --locale en   # production build, English only (fast)
+yarn build               # production build, all six locales (what CI runs)
+yarn pdf                 # build the PDF into build/downloads/afriplaybook.pdf
 ```
 
-To build the full production site (all 6 locales):
-
-```bash
-yarn build
-```
-
----
-
-## What's enabled on the site
-
-| Feature | Purpose | Where it lives |
-| --- | --- | --- |
-| Docusaurus 3.10.1 | Static-site framework | `docusaurus.config.js` |
-| Blog with card grid | Per-chapter announcements, calls for contribution | `blog/`, `src/theme/BlogPostItem/` |
-| i18n — 6 locales | English default + Hausa, Amharic, Swahili, French, Portuguese | `i18n/`, `scripts/translate-i18n.mjs` |
-| KaTeX math | LaTeX-quality formulas in markdown | `remark-math` + `rehype-katex` |
-| Mermaid-ready | Flowcharts in markdown (toggle on if needed) | `markdown.mermaid` config |
-| Giscus comments | GitHub Discussions-backed comments per doc page | `src/components/Comments.jsx`, `src/theme/DocItem/Layout/` |
-| Downloadable PDF | Auto-generated PDF of the full playbook on each deploy | `yarn pdf`, `.github/workflows/deploy.yml` |
-| Cloudflare Web Analytics | Privacy-friendly traffic stats, no cookies | `scripts` block in config |
-| PWA (installable/offline) | Readers can install the playbook and read offline | `@docusaurus/plugin-pwa`, `static/manifest.json` |
-| Ideal images | Lazy-loading, responsive image sizes | `@docusaurus/plugin-ideal-image` |
-| Announcement bar | Top-of-page banner ("Coming soon") | `themeConfig.announcementBar` |
-| Algolia DocSearch | Site-wide search (configured but **inactive** until DocSearch approval) | `themeConfig.algolia` |
-
-### Custom additions in `src/`
-
-- `src/clientModules/githubStars.js` — fetches and renders the live GitHub star count in the navbar.
-- `src/clientModules/fontSize.js` — A−/A/A+ buttons for accessibility.
-- `src/theme/BlogPostItem/index.js` — swizzled to add card thumbnails on the blog list page.
-- `src/theme/DocItem/Layout/index.js` — swizzled to mount Giscus comments at the end of every chapter.
-- `src/components/Comments.jsx` — Giscus React wrapper.
-
----
-
-## Pending one-time setup
-
-These are owner-side setup tasks. Collaborators don't need to do these to contribute, but the affected features won't fully activate until they're done.
-
-### 1. Enable Giscus comments
-
-Comments are wired up but won't render until configured.
-
-1. Repo **Settings → General → Features** → enable **Discussions**.
-2. Install the giscus app: <https://github.com/apps/giscus>
-3. Visit <https://giscus.app>, fill in the form for `warakacommunity/playbook`. Use `pathname` mapping.
-4. Paste the `data-repo-id` and `data-category-id` values into `src/components/Comments.jsx`.
-
-### 2. Apply for Algolia DocSearch
-
-1. Apply at <https://docsearch.algolia.com/apply/>.
-2. When credentials arrive, paste them into the `algolia` block in `docusaurus.config.js` (or set `ALGOLIA_APP_ID`, `ALGOLIA_SEARCH_API_KEY`, `ALGOLIA_INDEX_NAME` env vars).
-3. Uncomment the `algolia` block.
-
----
+The first `yarn pdf` downloads Chromium (about 150 MB).
 
 ## Common tasks
 
-### Write a new chapter
+### Write or edit a chapter
 
-1. Add a markdown file under `docs/<section>/<chapter>.md`.
-2. The sidebar generates from folder structure; use `_category_.json` for category labels.
-3. Math: write `$inline$` or `$$block$$` LaTeX directly in markdown.
-4. Optional images: drop into `docs/<section>/assets/` and reference them.
-5. Preview: `yarn start`.
+Chapters are Markdown files under `docs/<section>/`. Edit the file, preview with `yarn start`, and check `yarn build` passes with no broken links.
 
-### Translate a chapter
+A chapter goes live only when its front matter has `ready: true`. Without it the page still builds, but the site shows it as in development. Set `ready: true` when the chapter is finished and reviewed.
 
-1. Locate the matching file under `i18n/<locale>/docusaurus-plugin-content-docs/current/`.
-2. Edit the markdown content **in place** (don't rename the file).
-3. Preview: `yarn start --locale <locale>`.
+New pages must be added to `sidebars.js`, which lists the sidebar by hand. Templates live in `docs/templates/` and are placed in the sidebar under the chapter that uses them (see the `templateDoc` and `templateRef` helpers at the top of `sidebars.js`).
 
-> Note: only English UI strings have been auto-translated for Hausa/Amharic/Swahili. The actual chapter text is English placeholder content waiting for native-speaker translation.
+Math works in any chapter: `$inline$` or `$$block$$` LaTeX.
 
-### Write a blog post
+### Translate a page
+
+Translated copies live under `i18n/<locale>/docusaurus-plugin-content-docs/current/`, mirroring `docs/`. Edit the matching file in place (do not rename it) and preview with `yarn start --locale <locale>`. Most translated copies are still English text waiting for a native speaker.
+
+Navbar, footer, and other interface strings live in `i18n/<locale>/code.json` and `i18n/<locale>/docusaurus-theme-classic/`.
+
+### Write a blog post or case study
+
+Save it as `blog/YYYY-MM-DD-your-slug/index.md`:
 
 ```yaml
 ---
@@ -105,110 +52,46 @@ slug: your-post-slug
 title: "Your post title"
 authors: [shamsuddeen]
 tags: [announcement]
-image: /img/blog/your-thumbnail.png
+image: /img/blog/your-cover.png
+draft: true
 ---
 
 Intro paragraph.
 
 <!-- truncate -->
 
-Rest of the post...
+Rest of the post.
 ```
 
-Save as `blog/YYYY-MM-DD-your-slug/index.md`. To add a new author, edit `blog/authors.yml`.
+Keep `draft: true` while you write; drafts show in `yarn start` but not on the live site. Set it to `false` to publish. To add yourself as an author, edit `blog/authors.yml`.
 
-### Add an optimized image
+## How the site is built
 
-In `.mdx` files only (not `.md`):
+Pushes to `main` run `.github/workflows/deploy.yml`, which builds all six locales, regenerates the PDF, and publishes to GitHub Pages at <https://afriplaybook.waraka.org/>. It takes about five minutes.
 
-```mdx
-import Image from '@theme/IdealImage';
-import diagram from './assets/diagram.png';
+Search is Algolia DocSearch with an AI assistant (Algolia Agent Studio). Credentials come from repository secrets (`ALGOLIA_APP_ID`, `ALGOLIA_API_KEY`, `ALGOLIA_INDEX_NAME`, `ALGOLIA_AGENT_ID`). Without them, as in a local build, the site falls back to offline search.
 
-<Image img={diagram} alt="Annotation workflow diagram" />
-```
-
-### Regenerate the PDF locally
-
-```bash
-yarn pdf
-```
-
-Output: `build/downloads/afriplaybook.pdf`. CI does this automatically on every push to `main`.
-
-### Re-run UI translations
-
-If you add a new translation entry to `scripts/translate-i18n.mjs`:
-
-```bash
-node scripts/translate-i18n.mjs
-```
-
-The script is idempotent — only updates keys present in its dictionary; everything else falls back to English.
-
-### Update the announcement bar
-
-Edit `themeConfig.announcementBar` in `docusaurus.config.js`. To force-show the banner to users who already dismissed an old one, change the `id` value.
-
----
-
-## Deploy
-
-Pushes to `main` trigger `.github/workflows/deploy.yml`, which:
-
-1. Installs deps with `yarn install --frozen-lockfile`.
-2. Builds all 6 locales with `yarn build`.
-3. Generates the PDF via `yarn pdf:built` (downloads Chromium, runs Puppeteer with `--no-sandbox`).
-4. Publishes `build/` to the `gh-pages` branch.
-
-Total CI time: ~3–5 min. Live URL: <https://afriplaybook.waraka.org/>.
-
----
-
-## Versions and gotchas
-
-- **Docusaurus**: 3.10.1 (all `@docusaurus/*` packages must match the same version).
-- **Node**: 22 (matches CI and `.nvmrc`).
-- **Yarn 1.x**, not npm. The repo uses yarn-specific `resolutions` to pin `webpackbar` to 7.0.0 (npm ignores `resolutions` and will install a broken version that crashes on `ProgressPlugin`). An equivalent `overrides` block is also present for npm safety, but yarn is the supported path.
-- **Puppeteer / PDF in CI**: runs with `--no-sandbox` because GitHub Actions `ubuntu-latest` (Ubuntu 24.04) restricts unprivileged user namespaces. Acceptable on ephemeral runners rendering our own static site.
-- **PDF locally requires Chromium download** the first time you run `yarn pdf` (~150 MB Puppeteer install).
-
----
+Comments at the end of each chapter use [giscus](https://giscus.app) backed by GitHub Discussions (`src/components/Comments.jsx`).
 
 ## Repository layout
 
 ```
-docs/                                       Main playbook chapters
-blog/                                       Blog posts + authors.yml + tags.yml
-i18n/<locale>/                              Per-locale content and translation JSON
-  docusaurus-plugin-content-docs/current/   Locale copy of docs/ (translate in place)
-  docusaurus-plugin-content-blog/           Locale copy of blog/
-  docusaurus-theme-classic/                 navbar.json, footer.json
-  code.json                                 React/theme UI strings
+docs/                          Chapters, one folder per section; templates in docs/templates/
+blog/                          Blog posts, authors.yml, tags.yml
+i18n/<locale>/                 Translated copies of docs, blog, and interface strings
 src/
-  clientModules/                            Navbar widgets (GitHub stars, font sizing)
-  components/Comments.jsx                   Giscus wrapper
-  css/custom.css                            Site styles
-  pages/                                    React landing pages
-  theme/                                    Swizzled components
-static/
-  img/                                      Logos, blog thumbnails, social cards
-  manifest.json                             PWA manifest
-scripts/translate-i18n.mjs                  UI translation runner
-docusaurus.config.js                        Main configuration
-sidebars.js                                 Sidebar config (autogenerated from folders)
-.github/workflows/deploy.yml                CI pipeline
-CONTRIBUTING.md                             This file
+  components/                  React components (comments, editor, supporters band, contributors)
+  css/custom.css               Site styles, including print rules for the PDF
+  theme/                       Customised Docusaurus components (navbar, footer, TOC, doc layout)
+static/                        Images, covers, downloads, PWA manifest
+scripts/                       Build helpers (last-update dates, PDF check, i18n strings)
+docusaurus.config.js           Main configuration
+sidebars.js                    Sidebar, written by hand
+.github/workflows/deploy.yml   CI: build, PDF, deploy
 ```
 
----
+## Gotchas
 
-## Useful references
-
-- Docusaurus i18n: <https://docusaurus.io/docs/i18n/introduction>
-- Docusaurus math: <https://docusaurus.io/docs/markdown-features/math-equations>
-- PWA plugin: <https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-pwa>
-- Ideal image plugin: <https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-ideal-image>
-- Giscus: <https://giscus.app>
-- docs-to-pdf: <https://github.com/jean-humann/docs-to-pdf>
-- Cloudflare Web Analytics: <https://dash.cloudflare.com/?to=/:account/web-analytics>
+- All `@docusaurus/*` packages must be on the same version (currently 3.10.2).
+- Use Yarn. The repo pins `webpackbar` through Yarn `resolutions`; npm ignores them and installs a version that crashes the build.
+- If the dev server shows "Can't resolve @theme/..." after a config change, restart `yarn start`.
