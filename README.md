@@ -97,7 +97,14 @@ Thank you to everyone who has contributed.
   <img src="https://contrib.rocks/image?repo=warakacommunity/playbook" alt="Contributors" />
 </a>
 
-The image shows people with commits linked to a GitHub account. The full list, including maintainers, is on the [Contributors page](https://afriplaybook.waraka.org/contributors).
+- [@seyyaw](https://github.com/seyyaw)
+- [@shmuhammadd](https://github.com/shmuhammadd)
+- [@abumafrim](https://github.com/abumafrim)
+- [@Tadesse-Destaw](https://github.com/Tadesse-Destaw)
+- [@keduog](https://github.com/keduog)
+- Ibrahim Ahmad (no GitHub account linked)
+
+The image above updates automatically and shows people whose commits are linked to a GitHub account. The list is kept by hand, so it also includes people the image misses. If you have contributed and are not listed, open an issue or a pull request adding your name. The same list is on the site's [Contributors page](https://afriplaybook.waraka.org/contributors).
 
 ## Acknowledgements
 
