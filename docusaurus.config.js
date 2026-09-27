@@ -411,6 +411,22 @@ const config = {
       };
     },
     "docusaurus-plugin-image-zoom",
+    // Old URLs that were once live. Add a pair here whenever a page is renamed,
+    // moved, or removed, so links in papers, Discord, and the PDF keep working.
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        redirects: [
+          { from: "/blog/welcome-to-the-masakhane-blog", to: "/blog/welcome-to-the-waraka-blog" },
+          { from: "/blog/call-for-masakhane-tool-testers", to: "/blog/call-for-afriannotate-testers" },
+          // Worked examples dropped when Before You Start was cut to three.
+          ...["asr", "machine-translation", "ocr", "qa", "tts"].map((slug) => ({
+            from: `/before-you-start/${slug}`,
+            to: "/before-you-start",
+          })),
+        ],
+      },
+    ],
     [
       "@docusaurus/plugin-ideal-image",
       {
