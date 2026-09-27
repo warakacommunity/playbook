@@ -3,7 +3,9 @@
 [![Deploy](https://github.com/warakacommunity/playbook/actions/workflows/deploy.yml/badge.svg)](https://github.com/warakacommunity/playbook/actions/workflows/deploy.yml)
 [![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/ChNPHV2PPS)
 [![Cite](https://img.shields.io/badge/Cite-CITATION.cff-blue)](CITATION.cff)
-[![All Contributors](https://img.shields.io/github/all-contributors/warakacommunity/playbook?color=ee8449&style=flat)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 **A practical guide to building high-quality datasets for African languages.**
