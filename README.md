@@ -17,7 +17,7 @@ It is written for anyone who builds, or wants to build, a dataset for an African
 
 The playbook is maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers, with support from the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub).
 
-If you find a mistake in a chapter, or have an idea for the playbook, [open an issue](https://github.com/warakacommunity/playbook/issues/new) or start a [discussion](https://github.com/warakacommunity/playbook/discussions).
+If you find a mistake in a chapter, or have an idea for the playbook, [open an issue](https://github.com/warakacommunity/playbook/issues/new) or start a [discussion](https://github.com/warakacommunity/playbook/discussions). For help, ask in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) or on [Discord](https://discord.gg/ChNPHV2PPS).
 
 ## What's inside
 
@@ -43,10 +43,6 @@ You can help by fixing a sentence, reviewing a chapter, translating a page, addi
 Full steps for all three are in [How to contribute](https://afriplaybook.waraka.org/introduction/how-to-contribute) on the site. [CONTRIBUTING.md](CONTRIBUTING.md) covers local setup and how the repository is put together.
 
 **Translations** live under `i18n/<locale>/`. Edit the matching file in place and preview with `yarn start --locale ha` (or `am`, `sw`, `fr`, `pt`). **Blog posts** and case studies go in `blog/YYYY-MM-DD-slug/index.md` and start as `draft: true`, which keeps them off the live site until they are ready. Both are described in [CONTRIBUTING.md](CONTRIBUTING.md#common-tasks).
-
-### Getting help
-
-Ask in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) or on [Discord](https://discord.gg/ChNPHV2PPS). If you are new to git, ask and we will help.
 
 ## Run it locally
 
