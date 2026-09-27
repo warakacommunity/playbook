@@ -1,0 +1,46 @@
+name: Ask to be credited
+description: You reviewed, translated, annotated, or organised, and the work does not show up as commits.
+title: "Credit request: "
+labels: ["credit request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The [Contributors page](https://afriplaybook.waraka.org/contributors) lists people with commits on GitHub, but much of the work behind the playbook never appears there. Tell us what you did and we will credit you.
+  - type: input
+    id: name
+    attributes:
+      label: Name as you want it shown
+    validations:
+      required: true
+  - type: input
+    id: github
+    attributes:
+      label: GitHub username
+      description: Optional. If you have commits under an email that is not linked to your GitHub account, tell us here and we can fix the attribution.
+    validations:
+      required: false
+  - type: checkboxes
+    id: kind
+    attributes:
+      label: What you contributed
+      options:
+        - label: Reviewed one or more chapters
+        - label: Translated pages
+        - label: Annotated or collected data for a case study
+        - label: Organised people or ran a workshop
+        - label: Other (describe below)
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Which chapters, pages, or languages, and roughly when. If someone on the project can confirm it, name them.
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Permission
+      options:
+        - label: I agree to be listed publicly by the name above.
+          required: true

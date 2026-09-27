@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ask a question
+    url: https://github.com/warakacommunity/playbook/discussions
+    about: Open-ended questions and ideas go in GitHub Discussions.
+  - name: Chat with the community
+    url: https://discord.gg/ChNPHV2PPS
+    about: Join the Waraka community on Discord.

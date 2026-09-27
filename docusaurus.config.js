@@ -45,7 +45,7 @@ const config = {
     // Dedicated translation proxy (proposal/translate-worker.js deployed to Cloudflare).
     TRANSLATION_PROXY_URL: process.env.TRANSLATION_PROXY_URL || "",
   },
-  tagline: "Democratizing machine translation for African languages",
+  tagline: "A practical guide to building high-quality datasets for African languages",
   favicon: "img/favicon.ico",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

@@ -6,11 +6,11 @@ This document covers local setup, the site features that are wired up, and the m
 
 ## Quick start
 
-**Requirements:** Node.js ≥ 20, [Yarn 1.x](https://classic.yarnpkg.com) (do **not** use npm — see Gotchas).
+**Requirements:** Node.js 22, [Yarn 1.x](https://classic.yarnpkg.com) (do **not** use npm — see Gotchas).
 
 ```bash
 git clone https://github.com/warakacommunity/playbook.git
-cd AfriPlaybook
+cd playbook
 yarn install --frozen-lockfile
 yarn start
 ```
@@ -168,7 +168,7 @@ Total CI time: ~3–5 min. Live URL: <https://afriplaybook.waraka.org/>.
 ## Versions and gotchas
 
 - **Docusaurus**: 3.10.1 (all `@docusaurus/*` packages must match the same version).
-- **Node**: ≥ 20.
+- **Node**: 22 (matches CI and `.nvmrc`).
 - **Yarn 1.x**, not npm. The repo uses yarn-specific `resolutions` to pin `webpackbar` to 7.0.0 (npm ignores `resolutions` and will install a broken version that crashes on `ProgressPlugin`). An equivalent `overrides` block is also present for npm safety, but yarn is the supported path.
 - **Puppeteer / PDF in CI**: runs with `--no-sandbox` because GitHub Actions `ubuntu-latest` (Ubuntu 24.04) restricts unprivileged user namespaces. Acceptable on ephemeral runners rendering our own static site.
 - **PDF locally requires Chromium download** the first time you run `yarn pdf` (~150 MB Puppeteer install).

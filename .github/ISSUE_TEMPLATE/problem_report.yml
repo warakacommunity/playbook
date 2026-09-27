@@ -1,0 +1,57 @@
+name: Something wrong in a chapter
+description: Report a typo, a broken link, a factual error, or a missing source.
+title: "Problem: "
+labels: ["problem report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Small fixes are welcome as pull requests too. If you can fix it yourself, open the page on the site and use **Contribute** to edit it in your browser.
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      placeholder: https://afriplaybook.waraka.org/...
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem
+      options:
+        - Typo or unclear wording
+        - Broken link
+        - Factual error
+        - Missing or wrong source
+        - Something out of date
+        - Display problem (layout, image, table)
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Which language version of the site
+      options:
+        - English
+        - Hausa
+        - Amharic
+        - Swahili
+        - French
+        - Portuguese
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Quote the text if you can, so we can find it quickly.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: What it should say
+      description: Optional. If you know the correct information, include it and a source we can check.
+    validations:
+      required: false

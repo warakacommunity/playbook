@@ -1,0 +1,78 @@
+name: Chapter proposal
+description: Propose a new chapter or a major addition to an existing one.
+title: "Chapter proposal: "
+labels: ["chapter proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for proposing a chapter. A short proposal lets us check for overlap with existing chapters and help you scope it before you write. Please read [How to write a chapter](https://afriplaybook.waraka.org/introduction/how-to-write) first.
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      description: One sentence saying what the chapter covers.
+      placeholder: e.g. Recording speech data with community volunteers on low-cost phones
+    validations:
+      required: true
+  - type: dropdown
+    id: section
+    attributes:
+      label: Where it fits
+      description: Which part of the playbook should hold this chapter?
+      options:
+        - Foundations (Before You Start, Project Management, Data Governance, Data Collection, Annotation Design, Data Quality, Community)
+        - Text
+        - Speech
+        - Vision
+        - Multimodal
+        - Lifecycle and Release
+        - Templates
+        - Case Studies
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: outline
+    attributes:
+      label: Outline
+      description: Three to six bullet points, one per section of the chapter.
+      placeholder: |
+        - Why this matters
+        - Step 1 ...
+        - Step 2 ...
+        - Common mistakes
+    validations:
+      required: true
+  - type: textarea
+    id: existing
+    attributes:
+      label: How it relates to existing chapters
+      description: Name the chapters closest to this topic and say what yours adds. If a chapter already covers part of it, say which part.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What the chapter is based on
+      description: Projects you worked on, datasets you built, and papers or reports you will cite. The playbook prefers advice grounded in real projects.
+    validations:
+      required: true
+  - type: textarea
+    id: author
+    attributes:
+      label: About you
+      description: Your background and languages. Are you a native speaker of the languages involved? Would you like a co-author or a reviewer?
+    validations:
+      required: false
+  - type: checkboxes
+    id: agreements
+    attributes:
+      label: Before you start
+      options:
+        - label: I have searched the playbook and the open issues, and this chapter does not already exist.
+          required: true
+        - label: I will follow the writing guidelines (plain English, short sentences, sources for every claim).
+          required: true
+        - label: I agree that my contribution is released under the project's MIT licence.
+          required: true

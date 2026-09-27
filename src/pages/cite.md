@@ -11,7 +11,7 @@ If the AfriPlaybook informs your research, teaching, or project, please cite it.
 ```bibtex
 @misc{waraka2026playbook,
   author       = {{Waraka Community}},
-  title        = {AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages},
+  title        = {AfriPlaybook: A Practical Guide to Building High-Quality Datasets for African Languages},
   year         = {2026},
   publisher    = {Waraka Community},
   url          = {https://afriplaybook.waraka.org/},
@@ -21,15 +21,15 @@ If the AfriPlaybook informs your research, teaching, or project, please cite it.
 
 ## APA
 
-> Waraka Community. (2026). *AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages*. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/)
+> Waraka Community. (2026). *AfriPlaybook: A Practical Guide to Building High-Quality Datasets for African Languages*. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/)
 
 ## MLA
 
-> Waraka Community. *AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages*. 2026. Web. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/).
+> Waraka Community. *AfriPlaybook: A Practical Guide to Building High-Quality Datasets for African Languages*. 2026. Web. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/).
 
 ## Chicago
 
-> Waraka Community. *AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages*. 2026. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/).
+> Waraka Community. *AfriPlaybook: A Practical Guide to Building High-Quality Datasets for African Languages*. 2026. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/).
 
 ## Citation File Format (CFF)
 
@@ -39,7 +39,7 @@ The repository ships a [`CITATION.cff`](https://github.com/warakacommunity/playb
 
 When you reference a specific chapter rather than the playbook as a whole, include the chapter title and its URL. For example:
 
-> Waraka Community. (2026). Annotation Design and Workforce Management. In *AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages*. [https://afriplaybook.waraka.org/annotation-design/](https://afriplaybook.waraka.org/annotation-design/)
+> Waraka Community. (2026). Annotation Design and Workforce Management. In *AfriPlaybook: A Practical Guide to Building High-Quality Datasets for African Languages*. [https://afriplaybook.waraka.org/annotation-design/](https://afriplaybook.waraka.org/annotation-design/)
 
 ## Versioning and DOIs
 

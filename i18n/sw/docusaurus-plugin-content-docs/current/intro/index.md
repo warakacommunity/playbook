@@ -75,7 +75,7 @@ If the AfriPlaybook informs your research, teaching, or project, please cite it.
 ```bibtex
 @misc{waraka2026playbook,
   author       = {{Waraka Community}},
-  title        = {AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages},
+  title        = {AfriPlaybook: A Practical Guide to Building High-Quality Datasets for African Languages},
   year         = {2026},
   publisher    = {Waraka Community},
   url          = {https://afriplaybook.waraka.org/},
@@ -85,7 +85,7 @@ If the AfriPlaybook informs your research, teaching, or project, please cite it.
 
 **Plain text (APA-style):**
 
-> Waraka Community. (2026). *AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages*. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/)
+> Waraka Community. (2026). *AfriPlaybook: A Practical Guide to Building High-Quality Datasets for African Languages*. [https://afriplaybook.waraka.org/](https://afriplaybook.waraka.org/)
 
 For other formats (MLA, Chicago, etc.) and a machine-readable [`CITATION.cff`](https://github.com/warakacommunity/playbook/blob/main/CITATION.cff), see the [/cite](/cite) page.
 

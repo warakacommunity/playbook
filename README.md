@@ -1,67 +1,66 @@
 # AfriPlaybook
 
-**The decision framework for anyone starting an African-language NLP project — grounded in the empirical experience of Masakhane's own past projects.** An annotation-first dataset-lifecycle handbook covering data collection, annotation workforce, quality, documentation, evaluation, and community practice, for text, speech, translation, OCR, and adjacent modalities in low-resource African-language contexts.
+[![Deploy](https://github.com/warakacommunity/playbook/actions/workflows/deploy.yml/badge.svg)](https://github.com/warakacommunity/playbook/actions/workflows/deploy.yml)
+[![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/ChNPHV2PPS)
+[![Cite](https://img.shields.io/badge/Cite-CITATION.cff-blue)](CITATION.cff)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-It is not a model-tuning tutorial (see the [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course) and the [Google Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook) for those); it is what those playbooks assume has already been done. It is intended for language experts, annotators, translators, and community leads in addition to ML practitioners — see [**What this playbook is (and isn't)**](https://afriplaybook.waraka.org/introduction/scope-and-strategy) for the full scope statement and evidence base.
+**A practical guide to building high-quality datasets for African languages.**
 
-**Live site:** <https://afriplaybook.waraka.org/>
+Read it at **<https://afriplaybook.waraka.org>**.
 
-This is a living resource maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers. We welcome contributions from researchers, practitioners, students, language experts, and translators.
+## What it is
 
----
+The AfriPlaybook follows a dataset from first idea to public release: deciding what to collect and from whom, designing the annotation task, recruiting and paying the people who do it, checking their work, documenting the result, and publishing it so that others can build on it. It draws its examples from African projects, but most of its advice applies wherever data is scarce.
 
-## Table of contents
+It is written for anyone who builds, or wants to build, a dataset for an African language: students, researchers, linguists, language activists, community organisers, and engineers. No background in machine learning is assumed.
 
-- [What's in the playbook](#whats-in-the-playbook)
-- [Install and run locally](#install-and-run-locally)
-- [Ways to contribute](#ways-to-contribute)
-- [How to contribute a chapter](#how-to-contribute-a-chapter)
-- [How to translate](#how-to-translate)
-- [How to write a blog post](#how-to-write-a-blog-post)
-- [FAQ](#faq)
-- [Reporting issues](#reporting-issues)
-- [How to cite](#how-to-cite)
-- [Code of conduct](#code-of-conduct)
-- [License](#license)
+It is not a model-training tutorial. Once you have decided what data you need, the playbook shows you how to build it; the [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course) covers training. See [What this playbook is (and isn't)](https://afriplaybook.waraka.org/introduction/scope-and-strategy) for the full scope.
 
----
+The playbook is maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers, with support from the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub).
 
-## What's in the playbook
+## What's inside
 
-**Foundations** — the shared spine of every project:
+- **Foundations:** [Before You Start](https://afriplaybook.waraka.org/before-you-start) (how to check for existing datasets before you build), [Project Management](https://afriplaybook.waraka.org/project-management), Data Governance, Data Collection, Annotation Design, Data Quality, and Community.
+- **Task chapters** for text, speech, vision, and multimodal data.
+- **Lifecycle and release:** evaluation, documentation, dataset lifecycle, deployment, cross-language transfer, long-tail languages, legal and consent questions, and training with little compute.
+- **[Templates](https://afriplaybook.waraka.org/templates)** you can copy: dataset search log, project charter, consent form, annotation guidelines, dataset card, model card, and evaluation script.
+- **[Case studies](https://afriplaybook.waraka.org/case-studies)** written by the people who built real datasets.
+- **Appendix:** [glossary](https://afriplaybook.waraka.org/glossary), references, and a tools index.
 
-1. **Introduction** including [scope and strategy](docs/1_introduction/scope-and-strategy.md) — the "what this playbook is (and isn't)" statement.
-2. **[Before You Start](docs/before-you-start/index.md)** — per-task decision framework, resource tables, and honest cost estimates. Ships first for [NER](docs/before-you-start/ner.md); MT, ASR, sentiment, TTS, OCR to follow.
-3. **Data Collection, Curation, and Governance** — `docs/2_data-collection/`
-4. **Annotation Design and Workforce Management** — `docs/3_annotation-design/`
-5. **Data Quality Assurance and Validation** — `docs/4_data-quality/`
-6. **Community and Collaboration** — `docs/10_community-collaboration/`
+The whole book is also available as a [PDF](https://afriplaybook.waraka.org/downloads/afriplaybook.pdf), rebuilt on every deploy. The site's interface is available in English, Hausa, Amharic, Swahili, French, and Portuguese; chapters are translated as volunteers complete them.
 
-**Modality tracks** — text, speech, vision, multimodal. Each task chapter cross-references its Before-You-Start page.
+## Contributing
 
-**Lifecycle & Release**:
+Datasets for African languages are scarce partly because the people who know the languages and the people who write the guides are rarely the same people. This playbook improves only as far as its readers improve it. Every kind of help counts: fixing a sentence, reviewing a chapter, translating a page, adding a case study, or writing down what happened on your own project.
 
-7. **Evaluation, Benchmarking, and Data Integrity** — `docs/8_model-building/`
-8. **Documentation, Data Release, and Governance** — `docs/6_documentation/`
-9. **LLM-Assisted and Synthetic Data Generation** — `docs/7_llm-assisted-task/`
-10. **Dataset Lifecycle Management and Release Checklist** — `docs/9_dataset-lifecycle/`
+### Three ways to contribute
 
-**[Case Studies](docs/case-studies/index.md)** — retrospectives from real Masakhane projects, answering the same seventeen questions each. The evidence base the rest of the playbook draws on.
+Pick by the size of your change, not by your git experience.
 
-The site is also available in **6 languages**: English, Hausa, Amharic, Swahili, French, and Portuguese (UI translated; chapter content awaits native-speaker translation).
+1. **Edit on the site (easiest).** Open the online editor from the site's **Contribute** menu, sign in with GitHub, make your change, add a short note, and submit. The site opens a pull request for you. No git, no setup.
+2. **Edit one file on GitHub.** Find the file under [`docs/`](docs/), click the pencil icon, make your change, and click **Propose changes**. GitHub forks the repository for you.
+3. **Fork and pull request.** For new chapters or changes across several files. Open an issue with a short outline first, then fork, clone, run `yarn install --frozen-lockfile` and `yarn start`, write on a branch, run `yarn build`, and open a pull request.
 
----
+Full steps for all three are in [How to contribute](https://afriplaybook.waraka.org/introduction/how-to-contribute) on the site. [CONTRIBUTING.md](CONTRIBUTING.md) covers local setup and how the repository is put together.
 
-## Install and run locally
+**Translations** live under `i18n/<locale>/`. Edit the matching file in place and preview with `yarn start --locale ha` (or `am`, `sw`, `fr`, `pt`). **Blog posts** and case studies go in `blog/YYYY-MM-DD-slug/index.md` and start as `draft: true`, which keeps them off the live site until they are ready. Both are described in [CONTRIBUTING.md](CONTRIBUTING.md#common-tasks).
 
-The Playbook is a [Docusaurus 3](https://docusaurus.io) site. To install and preview it on your own machine:
+### What reviewers look for
 
-### Requirements
+A maintainer reviews every pull request, suggests edits, and merges when it is ready. Ready means: `yarn build` passes with no broken links, the page follows the [writing guidelines](https://afriplaybook.waraka.org/introduction/how-to-write), and every claim points to a source a reader can check. Small edits are usually merged quickly. New chapters take longer, because we ask a second reader who knows the topic. A chapter goes live only once its front matter has `ready: true`; until then the site shows it as in development. Merged changes are on the live site in about ten minutes.
 
-- Node.js 22 (recommended, matches CI and `.nvmrc`; [download](https://nodejs.org)). Node 23 is not supported by the test dependencies.
-- Yarn 1.x — install with `npm install -g yarn` if you don't have it (do **not** use npm for this project; the lockfile is yarn-managed)
+### Getting help
 
-### Clone, install, and run
+Ask in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) or on [Discord](https://discord.gg/ChNPHV2PPS). If you are stuck on git, say so. We have walked many first-time contributors through it.
+
+### Recognition
+
+Everyone who commits to the repository appears on the site's [Contributors page](https://afriplaybook.waraka.org/contributors) and in the list at the end of this README. If you reviewed, translated, or annotated without committing to GitHub, open an issue or tell us on Discord so we can credit you.
+
+## Run it locally
+
+You need [Node.js 22](https://nodejs.org) and Yarn 1.x (`npm install -g yarn`). Use Yarn, not npm: the lockfile is Yarn's.
 
 ```bash
 git clone https://github.com/warakacommunity/playbook.git
@@ -70,310 +69,19 @@ yarn install --frozen-lockfile
 yarn start
 ```
 
-Open <http://localhost:3000/> — the site reloads automatically as you edit files.
+Open <http://localhost:3000>. The site reloads as you edit. `yarn build` runs the full production build, and `yarn build --locale en` builds English only, which is much faster. More commands and the repository layout are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-### Other useful commands
+## Reporting problems
 
-```bash
-yarn start --locale fr       # preview a specific locale (en, ha, am, sw, fr, pt)
-yarn build                   # full production build (all locales)
-yarn build --locale en       # build a single locale (much faster)
-yarn clear                   # clear the .docusaurus cache (run if you hit module-not-found errors)
-yarn pdf                     # generate the downloadable PDF
-yarn serve                   # serve the production build at http://localhost:3000/
-```
-
-### Repo layout (high level)
-
-```text
-docs/                        chapter content (markdown), grouped by section folder
-blog/                        blog posts and announcements
-i18n/<locale>/               translated UI strings + per-locale chapter content
-src/pages/                   custom pages (home, /tool, /about, /roadmap, /cite, ...)
-src/components/              shared React components
-src/css/custom.css           global styles + theme tokens
-static/                      static assets served at site root (images, manifest, ...)
-docusaurus.config.js         site configuration (navbar, footer, plugins, i18n)
-sidebars.js                  documentation sidebar configuration
-```
-
-For deeper contributor-side details (every plugin, repo conventions, gotchas), see [CONTRIBUTING.md](CONTRIBUTING.md).
-
----
-
-## Ways to contribute
-
-There's no one way to help. Pick whichever matches what you do best:
-
-- **Write a chapter or section** — fill a gap in the playbook (see below)
-- **Translate** — adapt an existing chapter into Hausa, Amharic, Swahili, French, or Portuguese
-- **Review** — open issues or PRs against existing chapters; correct technical errors, clarify language, suggest references
-- **Add a case study** — a short post in the blog about a real-world Masakhane project
-- **Open a discussion** — got questions or want to debate an approach? Use [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions)
-- **Report bugs / suggest features** — see [Reporting issues](#reporting-issues)
-
----
-
-## How to contribute a chapter
-
-Step-by-step guide for first-time contributors. Even if you're new to git/GitHub, you can follow this.
-
-### Step 1 — Open an issue first (recommended)
-
-Before you write, **open an issue** describing the chapter you want to add. This avoids two people writing the same thing and lets us help you scope it.
-
-1. Go to <https://github.com/warakacommunity/playbook/issues/new>
-2. Title: `Chapter proposal: <your topic>`
-3. In the body, briefly describe:
-   - What topic the chapter covers
-   - Which section it fits into (e.g., "Data Quality")
-   - 3–5 bullet outline of subsections
-   - Languages you'll write in (English required; others welcome)
-
-We'll respond with feedback or a 👍 to start.
-
-### Step 2 — Fork and clone the repo
-
-If you don't have write access to `warakacommunity/playbook`, fork it first:
-
-1. Open <https://github.com/warakacommunity/playbook> and click **Fork** (top right).
-2. Clone your fork to your computer:
-
-   ```bash
-   git clone https://github.com/<your-github-username>/AfriPlaybook.git
-   cd AfriPlaybook
-   ```
-
-If you're already a maintainer with write access:
-
-```bash
-git clone https://github.com/warakacommunity/playbook.git
-cd playbook
-```
-
-### Step 3 — Set up the project locally
-
-Requirements:
-
-- Node.js 22 (recommended, matches CI and `.nvmrc`; [download](https://nodejs.org)). Node 23 is not supported by the test dependencies.
-- Yarn 1.x — install with `npm install -g yarn` if you don't have it (do **not** use npm for this project)
-
-Install dependencies and start the dev server:
-
-```bash
-yarn install --frozen-lockfile
-yarn start
-```
-
-Open <http://localhost:3000/> — the site reloads automatically as you edit files.
-
-### Step 4 — Create a branch
-
-Don't commit to `main`. Make a branch named after your chapter:
-
-```bash
-git checkout -b chapter/your-topic-slug
-```
-
-### Step 5 — Add your chapter file
-
-1. Find the section folder under `docs/` that fits your chapter (e.g., `docs/annotation-design/`).
-2. Create a new markdown file. Filename should be lowercase with hyphens, e.g., `inter-annotator-agreement.md`.
-3. At the top, add **frontmatter** to control the title and ordering in the sidebar:
-
-   ```markdown
-   ---
-   sidebar_position: 5
-   title: Inter-Annotator Agreement
-   ---
-
-   # Inter-Annotator Agreement
-
-   Your introduction paragraph...
-   ```
-
-4. Write the chapter using regular Markdown. You can also use:
-   - **Math**: `$P(y \mid x)$` inline, or `$$ ... $$` for block equations
-   - **Code blocks**: triple backticks with language (e.g., ```` ```python ````)
-   - **Admonitions**:
-
-     ```markdown
-     :::tip
-     Native speakers should review the annotation guidelines.
-     :::
-     ```
-
-     Available types: `note`, `tip`, `info`, `warning`, `danger`, `caution`.
-   - **Images**: place files in a sibling `assets/` folder and reference with `![alt](./assets/image.png)`.
-   - **Links to other chapters**: `[see Data Quality chapter](../data-quality/inter-annotator-agreement)`.
-
-### Step 6 — Update the sidebar (only if needed)
-
-Most of the time you don't need to touch this. The sidebar is auto-generated from the folder structure.
-
-If your chapter is in a brand-new folder, also add a `_category_.json` in that folder:
-
-```json
-{
-  "label": "Your Section Name",
-  "position": 7,
-  "link": {
-    "type": "generated-index",
-    "description": "Short description of what this section covers."
-  }
-}
-```
-
-### Step 7 — Preview locally
-
-While `yarn start` is running, your changes appear instantly in the browser. Click through to make sure:
-
-- Your chapter shows up in the left sidebar
-- Headings render correctly
-- Images load
-- Links work
-- Math/code/admonitions render properly
-
-### Step 8 — Run the build (catch errors early)
-
-Before pushing, run a full build to catch broken links or other issues that don't show in dev mode:
-
-```bash
-yarn build
-```
-
-If it fails (especially `onBrokenLinks: "throw"`), fix the reported issues and re-run.
-
-### Step 9 — Commit and push
-
-```bash
-git add docs/<your-section>/<your-chapter>.md
-git commit -m "docs: add chapter on <your topic>"
-git push origin chapter/your-topic-slug
-```
-
-### Step 10 — Open a Pull Request
-
-1. Go to your fork on GitHub.
-2. Click **Compare & pull request** (it appears after pushing a new branch).
-3. Set:
-   - **Base repository**: `warakacommunity/playbook`, branch `main`
-   - **Head**: your fork, branch `chapter/your-topic-slug`
-4. Title: `docs: add chapter on <your topic>`
-5. Body — answer briefly:
-   - What the chapter adds
-   - Any open questions you have for reviewers
-   - Reference the issue from Step 1 (e.g., `Closes #42`)
-6. Click **Create pull request**.
-
-A maintainer will review, suggest edits, and merge once it's ready.
-
-### What happens after merge
-
-Your chapter is live at <https://afriplaybook.waraka.org/...> within ~5 minutes (CI rebuilds and deploys all 6 locales).
-
----
-
-## How to translate
-
-The site has UI translated into 6 languages. Chapter **content** is currently English placeholder text in each locale folder. To translate a chapter:
-
-1. Set up locally (Steps 2–4 above).
-2. Find the matching markdown file under `i18n/<locale>/docusaurus-plugin-content-docs/current/`. For example, to translate `docs/annotation-design/training_guidlines.md` into Hausa, edit:
-   `i18n/ha/docusaurus-plugin-content-docs/current/annotation-design/training_guidlines.md`
-3. **Edit the file in place** — same filename, translated content. Do not rename or move it.
-4. Preview your translation: `yarn start --locale ha` (or your locale).
-5. Commit, push, open a PR (Steps 9–10 above), title it `i18n(ha): translate Annotation Training Guidelines` etc.
-
-Locale codes: `ha` (Hausa), `am` (Amharic), `sw` (Swahili), `fr` (French), `pt` (Portuguese).
-
----
-
-## How to write a blog post
-
-Blog posts go in `blog/` (separate from chapters). Use them for announcements, calls for contribution, project milestones, and case studies.
-
-1. Create `blog/YYYY-MM-DD-your-slug/index.md`.
-2. Frontmatter:
-
-   ```yaml
-   ---
-   slug: your-post-slug
-   title: "Your post title"
-   authors: [shamsuddeen]
-   tags: [announcement]
-   image: /img/blog/your-thumbnail.png
-   draft: true   # hidden from the live site; change to false (or delete) to publish
-   ---
-
-   Intro paragraph (this is what shows on the blog index card).
-
-   <!-- truncate -->
-
-   Rest of the post...
-   ```
-
-3. To add yourself as an author, edit `blog/authors.yml` and add an entry with your name, GitHub URL, and image (the simplest is `https://github.com/<your-username>.png`).
-4. Drop a thumbnail at `static/img/blog/your-thumbnail.png` (recommended size: 1200×675).
-5. **Draft or live.** While `draft: true`, the post shows only on your local preview (`npm start`) and is left out of the live site. When it is ready, set `draft: false` (or delete the line) and push. It goes live on the next deploy. If the post also has translated copies in `i18n/<language>/docusaurus-plugin-content-blog/`, set `draft` in each copy too: every language reads its own copy, so a translated copy without `draft: true` goes live on that language's site even while the English post is a draft.
-6. Preview, commit, push, PR (same flow as chapters).
-
----
-
-## FAQ
-
-Quick answers to the questions we hear most. The full version with more detail lives at [**afriplaybook.waraka.org/faq**](https://afriplaybook.waraka.org/faq).
-
-### Is the Playbook free to use?
-
-Yes — entirely. Playbook content is community-maintained and openly licensed; the AfriAnnotate annotation platform is **Apache 2.0**. No closed version, no paid tier, no commercial fork.
-
-### Can I contribute a chapter?
-
-Yes. Open an issue with a brief outline first, then write your chapter and open a PR. See [How to contribute a chapter](#how-to-contribute-a-chapter) above for the step-by-step.
-
-### How do I cite the Playbook?
-
-Every chapter page has a "Cite this page" link. The dedicated [`/cite`](https://afriplaybook.waraka.org/cite) page provides BibTeX, APA, MLA, Chicago, and a machine-readable [`CITATION.cff`](CITATION.cff). See also [How to cite](#how-to-cite) below.
-
-### Is AfriAnnotate deployable on-prem?
-
-Yes. Apache 2.0 licensed, ships as a Progressive Web App. Self-host on any server, install on a phone for offline-first work, or deploy inside an institutional network. Pilots are running at Bayero University and Bahir Dar University ICT4D.
-
-### Which African languages are supported?
-
-The site UI is translated into 6 languages (English, Hausa, Amharic, Swahili, French, Portuguese) with chapter content gradually following. AfriAnnotate supports any African language and script through Unicode, with virtual keyboards and RTL handling where applicable.
-
-### How can I get involved?
-
-5 minutes: star the repo or join Discord. 30 minutes: fix a typo via "Edit this page". A few hours: write a [blog post case study](#how-to-write-a-blog-post). A few weeks: write or improve a chapter. See [How to contribute](https://afriplaybook.waraka.org/introduction/how-to-contribute).
-
-### What's the difference between the Playbook and AfriAnnotate?
-
-They're complementary, not competing. The Playbook is a **guide** you read; AfriAnnotate is a **piece of software** you run. Both are open from day one and were designed together.
-
-For more questions and longer answers, see the [full FAQ page](https://afriplaybook.waraka.org/faq).
-
----
-
-## Reporting issues
-
-- **Bug in a chapter** (typo, broken link, wrong information): open a [new issue](https://github.com/warakacommunity/playbook/issues/new) with the URL of the page and what's wrong.
-- **Feature request**: open an issue describing what you'd like and why.
-- **Question**: prefer [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) for open-ended questions.
-
----
+- **Something wrong in a chapter** (a typo, a broken link, a mistake): [open an issue](https://github.com/warakacommunity/playbook/issues/new) with the page's URL and what is wrong.
+- **An idea for the playbook:** open an issue or start a [discussion](https://github.com/warakacommunity/playbook/discussions).
 
 ## How to cite
-
-If you use AfriPlaybook in your research, teaching, or work, please cite it.
-
-**BibTeX:**
 
 ```bibtex
 @misc{afriplaybook2026,
   author       = {{Waraka Community}},
-  title        = {AfriPlaybook: A Practical Guide for Building NLP Systems for African Languages},
+  title        = {AfriPlaybook: A Practical Guide to Building High-Quality Datasets for African Languages},
   year         = {2026},
   publisher    = {Waraka Community},
   url          = {https://afriplaybook.waraka.org/},
@@ -381,26 +89,26 @@ If you use AfriPlaybook in your research, teaching, or work, please cite it.
 }
 ```
 
-**Other formats**: GitHub auto-renders a **"Cite this repository"** button in the right sidebar of this repo (powered by [`CITATION.cff`](CITATION.cff)). Click it for APA, MLA, Chicago, and other formats.
+GitHub's **Cite this repository** button (from [CITATION.cff](CITATION.cff)) gives APA and other formats, and the site's [cite page](https://afriplaybook.waraka.org/cite) has more. If you cite a chapter, include its title and URL.
 
-If you cite a specific chapter, include the chapter title and the URL of the chapter page.
+## Contributors
 
----
+Thank you to everyone who has contributed.
 
-## Code of conduct
+<a href="https://github.com/warakacommunity/playbook/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=warakacommunity/playbook" alt="Contributors" />
+</a>
 
-This project follows the [Contributor Covenant](https://www.contributor-covenant.org/). Be respectful, especially across language and cultural boundaries — that's the whole point of the Playbook.
-
----
-
-## License
-
-The Playbook content is shared under the same terms as the Masakhane community. Code is licensed per the project's `LICENSE` file (if present) or follows Docusaurus' MIT license by default. If you contribute, you agree your contribution is shared on the same terms.
-
----
+The image shows people with commits linked to a GitHub account. The full list, including maintainers, is on the [Contributors page](https://afriplaybook.waraka.org/contributors).
 
 ## Acknowledgements
 
 The AfriPlaybook is supported by the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub), a pan-African initiative building open, culturally grounded datasets for African languages. We are grateful for its support.
 
-Built by the Waraka community, Masakhane, and AfricaNLP researchers, in collaboration with Bayero University Kano, Bahir Dar University, HausaNLP, and EthioNLP. Powered by [Docusaurus](https://docusaurus.io/). Search by [Algolia DocSearch](https://docsearch.algolia.com/). Comments by [giscus](https://giscus.app/).
+Built in collaboration with Bayero University Kano, Bahir Dar University, [HausaNLP](https://hausanlp.org/), and [EthioNLP](https://ethionlp.github.io/). Powered by [Docusaurus](https://docusaurus.io/), with search by [Algolia DocSearch](https://docsearch.algolia.com/) and comments by [giscus](https://giscus.app/).
+
+## Code of conduct and licence
+
+This project follows the [Contributor Covenant](CODE_OF_CONDUCT.md). Be respectful, especially across language and cultural boundaries.
+
+Everything in this repository, the site code, the chapters, the blog posts, and the templates, is released under the [MIT licence](LICENSE). Partner logos remain the property of their owners. By contributing, you agree that your contribution is released under the same licence.

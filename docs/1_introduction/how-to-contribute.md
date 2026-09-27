@@ -125,7 +125,7 @@ Check your page in the running preview (`http://localhost:3000`). Read it on a n
 This catches broken links and other errors before you open a pull request:
 
 ```bash
-npm run build
+yarn build
 ```
 
 Fix anything it flags. A clean build is the main thing reviewers check for.
