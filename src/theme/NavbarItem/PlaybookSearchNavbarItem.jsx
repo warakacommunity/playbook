@@ -64,7 +64,6 @@ export default function PlaybookSearchNavbarItem() {
     if (open && inputRef.current) inputRef.current.focus();
   }, [open]);
 
-  if (typeof window === 'undefined') return null;
 
   const submit = (e) => {
     e.preventDefault();

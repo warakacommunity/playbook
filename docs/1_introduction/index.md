@@ -3,8 +3,8 @@ sidebar_position: 1
 slug: /
 ready: true
 last_update:
-  date: 2026-09-26
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-09-27
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 import useBaseUrl from '@docusaurus/useBaseUrl';

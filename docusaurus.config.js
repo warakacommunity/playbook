@@ -569,20 +569,7 @@ const config = {
             label: "Contribute",
             position: "left",
           },
-          {
-            to: "/blog",
-            label: "Blog",
-            position: "left",
-          },
-          {
-            // Phones hide the "Waraka /" breadcrumb, so the hamburger menu
-            // carries the way back instead. Hidden in the desktop bar (CSS).
-            href: "https://waraka.org",
-            label: "Waraka community",
-            target: "_self",
-            position: "left",
-            className: "navbar-item--mobile-only",
-          },
+          { type: "custom-ResourcesNavbarItem", position: "left" },
           // Algolia: the DocSearch modal (results as you type, Ctrl/Cmd+K).
           // Local search: the site's own popover that opens the results page.
           USE_ALGOLIA

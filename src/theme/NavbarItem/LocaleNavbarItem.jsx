@@ -21,7 +21,6 @@ export default function LocaleNavbarItem() {
     return () => document.removeEventListener('mousedown', onOutside);
   }, []);
 
-  if (typeof window === 'undefined') return null;
 
   const labelFor = (l) => (localeConfigs && localeConfigs[l] && localeConfigs[l].label) || l;
 

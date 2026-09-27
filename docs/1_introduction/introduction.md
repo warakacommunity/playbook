@@ -4,7 +4,7 @@ slug: /introduction
 ready: true
 last_update:
   date: 2026-09-27
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Introduction

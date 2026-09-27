@@ -1523,8 +1523,6 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
 @media (max-width: 480px) {
   .navbar-lockup__title { display: none; }
 }
-/* Desktop bar already shows the breadcrumb; this item is for the phone menu. */
-.navbar__item.navbar-item--mobile-only { display: none; }
 
 /* PDF download (raw HTML navbar item): icon + label + muted file size. */
 .navbar-pdf-link {
