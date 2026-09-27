@@ -17,6 +17,8 @@ It is written for anyone who builds, or wants to build, a dataset for an African
 
 The playbook is maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers, with support from the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub).
 
+If you find a mistake in a chapter, or have an idea for the playbook, [open an issue](https://github.com/warakacommunity/playbook/issues/new) or start a [discussion](https://github.com/warakacommunity/playbook/discussions).
+
 ## What's inside
 
 - **Foundations:** [Before You Start](https://afriplaybook.waraka.org/before-you-start) (how to check for existing datasets before you build), [Project Management](https://afriplaybook.waraka.org/project-management), Data Governance, Data Collection, Annotation Design, Data Quality, and Community.
@@ -59,11 +61,6 @@ yarn start
 
 Open <http://localhost:3000>. The site reloads as you edit. `yarn build` runs the full production build, and `yarn build --locale en` builds English only, which is much faster. More commands and the repository layout are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Reporting problems
-
-- **Something wrong in a chapter** (a typo, a broken link, a mistake): [open an issue](https://github.com/warakacommunity/playbook/issues/new) with the page's URL and what is wrong.
-- **An idea for the playbook:** open an issue or start a [discussion](https://github.com/warakacommunity/playbook/discussions).
-
 ## How to cite
 
 ```bibtex
@@ -86,13 +83,6 @@ Thank you to everyone who has contributed.
 <a href="https://github.com/warakacommunity/playbook/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=warakacommunity/playbook" alt="Contributors" />
 </a>
-
-- [@seyyaw](https://github.com/seyyaw)
-- [@shmuhammadd](https://github.com/shmuhammadd)
-- [@abumafrim](https://github.com/abumafrim)
-- [@Tadesse-Destaw](https://github.com/Tadesse-Destaw)
-- [@keduog](https://github.com/keduog)
-- Ibrahim Ahmad (no GitHub account linked)
 
 Everyone who commits to the repository appears here and on the site's [Contributors page](https://afriplaybook.waraka.org/contributors). If you reviewed, translated, or annotated without committing to GitHub, open an issue or tell us on Discord so we can credit you.
 
