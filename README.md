@@ -15,7 +15,7 @@ The AfriPlaybook follows a dataset from first idea to public release: deciding w
 
 It is written for anyone who builds, or wants to build, a dataset for an African language: students, researchers, linguists, language activists, community organisers, and engineers. No background in machine learning is assumed.
 
-It is not a model-training tutorial. Once you have decided what data you need, the playbook shows you how to build it; the [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course) covers training. See [What this playbook is (and isn't)](https://afriplaybook.waraka.org/introduction/scope-and-strategy) for the full scope.
+It is not a model-training tutorial. Once you have decided what data you need, the playbook shows you how to build it. See [What this playbook is (and isn't)](https://afriplaybook.waraka.org/introduction/scope-and-strategy) for the full scope.
 
 The playbook is maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers, with support from the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub).
 
@@ -32,13 +32,11 @@ The whole book is also available as a [PDF](https://afriplaybook.waraka.org/down
 
 ## Contributing
 
-Datasets for African languages are scarce partly because the people who know the languages and the people who write the guides are rarely the same people. This playbook improves only as far as its readers improve it. Every kind of help counts: fixing a sentence, reviewing a chapter, translating a page, adding a case study, or writing down what happened on your own project.
+The playbook is written by its readers. You can help by fixing a sentence, reviewing a chapter, translating a page, adding a case study, or writing up what you learned on your own project.
 
 ### Three ways to contribute
 
-Pick by the size of your change, not by your git experience.
-
-1. **Edit on the site (easiest).** Open the online editor from the site's **Contribute** menu, sign in with GitHub, make your change, add a short note, and submit. The site opens a pull request for you. No git, no setup.
+1. **Edit on the site (easiest).** Open the online editor from the site's **Contribute** menu, sign in with GitHub, make your change, add a short note, and submit. The site opens a pull request for you. You do not need git or any setup.
 2. **Edit one file on GitHub.** Find the file under [`docs/`](docs/), click the pencil icon, make your change, and click **Propose changes**. GitHub forks the repository for you.
 3. **Fork and pull request.** For new chapters or changes across several files. Open an issue with a short outline first, then fork, clone, run `yarn install --frozen-lockfile` and `yarn start`, write on a branch, run `yarn build`, and open a pull request.
 
@@ -52,7 +50,7 @@ A maintainer reviews every pull request, suggests edits, and merges when it is r
 
 ### Getting help
 
-Ask in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) or on [Discord](https://discord.gg/ChNPHV2PPS). If you are stuck on git, say so. We have walked many first-time contributors through it.
+Ask in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) or on [Discord](https://discord.gg/ChNPHV2PPS). If you are new to git, ask and we will help.
 
 ### Recognition
 
@@ -111,4 +109,4 @@ Built in collaboration with Bayero University Kano, Bahir Dar University, [Hausa
 
 This project follows the [Contributor Covenant](CODE_OF_CONDUCT.md). Be respectful, especially across language and cultural boundaries.
 
-Everything in this repository, the site code, the chapters, the blog posts, and the templates, is released under the [MIT licence](LICENSE). Partner logos remain the property of their owners. By contributing, you agree that your contribution is released under the same licence.
+Everything in this repository is released under the [MIT licence](LICENSE), including the site code, the chapters, the blog posts, and the templates. Partner logos remain the property of their owners. By contributing, you agree that your contribution is released under the same licence.
