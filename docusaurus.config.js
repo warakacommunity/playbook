@@ -17,14 +17,16 @@ dotenv.config({ path: ".env.local" });
 // and the CDN never serve a cached copy of an older PDF.
 const PDF_VERSION = (process.env.GITHUB_SHA || 'dev').slice(0, 7);
 
-// Search. Algolia DocSearch is used when its credentials are present (repo
-// secrets, mapped to env vars in .github/workflows/deploy.yml); otherwise the
-// offline local search index is built. Only one can be active: both register
-// the theme's SearchBar component.
+// Search. Algolia DocSearch (via Algolia's @docsearch/docusaurus-adapter) is
+// used when its credentials are present (repo secrets, mapped to env vars in
+// .github/workflows/deploy.yml); otherwise the offline local search index is
+// built. Only one can be active: both register the theme's SearchBar.
+// ALGOLIA_AGENT_ID is optional: an Agent Studio agent that powers "Ask AI".
 const ALGOLIA = {
   appId: process.env.ALGOLIA_APP_ID || "",
   apiKey: process.env.ALGOLIA_API_KEY || "", // public, search-only key
   indexName: process.env.ALGOLIA_INDEX_NAME || "",
+  agentId: process.env.ALGOLIA_AGENT_ID || "",
 };
 const USE_ALGOLIA = Boolean(ALGOLIA.appId && ALGOLIA.apiKey && ALGOLIA.indexName);
 
@@ -468,7 +470,7 @@ const config = {
       : []),
   ],
 
-  themes: USE_ALGOLIA ? [] : [
+  themes: USE_ALGOLIA ? ["@docsearch/docusaurus-adapter"] : [
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
@@ -498,14 +500,19 @@ const config = {
       // Open Graph / social card image (1200 x 630)
       image: "img/social-card.png",
       ...(USE_ALGOLIA && {
-        algolia: {
+        docsearch: {
           appId: ALGOLIA.appId,
           apiKey: ALGOLIA.apiKey,
-          indexName: ALGOLIA.indexName,
+          indices: [{ name: ALGOLIA.indexName }],
           // Filter results to the current language (en, ha, am, sw, fr, pt).
           contextualSearch: true,
-          searchPagePath: "search",
+          searchPage: { path: "search" },
           insights: false,
+          ...(ALGOLIA.agentId && {
+            // "Ask AI": answers from the Agent Studio agent, grounded in the
+            // index. No per-reader memory on a public site.
+            askAi: { agentId: ALGOLIA.agentId, memory: { enabled: false } },
+          }),
         },
       }),
       colorMode: {

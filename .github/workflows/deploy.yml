@@ -35,6 +35,8 @@ jobs:
       ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
       ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
       ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+      # Agent Studio agent for "Ask AI" (optional; search works without it).
+      ALGOLIA_AGENT_ID: ${{ secrets.ALGOLIA_AGENT_ID }}
       # Raises the GitHub API rate limit (60 → 5000/hr) so the github-contributors
       # plugin can fetch the repo's contributors for the "Thanks to our
       # Contributors" band. Without it the fetch is skipped and the band is hidden.
