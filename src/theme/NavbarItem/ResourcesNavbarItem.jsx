@@ -39,6 +39,7 @@ function MobileList({ section }) {
 export default function ResourcesNavbarItem({ mobile, section }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
+  const leaveTimer = useRef(null);
   // Stable identity: dropdownBus compares closers by reference.
   const close = useCallback(() => setOpen(false), []);
 
@@ -56,17 +57,23 @@ export default function ResourcesNavbarItem({ mobile, section }) {
 
   if (mobile) return <MobileList section={section} />;
 
-  const toggle = () => setOpen((v) => { if (!v) openExclusive(close); return !v; });
+  const show = () => { openExclusive(close); setOpen(true); };
+  // Mouse click on a hover-opened menu should not close it; keyboard (detail 0) toggles.
+  const onClick = (e) => (e.detail === 0 ? setOpen((v) => { if (!v) openExclusive(close); return !v; }) : show());
+  // Hover: open at once, close after a short grace so the pointer can cross
+  // the gap between button and panel. Click stays for touch and keyboard.
+  const onEnter = () => { clearTimeout(leaveTimer.current); show(); };
+  const onLeave = () => { leaveTimer.current = setTimeout(close, 150); };
 
   return (
     // navbar__item: Docusaurus hides it in the bar on mobile; the drawer shows MobileList instead.
-    <div ref={wrapRef} className={`navbar__item ${dd.wrapper}`}>
+    <div ref={wrapRef} className={`navbar__item ${dd.wrapper}`} onMouseEnter={onEnter} onMouseLeave={onLeave}>
       <button
         type="button"
         className={`navbar__link ${dd.menuBtn}${open ? ' ' + dd.menuBtnOpen : ''}`}
         aria-haspopup="true"
         aria-expanded={open}
-        onClick={toggle}
+        onClick={onClick}
       >
         {section} <Chevron open={open} />
       </button>
