@@ -6,13 +6,14 @@ import dd from './StyledNavItem.module.css';
 import { IconBookOpen, IconNewspaper, IconUsers, IconFileText, IconClipboardCheck, IconRocket } from '@site/src/components/Icons';
 
 const SECTIONS = {
-  Learn: [
+  Resources: [
     { to: '/blog', label: 'Blog', desc: 'News, calls, and essays from the community.', Icon: IconNewspaper },
     { to: '/glossary', label: 'Glossary', desc: 'Definitions of terms used in the playbook.', Icon: IconBookOpen },
     { to: '/templates', label: 'Templates', desc: 'Guidelines, cards, and forms to copy.', Icon: IconFileText },
   ],
   Community: [
     { href: 'https://waraka.org', label: 'Waraka Community', desc: 'The community behind this playbook.', Icon: IconUsers },
+    { href: 'https://www.masakhane.io/', label: 'Masakhane Community', desc: 'Grassroots NLP research for African languages.', Icon: IconUsers },
     { href: 'https://docs.afriannotate.org/', label: 'AfriAnnotate', desc: 'Annotation platform for African languages.', Icon: IconClipboardCheck },
     { href: 'https://www.waraka.ai', label: 'Waraka Enterprise', desc: 'Commercial services from Waraka.', Icon: IconRocket },
   ],
@@ -34,7 +35,7 @@ function MobileList({ section }) {
   );
 }
 
-// One instance per section: navbar config passes section: 'Learn' | 'Community'.
+// One instance per section: navbar config passes section: 'Resources' | 'Community'.
 export default function ResourcesNavbarItem({ mobile, section }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);

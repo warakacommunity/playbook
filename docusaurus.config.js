@@ -569,7 +569,7 @@ const config = {
             label: "Contribute",
             position: "left",
           },
-          { type: "custom-ResourcesNavbarItem", section: "Learn", position: "left" },
+          { type: "custom-ResourcesNavbarItem", section: "Resources", position: "left" },
           { type: "custom-ResourcesNavbarItem", section: "Community", position: "left" },
           // Algolia: the DocSearch modal (results as you type, Ctrl/Cmd+K).
           // Local search: the site's own popover that opens the results page.

@@ -319,7 +319,7 @@
 [data-theme='dark'] .aboutMegaItemDesc {
   color: var(--ifm-color-emphasis-600);
 }
-/* Single-column variant of the megamenu (Learn / Community). */
+/* Single-column variant of the megamenu (Resources / Community). */
 .singleMenu {
   flex-direction: column;
   width: 280px;
