@@ -8,7 +8,7 @@ image: /img/blog/tool-testers.png
 draft: false
 ---
 
-We're opening up **[AfriAnnotate](https://docs.afriannotate.org/)**, our open annotation platform, for early testing. If you annotate text or speech for African languages, work on community datasets, or teach data-collection workflows, we'd love your help shaping what we ship in v1.
+We're opening up **[AfriAnnotate](https://afriannotate.waraka.org/)**, our open annotation platform, for early testing. If you annotate text or speech for African languages, work on community datasets, or teach data-collection workflows, we'd love your help shaping what we ship in v1.
 
 <!-- truncate -->
 

@@ -12,7 +12,7 @@ The AfriPlaybook follows a dataset from first idea to public release: deciding w
 
 It is written for anyone who builds, or wants to build, a dataset for an African language: students, researchers, linguists, language activists, community organisers, and engineers. No background in machine learning is assumed and it is not a model-training tutorial.
 
-The playbook is maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers, with support from the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub).
+The playbook is maintained by the [Waraka](https://waraka.org/) community, [Masakhane](https://www.masakhane.io/), and AfricaNLP researchers, with support from the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub/about).
 
 If you find a mistake in a chapter, or have an idea for the playbook, [open an issue](https://github.com/warakacommunity/playbook/issues/new) or start a [discussion](https://github.com/warakacommunity/playbook/discussions). For help, ask in [GitHub Discussions](https://github.com/warakacommunity/playbook/discussions) or on [Discord](https://discord.gg/ChNPHV2PPS).
 
@@ -113,7 +113,7 @@ To add someone, comment on any issue or pull request: `@all-contributors please 
 
 ## Acknowledgements
 
-The AfriPlaybook is supported by the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub), a pan-African initiative building open, culturally grounded datasets for African languages. We are grateful for its support.
+The AfriPlaybook is supported by the [Masakhane African Languages Hub](https://www.masakhane.io/masakhane-african-languages-hub/about), a pan-African initiative building open, culturally grounded datasets for African languages. We are grateful for its support.
 
 Built in collaboration with Bayero University Kano, Bahir Dar University, [HausaNLP](https://hausanlp.org/), and [EthioNLP](https://ethionlp.github.io/).
 

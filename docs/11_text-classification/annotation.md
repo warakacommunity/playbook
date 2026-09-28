@@ -85,7 +85,7 @@ In-house tools are typically open-source applications that can be customized, de
 
 Common self-hosted tools include:
 
-- AfriAnnotate, the playbook's companion annotation tool, built on the Label Studio configuration format: [https://docs.afriannotate.org](https://docs.afriannotate.org)
+- AfriAnnotate, the playbook's companion annotation tool, built on the Label Studio configuration format: [https://afriannotate.waraka.org/](https://afriannotate.waraka.org/)
 - POTATO (Portable Text Annotation Tool): [https://github.com/davidjurgens/potato](https://github.com/davidjurgens/potato)
 - Label Studio (open-source edition): [https://labelstud.io](https://labelstud.io/)
 - Doccano: [https://github.com/doccano/doccano](https://github.com/doccano/doccano)

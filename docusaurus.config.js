@@ -643,7 +643,7 @@ const config = {
               },
               {
                 label: "AfriAnnotate",
-                href: "https://docs.afriannotate.org/",
+                href: "https://afriannotate.waraka.org/",
               },
             ],
           },

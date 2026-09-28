@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 const SUPPORTER = {
   name: 'Masakhane African Languages Hub',
   image: '/img/supporters/masakhane-hub.jpg',
-  url: 'https://www.masakhane.io/masakhane-african-languages-hub',
+  url: 'https://www.masakhane.io/masakhane-african-languages-hub/about',
 };
 
 const PARTNERS = [

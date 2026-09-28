@@ -14,7 +14,7 @@ const SECTIONS = {
   Community: [
     { href: 'https://waraka.org', label: 'Waraka Community', desc: 'The community behind this playbook.', Icon: IconUsers },
     { href: 'https://www.masakhane.io/', label: 'Masakhane Community', desc: 'Grassroots NLP research for African languages.', Icon: IconUsers },
-    { href: 'https://docs.afriannotate.org/', label: 'AfriAnnotate', desc: 'Annotation platform for African languages.', Icon: IconClipboardCheck },
+    { href: 'https://afriannotate.waraka.org/', label: 'AfriAnnotate', desc: 'Annotation platform for African languages.', Icon: IconClipboardCheck },
     { href: 'https://www.waraka.ai', label: 'Waraka Enterprise', desc: 'Commercial services from Waraka.', Icon: IconRocket },
   ],
 };
