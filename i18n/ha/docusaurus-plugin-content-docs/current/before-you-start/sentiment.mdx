@@ -1,0 +1,81 @@
+---
+sidebar_position: 5
+title: Ra'ayi
+ready: true
+last_update:
+  date: 2026-09-26
+  author: Shamsudddeen Hassan Muhammad
+translation_status: machine
+source_hash: fdd406dd6a9a
+translated_at: 2026-09-28
+---
+
+# Binciken ra'ayi (Sentiment analysis) {#sentiment-analysis}
+
+*Misali a aikace. Bita ta ƙarshe: 2026-07-07.*
+
+Wannan shafi yana amfani da [matakai huɗu daga Kafin Ka Fara](/before-you-start/) akan binciken ra'ayi (sentiment analysis): yanke shawara ko rubutu yana da kyakkyawan ra'ayi (positive), mummunan ra'ayi (negative), ko kuma ba ruwansa (neutral). Yana amfani da **AfriSenti** da **NaijaSenti** a matsayin misalai saboda su ne manyan rumbun bayanai na ra'ayi (sentiment datasets) da al'umma suka gina don harsunan Afirka, waɗanda masu jin harshen a matsayin na asali suka yi wa lakabi (annotation). Idan ba a ambaci harshenka a nan ba, koma baya zuwa [Mataki na 1](/before-you-start/#step-1-search-for-prior-work) sannan ka yi bincike.
+
+## Mataki na 1: Abin da bincike ya samo {#step-1-what-a-search-turns-up}
+
+Bincika Hugging Face, Lanfrica, ko ACL Anthology don ra'ayi a kusan kowane babban harshen Afirka kuma da sauri za ka ci karo da rumbun bayanai (datasets) guda biyu:
+
+- **[AfriSenti](https://arxiv.org/abs/2302.08956)** ([Muhammad et al., 2023](https://aclanthology.org/2023.emnlp-main.862/)): fiye da saƙonnin Twitter (tweets) 110,000 a cikin harsuna 14. Amharic, Larabcin Aljeriya, Hausa, Igbo, Kinyarwanda, Larabcin Maroko, Harshen Fotigal na Mozambik, Nigerian Pidgin, Oromo, Swahili, Tigrinya, Twi, Xitsonga, da Yoruba. An kuma yi amfani da shi a cikin [AfriSenti-SemEval 2023 shared task](https://afrisenti-semeval.github.io/), don haka tsare-tsare da yawa da aka wallafa suna bayar da rahoton sakamako a kansa.
+- **[NaijaSenti](https://arxiv.org/abs/2201.08277)** ([Muhammad et al., 2022](https://aclanthology.org/2022.lrec-1.63/)): rumbun bayanan Najeriya na farko wanda AfriSenti ya samo asali daga gare shi. Hausa, Igbo, Nigerian Pidgin, da Yoruba, tare da kusan saƙonnin Twitter 30,000 ga kowane harshe (kusan 14,000 don Nigerian Pidgin). Takardar bincikensa ta kuma fitar da ƙamus na ra'ayi (sentiment lexicons).
+
+AfriSenti yana kan [Hugging Face Hub](https://huggingface.co/datasets/shmuhammad/AfriSenti-twitter-sentiment), kuma [GitHub repository](https://github.com/afrisenti-semeval/afrisent-semeval-2023) yana da bayanan, tsarin ƙididdigewa (evaluation script), da lakabin kowane mai yin lakabi (annotator labels) don harsuna da yawa. NaijaSenti yana kan Hub a matsayin [HausaNLP/NaijaSenti-Twitter](https://huggingface.co/datasets/HausaNLP/NaijaSenti-Twitter).
+
+Za ka kuma sami **kwafin irin waɗannan bayanan** da wasu asusu suka ɗora, da kuma ƙananan **rumbun bayanai na ra'ayi da aka gina ta hanyar fassara bayanan Ingilishi** ko sanya wa saƙonnin Twitter lakabi ta atomatik da alamomin motsin rai (emojis) ko kalmomin shiga (keywords). Kwafi suna da ban sha'awa saboda suna saukewa cikin sauƙi. Bayanan da aka fassara da waɗanda aka yi wa lakabi ta atomatik suna da ban sha'awa saboda suna da arha. Mataki na 2 shi ne inda za ka duba lasisin (licence) kwafin da ka sauke a zahiri, da kuma ko lakabin da aka samar ta atomatik yana nuna yadda mutane a cikin harshenka suke bayyana yadda suke ji.
+
+## Mataki na 2: Auna AfriSenti da jerin abubuwan dubawa {#step-2-judging-afrisenti-against-the-checklist}
+
+- **Lasisi (Licence).** Duba kwafin da kake amfani da shi. Babban katin Hugging Face yana cewa CC BY 4.0, amma wasu kwafin da ke kan Hub an yi musu alama da CC BY-NC-SA (non-commercial, share-alike). Idan kana gina wani samfuri, tabbatar da lasisin tare da marubutan tukuna.
+- **Samun Dama (Access).** Ana iya saukewa a buɗe daga Hugging Face da GitHub.
+- **Dacewa (Fit).** Rubutun Twitter/X kawai. Yana da gajarta, ba na yau da kullum ba, kuma yana cike da gajerun kalmomi da alamun maudu'i (hashtags). Rubutun tattaunawar sabis na abokan ciniki, binciken lafiya, rubutu na yau da kullum, ko dogayen tsokaci sun bambanta sosai. Koyaushe ka gina saitin ƙididdigewa (evaluation set) daga ainihin fagen da kake son yin aiki a kai.
+- **Al'ada (Culture).** Abin da ake ɗauka a matsayin mummunan ra'ayi a wata al'ada ana iya ɗaukarsa a matsayin ba ruwansa ko ma na girmamawa a wata al'adar. Sukar a fakaice ta zama ruwan dare a cikin mahallin harsunan Afirka da yawa kuma galibi masu yin lakabi (annotators) daga wajen al'adar suna yi masa lakabi da ba ruwansa. Karanta ɓangaren lakabi na takardar binciken kafin ka rubuta naka ƙa'idojin.
+- **Cakuɗa harshe (Code-switching).** Abu ne na yau da kullum, ba wani yanayi ne da ba a cika samunsa ba. Saƙonnin Twitter a kowane harshe da aka haɗa suna cakuɗawa da Ingilishi, Faransanci, Larabci, ko wani yaren sadarwa na yanki. Bayananka ma za su kasance haka.
+- **Rubutu (Script).** Amharic da Tigrinya suna cikin rubutun Ge'ez. Saƙonnin Twitter na Larabcin Aljeriya da Maroko na iya bayyana a cikin rubutun Larabci ko na Latin. Tabbatar cewa sarrafa rubutunka (text processing) yana iya ɗaukar duka biyun.
+- **Lakabi (Labels).** Rukunoni uku: kyakkyawan ra'ayi (positive), mummunan ra'ayi (negative), ba ruwansa (neutral). Ba ruwansa shi ne rukuni mafi wahala. Ba'a, ra'ayoyi masu cin karo da juna, bayani a fakaice, da tsantsar gaskiya duk suna ƙarewa a nan. Bayar da rahoton sakamako ga kowane rukuni, ba kawai jimillar maki ba (duba [ƙa'idojin asali](/introduction/core-principles)).
+- **Iyakar lakabi (Label scope).** Karkatar ra'ayi (polarity) ba motsin rai (emotion), matsayi (stance), rarrabuwar kawuna (polarization), ko cutarwa ba ne. Idan kana buƙatar lakabin motsin rai, duba [binciken motsin rai (emotion analysis)](/text-classification/emotion-analysis). Idan kana buƙatar daidaita abubuwan da ke ciki, duba [binciken kalaman ƙiyayya (hate speech analysis)](/text-classification/hate-speech-analysis). Idan kana buƙatar gano gaba tsakanin ƙungiyoyi, duba bayanan rarrabuwar kawuna kamar [POLAR](https://arxiv.org/abs/2505.20624). Kada ka sake amfani da lakabin AfriSenti don waɗannan ayyukan.
+- **Rabe-rabe (Splits).** Tabbatattun rabe-raben horarwa (train), haɓakawa (development), da gwaji (test) don kowane harshe, don haka ana iya kwatanta sakamako a tsakanin takardun bincike. Saitunan gwajin (test sets) sun kasance a buɗe ga jama'a tun 2023.
+- **Ƙa'idoji (Guidelines).** Wani ɓangare. Ma'adanar (repository) tana da fayil ɗin ƙa'idoji don Larabcin Aljeriya kawai. Takardar binciken ta bayyana tsarin yin lakabi (annotation) don kowane harshe.
+- **Inganci (Quality).** Masu jin harshen a matsayin na asali ne suka yi masa lakabi. An fitar da lakabin kowane mai yin lakabi don harsuna da yawa, don haka za ka iya auna daidaituwar (agreement) da kanka.
+- **Sirri (Privacy).** An ɓoye sunayen masu saƙonnin Twitter: an maye gurbin ambaton masu amfani da `@user` kuma an cire URLs. Idan ka tattara sabbin bayanan kafofin watsa labarun, yi hakan, kuma ka duba sharuɗɗan dandamalin kafin ka sake rarraba shi.
+- **Canja wuri (Transfer).** Ra'ayi ya dogara ne akan kalmomi da karin magana na musamman ga al'ada. Ba ya canja wuri sosai tsakanin harsuna idan aka kwatanta da ayyukan tsari kamar NER. Auna canjin wurin kafin ka dogara da shi.
+
+## Mataki na 3: Sake amfani, faɗaɗawa, ko ginawa {#step-3-reuse-extend-or-build}
+
+Nemo layin da ya dace da yanayinka, sannan ka bi shi a tsallake. Tambayar farko ita ce ko AfriSenti ko NaijaSenti sun haɗa da harshenka.
+
+<div className="decision-table">
+
+| Abin da ka gano | Zaɓinka | Abin da za ka yi |
+| --- | --- | --- |
+| Harshenka yana **ciki** a AfriSenti (harsuna 14) ko NaijaSenti (harsunan Najeriya 4), kuma rubutun Twitter/X yana kusa da fagenka | **Sake amfani da AfriSenti ko NaijaSenti** | Kada ka gina sabon rumbun bayanai (corpus). Duba lasisin, sannan ka ba da ƙarfinka wajen yin bita mai kyau ta ɗan adam akan sakamakon da ke kan bayananka. |
+| Harshenka yana **ciki**, amma fagenka ya **bambanta** (rubutu na yau da kullum, maganganun kasuwa, lafiya, sabis na abokan ciniki) | **Faɗaɗa shi** | Da farko gina saitin ƙididdigewa (evaluation set) na misalai 500–2,000 daga ainihin fagenka. Sai kawai idan AfriSenti bai yi aiki sosai ba, ƙara ƙaramin saitin horarwa (training set) na fagen na misalai 2,000–5,000, ta amfani da irin waɗannan lakabi guda uku. |
+| Harshenka **ba ya ciki**, amma yana da **alaƙa** da harshen da ke ciki | **Aro, sannan ka gina kaɗan** | Gwada [canja wuri tsakanin harsuna (cross-language transfer)](/cross-language-transfer) daga harshen da ke ciki mafi kusa, sannan ka gina ƙaramin saitin ƙididdigewa a cikin yarenka. Ra'ayi yana canja wuri a raunane, don haka auna kafin ka dogara da shi. |
+| Harshenka **ba ya ciki** kuma **ba shi da alaƙa** da harshen da ke ciki | **Gina tun daga farko** | Fara da babi na [shigar da harshe mai ƙarancin bayanai (long-tail language onboarding)](/long-tail-language), sannan [Tattara Bayanai (Data Collection)](/data-collection/Overview), [Tsarin Lakabi (Annotation Design)](/annotation-design/annotation-task-design), da [Ingancin Bayanai (Data Quality)](/data-quality). Karanta takardar binciken AfriSenti kafin ka rubuta ƙa'idojinka, kuma ka fara da gwajin misalai 2,000–5,000. |
+
+</div>
+
+## Mataki na 4: Koyo daga mutanen da suka gina shi {#step-4-learning-from-the-people-who-built-it}
+
+Masu bincike da masu yin lakabi waɗanda suke jin harshen a matsayin na asali a ƙasashen Afirka da yawa ne suka gina AfriSenti, suna aiki a tsarin haɗin gwiwa.
+
+**Karanta da farko:**
+
+- **[Takardar binciken AfriSenti](https://aclanthology.org/2023.emnlp-main.862/)** (Muhammad et al., 2023): rumbun bayanan harsuna 14, musamman ɓangaren ƙalubalen tattara kowane harshe.
+- **[Takardar binciken NaijaSenti](https://aclanthology.org/2022.lrec-1.63/)** (Muhammad et al., 2022): yadda aka tattara, aka tace, kuma aka yi wa saƙonnin Twitter a cikin harsunan Najeriya huɗu lakabi.
+- **[Takardar bincike na haɗin gwiwa](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto et al., 2020): tsarin aiki na Masakhane wanda AfriSenti ke bi.
+
+**Tambayoyin da za a yi wa marubutan:**
+
+1. Ta yaya kuka yanke shawarar abin da ake ƙirgawa a matsayin ba ruwansa, kuma a ina ne masu yin lakabi suka fi samun saɓani?
+2. Ta yaya kuka sami isassun saƙonnin Twitter a cikin harsunan da ba su da ayyukan Twitter sosai?
+3. Me za ku canza game da ƙa'idojin idan za ku sake farawa?
+
+## Ƙarin karatu {#further-reading}
+
+- [Inganci a taƙaice (Kreutzer et al., 2022)](https://aclanthology.org/2022.tacl-1.4/): binciken bayanan da aka samo daga intanet masu ƙarancin asali. Karanta shi kafin ka amince da bayanan ra'ayi da aka samo ko aka yi wa lakabi ta atomatik.
+
+Da zarar kana da bayananka, an yi bayani sosai a wani wuri game da horar da ƙirar (model). [Koyarwar rarraba jeri na Hugging Face (Hugging Face sequence classification tutorial)](https://huggingface.co/docs/transformers/tasks/sequence_classification) wuri ne mai kyau don farawa.

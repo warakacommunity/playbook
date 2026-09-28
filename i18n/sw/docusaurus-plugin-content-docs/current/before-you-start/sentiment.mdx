@@ -1,0 +1,81 @@
+---
+sidebar_position: 5
+title: Hisia
+ready: true
+last_update:
+  date: 2026-09-26
+  author: Shamsudddeen Hassan Muhammad
+translation_status: machine
+source_hash: fdd406dd6a9a
+translated_at: 2026-09-28
+---
+
+# Uchanganuzi wa hisia (Sentiment analysis) {#sentiment-analysis}
+
+*Mfano uliofanyiwa kazi. Ilipitiwa mwisho: 2026-07-07.*
+
+Ukurasa huu unatumia [hatua nne kutoka Kabla Hujanza](/sw/before-you-start/) kwenye uchanganuzi wa hisia (sentiment analysis): kuamua ikiwa matini ni chanya, hasi, au ya wastani. Unatumia **AfriSenti** na **NaijaSenti** kama mifano kwa sababu ndiyo seti za data (datasets) kubwa zaidi za hisia zilizojengwa na jamii kwa lugha za Kiafrika, zilizowekewa lakabi (annotated) na wazungumzaji wazawa. Ikiwa lugha yako haijatajwa hapa, rudi kwenye [Hatua ya 1](/sw/before-you-start/#step-1-search-for-prior-work) na utafute.
+
+## Hatua ya 1: Kile ambacho utafutaji unaleta {#step-1-what-a-search-turns-up}
+
+Tafuta Hugging Face, Lanfrica, au ACL Anthology kwa hisia katika karibu lugha yoyote kuu ya Kiafrika na haraka utafikia seti mbili za data:
+
+- **[AfriSenti](https://arxiv.org/abs/2302.08956)** ([Muhammad na wenzake, 2023](https://aclanthology.org/2023.emnlp-main.862/)): zaidi ya twiti 110,000 katika lugha 14. Kiamhari, Kiarabu cha Algeria, Kihausa, Kiigbo, Kinyarwanda, Kiarabu cha Morocco, Kireno cha Msumbiji, Pijini ya Nigeria, Kioromo, Kiswahili, Kitigrinya, Kitwi, Kixitsonga, na Kiyoruba. Ilitumiwa pia katika [AfriSenti-SemEval 2023 shared task](https://afrisenti-semeval.github.io/), kwa hivyo mifumo mingi iliyochapishwa inaripoti matokeo kuitumia.
+- **[NaijaSenti](https://arxiv.org/abs/2201.08277)** ([Muhammad na wenzake, 2022](https://aclanthology.org/2022.lrec-1.63/)): seti ya data ya awali ya Nigeria ambayo AfriSenti ilitokana nayo. Kihausa, Kiigbo, Pijini ya Nigeria, na Kiyoruba, zikiwa na takriban twiti 30,000 kwa kila lugha (kama 14,000 kwa Pijini ya Nigeria). Chapisho lake pia lilitoa leksikoni za hisia (sentiment lexicons).
+
+AfriSenti ipo kwenye [Hugging Face Hub](https://huggingface.co/datasets/shmuhammad/AfriSenti-twitter-sentiment), na [GitHub repository](https://github.com/afrisenti-semeval/afrisent-semeval-2023) ina data, hati ya tathmini (evaluation script), na lakabi za kila mweka lakabi (annotator) kwa lugha kadhaa. NaijaSenti ipo kwenye Hub kama [HausaNLP/NaijaSenti-Twitter](https://huggingface.co/datasets/HausaNLP/NaijaSenti-Twitter).
+
+Pia utapata **nakala za data hiyohiyo** zilizopakiwa na akaunti nyingine, na **seti ndogo za data za hisia zilizojengwa kwa kutafsiri data ya Kiingereza** au kuweka lakabi kwenye twiti kiotomatiki kwa kutumia emoji au maneno muhimu. Nakala zinavutia kwa sababu zinapakia kwa urahisi. Data iliyotafsiriwa na kuwekewa lakabi kiotomatiki inavutia kwa sababu ni ya bei nafuu. Hatua ya 2 ni pale unapokagua leseni ya nakala unayopakua haswa, na ikiwa lakabi zilizozalishwa kiotomatiki zinaonyesha jinsi watu katika lugha yako wanavyoelezea hisia.
+
+## Hatua ya 2: Kutathmini AfriSenti dhidi ya orodha ya ukaguzi {#step-2-judging-afrisenti-against-the-checklist}
+
+- **Leseni (Licence).** Kagua nakala unayotumia. Kadi kuu ya Hugging Face inasema CC BY 4.0, lakini nakala nyingine kwenye Hub zimewekewa lebo ya CC BY-NC-SA (isiyo ya kibiashara, shiriki-sawa). Ikiwa unaunda bidhaa, thibitisha leseni na waandishi kwanza.
+- **Ufikiaji (Access).** Inapakuliwa wazi kutoka Hugging Face na GitHub.
+- **Ufaafu (Fit).** Matini ya Twitter/X pekee. Ni fupi, isiyo rasmi, na imejaa vifupisho na lebo za reli (hashtags). Nakala za huduma kwa wateja, tafiti za afya, uandishi rasmi, au maoni marefu huonekana tofauti sana. Kila mara jenga seti ya tathmini (evaluation set) kutoka kwenye kikoa chako lengwa.
+- **Utamaduni (Culture).** Kile kinachosomwa kama hasi katika utamaduni mmoja kinaweza kusomwa kama cha wastani au hata cha heshima katika mwingine. Ukosoaji usio wa moja kwa moja ni wa kawaida katika miktadha mingi ya lugha za Kiafrika na mara nyingi huwekewa lakabi ya wastani na waweka lakabi kutoka nje ya utamaduni huo. Soma sehemu ya uwekaji lakabi ya chapisho kabla ya kuandika miongozo yako mwenyewe.
+- **Ubadilishaji msimbo (Code-switching).** Ni jambo la kawaida, si hali ya kipekee. Twiti katika kila lugha iliyojumuishwa huchanganya Kiingereza, Kifaransa, Kiarabu, au lugha ya mawasiliano ya kikanda. Data yako itafanya hivyo pia.
+- **Hati (Script).** Kiamhari na Kitigrinya vipo katika hati ya Ge'ez. Twiti za Kiarabu cha Algeria na Morocco zinaweza kuonekana katika hati ya Kiarabu au ya Kilatini. Hakikisha kwamba uchakataji wako wa matini unashughulikia zote mbili.
+- **Lakabi (Labels).** Madaraja matatu: chanya, hasi, wastani. Wastani ndilo daraja gumu zaidi. Kejeli, hisia mseto, usemi usio wa moja kwa moja, na ukweli mtupu vyote huishia hapo. Ripoti matokeo kwa kila daraja, si tu alama ya jumla (tazama [kanuni za msingi](/sw/introduction/core-principles)).
+- **Upeo wa lakabi (Label scope).** Uelekeo (Polarity) si hisia za ndani (emotion), msimamo (stance), mgawanyiko (polarization), au madhara (harm). Ikiwa unahitaji lakabi za hisia za ndani, tazama [uchanganuzi wa hisia za ndani](/sw/text-classification/emotion-analysis). Ikiwa unahitaji usimamizi wa maudhui, tazama [uchanganuzi wa matamshi ya chuki](/sw/text-classification/hate-speech-analysis). Ikiwa unahitaji kutambua uhasama kati ya makundi, angalia data ya mgawanyiko kama vile [POLAR](https://arxiv.org/abs/2505.20624). Usitumie tena lakabi za AfriSenti kwa kazi hizi.
+- **Migawanyo (Splits).** Migawanyo thabiti ya mafunzo (train), uendelezaji (development), na majaribio (test) kwa kila lugha, ili matokeo yaweze kulinganishwa kwenye machapisho mbalimbali. Seti za majaribio zimekuwa wazi kwa umma tangu 2023.
+- **Miongozo (Guidelines).** Kiasi. Hifadhi (repository) ina faili la miongozo kwa Kiarabu cha Algeria pekee. Chapisho linaelezea mchakato wa uwekaji lakabi kwa kila lugha.
+- **Ubora (Quality).** Imewekewa lakabi na wazungumzaji wazawa. Lakabi za kila mweka lakabi zimetolewa kwa lugha kadhaa, kwa hivyo unaweza kupima makubaliano (agreement) wewe mwenyewe.
+- **Faragha (Privacy).** Twiti zilifanywa zisijulikane (anonymised): majina ya watumiaji yalibadilishwa na `@user` na viungo (URLs) viliondolewa. Ikiwa unakusanya data mpya ya mitandao ya kijamii, fanya vivyo hivyo, na ukague masharti ya jukwaa kabla ya kuisambaza tena.
+- **Uhamishaji (Transfer).** Hisia hutegemea maneno na nahau mahususi za kitamaduni. Huhamishwa kwa kiwango cha chini kati ya lugha ikilinganishwa na kazi za kimuundo kama vile NER. Pima uhamishaji kabla ya kuutegemea.
+
+## Hatua ya 3: Tumia tena, panua, au jenga {#step-3-reuse-extend-or-build}
+
+Tafuta safu mlalo inayolingana na hali yako, kisha uifuate. Swali la kwanza ni ikiwa lugha yako imejumuishwa kwenye AfriSenti au NaijaSenti.
+
+<div className="decision-table">
+
+| Kile ulichopata | Chaguo lako | Nini cha kufanya |
+| --- | --- | --- |
+| Lugha yako **imejumuishwa** kwenye AfriSenti (lugha 14) au NaijaSenti (lugha 4 za Nigeria), na matini ya Twitter/X inakaribiana na kikoa chako | **Tumia tena AfriSenti au NaijaSenti** | Usijenge kopasi (corpus) mpya. Kagua leseni, kisha tumia juhudi zako kwenye ukaguzi makini wa binadamu wa matokeo kwenye data yako mwenyewe. |
+| Lugha yako **imejumuishwa**, lakini kikoa chako ni **tofauti** (uandishi rasmi, mazungumzo ya sokoni, afya, huduma kwa wateja) | **Ipanue** | Kwanza jenga seti ya tathmini ya mifano 500–2,000 kutoka kwenye kikoa chako mwenyewe. Ikiwa tu AfriSenti haifanyi kazi vizuri vya kutosha, ongeza seti ndogo ya mafunzo ya ndani ya kikoa ya mifano 2,000–5,000, ukitumia lakabi zilezile tatu. |
+| Lugha yako **haijajumuishwa**, lakini **inahusiana** na lugha iliyojumuishwa | **Azima, kisha jenga kidogo** | Jaribu [uhamishaji wa lugha tofauti (cross-language transfer)](/cross-language-transfer) kutoka kwa lugha iliyojumuishwa iliyo karibu zaidi, kisha jenga seti ndogo ya tathmini katika lugha yako mwenyewe. Hisia huhamishwa kwa udhaifu, kwa hivyo pima kabla ya kuitegemea. |
+| Lugha yako **haijajumuishwa** na **haihusiani** na lugha iliyojumuishwa | **Jenga kuanzia mwanzo** | Anza na sura ya [kuingiza lugha za mkia mrefu (long-tail language onboarding)](/long-tail-language), kisha [Ukusanyaji wa Data](/data-collection/Overview), [Usanifu wa Uwekaji Lakabi](/annotation-design/annotation-task-design), na [Ubora wa Data](/data-quality). Soma chapisho la AfriSenti kabla ya kuandika miongozo yako, na uanze na majaribio (pilot) ya mifano 2,000–5,000. |
+
+</div>
+
+## Hatua ya 4: Kujifunza kutoka kwa watu walioijenga {#step-4-learning-from-the-people-who-built-it}
+
+AfriSenti ilijengwa na watafiti na waweka lakabi wazawa katika nchi nyingi za Kiafrika, wakifanya kazi kwa njia shirikishi.
+
+**Soma kwanza:**
+
+- **[Chapisho la AfriSenti](https://aclanthology.org/2023.emnlp-main.862/)** (Muhammad na wenzake, 2023): seti ya data ya lugha 14, hasa sehemu inayohusu changamoto za kuratibu kila lugha.
+- **[Chapisho la NaijaSenti](https://aclanthology.org/2022.lrec-1.63/)** (Muhammad na wenzake, 2022): jinsi twiti katika lugha nne za Nigeria zilivyokusanywa, kuchujwa, na kuwekewa lakabi.
+- **[Chapisho la utafiti shirikishi](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto na wenzake, 2020): njia ya ufanyaji kazi ya Masakhane ambayo AfriSenti inafuata.
+
+**Maswali ya kuwauliza waandishi:**
+
+1. Mliamuaje kile kinachohesabika kama cha wastani, na ni wapi waweka lakabi walitofautiana zaidi?
+2. Mlipataje twiti za kutosha katika lugha zenye shughuli chache za Twitter?
+3. Mungebadilisha nini kuhusu miongozo ikiwa mungeanza tena?
+
+## Usomaji zaidi {#further-reading}
+
+- [Ubora kwa muhtasari (Kreutzer na wenzake, 2022)](https://aclanthology.org/2022.tacl-1.4/): ukaguzi wa data ya rasilimali chache iliyokusanywa kutoka kwenye wavuti. Isome kabla ya kuamini data ya hisia iliyokwanguliwa (scraped) au kuwekewa lakabi kiotomatiki.
+
+Mara tu unapokuwa na data yako, kutoa mafunzo kwa modeli kumeshughulikiwa vizuri kwingineko. [Mafunzo ya uainishaji wa mfuatano ya Hugging Face (sequence classification tutorial)](https://huggingface.co/docs/transformers/tasks/sequence_classification) ni mwanzo mzuri.

@@ -7,6 +7,7 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import localizeDocLinks from "./src/remark/localizeDocLinks.mjs";
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 
@@ -135,6 +136,9 @@ const config = {
           // progress: false, // ADD THIS LINE TO PREVENT THE CRASH
           // editUrl removed — "Suggest Edit" modal handles community edits instead.
           remarkPlugins: [remarkMath],
+          // Resolve chapter-to-chapter links per locale so partly translated
+          // locales build (see the plugin file for why).
+          beforeDefaultRemarkPlugins: [localizeDocLinks],
           rehypePlugins: [rehypeKatex],
         },
         blog: {

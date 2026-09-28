@@ -556,5 +556,13 @@
   "theme.tags.tagsPageTitle": {
     "message": "Alama",
     "description": "The title of the tag list page"
+  },
+  "translation.machine.title": {
+    "message": "Tafsiri ya mashine",
+    "description": "Title of the notice shown on machine-translated chapters"
+  },
+  "translation.machine.body": {
+    "message": "Mzungumzaji asilia bado hajakagua ukurasa huu. Maneno yanaweza kuwa si sahihi na maneno ya kiufundi yanaweza kuwa na makosa. Marekebisho yanakaribishwa kupitia menyu ya Changia.",
+    "description": "Body of the notice shown on machine-translated chapters"
   }
 }

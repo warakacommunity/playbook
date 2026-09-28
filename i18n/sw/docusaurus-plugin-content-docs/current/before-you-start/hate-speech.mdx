@@ -1,0 +1,79 @@
+---
+sidebar_position: 6
+title: Matamshi ya chuki na usalama wa maudhui
+ready: true
+last_update:
+  date: 2026-09-26
+  author: Shamsudddeen Hassan Muhammad
+translation_status: machine
+source_hash: 05bc8c0e2150
+translated_at: 2026-09-28
+---
+
+# Matamshi ya chuki na usalama wa maudhui {#hate-speech-and-content-safety}
+
+*Mfano uliofanyiwa kazi. Ilipitiwa mwisho: 2026-07-07.*
+
+Ukurasa huu unatumia [hatua nne kutoka Kabla Hujaanza](/sw/before-you-start/) katika utambuzi wa matamshi ya chuki na lugha ya matusi. Unatumia **AfriHate** kama mfano kwa sababu ni mkusanyiko mkubwa zaidi wa matamshi ya chuki uliojengwa na jamii kwa lugha za Kiafrika, ukiwa na waweka lakabi (annotators) wazawa na karatasi iliyochapishwa. Kuna seti za data (datasets) nyingi ndogo za lugha moja, na mpya hujitokeza mara kwa mara. Ikiwa lugha yako haijatajwa hapa, rudi kwenye [Hatua ya 1](/sw/before-you-start/#step-1-search-for-prior-work) na utafute.
+
+Kazi hii ni tofauti na nyingine katika sura hii kwa njia tatu. Waweka lakabi husoma maudhui yenye madhara kwa saa nyingi, hivyo wanahitaji msaada kuanzia siku ya kwanza. Kiainishi (classifier) kinachotumika kwa udhibiti wa kiotomatiki kinaweza kusababisha madhara yale yale kinachokusudiwa kuyapunguza. Na kile kinachohesabika kama chuki kinabishaniwa, kiutamaduni na kisiasa.
+
+## Hatua ya 1: Kile ambacho utafutaji unaibua {#step-1-what-a-search-turns-up}
+
+Tafuta Hugging Face, Lanfrica, au ACL Anthology kwa matamshi ya chuki katika lugha kuu ya Kiafrika na utapata seti za data nyingi ndogo, kila moja ikiwa na lakabi (labels) na miongozo yake. Ile inayoleta nyingi kati ya hizo pamoja ni:
+
+- **[AfriHate](https://aclanthology.org/2025.naacl-long.92/)** (Muhammad na wenzake, 2025): jumbe za Twitter (tweets) katika lugha 15. Kiarabu cha Algeria, Kiamhari, Kihausa, Kiigbo, Kinyarwanda, Kiarabu cha Morocco, Pijini ya Nigeria, Kioromo, Kisomali, Kiswahili, Kitigrinya, Kitwi, Kixhosa, Kiyoruba, na Kizulu. Kila ujumbe umewekewa lakabi ya chuki, matusi, au kawaida, na jumbe za chuki pia hubeba mlengwa (kabila, siasa, jinsia, ulemavu, dini, au nyinginezo).
+
+Data ipo kwenye [Hugging Face Hub](https://huggingface.co/datasets/afrihate/afrihate). Hifadhi ya [GitHub](https://github.com/AfriHate/AfriHate) inaorodhesha waratibu wa lugha, ambao ni watu wazuri wa kuwasiliana nao.
+
+Pia utapata seti za data kwa ajili ya **kazi zinazokaribiana** ambazo zinaonekana kufaa: data za hisia kama vile [BRIGHTER](https://arxiv.org/abs/2502.11926) (lugha 28, zikiwa na lakabi zinazojumuisha hasira na kinyaa), au data za mgawanyiko kama vile [POLAR](https://arxiv.org/abs/2505.20624) (lugha 22, zikiwemo Kiamhari, Kihausa, na Kiswahili).
+
+## Hatua ya 2: Kutathmini AfriHate dhidi ya orodha ya ukaguzi {#step-2-judging-afrihate-against-the-checklist}
+
+- **Leseni.** Kadi ya Hugging Face inaorodhesha Apache 2.0, ambayo inaruhusu matumizi ya kibiashara. Maandishi ni jumbe za Twitter, hivyo pia angalia ikiwa masharti ya jukwaa hilo yanaathiri kile unachopanga kufanya.
+- **Ufikiaji.** Imefungwa (gated). Lazima uingie kwenye Hugging Face na ukubali kushiriki maelezo yako ya mawasiliano kabla ya kuweza kuipakua.
+- **Ufaafu.** Machapisho ya Twitter/X kuanzia 2012 hadi 2023. Maoni kwenye majukwaa mengine, simu za redioni, jumbe za WhatsApp, au mabaraza ya mtandaoni yanaonekana tofauti. Matamshi ya chuki pia hubadilika haraka: maneno mapya ya kashfa (slurs), maneno ya siri, na tahajia hujitokeza wakati wote, hivyo data za zamani huzikosa.
+- **Hati.** Zaidi ni Hati ya Kilatini. Kiamhari na Kitigrinya zipo katika Hati ya Kiethiopia, Kiarabu cha Algeria kipo katika Hati ya Kiarabu, na Kiarabu cha Morocco kinaonekana katika Hati ya Kiarabu na ya Kilatini.
+- **Kuchanganya ndimi (code-switching).** Matamshi ya chuki ya lugha za Kiafrika mara nyingi huchanganya Kiingereza, Kifaransa, au Kiarabu, na sehemu ya kuudhi mara nyingi huwa pale ambapo mabadiliko ya lugha yanatokea. Angalia ni kiasi gani cha maandishi unayolenga kinachanganya lugha, na ujumuishe maandishi kama hayo katika tathmini yako.
+- **Lakabi.** Chuki, matusi, na kawaida, pamoja na mlengwa kwa jumbe za chuki. Kile kinachohesabika kama chuki ni mahususi kwa utamaduni, eneo, na wakati: neno ambalo halina upande wowote mahali fulani linaweza kubeba historia ya vurugu mahali pengine. Soma fasili za karatasi kabla ya kudhani kuwa zinaendana na zako. Usiingize mfumo wa lakabi kutoka kwenye kopasi ya Kiingereza bila kushauriana na jamii zilizoathiriwa.
+- **Migawanyo (splits).** Migawanyo isiyobadilika. Kila seti ya majaribio (test set) ina angalau mifano 100 ya kila tabaka (class), hivyo tabaka nadra la chuki linaweza kupimwa. Maudhui halisi mara nyingi si chuki, hivyo pia ripoti matokeo kwa kila tabaka pamoja na idadi ya mifano, si tu alama moja ya jumla.
+- **Miongozo.** Karatasi inaelezea fasili, orodha za maneno muhimu, na mchakato wa uwekaji lakabi. Angalia kile kilichotolewa kabla ya kupanga kuvitumia tena, na waulize waandishi ikiwa huwezi kupata miongozo kamili.
+- **Ubora.** Imewekewa lakabi na wazawa kutoka kwenye jamii za mitaa, kukiwa na waweka lakabi watatu au wanne kwa kila ujumbe. Makubaliano yanaripotiwa kwa kila lugha na kuanzia 0.46 hadi 0.81 (Randolph's kappa), hivyo ubora unatofautiana kulingana na lugha. Angalia namba ya lugha yako. Lakabi za mtu mmoja mmoja zimetolewa, jambo ambalo husaidia ikiwa unataka kusoma kutokubaliana.
+- **Nyaraka.** Karatasi ina sehemu za mapungufu na maadili. Jumbe zilipatikana kwa orodha za maneno muhimu, hivyo data ina upendeleo wa uteuzi (selection bias): ina chuki tu inayolingana na maneno ambayo timu ilitafuta. API ya kitaaluma ya Twitter/X iliyotumika kuikusanya si ya bure tena, hivyo kupanua data kwa njia hiyo hiyo ni ngumu zaidi leo.
+
+## Hatua ya 3: Tumia tena, panua, au jenga {#step-3-reuse-extend-or-build}
+
+Tafuta safu mlalo inayoendana na hali yako, kisha ifuate kuelekea kulia. Swali la kwanza ni ikiwa lugha yako inajumuishwa na AfriHate.
+
+<div className="decision-table">
+
+| Kile ulichopata | Chaguo lako | Nini cha kufanya |
+| --- | --- | --- |
+| Lugha yako **inajumuishwa** na AfriHate, na lakabi zake (chuki, matusi, kawaida, pamoja na mlengwa) na kikoa (Twitter/X) vinafaa kazi yako | **Tumia tena AfriHate** | Usijenge kopasi mpya kwa ajili ya lakabi hizi. Tumia juhudi zako kwenye seti ndogo ya tathmini kutoka kwenye jukwaa ambalo unalijali haswa. |
+| Lugha yako **inajumuishwa**, lakini unahitaji **lakabi nyingine au jukwaa jingine** | **Ipanue** | Kwa mfano, tenganisha uchochezi na maneno ya kashfa, au ongeza wito wa kufanya vurugu. Soma karatasi ya AfriHate kwanza, panua fasili zake badala ya kuzibadilisha, na ushirikishe jamii zilizoathiriwa katika muundo wa lakabi, si tu katika uwekaji lakabi. Usiweke upya lakabi za chuki, matusi, na kawaida; unganisha. |
+| Lugha yako **haijajumuishwa**, lakini **inahusiana** na mojawapo ya zile 15 | **Azima, kisha jenga kidogo** | Jaribu [uhamishaji kati ya lugha (cross-language transfer)](/cross-language-transfer) kutoka kwenye lugha iliyojumuishwa iliyo karibu zaidi, lakini ichukulie kama majaribio tu. Kile kinachohesabika kama chuki hakihamishiki vizuri kati ya tamaduni. Jenga seti ya tathmini ya lugha lengwa yenye mifano 500–2,000 kabla ya kuamini matokeo yoyote. |
+| Lugha yako **haijajumuishwa** na **haihusiani** na yoyote kati ya zile 15 | **Jenga kuanzia mwanzo** | Anza na sura ya [kuingiza lugha za mkia mrefu (long-tail languages)](/long-tail-language), kisha [Ukusanyaji wa Data](/data-collection/Overview), [Muundo wa Uwekaji Lakabi](/annotation-design/annotation-task-design), na [Ubora wa Data](/data-quality). Shirikisha jamii zilizoathiriwa katika muundo wa lakabi tangu mwanzo, na ulenga mifano 5,000–10,000. **Usianze bila kuwa na msaada wa ushauri nasaha kwa ajili ya waweka lakabi.** |
+
+</div>
+
+## Hatua ya 4: Kujifunza kutoka kwa watu walioijenga {#step-4-learning-from-the-people-who-built-it}
+
+AfriHate ilijengwa na timu za lugha kote Afrika, kila moja ikiwa na mratibu, zikifanya kazi chini ya seti ya pamoja ya lakabi. Matatizo yake magumu zaidi yalikuwa kupata machapisho ya chuki katika lugha ambazo API ya Twitter haikuzisaidia, na kushughulikia kutokubaliana kwa dhati kuhusu kile kinachohesabika kama chuki.
+
+**Soma kwanza:**
+
+- **[Karatasi ya AfriHate](https://aclanthology.org/2025.naacl-long.92/)** (Muhammad na wenzake, 2025): seti ya data ya lugha 15, hasa sehemu za ukusanyaji wa data, mapungufu, na maadili.
+- **[Karatasi ya utafiti shirikishi](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto na wenzake, 2020): jinsi ya kushirikisha jamii katika kazi ya seti ya data. Hili ni muhimu zaidi kwa muundo wa lakabi hapa kuliko kwa kazi nyingi.
+
+**Maswali ya kuwauliza waandishi:**
+
+1. Mlijengaje orodha za maneno muhimu, na ni chuki gani ambayo walikosa?
+2. Ni wapi waweka lakabi walitofautiana zaidi, na je, kutokubaliana kulifuata eneo, umri, au siasa?
+3. Ni msaada gani ambao waweka lakabi walihitaji, na ungeongeza nini wakati ujao?
+
+## Usomaji zaidi {#further-reading}
+
+- [Changamoto na mipaka katika utambuzi wa maudhui ya matusi (Vidgen na wenzake, 2019)](https://aclanthology.org/W19-3509/): utafiti wa matatizo ya mbinu katika uwanja huu. Isome kabla ya kuandika miongozo.
+- [Hatari ya upendeleo wa kibaguzi katika utambuzi wa matamshi ya chuki (Sap na wenzake, 2019)](https://aclanthology.org/P19-1163/): jinsi asili ya mweka lakabi inavyounda lakabi zenye upendeleo.
+
+Mara tu unapokuwa na data yako, kufunza modeli kumeangaziwa vizuri kwingineko. [Mafunzo ya uainishaji wa mfuatano ya Hugging Face](https://huggingface.co/docs/transformers/tasks/sequence_classification) ni mwanzo mzuri.

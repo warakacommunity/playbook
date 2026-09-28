@@ -2,6 +2,20 @@ import React from "react";
 import Layout from "@theme-original/DocItem/Layout";
 import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import Comments from "@site/src/components/Comments";
+import Admonition from "@theme/Admonition";
+import Translate from "@docusaurus/Translate";
+
+// Shown on chapters produced by scripts/translate-docs.mjs until a reviewer
+// sets translation_status: reviewed in the file's frontmatter.
+function MachineTranslationNote() {
+  return (
+    <Admonition type="info" title={<Translate id="translation.machine.title">Machine translation</Translate>}>
+      <Translate id="translation.machine.body">
+        A native speaker has not reviewed this page yet. Wording may be awkward and technical terms may be off. Corrections are welcome through the Contribute menu.
+      </Translate>
+    </Admonition>
+  );
+}
 
 // The "Start Contributing Online" action lives at the top of the right-hand
 // TOC rail (see src/theme/TOC). This wrapper adds two things on top of the
@@ -67,6 +81,7 @@ export default function LayoutWrapper(props) {
 
   return (
     <>
+      {frontMatter?.translation_status === "machine" && <MachineTranslationNote />}
       <Layout {...props} />
       <Comments />
     </>

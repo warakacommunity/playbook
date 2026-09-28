@@ -556,5 +556,13 @@
   "theme.tags.tagsPageTitle": {
     "message": "መለያዎች",
     "description": "The title of the tag list page"
+  },
+  "translation.machine.title": {
+    "message": "የማሽን ትርጉም",
+    "description": "Title of the notice shown on machine-translated chapters"
+  },
+  "translation.machine.body": {
+    "message": "ተወላጅ ተናጋሪ ይህንን ገጽ ገና አልገመገመውም። የቃላት አጠቃቀሙ ትክክል ላይሆን ይችላል እና የቴክኒክ ቃላት የተሳሳቱ ሊሆኑ ይችላሉ። በአስተዋጽኦ ምናሌ በኩል እርማቶችን በደስታ እንቀበላለን።",
+    "description": "Body of the notice shown on machine-translated chapters"
   }
 }

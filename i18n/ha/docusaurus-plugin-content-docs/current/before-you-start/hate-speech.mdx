@@ -1,0 +1,79 @@
+---
+sidebar_position: 6
+title: Kalaman ƙiyayya da tsaron abubuwan da ke ciki
+ready: true
+last_update:
+  date: 2026-09-26
+  author: Shamsudddeen Hassan Muhammad
+translation_status: machine
+source_hash: 05bc8c0e2150
+translated_at: 2026-09-28
+---
+
+# Kalaman ƙiyayya da tsaron abubuwan da ke ciki {#hate-speech-and-content-safety}
+
+*Misalin da aka yi aiki a kai. Bita ta ƙarshe: 2026-07-07.*
+
+Wannan shafi yana amfani da [matakai huɗu daga Kafin Ka Fara](/before-you-start/) wajen gano kalaman ƙiyayya da kalaman cin zarafi. Yana amfani da **AfriHate** a matsayin misali saboda shi ne babban rumbun bayanai na kalaman ƙiyayya da al'umma suka gina don harsunan Afirka, tare da masu yin lakabi (annotators) waɗanda harshensu ne na asali da kuma takardar bincike da aka wallafa. Akwai ƙananan rumbun bayanai na harshe ɗaya da yawa, kuma sababbi suna bayyana akai-akai. Idan ba a ambaci harshenka a nan ba, koma [Mataki na 1](/before-you-start/#step-1-search-for-prior-work) ka yi bincike.
+
+Wannan aiki ya bambanta da sauran a cikin wannan babi ta hanyoyi uku. Masu yin lakabi suna karanta abubuwa masu cutarwa na tsawon sa'o'i, don haka suna buƙatar tallafi tun daga ranar farko. Na'ura mai rarrabawa (classifier) da ake amfani da ita don daidaita abubuwa ta atomatik tana iya haifar da irin cutarwar da aka yi niyyar ta rage. Kuma abin da ake ɗauka a matsayin ƙiyayya abu ne da ake jayayya a kansa, a al'adance da kuma a siyasance.
+
+## Mataki na 1: Abin da bincike ya samo {#step-1-what-a-search-turns-up}
+
+Bincika Hugging Face, Lanfrica, ko ACL Anthology don kalaman ƙiyayya a cikin wani babban harshen Afirka kuma za ka sami ƙananan rumbun bayanai da yawa, kowannensu da nasa lakabi (labels) da ƙa'idodi. Wanda ya haɗa yawancinsu wuri ɗaya shi ne:
+
+- **[AfriHate](https://aclanthology.org/2025.naacl-long.92/)** (Muhammad et al., 2025): saƙonnin tweet a cikin harsuna 15. Larabcin Aljeriya, Amharic, Hausa, Igbo, Kinyarwanda, Larabcin Maroko, Nigerian Pidgin, Oromo, Somali, Swahili, Tigrinya, Twi, isiXhosa, Yoruba, da isiZulu. Kowane saƙon tweet an yi masa lakabi da ƙiyayya, cin zarafi, ko na al'ada, kuma saƙonnin tweet na ƙiyayya suna ɗauke da abin da aka nufa (ƙabila, siyasa, jinsi, nakasa, addini, ko wani abu daban).
+
+Bayanan suna kan [Hugging Face Hub](https://huggingface.co/datasets/afrihate/afrihate). Ma'adanar [GitHub repository](https://github.com/AfriHate/AfriHate) ta lissafa masu kula da harsuna, waɗanda mutane ne masu kyau da za a tuntuɓa.
+
+Za ka kuma sami rumbun bayanai don **ayyuka masu alaƙa** waɗanda suka yi kama da masu amfani: bayanan motsin rai kamar [BRIGHTER](https://arxiv.org/abs/2502.11926) (harsuna 28, tare da lakabi da suka haɗa da fushi da ƙyama), ko bayanan rarrabuwar kawuna kamar [POLAR](https://arxiv.org/abs/2505.20624) (harsuna 22, ciki har da Amharic, Hausa, da Swahili).
+
+## Mataki na 2: Auna AfriHate da jerin abubuwan dubawa {#step-2-judging-afrihate-against-the-checklist}
+
+- **Lasisi.** Katin Hugging Face ya lissafa Apache 2.0, wanda ke ba da damar amfani da shi don kasuwanci. Rubutun saƙonnin tweets ne, don haka kuma duba ko ƙa'idojin dandalin suna shafar abin da kake shirin yi.
+- **Samun damar shiga.** A rufe yake. Dole ne ka shiga Hugging Face kuma ka amince ka raba bayanan tuntuɓarka kafin ka iya sauke shi.
+- **Dacewa.** Rubuce-rubucen Twitter/X daga 2012 zuwa 2023. Tsokaci a kan wasu dandamali, kiran waya a gidan rediyo, saƙonnin WhatsApp, ko dandalin tattaunawa sun bambanta. Kalaman ƙiyayya ma suna canzawa da sauri: sababbin kalaman ɓatanci, kalmomin sirri, da yadda ake rubuta su suna bayyana a kowane lokaci, don haka tsofaffin bayanai ba sa ɗauke da su.
+- **Rubutu.** Yawancin rubutun Latin ne. Amharic da Tigrinya suna cikin rubutun Habasha, Larabcin Aljeriya yana cikin rubutun Larabci, kuma Larabcin Maroko yana bayyana a cikin rubutun Larabci da na Latin.
+- **Sauyin harshe (Code-switching).** Kalaman ƙiyayya na harsunan Afirka galibi suna gaurayawa da Turanci, Faransanci, ko Larabci, kuma ɓangaren cin zarafin galibi yana kasancewa a daidai inda sauyin ya faru. Duba yawan rubutun da kake so wanda ke gauraya harsuna, kuma ka haɗa irin wannan rubutun a cikin kimantawarka.
+- **Lakabi.** Ƙiyayya, cin zarafi, da na al'ada, da kuma abin da aka nufa ga saƙonnin tweets na ƙiyayya. Abin da ake ɗauka a matsayin ƙiyayya ya keɓanta ga al'ada, yanki, da kuma lokaci: kalmar da ba ta da wata ma'ana ta musamman a wuri ɗaya tana iya ɗaukar tarihin tashin hankali a wani wuri. Karanta ma'anar da ke cikin takardar binciken kafin ka ɗauka cewa sun dace da naka. Kada ka shigo da tsarin lakabi daga rumbun bayanan Turanci ba tare da tuntuɓar al'ummomin da abin ya shafa ba.
+- **Rarrabawa (Splits).** Kafaffen rarrabawa. Kowane rukunin gwaji yana da aƙalla misalai 100 na kowane aji, don haka ana iya auna ajin ƙiyayya da ba a cika samunsa ba. Abubuwan da ke ciki na gaske galibi ba ƙiyayya ba ne, don haka kuma ka bayar da rahoton sakamako ga kowane aji tare da adadin misalai, ba kawai maki ɗaya na gaba ɗaya ba.
+- **Ƙa'idodi.** Takardar binciken ta bayyana ma'anoni, jerin kalmomin bincike, da tsarin yin lakabi. Duba abin da aka saki kafin ka yi shirin sake amfani da su, kuma ka tambayi marubutan idan ba za ka iya samun cikakkun ƙa'idodin ba.
+- **Inganci.** An yi musu lakabi daga masu magana da harshen na asali daga al'ummomin yankin, tare da masu yin lakabi uku ko huɗu ga kowane tweet. An bayar da rahoton yarjejeniya ga kowane harshe kuma ya tashi daga 0.46 zuwa 0.81 (Randolph's kappa), don haka inganci ya bambanta dangane da harshe. Duba lambar na harshenka. An saki lakabin da kowane mutum ya yi, wanda ke taimakawa idan kana son yin nazarin rashin jituwa.
+- **Takardun bayanai.** Takardar binciken tana da sassan iyakoki da ɗa'a. An samo saƙonnin tweets da jerin kalmomin bincike, don haka bayanan suna da son zuciya wajen zaɓi: suna ɗauke da ƙiyayya ne kawai wacce ta dace da kalmomin da ƙungiyar ta nema. Manhajar Twitter/X academic API da aka yi amfani da ita don tattara su ba ta kyauta ba ce yanzu, don haka faɗaɗa bayanan ta irin wannan hanyar yana da wahala a yau.
+
+## Mataki na 3: Sake amfani, faɗaɗawa, ko ginawa {#step-3-reuse-extend-or-build}
+
+Nemo jere wanda ya dace da yanayinka, sannan ka bi shi a tsallake. Tambaya ta farko ita ce ko AfriHate ya ƙunshi harshenka.
+
+<div className="decision-table">
+
+| Abin da ka samo | Zaɓinka | Abin da za ka yi |
+| --- | --- | --- |
+| AfriHate ya **ƙunshi** harshenka, kuma lakabinsa (ƙiyayya, cin zarafi, na al'ada, da abin da aka nufa) da kuma dandalinsa (Twitter/X) sun dace da aikinka | **Sake amfani da AfriHate** | Kada ka gina sabon rumbun bayanai don waɗannan lakabin. Bada ƙarfinka a kan ƙaramin rukunin kimantawa daga dandalin da kake da sha'awa a kai. |
+| An **ƙunshi** harshenka, amma kana buƙatar **wasu lakabi ko wani dandali** | **Faɗaɗa shi** | Misali, raba tunzura daga kalaman ɓatanci, ko ƙara kiran a yi tashin hankali. Karanta takardar binciken AfriHate tukuna, faɗaɗa ma'anoninta maimakon maye gurbinsu, kuma ka saka al'ummomin da abin ya shafa a cikin tsara lakabi, ba kawai yin lakabi ba. Kada ka sake yin lakabin ƙiyayya, cin zarafi, da na al'ada; haɗa su. |
+| **Ba a ƙunshi** harshenka ba, amma yana da **alaƙa** da ɗaya daga cikin guda 15 | **Aro, sannan ka gina ƙarami** | Gwada [canja wuri tsakanin harsuna (cross-language transfer)](/cross-language-transfer) daga harshen da aka ƙunsa mafi kusa, amma ka ɗauke shi a matsayin gwaji kawai. Abin da ake ɗauka a matsayin ƙiyayya ba ya canja wuri da kyau tsakanin al'adu. Gina rukunin kimantawa na harshen da ake so na misalai 500–2,000 kafin ka amince da kowane sakamako. |
+| **Ba a ƙunshi** harshenka ba kuma **ba shi da alaƙa** da kowane daga cikin guda 15 | **Gina daga farko** | Fara da babin [shigar da harshe mai ƙarancin bayanai (long-tail language onboarding)](/long-tail-language), sannan [Tattara Bayanai](/data-collection/Overview), [Tsara Lakabi](/annotation-design/annotation-task-design), da [Ingancin Bayanai](/data-quality). Saka al'ummomin da abin ya shafa a cikin tsara lakabi tun daga farko, kuma ka yi niyyar samun misalai 5,000–10,000. **Kada ka fara ba tare da an samar da tallafin shawarwari ga masu yin lakabi ba.** |
+
+</div>
+
+## Mataki na 4: Koyo daga mutanen da suka gina shi {#step-4-learning-from-the-people-who-built-it}
+
+Ƙungiyoyin harsuna a fadin Afirka ne suka gina AfriHate, kowannensu da mai gudanarwa, suna aiki a ƙarƙashin tsarin lakabi iri ɗaya. Mafi wahalar matsalolinsa su ne gano rubuce-rubucen ƙiyayya a cikin harsunan da manhajar Twitter API ba ta goyi bayan su ba, da kuma magance rashin jituwa ta gaskiya game da abin da ake ɗauka a matsayin ƙiyayya.
+
+**Karanta tukuna:**
+
+- **[Takardar binciken AfriHate](https://aclanthology.org/2025.naacl-long.92/)** (Muhammad et al., 2025): rumbun bayanan harsuna 15, musamman tattara bayanai, iyakoki, da sassan ɗa'a.
+- **[Takardar bincike na haɗin gwiwa](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto et al., 2020): yadda za a saka al'ummomi a cikin aikin rumbun bayanai. Wannan yana da mahimmanci sosai wajen tsara lakabi a nan fiye da yawancin ayyuka.
+
+**Tambayoyin da za a yi wa marubutan:**
+
+1. Ta yaya kuka gina jerin kalmomin bincike, kuma wace ƙiyayya suka rasa?
+2. A ina ne masu yin lakabi suka fi samun rashin jituwa, kuma shin rashin jituwar ta bi yanki, shekaru, ko siyasa ne?
+3. Wane tallafi ne masu yin lakabi suka buƙata, kuma me za ku ƙara a gaba?
+
+## Ƙarin karatu {#further-reading}
+
+- [Ƙalubale da iyakoki wajen gano abubuwan cin zarafi (Vidgen et al., 2019)](https://aclanthology.org/W19-3509/): bincike kan matsalolin hanyoyin a cikin wannan fanni. Karanta shi kafin rubuta ƙa'idodi.
+- [Haɗarin nuna wariyar launin fata wajen gano kalaman ƙiyayya (Sap et al., 2019)](https://aclanthology.org/P19-1163/): yadda asalin mai yin lakabi ke haifar da lakabi masu son zuciya.
+
+Da zarar kana da bayananka, horar da ƙirar ƙwaƙwalwar kwamfuta (model) an yi bayani sosai a wani wuri. [Darasi na rarraba jeri na Hugging Face](https://huggingface.co/docs/transformers/tasks/sequence_classification) wuri ne mai kyau na farawa.

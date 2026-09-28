@@ -1,0 +1,75 @@
+---
+sidebar_position: 2
+title: NER
+ready: true
+last_update:
+  date: 2026-09-26
+  author: Shamsudddeen Hassan Muhammad
+translation_status: machine
+source_hash: c9e2e88ac2b8
+translated_at: 2026-09-28
+---
+
+# Utambuzi wa Majina Maalum (Named Entity Recognition) {#named-entity-recognition}
+
+*Mfano uliofanyiwa kazi. Ilipitiwa mwisho: 2026-07-07.*
+
+Ukurasa huu unatumia [hatua nne kutoka Kabla Hujanza](/sw/before-you-start/) kwenye utambuzi wa majina maalum (named entity recognition - NER): kupata watu, mashirika, mahali, na tarehe katika matini. Unatumia **MasakhaNER** kama mfano kwa sababu ni juhudi ya NER iliyorekodiwa vizuri zaidi kwa lugha za Kiafrika. Ikiwa lugha yako haijatajwa hapa, rudi kwenye [Hatua ya 1](/sw/before-you-start/#step-1-search-for-prior-work) na utafute.
+
+## Hatua ya 1: Matokeo ya utafutaji {#step-1-what-a-search-turns-up}
+
+Tafuta Hugging Face, Lanfrica, au ACL Anthology kwa ajili ya NER katika karibu lugha yoyote kuu ya Kiafrika na haraka utafikia seti mbili za data (datasets):
+
+- **[MasakhaNER 2](https://arxiv.org/abs/2210.12391)** (Adelani na wenzake, 2022): Lugha 20. Kibambara, Kichewa, Kishona, Kiewe, Kifon, Kighomala, Kihausa, Kiigbo, Kixhosa, Kizulu, Kinyarwanda, Kiswahili, Kiganda, Kiluo, Kimossi, Pijini ya Nigeria, Kisetswana, Kitwi, Kiwolof, na Kiyoruba.
+- **[MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** (Adelani na wenzake, 2021): lugha 10 za kwanza. Toleo la 2 linajumuisha nyingi kati ya hizo, lakini toleo la 1 bado ndilo la kutumia kwa **Kiamhari**, ambalo toleo la 2 halijumuishi. Chapisho lake pia linaeleza jinsi mchakato wa uwekaji lakabi (annotation) ulivyoundwa.
+
+Data ipo kwenye [Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2), na hifadhi ya [GitHub](https://github.com/masakhane-io/masakhane-ner) ina miongozo ya uwekaji lakabi na hati za tathmini (evaluation scripts).
+
+Pia utapata **data ya NER iliyowekewa lakabi kiotomatiki ("silver")** ambayo inajumuisha lugha nyingi zaidi, iliyojengwa kwa kuhamisha lakabi kutoka kwenye viungo vya Wikipedia badala ya wawekaji lakabi binadamu. Inavutia kwa sababu ya uwigo wake. Hatua ya 2 ndipo unapogundua kama ubora wake unatosheleza kwa madhumuni yako.
+
+## Hatua ya 2: Kutathmini MasakhaNER 2 dhidi ya orodha ya ukaguzi {#step-2-judging-masakhaner-2-against-the-checklist}
+
+- **Leseni (Licence).** CC BY-NC 4.0: ni bure kwa utafiti, **sio kwa matumizi ya kibiashara**. Ikiwa unaunda bidhaa, angalia hili kwanza.
+- **Ufikiaji (Access).** Inapakulika wazi kutoka Hugging Face na GitHub.
+- **Ufaafu (Fit).** Matini ya habari. Mitandao ya kijamii, nyaraka za serikali, au nakala za hotuba huonekana tofauti, hivyo tarajia usahihi wa chini kwenye hizo.
+- **Hati (Script).** Hati ya Kilatini pekee. Ajami ya Kihausa, Kiwolof cha hati ya Kiarabu, na lugha za hati ya Ge'ez hazijajumuishwa.
+- **Ubadilishaji msimbo (Code-switching).** Sentensi ni za lugha moja. Matini halisi mara nyingi huchanganya lugha ndani ya sentensi (Kihausa–Kiingereza, Kiswahili–Kiingereza, Kifaransa–Kiwolof). Ikiwa yako inafanya hivyo, tarajia matokeo kuwa mabaya zaidi kuliko namba zilizochapishwa.
+- **Lakabi (Labels).** Mtu, shirika, mahali, na tarehe. "Shirika" linaweza lisilingane na kile ambacho matumizi yako yanamaanisha, kwa hivyo soma miongozo kabla ya kudhani seti ya lakabi inafaa.
+- **Migawanyo (Splits).** Migawanyo thabiti ya mafunzo (train), uendelezaji (development), na majaribio (test), ili matokeo yaweze kulinganishwa kwenye machapisho mbalimbali.
+- **Miongozo (Guidelines).** Imetolewa. Hata kama lugha yako haijajumuishwa, miongozo ndiyo mahali pazuri pa kuanzia kwa kuandika yako mwenyewe.
+- **Ubora (Quality).** Imewekewa lakabi na wazungumzaji wazawa kupitia mchakato shirikishi. Machapisho yanaelezea hili kwa kina.
+- **Alama za matamshi (Diacritics).** Katika Kiyoruba, Kiigbo, na lugha nyingine kadhaa, alama za toni hubeba maana. Hakikisha kwamba uchakataji wako wa matini unazihifadhi, la sivyo mipaka ya majina maalum itahama na matokeo yataonekana mabaya zaidi kuliko yalivyo.
+
+## Hatua ya 3: Tumia tena, panua, au jenga {#step-3-reuse-extend-or-build}
+
+Tafuta safumlalo inayoendana na hali yako, kisha uifuate. Swali la kwanza ni kama lugha yako inajumuishwa na MasakhaNER 2.
+
+<div className="decision-table">
+
+| Ulichopata | Chaguo lako | Nini cha kufanya |
+| --- | --- | --- |
+| Lugha yako **inajumuishwa** na MasakhaNER 2, na lakabi zake (mtu, shirika, mahali, tarehe) zinatosha kwa kazi yako | **Tumia tena MasakhaNER 2** | Usijenge kopasi (corpus) mpya kwa lakabi hizi. |
+| Lugha yako **inajumuishwa**, lakini unahitaji **aina za ziada za majina maalum** (pesa, bidhaa, mahususi kwa utamaduni) | **Ipanue** | Weka lakabi kwa aina za ziada kwenye migawanyo iliyopo na utumie tena miongozo. Usiweke tena lakabi kwa mtu, shirika, na mahali; unganisha. |
+| Lugha yako **haijajumuishwa**, lakini **inahusiana** na mojawapo ya zile 20 (familia au hati moja) | **Azima, kisha jenga kidogo** | Jaribu [uhamishaji wa lugha tofauti (cross-language transfer)](/cross-language-transfer) kutoka lugha iliyojumuishwa iliyo karibu zaidi, kisha jenga seti ndogo ya tathmini katika lugha yako mwenyewe ukitumia miongozo ya MasakhaNER. |
+| Lugha yako **haijajumuishwa** na **haihusiani** na yoyote kati ya zile 20 | **Jenga kutoka mwanzo** | Anza na sura ya [kuingiza lugha za mkia mrefu (long-tail language onboarding)](/long-tail-language), kisha [Ukusanyaji wa Data](/data-collection/Overview), [Usanifu wa Uwekaji Lakabi](/annotation-design/annotation-task-design), na [Ubora wa Data](/data-quality). Soma miongozo ya MasakhaNER kabla ya kuandika yako mwenyewe, na lenga sentensi 5,000–10,000 kuanza. |
+
+</div>
+
+## Hatua ya 4: Kujifunza kutoka kwa watu walioijenga {#step-4-learning-from-the-people-who-built-it}
+
+MasakhaNER ilijengwa na watafiti wa kujitolea na wawekaji lakabi wazawa kote Afrika. Njia yao ya kupanga kazi inafaa kusomwa kabla ya kusanifu mradi wako mwenyewe.
+
+**Soma kwanza:**
+
+- **[Uchunguzi kifani wa MasakhaNER](/sw/case-studies/masakhaner)** katika kitabu hiki cha mbinu (playbook): jinsi mradi ulivyopangwa na kile timu ilichojifunza.
+- **[Chapisho la MasakhaNER 2](https://arxiv.org/abs/2210.12391)** (Adelani na wenzake, 2022): seti ya data ya lugha 20 na uchambuzi wake.
+- **[Chapisho la MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** (Adelani na wenzake, 2021): jinsi mchakato wa uwekaji lakabi ulivyoundwa.
+- **[Chapisho la utafiti shirikishi](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto na wenzake, 2020): njia ya ufanyaji kazi ya Masakhane ambayo MasakhaNER ilitokana nayo.
+
+**Maswali ya kuwauliza waandishi:**
+
+1. Mliajirije na kuratibu wawekaji lakabi katika nchi 20?
+2. Ni wapi wawekaji lakabi walitofautiana zaidi, na mlisuluhishaje?
+3. Nini kilibadilika kati ya toleo la 1 na toleo la 2, na kwa nini?
+
+Mara tu unapokuwa na data yako, kutoa mafunzo kwa modeli (training a model) kumeangaziwa vizuri kwingineko. [Mafunzo ya uainishaji wa tokeni ya Hugging Face](https://huggingface.co/docs/transformers/tasks/token_classification) ni mwanzo mzuri.

@@ -1,19 +1,7 @@
 {
-  "title": {
-    "message": "MasakhaneHub",
-    "description": "The title in the navbar"
-  },
-  "logo.alt": {
-    "message": "Logo Masakhane",
-    "description": "The alt text of navbar logo"
-  },
   "item.label.AfriPlaybook": {
     "message": "AfriPlaybook",
     "description": "Navbar item with label Playbook"
-  },
-  "item.label.MasakhaneTool": {
-    "message": "MasakhaneTool",
-    "description": "Navbar item with label Annotation Tool"
   },
   "item.label.Blog": {
     "message": "Blog",

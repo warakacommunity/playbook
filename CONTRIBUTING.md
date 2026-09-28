@@ -38,7 +38,18 @@ Math works in any chapter: `$inline$` or `$$block$$` LaTeX.
 
 ### Translate a page
 
-Translated copies live under `i18n/<locale>/docusaurus-plugin-content-docs/current/`, mirroring `docs/`. Edit the matching file in place (do not rename it) and preview with `yarn start --locale <locale>`. Most translated copies are still English text waiting for a native speaker.
+Translated copies live under `i18n/<locale>/docusaurus-plugin-content-docs/current/`, mirroring `docs/`. Edit the matching file in place (do not rename it) and preview with `yarn start --locale <locale>`. A chapter with no translated copy is served in English.
+
+Chapters are first machine-translated, then reviewed by a native speaker. `scripts/translate-docs.mjs` produces the drafts with Gemini and marks each file `translation_status: machine` in its frontmatter, which shows a notice to readers. It also records a hash of the English source, so re-running it only re-translates chapters whose English changed.
+
+```bash
+export GEMINI_API_KEY=...                       # key from https://aistudio.google.com/apikey
+yarn translate:docs --locale ha --tier 1        # Foundations, templates, and glossary
+yarn translate:docs --locale sw --paths docs/asr/index.md
+yarn translate:docs --locale am --tier 1 --dry-run   # list what would run
+```
+
+To review a machine draft, correct the text and change `translation_status: machine` to `translation_status: reviewed`. Keep the `source_hash` line. Do not translate code blocks, URLs, or the names of projects, datasets, and licences.
 
 Navbar, footer, and other interface strings live in `i18n/<locale>/code.json` and `i18n/<locale>/docusaurus-theme-classic/`.
 

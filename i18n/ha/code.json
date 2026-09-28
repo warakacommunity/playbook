@@ -556,5 +556,13 @@
   "theme.tags.tagsPageTitle": {
     "message": "Alamomi",
     "description": "The title of the tag list page"
+  },
+  "translation.machine.title": {
+    "message": "Fassarar na'ura",
+    "description": "Title of the notice shown on machine-translated chapters"
+  },
+  "translation.machine.body": {
+    "message": "Wani ɗan asalin yaren bai duba wannan shafin ba tukunna. Tsarin kalmomi na iya zama ba daidai ba kuma kalmomin fasaha na iya zama kuskure. Ana maraba da gyare-gyare ta hanyar menu na Ba da gudummawa.",
+    "description": "Body of the notice shown on machine-translated chapters"
   }
 }

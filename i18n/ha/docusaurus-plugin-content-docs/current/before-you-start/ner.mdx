@@ -1,0 +1,75 @@
+---
+sidebar_position: 2
+title: NER
+ready: true
+last_update:
+  date: 2026-09-26
+  author: Shamsudddeen Hassan Muhammad
+translation_status: machine
+source_hash: c9e2e88ac2b8
+translated_at: 2026-09-28
+---
+
+# Gano Sunayen Yanka (Named Entity Recognition) {#named-entity-recognition}
+
+*Misali a aikace. Bita ta ƙarshe: 2026-07-07.*
+
+Wannan shafi yana amfani da [matakai huɗu daga Kafin Ka Fara](/before-you-start/) wajen gano sunayen yanka (NER): gano mutane, ƙungiyoyi, wurare, da kwanakin wata a cikin rubutu. Yana amfani da **MasakhaNER** a matsayin misali saboda shi ne aikin NER da aka fi tattara bayanansa sosai ga harsunan Afirka. Idan ba a ambaci harshenka a nan ba, koma [Mataki na 1](/before-you-start/#step-1-search-for-prior-work) sannan ka yi bincike.
+
+## Mataki na 1: Abin da bincike ya samo {#step-1-what-a-search-turns-up}
+
+Bincika Hugging Face, Lanfrica, ko ACL Anthology don NER a kusan kowane babban harshen Afirka kuma da sauri za ka ci karo da rumbun bayanai (datasets) guda biyu:
+
+- **[MasakhaNER 2](https://arxiv.org/abs/2210.12391)** (Adelani et al., 2022): Harsuna 20. Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Kiswahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, da Yoruba.
+- **[MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** (Adelani et al., 2021): Harsuna 10 na farko. Tsari na 2 (Version 2) ya ƙunshi yawancinsu, amma tsari na 1 shi ne wanda ya kamata a yi amfani da shi don **Amharic**, wanda tsari na 2 bai ƙunsa ba. Takardar bincikensa kuma tana bayanin yadda aka tsara tsarin sanya lakabi (annotation).
+
+Bayanan suna kan [Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2), kuma ma'adanar [GitHub repository](https://github.com/masakhane-io/masakhane-ner) tana da ƙa'idojin sanya lakabi da kuma lambobin kwamfuta na tantancewa (evaluation scripts).
+
+Za ka kuma sami **bayanan NER da aka sanya wa lakabi ta atomatik ("silver")** waɗanda suka ƙunshi harsuna da yawa, waɗanda aka gina ta hanyar ɗaukar lakabi daga hanyoyin haɗin Wikipedia maimakon masu sanya lakabi na mutane. Yana da ban sha'awa saboda yawan harsunan da ya ƙunsa. Mataki na 2 shi ne inda za ka gano ko ingancinsa ya isa don manufarka.
+
+## Mataki na 2: Auna MasakhaNER 2 da jerin abubuwan dubawa {#step-2-judging-masakhaner-2-against-the-checklist}
+
+- **Lasisi (Licence).** CC BY-NC 4.0: kyauta ne don bincike, **ba don kasuwanci ba**. Idan kana gina wani samfuri, duba wannan tukuna.
+- **Samun Dama (Access).** Ana iya saukewa a buɗe daga Hugging Face da GitHub.
+- **Dacewa (Fit).** Rubutun labarai. Rubutun kafofin sada zumunta, takardun gwamnati, ko rubutaccen jawabi sun bambanta, don haka yi tsammanin ƙarancin daidaito a kansu.
+- **Haruffa (Script).** Haruffan Latin kawai. Ba a haɗa da Hausa Ajami, Wolof mai haruffan Larabci, da harsunan da ke amfani da haruffan Ge'ez ba.
+- **Gauraya harsuna (Code-switching).** Jumlolin suna da harshe ɗaya ne. Rubutu na zahiri yakan gauraya harsuna a cikin jumla ɗaya (Hausa–Turanci, Swahili–Turanci, Faransanci–Wolof). Idan naka yana yin haka, yi tsammanin sakamakon zai yi ƙasa da lambobin da aka wallafa.
+- **Lakabi (Labels).** Mutum, ƙungiya, wuri, da kwanan wata. "Ƙungiya" na iya zama bai dace da abin da aikin da kake son yi yake nufi da shi ba, don haka karanta ƙa'idojin kafin ka ɗauka cewa tsarin lakabin ya dace.
+- **Rabe-rabe (Splits).** Akwai tsayayyun rabe-raben koyo (train), haɓakawa (development), da gwaji (test), don haka ana iya kwatanta sakamako a tsakanin takardun bincike daban-daban.
+- **Ƙa'idoji (Guidelines).** An saki. Ko da ba a haɗa da harshenka ba, ƙa'idojin su ne mafi kyawun mafari don rubuta naka.
+- **Inganci (Quality).** Masu jin harshen a matsayin na asali ne suka sanya lakabin ta hanyar tsarin haɗin gwiwa. Takardun binciken sun bayyana hakan dalla-dalla.
+- **Alamomin wasula (Diacritics).** A cikin Yoruba, Igbo, da wasu harsuna da yawa, alamomin sautin murya suna ɗaukar ma'ana. Tabbatar cewa sarrafa rubutunka ya kiyaye su, ko kuma iyakokin sunayen yankan za su canja kuma sakamakon zai yi muni fiye da yadda yake.
+
+## Mataki na 3: Sake amfani, faɗaɗawa, ko ginawa {#step-3-reuse-extend-or-build}
+
+Nemo layin da ya dace da yanayinka, sannan ka bi shi a tsallake. Tambaya ta farko ita ce ko MasakhaNER 2 ya ƙunshi harshenka.
+
+<div className="decision-table">
+
+| Abin da ka gano | Zaɓinka | Abin da za ka yi |
+| --- | --- | --- |
+| MasakhaNER 2 ya **ƙunshi** harshenka, kuma lakabinsa (mutum, ƙungiya, wuri, kwanan wata) sun isa don aikinka | **Sake amfani da MasakhaNER 2** | Kada ka gina sabon rumbun rubutu (corpus) don waɗannan lakabin. |
+| An **ƙunshi** harshenka, amma kana buƙatar **ƙarin nau'ikan sunayen yanka** (kuɗi, kayayyaki, na al'ada) | **Faɗaɗa shi** | Sanya lakabi ga ƙarin nau'ikan a kan rabe-raben da ke akwai kuma ka sake amfani da ƙa'idojin. Kada ka sake sanya lakabi ga mutum, ƙungiya, da wuri; ka haɗe su. |
+| Ba a **ƙunshi** harshenka ba, amma yana da **alaƙa** da ɗaya daga cikin guda 20 ɗin (iyali ɗaya ko haruffa) | **Aro, sannan ka gina kaɗan** | Gwada [canja wuri tsakanin harsuna (cross-language transfer)](/cross-language-transfer) daga harshen da aka ƙunsa mafi kusa, sannan ka gina ƙaramin rumbun tantancewa a cikin harshenka ta amfani da ƙa'idojin MasakhaNER. |
+| Ba a **ƙunshi** harshenka ba kuma **ba shi da alaƙa** da kowane daga cikin guda 20 ɗin | **Gina daga farko** | Fara da babi na [shigar da harshen da ba a fiye amfani da shi ba (long-tail language onboarding)](/long-tail-language), sannan [Tattara Bayanai](/data-collection/Overview), [Tsarin Sanya Lakabi](/annotation-design/annotation-task-design), da [Ingancin Bayanai](/data-quality). Karanta ƙa'idojin MasakhaNER kafin ka rubuta naka, kuma ka yi niyyar samun jumloli 5,000–10,000 don farawa. |
+
+</div>
+
+## Mataki na 4: Koyo daga mutanen da suka gina shi {#step-4-learning-from-the-people-who-built-it}
+
+Masu bincike na sa-kai da masu sanya lakabi waɗanda suke jin harshen a matsayin na asali a faɗin Afirka ne suka gina MasakhaNER. Hanyarsu ta tsara aikin ta cancanci a yi nazari a kanta kafin ka tsara aikin naka.
+
+**Karanta tukuna:**
+
+- **[Nazarin misali na MasakhaNER](/case-studies/masakhaner)** a cikin wannan jagorar (playbook): yadda aka tsara aikin da kuma abin da ƙungiyar ta koya.
+- **[Takardar bincike ta MasakhaNER 2](https://arxiv.org/abs/2210.12391)** (Adelani et al., 2022): rumbun bayanan harsuna 20 da kuma nazarinsa.
+- **[Takardar bincike ta MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** (Adelani et al., 2021): yadda aka tsara tsarin sanya lakabi.
+- **[Takardar bincike ta haɗin gwiwa](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto et al., 2020): hanyar aiki ta Masakhane wadda MasakhaNER ya samo asali daga gare ta.
+
+**Tambayoyin da za a yi wa marubutan:**
+
+1. Ta yaya kuka ɗauki kuma kuka tsara masu sanya lakabi a ƙasashe 20?
+2. A ina ne masu sanya lakabi suka fi samun saɓani, kuma ta yaya kuka warware hakan?
+3. Menene ya canja tsakanin tsari na 1 da tsari na 2, kuma me ya sa?
+
+Da zarar kana da bayananka, an yi bayani sosai a wani wuri game da koya wa samfuri (model). [Darasi na rarraba kalmomi (token classification) na Hugging Face](https://huggingface.co/docs/transformers/tasks/token_classification) kyakkyawan mafari ne.
