@@ -423,6 +423,9 @@ const config = {
         redirects: [
           { from: "/blog/welcome-to-the-masakhane-blog", to: "/blog/welcome-to-the-waraka-blog" },
           { from: "/blog/call-for-masakhane-tool-testers", to: "/blog/call-for-afriannotate-testers" },
+          // Governance templates moved from the Documentation chapter to the Governance Toolkit.
+          { from: "/documentation/contributor-agreement", to: "/templates/contributor-agreement" },
+          { from: "/documentation/sustainability-plan", to: "/templates/sustainability-plan" },
           // Worked examples dropped when Before You Start was cut to three.
           ...["asr", "machine-translation", "ocr", "qa", "tts"].map((slug) => ({
             from: `/before-you-start/${slug}`,

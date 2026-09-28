@@ -9,7 +9,7 @@ last_update:
 
 # Licensing and Compliance
 
-A licence states what others may and may not do with your dataset. The reasoning behind choosing one, including the African community licences such as NOODL and Esethu, is in the [data governance](../data-governance/index.md) chapter. This page is the practical companion, covering the common licence types and a template for documenting your choice.
+A licence states what others may and may not do with your dataset. The reasoning behind choosing one, including the African community licences such as NOODL and Esethu, is in the [data governance](../data-governance/index.md) chapter. This page is the practical companion, covering the common licence types and a template for documenting your choice. To arrive at a choice, work through the [licensing decision tree](../governance-toolkit/licensing-decision-tree.md) in the Governance Toolkit.
 
 ## Common licence types for NLP datasets
 

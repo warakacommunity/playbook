@@ -13,7 +13,7 @@ Release is a milestone, not the end. A dataset that is corrected, extended, and 
 
 ## Who owns the long tail
 
-Most datasets outlive the grant that paid for them and the student who built them. Nobody asks in year one who will answer an email about the corpus in year four. Name a steward before release, in the dataset card and in the [Sustainability Plan](../6_documentation/sustainability-plan.md).
+Most datasets outlive the grant that paid for them and the student who built them. Nobody asks in year one who will answer an email about the corpus in year four. Name a steward before release, in the dataset card and in the [Sustainability Plan](../templates/sustainability-plan.md).
 
 A steward can be a person, a lab, or a community body. A person is responsive but leaves. A lab has continuity but its priorities shift with funding. A community body such as Masakhane or a national language-resource centre has the longest horizon and the strongest claim to speak for the speakers, but it needs a named contact inside it. The Masakhane participatory model spreads authorship and ownership across native speakers rather than concentrating it in a host institution ([Nekoto et al., 2020](../references.md#nekoto-2020)). Apply the same logic to stewardship: decision rights sit with the language community, and day-to-day duties sit with one accountable person who reports to it.
 

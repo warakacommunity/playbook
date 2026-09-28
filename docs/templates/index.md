@@ -25,19 +25,24 @@ Every template on this page has a **"Download as PDF"** button in the top-right 
 - **[Annotation guidelines template](./annotation-guidelines.md)**: a task-agnostic starting point modelled on MasakhaNER 2's and AfriSenti's guideline structures. Covers definitions, decision procedure with corner cases, label set, orthography and diacritic handling, IAA target and cadence, adjudication, and the change log that makes guideline drift visible. Motivated by the [Annotation Design](../3_annotation-design/annotation-task-design.md) chapter and by every Case Study where guideline drift caused quality problems.
 - **[Project charter template](./project-charter.md)**: the Step-0 community agreement covering purpose, parties, language and orthography, data scope, community IP and licence, team + timeline + budget, governance, deliverables, and ethics. The document that comes out of the community-consent consultation and is signed by the project lead, institutional sponsor, community stewards, and ombudsperson. Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.md#step-0-before-any-data-collection).
 - **[Model card template](./model-card.md)**: a Model-Cards-derived card extended with the deployment-realism sections the playbook argues are non-optional: target-tier latency (p50 + p95 on the deployment phone tier), quantised quality drop, code-switched evaluation, script-variant coverage, offline model-download UX, and voice-cloning risk for TTS. Motivated by the [deployment chapter](../deployment/index.md).
+- **[Contributor agreement template](./contributor-agreement.md)**: the terms for volunteers and collaborators whose work becomes part of a dataset or the playbook: a licence grant rather than an assignment by default, credit choices the contributor controls, the right to stop, and a signature block that works for oral or thumbprint acceptance. Motivated by the [Governance Toolkit](../governance-toolkit/index.md) and the [data governance](../data-governance/index.md) chapter.
+- **[Annotator contract template](./annotator-contract.md)**: a complete contract for paid annotation, transcription, or translation work, with a plain-language summary for the annotator, a pay floor tied to local benchmarks, rules for rejected work, daily caps and rotation for harmful-content tasks, and honest tax and employment-status clauses. Motivated by the [Governance Toolkit](../governance-toolkit/index.md) and [Project Management](../project-management/index.md).
+- **[Sustainability plan template](./sustainability-plan.md)**: who stewards the dataset after the grant, a five-year cost model, the financing mix, and a business model for services on open data that does not close the data. Motivated by the [Governance Toolkit](../governance-toolkit/index.md) and the [Dataset Lifecycle](../9_dataset-lifecycle/index.md) chapter.
 - **[Case-study retrospective template](../case-studies/retrospective-template.md)**: the seventeen-question retrospective structure used across the [Case Studies](../case-studies/index.md) chapter. Listed here for discoverability.
 
-## The seven templates in one line each
+## The templates in one line each
 
 If you are building a new African-language NLP project from Step 0 to deployment, you will fork these templates in roughly this order:
 
 1. **Project charter**: sign it with the community BEFORE data collection.
 2. **Consent form**: the workflow for individual + community + non-literate consent.
-3. **Annotation guidelines**: version-controlled, with a change log.
-4. **Evaluation script**: enforces per-language + per-class + chrF/CER-primary automatically.
-5. **Dataset card**: ships alongside the corpus release.
-6. **Model card**: ships alongside the model release, with the deployment-realism additions.
-7. **Case-study retrospective**: after the project ships, contribute the seventeen answers back to the [Case Studies](../case-studies/index.md) chapter.
+3. **Contributor agreement** and **annotator contract**: before anyone contributes or is paid.
+4. **Sustainability plan**: draft it at design time, so the grant budget carries the long tail.
+5. **Annotation guidelines**: version-controlled, with a change log.
+6. **Evaluation script**: enforces per-language + per-class + chrF/CER-primary automatically.
+7. **Dataset card**: ships alongside the corpus release.
+8. **Model card**: ships alongside the model release, with the deployment-realism additions.
+9. **Case-study retrospective**: after the project ships, contribute the seventeen answers back to the [Case Studies](../case-studies/index.md) chapter.
 
 ## Editorial rules for templates
 

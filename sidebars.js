@@ -87,6 +87,12 @@ const sidebars = {
           templateDoc('project-charter', 'Project charter', 'project-management'),
         ]),
         'data-governance/index',
+        chapterIndexed('Governance Toolkit', 'governance-toolkit/index', [
+          'governance-toolkit/licensing-decision-tree',
+          templateDoc('contributor-agreement', 'Contributor agreement', 'governance'),
+          templateDoc('annotator-contract', 'Annotator contract', 'governance'),
+          templateDoc('sustainability-plan', 'Sustainability plan', 'governance'),
+        ]),
         chapter('Data Collection', '2_data-collection'),
         chapter('Annotation Design', '3_annotation-design', [templateDoc('annotation-guidelines', 'Annotation guidelines', 'annotation-design')]),
         chapterIndexed('Data Quality', 'data-quality/index', ['data-quality/equipment-setup']),
@@ -191,6 +197,9 @@ const sidebars = {
       templateRef('annotation-guidelines', null, 'templates'),
       templateRef('project-charter', null, 'templates'),
       templateRef('model-card', null, 'templates'),
+      templateRef('contributor-agreement', null, 'templates'),
+      templateRef('annotator-contract', null, 'templates'),
+      templateRef('sustainability-plan', null, 'templates'),
     ]),
     chapterIndexed('Case Studies', 'case-studies/index', [
       'case-studies/masakhaner',

@@ -13,9 +13,9 @@ This page lists all governance toolkit templates available in the playbook. Each
 | Template | Who uses it | When |
 |----------|-------------|------|
 | [Consent Form](../templates/consent-form.md) | Project leads, coordinators | Before data collection begins |
-| [Contributor Agreement](./contributor-agreement.md) | Project leads | When onboarding annotators or chapter authors |
+| [Contributor Agreement](../templates/contributor-agreement.md) | Project leads | When onboarding annotators or chapter authors |
 | [Data Ownership Documentation](./data-ownership.md) | Project leads, legal reviewers | At project setup and dataset release |
-| [Sustainability Plan](./sustainability-plan.md) | Project leads, funders | At project design and end-of-grant stage |
+| [Sustainability Plan](../templates/sustainability-plan.md) | Project leads, funders | At project design and end-of-grant stage |
 | [Licensing Agreement](./licensing.md) | Project leads, legal reviewers | Before dataset publication |
 
 ## Other Artifacts
