@@ -15,10 +15,6 @@
     "message": "AfriPlaybook",
     "description": "The label of footer link with label=Playbook linking to /"
   },
-  "link.item.label.MasakhaneTool": {
-    "message": "MasakhaneTool",
-    "description": "The label of footer link with label=Annotation Tool linking to /tool"
-  },
   "link.item.label.Blog": {
     "message": "Blog",
     "description": "The label of footer link with label=Blog linking to /blog"
@@ -46,9 +42,5 @@
   "link.item.label.GitHub Repository": {
     "message": "Dépôt GitHub",
     "description": "The label of footer link with label=GitHub Repository linking to https://github.com/warakacommunity/playbook"
-  },
-  "copyright": {
-    "message": "Copyright © 2026 Masakhane. Construit avec Docusaurus.",
-    "description": "The footer copyright"
   }
 }

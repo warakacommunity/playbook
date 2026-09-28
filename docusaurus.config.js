@@ -638,6 +638,10 @@ const config = {
                 to: "/cite",
               },
               {
+                label: "Changelog",
+                href: "https://github.com/warakacommunity/playbook/blob/main/CHANGELOG.md",
+              },
+              {
                 label: "AfriAnnotate",
                 href: "https://docs.afriannotate.org/",
               },

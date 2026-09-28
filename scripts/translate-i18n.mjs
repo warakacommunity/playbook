@@ -18,26 +18,22 @@ const FILES = [
 
 // ------- Translations -------
 // Brand names (Masakhane, EthioNLP, HausaNLP, Lanfrica, Zindi Africa, GitHub)
-// stay in English. Same for "MasakhaneHub" navbar title.
+// stay in English.
 
 const T = {
   ha: {
     // navbar
     "item.label.AfriPlaybook": "AfriPlaybook",
-    "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "Bulogi",
     "item.label.Download PDF": "Sauke PDF",
-    "logo.alt": "Tambarin Masakhane",
 
     // footer
     "link.title.Docs": "Takardu",
     "link.title.Community": "Al'umma",
     "link.title.More": "Ƙari",
     "link.item.label.AfriPlaybook": "AfriPlaybook",
-    "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "Bulogi",
     "link.item.label.GitHub Repository": "Ma'ajiyar GitHub",
-    copyright: "Haƙƙin mallaka © 2026 Masakhane. An gina shi da Docusaurus.",
 
     // sidebar categories
     "sidebar.tutorialSidebar.category.2. Data Collection, Curation, and Governance":
@@ -111,19 +107,15 @@ const T = {
 
   am: {
     "item.label.AfriPlaybook": "AfriPlaybook",
-    "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "ብሎግ",
     "item.label.Download PDF": "PDF አውርድ",
-    "logo.alt": "የማሳካኔ ሎጎ",
 
     "link.title.Docs": "ሰነዶች",
     "link.title.Community": "ማህበረሰብ",
     "link.title.More": "ተጨማሪ",
     "link.item.label.AfriPlaybook": "AfriPlaybook",
-    "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "ብሎግ",
     "link.item.label.GitHub Repository": "GitHub ማከማቻ",
-    copyright: "የቅጂ መብት © 2026 ማሳካኔ። በDocusaurus የተገነባ።",
 
     "sidebar.tutorialSidebar.category.2. Data Collection, Curation, and Governance":
       "2. የውሂብ ስብስብ፣ ዝግጅት፣ እና አስተዳደር",
@@ -195,19 +187,15 @@ const T = {
 
   sw: {
     "item.label.AfriPlaybook": "AfriPlaybook",
-    "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "Blogu",
     "item.label.Download PDF": "Pakua PDF",
-    "logo.alt": "Nembo ya Masakhane",
 
     "link.title.Docs": "Hati",
     "link.title.Community": "Jumuiya",
     "link.title.More": "Zaidi",
     "link.item.label.AfriPlaybook": "AfriPlaybook",
-    "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "Blogu",
     "link.item.label.GitHub Repository": "Hifadhi ya GitHub",
-    copyright: "Hakimiliki © 2026 Masakhane. Imejengwa kwa Docusaurus.",
 
     "sidebar.tutorialSidebar.category.2. Data Collection, Curation, and Governance":
       "2. Ukusanyaji, Uangalizi, na Utawala wa Data",
@@ -279,20 +267,15 @@ const T = {
 
   fr: {
     "item.label.AfriPlaybook": "AfriPlaybook",
-    "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "Blog",
     "item.label.Download PDF": "Télécharger le PDF",
-    "logo.alt": "Logo Masakhane",
 
     "link.title.Docs": "Documentation",
     "link.title.Community": "Communauté",
     "link.title.More": "Plus",
     "link.item.label.AfriPlaybook": "AfriPlaybook",
-    "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "Blog",
     "link.item.label.GitHub Repository": "Dépôt GitHub",
-    copyright:
-      "Copyright © 2026 Masakhane. Construit avec Docusaurus.",
 
     "sidebar.tutorialSidebar.category.2. Data Collection, Curation, and Governance":
       "2. Collecte, curation et gouvernance des données",
@@ -364,20 +347,15 @@ const T = {
 
   pt: {
     "item.label.AfriPlaybook": "AfriPlaybook",
-    "item.label.MasakhaneTool": "MasakhaneTool",
     "item.label.Blog": "Blog",
     "item.label.Download PDF": "Baixar PDF",
-    "logo.alt": "Logótipo Masakhane",
 
     "link.title.Docs": "Documentação",
     "link.title.Community": "Comunidade",
     "link.title.More": "Mais",
     "link.item.label.AfriPlaybook": "AfriPlaybook",
-    "link.item.label.MasakhaneTool": "MasakhaneTool",
     "link.item.label.Blog": "Blog",
     "link.item.label.GitHub Repository": "Repositório do GitHub",
-    copyright:
-      "Direitos de autor © 2026 Masakhane. Construído com Docusaurus.",
 
     "sidebar.tutorialSidebar.category.2. Data Collection, Curation, and Governance":
       "2. Recolha, Curadoria e Governação de Dados",
