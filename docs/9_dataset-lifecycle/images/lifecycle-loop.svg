@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300" role="img" aria-labelledby="t d">
+  <title id="t">The dataset lifecycle after release</title>
+  <desc id="d">Five stages in a loop: release, host, identify and list, steward, and retire or succeed, which feeds a new release.</desc>
+  <style>
+    .box { fill: #eef3fb; stroke: #2a4a7a; stroke-width: 2; rx: 12; }
+    .box2 { fill: #f6efe6; stroke: #a15c2c; stroke-width: 2; rx: 12; }
+    .h { font: 700 17px system-ui, -apple-system, Segoe UI, sans-serif; fill: #14213d; }
+    .s { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: #3a3a3a; }
+    .arrow { stroke: #2a4a7a; stroke-width: 2.2; fill: none; marker-end: url(#m); }
+    .arrow2 { stroke: #a15c2c; stroke-width: 2.2; fill: none; marker-end: url(#m2); stroke-dasharray: 6 5; }
+    .lbl { font: 600 12px system-ui, -apple-system, Segoe UI, sans-serif; fill: #a15c2c; }
+  </style>
+  <defs>
+    <marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a4a7a"/></marker>
+    <marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a15c2c"/></marker>
+  </defs>
+
+  <rect class="box" x="20" y="70" width="160" height="96"/>
+  <text class="h" x="100" y="106" text-anchor="middle">1. Release</text>
+  <text class="s" x="100" y="128" text-anchor="middle">checklist passed,</text>
+  <text class="s" x="100" y="146" text-anchor="middle">splits and card final</text>
+
+  <rect class="box" x="215" y="70" width="160" height="96"/>
+  <text class="h" x="295" y="106" text-anchor="middle">2. Host</text>
+  <text class="s" x="295" y="128" text-anchor="middle">working copy plus</text>
+  <text class="s" x="295" y="146" text-anchor="middle">archival deposit</text>
+
+  <rect class="box" x="410" y="70" width="160" height="96"/>
+  <text class="h" x="490" y="106" text-anchor="middle">3. Identify and list</text>
+  <text class="s" x="490" y="128" text-anchor="middle">DOI, version, metadata,</text>
+  <text class="s" x="490" y="146" text-anchor="middle">catalogues</text>
+
+  <rect class="box" x="605" y="70" width="160" height="96"/>
+  <text class="h" x="685" y="106" text-anchor="middle">4. Steward</text>
+  <text class="s" x="685" y="128" text-anchor="middle">fix, extend, answer,</text>
+  <text class="s" x="685" y="146" text-anchor="middle">fund the long tail</text>
+
+  <rect class="box2" x="800" y="70" width="140" height="96"/>
+  <text class="h" x="870" y="106" text-anchor="middle">5. Retire</text>
+  <text class="s" x="870" y="128" text-anchor="middle">deprecate, keep old</text>
+  <text class="s" x="870" y="146" text-anchor="middle">versions, name heir</text>
+
+  <path class="arrow" d="M180,118 L213,118"/>
+  <path class="arrow" d="M375,118 L408,118"/>
+  <path class="arrow" d="M570,118 L603,118"/>
+  <path class="arrow" d="M765,118 L798,118"/>
+
+  <path class="arrow2" d="M870,166 L870,230 L100,230 L100,168"/>
+  <text class="lbl" x="485" y="250" text-anchor="middle">a new version or a successor dataset starts the loop again</text>
+</svg>

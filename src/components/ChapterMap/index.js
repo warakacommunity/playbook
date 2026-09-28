@@ -56,8 +56,8 @@ const PHASES = [
       },
       {
         title: "Lifecycle & Release",
-        blurb: "Maintain, version, and release responsibly.",
-        href: "/dataset-lifecycle/release",
+        blurb: "Release, host, identify, and steward the data for the long term.",
+        href: "/dataset-lifecycle/",
       },
     ],
   },

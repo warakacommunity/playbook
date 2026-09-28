@@ -163,7 +163,12 @@ const sidebars = {
         templateDoc('dataset-card', 'Dataset card', 'documentation'),
         templateRef('consent-form', 'Consent form', 'documentation'),
       ]),
-      chapter('Dataset Lifecycle', '9_dataset-lifecycle'),
+      chapterIndexed('Dataset Lifecycle', 'dataset-lifecycle/index', [
+        'dataset-lifecycle/release',
+        'dataset-lifecycle/hosting',
+        'dataset-lifecycle/discoverability',
+        'dataset-lifecycle/maintenance',
+      ]),
       chapterIndexed('Deployment', 'deployment/index', [
         'deployment/offline',
         'deployment/sms-ussd-whatsapp',

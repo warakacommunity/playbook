@@ -19,7 +19,8 @@ Releasing a dataset is the moment the work becomes useful to others, and a clear
 - **Licensing defined.** A clear licence chosen on purpose, applied to the data, with attribution and provenance recorded (see [Data Governance](../data-governance/index.md)).
 - **Ethical review conducted.** Consent confirmed, personal and sensitive data handled, harms considered, community authority respected (see [Data Governance](../data-governance/index.md)).
 - **Baselines and splits provided.** Official train, development, and test splits, and at least baseline results, so others can compare fairly (see [Evaluation](../8_model-building/starter-kit.md)).
-- **Public access ensured.** Hosted where the community can find it, such as Hugging Face, Zenodo, or the Lanfrica catalogue, with a stable identifier.
+- **Public access ensured.** Hosted where the community can find it, with a persistent identifier and a listing in the catalogues people search (see [Hosting and preservation](./hosting.md) and [Identifiers, versions, and catalogues](./discoverability.md)).
+- **A steward named.** Someone answers for the dataset after release, and the maintenance plan says how (see [Maintenance and stewardship](./maintenance.md)).
 
 ## Publishing to a hub
 

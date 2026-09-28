@@ -82,6 +82,13 @@ gap between English and African languages. [arxiv.org/abs/2311.07978](https://ar
 segmented and transcribed Arabic-script (Ajami) manuscripts with ALTO formatting, bringing a previously
 digitally invisible script into reach. [link.springer.com](https://link.springer.com/chapter/10.1007/978-3-032-04627-7_36)
 
+### Akhtar, M., et al. (2024) {#akhtar-2024}
+
+*Croissant: A Metadata Format for ML-Ready Datasets.* NeurIPS 2024 Datasets and Benchmarks Track;
+arXiv:2403.19546. A JSON-LD vocabulary built on schema.org that describes a dataset's files, record
+structure, and ML semantics in one document, so tools can find and load it without custom code. Emitted
+automatically by Hugging Face, Kaggle, and OpenML. [arxiv.org/abs/2403.19546](https://arxiv.org/abs/2403.19546)
+
 ### Alabi, J. O., et al. (2025) {#afrihubert-2025}
 
 *AfriHuBERT: A self-supervised speech representation model for African languages.* Interspeech 2025;
@@ -142,6 +149,13 @@ Languages.* Interspeech 2025 / arXiv:2505.20564. An 1,800-hour Igbo, Hausa, and 
 built from 5,000+ voice donors via trained community facilitators and a reciprocal "data farming" model.
 [arxiv.org/abs/2505.20564](https://arxiv.org/abs/2505.20564)
 
+### Emezue, C. C., & Dossou, B. F. P. (2020) {#emezue-dossou-2020}
+
+*Lanfrica: A Participatory Approach to Documenting Machine Translation Research on African Languages.*
+arXiv:2008.07302. The paper behind Lanfrica: a community-maintained index of research, benchmarks, and
+datasets on African languages, built because no central database let researchers find existing work or
+compare against it. [arxiv.org/abs/2008.07302](https://arxiv.org/abs/2008.07302)
+
 ### Esethu Framework (2025) {#esethu-2025}
 
 *The Esethu Framework: Reimagining Sustainable Dataset Governance and Curation for Low-Resource
@@ -182,6 +196,13 @@ Somali, Swahili, Tigrinya, Yorùbá, and more). [aclanthology.org/2021.findings-
 ACL 2023. 6,022 English question-answer pairs over 1,555 Visual Genome images, human-translated to Hausa.
 [aclanthology.org/2023.findings-acl.646](https://aclanthology.org/2023.findings-acl.646/)
 
+### Jernite, Y., et al. (2022) {#jernite-2022}
+
+*Data Governance in the Age of Large-Scale Data-Driven Language Technology.* Proceedings of the 2022 ACM
+Conference on Fairness, Accountability, and Transparency (FAccT '22). Proposes a distributed governance
+structure for language data, developed for the BigScience project, that assigns rights and duties to data
+custodians, hosts, and users across the whole life of a dataset. [doi.org/10.1145/3531146.3534637](https://dl.acm.org/doi/10.1145/3531146.3534637)
+
 ### Joshi, P., Santy, S., Budhiraja, A., Bali, K., & Choudhury, M. (2020) {#joshi-2020}
 
 *The State and Fate of Linguistic Diversity and Inclusion in the NLP World.* Proceedings of ACL 2020.
@@ -216,6 +237,13 @@ datasets carry missing or unclear licences, which leaves them legally unusable f
 *A Rigorous Evaluation of LLM Data Generation Strategies for Low-Resource Languages.* arXiv:2506.12158.
 Finds careful generation (real demonstrations plus self-revision) can approach real data, while naive
 synthetic generation often fails for the lowest-resource languages. [arxiv.org/abs/2506.12158](https://arxiv.org/abs/2506.12158)
+
+### Luccioni, A. S., et al. (2022) {#luccioni-2022}
+
+*A Framework for Deprecating Datasets: Standardizing Documentation, Identification, and Communication.*
+Proceedings of FAccT 2022, 199–212. Studies how machine-learning datasets are withdrawn, documents cases
+where deprecated datasets kept circulating without their documentation, and proposes a deprecation
+framework covering risk assessment, notice, and persistent identifiers. [doi.org/10.1145/3531146.3533086](https://dl.acm.org/doi/10.1145/3531146.3533086)
 
 ### Malabo Convention (2023) {#malabo-2023}
 
@@ -290,6 +318,13 @@ languages, with answers retrieved from English or French passages. [arxiv.org/ab
 *AfriSpeech-200: Pan-African Accented Speech Dataset for Clinical and General Domain ASR.* TACL 2023;
 arXiv:2310.00274. 200 hours of accented English from 120 accents across 13 African countries.
 [arxiv.org/abs/2310.00274](https://arxiv.org/abs/2310.00274)
+
+### Peng, K., Mathur, A., & Narayanan, A. (2021) {#peng-2021}
+
+*Mitigating Dataset Harms Requires Stewardship: Lessons from 1000 Papers.* Proceedings of the NeurIPS 2021
+Datasets and Benchmarks Track. Traces nearly 1,000 papers that used three retracted face-recognition datasets
+and shows that derivatives, unclear licences, and weak management let harms persist after withdrawal; argues
+for stewardship across the full dataset life cycle. [arxiv.org/abs/2108.02922](https://arxiv.org/abs/2108.02922)
 
 ### Plank, B. (2022) {#plank-2022}
 

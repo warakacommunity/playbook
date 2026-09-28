@@ -6,7 +6,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
-Nothing yet.
+### Added
+
+- Dataset Lifecycle expanded into a full chapter on sustainability, discoverability, and reuse: a landing page, Hosting and Preservation, Identifiers, Versions, and Catalogues, and Maintenance and Stewardship, with five new references.
+
+### Changed
+
+- The old Maintenance page is now Maintenance and Stewardship, and the release checklist names a steward.
 
 ## [1.0.0] - 2026-09-28
 
