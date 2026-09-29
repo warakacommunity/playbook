@@ -1,5 +1,6 @@
 ---
-wip: true
+# wip: true
+ready: true
 title: OCR
 sidebar_position: 2
 last_update:

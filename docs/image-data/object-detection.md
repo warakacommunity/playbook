@@ -1,5 +1,6 @@
 ---
-wip: true
+# wip: true
+ready: true
 title: Object detection
 sidebar_position: 3
 last_update:
