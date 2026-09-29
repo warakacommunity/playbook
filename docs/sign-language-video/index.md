@@ -1,5 +1,6 @@
 ---
-wip: true
+# wip: true
+ready: true
 title: Video
 last_update:
   date: 2026-09-24

@@ -1,5 +1,6 @@
 ---
-wip: true
+# wip: true
+ready: true
 title: Layout & document understanding
 sidebar_position: 4
 last_update:

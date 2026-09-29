@@ -1,5 +1,6 @@
 ---
-wip: true
+# wip: true
+ready: true
 title: Sign language
 sidebar_position: 2
 last_update:

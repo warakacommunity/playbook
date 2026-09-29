@@ -1,5 +1,6 @@
 ---
-wip: true
+# wip: true
+ready: true
 title: Image captioning
 sidebar_position: 3
 last_update:

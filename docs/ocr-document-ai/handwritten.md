@@ -1,5 +1,6 @@
 ---
-wip: true
+# wip: true
+ready: true
 title: Handwritten text recognition
 sidebar_position: 3
 last_update:
