@@ -15,7 +15,7 @@ The [Data Governance](../data-governance/index.md) and [Legal, consent, and comm
 
 | Tool | What it decides | Use it when |
 | --- | --- | --- |
-| [Licensing decision tree](./licensing-decision-tree.md) | Which licence, or which restricted-release pattern, your dataset can honestly carry, given the consent you collected and the sources you used | Before the project charter is signed, and again before release |
+| [Licensing decision tree](/governance-toolkit/licensing-decision-tree) | Which licence, or which restricted-release pattern, your dataset can honestly carry, given the consent you collected and the sources you used | Before the project charter is signed, and again before release |
 | [Contributor agreement](../templates/contributor-agreement.md) | The terms for volunteers and collaborators whose work becomes part of the dataset: what they grant, how they are credited, how they can stop | When onboarding anyone who is not paid per task |
 | [Annotator contract](../templates/annotator-contract.md) | The terms for paid annotation, transcription, or translation work: pay, rejection, wellbeing, data protection, rights | Before the first paid task is assigned |
 | [Sustainability plan](../templates/sustainability-plan.md) | Who stewards the dataset after the grant, what it costs, and where the money and time come from, including a business model for services on open data | At project design, and again in the last quarter of the grant |
