@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="ontTitle ontDesc">
+  <title id="ontTitle">The diagnosis ontology and the double-label loop</title>
+  <desc id="ontDesc">On the left, a three-level ontology: crop, then issue family (pest, disease, nutrient, abiotic, healthy) plus an uncertain node, then the specific issue as a leaf. Each label carries a confidence field and the ontology version. On the right, the rolling loop: every image gets one agronomist label, a rolling 30 percent sample gets a second, Cohen's kappa is computed weekly per language, crop and annotator, and any cell below 0.75 goes to 100 percent double labelling and retraining until it recovers.</desc>
+
+  <rect x="6" y="6" width="968" height="608" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Diagnosis ontology and the double-label loop</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Crop &#8594; issue family &#8594; specific issue, with an uncertain node; 30% of images get a second label.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+
+  <!-- ============ ONTOLOGY TREE ============ -->
+  <g>
+    <rect x="30" y="110" width="500" height="470" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="56" cy="136" r="13" fill="#1F5B3F"/>
+    <text x="56" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="76" y="141" font-size="16" font-weight="700" fill="#1F5B3F">Ontology v1.2, versioned and shipped with the data</text>
+
+    <!-- level 1: crop -->
+    <rect x="200" y="160" width="160" height="34" rx="9" fill="#1F5B3F"/>
+    <text x="280" y="182" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">crop: maize</text>
+
+    <!-- lines crop -> families -->
+    <line x1="280" y1="194" x2="280" y2="214" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="88" y1="214" x2="472" y2="214" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="88" y1="214" x2="88" y2="232" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="184" y1="214" x2="184" y2="232" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="280" y1="214" x2="280" y2="232" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="376" y1="214" x2="376" y2="232" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="472" y1="214" x2="472" y2="232" stroke="#CBBBA4" stroke-width="2"/>
+
+    <!-- level 2: families -->
+    <rect x="52" y="232" width="72" height="30" rx="8" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="88" y="252" font-size="12" font-weight="600" fill="#9C4F2B" text-anchor="middle">pest</text>
+    <rect x="148" y="232" width="72" height="30" rx="8" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="184" y="252" font-size="12" font-weight="600" fill="#8A3B25" text-anchor="middle">disease</text>
+    <rect x="244" y="232" width="72" height="30" rx="8" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="280" y="252" font-size="12" font-weight="600" fill="#B97F37" text-anchor="middle">nutrient</text>
+    <rect x="340" y="232" width="72" height="30" rx="8" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="376" y="252" font-size="12" font-weight="600" fill="#35607A" text-anchor="middle">abiotic</text>
+    <rect x="436" y="232" width="72" height="30" rx="8" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="472" y="252" font-size="12" font-weight="600" fill="#1F5B3F" text-anchor="middle">healthy</text>
+
+    <!-- lines families -> leaves -->
+    <line x1="88" y1="262" x2="88" y2="282" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="184" y1="262" x2="184" y2="282" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="280" y1="262" x2="280" y2="282" stroke="#CBBBA4" stroke-width="2"/>
+    <line x1="376" y1="262" x2="376" y2="282" stroke="#CBBBA4" stroke-width="2"/>
+
+    <!-- level 3: leaves -->
+    <rect x="48" y="282" width="80" height="54" rx="8" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="88" y="300" font-size="11" fill="#2B2218" text-anchor="middle">fall armyworm</text>
+    <text x="88" y="314" font-size="11" fill="#2B2218" text-anchor="middle">stem borer</text>
+    <text x="88" y="328" font-size="11" fill="#8A7D6E" text-anchor="middle">aphids ...</text>
+
+    <rect x="144" y="282" width="80" height="54" rx="8" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="184" y="300" font-size="11" fill="#2B2218" text-anchor="middle">maize streak</text>
+    <text x="184" y="314" font-size="11" fill="#2B2218" text-anchor="middle">leaf blight</text>
+    <text x="184" y="328" font-size="11" fill="#8A7D6E" text-anchor="middle">rust ...</text>
+
+    <rect x="240" y="282" width="80" height="54" rx="8" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="280" y="300" font-size="11" fill="#2B2218" text-anchor="middle">nitrogen</text>
+    <text x="280" y="314" font-size="11" fill="#2B2218" text-anchor="middle">phosphorus</text>
+    <text x="280" y="328" font-size="11" fill="#8A7D6E" text-anchor="middle">zinc ...</text>
+
+    <rect x="336" y="282" width="80" height="54" rx="8" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="376" y="300" font-size="11" fill="#2B2218" text-anchor="middle">drought</text>
+    <text x="376" y="314" font-size="11" fill="#2B2218" text-anchor="middle">waterlogging</text>
+    <text x="376" y="328" font-size="11" fill="#8A7D6E" text-anchor="middle">herbicide ...</text>
+
+    <text x="472" y="304" font-size="11" fill="#8A7D6E" text-anchor="middle">no leaf:</text>
+    <text x="472" y="318" font-size="11" fill="#8A7D6E" text-anchor="middle">same crop,</text>
+    <text x="472" y="332" font-size="11" fill="#8A7D6E" text-anchor="middle">same stage</text>
+
+    <!-- uncertain node -->
+    <rect x="48" y="354" width="200" height="34" rx="9" fill="#FFFFFF" stroke="#8A7D6E" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="148" y="376" font-size="12" font-weight="600" fill="#8A7D6E" text-anchor="middle">uncertain (any level)</text>
+    <text x="260" y="370" font-size="11" fill="#8A7D6E">a real node, never a forced guess;</text>
+    <text x="260" y="384" font-size="11" fill="#8A7D6E">goes to the second labeller</text>
+
+    <!-- label block -->
+    <rect x="48" y="404" width="464" height="160" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="60" y="426" font-size="12" font-weight="700" fill="#1F5B3F">What one label records</text>
+    <text x="60" y="448" font-size="12" fill="#2B2218" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">"label": "maize/pest/fall_armyworm"</text>
+    <text x="60" y="466" font-size="12" fill="#2B2218" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">"issue_family": "pest"</text>
+    <text x="60" y="484" font-size="12" fill="#2B2218" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">"confidence": "high" | "medium" | "low"</text>
+    <text x="60" y="502" font-size="12" fill="#2B2218" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">"secondary_labels": ["maize/nutrient/nitrogen"]</text>
+    <text x="60" y="520" font-size="12" fill="#2B2218" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">"ontology_version": "1.2"</text>
+    <text x="60" y="538" font-size="12" fill="#2B2218" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">"review_chain": [label, agronomist_review, ...]</text>
+    <text x="60" y="556" font-size="11" font-style="italic" fill="#8A7D6E">the label never changes silently: every relabel is a new chain entry</text>
+  </g>
+
+  <!-- ============ DOUBLE-LABEL LOOP ============ -->
+  <g>
+    <rect x="554" y="110" width="396" height="470" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="580" cy="136" r="13" fill="#B97F37"/>
+    <text x="580" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="600" y="141" font-size="16" font-weight="700" fill="#B97F37">Rolling double-label loop</text>
+
+    <rect x="572" y="164" width="300" height="52" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="584" y="185" font-size="13" font-weight="600" fill="#1F5B3F">Every image: one agronomist label</text>
+    <text x="584" y="203" font-size="12" fill="#8A7D6E">~100 labelling actions per agronomist-day</text>
+
+    <line x1="722" y1="216" x2="722" y2="236" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="572" y="238" width="300" height="52" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="584" y="259" font-size="13" font-weight="600" fill="#1F5B3F">Rolling 30% sample: second label</text>
+    <text x="584" y="277" font-size="12" fill="#8A7D6E">a different agronomist, blind to the first</text>
+
+    <line x1="722" y1="290" x2="722" y2="310" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="572" y="312" width="300" height="66" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="584" y="333" font-size="13" font-weight="600" fill="#B97F37">Cohen's &#954;, every Monday</text>
+    <text x="584" y="351" font-size="12" fill="#8A7D6E">per language, per crop, per annotator</text>
+    <text x="584" y="368" font-size="12" fill="#8A7D6E">disagreements go to adjudication</text>
+
+    <!-- branch -->
+    <line x1="660" y1="378" x2="660" y2="404" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="800" y1="378" x2="800" y2="404" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="572" y="406" width="150" height="70" rx="10" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="647" y="428" font-size="13" font-weight="700" fill="#1F5B3F" text-anchor="middle">&#954; &#8805; 0.75</text>
+    <text x="647" y="446" font-size="12" fill="#2E7D5B" text-anchor="middle">stay at 30%</text>
+    <text x="647" y="462" font-size="12" fill="#2E7D5B" text-anchor="middle">credit on acceptance</text>
+
+    <rect x="742" y="406" width="190" height="70" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="837" y="428" font-size="13" font-weight="700" fill="#8A3B25" text-anchor="middle">&#954; &lt; 0.75</text>
+    <text x="837" y="446" font-size="12" fill="#8A3B25" text-anchor="middle">that crop or annotator: 100%</text>
+    <text x="837" y="462" font-size="12" fill="#8A3B25" text-anchor="middle">pause, retrain, fix the rubric</text>
+
+    <!-- loop back to top -->
+    <path d="M932 440 L944 440 L944 190 L876 190" fill="none" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <text x="572" y="508" font-size="12" fill="#2B2218">Below the floor twice: the class is re-defined in the</text>
+    <text x="572" y="524" font-size="12" fill="#2B2218">ontology and the version number goes up.</text>
+    <text x="572" y="552" font-size="12" font-style="italic" fill="#B97F37">agronomist USD 40/day &#183; the bottleneck of the pipeline</text>
+  </g>
+
+  <text x="950" y="606" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Agricultural advisory data &#183; Diagnosis labelling</text>
+</svg>

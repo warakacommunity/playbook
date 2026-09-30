@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 600" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="capTitle capDesc">
+  <title id="capTitle">The capture form and the ingest pipeline</title>
+  <desc id="capDesc">On the left, the structured capture form a collector fills on the phone for every photo: crop, suspected issue with a "not sure" option, growth stage, plant part, district, the farmer's question, and two shots, plant level and close-up. Captures queue offline. On the right, the ingest pipeline every image passes before it enters an annotation project: EXIF stripped, GPS reduced to a district name, faces blurred, perceptual-hash de-duplication, and a pair ID minted.</desc>
+
+  <rect x="6" y="6" width="968" height="588" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Capture form and ingest</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">The form travels with the photo; ingest cleans the image and mints the pair ID.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+
+  <!-- ============ CAPTURE FORM (phone) ============ -->
+  <g>
+    <rect x="30" y="110" width="330" height="450" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <circle cx="56" cy="136" r="13" fill="#C66A3D"/>
+    <text x="56" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="76" y="141" font-size="16" font-weight="700" fill="#9C4F2B">Capture form, one per photo</text>
+
+    <!-- two shots -->
+    <rect x="48" y="158" width="150" height="70" rx="8" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <path d="M60 220 Q90 180 123 205 Q150 225 186 195 L186 219 L60 219 Z" fill="#E7F1EC"/>
+    <path d="M100 218 L100 190 M100 200 L88 188 M100 196 L112 186" stroke="#2E7D5B" stroke-width="2" fill="none"/>
+    <text x="123" y="176" font-size="11" fill="#8A7D6E" text-anchor="middle">plant level</text>
+
+    <rect x="208" y="158" width="134" height="70" rx="8" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <ellipse cx="275" cy="200" rx="40" ry="20" fill="#E7F1EC" stroke="#2E7D5B" stroke-width="1.5"/>
+    <circle cx="265" cy="198" r="4" fill="#C66A3D"/>
+    <circle cx="284" cy="204" r="3" fill="#C66A3D"/>
+    <text x="275" y="176" font-size="11" fill="#8A7D6E" text-anchor="middle">close-up, natural light</text>
+
+    <!-- fields -->
+    <rect x="48" y="240" width="294" height="30" rx="7" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="58" y="260" font-size="12" fill="#8A7D6E">Crop</text>
+    <text x="332" y="260" font-size="12" font-weight="600" fill="#2B2218" text-anchor="end">maize (masara)</text>
+
+    <rect x="48" y="276" width="294" height="30" rx="7" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="58" y="296" font-size="12" fill="#8A7D6E">Suspected issue</text>
+    <text x="332" y="296" font-size="12" font-weight="600" fill="#2B2218" text-anchor="end">not sure &#9662;</text>
+
+    <rect x="48" y="312" width="294" height="30" rx="7" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="58" y="332" font-size="12" fill="#8A7D6E">Growth stage</text>
+    <text x="332" y="332" font-size="12" font-weight="600" fill="#2B2218" text-anchor="end">vegetative</text>
+
+    <rect x="48" y="348" width="294" height="30" rx="7" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="58" y="368" font-size="12" fill="#8A7D6E">Plant part</text>
+    <text x="332" y="368" font-size="12" font-weight="600" fill="#2B2218" text-anchor="end">leaf</text>
+
+    <rect x="48" y="384" width="294" height="30" rx="7" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="58" y="404" font-size="12" fill="#8A7D6E">District</text>
+    <text x="332" y="404" font-size="12" font-weight="600" fill="#2B2218" text-anchor="end">from GPS, name only</text>
+
+    <rect x="48" y="420" width="294" height="60" rx="7" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="58" y="440" font-size="12" fill="#8A7D6E">Farmer's question (typed or recorded)</text>
+    <text x="58" y="460" font-size="12" font-weight="600" fill="#2B2218">Me ya sa ganyen masarar nan</text>
+    <text x="58" y="474" font-size="12" font-weight="600" fill="#2B2218">ke da ramuka?</text>
+
+    <rect x="48" y="494" width="164" height="24" rx="8" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="130" y="510" font-size="11" font-weight="700" fill="#B97F37" text-anchor="middle">outbox: 12 queued, offline</text>
+    <text x="222" y="510" font-size="11" fill="#8A7D6E">syncs when online</text>
+
+    <text x="48" y="545" font-size="12" font-style="italic" fill="#9C4F2B">USD 0.60 per accepted image + session allowance</text>
+  </g>
+
+  <line x1="360" y1="335" x2="398" y2="335" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ============ INGEST PIPELINE ============ -->
+  <g>
+    <rect x="400" y="110" width="550" height="450" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="426" cy="136" r="13" fill="#B97F37"/>
+    <text x="426" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="446" y="141" font-size="16" font-weight="700" fill="#B97F37">Ingest, before any annotator sees the image</text>
+
+    <rect x="418" y="160" width="514" height="52" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="430" y="181" font-size="13" font-weight="600" fill="#2B2218">EXIF stripped</text>
+    <text x="430" y="199" font-size="12" fill="#8A7D6E">device model, timestamps, serials removed from the released file</text>
+
+    <line x1="675" y1="212" x2="675" y2="230" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="418" y="232" width="514" height="52" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="430" y="253" font-size="13" font-weight="600" fill="#2B2218">GPS &#8594; district</text>
+    <text x="430" y="271" font-size="12" fill="#8A7D6E">coordinates read once to derive the district name, then discarded</text>
+
+    <line x1="675" y1="284" x2="675" y2="302" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="418" y="304" width="514" height="52" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="430" y="325" font-size="13" font-weight="600" fill="#2B2218">Faces detected and blurred</text>
+    <text x="430" y="343" font-size="12" fill="#8A7D6E">human check on flagged images; a face that cannot be blurred drops the image</text>
+
+    <line x1="675" y1="356" x2="675" y2="374" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="418" y="376" width="514" height="52" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="430" y="397" font-size="13" font-weight="600" fill="#2B2218">Perceptual-hash de-duplication</text>
+    <text x="430" y="415" font-size="12" fill="#8A7D6E">near-duplicates of the same leaf are rejected and earn no credit</text>
+
+    <line x1="675" y1="428" x2="675" y2="446" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="418" y="448" width="514" height="52" rx="10" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="430" y="469" font-size="13" font-weight="700" fill="#1F5B3F">pair_id minted:  hau-000123</text>
+    <text x="430" y="487" font-size="12" fill="#2E7D5B">stream tagged: field | open_seed | benchmark_reserved</text>
+
+    <line x1="675" y1="500" x2="675" y2="518" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="675" y="538" font-size="13" font-weight="600" fill="#2B2218" text-anchor="middle">&#8594; diagnosis project (or the isolated benchmark project)</text>
+  </g>
+
+  <text x="950" y="586" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Agricultural advisory data &#183; Field image capture</text>
+</svg>

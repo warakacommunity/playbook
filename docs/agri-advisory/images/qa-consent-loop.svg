@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 720" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="qaTitle qaDesc">
+  <title id="qaTitle">Quality, consent and release loop</title>
+  <desc id="qaDesc">A consent gate (written or recorded oral, versioned, with a 60-day opt-out) admits each contribution. Anonymisation at ingest blurs faces, strips EXIF, coarsens GPS to district and assigns opaque IDs. The record then passes three review stages: agronomist review, native-speaker linguistic review and language-lead adjudication, with relabel and rewrite loops back and credit landing only on acceptance. A Monday report reads kappa, advisory agreement, coverage gaps, queue and ledger. A release timeline runs from batch exports every two weeks under partner sampling, to partner delivery under embargo, to public CC-BY-4.0 release 60 days later after the last opt-out window closes.</desc>
+
+  <rect x="6" y="6" width="968" height="708" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Quality, consent and release</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Consent first &#8594; anonymise at ingest &#8594; three review stages &#8594; credit on acceptance &#8594; report every Monday &#8594; release after the last opt-out.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <defs>
+    <marker id="qaArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+    <marker id="qaBack" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8A3B25"/>
+    </marker>
+  </defs>
+
+  <!-- ===== Consent gate (gold) ===== -->
+  <g>
+    <rect x="30" y="110" width="212" height="150" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="58" cy="140" r="13" fill="#B97F37"/>
+    <text x="58" y="145" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="80" y="145" font-size="16" font-weight="700" fill="#B97F37">Consent gate</text>
+    <text x="48" y="170" font-size="12" fill="#2B2218">written or recorded oral,</text>
+    <text x="48" y="186" font-size="12" fill="#2B2218">in the language, versioned</text>
+    <text x="48" y="208" font-size="12" fill="#2B2218">voice = biometric data,</text>
+    <text x="48" y="224" font-size="12" fill="#2B2218">explicit opt-in to release</text>
+    <text x="48" y="246" font-size="11" font-weight="600" fill="#B97F37">60-day opt-out, credit by choice</text>
+  </g>
+
+  <line x1="242" y1="185" x2="276" y2="185" stroke="#CBBBA4" stroke-width="2" marker-end="url(#qaArrow)"/>
+
+  <!-- ===== Anonymise at ingest (terracotta) ===== -->
+  <g>
+    <rect x="280" y="110" width="212" height="150" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <circle cx="308" cy="140" r="13" fill="#C66A3D"/>
+    <text x="308" y="145" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="330" y="145" font-size="16" font-weight="700" fill="#9C4F2B">Ingest</text>
+    <text x="298" y="170" font-size="12" fill="#2B2218">faces blurred</text>
+    <text x="298" y="188" font-size="12" fill="#2B2218">EXIF stripped</text>
+    <text x="298" y="206" font-size="12" fill="#2B2218">GPS &#8594; district only</text>
+    <text x="298" y="224" font-size="12" fill="#2B2218">opaque IDs, pair_id minted</text>
+    <text x="298" y="246" font-size="11" fill="#8A7D6E">before any annotator sees it</text>
+  </g>
+
+  <!-- ===== Monday report (neutral, right) ===== -->
+  <g>
+    <rect x="740" y="110" width="210" height="150" rx="12" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="758" y="140" font-size="15" font-weight="700" fill="#2B2218">Monday report</text>
+    <text x="758" y="160" font-size="11" fill="#8A7D6E">per language + aggregate</text>
+    <text x="758" y="182" font-size="12" fill="#2B2218">Cohen's &#954; &#8805; 0.75 per crop</text>
+    <text x="758" y="200" font-size="12" fill="#2B2218">advisory agreement &#8805; 90% (r2)</text>
+    <text x="758" y="218" font-size="12" fill="#2B2218">coverage gaps, speakers</text>
+    <text x="758" y="236" font-size="12" fill="#2B2218">open queue, opt-outs, ledger</text>
+    <text x="758" y="252" font-size="11" fill="#8A3B25">below threshold &#8594; action line</text>
+  </g>
+
+  <!-- ===== Three-stage QA (forest green) ===== -->
+  <g>
+    <rect x="30" y="290" width="920" height="200" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="58" cy="320" r="13" fill="#1F5B3F"/>
+    <text x="58" y="325" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="80" y="325" font-size="16" font-weight="700" fill="#1F5B3F">Three-stage QA, separate roles, no self-review</text>
+
+    <rect x="48" y="346" width="230" height="86" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="60" y="368" font-size="13" font-weight="600" fill="#1F5B3F">Stage 1 &#183; Agronomist review</text>
+    <text x="60" y="386" font-size="11" fill="#8A7D6E">label vs extension standard,</text>
+    <text x="60" y="400" font-size="11" fill="#8A7D6E">advisory faithful and safe</text>
+    <text x="60" y="420" font-size="11" fill="#2B2218">accept / relabel / rewrite / reject</text>
+
+    <line x1="278" y1="389" x2="320" y2="389" stroke="#CBBBA4" stroke-width="2" marker-end="url(#qaArrow)"/>
+
+    <rect x="324" y="346" width="230" height="86" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="336" y="368" font-size="13" font-weight="600" fill="#1F5B3F">Stage 2 &#183; Linguistic review</text>
+    <text x="336" y="386" font-size="11" fill="#8A7D6E">native speaker, not the author:</text>
+    <text x="336" y="400" font-size="11" fill="#8A7D6E">register, vernacular terms</text>
+    <text x="336" y="420" font-size="11" fill="#2B2218">accept / rewrite request</text>
+
+    <line x1="554" y1="389" x2="596" y2="389" stroke="#CBBBA4" stroke-width="2" marker-end="url(#qaArrow)"/>
+
+    <rect x="600" y="346" width="180" height="86" rx="10" fill="#FFFFFF" stroke="#2E7D5B" stroke-width="1.5"/>
+    <text x="612" y="368" font-size="13" font-weight="600" fill="#1F5B3F">Stage 3 &#183; Adjudication</text>
+    <text x="612" y="386" font-size="11" fill="#8A7D6E">language lead; quality lead</text>
+    <text x="612" y="400" font-size="11" fill="#8A7D6E">on escalation; logged</text>
+    <text x="612" y="420" font-size="11" fill="#2B2218">final label + advisory</text>
+
+    <line x1="780" y1="389" x2="822" y2="389" stroke="#CBBBA4" stroke-width="2" marker-end="url(#qaArrow)"/>
+
+    <rect x="826" y="346" width="108" height="86" rx="10" fill="#1F5B3F" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="880" y="380" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Accepted</text>
+    <text x="880" y="400" font-size="11" fill="#FFFFFF" text-anchor="middle">credit lands</text>
+    <text x="880" y="416" font-size="11" fill="#FFFFFF" text-anchor="middle">on the ledger</text>
+
+    <!-- rework loops (rust) -->
+    <path d="M163 432 L163 456 L60 456" fill="none" stroke="#8A3B25" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#qaBack)"/>
+    <text x="170" y="460" font-size="11" fill="#8A3B25">relabel or reject &#8594; back, no credit</text>
+    <path d="M439 432 L439 474 L336 474" fill="none" stroke="#8A3B25" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#qaBack)"/>
+    <text x="446" y="478" font-size="11" fill="#8A3B25">rewrite request &#8594; back to author, no credit until accepted</text>
+  </g>
+
+  <!-- ingest -> QA and QA -> report connectors -->
+  <line x1="386" y1="260" x2="386" y2="286" stroke="#CBBBA4" stroke-width="2" marker-end="url(#qaArrow)"/>
+  <line x1="845" y1="290" x2="845" y2="264" stroke="#CBBBA4" stroke-width="2" marker-end="url(#qaArrow)"/>
+  <text x="858" y="280" font-size="11" fill="#8A7D6E">metrics</text>
+
+  <!-- ===== Release timeline (deep rust) ===== -->
+  <text x="30" y="528" font-size="15" font-weight="700" fill="#2B2218">Release timeline</text>
+  <line x1="30" y1="538" x2="950" y2="538" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <g>
+    <rect x="30" y="554" width="920" height="140" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <circle cx="58" cy="584" r="13" fill="#8A3B25"/>
+    <text x="58" y="589" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="80" y="589" font-size="16" font-weight="700" fill="#8A3B25">From batch export to public release</text>
+
+    <line x1="60" y1="640" x2="920" y2="640" stroke="#8A3B25" stroke-width="2"/>
+
+    <circle cx="120" cy="640" r="7" fill="#FFFFFF" stroke="#8A3B25" stroke-width="2"/>
+    <text x="120" y="622" font-size="12" font-weight="600" fill="#2B2218" text-anchor="middle">contribution</text>
+    <text x="120" y="664" font-size="11" fill="#8A7D6E" text-anchor="middle">opt-out window opens</text>
+
+    <circle cx="340" cy="640" r="7" fill="#FFFFFF" stroke="#8A3B25" stroke-width="2"/>
+    <text x="340" y="622" font-size="12" font-weight="600" fill="#2B2218" text-anchor="middle">batch export every 2 weeks</text>
+    <text x="340" y="664" font-size="11" fill="#8A7D6E" text-anchor="middle">partner samples, rework goes back</text>
+    <text x="340" y="680" font-size="11" fill="#8A7D6E" text-anchor="middle">withdrawals applied before each export</text>
+
+    <circle cx="600" cy="640" r="7" fill="#8A3B25" stroke="#8A3B25" stroke-width="2"/>
+    <text x="600" y="622" font-size="12" font-weight="600" fill="#2B2218" text-anchor="middle">partner delivery, embargoed</text>
+    <text x="600" y="664" font-size="11" fill="#8A7D6E" text-anchor="middle">M7 in AgroLingua, with datasheets</text>
+
+    <circle cx="860" cy="640" r="7" fill="#1F5B3F" stroke="#1F5B3F" stroke-width="2"/>
+    <text x="860" y="622" font-size="12" font-weight="600" fill="#1F5B3F" text-anchor="middle">public CC-BY-4.0</text>
+    <text x="860" y="664" font-size="11" fill="#8A7D6E" text-anchor="middle">M7 + 60 days, after the</text>
+    <text x="860" y="680" font-size="11" fill="#8A7D6E" text-anchor="middle">last opt-out window closes</text>
+  </g>
+
+  <text x="950" y="708" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Agricultural advisory &#183; Quality, consent and release</text>
+</svg>

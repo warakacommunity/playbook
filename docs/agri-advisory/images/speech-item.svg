@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 640" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="spTitle spDesc">
+  <title id="spTitle">One speech item on one pair</title>
+  <desc id="spDesc">A speech item is keyed to a pair ID and holds two recordings by two different speakers: a spontaneous farmer question, cued by the collector's captured question, and the pair's advisory read aloud verbatim. Each recording has a 48 kHz original with a 16 kHz derivative, a verbatim transcript with timestamps, and speaker metadata present only under consent. Every clip passes automated QC and then two-vote native-speaker validation, with split votes escalated to a reviewer.</desc>
+
+  <rect x="6" y="6" width="968" height="628" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">One speech item = two recordings on one pair</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Every clip attaches to a pair ID. No standalone corpus, no synthesised audio.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <defs>
+    <marker id="spArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+
+  <!-- ============ PAIR (terracotta) ============ -->
+  <g>
+    <rect x="30" y="106" width="920" height="60" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="48" y="131" font-size="15" font-weight="700" fill="#9C4F2B">Pair hau-000123</text>
+    <text x="48" y="151" font-size="12" fill="#8A7D6E">image &#183; diagnosis maize / pest / fall armyworm &#183; accepted advisory &#183; collector's captured question</text>
+    <rect x="770" y="118" width="164" height="36" rx="8" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="852" y="135" font-size="12" font-weight="700" fill="#9C4F2B" text-anchor="middle">item hau-000123-s</text>
+    <text x="852" y="149" font-size="11" fill="#8A7D6E" text-anchor="middle">split: train only</text>
+  </g>
+
+  <line x1="250" y1="166" x2="250" y2="190" stroke="#CBBBA4" stroke-width="2" marker-end="url(#spArrow)"/>
+  <line x1="730" y1="166" x2="730" y2="190" stroke="#CBBBA4" stroke-width="2" marker-end="url(#spArrow)"/>
+
+  <!-- ============ RECORDING 1: farmer question (gold) ============ -->
+  <g>
+    <rect x="30" y="192" width="440" height="252" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="58" cy="222" r="13" fill="#B97F37"/>
+    <text x="58" y="227" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="80" y="227" font-size="16" font-weight="700" fill="#B97F37">Farmer question</text>
+    <text x="80" y="245" font-size="12" fill="#8A7D6E">spontaneous &#183; speaker A</text>
+
+    <rect x="48" y="256" width="404" height="40" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="60" y="272" font-size="12" font-weight="600" fill="#2B2218">Cue: the collector's captured question</text>
+    <text x="60" y="288" font-size="12" fill="#8A7D6E">speaker looks at the photo and asks it their own way</text>
+
+    <rect x="48" y="304" width="404" height="40" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="60" y="320" font-size="12" font-weight="600" fill="#2B2218">Audio: 48 kHz original + 16 kHz mono derivative</text>
+    <text x="60" y="336" font-size="12" fill="#8A7D6E">robust_asr profile: field ambience kept, every word clear</text>
+
+    <rect x="48" y="352" width="404" height="40" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="60" y="368" font-size="12" font-weight="600" fill="#2B2218">Transcript: verbatim by a native transcriber</text>
+    <text x="60" y="384" font-size="12" fill="#8A7D6E">20% second-checked &#183; word or utterance timestamps</text>
+
+    <rect x="48" y="400" width="404" height="32" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="60" y="421" font-size="12" font-weight="600" fill="#2B2218">Speaker: opaque ID &#183; age band, gender, region only if consented</text>
+  </g>
+
+  <!-- ============ RECORDING 2: spoken advisory (forest green) ============ -->
+  <g>
+    <rect x="510" y="192" width="440" height="252" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="538" cy="222" r="13" fill="#1F5B3F"/>
+    <text x="538" y="227" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="560" y="227" font-size="16" font-weight="700" fill="#1F5B3F">Spoken advisory</text>
+    <text x="560" y="245" font-size="12" fill="#8A7D6E">read verbatim &#183; speaker B, a different person</text>
+
+    <rect x="528" y="256" width="404" height="40" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="540" y="272" font-size="12" font-weight="600" fill="#2B2218">Prompt: the pair's accepted advisory text</text>
+    <text x="540" y="288" font-size="12" fill="#8A7D6E">one-speaker-one-prompt: nobody reads the same text twice</text>
+
+    <rect x="528" y="304" width="404" height="40" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="540" y="320" font-size="12" font-weight="600" fill="#2B2218">Audio: 48 kHz original + 16 kHz mono derivative</text>
+    <text x="540" y="336" font-size="12" fill="#8A7D6E">a human speaker in a facilitated session, never synthesised</text>
+
+    <rect x="528" y="352" width="404" height="40" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="540" y="368" font-size="12" font-weight="600" fill="#2B2218">Transcript: the prompt text, checked for deviations</text>
+    <text x="540" y="384" font-size="12" fill="#8A7D6E">matches_prompt true or a list of what differed</text>
+
+    <rect x="528" y="400" width="404" height="32" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="540" y="421" font-size="12" font-weight="600" fill="#2B2218">Speaker: opaque ID &#183; age band, gender, region only if consented</text>
+  </g>
+
+  <line x1="250" y1="444" x2="250" y2="468" stroke="#CBBBA4" stroke-width="2" marker-end="url(#spArrow)"/>
+  <line x1="730" y1="444" x2="730" y2="468" stroke="#CBBBA4" stroke-width="2" marker-end="url(#spArrow)"/>
+
+  <!-- ============ QC (deep rust) ============ -->
+  <g>
+    <rect x="30" y="470" width="920" height="126" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="48" y="496" font-size="15" font-weight="700" fill="#8A3B25">Every clip, in order</text>
+
+    <rect x="48" y="510" width="260" height="70" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="60" y="530" font-size="13" font-weight="700" fill="#8A3B25">Automated QC at upload</text>
+    <text x="60" y="548" font-size="12" fill="#2B2218">clipping, loudness, SNR, silence,</text>
+    <text x="60" y="564" font-size="12" fill="#2B2218">duration, speech ratio; fails are dropped</text>
+
+    <line x1="308" y1="545" x2="344" y2="545" stroke="#CBBBA4" stroke-width="2" marker-end="url(#spArrow)"/>
+
+    <rect x="346" y="510" width="290" height="70" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="358" y="530" font-size="13" font-weight="700" fill="#8A3B25">Two-vote validation</text>
+    <text x="358" y="548" font-size="12" fill="#2B2218">two native speakers agree: validated</text>
+    <text x="358" y="564" font-size="12" fill="#2B2218">split vote: reviewer decides, outcome logged</text>
+
+    <line x1="636" y1="545" x2="672" y2="545" stroke="#CBBBA4" stroke-width="2" marker-end="url(#spArrow)"/>
+
+    <rect x="674" y="510" width="258" height="70" rx="10" fill="#8A3B25" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="686" y="530" font-size="13" font-weight="700" fill="#FFFFFF">Validated item</text>
+    <text x="686" y="548" font-size="12" fill="#FFFFFF">credit lands on the ledger</text>
+    <text x="686" y="564" font-size="12" fill="#FFFFFF">target: 95% pass first time</text>
+  </g>
+
+  <text x="30" y="622" font-size="12" font-style="italic" fill="#8A7D6E">USD 2.00 per item: 0.50 + 0.50 speakers &#183; 2 &#215; 0.25 votes &#183; 0.50 transcription and QC</text>
+  <text x="950" y="622" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Agricultural advisory &#183; Speech layer</text>
+</svg>

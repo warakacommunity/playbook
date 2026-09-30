@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 660" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="advTitle advDesc">
+  <title id="advTitle">From field photo to spoken advisory and benchmark</title>
+  <desc id="advDesc">A field photo with its capture form passes through ingest, which mints a pair ID. The pair ID is the spine that links the diagnosis label, the in-language advisory, the two speech recordings, the held-out benchmark case and the preference pair. Every pair passes a three-stage QA loop: agronomist review, native-speaker linguistic review, and language-lead adjudication, before it earns credit and enters the release.</desc>
+
+  <rect x="6" y="6" width="968" height="648" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">From field photo to spoken advisory</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">One pair ID, minted at ingest, links every item built on the same photo.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+
+  <!-- ROW 1: photo, ingest, label, advisory, speech -->
+  <g>
+    <rect x="30" y="110" width="164" height="124" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <circle cx="56" cy="136" r="13" fill="#C66A3D"/>
+    <text x="56" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="76" y="141" font-size="15" font-weight="700" fill="#9C4F2B">Field photo</text>
+    <text x="44" y="166" font-size="12" fill="#2B2218">plant level + close-up</text>
+    <text x="44" y="184" font-size="12" fill="#8A7D6E">form: crop, issue, stage,</text>
+    <text x="44" y="200" font-size="12" fill="#8A7D6E">part, district, question</text>
+    <text x="44" y="222" font-size="12" font-style="italic" fill="#9C4F2B">offline, queued sync</text>
+  </g>
+  <line x1="194" y1="172" x2="222" y2="172" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="224" y="110" width="164" height="124" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="250" cy="136" r="13" fill="#B97F37"/>
+    <text x="250" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="270" y="141" font-size="15" font-weight="700" fill="#B97F37">Ingest</text>
+    <text x="238" y="166" font-size="12" fill="#2B2218">EXIF stripped</text>
+    <text x="238" y="182" font-size="12" fill="#2B2218">GPS &#8594; district</text>
+    <text x="238" y="198" font-size="12" fill="#2B2218">faces blurred, dedup</text>
+    <text x="238" y="222" font-size="12" font-weight="700" fill="#B97F37">pair_id minted</text>
+  </g>
+  <line x1="388" y1="172" x2="416" y2="172" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="418" y="110" width="164" height="124" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="444" cy="136" r="13" fill="#1F5B3F"/>
+    <text x="444" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="464" y="141" font-size="15" font-weight="700" fill="#1F5B3F">Diagnosis</text>
+    <text x="432" y="166" font-size="12" fill="#2B2218">agronomist labels</text>
+    <text x="432" y="182" font-size="12" fill="#8A7D6E">crop / family / issue</text>
+    <text x="432" y="198" font-size="12" fill="#8A7D6E">confidence, ontology v.</text>
+    <text x="432" y="222" font-size="12" font-style="italic" fill="#1F5B3F">30% double-labelled</text>
+  </g>
+  <line x1="582" y1="172" x2="610" y2="172" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="612" y="110" width="164" height="124" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <circle cx="638" cy="136" r="13" fill="#8A3B25"/>
+    <text x="638" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="658" y="141" font-size="15" font-weight="700" fill="#8A3B25">Advisory</text>
+    <text x="626" y="166" font-size="12" fill="#2B2218">written in the language</text>
+    <text x="626" y="182" font-size="12" fill="#8A7D6E">local register, local inputs</text>
+    <text x="626" y="198" font-size="12" fill="#8A7D6E">60&#8211;180 words, safety line</text>
+    <text x="626" y="222" font-size="12" font-style="italic" fill="#8A3B25">never translated</text>
+  </g>
+  <line x1="776" y1="172" x2="804" y2="172" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g>
+    <rect x="806" y="110" width="144" height="124" rx="12" fill="#E6EEF3" stroke="#35607A" stroke-width="1.5"/>
+    <circle cx="832" cy="136" r="13" fill="#35607A"/>
+    <text x="832" y="141" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+    <text x="852" y="141" font-size="15" font-weight="700" fill="#35607A">Speech</text>
+    <text x="820" y="166" font-size="12" fill="#2B2218">farmer question</text>
+    <text x="820" y="182" font-size="12" fill="#2B2218">advisory read aloud</text>
+    <text x="820" y="198" font-size="12" fill="#8A7D6E">48 kHz, transcript</text>
+    <text x="820" y="222" font-size="12" font-style="italic" fill="#35607A">two speakers</text>
+  </g>
+
+  <!-- SPINE -->
+  <line x1="112" y1="234" x2="112" y2="268" stroke="#CBBBA4" stroke-width="2"/>
+  <line x1="306" y1="234" x2="306" y2="268" stroke="#CBBBA4" stroke-width="2"/>
+  <line x1="500" y1="234" x2="500" y2="268" stroke="#CBBBA4" stroke-width="2"/>
+  <line x1="694" y1="234" x2="694" y2="268" stroke="#CBBBA4" stroke-width="2"/>
+  <line x1="878" y1="234" x2="878" y2="268" stroke="#CBBBA4" stroke-width="2"/>
+
+  <rect x="30" y="268" width="920" height="30" rx="8" fill="#B97F37"/>
+  <text x="490" y="288" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">pair_id  hau-000123  &#183;  the spine: image, metadata, label, advisory, speech, benchmark, preference</text>
+
+  <line x1="175" y1="298" x2="175" y2="326" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="495" y1="298" x2="495" y2="326" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="810" y1="298" x2="810" y2="326" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ROW 2: benchmark, preference -->
+  <g>
+    <rect x="30" y="328" width="290" height="118" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="46" y="354" font-size="15" font-weight="700" fill="#1F5B3F">Benchmark case  bm-hau-00217</text>
+    <text x="46" y="378" font-size="12" fill="#2B2218">from a reserved capture stream:</text>
+    <text x="46" y="394" font-size="12" fill="#8A7D6E">separate collectors, farms, speakers</text>
+    <text x="46" y="410" font-size="12" fill="#8A7D6E">four task types, gold verdict</text>
+    <text x="46" y="432" font-size="12" font-style="italic" fill="#1F5B3F">verified by agronomist + native speaker</text>
+  </g>
+
+  <g>
+    <rect x="350" y="328" width="290" height="118" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="366" y="354" font-size="15" font-weight="700" fill="#8A3B25">Preference pair  pf-swh-01188</text>
+    <text x="366" y="378" font-size="12" fill="#2B2218">two candidate advisories, side by side</text>
+    <text x="366" y="394" font-size="12" fill="#8A7D6E">forced choice + reason code</text>
+    <text x="366" y="410" font-size="12" fill="#8A7D6E">two raters, disagreement kept</text>
+    <text x="366" y="432" font-size="12" font-style="italic" fill="#8A3B25">drafts, rewrites, model outputs</text>
+  </g>
+
+  <!-- RELEASE -->
+  <g>
+    <rect x="30" y="470" width="610" height="150" rx="12" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="46" y="496" font-size="15" font-weight="700" fill="#2B2218">What ships per pair</text>
+    <text x="46" y="520" font-size="12" fill="#2B2218">one JSON record: image + metadata, label with reviewer chain,</text>
+    <text x="46" y="536" font-size="12" fill="#2B2218">advisory text, consent reference, QA status, split</text>
+    <text x="46" y="560" font-size="12" fill="#8A7D6E">split = train | benchmark_heldout, enforced by source_id and speaker_id at export</text>
+    <text x="46" y="584" font-size="12" fill="#8A7D6E">CC-BY-4.0, per-language datasheet, release after the 60-day opt-out window</text>
+    <text x="46" y="606" font-size="12" font-style="italic" fill="#B97F37">credit lands on acceptance only</text>
+  </g>
+
+  <!-- QA LOOP -->
+  <g>
+    <rect x="670" y="328" width="280" height="292" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="686" y="354" font-size="15" font-weight="700" fill="#B97F37">Three-stage QA, every pair</text>
+
+    <rect x="686" y="370" width="220" height="48" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="698" y="390" font-size="13" font-weight="600" fill="#1F5B3F">1  Agronomist review</text>
+    <text x="698" y="407" font-size="11" fill="#8A7D6E">label correct? advisory safe?</text>
+
+    <line x1="796" y1="418" x2="796" y2="440" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="686" y="442" width="220" height="48" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="698" y="462" font-size="13" font-weight="600" fill="#8A3B25">2  Linguistic review</text>
+    <text x="698" y="479" font-size="11" fill="#8A7D6E">natural? right vernacular terms?</text>
+
+    <line x1="796" y1="490" x2="796" y2="512" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="686" y="514" width="220" height="48" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="698" y="534" font-size="13" font-weight="600" fill="#B97F37">3  Adjudication</text>
+    <text x="698" y="551" font-size="11" fill="#8A7D6E">language lead, decision logged</text>
+
+    <!-- loop back: relabel / rewrite -->
+    <path d="M906 538 L928 538 L928 394 L910 394" fill="none" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="932" y="470" font-size="11" fill="#8A7D6E" transform="rotate(90 932 470)" text-anchor="middle">relabel / rewrite</text>
+
+    <text x="686" y="588" font-size="12" fill="#2B2218">&#954; &#8805; 0.75 on labels, &#8805; 90% advisories</text>
+    <text x="686" y="604" font-size="12" fill="#2B2218">accepted by round two, reported weekly</text>
+  </g>
+
+  <text x="950" y="646" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Agricultural advisory data &#183; Pipeline</text>
+</svg>

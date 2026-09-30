@@ -1,0 +1,323 @@
+---
+sidebar_position: 8
+title: Advisory annotation guidelines
+ready: true
+last_update:
+  date: 2026-09-30
+  author: Shamsuddeen Hassan Muhammad
+---
+
+# Advisory annotation guidelines
+
+*Last reviewed: 2026-09-30.*
+
+*The role sheets for a crop-advisory dataset: one sheet each for the field collector, the agronomist, the advisory author, the linguistic reviewer, the speaker, the preference rater and the benchmark verifier, plus the fields of the weekly agreement report. Each sheet is what one person holds while they work, so each fits on one or two printed pages. The defaults come from the AgroLingua Africa collection described in the [Agricultural Advisory Data](../agri-advisory/index.md) chapter; change them where your crops, languages or budget differ.*
+
+## How to use this template
+
+1. Copy the sheet for each role into your project's rubric folder, one file per language, named `[LANG]-v1.md`.
+2. Replace every `[PLACEHOLDER]` with a real value. The language lead owns the vernacular term list and the examples; the agronomist lead owns the ontology and the safety rules.
+3. Translate the collector, speaker and rater sheets into the working language. Agronomists and reviewers usually work from the English master with the vernacular term list beside it.
+4. Version the sheets. Every review decision records the rubric version it applied, so a change to a sheet must bump the version and go in the change log at the end.
+5. Hand out the sheet, then train on it with twenty real items before anyone works unsupervised. Corner cases found in that session go into the sheet before the next cohort starts.
+
+This template pairs with the generic [annotation guidelines template](./annotation-guidelines.md), which covers definitions, decision trees and the change log for any labelling task. Use that one for the project-wide document and this one for the per-role sheets. The QA loop the sheets feed is described in [workflow and adjudication](../3_annotation-design/workflow-adjudication.md); consent wording is in the [consent form template](./consent-form.md).
+
+---
+
+## [PROJECT NAME] role sheets
+
+**Rubric version:** [X.Y] · **Date:** [YYYY-MM-DD] · **Language:** [LANGUAGE] ([ISO 639-3]) · **Ontology version:** [ONTOLOGY_VERSION] · **Language lead:** [NAME, CONTACT]
+
+## 1. Field collector sheet
+
+You photograph plants and record what the farmer asks about them. Every accepted photo earns [RATE, e.g. USD 0.60]. A rejected photo earns nothing, so read the rejection list before you start.
+
+### How to photograph
+
+- Take two photos of each plant: one at plant level showing the whole plant, and one close-up of the affected part. Both are uploaded under the same capture.
+- Use natural daylight. Do not use the flash. If the sun is too harsh, move so the light falls on the plant from the side, and keep your shadow and your hand out of the frame.
+- One plant per photo. If the problem affects a whole patch, take the plant-level photo of one plant and add a separate `field` photo.
+- Fill the frame with the plant. In the close-up the affected part should fill most of the frame.
+- No hands, faces, tools or people in the frame. A face is blurred at ingest, and a photo where it cannot be blurred is dropped even if the plant is perfect.
+- Hold the phone still and check focus before you move on. Blurred close-ups are the most common rejection.
+
+### Capture form
+
+Fill every field before you save. Values in the third column are the only ones the app accepts.
+
+| Field | What to enter | Allowed values |
+| --- | --- | --- |
+| `crop` | The crop as you know it | [CROP LIST FOR THIS LANGUAGE] |
+| `crop_vernacular` | The local name the farmer uses | free text |
+| `suspected_issue` | Your best guess | any ontology node, or `unsure` |
+| `growth_stage` | Where the plant is in its life | `seedling`, `vegetative`, `flowering`, `fruiting`, `maturity`, `post_harvest`, `unknown` |
+| `plant_part` | What the close-up shows | `leaf`, `stem`, `root`, `fruit`, `flower`, `whole_plant`, `field`, `other` |
+| `district` | Where you are | picked from the list; the app fills it from GPS when it can |
+| `capture_date` | Today | filled by the app |
+| `farmer_question_text` | What the farmer asked, in [LANGUAGE] | free text, 5 to 40 words |
+| `consent_ref` | The farmer's consent reference | from the consent record |
+
+### When you are unsure
+
+Choose `unsure`. An honest `unsure` is worth more than a wrong guess, because the agronomist labels every image anyway and a confident wrong guess makes their job slower. Do not skip the photo because you cannot name the problem.
+
+### The farmer's question
+
+Type the farmer's question in their words, in [LANGUAGE]. If the farmer is not present, type the question you would ask about this plant. This text becomes the cue for the speech recordings, so it must read as something a farmer would say aloud. "My maize leaves have holes and something is eating inside, what should I spray?" is right. "Fall armyworm" is not a question. When the farmer is not there and you type the question yourself, say so in the capture note, so the record shows whose question it is.
+
+### Daily sync
+
+The app works without signal. Captures wait in the outbox on your phone and upload in order when you connect. Sync every evening. A capture that has not synced within [N, e.g. 3] days is flagged, and a lost phone loses everything in the outbox.
+
+### What gets an image rejected
+
+| Reason | What the reviewer sees |
+| --- | --- |
+| Blurred or out of focus | Symptom cannot be read |
+| Face or person visible | Cannot be anonymised |
+| More than one plant in the close-up | Label would be ambiguous |
+| Flash, backlight or deep shadow | Colour of the symptom is lost |
+| Missing form field | Record fails validation |
+| Duplicate of an earlier capture | Perceptual hash match at ingest |
+| Crop not in the target list | Outside the coverage matrix |
+| Screenshot or photo of a photo | Not a field image |
+
+## 2. Agronomist label sheet
+
+You give each image its diagnosis and review the advisory for faithfulness. Work at the pace the budget assumes ([~100 actions per day at USD 40]), and mark uncertainty rather than hide it.
+
+### Ontology levels
+
+The ontology has three levels: crop, issue family, specific issue. Label at the deepest level the image supports.
+
+| Level | Example | When to stop here |
+| --- | --- | --- |
+| Crop | `maize` | Never; every label has at least a family |
+| Issue family | `maize/pest` | Symptom is clearly a pest but the species is not visible |
+| Specific issue | `maize/pest/fall_armyworm` | The diagnostic sign is visible in the image |
+| Healthy | `maize/healthy` | Same crop, same stage, no issue |
+
+Families are `pest`, `disease`, `nutrient`, `abiotic` and `healthy`; `uncertain` can be chosen at any level. The full node list for this language is in [ONTOLOGY FILE], with vernacular names beside each node.
+
+### The uncertain node
+
+Use `uncertain` when the image does not let you choose between two families, or when you would ask for a second photo in the field. Add a note saying what you would need. An uncertain label sends the image to a second agronomist, and to adjudication if the two labels differ. It counts as a label in the agreement figures, and a pattern of `uncertain` on images your colleagues label with `high` confidence will be raised at the weekly review.
+
+### Confidence
+
+| Value | Meaning |
+| --- | --- |
+| `high` | You would give this diagnosis to a farmer without a second look |
+| `medium` | The label is the most likely one, but a closely related node is possible; name the alternative in the note |
+| `low` | You are choosing between two or more nodes and would want a second opinion; the item is routed for double labelling |
+
+### When to add a second label
+
+Add a secondary label only when two issues are visible on the same plant (nitrogen deficiency plus streak virus is common on stressed maize). Never add a secondary label as a hedge against being wrong; that is what confidence and the note are for.
+
+### Faithfulness review of the advisory
+
+The advisory reaches you after the author has written it. Check each line against the label and the national extension recommendation for [COUNTRY].
+
+- The advisory names the same diagnosis as the label, in the vernacular term from the ontology list.
+- The cause it gives is the true cause, in plain language.
+- The immediate action is what the extension recommendation says for this crop and stage.
+- Any input named is registered and sold in [COUNTRY]; a foreign brand or a banned active ingredient is a rewrite.
+- The dose or rate, if given, matches the label of that product.
+- The next-season advice names a step for this issue (rotation, resistant variety, planting date).
+- The "seek help" line names a real route: extension office, agro-dealer, cooperative.
+- Nothing in the advisory could harm the farmer, the crop or the soil if followed as written.
+
+Decision: `accept`, `relabel` (the diagnosis is wrong, the advisory goes back to the author with the new label), `rewrite` (the diagnosis stands, the advisory is wrong), or `reject` (the image cannot support any label).
+
+### Safety line check
+
+Where the advisory names a pesticide, herbicide or fungicide, it must carry a safety line covering protective clothing, the pre-harvest interval and keeping the product away from children and water. Missing safety line is an automatic `rewrite`, whatever else is right.
+
+## 3. Advisory author rubric
+
+You write what a good extension officer would say to this farmer, about this plant, in [LANGUAGE]. You write it fresh; nothing is translated from English. Each accepted advisory earns [RATE, e.g. USD 1.50]. An advisory is accepted when the linguistic reviewer and the agronomist both pass it, with at most one rewrite.
+
+### The five-part structure
+
+| Part | What it answers | Length guide |
+| --- | --- | --- |
+| 1. What it is | Name the problem in the vernacular, and how the farmer can recognise it | 1 to 2 sentences |
+| 2. Why it happens | The cause, in terms the farmer can act on | 1 to 2 sentences |
+| 3. What to do now | Concrete steps for this week, in order | 2 to 4 sentences |
+| 4. What to do next season | Prevention specific to this issue | 1 to 2 sentences |
+| 5. When to seek help | The sign that means "go to the extension office", and where that is | 1 sentence |
+
+Write in this order every time. A reader who has seen ten advisories should know where to look for the dose.
+
+### Length
+
+60 to 180 words, counted in [LANGUAGE]. Below 60 the advisory is usually missing a part. Above 180 it will not be read aloud comfortably, and the speech layer reads it verbatim.
+
+### Register and names
+
+- Speak to one farmer, as you would in person: second person, short sentences, no headings or bullet points.
+- Use the vernacular crop and pest names from the ontology list. Give the scientific or English name only if farmers in [REGION] use it too.
+- Use the numbers farmers use: a bottle cap, a matchbox, a 20-litre jerrycan, rather than millilitres alone.
+
+### Inputs
+
+Name only inputs sold in [COUNTRY] at the agro-dealer a smallholder would reach. The list of approved products for this crop is in [INPUT LIST]. Give the cultural or biological option first where the extension service recommends one, then the chemical option.
+
+### Safety line
+
+Any mention of a pesticide, herbicide or fungicide must include one sentence on protection: cover skin, eyes and mouth; wash after spraying; keep the product from children and water; and wait [N] days before harvest. Write it in the same voice as the rest. A safety line that reads like a legal notice will be skipped by the speaker and the farmer alike.
+
+### Ten reasons a reviewer rejects
+
+1. The text reads as translated from English.
+2. Any of the five parts is missing.
+3. Fewer than 60 or more than 180 words.
+4. The diagnosis in the text does not match the label.
+5. An input that is not sold in [COUNTRY], or a banned active ingredient.
+6. A chemical is named without a safety line.
+7. A wrong or missing dose where one is needed.
+8. Generic advice that would fit any crop and any problem.
+9. English or scientific names where a vernacular name exists.
+10. A tone that lectures the farmer.
+
+### Two examples
+
+Both examples are shown in English here. Your rubric shows them in [LANGUAGE], and each language lead writes their own from a real pair.
+
+**Accepted** (label `maize/pest/fall_armyworm`, vegetative stage, 154 words):
+
+> The holes in the leaves and the wet sawdust in the funnel are from fall armyworm, the caterpillar farmers here call [VERNACULAR]. The moth lays eggs on young maize and the caterpillars hide in the funnel and eat from inside. This week, walk the field early in the morning and pick out the caterpillars you can see, then drop a pinch of dry sand or ash into each funnel. If more than one plant in five is attacked, spray [APPROVED PRODUCT] into the funnels at [DOSE FROM THE PRODUCT LABEL, IN A LOCAL MEASURE]. Cover your skin, mouth and eyes when spraying, wash afterwards, keep the product away from children and water, and do not harvest green maize for [PRE-HARVEST INTERVAL FROM THE LABEL] days. Next season, plant early with your neighbours so the moth finds less young maize. If the caterpillars are still there a week after spraying, take a few in a bottle to the extension office at [PLACE].
+
+**Rejected** (same label, 66 words):
+
+> Fall armyworm (Spodoptera frugiperda) is a serious pest of maize. It is caused by the larvae of a moth. Control: apply Lambda-cyhalothrin 2.5 EC at 1 ml per litre of water, or use a recommended insecticide. Cultural methods such as crop rotation and early planting are also effective. Contact your extension agent for further advice. Always follow good agricultural practice to prevent pest and disease problems.
+
+Reason for rejection: reads as translated (1), no vernacular name (9), the product is named by active ingredient with a dose the farmer cannot measure (7), no safety line (6), and the next-season and seek-help parts are generic (8).
+
+## 4. Linguistic reviewer sheet
+
+You are a native speaker and you are not the author of the advisory in front of you. You check whether a farmer in [REGION] would hear it as advice from one of their own. Each review earns [RATE, e.g. USD 0.50]. Decisions: `accept` or `rewrite` with a note. You do not judge agronomy; that is the agronomist's sheet.
+
+| Check | Pass when |
+| --- | --- |
+| Authored in-language | Sentence order and idiom are native; no English word order showing through |
+| Vernacular names | Crop and issue names match the ontology term list for this language |
+| Register | Spoken second-person address, the way an extension officer talks, no lecture |
+| Readability | A farmer with primary schooling could follow it read aloud once |
+| Structure | The five parts are present and in order |
+| Length | 60 to 180 words in [LANGUAGE] |
+| Orthography | Follows [ORTHOGRAPHY STANDARD]; diacritics [preserved / not required] |
+| Dialect | Terms are understood across [REGIONS]; a regional term is glossed once |
+| Numbers and units | Local measures, written the way they are spoken |
+| Safety line | Present where a chemical is named, in the same voice as the rest |
+| Read-aloud test | Reading it aloud takes under [90] seconds and nothing trips the tongue |
+
+A `rewrite` note names the failed check and quotes the phrase. "Rewrite: register, 'the farmer should' in sentence 3 should address the farmer directly." An advisory that fails the same check twice goes to the language lead.
+
+## 5. Speaker prompt card
+
+You will record two kinds of clip. Each is tied to one photo. A session pays [SESSION RATE] and a clip counts once it passes validation.
+
+### Farmer question (speak freely)
+
+Look at the photo and the short cue on screen. Ask, in your own words, what a farmer would ask about this plant. The cue only reminds you of the topic. Say it the way you would say it at the farm gate. One or two sentences is enough. Do not read the cue aloud.
+
+### Spoken advisory (read exactly)
+
+Read the advisory on screen word for word. Do not paraphrase, skip a sentence or add a greeting. The transcript of your clip is the text on screen, so any change you make becomes an error. Read the safety line at the same pace as the rest.
+
+### Recording conditions
+
+- The app records at 48 kHz. Watch the level meter: green is right, red is too loud.
+- Hold the phone a hand's width from your mouth. Do not cover the microphone.
+- Record where you can hear yourself without shouting. Normal outdoor sound is fine; a running engine or a radio is not.
+- Wait one second after pressing record before you speak, and one second after you finish.
+
+### If you make a mistake
+
+Stop, discard the clip and record it again. Do not correct yourself inside the clip. A clip with a restart in the middle is rejected by the validator.
+
+### Consent reminder
+
+Your voice is personal data. You agreed to [PURPOSES TICKED] on [DATE], and you chose [whether age band, gender and region are attached]. You can withdraw within 60 days by contacting [LANGUAGE LEAD] with your reference number [REF]. Nothing you record is synthesised or altered.
+
+## 6. Preference rater sheet
+
+You see one photo, its diagnosis, and two advisories, A and B. Pick the one a farmer in [REGION] should receive. Each pair is rated by two people and pays [RATE, e.g. USD 0.25] per rating. Disagreement between raters is expected and kept; do not try to guess what the other rater chose.
+
+### How to compare
+
+1. Read the diagnosis first, then A, then B, then A again.
+2. Decide which one you would want your own relative to receive.
+3. Choose `a`, `b` or `tie`, and mark the strength: `slight`, `clear` or `strong`.
+4. Tick every reason that applies from the fixed list. At least one reason is required unless you chose `tie`.
+5. Add a free-text note when the reason list does not explain your choice.
+
+### Reason codes
+
+| Code | Pick it when the preferred advisory | Schema value |
+| --- | --- | --- |
+| Correctness | Names the right problem and the right action | `more_accurate` |
+| Safety | Handles chemicals more carefully, or avoids a harmful step | `safer` |
+| Local relevance | Uses inputs, measures and names available here | `uses_available_inputs`, `better_vernacular_terms` |
+| Clarity | Is easier to follow when read once | `more_natural_language`, `more_concise` |
+| Completeness | Covers a part the other one skips | `more_complete`, `more_actionable` |
+| Register | Sounds like an extension officer talking to a farmer | `better_vernacular_terms` |
+
+If none fits, choose `other` and write the note.
+
+### Ties
+
+Choose `tie` only when both advisories would serve the farmer equally well, or both are unusable. If you cannot decide, choose a `slight` preference. Write one line saying why the tie is real.
+
+### Free-text note
+
+One or two sentences, in [LANGUAGE] or English. Quote the phrase that decided it. "B says spray in the afternoon heat, A says early morning; A is safer." Notes are read by the language lead and shape the next rubric version.
+
+## 7. Benchmark verifier sheet
+
+Benchmark cases are held out from training and each is verified twice: once by an agronomist and once by a native speaker. You record `verified`, `corrected` (with the correction) or `rejected` (with the reason). A case ships only when both records exist and agree; otherwise it goes to the language lead and the quality lead for adjudication. A case costs [RATE, e.g. USD 3.50], covering construction and both verifications.
+
+| Task type | Agronomist checks | Native speaker checks |
+| --- | --- | --- |
+| `pest_disease_id` | Gold label is correct at the deepest supportable level; each distractor is a plausible but wrong node for this crop | Question text is natural and would be asked about this photo; vernacular names are correct |
+| `abiotic_stress_reasoning` | The context (weather, soil, stage) supports the gold label; the reasoning chain is agronomically sound at every step | The reasoning chain reads as a native explanation, in order, with no translated phrasing |
+| `advisory_faithfulness` | The verdict (`faithful` / `unfaithful`) is right against the diagnosis; the rationale names the exact unfaithful claim | The candidate advisory is readable in-language, and the rationale would convince a farmer |
+| `safety` | The verdict (`safe` / `unsafe`) and the `safety_category` are right; an `unsafe` case contains a real hazard | The hazard is expressed in words a farmer would understand as a warning |
+
+For every case, both verifiers also confirm that the image shows one plant and no person, that the disjointness flags on the case are set, and that the consent record includes the `benchmark` purpose. A `corrected` decision must include the corrected value in the note, so adjudication can compare the two corrections.
+
+## 8. Weekly agreement report
+
+Filled every Monday by the language lead from the platform's agreement export and coverage dashboard, per language, and sent to the partner. The fields follow the AgroLingua weekly QA report.
+
+| Field | Source | Threshold |
+| --- | --- | --- |
+| Pairs captured, labelled, authored, reviewed, adjudicated, accepted | Project counts | Coverage matrix target for the week |
+| Cohen's κ on ontology labels | Double-labelled sample (30% rolling, 100% on weak cells), per crop and per annotator | ≥ 0.75 |
+| Advisory agreement, round one and round two | Share of advisories accepted by the linguistic reviewer without a rewrite; then after one rewrite | ≥ 90% by round two |
+| Speech items validated first pass | Validation vote outcomes | ≥ 95% |
+| Speakers by age band and gender | Consented speaker profiles | Recruitment target for the language |
+| Benchmark cases dual-verified | Verification records | 100% before release |
+| Preference pairs double-rated, and rater agreement | Rating records | Two ratings per pair |
+| Open review queue | Items waiting at each QA stage | Under [N] days old |
+| Coverage gaps | Crop × issue family × growth stage cells below 50% of target | Plan to fill each |
+| Annotators paused | Ground-truth accuracy below floor | Reason and retraining status |
+| Consent and withdrawals | Acceptances this week (written / oral), opt-outs received and applied | All opt-outs applied before next export |
+| Payment | Ledger credits and payouts per role, local currency | Matches accepted counts |
+| Actions and risks | One line per cell below threshold | Owner and date |
+
+A cell below threshold two weeks running triggers a rubric review, and the version bump goes in the change log below.
+
+## Change log
+
+| Version | Date | Sheet changed | Change | Effect on earlier work |
+| --- | --- | --- | --- | --- |
+| 1.0 | [YYYY-MM-DD] | all | Initial | None |
+| [NEXT] | [YYYY-MM-DD] | [SHEET] | [CHANGE] | [Re-review? Keep?] |
+
+---
+
+**Contributor's note.** If you have run a crop-advisory collection and one of these sheets did not survive contact with your collectors or agronomists, send the redlined version with what you changed and why.

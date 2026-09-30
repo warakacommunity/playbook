@@ -21,4 +21,5 @@ tasks share the challenge of **aligning and jointly labelling** more than one si
 
 ## Tasks
 - **Image–text** – (visual question answering, image captioning)
+- **Agricultural advisory data** – (field images, diagnosis labels, native-language advisories, a spoken layer, benchmark and preference data)
 - **LLM-assisted & synthetic data** – (generation, augmentation, distillation)

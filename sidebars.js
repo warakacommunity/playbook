@@ -155,6 +155,15 @@ const sidebars = {
         'image-text/vqa',
         'image-text/captioning',
       ]),
+      chapterIndexed('Agricultural Advisory Data', 'agri-advisory/index', [
+        'agri-advisory/field-image-capture',
+        'agri-advisory/diagnosis-labelling',
+        'agri-advisory/advisory-authoring',
+        'agri-advisory/speech-layer',
+        'agri-advisory/benchmark-and-preference',
+        'agri-advisory/quality-consent-release',
+        templateDoc('advisory-annotation-guidelines', 'Advisory annotation guidelines', 'agri-advisory'),
+      ]),
       chapterIndexed('LLM-Assisted Data', 'llm-assisted-task/index', [
         'llm-assisted-task/equipment-setup',
       ]),
@@ -200,6 +209,7 @@ const sidebars = {
       templateRef('contributor-agreement', null, 'templates'),
       templateRef('annotator-contract', null, 'templates'),
       templateRef('sustainability-plan', null, 'templates'),
+      templateRef('advisory-annotation-guidelines', null, 'templates'),
     ]),
     chapterIndexed('Case Studies', 'case-studies/index', [
       'case-studies/masakhaner',

@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 600" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="advTitle advDesc">
+  <title id="advTitle">Advisory structure and review flow</title>
+  <desc id="advDesc">Left: one advisory has five parts in order (what it is, why it happens, what to do now, what to do next season, when to seek help) plus a mandatory safety line whenever a chemical is named, within 60 to 180 words. Right: the author, briefed with the diagnosis and the national extension recommendation, writes a draft in the language; an agronomist checks faithfulness to the diagnosis and safety; a native-speaker linguistic reviewer then checks register and vernacular terms; either reviewer can send it back for at most one rewrite before it is accepted or adjudicated.</desc>
+
+  <rect x="6" y="6" width="968" height="588" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">One advisory: five parts, one safety line, two reviews</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Written in the language from the start, 60&#8211;180 words, keyed to the pair ID.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <defs>
+    <marker id="advArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+    <marker id="advArrowRust" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8A3B25"/>
+    </marker>
+  </defs>
+
+  <!-- ============ LEFT: the five-part structure ============ -->
+  <g>
+    <rect x="30" y="108" width="440" height="466" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <text x="48" y="136" font-size="16" font-weight="700" fill="#B97F37">The five parts, in order</text>
+    <text x="48" y="154" font-size="12" fill="#8A7D6E">pair hau-000123 &#183; maize / pest / fall armyworm</text>
+
+    <!-- part 1 -->
+    <rect x="48" y="168" width="404" height="54" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="70" cy="195" r="13" fill="#B97F37"/>
+    <text x="70" y="200" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="92" y="190" font-size="14" font-weight="700" fill="#2B2218">What it is</text>
+    <text x="92" y="209" font-size="12" fill="#8A7D6E">vernacular pest name, what the farmer sees</text>
+
+    <!-- part 2 -->
+    <rect x="48" y="230" width="404" height="54" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="70" cy="257" r="13" fill="#B97F37"/>
+    <text x="70" y="262" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="92" y="252" font-size="14" font-weight="700" fill="#2B2218">Why it happens</text>
+    <text x="92" y="271" font-size="12" fill="#8A7D6E">late sowing, dry spell, weeds</text>
+
+    <!-- part 3 -->
+    <rect x="48" y="292" width="404" height="54" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="70" cy="319" r="13" fill="#B97F37"/>
+    <text x="70" y="324" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="92" y="314" font-size="14" font-weight="700" fill="#2B2218">What to do now</text>
+    <text x="92" y="333" font-size="12" fill="#8A7D6E">a threshold the farmer can count; inputs sold locally</text>
+
+    <!-- part 4 -->
+    <rect x="48" y="354" width="404" height="54" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="70" cy="381" r="13" fill="#B97F37"/>
+    <text x="70" y="386" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="92" y="376" font-size="14" font-weight="700" fill="#2B2218">What to do next season</text>
+    <text x="92" y="395" font-size="12" fill="#8A7D6E">sow early, scout weekly</text>
+
+    <!-- part 5 -->
+    <rect x="48" y="416" width="404" height="54" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="70" cy="443" r="13" fill="#B97F37"/>
+    <text x="70" y="448" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+    <text x="92" y="438" font-size="14" font-weight="700" fill="#2B2218">When to seek help</text>
+    <text x="92" y="457" font-size="12" fill="#8A7D6E">a named role and a trigger</text>
+
+    <!-- safety line -->
+    <rect x="48" y="484" width="404" height="54" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="2"/>
+    <text x="62" y="506" font-size="14" font-weight="700" fill="#8A3B25">Safety line: mandatory if a chemical is named</text>
+    <text x="62" y="525" font-size="12" fill="#8A3B25">protection, wind, washing, children and water, harvest wait</text>
+
+    <text x="48" y="562" font-size="12" font-style="italic" fill="#8A7D6E">60&#8211;180 words &#183; reviewer returns a draft missing any part</text>
+  </g>
+
+  <!-- ============ RIGHT: draft to accepted ============ -->
+  <g>
+    <rect x="500" y="108" width="450" height="466" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="518" y="136" font-size="16" font-weight="700" fill="#1F5B3F">From draft to accepted</text>
+
+    <!-- briefing input -->
+    <rect x="518" y="150" width="300" height="40" rx="8" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1"/>
+    <text x="530" y="167" font-size="12" font-weight="600" fill="#2B2218">Briefing: diagnosis + confidence, farmer question,</text>
+    <text x="530" y="182" font-size="12" font-weight="600" fill="#2B2218">national extension recommendation</text>
+    <line x1="668" y1="190" x2="668" y2="208" stroke="#CBBBA4" stroke-width="2" marker-end="url(#advArrow)"/>
+
+    <!-- author draft -->
+    <rect x="518" y="210" width="300" height="60" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="540" cy="240" r="13" fill="#1F5B3F"/>
+    <text x="540" y="245" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">A</text>
+    <text x="562" y="235" font-size="14" font-weight="700" fill="#1F5B3F">Author draft</text>
+    <text x="562" y="254" font-size="12" fill="#8A7D6E">native speaker writes in the language</text>
+    <line x1="668" y1="270" x2="668" y2="292" stroke="#CBBBA4" stroke-width="2" marker-end="url(#advArrow)"/>
+
+    <!-- linguistic review -->
+    <rect x="518" y="294" width="300" height="60" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="540" cy="324" r="13" fill="#1F5B3F"/>
+    <text x="540" y="329" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">B</text>
+    <text x="562" y="319" font-size="14" font-weight="700" fill="#1F5B3F">Agronomist faithfulness review</text>
+    <text x="562" y="338" font-size="12" fill="#8A7D6E">matches diagnosis and extension, safe</text>
+    <line x1="668" y1="354" x2="668" y2="376" stroke="#CBBBA4" stroke-width="2" marker-end="url(#advArrow)"/>
+
+    <!-- agronomist review -->
+    <rect x="518" y="378" width="300" height="60" rx="10" fill="#FFFFFF" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="540" cy="408" r="13" fill="#1F5B3F"/>
+    <text x="540" y="413" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">C</text>
+    <text x="562" y="403" font-size="14" font-weight="700" fill="#1F5B3F">Linguistic review</text>
+    <text x="562" y="422" font-size="12" fill="#8A7D6E">not the author: register, vernacular terms</text>
+    <line x1="668" y1="438" x2="668" y2="460" stroke="#CBBBA4" stroke-width="2" marker-end="url(#advArrow)"/>
+
+    <!-- accepted -->
+    <rect x="518" y="462" width="300" height="44" rx="10" fill="#1F5B3F" stroke="#1F5B3F" stroke-width="1.5"/>
+    <text x="668" y="489" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Accepted: credit lands, version 1 or 2</text>
+
+    <!-- rewrite loop (rust) -->
+    <path d="M818 324 L860 324 L860 240 L818 240" fill="none" stroke="#8A3B25" stroke-width="2" marker-end="url(#advArrowRust)"/>
+    <path d="M818 408 L860 408 L860 330" fill="none" stroke="#8A3B25" stroke-width="2"/>
+    <text x="872" y="300" font-size="12" font-weight="700" fill="#8A3B25">rewrite</text>
+    <text x="872" y="316" font-size="12" font-weight="700" fill="#8A3B25">request</text>
+    <text x="872" y="336" font-size="12" fill="#8A3B25">at most</text>
+    <text x="872" y="352" font-size="12" fill="#8A3B25">one, then</text>
+    <text x="872" y="368" font-size="12" fill="#8A3B25">language</text>
+    <text x="872" y="384" font-size="12" fill="#8A3B25">lead</text>
+    <text x="872" y="400" font-size="12" fill="#8A3B25">adjudicates</text>
+
+    <text x="518" y="532" font-size="12" fill="#2E7D5B">Target: 90% accepted without a rewrite request by round two,</text>
+    <text x="518" y="548" font-size="12" fill="#2E7D5B">reported every Monday per language.</text>
+    <text x="518" y="566" font-size="12" font-style="italic" fill="#8A7D6E">USD 1.50 draft + one rewrite &#183; USD 0.50 linguistic review</text>
+  </g>
+
+  <text x="950" y="586" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Agricultural advisory &#183; Advisory authoring</text>
+</svg>
