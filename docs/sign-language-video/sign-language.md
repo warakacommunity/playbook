@@ -5,7 +5,7 @@ title: Sign language
 sidebar_position: 2
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Tadesse Destaw
 ---
 
 # Sign language

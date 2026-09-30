@@ -5,7 +5,7 @@ title: Video
 sidebar_position: 4
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Tadesse Destaw
 ---
 
 # Video

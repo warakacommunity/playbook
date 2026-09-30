@@ -3,8 +3,8 @@ sidebar_position: 5
 title: Licensing and Compliance
 ready: true
 last_update:
-  date: 2026-07-07
-  author: Idris Abdulmumin
+  date: 2026-09-28
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Licensing and Compliance
