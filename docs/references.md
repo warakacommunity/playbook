@@ -66,9 +66,8 @@ terminology where none existed. [arxiv.org/abs/2605.29741](https://arxiv.org/abs
 
 ### AfriSign (2025) {#afrisign-2025}
 
-*AfriSign: African sign languages machine translation.* Discover Artificial Intelligence (Springer),
-2025. A video-to-text translation dataset of sign-language renderings of Bible verses across six African
-countries. [doi.org/10.1007/s44163-025-00227-7](https://link.springer.com/article/10.1007/s44163-025-00227-7)
+Gueuwou, S., Takyi, K., Müller, M., Nyarko, M. S., Adade, R., & Owusuaa Mensah Gyening, R.-M. *AfriSign: African sign languages machine translation.* Discover Artificial Intelligence 5, article 6, 2025. Sign-language renderings of Bible verses, from the Jehovah's Witnesses website, paired with English text, for Ghanaian, Nigerian, Kenyan, Zambian, Zimbabwean and South African Sign Language. [doi.org/10.1007/s44163-025-00227-7](https://link.springer.com/article/10.1007/s44163-025-00227-7)
+
 
 ### AfroBench {#afrobench}
 
@@ -119,11 +118,23 @@ Science.* TACL 6. A standard for documenting the linguistic and demographic cont
 communities whose languages are at stake rather than treating them as data sources.
 [aclanthology.org/2020.coling-main.313](https://aclanthology.org/2020.coling-main.313/)
 
+### Blench, R., & Warren (2003) {#blench-warren-2003}
+
+*An unreported African Sign Language for the Deaf among the Bura in Northeast Nigeria.* Describes Bura Sign Language, a village sign language in north-eastern Nigeria.
+
 ### BRIGHTER / AfriEmo (2025) {#brighter-2025}
 
 *BRIGHTER: Bridging the Gap in Text-Based Emotion Detection* (SemEval-2025 Task 11). Multilingual
 emotion-in-text datasets covering many African languages; a useful taxonomy reference for emotion work.
 [arxiv.org/abs/2502.11926](https://arxiv.org/abs/2502.11926)
+
+### Camgöz, N. C., et al. (2018) {#camgoz-2018}
+
+*Neural Sign Language Translation.* CVPR 2018, 7784-7793. Introduces RWTH-PHOENIX-Weather-2014T: German Sign Language weather forecasts with gloss annotations and German translations. [rwth-aachen.de](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX-2014-T/)
+
+### Camgöz, N. C., et al. (2020) {#camgoz-2020}
+
+Camgöz, N. C., Koller, O., Hadfield, S., & Bowden, R. *Sign Language Transformers: Joint End-to-end Sign Language Recognition and Translation.* CVPR 2020, 10023-10033. The reference transformer architecture for sign-language recognition and translation, evaluated with BLEU-4. [arxiv.org/abs/2003.13830](https://arxiv.org/abs/2003.13830)
 
 ### Carnegie Endowment for International Peace (2024) {#carnegie-2024}
 
@@ -136,11 +147,29 @@ emotion-in-text datasets covering many African languages; a useful taxonomy refe
 benefit, Authority to control, Responsibility, Ethics: the community's right to govern data about it.
 [doi.org/10.5334/dsj-2020-043](https://doi.org/10.5334/dsj-2020-043)
 
+### CASL-W60 (2025) {#casl-w60-2025}
+
+A word-level Central African Sign Language dataset: 60 words, 5,889 videos from 19 signers. Data in Brief, 2025. [doi.org/10.1016/j.dib.2025.111790](https://doi.org/10.1016/j.dib.2025.111790)
+
+### Cormier, K., et al. (2017) {#bsl-corpus-2017}
+
+Cormier, K., Fenlon, J., Gulamani, S., & Smith, S. *BSL Corpus Annotation Conventions*, version 3.0. Deafness, Cognition and Language Research Centre, University College London, March 2017. The basic template (right-hand and left-hand ID-gloss, free translation), the 49-tier working template, sign boundaries and the two-frame gap between annotations. [bslcorpusproject.org](https://bslcorpusproject.org/wp-content/uploads/BSLCorpus_AnnotationConventions_v3.0_-March2017.pdf)
+
+
+### Crasborn, O., et al. (2020) {#corpus-ngt-2020}
+
+Crasborn, O., Zwitserlood, I., van der Kooij, E., Bank, R., & Ormel, E. *Annotation Conventions for the Corpus NGT*, version 4. Radboud University Nijmegen, July 2020. One gloss tier per signer per hand (GlossL S1, GlossR S1, GlossL S2, GlossR S2), with ID-glosses from Global Signbank linked through an external controlled vocabulary. [hdl.handle.net/2066/319186](https://hdl.handle.net/2066/319186)
+
+
 ### Deep Learning Indaba {#deep-learning-indaba}
 
 *Deep Learning Indaba and IndabaX.* The annual gathering of Africa's machine-learning community, founded
 2017, with a mission for Africans to be owners and shapers of AI. Its local IndabaX events grew from 13
 in 2018 to 47 countries by 2024–2025, aiming for every African country by 2027. [deeplearningindaba.com](https://deeplearningindaba.com/)
+
+### Duarte, A., et al. (2021) {#how2sign-2021}
+
+*How2Sign: A Large-scale Multimodal Dataset for Continuous American Sign Language.* CVPR 2021. Reports that gloss annotation took on average one hour per 90 seconds of video. [arxiv.org/abs/2008.08143](https://arxiv.org/abs/2008.08143)
 
 ### Emezue, C. C., et al. (2025) {#emezue-2025}
 
@@ -167,6 +196,10 @@ Languages.* arXiv:2502.15916. A community-centric dataset-governance framework a
 *Ethnologue: Languages of the World* (27th ed.). SIL International.
 [ethnologue.com/insights/how-many-languages](https://www.ethnologue.com/insights/how-many-languages/)
 
+### European Union of the Deaf (2025) {#eud-2025}
+
+*Sign Language in the Era of Artificial Intelligence.* July 2025. The European Deaf community's position on AI and sign languages. [eud.eu](https://eud.eu/wp-content/uploads/2025/07/Sign-Language-in-the-Era-of-Artificial-Intelligence.pdf)
+
 ### Fidel (2025) {#fidel-2025}
 
 *Fidel: a large-scale sentence-level Amharic OCR dataset.* IJDAR, 2025. 40,000 handwritten and 28,000
@@ -183,6 +216,18 @@ Senegal.* arXiv:2404.01991. 100+ hours of spontaneous agricultural speech in Wol
 
 *Datasheets for Datasets.* Communications of the ACM, 64(12). A standard questionnaire documenting a
 dataset's motivation, composition, collection, recommended uses, and limitations. [doi.org/10.1145/3458723](https://dl.acm.org/doi/10.1145/3458723)
+
+### Gueuwou, S., et al. (2023) {#jwsign-2023}
+
+Gueuwou, S., Siake, S., Leong, C., & Müller, M. *JWSign: A Highly Multilingual Corpus of Bible Translations for more Diversity in Sign Language Processing.* Findings of EMNLP 2023. 98 sign languages, about 2,530 hours, more than 1,500 signers. [arxiv.org/abs/2311.10174](https://arxiv.org/abs/2311.10174)
+
+### Hanke, T. (2004) {#hanke-2004}
+
+*HamNoSys: Representing sign language data in language resources and language processing contexts.* LREC 2004 workshop on the representation and processing of sign languages. HamNoSys was first defined in 1984 and first published in 1987; version 2.0 appeared in 1989. [sign-lang.uni-hamburg.de](https://www.sign-lang.uni-hamburg.de/lrec/pub/04001.pdf)
+
+### Harris, R., Holmes, H. M., & Mertens, D. M. (2009) {#harris-2009}
+
+*Research ethics in sign language communities.* Sign Language Studies 9(2), 104-131. Proposes Sign Language Communities' Terms of Reference for research with signing communities. [doi.org/10.1353/sls.0.0011](https://doi.org/10.1353/sls.0.0011)
 
 ### Hasan, T., et al. (2021) {#xlsum-2021}
 
@@ -203,10 +248,23 @@ Conference on Fairness, Accountability, and Transparency (FAccT '22). Proposes a
 structure for language data, developed for the BigScience project, that assigns rights and duties to data
 custodians, hosts, and users across the whole life of a dataset. [doi.org/10.1145/3531146.3534637](https://dl.acm.org/doi/10.1145/3531146.3534637)
 
+### Johnston, T. (2010) {#johnston-2010}
+
+*From archive to corpus: Transcription and annotation in the creation of signed language corpora.* International Journal of Corpus Linguistics 15(1), 106-131. Why a signed-language corpus needs ID-glosses tied to a lexicon, and how annotation on parallel tiers turns an archive of video into a corpus. [doi.org/10.1075/ijcl.15.1.05joh](https://doi.org/10.1075/ijcl.15.1.05joh)
+
+
+### Johnston, T. (2013) {#johnston-2013}
+
+*Auslan Corpus Annotation Guidelines.* Macquarie University, version of 22 February 2013 (later versions exist). The working rules of the Auslan Corpus: which hand tiers to gloss, sign boundaries, gaps between annotations, and the tier set. [media.auslan.org.au](https://media.auslan.org.au/attachments/AuslanCorpusAnnotationGuidelines_Johnston.pdf)
+
 ### Joshi, P., Santy, S., Budhiraja, A., Bali, K., & Choudhury, M. (2020) {#joshi-2020}
 
 *The State and Fate of Linguistic Diversity and Inclusion in the NLP World.* Proceedings of ACL 2020.
 [aclanthology.org/2020.acl-main.560](https://aclanthology.org/2020.acl-main.560/)
+
+### Kolawole, et al. (2022) {#kolawole-2022}
+
+*Sign-to-Speech Model for Sign Language Understanding: A Case Study of Nigerian Sign Language.* IJCAI 2022, AI for Good track. About 5,000 images of 137 Nigerian Sign Language signs, including the alphabet. [arxiv.org/abs/2111.00995](https://arxiv.org/abs/2111.00995)
 
 ### Kreutzer, J., et al. (2022) {#kreutzer-2022}
 
@@ -232,6 +290,10 @@ PDFs, and dead project pages, and also creates bespoke datasets through "data fa
 datasets carry missing or unclear licences, which leaves them legally unusable for reusers.
 [lanfrica.com/blog](https://lanfrica.com/blog/licensing-as-a-barrier-to-the-usability-of-african-language-datasets/)
 
+### Li, D., et al. (2020) {#wlasl-2020}
+
+Li, D., Rodriguez Opazo, C., Yu, X., & Li, H. *Word-level Deep Sign Language Recognition from Video: A New Large-scale Dataset and Methods Comparison.* WACV 2020. WLASL: 2,000 American Sign Language words, 21,083 videos, 119 signers. [arxiv.org/abs/1910.11006](https://arxiv.org/abs/1910.11006)
+
 ### LLM Data Generation (2025) {#llm-datagen-2025}
 
 *A Rigorous Evaluation of LLM Data Generation Strategies for Low-Resource Languages.* arXiv:2506.12158.
@@ -244,6 +306,10 @@ synthetic generation often fails for the lowest-resource languages. [arxiv.org/a
 Proceedings of FAccT 2022, 199–212. Studies how machine-learning datasets are withdrawn, documents cases
 where deprecated datasets kept circulating without their documentation, and proposes a deprecation
 framework covering risk assessment, notice, and persistent identifiers. [doi.org/10.1145/3531146.3533086](https://dl.acm.org/doi/10.1145/3531146.3533086)
+
+### Maina, et al. (2025) {#ksl-pose-2025}
+
+A word-level Kenyan Sign Language dataset: about 30,000 word videos from 685 signers, released as MediaPipe pose and stick-figure files. Data in Brief, 2025. [doi.org/10.1016/j.dib.2025.111502](https://doi.org/10.1016/j.dib.2025.111502); data at [zenodo.org](https://doi.org/10.5281/zenodo.14974973)
 
 ### Malabo Convention (2023) {#malabo-2023}
 
@@ -258,6 +324,11 @@ on personal-data protection and cybersecurity.
 should decide what data represents their communities, retain ownership of it, and know how it is used.
 [masakhane.io](https://www.masakhane.io/)
 
+### Max Planck Institute for Psycholinguistics (2024) {#mpi-video-guidelines}
+
+*Processing videos for use with ELAN.* October 2024. Encoding settings for frame-accurate annotation, including a keyframe interval of 25 frames and no B-frames when exact frame positioning is crucial. [mpi.nl](https://www.mpi.nl/tools/elan/docs/Video_encoding_guidelines_ELAN.pdf)
+
+
 ### Meyer, J., et al. (2022) {#bibletts-2022}
 
 *BibleTTS: a large, high-fidelity, multilingual, and uniquely African speech corpus.* Interspeech 2022;
@@ -268,6 +339,10 @@ arXiv:2207.03546. Up to 86 hours of clean single-speaker TTS audio per language 
 
 *Model Cards for Model Reporting.* Proceedings of FAccT 2019. A standard for reporting a model's intended
 use, performance across groups, and limitations. [doi.org/10.1145/3287560.3287596](https://dl.acm.org/doi/10.1145/3287560.3287596)
+
+### Moryossef, A., Müller, M., & Fahrni, R. (2021) {#pose-format-2021}
+
+*pose-format.* A library for reading, writing and processing pose keypoint files from MediaPipe Holistic, OpenPose and AlphaPose. [github.com/sign-language-processing/pose](https://github.com/sign-language-processing/pose)
 
 ### Muhammad, S. H., et al. (2023) {#muhammad-2023}
 
@@ -280,6 +355,10 @@ inter-annotator agreement above 0.70. [arxiv.org/abs/2302.08956](https://arxiv.o
 *AfriHate: A Multilingual Collection of Hate Speech and Abusive Language Datasets for African Languages.*
 arXiv:2501.08284. Inter-annotator agreement (Randolph's kappa) ranged 0.46–0.81 across languages.
 [arxiv.org/abs/2501.08284](https://arxiv.org/abs/2501.08284)
+
+### Müller, M., et al. (2023) {#muller-2023}
+
+*Considerations for meaningful sign language machine translation based on glosses.* ACL 2023. Notes that BLEU was never validated for sign-language translation, suggests chrF, and examines what gloss-based translation can and cannot show. [arxiv.org/abs/2211.15464](https://arxiv.org/abs/2211.15464)
 
 ### Nekoto, W., et al. (2020) {#nekoto-2020}
 
@@ -306,6 +385,10 @@ reviving, and building the community"). Data Science Law Lab / Centre for Intell
 Information Technology Law (CIPIT), Strathmore University. A tiered, community-centred data licence:
 free, share-alike reuse within Africa and developing nations; royalties / benefit-sharing required of
 users elsewhere. [datasciencelawlab.africa](https://datasciencelawlab.africa/nwulite-obodo-open-data-license/)
+
+### Nyst, V. (2020) {#nyst-2020}
+
+*Sign languages in Africa.* In R. Vossen & G. J. Dimmendaal (eds.), The Oxford Handbook of African Languages. Oxford University Press. An overview of African sign languages, the spread of ASL through Andrew Foster's schools, LSAF in francophone countries, and village sign languages. [hdl.handle.net/1887/3589964](https://hdl.handle.net/1887/3589964)
 
 ### Ogundepo, O., et al. (2023) {#afriqa-2023}
 
@@ -350,10 +433,22 @@ Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems. Ba
 practitioners across India, East and West Africa, and the US; 92% reported at least one data cascade.
 [doi.org/10.1145/3411764.3445518](https://dl.acm.org/doi/10.1145/3411764.3445518)
 
+### Schembri, A., et al. (2013) {#schembri-2013}
+
+Schembri, A., Fenlon, J., Rentelis, R., Reynolds, S., & Cormier, K. *Building the British Sign Language Corpus.* Language Documentation & Conservation 7, 136-154. Recruitment, consent explained in BSL by fieldworkers, and the elicitation tasks (102 lexical concepts, narratives, conversation, interview). [hdl.handle.net/10125/4592](http://hdl.handle.net/10125/4592)
+
+### Schmaling, C. (2000) {#schmaling-2000}
+
+*Maganar Hannu, Language of the Hands: A Descriptive Analysis of Hausa Sign Language.* Hamburg: Signum (International Studies on Sign Language and Communication of the Deaf 35).
+
 ### Seeing, Signing, and Saying (2025) {#seeing-signing-2025}
 
-*Seeing, Signing, and Saying: A Vision-Language Model-Assisted Pipeline for Sign Language Data
-Acquisition and Curation from Social Media.* arXiv:2510.25413. [arxiv.org/abs/2510.25413](https://arxiv.org/abs/2510.25413)
+Yazdani, S., Hamidullah, Y., España-Bonet, C., & van Genabith, J. *Seeing, Signing, and Saying: A Vision-Language Model-Assisted Pipeline for Sign Language Data Acquisition and Curation from Social Media.* RANLP 2025. Introduces the TikTok-SL-8 corpus. [aclanthology.org/2025.ranlp-1.159](https://aclanthology.org/2025.ranlp-1.159/)
+
+
+### SignTalk-Gh (2026) {#signtalk-gh-2026}
+
+Ahene, et al. A Ghanaian Sign Language dataset for healthcare: 9,879 videos of 4,031 sentences from 5 signers, about 60% of the source sentences generated with an LLM. Scientific Reports, 2026. [doi.org/10.1038/s41598-026-43478-9](https://doi.org/10.1038/s41598-026-43478-9)
 
 ### Sikasote, C., et al. (2023) {#zambezi-2023}
 
@@ -377,6 +472,14 @@ arXiv:2506.04557. A learned MT-evaluation metric adapted to sub-Saharan African 
 *The State of Computer Vision Research in Africa.* arXiv:2401.11617. A survey finding African computer
 vision concentrated in agriculture and health and constrained by data scarcity. [arxiv.org/abs/2401.11617](https://arxiv.org/abs/2401.11617)
 
+### Stokoe, W. C. (1960) {#stokoe-1960}
+
+*Sign Language Structure: An Outline of the Visual Communication Systems of the American Deaf.* Studies in Linguistics, Occasional Papers 8. The first linguistic analysis to show that signs have internal structure, with the first sign-language notation.
+
+### Sutton, V. (n.d.) {#signwriting}
+
+*History of SignWriting.* SignWriting was developed by Valerie Sutton from 1974, in Denmark, out of her DanceWriting. [signwriting.org](https://www.signwriting.org/archive/docs2/sw0161_History_of_SignWriting.pdf)
+
 ### Te Hiku Media: Kaitiakitanga License {#tehiku-kaitiakitanga}
 
 *Data Sovereignty and the Kaitiakitanga License.* Te Hiku Media (Papa Reo), Aotearoa New Zealand. Treats
@@ -395,6 +498,10 @@ surveillance and unconsented corpus-building. [tehiku.nz](https://tehiku.nz/te-h
 Maintained Fleiss' kappa above 0.82 between peer moderators during validation.
 [arxiv.org/abs/2603.29244](https://arxiv.org/abs/2603.29244)
 
+### Wanzare, et al. (2024) {#ksl-dataset-2024}
+
+Wanzare, Okutoyi, Kang'ahi & Ayere. *KSL Dataset.* About 14,000 English sentences with Kenyan Sign Language glosses, about 20,000 KSL videos, and 4,000 words transcribed in HamNoSys. [arxiv.org/abs/2410.18295](https://arxiv.org/abs/2410.18295)
+
 ### WAXAL (2026) {#waxal-2026}
 
 *WAXAL: A Multilingual African Speech Dataset* (Google AI, 2026). A large multilingual African speech
@@ -404,3 +511,16 @@ dataset for training ASR and TTS models across many African languages. [marktech
 
 *The FAIR Guiding Principles for scientific data management and stewardship.* Scientific Data, 3, 160018.
 Findable, Accessible, Interoperable, Reusable. [doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
+
+### Wittenburg, P., et al. (2006) {#wittenburg-2006}
+
+Wittenburg, P., Brugman, H., Russel, A., Klassmann, A., & Sloetjes, H. *ELAN: a Professional Framework for Multimodality Research.* LREC 2006, 1556-1559. The annotation tool most sign-language corpora use, and its `.eaf` format of tiers, tier types and controlled vocabularies. [aclanthology.org/L06-1082](https://aclanthology.org/L06-1082/)
+
+
+### World Federation of the Deaf & WASLI (2018) {#wfd-wasli-2018}
+
+*WFD and WASLI Statement on Use of Signing Avatars.* 14 March 2018, updated 14 April 2018. Cautions against signing avatars as a replacement for human signers, especially for live, complex or important information. [wasli.org](https://wasli.org/wp-content/uploads/2023/07/WFD-and-WASLI-Statement-on-Avatar-FINAL-14032018-Updated-14042018-1.pdf)
+
+### World Federation of the Deaf (n.d.) {#wfd-recognition}
+
+*The legal recognition of national sign languages.* The WFD's country-by-country record of constitutional and legislative recognition. [wfdeaf.org](https://wfdeaf.org/the-legal-recognition-of-national-sign-languages/)

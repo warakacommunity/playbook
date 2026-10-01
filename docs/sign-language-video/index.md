@@ -3,7 +3,7 @@
 ready: true
 title: Video
 last_update:
-  date: 2026-09-29
+  date: 2026-10-01
   author: Tadesse Destaw
 ---
 
@@ -13,7 +13,7 @@ Video adds time to vision: the data is moving images, and the tasks read meaning
 
 This chapter covers:
 
-- **[Sign language](./sign-language.md)**: recognising and translating the visual languages of Deaf communities.
+- **[Sign language](./sign-language.md)**: building corpora of the visual languages of Deaf communities, from recording and tier-based annotation to release and modelling.
 - **[Gesture](./gesture.md)**: recognising hand and body gestures, which vary by culture.
 - **[Video](./video.md)**: general video understanding, such as classification and captioning.
 

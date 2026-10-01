@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1229 756" width="1229" height="756" role="img" aria-label="One utterance, annotated on parallel tiers template preview">
+  <title>One utterance, annotated on parallel tiers</title>
+  <rect width="1229" height="756" fill="#F4F5F7"/>
+  <rect x="0" y="0" width="1229" height="140" fill="#1D4ED8"/>
+  <text x="60" y="72" font-family="Inter, sans-serif" font-size="34" font-weight="700" fill="white">Annotation tiers</text>
+  <text x="60" y="112" font-family="Inter, sans-serif" font-size="27" fill="#DBEAFE">One utterance, annotated on parallel tiers</text>
+  <rect x="40" y="160" width="1149" height="556" rx="10" fill="white" stroke="#C3C8D0"/>
+  <rect x="40" y="160" width="300" height="556" rx="10" fill="#E6E8EC"/>
+  <line x1="330" y1="160" x2="330" y2="182" stroke="#8B93A3"/>
+  <text x="334" y="178" font-family="monospace" font-size="18" fill="#5D6576">00:00</text>
+  <line x1="590" y1="160" x2="590" y2="182" stroke="#8B93A3"/>
+  <text x="594" y="178" font-family="monospace" font-size="18" fill="#5D6576">00:01</text>
+  <line x1="850" y1="160" x2="850" y2="182" stroke="#8B93A3"/>
+  <text x="854" y="178" font-family="monospace" font-size="18" fill="#5D6576">00:02</text>
+  <line x1="1110" y1="160" x2="1110" y2="182" stroke="#8B93A3"/>
+  <text x="1114" y="178" font-family="monospace" font-size="18" fill="#5D6576">00:03</text>
+  <line x1="40" y1="276" x2="1189" y2="276" stroke="#E3E5E9"/>
+  <text x="60" y="243" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#1f55b0">RH-IDgloss</text>
+  <line x1="40" y1="362" x2="1189" y2="362" stroke="#E3E5E9"/>
+  <text x="82" y="329" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#1f55b0">RH-GramCls</text>
+  <line x1="40" y1="448" x2="1189" y2="448" stroke="#E3E5E9"/>
+  <text x="82" y="415" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#1f55b0">Mouthing</text>
+  <line x1="40" y1="534" x2="1189" y2="534" stroke="#E3E5E9"/>
+  <text x="60" y="501" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#18723a">LH-IDgloss</text>
+  <line x1="40" y1="620" x2="1189" y2="620" stroke="#E3E5E9"/>
+  <text x="60" y="587" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#9a4a12">Brow</text>
+  <line x1="40" y1="706" x2="1189" y2="706" stroke="#E3E5E9"/>
+  <text x="60" y="673" font-family="Inter, sans-serif" font-size="32" font-weight="600" fill="#6a3a9c">Translation</text>
+  <line x1="408" y1="198" x2="564" y2="198" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="408" y1="198" x2="408" y2="268" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="564" y1="198" x2="564" y2="268" stroke="#1D2330" stroke-width="2.5"/>
+  <text x="415" y="232" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#1D2330">PT:PRO2</text>
+  <line x1="590" y1="198" x2="746" y2="198" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="590" y1="198" x2="590" y2="268" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="746" y1="198" x2="746" y2="268" stroke="#1D2330" stroke-width="2.5"/>
+  <text x="597" y="232" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#1D2330">GO</text>
+  <line x1="772" y1="198" x2="1006" y2="198" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="772" y1="198" x2="772" y2="268" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="1006" y1="198" x2="1006" y2="268" stroke="#1D2330" stroke-width="2.5"/>
+  <text x="779" y="232" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#1D2330">MARKET</text>
+  <line x1="408" y1="284" x2="564" y2="284" stroke="#D97F00" stroke-width="2.5"/>
+  <line x1="408" y1="284" x2="408" y2="294" stroke="#D97F00" stroke-width="2.5"/>
+  <line x1="564" y1="284" x2="564" y2="294" stroke="#D97F00" stroke-width="2.5"/>
+  <text x="415" y="318" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#8A4F00">PT</text>
+  <line x1="590" y1="284" x2="746" y2="284" stroke="#D97F00" stroke-width="2.5"/>
+  <line x1="590" y1="284" x2="590" y2="294" stroke="#D97F00" stroke-width="2.5"/>
+  <line x1="746" y1="284" x2="746" y2="294" stroke="#D97F00" stroke-width="2.5"/>
+  <text x="597" y="318" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#8A4F00">V</text>
+  <line x1="772" y1="284" x2="1006" y2="284" stroke="#D97F00" stroke-width="2.5"/>
+  <line x1="772" y1="284" x2="772" y2="294" stroke="#D97F00" stroke-width="2.5"/>
+  <line x1="1006" y1="284" x2="1006" y2="294" stroke="#D97F00" stroke-width="2.5"/>
+  <text x="779" y="318" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#8A4F00">N</text>
+  <line x1="798" y1="370" x2="980" y2="370" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="798" y1="370" x2="798" y2="440" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="980" y1="370" x2="980" y2="440" stroke="#1D2330" stroke-width="2.5"/>
+  <text x="805" y="404" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#1D2330">market</text>
+  <line x1="772" y1="456" x2="1006" y2="456" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="772" y1="456" x2="772" y2="526" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="1006" y1="456" x2="1006" y2="526" stroke="#1D2330" stroke-width="2.5"/>
+  <text x="779" y="490" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#1D2330">MARKET</text>
+  <line x1="382" y1="542" x2="1032" y2="542" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="382" y1="542" x2="382" y2="612" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="1032" y1="542" x2="1032" y2="612" stroke="#1D2330" stroke-width="2.5"/>
+  <text x="389" y="576" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#1D2330">raised</text>
+  <line x1="408" y1="628" x2="1032" y2="628" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="408" y1="628" x2="408" y2="698" stroke="#1D2330" stroke-width="2.5"/>
+  <line x1="1032" y1="628" x2="1032" y2="698" stroke="#1D2330" stroke-width="2.5"/>
+  <text x="415" y="662" font-family="Inter, sans-serif" font-size="30" font-weight="500" fill="#1D2330">Are you going to the market?</text>
+  <rect x="408" y="190" width="156" height="516" fill="#AAAAEB" fill-opacity="0.35"/>
+  <line x1="486" y1="160" x2="486" y2="716" stroke="#D32F2F" stroke-width="2"/>
+</svg>
