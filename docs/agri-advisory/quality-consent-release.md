@@ -9,7 +9,7 @@ last_update:
 
 # Quality, Consent and Release
 
-This page describes the loop that every record passes through whatever its type: consent before contribution, anonymisation at ingest, three review stages before credit, a weekly agreement report, and a release that waits for the last opt-out window to close. AgroLingua Africa is the running example: ten languages, three-stage QA on AfriAnnotate, Cohen's kappa at or above 0.75, a 60-day opt-out, and a CC-BY-4.0 release 60 days after the partner delivery.
+This page describes the loop that every record passes through whatever its type: consent before contribution, anonymisation at ingest, three review stages before credit, a weekly agreement report, and a release that waits for the last opt-out window to close. The worked example runs ten languages with three-stage QA on AfriAnnotate, Cohen's kappa at or above 0.75, a 60-day opt-out, and a CC-BY-4.0 release 60 days after delivery to the partner (the funder or organisation that commissioned the dataset).
 
 ![Consent gates each contribution; anonymisation runs at ingest; three review stages lead to acceptance and credit, with rework loops back; a Monday report reads the agreement metrics; the release timeline runs from batch exports to embargoed partner delivery to public CC-BY-4.0 release after the last opt-out window closes.](images/qa-consent-loop.svg)
 
@@ -32,18 +32,18 @@ Two numbers gate progress, and both come from the platform's built-in agreement 
 - **Cohen's kappa at or above 0.75 on ontology labels.** Computed per language, per crop and per annotator on the double-labelled sample: a rolling 30% of images, rising to 100% for any crop or annotator whose cell falls below the threshold.
 - **Advisory agreement at or above 90% by round two.** The share of advisories the linguistic reviewer accepts without a rewrite request, after at most one revision.
 
-Speech has its own bar (95% of clips validated on the first pass; see [Speech Layer](./speech-layer.md)), and benchmark cases must be 100% dual-verified (see [Benchmark and Preference Data](./benchmark-and-preference.md)). Annotators whose accuracy on hidden gold items falls below the floor the language lead sets in the rubric are paused automatically and retrained before they resume.
+Speech has its own bar (95% of clips validated on the first pass; see [Speech Layer](./speech-layer.md)). Annotators whose accuracy on hidden gold items falls below the floor the language lead sets in the rubric are paused automatically and retrained before they resume.
 
-:::tip[Watch the cell, not the average]
+:::tip[Read every crop cell]
 A language can sit above 0.75 overall while one crop sits at 0.55 because the ontology has two nodes that look the same on a phone screen. The weekly report shows every crop cell, and the fix is usually a rubric edit and a retraining session.
 :::
 
 ## The Monday report
 
-Every Monday, one report per language and an aggregate, generated from the platform's dashboard, agreement exports and ledger, with a short narrative from each language lead. It goes to the partner and into the project repository. The AgroLingua template has these parts:
+Every Monday, one report per language and an aggregate, generated from the platform's dashboard, agreement exports and ledger, with a short narrative from each language lead. It goes to the partner and into the project repository. The report has these parts:
 
-- **Headline**: pairs captured and through QA, speech items validated, benchmark cases dual-verified, preference pairs double-rated; this week, cumulative, target, on track or not.
-- **Per language**: captured, labelled, authored, reviewed, adjudicated, accepted; kappa; advisory agreement in round one and round two; speech items; speakers by gender; open review queue. Cells below threshold are marked and get a line under actions.
+- **Headline**: pairs captured and through QA, speech items validated; this week, cumulative, target, on track or not.
+- **Per language**: captured, labelled, authored, reviewed, adjudicated, accepted; kappa; advisory agreement in round one and round two; speech items; speakers by gender; preference pairs rated and rater agreement; open review queue. Cells below threshold are marked and get a line under actions.
 - **Coverage gaps**: crop by issue family by growth stage cells below half of target, with the plan to fill each (season, region or seed).
 - **Speaker balance**: age band by gender against the recruitment target, and the steering for next week.
 - **Annotator evaluation**: who was paused, why, and retraining status.
@@ -63,13 +63,13 @@ The platform enforces consent. Nobody can capture, author, review or record unti
 
 | Contributor | Form | Covers |
 | --- | --- | --- |
-| Collector, and the farmer whose plant is photographed | Written, or recorded oral in the language | Image use for training, benchmark and publication; CC-BY-4.0 release; 60-day opt-out |
-| Author, reviewer, transcriber, rater | Written annotator agreement | Licensing of authored text under CC-BY-4.0; credit choice |
-| Speaker | Written or recorded oral, plus a separate speaker-profile consent | Voice use for training, benchmark and publication; named as biometric data; explicit opt-in to public release; whether age band, gender and region may attach; 60-day opt-out |
+| Collector, and the farmer whose plant is photographed | Written, or recorded oral in the language | Image use for training, evaluation and publication; CC-BY-4.0 release; 60-day opt-out |
+| Author, reviewer, transcriber | Written annotator agreement | Licensing of authored text under CC-BY-4.0; credit choice |
+| Speaker | Written or recorded oral, plus a separate speaker-profile consent | Voice use for training, evaluation and publication; named as biometric data; explicit opt-in to public release; whether age band, gender and region may attach; 60-day opt-out |
 
 Consent is given in the contributor's language. For contributors who cannot read the form comfortably, the language lead has the script translated and recorded once by a native speaker; in the field the collector plays it, asks five yes-or-no questions, and records the answers against the contributor's reference number with no names spoken. Consent status is set only after the language lead has listened to the recording.
 
-Voice is biometric data, and the speaker template says so in plain words. It asks separately for the opt-in to public release under CC-BY-4.0 and for permission to attach age band, gender and region; a speaker may say no to the profile and still contribute. Every contributor receives a reference number and a contact, and an opt-out within 60 days removes their items before the next export, with the removal logged and counted in the datasheet. After 60 days, published items cannot be recalled, and the form says so. Where national law requires it, the contracting host registers as data controller (Nigeria NDPC, Kenya ODPC, Rwanda NCSA); AgroLingua budgets this with the ethics review. The forms are in the [consent form template](../templates/consent-form.md), and the legal background is in [Legal and Consent](../legal-consent/index.md).
+Voice is biometric data, and the speaker template says so in plain words. It asks separately for the opt-in to public release under CC-BY-4.0 and for permission to attach age band, gender and region; a speaker may say no to the profile and still contribute. Every contributor receives a reference number and a contact, and an opt-out within 60 days removes their items before the next export, with the removal logged and counted in the datasheet. After 60 days, published items cannot be recalled, and the form says so. Where national law requires it, the contracting host registers as data controller (Nigeria NDPC, Kenya ODPC, Rwanda NCSA); plan the registration with the ethics review. The forms are in the [consent form template](../templates/consent-form.md), and the legal background is in [Legal and Consent](../legal-consent/index.md).
 
 ## Anonymisation at ingest
 
@@ -85,18 +85,18 @@ Anonymisation runs before an image or clip enters any annotation project, so no 
 
 ## Licence and release
 
-Everything releases under CC-BY-4.0: images, advisories, audio, transcripts, benchmark cases, preference pairs, the ontology and the rubrics. Contributor agreements assign the right to release under that licence. Partner model outputs used as preference candidates are released under the same licence by agreement with the partner.
+Everything releases under CC-BY-4.0: images, advisories, audio, transcripts, the ontology and the rubrics. Contributor agreements assign the right to release under that licence.
 
-The seed licence rule is strict. Open images are kept only where the source licence is CC-BY-compatible, and each is attributed. Sources under ShareAlike, NonCommercial or competition-only terms are excluded, because any one of them would pull the whole release away from CC-BY-4.0. In AgroLingua, PlantDoc and CCMT clear the rule; PlantVillage, iCassava and PlantWild are verified source by source before any image is kept.
+The seed licence rule is strict. Open images are kept only where the source licence is CC-BY-compatible, and each is attributed. Sources under ShareAlike, NonCommercial or competition-only terms are excluded, because any one of them would pull the whole release away from CC-BY-4.0. As of September 2026, PlantDoc, CCMT and the Makerere cassava set clear the rule; PlantVillage, iCassava and PlantWild do not (see [Field Image Capture](./field-image-capture.md#planning-coverage)).
 
-The timeline has two release events. The final delivery (month 7 in AgroLingua) goes to the partner under embargo. The public release on the Hugging Face Hub follows 60 days later, after the last contributor's opt-out window has closed. Errata and later withdrawals ship as new versions with a changelog. Storage and access control between the two events follow [Data Governance](../data-governance/index.md).
+The timeline has two release events. The final delivery (month 7 in the worked example) goes to the partner under embargo. The public release on the Hugging Face Hub follows 60 days later, after the last contributor's opt-out window has closed. Errata and later withdrawals ship as new versions with a changelog. Storage and access control between the two events follow [Data Governance](../data-governance/index.md).
 
 ## The per-language datasheet
 
 One datasheet per language, following the Datasheets for Datasets structure ([Gebru et al., 2021](../references.md#gebru-2021)). Counts are generated from the platform's provenance and consent exports; the language lead writes the narrative and the quality lead reviews it. It contains:
 
-- **Composition**: pairs (field versus seed), speech items and distinct speakers, benchmark cases by task type, preference pairs, items withdrawn; the coverage matrix, districts, speaker balance from consented profiles only; splits with source and speaker disjointness confirmed and the count of rows dropped; known gaps and why.
-- **Collection process**: who collected, where, when, on what devices; seed sources, licences and counts kept and dropped; author cohort and rubric version; speech recruitment, set-up and QC profile; how the held-out stream was isolated.
+- **Composition**: pairs (field versus seed), speech items and distinct speakers, items withdrawn; the coverage matrix, districts, speaker balance from consented profiles only; the train, dev and test splits; known gaps and why.
+- **Collection process**: who collected, where, when, on what devices; seed sources, licences and counts kept and dropped; author cohort and rubric version; speech recruitment, set-up and QC profile.
 - **Labelling and quality**: ontology version, share of items through each QA outcome, kappa per crop, advisory agreement by round, speech first-pass rate, annotators paused.
 - **Consent, anonymisation and rights**: template versions, written versus oral counts, purposes granted, opt-out dates and withdrawals honoured; anonymisation counts; licence and attributions; credits per contributor choice.
 - **Payment**: rate card and total paid per role, from the ledger.
@@ -106,12 +106,12 @@ The playbook's [dataset card template](../templates/dataset-card.md) covers the 
 
 ## Payment and credit
 
-Rates are set per country at local market rates for each role and shown to contributors in the platform before they join. Work is credited on acceptance into an append-only ledger, each contributor can see their own statement, and payout runs are exported monthly by facilitator cohort, so a facilitator is paid what their cohort earned. Contributors are paid monthly regardless of when the partner pays the project. Credit is by choice, taken at consent time: by name, by pseudonym, or not at all.
+Rates are set per country at local market rates for each role and shown to contributors in the platform before they join. Work is credited on acceptance into AfriAnnotate's append-only ledger, each contributor can see their own statement, and payout runs are exported monthly by facilitator cohort, so a facilitator is paid what their cohort earned. Contributors are paid monthly regardless of when the partner pays the project. Credit is by choice, taken at consent time: by name, by pseudonym, or not at all.
 
 ## Known limitations
 
 - **Kappa depends on the ontology.** A fine-grained ontology lowers agreement without lowering quality. Report kappa alongside the node count.
-- **Oral consent is slower to verify.** Each recording must be heard by the language lead before the contributor's items count. Budget the lead's time for it, or a backlog forms in the first month.
+- **Oral consent is slower to verify.** Each recording must be heard by the language lead before the contributor's items count. Plan the lead's time for it, or a backlog forms in the first month.
 - **Sixty days is a compromise.** A longer window is kinder to contributors and delays release. Whatever you choose, the consent form, the export schedule and the release date must carry the same number.
 - **Registration takes calendar time.** Data-controller registration can run for weeks. Start it at kick-off.
 
@@ -122,4 +122,4 @@ Rates are set per country at local market rates for each role and shown to contr
 - [Data Governance](../data-governance/index.md): storage, access and retention between delivery and public release.
 - [Documentation](../6_documentation/documentation.md) and the [dataset card template](../templates/dataset-card.md).
 - [Datasheets for Datasets](../references.md#gebru-2021).
-- [AfriAnnotate](https://afriannotate.waraka.org): consent library, agreement metrics and ledger described on this page.
+- [AfriAnnotate](https://afriannotate.waraka.org): the consent library, agreement metrics and payment ledger described on this page.

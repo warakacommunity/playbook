@@ -11,7 +11,7 @@ last_update:
 
 *Last reviewed: 2026-09-30.*
 
-*The role sheets for a crop-advisory dataset: one sheet each for the field collector, the agronomist, the advisory author, the linguistic reviewer, the speaker, the preference rater and the benchmark verifier, plus the fields of the weekly agreement report. Each sheet is what one person holds while they work, so each fits on one or two printed pages. The defaults come from the AgroLingua Africa collection described in the [Agricultural Advisory Data](../agri-advisory/index.md) chapter; change them where your crops, languages or budget differ.*
+*The role sheets for a crop-advisory dataset: one sheet each for the field collector, the agronomist, the advisory author, the linguistic reviewer, the speaker and the preference rater, plus the fields of the weekly agreement report. Each sheet is what one person holds while they work, so each fits on one or two printed pages. The defaults come from the worked example in the [Agricultural Advisory Data](../agri-advisory/index.md) chapter; change them where your crops or languages differ.*
 
 ## How to use this template
 
@@ -31,7 +31,7 @@ This template pairs with the generic [annotation guidelines template](./annotati
 
 ## 1. Field collector sheet
 
-You photograph plants and record what the farmer asks about them. Every accepted photo earns [RATE, e.g. USD 0.60]. A rejected photo earns nothing, so read the rejection list before you start.
+You photograph plants and record what the farmer asks about them. Every accepted photo earns [RATE]. A rejected photo earns nothing, so read the rejection list before you start.
 
 ### How to photograph
 
@@ -85,7 +85,7 @@ The app works without signal. Captures wait in the outbox on your phone and uplo
 
 ## 2. Agronomist label sheet
 
-You give each image its diagnosis and review the advisory for faithfulness. Work at the pace the budget assumes ([~100 actions per day at USD 40]), and mark uncertainty rather than hide it.
+You give each image its diagnosis and review the advisory for faithfulness. Work at the pace the project plans ([~100 actions per day]), and mark uncertainty rather than hide it.
 
 ### Ontology levels
 
@@ -137,7 +137,7 @@ Where the advisory names a pesticide, herbicide or fungicide, it must carry a sa
 
 ## 3. Advisory author rubric
 
-You write what a good extension officer would say to this farmer, about this plant, in [LANGUAGE]. You write it fresh; nothing is translated from English. Each accepted advisory earns [RATE, e.g. USD 1.50]. An advisory is accepted when the linguistic reviewer and the agronomist both pass it, with at most one rewrite.
+You write what a good extension officer would say to this farmer, about this plant, in [LANGUAGE]. You write it fresh; nothing is translated from English. Each accepted advisory earns [RATE]. An advisory is accepted when the linguistic reviewer and the agronomist both pass it, with at most one rewrite.
 
 ### The five-part structure
 
@@ -198,7 +198,7 @@ Reason for rejection: reads as translated (1), no vernacular name (9), the produ
 
 ## 4. Linguistic reviewer sheet
 
-You are a native speaker and you are not the author of the advisory in front of you. You check whether a farmer in [REGION] would hear it as advice from one of their own. Each review earns [RATE, e.g. USD 0.50]. Decisions: `accept` or `rewrite` with a note. You do not judge agronomy; that is the agronomist's sheet.
+You are a native speaker and you are not the author of the advisory in front of you. You check whether a farmer in [REGION] would hear it as advice from one of their own. Each review earns [RATE]. Decisions: `accept` or `rewrite` with a note. You do not judge agronomy; that is the agronomist's sheet.
 
 | Check | Pass when |
 | --- | --- |
@@ -245,53 +245,53 @@ Your voice is personal data. You agreed to [PURPOSES TICKED] on [DATE], and you 
 
 ## 6. Preference rater sheet
 
-You see one photo, its diagnosis, and two advisories, A and B. Pick the one a farmer in [REGION] should receive. Each pair is rated by two people and pays [RATE, e.g. USD 0.25] per rating. Disagreement between raters is expected and kept; do not try to guess what the other rater chose.
+You see one photo, its diagnosis, and two advisories, A and B. Pick the one a farmer in [REGION] should receive. You are not told where either advisory came from, and which one appears as A changes from pair to pair. Each rating earns [RATE]. Where two people rate the same pair, both answers are kept, so do not discuss a pair with another rater.
 
 ### How to compare
 
-1. Read the diagnosis first, then A, then B, then A again.
-2. Decide which one you would want your own relative to receive.
-3. Choose `a`, `b` or `tie`, and mark the strength: `slight`, `clear` or `strong`.
-4. Tick every reason that applies from the fixed list. At least one reason is required unless you chose `tie`.
-5. Add a free-text note when the reason list does not explain your choice.
+1. Read the diagnosis first, then A in full, then B in full.
+2. Apply the four checks in order, and stop at the first one that separates the two advisories:
+
+   | Check | Choose |
+   | --- | --- |
+   | Correct: addresses the diagnosis shown | the correct one |
+   | Safe: no harmful step, and a safety line for any chemical | the safe one |
+   | Usable here: inputs, measures and names farmers in [REGION] use | the locally usable one |
+   | Language: clear, natural, right register | the clearer one |
+
+3. Choose `A`, `B` or `tie`, and mark the strength: `slight`, `clear` or `strong`.
+4. Tick every reason that applies. At least one reason is required unless you chose `tie`.
+5. Do not guess which advisory a person wrote. The source is no reason to prefer it.
 
 ### Reason codes
 
-| Code | Pick it when the preferred advisory | Schema value |
-| --- | --- | --- |
-| Correctness | Names the right problem and the right action | `more_accurate` |
-| Safety | Handles chemicals more carefully, or avoids a harmful step | `safer` |
-| Local relevance | Uses inputs, measures and names available here | `uses_available_inputs`, `better_vernacular_terms` |
-| Clarity | Is easier to follow when read once | `more_natural_language`, `more_concise` |
-| Completeness | Covers a part the other one skips | `more_complete`, `more_actionable` |
-| Register | Sounds like an extension officer talking to a farmer | `better_vernacular_terms` |
-
-If none fits, choose `other` and write the note.
+| Code | Tick it when the advisory you chose |
+| --- | --- |
+| `more_accurate` | Names the right problem and the right action |
+| `safer` | Handles chemicals more carefully, or avoids a harmful step |
+| `more_complete` | Covers a part the other one skips |
+| `more_actionable` | Gives steps the farmer can follow this week |
+| `uses_available_inputs` | Names inputs and measures available in [COUNTRY] |
+| `better_vernacular_terms` | Uses the crop and pest names farmers here use |
+| `more_natural_language` | Sounds like an extension officer talking to a farmer |
+| `more_concise` | Says the same thing in fewer words |
+| `other` | None of the above fits; explain in the note |
 
 ### Ties
 
-Choose `tie` only when both advisories would serve the farmer equally well, or both are unusable. If you cannot decide, choose a `slight` preference. Write one line saying why the tie is real.
+Choose `tie` only when you would give either advisory to a farmer. If you lean one way, choose it and mark the strength `slight`. If neither advisory is acceptable, choose the less harmful one and say in the note what is wrong with both.
 
 ### Free-text note
 
-One or two sentences, in [LANGUAGE] or English. Quote the phrase that decided it. "B says spray in the afternoon heat, A says early morning; A is safer." Notes are read by the language lead and shape the next rubric version.
+One or two sentences, in [LANGUAGE] or English. Quote the phrase that decided it: "B says spray in the afternoon heat, A says early morning; A is safer." The language lead reads the notes and uses them to revise the reason list.
 
-## 7. Benchmark verifier sheet
+### Batches
 
-Benchmark cases are held out from training and each is verified twice: once by an agronomist and once by a native speaker. You record `verified`, `corrected` (with the correction) or `rejected` (with the reason). A case ships only when both records exist and agree; otherwise it goes to the language lead and the quality lead for adjudication. A case costs [RATE, e.g. USD 3.50], covering construction and both verifications.
+A batch holds [N, e.g. 30] pairs. Finish a batch in one sitting and rest before the next. Some pairs in every batch have a known answer and are used to check your ratings; you will not know which.
 
-| Task type | Agronomist checks | Native speaker checks |
-| --- | --- | --- |
-| `pest_disease_id` | Gold label is correct at the deepest supportable level; each distractor is a plausible but wrong node for this crop | Question text is natural and would be asked about this photo; vernacular names are correct |
-| `abiotic_stress_reasoning` | The context (weather, soil, stage) supports the gold label; the reasoning chain is agronomically sound at every step | The reasoning chain reads as a native explanation, in order, with no translated phrasing |
-| `advisory_faithfulness` | The verdict (`faithful` / `unfaithful`) is right against the diagnosis; the rationale names the exact unfaithful claim | The candidate advisory is readable in-language, and the rationale would convince a farmer |
-| `safety` | The verdict (`safe` / `unsafe`) and the `safety_category` are right; an `unsafe` case contains a real hazard | The hazard is expressed in words a farmer would understand as a warning |
+## 7. Weekly agreement report
 
-For every case, both verifiers also confirm that the image shows one plant and no person, that the disjointness flags on the case are set, and that the consent record includes the `benchmark` purpose. A `corrected` decision must include the corrected value in the note, so adjudication can compare the two corrections.
-
-## 8. Weekly agreement report
-
-Filled every Monday by the language lead from the platform's agreement export and coverage dashboard, per language, and sent to the partner. The fields follow the AgroLingua weekly QA report.
+Filled every Monday by the language lead from the platform's agreement export and coverage dashboard, per language, and sent to the partner. The fields follow the Monday report in [Quality, Consent and Release](../agri-advisory/quality-consent-release.md#the-monday-report).
 
 | Field | Source | Threshold |
 | --- | --- | --- |
@@ -299,9 +299,8 @@ Filled every Monday by the language lead from the platform's agreement export an
 | Cohen's κ on ontology labels | Double-labelled sample (30% rolling, 100% on weak cells), per crop and per annotator | ≥ 0.75 |
 | Advisory agreement, round one and round two | Share of advisories accepted by the linguistic reviewer without a rewrite; then after one rewrite | ≥ 90% by round two |
 | Speech items validated first pass | Validation vote outcomes | ≥ 95% |
+| Preference ratings: rater agreement and share of A choices | Double-rated pairs; choices per rater, ties excluded from the A share | Agreement reported, no floor; A share near 50% per rater; gold accuracy at or above [FLOOR] |
 | Speakers by age band and gender | Consented speaker profiles | Recruitment target for the language |
-| Benchmark cases dual-verified | Verification records | 100% before release |
-| Preference pairs double-rated, and rater agreement | Rating records | Two ratings per pair |
 | Open review queue | Items waiting at each QA stage | Under [N] days old |
 | Coverage gaps | Crop × issue family × growth stage cells below 50% of target | Plan to fill each |
 | Annotators paused | Ground-truth accuracy below floor | Reason and retraining status |

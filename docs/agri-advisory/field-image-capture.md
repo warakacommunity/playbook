@@ -3,19 +3,19 @@ title: Field Image Capture
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-09-30
+  date: 2026-10-02
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Field Image Capture
 
-Field image capture is the first task in the pipeline and the one that sets the ceiling for everything after it. An agronomist cannot label a blurred leaf, an author cannot write a grounded advisory for a photo with no crop or growth stage recorded, and a benchmark built from images that also sit in the training set measures nothing. This page covers who takes the photos, what they record with each one, how the season shapes the plan, and what happens to an image between the phone and the annotation project.
+Field image capture is the first task in the pipeline and the one that sets the ceiling for everything after it. An agronomist cannot label a blurred leaf, and an author cannot write a grounded advisory for a photo with no crop or growth stage recorded. This page covers who takes the photos, what they record with each one, how the season shapes the plan, and what happens to an image between the phone and the annotation project.
 
 ![The capture form a collector fills for every photo, and the ingest pipeline that strips EXIF, coarsens GPS to district, blurs faces, removes near-duplicates and mints the pair ID](images/capture-form.svg)
 
 ## What the data looks like
 
-One accepted image is a photo plus a structured form, cleaned at ingest and given a pair ID. The image and metadata blocks of the AgroLingua pair record look like this (the diagnosis, advisory and consent blocks are added by later tasks):
+One accepted image is a photo plus a structured form, cleaned at ingest and given a pair ID. The image and metadata blocks of a pair record look like this (the diagnosis, advisory and consent blocks are added by later tasks):
 
 ```json title="hau-000123.json (image and metadata blocks)"
 {
@@ -48,29 +48,35 @@ Two fields deserve attention. `suspected_issue` is the collector's own guess, fr
 
 ## Who does it and how
 
-**Collectors.** Recruit 5–10 per language through the language lead, from the farming communities where the crops grow. Extension agents, agricultural students and lead farmers make good collectors because they already know a diseased leaf when they see one and they have a reason to be in the field. Each collector captures 100–300 accepted images over a season. AgroLingua aims for about 10,000 field images across ten languages this way, 2,000 of them in the reserved benchmark stream.
+**Collectors.** Recruit 5–10 per language through the language lead, from the farming communities where the crops grow. Extension agents, agricultural students and lead farmers make good collectors because they already know a diseased leaf when they see one and they have a reason to be in the field. Each collector captures 100–300 accepted images over a season. The worked example collects about 10,000 field images across ten languages this way.
 
 **Two shots per plant.** Take a plant-level shot that shows the whole plant and its neighbours, then a close-up of the affected part. Under natural light, no flash, the affected area in focus and filling most of the frame. The agronomist needs the close-up to name the issue and the plant-level shot to judge stage and spread. In-app guidance cards show a good and a bad example of each.
 
 **The form.** Every photo carries crop, suspected issue (with "not sure" allowed), growth stage, plant part, district and the farmer's question. The form takes under a minute once a collector is used to it, and it is what turns a folder of photos into a dataset. A photo with no form is rejected at ingest.
 
-**Offline first.** Most fields have no signal. The capture app downloads the project, the form and the guidance cards to the phone; each capture goes into an on-device outbox and replays in order when the phone finds a network, and rejected writes are held for review so a collector never loses a day's work to a bad sync. AgroLingua runs this on [AfriAnnotate](https://afriannotate.waraka.org). Whatever tool you choose must work offline, because a capture app that needs a connection quietly selects for images taken near towns.
+**Offline first.** Most fields have no signal. The capture app downloads the project, the form and the guidance cards to the phone; each capture goes into an on-device outbox and replays in order when the phone finds a network, and rejected writes are held for review so a collector never loses a day's work to a bad sync. Capture runs on [AfriAnnotate](https://afriannotate.waraka.org), which works this way. Offline capture matters because an app that needs a connection quietly selects for images taken near towns.
 
 **Consent at capture.** Before the first photo on a farm, the collector plays the recorded oral consent script in the language, or hands over the written form, and logs the farmer's agreement against an opaque contributor ID. The platform blocks capture until a consent record exists. An oral consent record stays provisional until the language lead has listened to the recording, and the images from that farm earn no credit before then; see [Quality, consent and release](./quality-consent-release.md).
 
+## On the platform
+
+The screenshot below shows the capture task in the AfriAnnotate mobile view, as three screens of one task. The collector photographs the plant, fills in the structured form (crop, suspected issue, growth stage, plant part), and records or types the farmer's question. The app keeps working offline and uploads when a connection returns.
+
+![Field capture in the AfriAnnotate mobile view: the collector takes the photo, selects the crop, suspected issue, growth stage and plant part, and records or types the farmer's question](images/afriannotate-field-capture.jpg)
+
+The photo is a stock image standing in for a field photo. The sample text is in English for the reader; in a project it is in the collector's language.
+
 ## Planning coverage
 
-**The coverage matrix.** Agree a target matrix of crop by issue family by growth stage with the agronomist partner before capture starts, and make it the live dashboard. Per crop, AgroLingua targets four issue families (pest damage, disease lesions, nutrient stress, abiotic stress) plus a healthy reference class of the same crop at the same stage. Each language's priority staples come from the national extension partner: maize, sorghum, millet, rice, cowpea, groundnut and tomato for Hausa; teff, wheat, maize, barley, faba bean, enset and coffee for Amharic. A matrix that is only checked at delivery will have empty cells you can no longer fill.
+**The coverage matrix.** Agree a target matrix of crop by issue family by growth stage with the agronomist partner before capture starts, and make it the live dashboard. Per crop, target four issue families (pest damage, disease lesions, nutrient stress, abiotic stress) plus a healthy reference class of the same crop at the same stage. Each language's priority staples come from the national extension partner: for example, maize, sorghum, millet, rice, cowpea, groundnut and tomato for Hausa in northern Nigeria, or teff, wheat, maize, barley, faba bean, enset and coffee for Amharic in Ethiopia. A matrix that is only checked at delivery will have empty cells you can no longer fill.
 
 **The cropping calendar.** You photograph what is in the field. In northern Nigeria and Senegal a November to May window covers dry-season irrigated crops (rice, tomato, onion, wheat) and storage and pest issues; rainy-season staples (millet, sorghum, groundnut, cowpea) need a June to July push or the open seed. Write the calendar for each country into the plan at kick-off and set collector targets per window.
 
-**The open-data seed.** Open plant-disease image sets fill the cells the season cannot: [PlantVillage](https://github.com/spMohanty/PlantVillage-Dataset), [PlantDoc](https://github.com/pratikkayal/PlantDoc-Dataset), CCMT, [iCassava](https://www.kaggle.com/c/cassava-disease) and PlantWild. Check the licence of every source before you keep a single image: PlantDoc and CCMT are CC BY 4.0; parts of PlantVillage circulate under ShareAlike, iCassava was released under competition terms, and PlantWild needs verifying. Keep only what is compatible with your release licence and attribute each image. Then filter: crop in the target list, minimum resolution, perceptual-hash near-duplicate removal, and a visual sanity pass by an agronomist. AgroLingua keeps about 5,000 seed images this way.
+**The open-data seed.** Open plant-disease image sets fill the cells the season cannot: PlantVillage ([Hughes and Salathé, 2015](../references.md#plantvillage-2015)), PlantDoc ([Singh et al., 2020](../references.md#plantdoc-2020)), CCMT ([Mensah et al., 2023](../references.md#ccmt-2023)), iCassava ([Mwebaze et al., 2019](../references.md#icassava-2019)) and PlantWild ([Wei et al., 2024](../references.md#plantwild-2024)). Check the published licence of every source before you keep a single image. As of September 2026: PlantDoc and CCMT are CC BY 4.0 and the Makerere cassava set ([Tusubira et al., 2022](../references.md#makerere-cassava-2022)) is CC0, so all three can go into a CC BY 4.0 release; PlantVillage is CC BY-SA 3.0, iCassava 2019 is under non-commercial competition rules, and PlantWild is CC BY-NC-ND 4.0, so none of those three can, unless the owner gives written permission. Keep only what is compatible with your release licence and attribute each image. Then filter: crop in the target list, minimum resolution, perceptual-hash near-duplicate removal, and a visual sanity pass by an agronomist. The worked example keeps about 5,000 seed images this way.
 
-:::warning[Seed images get fresh advisories and never enter the benchmark]
-A seed image contributes pixels only. It goes through the same form, the same ontology label and the same native-authored advisory as a field image, tagged `source.kind = open_seed`. It is never used for a held-out benchmark case, because the models you will evaluate have very likely seen it.
+:::warning[Seed images get fresh advisories]
+A seed image contributes pixels only. It goes through the same form, the same ontology label and the same native-authored advisory as a field image, tagged `source.kind = open_seed`.
 :::
-
-**The reserved benchmark stream.** Isolate it from day one. Benchmark images come from separate collectors, separate farms and, where possible, separate districts, and they land in a separate project the training annotators cannot see. AgroLingua reserves 2,000 of its 10,000 field images this way, at least 200 per language, and enforces the split by `source_id` at export. A benchmark carved out of the training stream after the fact shares farms, phones and collectors with the training set, and a model that memorises a field will score well on it.
 
 ## Guidelines that matter
 
@@ -84,15 +90,9 @@ A seed image contributes pixels only. It goes through the same form, the same on
 
 ## Quality control
 
-Ingest is the first quality gate and it runs before any annotator sees the image. EXIF and device metadata are stripped. Device GPS is read once to derive the district name, and the coordinates are discarded. Faces are detected and blurred automatically, images flagged as containing people get a human check, and any image where a person cannot be blurred is dropped. A perceptual hash rejects near-duplicates within the batch and against the seed. Then the pair ID is minted and the image is tagged to its stream: field, open seed or benchmark reserved.
+Ingest is the first quality gate and it runs before any annotator sees the image. EXIF and device metadata are stripped. Device GPS is read once to derive the district name, and the coordinates are discarded. Faces are detected and blurred automatically, images flagged as containing people get a human check, and any image where a person cannot be blurred is dropped. A perceptual hash rejects near-duplicates within the batch and against the seed. Then the pair ID is minted and the image is tagged with its source: field or open seed.
 
 The second gate is the agronomist at diagnosis time, who can reject an image for quality with a reason that goes back to the collector in the app. The language lead watches rejection rates per collector and the coverage matrix each week, pauses and retrains a collector whose rejections stay high, and steers capture targets while the season is still open.
-
-## What it costs
-
-The unit is an accepted image. AgroLingua pays USD 0.60 per accepted image plus a per-session field allowance from the field logistics line, which covers transport and airtime for sync. Credit lands on acceptance, so a rejected or duplicate image earns nothing. The cost driver is the acceptance rate: an untrained collector can lose a third of a day's captures to blur and duplicates, so spend the first week on training and calibration, with every image reviewed, before you scale the cohort.
-
-The seed has no capture cost, but licence checking, filtering and the agronomist sanity pass take time, and every seed image still needs a label and an advisory at the full rate.
 
 ## Known limitations
 
@@ -105,7 +105,6 @@ The seed has no capture cost, but licence checking, filtering and the agronomist
 ## Further reading
 
 - [Diagnosis labelling](./diagnosis-labelling.md): what the agronomist does with the image and the form.
-- [Benchmark and preference data](./benchmark-and-preference.md): how the reserved stream becomes held-out cases.
 - [Quality, consent and release](./quality-consent-release.md): the consent scripts, the opt-out window and the anonymisation table.
 - [Image Data](../image-data/index.md): general image annotation, including the classification, detection and segmentation tasks this chapter does not cover.
 - [Data governance](../data-governance/index.md): who controls the data and on what terms.

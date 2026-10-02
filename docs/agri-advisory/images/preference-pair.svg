@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 724" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="prTitle prDesc">
+  <title id="prTitle">One preference pair</title>
+  <desc id="prDesc">One accepted pair (photo and diagnosis) feeds two candidate advisories, A and B. The source of each candidate is hidden from the rater and the A/B order is randomised. Two native-speaker raters work independently on the same rating screen, and each gives a choice (A, B or tie), a strength, reason codes and a note. The record stores both ratings with a raters_agree flag, and a disagreement is kept and flagged.</desc>
+
+  <rect x="6" y="6" width="968" height="712" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">One preference pair = two judgements on two advisories</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Nothing new is photographed, written or recorded. The raters judge material that already exists.</text>
+  <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
+
+  <defs>
+    <marker id="prArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#CBBBA4"/>
+    </marker>
+  </defs>
+
+  <!-- ============ PAIR (terracotta) ============ -->
+  <g>
+    <rect x="30" y="106" width="920" height="60" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="48" y="131" font-size="15" font-weight="700" fill="#9C4F2B">Pair hau-000123</text>
+    <text x="48" y="151" font-size="12" fill="#8A7D6E">photo &#183; diagnosis maize / pest / fall armyworm &#183; already accepted through QA</text>
+    <rect x="770" y="118" width="164" height="36" rx="8" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
+    <text x="852" y="135" font-size="12" font-weight="700" fill="#9C4F2B" text-anchor="middle">pf-hau-000123</text>
+    <text x="852" y="149" font-size="11" fill="#8A7D6E" text-anchor="middle">keyed to the pair ID</text>
+  </g>
+
+  <line x1="250" y1="166" x2="250" y2="190" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+  <line x1="730" y1="166" x2="730" y2="190" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+
+  <!-- ============ CANDIDATE A (gold) ============ -->
+  <g>
+    <rect x="30" y="192" width="440" height="90" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
+    <circle cx="58" cy="222" r="13" fill="#B97F37"/>
+    <text x="58" y="227" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">A</text>
+    <text x="80" y="227" font-size="16" font-weight="700" fill="#B97F37">Candidate advisory A</text>
+    <text x="48" y="252" font-size="12" fill="#2B2218">an advisory for this photo and diagnosis, 60&#8211;180 words</text>
+    <text x="48" y="270" font-size="12" font-style="italic" fill="#8A7D6E">source stored in the record, hidden from the rater</text>
+  </g>
+
+  <!-- ============ CANDIDATE B (forest green) ============ -->
+  <g>
+    <rect x="510" y="192" width="440" height="90" rx="12" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
+    <circle cx="538" cy="222" r="13" fill="#1F5B3F"/>
+    <text x="538" y="227" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">B</text>
+    <text x="560" y="227" font-size="16" font-weight="700" fill="#1F5B3F">Candidate advisory B</text>
+    <text x="528" y="252" font-size="12" fill="#2B2218">a second advisory for the same photo and diagnosis</text>
+    <text x="528" y="270" font-size="12" font-style="italic" fill="#8A7D6E">source stored in the record, hidden from the rater</text>
+  </g>
+
+  <line x1="250" y1="282" x2="250" y2="306" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+  <line x1="730" y1="282" x2="730" y2="306" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+
+  <!-- ============ RATING SCREEN ============ -->
+  <g>
+    <rect x="30" y="308" width="920" height="44" rx="10" fill="#FFFFFF" stroke="#E7DDCB" stroke-width="1.5"/>
+    <text x="48" y="335" font-size="13" font-weight="700" fill="#2B2218">Rating screen</text>
+    <text x="934" y="335" font-size="12" fill="#8A7D6E" text-anchor="end">photo and diagnosis beside A and B &#183; which text appears as A is randomised for every pair</text>
+  </g>
+
+  <line x1="250" y1="352" x2="250" y2="376" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+  <line x1="730" y1="352" x2="730" y2="376" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+
+  <!-- ============ RATER 1 (slate blue) ============ -->
+  <g>
+    <rect x="30" y="378" width="440" height="160" rx="12" fill="#E6EEF3" stroke="#35607A" stroke-width="1.5"/>
+    <circle cx="58" cy="408" r="13" fill="#35607A"/>
+    <text x="58" y="413" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="80" y="413" font-size="16" font-weight="700" fill="#35607A">Rater 1</text>
+    <text x="80" y="431" font-size="12" fill="#8A7D6E">native speaker &#183; works alone</text>
+
+    <rect x="48" y="442" width="198" height="40" rx="10" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="60" y="458" font-size="12" font-weight="600" fill="#2B2218">Choice</text>
+    <text x="60" y="474" font-size="12" fill="#8A7D6E">A, B or tie</text>
+
+    <rect x="254" y="442" width="198" height="40" rx="10" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="266" y="458" font-size="12" font-weight="600" fill="#2B2218">Strength</text>
+    <text x="266" y="474" font-size="12" fill="#8A7D6E">slight, clear or strong</text>
+
+    <rect x="48" y="490" width="198" height="40" rx="10" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="60" y="506" font-size="12" font-weight="600" fill="#2B2218">Reason codes</text>
+    <text x="60" y="522" font-size="12" fill="#8A7D6E">every one that applies</text>
+
+    <rect x="254" y="490" width="198" height="40" rx="10" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="266" y="506" font-size="12" font-weight="600" fill="#2B2218">Note</text>
+    <text x="266" y="522" font-size="12" fill="#8A7D6E">free text, quotes the phrase</text>
+  </g>
+
+  <!-- ============ RATER 2 (slate blue) ============ -->
+  <g>
+    <rect x="510" y="378" width="440" height="160" rx="12" fill="#E6EEF3" stroke="#35607A" stroke-width="1.5"/>
+    <circle cx="538" cy="408" r="13" fill="#35607A"/>
+    <text x="538" y="413" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="560" y="413" font-size="16" font-weight="700" fill="#35607A">Rater 2</text>
+    <text x="560" y="431" font-size="12" fill="#8A7D6E">a different native speaker &#183; cannot see rater 1's answer</text>
+
+    <rect x="528" y="442" width="198" height="40" rx="10" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="540" y="458" font-size="12" font-weight="600" fill="#2B2218">Choice</text>
+    <text x="540" y="474" font-size="12" fill="#8A7D6E">A, B or tie</text>
+
+    <rect x="734" y="442" width="198" height="40" rx="10" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="746" y="458" font-size="12" font-weight="600" fill="#2B2218">Strength</text>
+    <text x="746" y="474" font-size="12" fill="#8A7D6E">slight, clear or strong</text>
+
+    <rect x="528" y="490" width="198" height="40" rx="10" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="540" y="506" font-size="12" font-weight="600" fill="#2B2218">Reason codes</text>
+    <text x="540" y="522" font-size="12" fill="#8A7D6E">every one that applies</text>
+
+    <rect x="734" y="490" width="198" height="40" rx="10" fill="#FFFFFF" stroke="#35607A" stroke-width="1.5"/>
+    <text x="746" y="506" font-size="12" font-weight="600" fill="#2B2218">Note</text>
+    <text x="746" y="522" font-size="12" fill="#8A7D6E">free text, quotes the phrase</text>
+  </g>
+
+  <line x1="250" y1="538" x2="250" y2="562" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+  <line x1="730" y1="538" x2="730" y2="562" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+
+  <!-- ============ RECORD (deep rust) ============ -->
+  <g>
+    <rect x="30" y="564" width="920" height="116" rx="12" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="48" y="590" font-size="15" font-weight="700" fill="#8A3B25">The record</text>
+
+    <rect x="48" y="602" width="260" height="62" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="60" y="622" font-size="13" font-weight="700" fill="#8A3B25">Both ratings stored</text>
+    <text x="60" y="640" font-size="12" fill="#2B2218">two candidates with their sources,</text>
+    <text x="60" y="656" font-size="12" fill="#2B2218">two ratings, neither one overwritten</text>
+
+    <line x1="308" y1="633" x2="344" y2="633" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+
+    <rect x="346" y="602" width="290" height="62" rx="10" fill="#FFFFFF" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="358" y="622" font-size="13" font-weight="700" fill="#8A3B25">raters_agree: yes / no</text>
+    <text x="358" y="640" font-size="12" fill="#2B2218">yes when both raters made the same choice</text>
+    <text x="358" y="656" font-size="12" fill="#2B2218">no adjudication step</text>
+
+    <line x1="636" y1="633" x2="672" y2="633" stroke="#CBBBA4" stroke-width="2" marker-end="url(#prArrow)"/>
+
+    <rect x="674" y="602" width="258" height="62" rx="10" fill="#8A3B25" stroke="#8A3B25" stroke-width="1.5"/>
+    <text x="686" y="622" font-size="13" font-weight="700" fill="#FFFFFF">Disagreement kept and flagged</text>
+    <text x="686" y="640" font-size="12" fill="#FFFFFF">a split between two speakers</text>
+    <text x="686" y="656" font-size="12" fill="#FFFFFF">is part of the data</text>
+  </g>
+
+  <text x="950" y="704" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Agricultural advisory &#183; Preference data</text>
+</svg>

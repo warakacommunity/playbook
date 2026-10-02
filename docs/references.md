@@ -241,6 +241,13 @@ Somali, Swahili, Tigrinya, Yorùbá, and more). [aclanthology.org/2021.findings-
 ACL 2023. 6,022 English question-answer pairs over 1,555 Visual Genome images, human-translated to Hausa.
 [aclanthology.org/2023.findings-acl.646](https://aclanthology.org/2023.findings-acl.646/)
 
+### Hughes, D. P., & Salathé, M. (2015) {#plantvillage-2015}
+
+*An open access repository of images on plant health to enable the development of mobile disease diagnostics.*
+The PlantVillage dataset: tens of thousands of leaf images photographed on plain backgrounds under controlled
+conditions. Released under CC BY-SA 3.0, so it cannot be relicensed into a CC BY release.
+[arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
+
 ### Jernite, Y., et al. (2022) {#jernite-2022}
 
 *Data Governance in the Age of Large-Scale Data-Driven Language Technology.* Proceedings of the 2022 ACM
@@ -328,6 +335,11 @@ should decide what data represents their communities, retain ownership of it, an
 
 *Processing videos for use with ELAN.* October 2024. Encoding settings for frame-accurate annotation, including a keyframe interval of 25 frames and no B-frames when exact frame positioning is crucial. [mpi.nl](https://www.mpi.nl/tools/elan/docs/Video_encoding_guidelines_ELAN.pdf)
 
+### Mensah, P. K., et al. (2023) {#ccmt-2023}
+
+*CCMT: Dataset for crop pest and disease detection.* Data in Brief. Field images of cashew, cassava, maize
+and tomato pests and diseases collected in Ghana. CC BY 4.0.
+[data.mendeley.com/datasets/bwh3zbpkpv/1](https://data.mendeley.com/datasets/bwh3zbpkpv/1)
 
 ### Meyer, J., et al. (2022) {#bibletts-2022}
 
@@ -355,6 +367,12 @@ inter-annotator agreement above 0.70. [arxiv.org/abs/2302.08956](https://arxiv.o
 *AfriHate: A Multilingual Collection of Hate Speech and Abusive Language Datasets for African Languages.*
 arXiv:2501.08284. Inter-annotator agreement (Randolph's kappa) ranged 0.46–0.81 across languages.
 [arxiv.org/abs/2501.08284](https://arxiv.org/abs/2501.08284)
+
+### Mwebaze, E., et al. (2019) {#icassava-2019}
+
+*iCassava 2019 Fine-Grained Visual Categorization Challenge.* Cassava leaf disease images collected in Uganda
+by the Makerere AI Lab for a Kaggle competition. The competition data is limited to non-commercial use.
+[arxiv.org/abs/1908.02900](https://arxiv.org/abs/1908.02900)
 
 ### Müller, M., et al. (2023) {#muller-2023}
 
@@ -461,6 +479,12 @@ across Bemba, Nyanja, Tonga, and Lozi, plus 525 hours of unlabelled radio audio.
 curated 9+ open African-language datasets through community challenges and short research fellowships.
 [arxiv.org/abs/2104.02516](https://arxiv.org/abs/2104.02516)
 
+### Singh, D., et al. (2020) {#plantdoc-2020}
+
+*PlantDoc: A Dataset for Visual Plant Disease Detection.* CoDS-COMAD 2020. About 2,600 in-the-field images
+across 13 plant species. CC BY 4.0.
+[github.com/pratikkayal/PlantDoc-Dataset](https://github.com/pratikkayal/PlantDoc-Dataset)
+
 ### SSA-COMET (2025) {#ssa-comet-2025}
 
 *SSA-COMET: Do LLMs Outperform Learned Metrics in Evaluating MT for Under-Resourced African Languages?*
@@ -498,6 +522,12 @@ surveillance and unconsented corpus-building. [tehiku.nz](https://tehiku.nz/te-h
 Maintained Fleiss' kappa above 0.82 between peer moderators during validation.
 [arxiv.org/abs/2603.29244](https://arxiv.org/abs/2603.29244)
 
+### Tusubira, J. F., et al. (2022) {#makerere-cassava-2022}
+
+*Makerere University cassava image dataset.* Harvard Dataverse. Cassava field images from Uganda, released
+under CC0 1.0.
+[doi.org/10.7910/DVN/T4RB0B](https://doi.org/10.7910/DVN/T4RB0B)
+
 ### Wanzare, et al. (2024) {#ksl-dataset-2024}
 
 Wanzare, Okutoyi, Kang'ahi & Ayere. *KSL Dataset.* About 14,000 English sentences with Kenyan Sign Language glosses, about 20,000 KSL videos, and 4,000 words transcribed in HamNoSys. [arxiv.org/abs/2410.18295](https://arxiv.org/abs/2410.18295)
@@ -506,6 +536,12 @@ Wanzare, Okutoyi, Kang'ahi & Ayere. *KSL Dataset.* About 14,000 English sentence
 
 *WAXAL: A Multilingual African Speech Dataset* (Google AI, 2026). A large multilingual African speech
 dataset for training ASR and TTS models across many African languages. [marktechpost.com](https://www.marktechpost.com/2026/03/17/google-ai-releases-waxal-a-multilingual-african-speech-dataset-for-training-automatic-speech-recognition-and-text-to-speech-models/)
+
+### Wei, T., et al. (2024) {#plantwild-2024}
+
+*Benchmarking In-the-Wild Multimodal Plant Disease Recognition and A Versatile Baseline.* ACM Multimedia 2024.
+The PlantWild dataset of in-the-wild plant disease images. CC BY-NC-ND 4.0.
+[huggingface.co/datasets/uqtwei2/PlantWild](https://huggingface.co/datasets/uqtwei2/PlantWild)
 
 ### Wilkinson, M. D., et al. (2016) {#wilkinson-2016}
 

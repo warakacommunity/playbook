@@ -3,7 +3,7 @@ title: Speech Layer
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-09-30
+  date: 2026-10-02
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -17,7 +17,7 @@ This is not a standalone speech corpus. Every clip attaches to a pair ID, so the
 
 ## What the data looks like
 
-One speech item is two recordings on one training pair. The farmer question is spontaneous: a speaker looks at the photo, sees the question the collector captured in the field as a cue, and asks in their own words what a farmer would ask. The spoken advisory is read: a different speaker reads the pair's accepted advisory aloud, verbatim. Both carry the pair ID, a 48 kHz original with a 16 kHz mono derivative, a verbatim transcript with timestamps, and speaker metadata that appears only when the speaker consented to share it. The record below is trimmed from the AgroLingua Africa speech-item schema:
+One speech item is two recordings on one pair. The farmer question is spontaneous: a speaker looks at the photo, sees the question the collector captured in the field as a cue, and asks in their own words what a farmer would ask. The spoken advisory is read: a different speaker reads the pair's accepted advisory aloud, verbatim. Both carry the pair ID, a 48 kHz original with a 16 kHz mono derivative, a verbatim transcript with timestamps, and speaker metadata that appears only when the speaker consented to share it. The record below is a trimmed speech-item record:
 
 ```json
 {
@@ -57,11 +57,17 @@ The two speakers on an item are different people, so no one voice is both sides 
 
 Speakers are recruited through regional facilitators, at least three regions per country, with a target of 100 to 200 distinct speakers per language. Balance across age bands (18-29, 30-44, 45-59, 60+), gender, and region is tracked on the dashboard and recruitment is steered every week, because a pool that drifts to young urban men in month one cannot be rebalanced in month five without recording it again.
 
-Recording happens in facilitated sessions: a facilitator brings a group of speakers together, works through the consent script, and runs the AfriAnnotate recorder at 48 kHz with live metering. A cooperative office or a classroom with the door closed and the generator off is enough; outdoors near the field is acceptable under the `robust_asr` profile as long as every word stays intelligible. Speakers are credited USD 0.50 per validated recording in AgroLingua Africa and paid out per session, so a speaker earns USD 10 to 25 for an afternoon.
+Recording happens in facilitated sessions: a facilitator brings a group of speakers together, works through the consent script, and runs the AfriAnnotate recorder at 48 kHz with live metering. A cooperative office or a classroom with the door closed and the generator off is enough; outdoors near the field is acceptable under the `robust_asr` profile as long as every word stays intelligible. Speakers are credited per validated recording and paid out per session.
 
 Prompts follow a one-speaker-one-prompt rule: no advisory is read by the same person twice, and no speaker records enough of a language's items to dominate it. The platform assigns prompts, so facilitators do not keep the rule by hand.
 
-Benchmark pairs get no training speech. The held-out cases have their own speech-input variants, recorded by speakers who never appear in the training pool, so speaker-level disjointness holds at export. See [Benchmark and Preference Data](./benchmark-and-preference.md).
+## On the platform
+
+The screenshot below shows the recording task in AfriAnnotate, here in Hausa. The speaker sees the photo and the advisory to read aloud, and records in the browser or the mobile app. The platform checks the recording automatically when it is saved.
+
+![Speech recording in AfriAnnotate, in Hausa: the speaker sees the photo and the advisory to read aloud and records it with one button](images/afriannotate-speech-recording.jpg)
+
+The photo is a stock image standing in for a field photo.
 
 ## Guidelines that matter
 
@@ -92,20 +98,12 @@ Transcription differs by recording type. For a read advisory the prompt text is 
 
 The vote-and-adjudicate pattern is the one in [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md). One difference: the advisory text already passed its own review, so a fault heard in a read advisory is a reading error, and the fix is a re-record.
 
-## What it costs
-
-The unit is the item: one question plus one spoken advisory, validated and transcribed. AgroLingua Africa prices it at USD 2.00, split as USD 0.50 to each of the two speakers, two validation votes at USD 0.25 each, and USD 0.50 for transcription and QC. Speakers are paid per session on the ledger, credited on validation.
-
-The cost driver is the spontaneous question: the read advisory needs no transcription, while the question needs a human transcript, a 20% second check, and closer validation because there is no prompt to compare against. Facilitator logistics (venue, travel, a session allowance) sit in the field logistics line, so a language with dispersed regions costs more per item in practice than USD 2.00.
-
-AgroLingua Africa records a core of 900 items each in Kiswahili, Amharic and Hausa and 120 in each of the other seven languages (3,540 items, about 40 to 45 hours) in the first tier, then extends to one item per training pair in the second (9,460 further items, about 145 to 165 hours). Start the extension only after the core has passed validation, because every session-level fault found in the core is one you avoid paying for 9,000 more times.
-
 ## Consent and release
 
 Speaker consent is taken at the session, before the first recording, on a separate speaker template.
 
 :::danger[Voice is biometric data]
-A voice recording can identify a person on its own, so the speaker consent form names the recording as biometric data and asks separately whether the voice may be used for training, publication and benchmark use, whether it may be released publicly under CC-BY-4.0, and whether age band, gender and region may be attached. A speaker can say yes to the first and no to the others; a refused metadata share leaves `metadata_shared` false and the fields absent. The 60-day opt-out applies to speech as to everything else. See [Legal and Consent](../legal-consent/index.md) for the framework and [Quality, Consent and Release](./quality-consent-release.md) for this chapter's templates.
+A voice recording can identify a person on its own, so the speaker consent form names the recording as biometric data and asks separately whether the voice may be used for training, evaluation and publication, whether it may be released publicly under CC-BY-4.0, and whether age band, gender and region may be attached. A speaker can say yes to the first and no to the others; a refused metadata share leaves `metadata_shared` false and the fields absent. The 60-day opt-out applies to speech as to everything else. See [Legal and Consent](../legal-consent/index.md) for the framework and [Quality, Consent and Release](./quality-consent-release.md) for this chapter's templates.
 :::
 
 ## Known limitations
@@ -120,5 +118,5 @@ A voice recording can identify a person on its own, so the speaker consent form 
 - [Automatic Speech Recognition (ASR)](../asr/index.md): recording, transcription, and QA practice for African-language speech in general.
 - [Advisory Authoring](./advisory-authoring.md): the text the spoken advisory reads, and why its length band matters for audio.
 - [Quality, Consent and Release](./quality-consent-release.md): the consent templates, the opt-out window, and how speaker metadata reaches the release.
-- [Advisory annotation guidelines](../templates/advisory-annotation-guidelines.md): the speaker and validator sheets.
+- [Advisory annotation guidelines](../templates/advisory-annotation-guidelines.md): the speaker prompt card.
 - [Kallaama (Gauthier et al., 2024)](../references.md#kallaama-2024): spontaneous agricultural speech in Wolof, Pulaar and Sereer, the nearest published relative of the farmer-question recordings.

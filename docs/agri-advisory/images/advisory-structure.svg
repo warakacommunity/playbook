@@ -118,7 +118,6 @@
 
     <text x="518" y="532" font-size="12" fill="#2E7D5B">Target: 90% accepted without a rewrite request by round two,</text>
     <text x="518" y="548" font-size="12" fill="#2E7D5B">reported every Monday per language.</text>
-    <text x="518" y="566" font-size="12" font-style="italic" fill="#8A7D6E">USD 1.50 draft + one rewrite &#183; USD 0.50 linguistic review</text>
   </g>
 
   <text x="950" y="586" font-size="12" fill="#8A7D6E" text-anchor="end">AfriPlaybook &#183; Agricultural advisory &#183; Advisory authoring</text>

@@ -160,7 +160,7 @@ const sidebars = {
         'agri-advisory/diagnosis-labelling',
         'agri-advisory/advisory-authoring',
         'agri-advisory/speech-layer',
-        'agri-advisory/benchmark-and-preference',
+        'agri-advisory/preference-data',
         'agri-advisory/quality-consent-release',
         templateDoc('advisory-annotation-guidelines', 'Advisory annotation guidelines', 'agri-advisory'),
       ]),

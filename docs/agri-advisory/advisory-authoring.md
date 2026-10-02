@@ -3,7 +3,7 @@ title: Advisory Authoring
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-09-30
+  date: 2026-10-02
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -17,7 +17,7 @@ The advisory attaches to a diagnosed image on the same pair ID. The diagnosis co
 
 ## What the data looks like
 
-Each advisory is a short text in the target language, stored on the pair record with the author's ID, a word count, a flag for the safety line, and a version number that says whether it was accepted as drafted or after a rewrite. The record below is trimmed from the AgroLingua Africa pair schema:
+Each advisory is a short text in the target language, stored on the pair record with the author's ID, a word count, a flag for the safety line, and a version number that says whether it was accepted as drafted or after a rewrite. The record below is a trimmed pair record:
 
 ```json
 {
@@ -55,9 +55,17 @@ What makes it usable: the pest has its local name, the product is one sold in Ni
 
 Authors are native speakers who can write the way an extension officer talks to a farmer: extension agents, agricultural teachers, radio farm-programme presenters. Fluency alone does not qualify an author. One who writes in a newspaper register produces text a farmer would not say and a model should not learn.
 
-AgroLingua Africa runs 6 to 10 authors per language, with 3 to 5 linguistic reviewers and 1 to 2 agronomists behind them. Authors work in the [AfriAnnotate](https://afriannotate.waraka.org) text-authoring template with the image, the agronomist's diagnosis, the national extension recommendation, and the collector's captured farmer question on one screen. Before the first batch each author is briefed on the vernacular term list, the style guide, and the five-part structure, with the language lead's worked examples for the common classes.
+Plan on 6 to 10 authors per language, with 3 to 5 linguistic reviewers and 1 to 2 agronomists behind them. Authors work in the [AfriAnnotate](https://afriannotate.waraka.org) text-authoring template with the image, the agronomist's diagnosis, the national extension recommendation, and the collector's captured farmer question on one screen. Before the first batch each author is briefed on the vernacular term list, the style guide, and the five-part structure, with the language lead's worked examples for the common classes.
 
 Authors write in the language from the start. Nothing is translated from English. The diagnosis and the recommendation reach the author as facts; the job is to say those facts to a farmer in that district.
+
+## On the platform
+
+The screenshot below shows the authoring task in AfriAnnotate. The author sees the photo, the diagnosis and the extension recommendation on the left, and writes the advisory on the right in its five parts, each in its own box with a character count.
+
+![Advisory authoring in AfriAnnotate: the author sees the photo, the diagnosis and the extension recommendation and writes the advisory in five parts](images/afriannotate-advisory-authoring.jpg)
+
+The photo is a stock image standing in for a field photo. The sample advisory is in English for the reader; in a project the author writes in their own language.
 
 ## Guidelines that matter
 
@@ -80,13 +88,7 @@ Expect most rewrite requests to name one of four faults: an English sentence str
 
 Every advisory passes two independent reviews before it counts, agronomist first. The agronomist checks that the advisory follows from the diagnosis, matches the national extension recommendation, and is safe where it names a chemical. A native-speaker linguistic reviewer, never the author, then checks register, vernacular terms, and whether a farmer would understand it. Either reviewer can return the draft with a rewrite request; a returned draft gets at most one rewrite before it goes to the language lead for adjudication. The general pattern of review and logged adjudication is in [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md); this page only adds the two domain checks.
 
-The number to track is advisory agreement: the share of advisories the linguistic reviewer accepts without a rewrite request. AgroLingua Africa targets 90% by round two, reported every Monday per language. A language still below that after two rounds has a briefing or recruitment problem: re-brief the authors with the specific rewrite reasons, then replace anyone still returning calques. The safety line is also checked mechanically, by an export check that refuses any accepted advisory naming a listed product with `safety_line_present` false.
-
-## What it costs
-
-The unit is the advisory. AgroLingua Africa pays USD 1.50 per accepted advisory, covering the draft plus one rewrite, and USD 0.50 for native-speaker linguistic review, so an accepted advisory costs USD 2.00 in author and reviewer fees. The agronomist's faithfulness review sits on the agronomist day rate (USD 40 per day at about 100 actions) shared with labelling. Credit lands on acceptance only, so a rejected draft earns nothing.
-
-The cost driver is the rewrite rate. At a flat USD 1.50 a rewrite costs the author time rather than the project money, but a language with a high rewrite rate is also running its reviewers and language lead twice as hard. Pricing per advisory rather than per word matters for the same reason: per-word rates reward padding, and padded advisories come back from review.
+The number to track is advisory agreement: the share of advisories the linguistic reviewer accepts without a rewrite request. The target is 90% by round two, reported every Monday per language. A language still below that after two rounds has a briefing or recruitment problem: re-brief the authors with the specific rewrite reasons, then replace anyone still returning calques. The safety line is also checked mechanically, by an export check that refuses any accepted advisory naming a listed product with `safety_line_present` false.
 
 ## Known limitations
 
@@ -98,6 +100,5 @@ The cost driver is the rewrite rate. At a flat USD 1.50 a rewrite costs the auth
 ## Further reading
 
 - [Diagnosis Labelling](./diagnosis-labelling.md): where the label and confidence that brief the author come from.
-- [Benchmark and Preference Data](./benchmark-and-preference.md): how author drafts and reviewer rewrites become A/B preference pairs.
 - [Advisory annotation guidelines](../templates/advisory-annotation-guidelines.md): the author and reviewer sheets, including the five-part checklist.
 - [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md): the general review and adjudication pattern this page assumes.
