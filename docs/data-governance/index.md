@@ -28,6 +28,21 @@ The people whose language it is should have the final say over how their data is
 
 Two frameworks should guide a dataset's design, and they answer different questions. FAIR asks whether data is Findable, Accessible, Interoperable, and Reusable, and it is now a baseline expectation for research data ([Wilkinson et al., 2016](../references.md#wilkinson-2016)). FAIR says nothing about power or justice, though. Data can be perfectly FAIR and still be taken from a community that gets nothing back. CARE was written to fill that gap. Its four commitments, Collective benefit, Authority to control, Responsibility, and Ethics, assert the right of Indigenous and local communities to govern data about them ([Carroll et al., 2020](../references.md#carroll-2020)). Use both. FAIR makes the data usable; CARE makes it just. FAIR without CARE is well-documented extraction.
 
+> The 'CARE Principles for Indigenous Data Governance' (Collective Benefit, Authority to Control, Responsibility, and Ethics) empower Indigenous Peoples by shifting the focus from regulated consultation to value-based relationships that position data approaches within Indigenous cultures and knowledge systems to the benefit of Indigenous Peoples. This shift ultimately promotes equitable participation in processes of data reuse, which will result in more equitable outcomes.
+>
+> [Carroll et al. (2020)](../references.md#carroll-2020)
+
+CARE was written for Indigenous Peoples' data, and it asks three questions of any dataset: whom the data serves, who benefits from it, and who has authority over its use ([Imperial College London](https://www.imperial.ac.uk/research-and-innovation/support-for-staff/scholarly-communication/research-data-management/care-data-principles/) gives a short summary). An African-language project can ask the same questions on behalf of the community whose language it records. Each principle maps to a decision in this chapter:
+
+| Principle | What it asks | In your project |
+| --- | --- | --- |
+| **Collective benefit** | The data should benefit the community it comes from, through development, better governance, and fairer outcomes. | Agree what returns to the speakers before you collect. See [Benefit-sharing and credit](#benefit-sharing-and-credit). |
+| **Authority to control** | The community's rights and interests in its data are recognised, and the community governs how the data is used. | Write down who decides, and keep that authority with the community. See [Governance models](#governance-models). |
+| **Responsibility** | People who work with the data build respectful relationships, grow local skills, and respect the community's language and worldview. | Hire and train locally, and tell the community how its data is being used. |
+| **Ethics** | The community's rights and wellbeing come first at every stage of the data's life, including uses nobody has planned yet. | Review possible harms before collection and again before each release. See [A lightweight ethics review](#a-lightweight-ethics-review). |
+
+A community can also state its own conditions on a dataset. [Local Contexts](https://localcontexts.org/about/) provides Traditional Knowledge and Biocultural labels for this purpose, which travel with the data and tell a reuser what the community permits.
+
 The findability half of FAIR has a practical home in African NLP. Lanfrica's African AI Atlas tracks datasets, models, and papers that would otherwise sit scattered across repositories, PDFs, and dead project pages, so that work already done can be found and reused instead of rebuilt from scratch ([Lanfrica](../references.md#lanfrica)).
 
 ## Consent and rights
