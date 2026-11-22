@@ -2,7 +2,7 @@
 title: Data Governance
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-22
   author: Idris Abdulmumin
 ---
 
@@ -30,7 +30,7 @@ Two frameworks should guide a dataset's design, and they answer different questi
 
 > The 'CARE Principles for Indigenous Data Governance' (Collective Benefit, Authority to Control, Responsibility, and Ethics) empower Indigenous Peoples by shifting the focus from regulated consultation to value-based relationships that position data approaches within Indigenous cultures and knowledge systems to the benefit of Indigenous Peoples. This shift ultimately promotes equitable participation in processes of data reuse, which will result in more equitable outcomes.
 >
-> [Carroll et al. (2020)](../references.md#carroll-2020)
+> ([Carroll et al., 2020](../references.md#carroll-2020))
 
 CARE was written for Indigenous Peoples' data, and it asks three questions of any dataset: whom the data serves, who benefits from it, and who has authority over its use ([Imperial College London](https://www.imperial.ac.uk/research-and-innovation/support-for-staff/scholarly-communication/research-data-management/care-data-principles/) gives a short summary). An African-language project can ask the same questions on behalf of the community whose language it records. Each principle maps to a decision in this chapter:
 

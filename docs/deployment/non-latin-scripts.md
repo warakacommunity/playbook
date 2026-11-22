@@ -4,7 +4,7 @@ title: Non-Latin scripts in real UIs
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Non-Latin scripts in real UIs
@@ -23,7 +23,7 @@ Practical African-language deployment usually intersects one of the following. E
 - **Tifinagh (Neo-Tifinagh)**: Berber / Tamazight languages, including Kabyle and Tamasheq. Unicode block U+2D30–U+2D7F. Left-to-right. Font support is limited; distributed by Moroccan and Algerian standardisation bodies.
 - **Vai**: Vai language of Liberia and Sierra Leone. Unicode block U+A500–U+A63F. Font support is thin; largely a research and community-preservation script.
 - **Osmanya, Kaddare, Borama**: Somali script systems developed at various times, rarely used today; mentioned here for completeness.
-- **Latin with special characters**: Yoruba (tone-mark diacritics), Igbo (dots below), Hausa (hooked ɓ, ɗ, ƙ, ƴ), Fon (ɔ, ɛ, ɖ), Ewe (ɖ, ƒ), and many others. Not "non-Latin" strictly, but load-bearing enough that a UI that mangles the diacritics is unusable for exactly the same reasons.
+- **Latin with special characters**: Yorùbá (tone-mark diacritics), Igbo (dots below), Hausa (hooked ɓ, ɗ, ƙ, ƴ), Fon (ɔ, ɛ, ɖ), Ewe (ɖ, ƒ), and many others. Not "non-Latin" strictly, but load-bearing enough that a UI that mangles the diacritics is unusable for exactly the same reasons.
 
 ## Unicode support: a starting inventory
 

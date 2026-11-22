@@ -3,16 +3,18 @@ sidebar_position: 99
 sidebar_label: References
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-22
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # References
 
 Works cited across the AfriPlaybook, in one place. Every entry has a stable anchor, so an in-text
-citation links straight to its exact position here. To add a reference, give its heading an
-`author-year` id (`### Author (year) {#author-year}`) and cite it from the text as
-`[Author (year)](../references.md#author-year)`.
+citation links straight to its exact position here. To add a reference, give its heading the author
+and year with an id (`### Surname, I., et al. (year) {#surname-year}`; a dataset or benchmark name such as
+`{#afriqa-2023}` is also fine) and cite it from the text as `([Surname et al., year](../references.md#surname-year))`.
+Entries are in alphabetical order by heading.
+
 
 ### Abdulmumin, I., et al. (2026) {#abdulmumin-2026}
 
@@ -21,11 +23,20 @@ sentiment dataset (3,565 tweets, three native-speaker annotators across eight ba
 was κ = 0.76, but items labelled within a minute of each other reached κ = 0.98 while items labelled more
 than a day apart fell to κ = 0.65, revealing annotator drift over time. [arxiv.org/abs/2605.27239](https://arxiv.org/abs/2605.27239)
 
-### Adelani, D. I., et al. (2022) {#adelani-2022}
+### Adebara, I., et al. (2023) {#serengeti-2023}
+
+*SERENGETI: Massively Multilingual Language Models for Africa.* Findings of the Association for Computational Linguistics: ACL 2023, pp. 1498–1537. Pretrained language models covering 517 African languages and language varieties. [aclanthology.org/2023.findings-acl.97](https://aclanthology.org/2023.findings-acl.97/)
+
+### Adelani, D. I., et al. (2021) {#adelani-2021}
+
+*MasakhaNER: Named Entity Recognition for African Languages.* Transactions of the Association for Computational Linguistics, 9, 1116–1131. The first large, publicly available NER dataset (PER, ORG, LOC, DATE) for ten African languages, annotated by volunteer native speakers from the Masakhane community. [aclanthology.org/2021.tacl-1.66](https://aclanthology.org/2021.tacl-1.66/)
+
+### Adelani, D. I., et al. (2022a) {#adelani-2022}
 
 *MasakhaNER 2.0: Africa-centric Transfer Learning for Named Entity Recognition.* Proceedings of
 EMNLP 2022. A human-annotated NER dataset spanning 20 African languages, built by the Masakhane
 community. [aclanthology.org/2022.emnlp-main.298](https://aclanthology.org/2022.emnlp-main.298/)
+
 
 ### Adelani, D. I., et al. (2022b) {#mafand-2022}
 
@@ -41,7 +52,7 @@ reasoning), and AfriMMLU (knowledge QA). [arxiv.org/abs/2406.03368](https://arxi
 
 ### African Next Voices (2025) {#african-next-voices}
 
-*African Next Voices.* A Gates Foundation–funded initiative (about US$2.2 million) that recorded roughly
+*African Next Voices.* A Gates Foundation–funded initiative (about US\$2.2 million) that recorded roughly
 9,000 hours of everyday speech in 18 African languages across Kenya, Nigeria, and South Africa, collected
 by local centres such as the Maseno Centre for Applied AI and Data Science Nigeria. One of the largest
 African voice datasets of its kind. [up.ac.za/afridsai](https://www.up.ac.za/afridsai/news/african-next-voices-featured-nature-reshaping-speech-technology-africa)
@@ -50,7 +61,7 @@ African voice datasets of its kind. [up.ac.za/afridsai](https://www.up.ac.za/afr
 
 *AfriCaption: Establishing a New Paradigm for Image Captioning in African Languages.* arXiv:2510.17405.
 Native (non-translated) image captions across linguistically diverse African languages (Igbo, Hausa,
-Yoruba, Ewe, Luganda, Kinyarwanda, and more). [arxiv.org/abs/2510.17405](https://arxiv.org/abs/2510.17405)
+Yorùbá, Ewe, Luganda, Kinyarwanda, and more). [arxiv.org/abs/2510.17405](https://arxiv.org/abs/2510.17405)
 
 ### AfriDoc-MT (2025) {#afridocmt-2025}
 
@@ -68,13 +79,6 @@ terminology where none existed. [arxiv.org/abs/2605.29741](https://arxiv.org/abs
 
 Gueuwou, S., Takyi, K., Müller, M., Nyarko, M. S., Adade, R., & Owusuaa Mensah Gyening, R.-M. *AfriSign: African sign languages machine translation.* Discover Artificial Intelligence 5, article 6, 2025. Sign-language renderings of Bible verses, from the Jehovah's Witnesses website, paired with English text, for Ghanaian, Nigerian, Kenyan, Zambian, Zimbabwean and South African Sign Language. [doi.org/10.1007/s44163-025-00227-7](https://link.springer.com/article/10.1007/s44163-025-00227-7)
 
-
-### AfroBench {#afrobench}
-
-*AfroBench: How Good are Large Language Models on African Languages?* McGill-NLP; arXiv:2311.07978. A
-large-scale LLM benchmark spanning 64 African languages, 15 tasks, and 22 datasets, showing a persistent
-gap between English and African languages. [arxiv.org/abs/2311.07978](https://arxiv.org/abs/2311.07978)
-
 ### Ajami HTR (2025) {#ajami-htr-2025}
 
 *A Handwritten Text Recognition Dataset for Ajami Manuscripts in Fulfulde and Hausa.* 2025. Manually
@@ -88,11 +92,34 @@ arXiv:2403.19546. A JSON-LD vocabulary built on schema.org that describes a data
 structure, and ML semantics in one document, so tools can find and load it without custom code. Emitted
 automatically by Hugging Face, Kaggle, and OpenML. [arxiv.org/abs/2403.19546](https://arxiv.org/abs/2403.19546)
 
+### Alabi, J. O., et al. (2020) {#alabi-2020}
+
+*Massive vs. Curated Embeddings for Low-Resourced Languages: the Case of Yorùbá and Twi.* Proceedings of LREC 2020, pp. 2754–2762. Compares web-scale and curated word embeddings for Yorùbá and Twi, and annotates the Global Voices corpus for Yorùbá with named entities. [aclanthology.org/2020.lrec-1.335](https://aclanthology.org/2020.lrec-1.335/)
+
+
 ### Alabi, J. O., et al. (2025) {#afrihubert-2025}
 
 *AfriHuBERT: A self-supervised speech representation model for African languages.* Interspeech 2025;
 arXiv:2409.20201. Pretrains on raw African-language audio so that little labelled data goes further.
 [arxiv.org/abs/2409.20201](https://arxiv.org/abs/2409.20201)
+
+### Anikina, T., et al. (2025) {#llm-datagen-2025}
+
+*A Rigorous Evaluation of LLM Data Generation Strategies for Low-Resource Languages.* Anikina, T., Cegin, J., Simko, J., &
+Ostermann, S. Proceedings of EMNLP 2025 (Main); arXiv:2506.12158. Across 11 languages (Swahili the only African one),
+combining target-language demonstrations with LLM self-revision brings downstream performance to within about 5 F1 points
+of real data in some settings, but the gap widens for lower-resource languages and is largest without target-language
+examples. [arxiv.org/abs/2506.12158](https://arxiv.org/abs/2506.12158)
+
+
+### Ardila, R., et al. (2020) {#ardila-2020}
+
+*Common Voice: A Massively-Multilingual Speech Corpus.* LREC 2020. Describes Mozilla's crowdsourced, openly licensed multilingual read-speech corpus. [arxiv.org/abs/1912.06670](https://arxiv.org/abs/1912.06670)
+
+### Bandarkar, L., et al. (2024) {#belebele-2024}
+
+*The Belebele Benchmark: a Parallel Reading Comprehension Dataset in 122 Language Variants.* Proceedings of ACL 2024 (Volume 1: Long Papers), pp. 749–775. A fully parallel multiple-choice reading comprehension benchmark built on FLORES-200 passages, covering many African languages. [aclanthology.org/2024.acl-long.44](https://aclanthology.org/2024.acl-long.44/)
+
 
 ### Belay, T. D., et al. (2025) {#belay-2025}
 
@@ -121,6 +148,15 @@ communities whose languages are at stake rather than treating them as data sourc
 ### Blench, R., & Warren (2003) {#blench-warren-2003}
 
 *An unreported African Sign Language for the Deaf among the Bura in Northeast Nigeria.* Describes Bura Sign Language, a village sign language in north-eastern Nigeria.
+
+### Bredin, H. (2017) {#bredin-2017}
+
+*pyannote.metrics: A Toolkit for Reproducible Evaluation, Diagnostic, and Error Analysis of Speaker Diarization Systems.* Interspeech 2017, pp. 3587–3591. Open-source Python library and command-line tool for computing DER and related diarization metrics, with error-analysis features. [isca-archive.org/interspeech_2017/bredin17_interspeech.html](https://www.isca-archive.org/interspeech_2017/bredin17_interspeech.html)
+
+
+### Bredin, H., et al. (2020) {#bredin-2020}
+
+*pyannote.audio: Neural Building Blocks for Speaker Diarization.* ICASSP 2020. Open-source toolkit providing trainable and pretrained neural components for voice activity detection, speaker change detection, speaker embedding and diarization. [arxiv.org/abs/1911.01255](https://arxiv.org/abs/1911.01255)
 
 ### BRIGHTER / AfriEmo (2025) {#brighter-2025}
 
@@ -151,14 +187,29 @@ benefit, Authority to control, Responsibility, Ethics: the community's right to 
 
 A word-level Central African Sign Language dataset: 60 words, 5,889 videos from 19 signers. Data in Brief, 2025. [doi.org/10.1016/j.dib.2025.111790](https://doi.org/10.1016/j.dib.2025.111790)
 
+### Chen, M., et al. (2023) {#blaser-2023}
+
+*BLASER: A Text-Free Speech-to-Speech Translation Evaluation Metric.* Proceedings of ACL 2023. A metric that scores speech-to-speech translation directly from audio embeddings, without an ASR step. [aclanthology.org/2023.acl-long.504](https://aclanthology.org/2023.acl-long.504)
+
+### Clark, J. H., et al. (2020) {#tydiqa-2020}
+
+*TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages.* Transactions of the Association for Computational Linguistics, 8. A QA benchmark in 11 typologically diverse languages, including Swahili, written by people who wanted an answer but did not yet know it, and collected without translation. [aclanthology.org/2020.tacl-1.30](https://aclanthology.org/2020.tacl-1.30/)
+
+### Conneau, A., et al. (2022) {#fleurs-2022}
+
+*FLEURS: Few-shot Learning Evaluation of Universal Representations of Speech.* IEEE Spoken Language Technology Workshop (SLT) 2022. An n-way parallel read-speech benchmark in 102 languages, including many African languages, with about 12 hours per language. [arxiv.org/abs/2205.12446](https://arxiv.org/abs/2205.12446)
+
 ### Cormier, K., et al. (2017) {#bsl-corpus-2017}
 
 Cormier, K., Fenlon, J., Gulamani, S., & Smith, S. *BSL Corpus Annotation Conventions*, version 3.0. Deafness, Cognition and Language Research Centre, University College London, March 2017. The basic template (right-hand and left-hand ID-gloss, free translation), the 49-tier working template, sign boundaries and the two-frame gap between annotations. [bslcorpusproject.org](https://bslcorpusproject.org/wp-content/uploads/BSLCorpus_AnnotationConventions_v3.0_-March2017.pdf)
 
-
 ### Crasborn, O., et al. (2020) {#corpus-ngt-2020}
 
 Crasborn, O., Zwitserlood, I., van der Kooij, E., Bank, R., & Ormel, E. *Annotation Conventions for the Corpus NGT*, version 4. Radboud University Nijmegen, July 2020. One gloss tier per signer per hand (GlossL S1, GlossR S1, GlossL S2, GlossR S2), with ID-glosses from Global Signbank linked through an external controlled vocabulary. [hdl.handle.net/2066/319186](https://hdl.handle.net/2066/319186)
+
+### de Marneffe, M.-C., Manning, C. D., Nivre, J., & Zeman, D. (2021) {#ud-2021}
+
+*Universal Dependencies.* Computational Linguistics, 47(2), 255–308. Describes the UD framework for cross-linguistically consistent morphosyntactic annotation, used for treebanks in more than 100 languages. [aclanthology.org/2021.cl-2.11](https://aclanthology.org/2021.cl-2.11/)
 
 
 ### Deep Learning Indaba {#deep-learning-indaba}
@@ -167,16 +218,29 @@ Crasborn, O., Zwitserlood, I., van der Kooij, E., Bank, R., & Ormel, E. *Annotat
 2017, with a mission for Africans to be owners and shapers of AI. Its local IndabaX events grew from 13
 in 2018 to 47 countries by 2024–2025, aiming for every African country by 2027. [deeplearningindaba.com](https://deeplearningindaba.com/)
 
+### Dione, C. M. B., et al. (2023) {#masakhapos-2023}
+
+*MasakhaPOS: Part-of-Speech Tagging for Typologically Diverse African languages.* Proceedings of ACL 2023 (Volume 1: Long Papers), pp. 10883–10900. A UPOS-annotated news dataset of about 1,500 sentences in each of 20 African languages, built by Masakhane, with an analysis of tokenisation challenges and cross-lingual transfer. [aclanthology.org/2023.acl-long.609](https://aclanthology.org/2023.acl-long.609/)
+
+
 ### Duarte, A., et al. (2021) {#how2sign-2021}
 
 *How2Sign: A Large-scale Multimodal Dataset for Continuous American Sign Language.* CVPR 2021. Reports that gloss annotation took on average one hour per 90 seconds of video. [arxiv.org/abs/2008.08143](https://arxiv.org/abs/2008.08143)
 
-### Emezue, C. C., et al. (2025) {#emezue-2025}
+### Eiselen, R., & Puttkammer, M. (2014) {#eiselen-puttkammer-2014}
 
-*The NaijaVoices Dataset: Cultivating Large-Scale, High-Quality, Culturally-Rich Speech Data for African
-Languages.* Interspeech 2025 / arXiv:2505.20564. An 1,800-hour Igbo, Hausa, and Yorùbá speech corpus
-built from 5,000+ voice donors via trained community facilitators and a reciprocal "data farming" model.
-[arxiv.org/abs/2505.20564](https://arxiv.org/abs/2505.20564)
+*Developing Text Resources for Ten South African Languages.* Proceedings of LREC 2014, pp. 3698–3703. The NCHLT text project: monolingual corpora, a subset annotated on token, morphological and morphosyntactic layers, and tokenisers, lemmatisers and POS taggers for ten languages. [aclanthology.org/L14-1106](https://aclanthology.org/L14-1106/)
+
+
+### Eiselen, R. (2016a) {#eiselen-2016-chunking}
+
+*South African Language Resources: Phrase Chunking.* Proceedings of LREC 2016, pp. 689–693. Annotation protocols, phrase-chunked data and CRF chunkers for ten South African languages, finding that disjunctively written languages do better with limited data. [aclanthology.org/L16-1109](https://aclanthology.org/L16-1109/)
+
+
+### Eiselen, R. (2016b) {#eiselen-2016-ner}
+
+*Government Domain Named Entity Recognition for South African Languages.* Proceedings of LREC 2016, pp. 3344–3348. Annotation protocols, government-domain NER data and CRF recognisers for ten South African languages. [aclanthology.org/L16-1533](https://aclanthology.org/L16-1533/)
+
 
 ### Emezue, C. C., & Dossou, B. F. P. (2020) {#emezue-dossou-2020}
 
@@ -184,6 +248,13 @@ built from 5,000+ voice donors via trained community facilitators and a reciproc
 arXiv:2008.07302. The paper behind Lanfrica: a community-maintained index of research, benchmarks, and
 datasets on African languages, built because no central database let researchers find existing work or
 compare against it. [arxiv.org/abs/2008.07302](https://arxiv.org/abs/2008.07302)
+
+### Emezue, C. C., et al. (2025) {#emezue-2025}
+
+*The NaijaVoices Dataset: Cultivating Large-Scale, High-Quality, Culturally-Rich Speech Data for African
+Languages.* Interspeech 2025 / arXiv:2505.20564. An 1,800-hour Igbo, Hausa, and Yorùbá speech corpus
+built from 5,000+ voice donors via trained community facilitators and a reciprocal "data farming" model.
+[arxiv.org/abs/2505.20564](https://arxiv.org/abs/2505.20564)
 
 ### Esethu Framework (2025) {#esethu-2025}
 
@@ -205,6 +276,15 @@ Languages.* arXiv:2502.15916. A community-centric dataset-governance framework a
 *Fidel: a large-scale sentence-level Amharic OCR dataset.* IJDAR, 2025. 40,000 handwritten and 28,000
 typed line images from 411 native writers, spanning handwritten, typed, and synthetic Ge'ez-script text.
 [doi.org/10.1007/s10032-026-00593-7](https://link.springer.com/article/10.1007/s10032-026-00593-7)
+
+### FitzGerald, J., et al. (2023) {#massive-2023}
+
+*MASSIVE: A 1M-Example Multilingual Natural Language Understanding Dataset with 51 Typologically-Diverse Languages.* Proceedings of ACL 2023 (Volume 1: Long Papers), pp. 4277–4302. Virtual-assistant utterances localised from English SLURP into 50 languages, including Afrikaans, Amharic and Kiswahili, with 60 intents and 55 slot types. [aclanthology.org/2023.acl-long.235](https://aclanthology.org/2023.acl-long.235/)
+
+
+### Fort, K., & Sagot, B. (2010) {#fort-sagot-2010}
+
+*Influence of Pre-annotation on POS-tagged Corpus Development.* Proceedings of the Fourth Linguistic Annotation Workshop (LAW IV), ACL, pp. 56–63. A controlled study showing that automatic pre-annotation speeds annotators up and can raise quality, but also biases them towards the pre-annotation. [aclanthology.org/W10-1807](https://aclanthology.org/W10-1807/)
 
 ### Gauthier, E., et al. (2024) {#kallaama-2024}
 
@@ -255,10 +335,13 @@ Conference on Fairness, Accountability, and Transparency (FAccT '22). Proposes a
 structure for language data, developed for the BigScience project, that assigns rights and duties to data
 custodians, hosts, and users across the whole life of a dataset. [doi.org/10.1145/3531146.3534637](https://dl.acm.org/doi/10.1145/3531146.3534637)
 
+### Jia, Y., et al. (2022) {#cvss-2022}
+
+*CVSS Corpus and Massively Multilingual Speech-to-Speech Translation.* Proceedings of LREC 2022. A speech-to-speech translation corpus from 21 languages into English, built from Common Voice and CoVoST 2 with TTS-synthesised targets. [arxiv.org/abs/2201.03713](https://arxiv.org/abs/2201.03713)
+
 ### Johnston, T. (2010) {#johnston-2010}
 
 *From archive to corpus: Transcription and annotation in the creation of signed language corpora.* International Journal of Corpus Linguistics 15(1), 106-131. Why a signed-language corpus needs ID-glosses tied to a lexicon, and how annotation on parallel tiers turns an archive of video into a corpus. [doi.org/10.1075/ijcl.15.1.05joh](https://doi.org/10.1075/ijcl.15.1.05joh)
-
 
 ### Johnston, T. (2013) {#johnston-2013}
 
@@ -297,15 +380,14 @@ PDFs, and dead project pages, and also creates bespoke datasets through "data fa
 datasets carry missing or unclear licences, which leaves them legally unusable for reusers.
 [lanfrica.com/blog](https://lanfrica.com/blog/licensing-as-a-barrier-to-the-usability-of-african-language-datasets/)
 
+### Larson, S., et al. (2019) {#clinc150-2019}
+
+*An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction.* Proceedings of EMNLP-IJCNLP 2019, pp. 1311–1316. The CLINC150 dataset of 150 intents plus out-of-scope queries, showing that classifiers struggle to reject out-of-scope input. [aclanthology.org/D19-1131](https://aclanthology.org/D19-1131/)
+
+
 ### Li, D., et al. (2020) {#wlasl-2020}
 
 Li, D., Rodriguez Opazo, C., Yu, X., & Li, H. *Word-level Deep Sign Language Recognition from Video: A New Large-scale Dataset and Methods Comparison.* WACV 2020. WLASL: 2,000 American Sign Language words, 21,083 videos, 119 signers. [arxiv.org/abs/1910.11006](https://arxiv.org/abs/1910.11006)
-
-### LLM Data Generation (2025) {#llm-datagen-2025}
-
-*A Rigorous Evaluation of LLM Data Generation Strategies for Low-Resource Languages.* arXiv:2506.12158.
-Finds careful generation (real demonstrations plus self-revision) can approach real data, while naive
-synthetic generation often fails for the lowest-resource languages. [arxiv.org/abs/2506.12158](https://arxiv.org/abs/2506.12158)
 
 ### Luccioni, A. S., et al. (2022) {#luccioni-2022}
 
@@ -335,11 +417,19 @@ should decide what data represents their communities, retain ownership of it, an
 
 *Processing videos for use with ELAN.* October 2024. Encoding settings for frame-accurate annotation, including a keyframe interval of 25 frames and no B-frames when exact frame positioning is crucial. [mpi.nl](https://www.mpi.nl/tools/elan/docs/Video_encoding_guidelines_ELAN.pdf)
 
+### Maynez, J., et al. (2020) {#maynez-2020}
+
+*On Faithfulness and Factuality in Abstractive Summarization.* ACL 2020. A human evaluation finding that all the neural abstractive summarizers tested produce a substantial share of content not supported by the source document, and that textual-entailment measures track faithfulness better than standard metrics. [aclanthology.org/2020.acl-main.173](https://aclanthology.org/2020.acl-main.173/)
+
 ### Mensah, P. K., et al. (2023) {#ccmt-2023}
 
 *CCMT: Dataset for crop pest and disease detection.* Data in Brief. Field images of cashew, cassava, maize
 and tomato pests and diseases collected in Ghana. CC BY 4.0.
 [data.mendeley.com/datasets/bwh3zbpkpv/1](https://data.mendeley.com/datasets/bwh3zbpkpv/1)
+
+### Mesaros, A., et al. (2016) {#mesaros-2016}
+
+*Metrics for Polyphonic Sound Event Detection.* Applied Sciences 6(6):162. Defines segment-based and event-based metrics for sound event detection and releases the open-source sed_eval toolbox. [mdpi.com/2076-3417/6/6/162](https://www.mdpi.com/2076-3417/6/6/162)
 
 ### Meyer, J., et al. (2022) {#bibletts-2022}
 
@@ -368,15 +458,15 @@ inter-annotator agreement above 0.70. [arxiv.org/abs/2302.08956](https://arxiv.o
 arXiv:2501.08284. Inter-annotator agreement (Randolph's kappa) ranged 0.46–0.81 across languages.
 [arxiv.org/abs/2501.08284](https://arxiv.org/abs/2501.08284)
 
+### Müller, M., et al. (2023) {#muller-2023}
+
+*Considerations for meaningful sign language machine translation based on glosses.* ACL 2023. Notes that BLEU was never validated for sign-language translation, suggests chrF, and examines what gloss-based translation can and cannot show. [arxiv.org/abs/2211.15464](https://arxiv.org/abs/2211.15464)
+
 ### Mwebaze, E., et al. (2019) {#icassava-2019}
 
 *iCassava 2019 Fine-Grained Visual Categorization Challenge.* Cassava leaf disease images collected in Uganda
 by the Makerere AI Lab for a Kaggle competition. The competition data is limited to non-commercial use.
 [arxiv.org/abs/1908.02900](https://arxiv.org/abs/1908.02900)
-
-### Müller, M., et al. (2023) {#muller-2023}
-
-*Considerations for meaningful sign language machine translation based on glosses.* ACL 2023. Notes that BLEU was never validated for sign-language translation, suggests chrF, and examines what gloss-based translation can and cannot show. [arxiv.org/abs/2211.15464](https://arxiv.org/abs/2211.15464)
 
 ### Nekoto, W., et al. (2020) {#nekoto-2020}
 
@@ -414,11 +504,27 @@ users elsewhere. [datasciencelawlab.africa](https://datasciencelawlab.africa/nwu
 The first cross-lingual open-retrieval QA dataset for African languages: 12,000+ questions across 10
 languages, with answers retrieved from English or French passages. [arxiv.org/abs/2305.06897](https://arxiv.org/abs/2305.06897)
 
+### Ojo, J., et al. (2025) {#afrobench}
+
+*AfroBench: How Good are Large Language Models on African Languages?* Ojo, J., Ogundepo, O., Oladipo, A., Ogueji, K., Lin, J., Stenetorp, P., & Adelani, D. I. Findings of ACL 2025; arXiv:2311.07978. A
+large-scale LLM benchmark spanning 64 African languages, 15 tasks, and 22 datasets, showing a persistent
+gap between English and African languages. [arxiv.org/abs/2311.07978](https://arxiv.org/abs/2311.07978)
+
+
+### Oladipo, A., et al. (2023) {#oladipo-2023}
+
+*Better Quality Pre-training Data and T5 Models for African Languages.* Proceedings of EMNLP 2023, pp. 158–168. Introduces the WURA corpus, a cleaned multilingual pretraining corpus for 16 African languages, and the AfriTeVa V2 T5 models trained on it. [aclanthology.org/2023.emnlp-main.11](https://aclanthology.org/2023.emnlp-main.11/)
+
 ### Olatunji, T., et al. (2023) {#afrispeech-2023}
 
 *AfriSpeech-200: Pan-African Accented Speech Dataset for Clinical and General Domain ASR.* TACL 2023;
 arXiv:2310.00274. 200 hours of accented English from 120 accents across 13 African countries.
 [arxiv.org/abs/2310.00274](https://arxiv.org/abs/2310.00274)
+
+### Pan, X., et al. (2017) {#wikiann-2017}
+
+*Cross-lingual Name Tagging and Linking for 282 Languages.* Proceedings of ACL 2017 (Volume 1: Long Papers), pp. 1946–1958. Introduces WikiANN, silver-standard NER data for 282 languages derived from Wikipedia cross-lingual links. [aclanthology.org/P17-1178](https://aclanthology.org/P17-1178/)
+
 
 ### Peng, K., Mathur, A., & Narayanan, A. (2021) {#peng-2021}
 
@@ -426,6 +532,11 @@ arXiv:2310.00274. 200 hours of accented English from 120 accents across 13 Afric
 Datasets and Benchmarks Track. Traces nearly 1,000 papers that used three retracted face-recognition datasets
 and shows that derivatives, unclear licences, and weak management let harms persist after withdrawal; argues
 for stewardship across the full dataset life cycle. [arxiv.org/abs/2108.02922](https://arxiv.org/abs/2108.02922)
+
+### Petrov, S., Das, D., & McDonald, R. (2012) {#petrov-2012}
+
+*A Universal Part-of-Speech Tagset.* Proceedings of LREC 2012, pp. 2089–2096. Proposes twelve universal POS categories with mappings from 25 treebank tagsets, the forerunner of the UD UPOS tagset. [aclanthology.org/L12-1115](https://aclanthology.org/L12-1115/)
+
 
 ### Plank, B. (2022) {#plank-2022}
 
@@ -439,10 +550,27 @@ than noise. [aclanthology.org/2022.emnlp-main.731](https://aclanthology.org/2022
 metric better suited to morphologically rich languages than word-based BLEU.
 [aclanthology.org/W15-3049](https://aclanthology.org/W15-3049/)
 
+### Ramshaw, L., & Marcus, M. (1995) {#ramshaw-marcus-1995}
+
+*Text Chunking using Transformation-Based Learning.* Third Workshop on Very Large Corpora, 1995. Recasts chunking as tagging, with chunk structure encoded in per-word tags, which is the origin of the IOB tagging scheme. [aclanthology.org/W95-0107](https://aclanthology.org/W95-0107/)
+
+
 ### Ranathunga, S., & de Silva, N. (2022) {#ranathunga-desilva-2022}
 
 *Some Languages are More Equal than Others: Probing Deeper into the Linguistic Disparity in the NLP
 World.* arXiv:2210.08523. [arxiv.org/abs/2210.08523](https://arxiv.org/abs/2210.08523)
+
+### Retta, E. A., et al. (2022) {#retta-2022}
+
+*A New Amharic Speech Emotion Dataset and Classification Benchmark.* arXiv:2201.02710. Introduces ASED, an Amharic speech emotion dataset of 2,474 clips from 65 speakers across four dialects and five emotion classes, with a VGG-based benchmark. [arxiv.org/abs/2201.02710](https://arxiv.org/abs/2201.02710)
+
+### Ryant, N., et al. (2019) {#ryant-2019}
+
+*The Second DIHARD Diarization Challenge: Dataset, Task, and Baselines.* Interspeech 2019, pp. 978–982. Describes the DIHARD II challenge on hard, diverse-domain diarization and introduces the Jaccard Error Rate (JER) as a secondary metric. [isca-archive.org/interspeech_2019/ryant19_interspeech.html](https://www.isca-archive.org/interspeech_2019/ryant19_interspeech.html)
+
+### Saeb, A., et al. (2017) {#saeb-2017}
+
+*Very Low Resource Radio Browsing for Agile Developmental and Humanitarian Monitoring.* Interspeech 2017, pp. 2118–2122. Keyword-spotting radio-browsing system for UN programmes in Uganda, with an Acholi system built from about 12 minutes of annotated speech using multilingual acoustic models. [isca-archive.org/interspeech_2017/saeb17_interspeech](https://www.isca-archive.org/interspeech_2017/saeb17_interspeech.html)
 
 ### Sambasivan, N., Kapania, S., Highfill, H., Akrong, D., Paritosh, P., & Aroyo, L. (2021) {#sambasivan-2021}
 
@@ -450,6 +578,10 @@ World.* arXiv:2210.08523. [arxiv.org/abs/2210.08523](https://arxiv.org/abs/2210.
 Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems. Based on 53
 practitioners across India, East and West Africa, and the US; 92% reported at least one data cascade.
 [doi.org/10.1145/3411764.3445518](https://dl.acm.org/doi/10.1145/3411764.3445518)
+
+### Sanni, M., et al. (2025) {#afrispeech-dialog-2025}
+
+*Afrispeech-Dialog: A Benchmark Dataset for Spontaneous English Conversations in Healthcare and Beyond.* NAACL 2025 (Long Papers), pp. 8399–8417. 50 simulated medical and non-medical conversations in African-accented English, used to benchmark long-form speaker diarization and ASR on accented speech. [aclanthology.org/2025.naacl-long.426](https://aclanthology.org/2025.naacl-long.426)
 
 ### Schembri, A., et al. (2013) {#schembri-2013}
 
@@ -459,14 +591,26 @@ Schembri, A., Fenlon, J., Rentelis, R., Reynolds, S., & Cormier, K. *Building th
 
 *Maganar Hannu, Language of the Hands: A Descriptive Analysis of Hausa Sign Language.* Hamburg: Signum (International Studies on Sign Language and Communication of the Deaf 35).
 
+### Seamless Communication, Barrault, L., et al. (2023) {#seamless-2023}
+
+*SeamlessM4T: Massively Multilingual & Multimodal Machine Translation.* arXiv preprint 2308.11596. A single model for speech and text translation across up to ~100 languages, with speech output for a smaller subset. [arxiv.org/abs/2308.11596](https://arxiv.org/abs/2308.11596)
+
 ### Seeing, Signing, and Saying (2025) {#seeing-signing-2025}
 
 Yazdani, S., Hamidullah, Y., España-Bonet, C., & van Genabith, J. *Seeing, Signing, and Saying: A Vision-Language Model-Assisted Pipeline for Sign Language Data Acquisition and Curation from Social Media.* RANLP 2025. Introduces the TikTok-SL-8 corpus. [aclanthology.org/2025.ranlp-1.159](https://aclanthology.org/2025.ranlp-1.159/)
 
+### Shumailov, I., et al. (2024) {#shumailov-2024}
+
+*AI Models Collapse When Trained on Recursively Generated Data.* Nature, 631, 755–759. Shows that training indiscriminately on model-generated content makes models progressively forget the tails of the real data distribution ("model collapse"). [doi.org/10.1038/s41586-024-07566-y](https://doi.org/10.1038/s41586-024-07566-y)
 
 ### SignTalk-Gh (2026) {#signtalk-gh-2026}
 
 Ahene, et al. A Ghanaian Sign Language dataset for healthcare: 9,879 videos of 4,031 sentences from 5 signers, about 60% of the source sentences generated with an LLM. Scientific Reports, 2026. [doi.org/10.1038/s41598-026-43478-9](https://doi.org/10.1038/s41598-026-43478-9)
+
+### Sikasote, C., et al. (2023) {#bigc-2023}
+
+*BIG-C: a Multimodal Multi-Purpose Dataset for Bemba.* Proceedings of ACL 2023. Over 180 hours of image-grounded Bemba conversational speech with transcripts and English translations, supporting ASR, MT and speech translation. [aclanthology.org/2023.acl-long.115](https://aclanthology.org/2023.acl-long.115)
+
 
 ### Sikasote, C., et al. (2023) {#zambezi-2023}
 
@@ -484,6 +628,10 @@ curated 9+ open African-language datasets through community challenges and short
 *PlantDoc: A Dataset for Visual Plant Disease Detection.* CoDS-COMAD 2020. About 2,600 in-the-field images
 across 13 plant species. CC BY 4.0.
 [github.com/pratikkayal/PlantDoc-Dataset](https://github.com/pratikkayal/PlantDoc-Dataset)
+
+### Singh, S., et al. (2024) {#aya-2024}
+
+*Aya Dataset: An Open-Access Collection for Multilingual Instruction Tuning.* Proceedings of ACL 2024 (Volume 1: Long Papers), pp. 11521–11567. A human-curated instruction-following dataset in 65 languages, written by fluent speakers rather than translated. [aclanthology.org/2024.acl-long.620](https://aclanthology.org/2024.acl-long.620/)
 
 ### SSA-COMET (2025) {#ssa-comet-2025}
 
@@ -528,6 +676,10 @@ Maintained Fleiss' kappa above 0.82 between peer moderators during validation.
 under CC0 1.0.
 [doi.org/10.7910/DVN/T4RB0B](https://doi.org/10.7910/DVN/T4RB0B)
 
+### Wanjawa, B. W., et al. (2023) {#kenswquad-2023}
+
+*KenSwQuAD: A Question Answering Dataset for Swahili Low Resource Language.* ACM Transactions on Asian and Low-Resource Language Information Processing, 22(4). A SQuAD-style dataset of 7,526 question-answer pairs over 1,445 Swahili texts from the Kencorpus project, with a 12.5% sample re-evaluated by different annotators. [arxiv.org/abs/2205.02364](https://arxiv.org/abs/2205.02364)
+
 ### Wanzare, et al. (2024) {#ksl-dataset-2024}
 
 Wanzare, Okutoyi, Kang'ahi & Ayere. *KSL Dataset.* About 14,000 English sentences with Kenyan Sign Language glosses, about 20,000 KSL videos, and 4,000 words transcribed in HamNoSys. [arxiv.org/abs/2410.18295](https://arxiv.org/abs/2410.18295)
@@ -552,7 +704,6 @@ Findable, Accessible, Interoperable, Reusable. [doi.org/10.1038/sdata.2016.18](h
 
 Wittenburg, P., Brugman, H., Russel, A., Klassmann, A., & Sloetjes, H. *ELAN: a Professional Framework for Multimodality Research.* LREC 2006, 1556-1559. The annotation tool most sign-language corpora use, and its `.eaf` format of tiers, tier types and controlled vocabularies. [aclanthology.org/L06-1082](https://aclanthology.org/L06-1082/)
 
-
 ### World Federation of the Deaf & WASLI (2018) {#wfd-wasli-2018}
 
 *WFD and WASLI Statement on Use of Signing Avatars.* 14 March 2018, updated 14 April 2018. Cautions against signing avatars as a replacement for human signers, especially for live, complex or important information. [wasli.org](https://wasli.org/wp-content/uploads/2023/07/WFD-and-WASLI-Statement-on-Avatar-FINAL-14032018-Updated-14042018-1.pdf)
@@ -560,3 +711,9 @@ Wittenburg, P., Brugman, H., Russel, A., Klassmann, A., & Sloetjes, H. *ELAN: a 
 ### World Federation of the Deaf (n.d.) {#wfd-recognition}
 
 *The legal recognition of national sign languages.* The WFD's country-by-country record of constitutional and legislative recognition. [wfdeaf.org](https://wfdeaf.org/the-legal-recognition-of-national-sign-languages/)
+
+
+### Yu, H., et al. (2025) {#injongo-2025}
+
+*INJONGO: A Multicultural Intent Detection and Slot-filling Dataset for 16 African Languages.* Proceedings of ACL 2025 (Volume 1: Long Papers), pp. 9429–9452. Native-speaker-written utterances for 40 intents in five domains with 23 slot types, in 16 African languages plus English. [aclanthology.org/2025.acl-long.464](https://aclanthology.org/2025.acl-long.464/)
+

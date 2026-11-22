@@ -1,5 +1,4 @@
 ---
-# wip: true
 ready: true
 title: Image captioning
 sidebar_position: 3
@@ -18,7 +17,7 @@ Image captioning describes an image in fluent text. It is the multimodal cousin 
 
 ## What the data looks like
 
-A captioning dataset pairs images with one or more reference captions in the target language. The crucial choice is how the captions are produced. Translating English captions is quick but yields stilted, culturally displaced descriptions, while writing captions natively from the image gives text that reflects how speakers actually describe their world. AfriCaption took the second route, establishing a paradigm for image captioning across linguistically diverse African languages including Igbo, Hausa, Yoruba, Ewe, Luganda, and Kinyarwanda rather than translating from English ([AfriCaption, 2025](../references.md#africaption-2025)). As with all African vision work, captions of images that show African scenes and objects matter more than captions of borrowed Western photos.
+A captioning dataset pairs images with one or more reference captions in the target language. The crucial choice is how the captions are produced. Translating English captions is quick but yields stilted, culturally displaced descriptions, while writing captions natively from the image gives text that reflects how speakers actually describe their world. AfriCaption took the second route, establishing a paradigm for image captioning across linguistically diverse African languages including Igbo, Hausa, Yorùbá, Ewe, Luganda, and Kinyarwanda rather than translating from English ([AfriCaption, 2025](../references.md#africaption-2025)). As with all African vision work, captions of images that show African scenes and objects matter more than captions of borrowed Western photos.
 
 A record pairs an image with several reference captions, since one caption cannot represent the many valid ways to describe a picture:
 
@@ -80,7 +79,7 @@ Captioning data is expensive per-record because native writing is skilled work, 
 
 - **BLEU and CIDEr under-report caption quality in morphologically rich languages.** A caption that correctly names three inflections of the same root scores worse than a caption that reuses the root once. Report BERTScore or SSA-COMET-family metrics alongside, and treat human evaluation as final.
 - **MLLMs describe Western scenes better than African scenes.** A model that captions a European kitchen well may misname the objects, the setting, and the activities in a Nigerian market. The failure mode is not language coverage; it is visual coverage. Evaluate on target-context images specifically.
-- **Fluent captions can be catastrophically wrong.** A grammatically perfect Yoruba caption that misidentifies the dish in the image is a worse failure than a broken caption that names the dish correctly. Fluency is not a proxy for correctness; the review protocol must treat these as separate axes.
+- **Fluent captions can be catastrophically wrong.** A grammatically perfect Yorùbá caption that misidentifies the dish in the image is a worse failure than a broken caption that names the dish correctly. Fluency is not a proxy for correctness; the review protocol must treat these as separate axes.
 - **Translated captions are training-data poison.** Fine-tuning a captioning model on machine-translated captions of an English corpus does more harm than good: it teaches the model to produce grammatically-target-language English-shaped captions. AfriCaption's native-writing methodology is the reason to trust its data.
 - **Consent for identifiable people is load-bearing.** A caption that identifies a person by name, community, or role turns an image record into personally identifiable data. Guidelines must forbid identifying captions unless explicit consent has been obtained.
 - **Cultural naming matters.** A dish that has three names in three languages, a garment that carries community-specific meaning, or a ceremony that is only named by insiders: all of these produce brittle captioning behaviour if the annotator was not from the community. Recruit annotators from the visual context, not just the language.

@@ -3,7 +3,7 @@ title: Community Ecosystems
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-22
   author: Idris Abdulmumin
 ---
 
@@ -13,7 +13,7 @@ African NLP is, to an unusual degree, a community endeavour. The datasets, model
 
 ## The communities and what they do
 
-The ecosystem has a recognisable shape. **Masakhane** is the pan-African hub, a grassroots community of thousands whose participatory model produced foundational datasets such as MasakhaNER and MAFAND ([Nekoto et al., 2020](../references.md#nekoto-2020); [Adelani et al., 2022](../references.md#adelani-2022)). Around and within it sit **language- and country-focused groups** like HausaNLP, EthioNLP, GhanaNLP, and Digital Umuganda in Rwanda, which carry deep expertise in their specific languages. The **Deep Learning Indaba**, founded in 2017, is the community's annual meeting place and runs IndabaX events that had reached 47 countries by 2025, building the human capacity the field depends on ([Deep Learning Indaba](../references.md#deep-learning-indaba)). **AI4D-Africa** funded and coordinated dataset creation through its African Language Program ([Siminyu et al., 2021](../references.md#siminyu-2021)), **Zindi** hosts competitions and a large pool of African data scientists, **Lelapa AI** builds African-centred models and the Esethu framework, and **Lanfrica** maps the resources so they can be found ([Lanfrica](../references.md#lanfrica)). This is not an exhaustive list, and it grows every year.
+The ecosystem has a recognisable shape. **Masakhane** is the pan-African hub, a grassroots community of thousands whose participatory model produced foundational datasets such as MasakhaNER and MAFAND ([Nekoto et al., 2020](../references.md#nekoto-2020); [Adelani et al., 2022a](../references.md#adelani-2022)). Around and within it sit **language- and country-focused groups** like HausaNLP, EthioNLP, GhanaNLP, and Digital Umuganda in Rwanda, which carry deep expertise in their specific languages. The **Deep Learning Indaba**, founded in 2017, is the community's annual meeting place and runs IndabaX events that had reached 47 countries by 2025, building the human capacity the field depends on ([Deep Learning Indaba](../references.md#deep-learning-indaba)). **AI4D-Africa** funded and coordinated dataset creation through its African Language Program ([Siminyu et al., 2021](../references.md#siminyu-2021)), **Zindi** hosts competitions and a large pool of African data scientists, **Lelapa AI** builds African-centred models and the Esethu framework, and **Lanfrica** maps the resources so they can be found ([Lanfrica](../references.md#lanfrica)). This is not an exhaustive list, and it grows every year.
 
 ## Academic and industry collaboration
 

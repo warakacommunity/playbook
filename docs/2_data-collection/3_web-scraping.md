@@ -4,7 +4,7 @@ description: What web scraping can and can't deliver for African-language data, 
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Web Scraping

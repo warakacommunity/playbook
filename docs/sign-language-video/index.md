@@ -1,5 +1,4 @@
 ---
-# wip: true
 ready: true
 title: Video
 last_update:

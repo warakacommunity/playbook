@@ -1,9 +1,9 @@
 ---
-wip: true
+ready: true
 title: Speaker Diarization
 last_update:
-  date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Speaker Diarization
@@ -28,6 +28,8 @@ Robust African-language diarization data embraces these conditions rather than f
 
 Diarization data is multi-speaker audio annotated with speaker-turn boundaries, marking where each speaker starts and stops and which segments belong to the same person. The natural sources are exactly the kinds of recordings African projects already gather: radio broadcasts, community meetings, focus groups, and interviews.
 
+Public diarization data for African contexts is still scarce, and most African speech corpora are single-speaker read or prompted speech with no speaker-turn labels. One of the few evaluation sets is AfriSpeech-Dialog, 50 simulated medical and non-medical conversations in African-accented English, on which the authors report a degradation of more than 10% for state-of-the-art diarization and ASR systems compared with native-accent speech ([Sanni et al., 2025](../references.md#afrispeech-dialog-2025)). Corpora in African languages themselves, with natural overlap and code-switching, largely still have to be built, which is what the rest of this page is about.
+
 Diarization labels are stored in RTTM, the standard format the evaluation tools expect. Each line is one speaker segment: the recording id, the start time, the duration, and the speaker label, with the fixed `<NA>` placeholders the format requires:
 
 ```text
@@ -48,7 +50,13 @@ The right diarization corpus depends on the downstream deployment.
 - **Phone-recorded field interviews.** Two speakers typically, phone-quality audio, variable acoustics between interviewer and interviewee, sometimes recorded on speakerphone. The reference source when the deployment is journalism, health-worker debriefs, or NGO field research.
 - **Call-centre and helpline audio.** Two speakers (agent + caller) typically, telephony-band audio, well-defined turn structure. Easier for models than community meetings; harder than broadcast because of the audio-quality ceiling. Consent framework is the load-bearing decision; see the [audio-understanding chapter's call-centre note](../audio-understanding/index.md#data-collection-specifics-for-african-contexts).
 
-Match the training corpus's acoustic-and-turn-taking profile to the deployment target. A diarizer trained on broadcast panels and deployed on community-meeting audio will halve its accuracy in production; a diarizer trained on community meetings and deployed on broadcast will over-fragment turns because the model has learned to expect noise where there isn't any.
+Match the training corpus's acoustic-and-turn-taking profile to the deployment target. A diarizer trained on broadcast panels and deployed on community-meeting audio should be expected to lose a large share of its accuracy in production; a diarizer trained on community meetings and deployed on broadcast tends to over-fragment turns because the model has learned to expect noise where there isn't any. Measure the gap on a held-out sample of real deployment audio before trusting any benchmark number.
+
+:::danger[Every voice needs consent]
+
+A multi-speaker recording has as many data subjects as it has speakers. Consent from the person who made the recording, or from the broadcaster, does not cover the other voices in it. Plan consent per speaker before collection; see [Data Governance](../data-governance/index.md).
+
+:::
 
 ## Annotation
 
@@ -92,19 +100,21 @@ Dragging a speaker segment across the audio timeline in AfriAnnotate:
 
 ## Evaluation
 
-Diarization is evaluated with the [Diarization Error Rate (DER)](https://pyannote.github.io/pyannote-metrics/reference.html), which combines missed speech, false speech, and speaker-confusion errors into one figure, and the Jaccard Error Rate (JER), which weights every speaker equally regardless of how much they talk. As elsewhere, a human review of a sample catches systematic problems that a single aggregate number cannot.
+Diarization is evaluated with the [Diarization Error Rate (DER)](https://pyannote.github.io/pyannote-metrics/reference.html), which combines missed speech, false speech, and speaker-confusion errors into one figure ([Bredin, 2017](../references.md#bredin-2017)), and the Jaccard Error Rate (JER), introduced for the DIHARD II challenge, which averages a per-speaker error and so weights every speaker equally regardless of how much they talk ([Ryant et al., 2019](../references.md#ryant-2019)). As elsewhere, a human review of a sample catches systematic problems that a single aggregate number cannot.
 
 `pyannote.metrics` reads RTTM files and computes DER directly, so scoring a system is a matter of loading the reference and the prediction:
 
 ```python
-# pip install pyannote.metrics
+# pip install pyannote.metrics pyannote.database
 from pyannote.metrics.diarization import DiarizationErrorRate
 from pyannote.database.util import load_rttm
 
 reference = load_rttm("reference.rttm")["panel_01"]
 hypothesis = load_rttm("system_output.rttm")["panel_01"]
 
-metric = DiarizationErrorRate(collar=0.25)  # 0.25s grace around boundaries
+# pyannote's collar is the TOTAL width around each reference boundary:
+# collar=0.5 forgives ±0.25 s, the usual "0.25 s collar" in NIST/DIHARD scoring.
+metric = DiarizationErrorRate(collar=0.5)
 der = metric(reference, hypothesis)
 print(f"DER: {der:.3f}")
 
@@ -113,8 +123,9 @@ print(f"DER: {der:.3f}")
 components = metric(reference, hypothesis, detailed=True)
 print(f"  missed speech:    {components['missed detection']:.2f}s")
 print(f"  false alarm:      {components['false alarm']:.2f}s")
-print(f"  speaker confusion:{components['confusion']:.2f}s")
+print(f"  speaker confusion: {components['confusion']:.2f}s")
 ```
+
 
 The `collar` forgives small timing differences at speaker boundaries, which are rarely what you care about. Reading the breakdown is the useful part: in noisy phone-recorded community audio, a high false-alarm component usually points at background noise being mistaken for speech, while high confusion points at the overlap and code-switching that make African conversational audio hard, telling you which collection or annotation problem to fix next.
 
@@ -125,6 +136,15 @@ The `collar` forgives small timing differences at speaker boundaries, which are 
 - **Overlap-region DER.** Compute DER on the subset of the audio where two or more speakers are talking. This is where most model failure lives in real conversation; the metric on overlap regions specifically is what predicts production performance.
 - **Speaker-count accuracy.** Did the model estimate the right number of distinct speakers in each recording? Over-splitting a two-speaker interview into five apparent speakers is a common failure mode DER partly captures but does not fully expose.
 
+## Starting from a pretrained pipeline
+
+Few projects need to train a diarizer from scratch. Open-source toolkits such as `pyannote.audio` ship pretrained pipelines (voice activity detection, speaker embedding, and clustering) that can be run directly on African audio and then fine-tuned on a modest amount of in-domain annotated data ([Bredin et al., 2020](../references.md#bredin-2020)). This changes where the annotation budget goes:
+
+- **Annotate an evaluation set first.** A few hours of carefully diarised audio from the real deployment sources, split by source and condition as above, tells you whether the off-the-shelf pipeline is already good enough.
+- **Spend training annotation on the failures.** If the breakdown shows confusion in overlaps or over-splitting of code-switching speakers, annotate more of exactly that audio for fine-tuning rather than more of what the model already handles.
+- **Pre-annotate, then correct.** Running the pretrained pipeline first and having annotators correct its RTTM output is usually faster than marking from scratch, but check a sample annotated from scratch so annotators do not simply accept the model's boundaries.
+- **Check the model licence and access terms.** Some pretrained pipelines are gated behind a user agreement; confirm the terms allow your intended use and redistribution before building on them.
+
 ## Deployment realities
 
 - **Streaming vs offline.** Real-time diarization for live captioning is a different engineering problem from offline diarization for post-hoc transcription. Streaming diarization must commit to speaker assignments as they occur; offline can revise earlier decisions when the whole recording is seen. Choose at scoping; streaming diarization is materially harder.
@@ -134,10 +154,11 @@ The `collar` forgives small timing differences at speaker boundaries, which are 
 
 ## What breaks: common failure modes
 
-- **Studio-training / community-deployment collapse.** DER on clean training data looks acceptable; deployment on noisy community meetings triples DER. Fix: train on data whose acoustic conditions match deployment.
-- **Overlap invisible in aggregate DER.** Overall DER is 15%; overlap-region DER is 45%. Fix: report overlap DER separately and treat it as the load-bearing number for conversational deployment.
+- **Studio-training / community-deployment collapse.** DER on clean training data looks acceptable; deployment on noisy community meetings can multiply it several times over. Fix: train on data whose acoustic conditions match deployment.
+- **Overlap invisible in aggregate DER.** An overall DER of 15% can hide an overlap-region DER of 45% or more, because overlapping speech is a small share of total time. Fix: report overlap DER separately and treat it as the load-bearing number for conversational deployment.
 - **Code-switching splits one speaker into two.** Voice-embedding model latches onto language-conditioned acoustic features and treats a code-switching speaker as multiple speakers. Fix: include code-switched training data and evaluate on code-switched subsets.
 - **Speaker-count over-estimation on short turns.** Model treats every backchannel or brief sound as a new speaker. Fix: enforce minimum turn length in inference post-processing; audit annotation guidelines for backchannel handling.
-- **Boundary sloppiness at high collar.** DER measured at `collar=0.5` looks acceptable; measured at `collar=0.1` reveals boundaries are consistently 300 ms off. Fix: measure at the collar the deployment actually tolerates.
+- **Boundary sloppiness at a wide collar.** DER measured at `collar=0.5` (±0.25 s) looks acceptable; measured at `collar=0.1` (±0.05 s) it reveals boundaries that are consistently 300 ms off. Fix: measure at the collar the deployment actually tolerates, and remember that pyannote's `collar` is the total width, half on each side of a boundary.
 - **Consent gap on multi-speaker archives.** Broadcast panel audio consented for broadcast; downstream ML release without new consent breaches the original agreement. Fix: consent must be re-negotiated for each speaker in a multi-speaker recording.
 - **Named-speaker leak.** Corpus intended to be anonymous but downstream metadata reveals speaker identity through timestamps + broadcast schedules + context. Fix: anonymisation of speaker labels is not enough; audit the full metadata for identity leakage.
+

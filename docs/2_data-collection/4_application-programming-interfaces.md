@@ -3,8 +3,8 @@ title: Application Programming Interfaces (APIs)
 description: How to collect data through official APIs, and why building a project's data plan around any single platform's API is riskier than it looks.
 ready: true
 last_update:
-  date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Application Programming Interfaces (APIs)
@@ -40,7 +40,7 @@ This isn't a story about one platform behaving badly. It's the generic risk of a
 
 ## A worked example: pulling from a Wikimedia API
 
-Of the categories above, the Wikimedia APIs are the safest to learn on: they are built for reuse, cover many African languages, and are not going to reprice overnight. The example below pulls article extracts from a language edition of Wikipedia, archives the raw response exactly as received, and records provenance for each article. Swap `lang` for any Wikipedia language code, such as `yo` (Yoruba), `sw` (Swahili), `ha` (Hausa), or `am` (Amharic).
+Of the categories above, the Wikimedia APIs are the safest to learn on: they are built for reuse, cover many African languages, and are not going to reprice overnight. The example below pulls article extracts from a language edition of Wikipedia, archives the raw response exactly as received, and records provenance for each article. Swap `lang` for any Wikipedia language code, such as `yo` (Yorùbá), `sw` (Swahili), `ha` (Hausa), or `am` (Amharic).
 
 ```python
 import json

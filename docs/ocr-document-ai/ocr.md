@@ -1,5 +1,4 @@
 ---
-# wip: true
 ready: true
 title: OCR
 sidebar_position: 2
@@ -75,7 +74,7 @@ OCR data cost is dominated by transcription throughput, not by images. Rough ord
 
 ## Known limitations to watch for
 
-- **Diacritics are load-bearing on Latin-script African languages.** A model that scores 3% CER on English scores 15% CER on Yoruba because the tone marks fall off. Report CER *with* and *without* diacritic normalisation; the two numbers tell different truths.
+- **Diacritics are load-bearing on Latin-script African languages.** A model that scores 3% CER on English scores 15% CER on Yorùbá because the tone marks fall off. Report CER *with* and *without* diacritic normalisation; the two numbers tell different truths.
 - **Ge'ez / Fidel has a large character set.** Amharic has ~276 base characters plus diacritics, which stresses the classifier head of general OCR engines trained on ~100-character Latin alphabets. Purpose-built Fidel-trained models are required for reliable performance.
 - **Ajami is not standard Arabic.** Arabic-OCR models trained on Modern Standard Arabic mishandle the extended letters, ligatures, and vocalisation conventions that Ajami uses for Hausa and Fulfulde. Do not assume Arabic-OCR reuse works.
 - **Scan quality dominates model choice.** A 300 DPI scan of a clean government gazette on a modern OCR engine yields 1-2% CER; a phone photo of a photocopied newspaper on the same engine yields 15-30% CER. Preprocessing (deskew, binarisation, resolution normalisation) matters more than model choice below ~150 DPI equivalent.

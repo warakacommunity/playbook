@@ -5,8 +5,8 @@ last_update:
   date: 2026-09-27
   author: Shamsuddeen Hassan Muhammad
 translation_status: machine
-source_hash: 56e2f9281148
-translated_at: 2026-09-28
+source_hash: ee10c721b8c8
+translated_at: 2026-11-22
 ---
 
 # Jinsi ya Kuchangia {#how-to-contribute}
@@ -105,7 +105,8 @@ Sura ni faili za Markdown chini ya `docs/`, zilizopangwa katika folda kulingana 
 
 ```markdown
 ---
-sidebar_position: 3
+title: Your Chapter Title
+ready: true
 ---
 
 # Your Chapter Title
@@ -113,11 +114,11 @@ sidebar_position: 3
 Your content here.
 ```
 
-`sidebar_position` inadhibiti mahali ukurasa unapoonekana kwenye utepe wa kando (sidebar). Chagua nambari kwa nafasi unayotaka, na usogeze kurasa zinazofuata ikiwa inahitajika.
+Usiweke `ready: true` wakati ukurasa bado unaandikwa: hadi utakapokuwepo, tovuti inaonyesha kishikilia nafasi (placeholder) cha "In development" (Kinaendelea kuandaliwa) badala ya maudhui ya ukurasa. Tarehe ya "Last updated" na mwandishi hujazwa kiotomatiki kutoka kwenye historia ya git, kwa hivyo huhitaji kuziongeza.
 
-### Hatua ya 6: Utepe wa kando unajisasisha wenyewe {#step-6-the-sidebar-updates-itself}
+### Hatua ya 6: Ongeza ukurasa kwenye utepe wa kando (sidebar) {#step-6-add-the-page-to-the-sidebar}
 
-Utepe wa kando unazalishwa kiotomatiki kutoka kwa muundo wa folda na `sidebar_position` ya kila ukurasa, kwa hivyo hakuna kitu cha ziada cha kuhariri. Ili kubadilisha jina la lebo ya folda, hariri `_category_.json` yake.
+Utepe wa kando (sidebar) umeorodheshwa waziwazi katika `sidebars.js`, kwa hivyo ukurasa mpya hauonekani hadi uuongeze hapo. Tafuta sura ambayo ukurasa unahusika nayo na uongeze kitambulisho (id) cha ukurasa (njia yake chini ya `docs/`, bila kiendelezi (extension) wala kiambishi cha nambari (number prefix), kwa mfano `'image-data/keypoints'`) katika nafasi unayotaka. Kuhariri ukurasa uliopo hakuhitaji mabadiliko yoyote kwenye utepe wa kando.
 
 ### Hatua ya 7: Kagua mabadiliko yako {#step-7-preview-your-change}
 
@@ -168,4 +169,4 @@ Tafsiri zinasimamiwa na jamii. Tumia kibadilisha lugha kilicho juu kulia mwa upa
 - **Piga soga na jamii:** [Discord](https://discord.gg/ChNPHV2PPS)
 - **Umepata hitilafu (bug):** [fungua tatizo](https://github.com/warakacommunity/playbook/issues/new)
 
-Tazama kila mtu ambaye amechangia hadi sasa kwenye ukurasa wa [Wachangiaji](/sw/contributors).
+Tazama kila mtu ambaye amechangia hadi sasa kwenye ukurasa wa [Wachangiaji](./contributors.mdx).

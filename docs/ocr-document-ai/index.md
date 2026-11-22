@@ -1,5 +1,4 @@
 ---
-# wip: true
 ready: true
 title: Document AI
 last_update:

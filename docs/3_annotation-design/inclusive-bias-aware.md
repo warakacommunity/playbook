@@ -3,7 +3,7 @@ title: Inclusive and Bias-Aware Annotation
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-22
   author: Idris Abdulmumin
 ---
 
@@ -17,7 +17,7 @@ An annotator reads every item through their own language variety, region, gender
 
 ## Recruit for diversity, deliberately
 
-Build the annotator pool to reflect the community whose language it is, across gender, age, and especially dialect and region. Avoid leaning on whichever group is easiest to reach, such as university students in the capital, when the language is spoken far more widely than that. Native-speaker involvement is the baseline, because native speakers catch the dialectal and idiomatic detail that outsiders miss, and the strongest African datasets have been built by recruiting native speakers from across the relevant communities rather than from one convenient pool ([Adelani et al., 2022](../references.md#adelani-2022); [Muhammad et al., 2023](../references.md#muhammad-2023)).
+Build the annotator pool to reflect the community whose language it is, across gender, age, and especially dialect and region. Avoid leaning on whichever group is easiest to reach, such as university students in the capital, when the language is spoken far more widely than that. Native-speaker involvement is the baseline, because native speakers catch the dialectal and idiomatic detail that outsiders miss, and the strongest African datasets have been built by recruiting native speakers from across the relevant communities rather than from one convenient pool ([Adelani et al., 2022a](../references.md#adelani-2022); [Muhammad et al., 2023](../references.md#muhammad-2023)).
 
 ## Record annotator context, with consent
 

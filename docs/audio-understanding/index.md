@@ -1,9 +1,9 @@
 ---
-wip: true
+ready: true
 title: Audio Understanding
 last_update:
-  date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Audio Understanding
@@ -20,20 +20,23 @@ Audio understanding is not one task but a family. The framing determines the lab
 
 - **Whole-clip classification.** One label (or a small set) per clip: "This is Kiswahili news broadcast", "This clip contains coughing", "This is a distress call". Simplest to annotate, cheapest to model, sufficient for many triage use cases (routing calls to the right desk, flagging health-relevant audio for review).
 - **Event detection with timestamps.** Where in a longer clip an event of interest occurs, with start and end times: "Coughing at 00:14–00:17 and 01:22–01:25", "Speech onset at 00:03". More expensive to annotate than classification, but load-bearing for any pipeline that must locate events, not just detect their presence.
-- **Keyword spotting (KWS).** A specialised detection variant: "Does this clip contain the phrase 'help' in any of Kiswahili, English, or Yoruba?" Used in voice assistants (wake-word detection) and in emergency-triage systems. Latency-sensitive and often deployed on-device.
+- **Keyword spotting (KWS).** A specialised detection variant: "Does this clip contain the phrase 'help' in any of Kiswahili, English, or Yorùbá?" Used in voice assistants (wake-word detection) and in emergency-triage systems. Latency-sensitive and often deployed on-device.
 - **Spoken language identification (LID).** Which language a clip contains: a first-pass gate for downstream ASR or MT routing. Simple in theory, hard in African contexts because of code-switching, dialect variation, and speakers whose accent in a lingua franca can trip general-purpose LID models.
+
+These tasks are already in use on the continent. A radio-browsing system built for United Nations relief and development programmes in Uganda used keyword spotting over radio broadcasts to give near real-time information on what communities were discussing; for Acholi it was built from only about 12 minutes of annotated speech, borrowing acoustic knowledge from Luganda and English ([Saeb et al., 2017](../references.md#saeb-2017)). The lesson for dataset builders is that a narrow, well-chosen keyword list and a small amount of carefully annotated audio can deliver a usable system where full transcription is out of reach.
 
 ## What "African audio" actually varies on
 
 Three axes routinely undermine audio-understanding pipelines built on borrowed assumptions.
 
 - **The label taxonomy is not universal.** A speech / music / noise / silence taxonomy borrowed from AudioSet or ESC-50 misses most of what matters in an African deployment. A community-radio archive contains market-noise, call-and-response singing, drums that Western taxonomies treat as one category and locals distinguish by ceremony, animal calls specific to region and season. A health-screening archive contains coughs, breathing patterns, and vocalisations whose diagnostic categories a global taxonomy under-serves. Build the taxonomy with the community that will use the corpus; adapt existing schemes rather than importing them.
-- **Multilingual, code-switched audio is the norm.** Language ID on a 5-second clip that switches from Kiswahili to English mid-utterance is genuinely hard. Even whole-clip classification of "is this Yoruba?" fails when the clip is a Yoruba host interviewing an English-speaking guest with alternating turns. Design labels to accommodate mixed input (`labels: ["Kiswahili", "English", "Code-switched"]`) or the corpus quietly learns that its "Kiswahili" class also contains English.
-- **Acoustic environment matters more than the model architecture.** Community-radio recordings, market recordings, and outdoor call-centre audio are noisier than studio speech and than most Western public-audio corpora. A model trained on the studio-conditions AudioSet and evaluated on market audio will fail; a model trained on real African deployment audio will generalise. Match training and deployment acoustic conditions or plan a domain-adaptation step.
+- **Multilingual, code-switched audio is the norm.** Language ID on a 5-second clip that switches from Kiswahili to English mid-utterance is genuinely hard. Even whole-clip classification of "is this Yorùbá?" fails when the clip is a Yorùbá host interviewing an English-speaking guest with alternating turns. Design labels to accommodate mixed input (`labels: ["Kiswahili", "English", "Code-switched"]`) or the corpus quietly learns that its "Kiswahili" class also contains English.
+
+- **Acoustic environment matters more than the model architecture.** Community-radio recordings, market recordings, and outdoor call-centre audio are noisier than studio speech, and their mix of sounds differs from what public corpora capture. AudioSet, for example, is drawn from YouTube videos, so its acoustic conditions and sound sources reflect what gets uploaded online rather than an African market or a phone line. A model trained on such data and evaluated on market audio will degrade; a model trained on audio from the real deployment conditions generalises far better. Match training and deployment acoustic conditions or plan a domain-adaptation step.
 
 ## What the data looks like
 
-Audio-understanding data is audio clips paired with labels, and the label scheme is the heart of the task. The clips can come from radio archives, community recordings, environmental sensors, or call centres, and the labels say what each clip is or contains. General multilingual speech corpora such as African Next Voices provide raw material that can be relabelled for understanding tasks ([African Next Voices, 2025](../references.md#african-next-voices)); WAXAL, NaijaVoices, and Common Voice can all be repurposed with an appropriate label pass.
+Audio-understanding data is audio clips paired with labels, and the label scheme is the heart of the task. The clips can come from radio archives, community recordings, environmental sensors, or call centres, and the labels say what each clip is or contains. General multilingual speech corpora such as African Next Voices provide raw material that can be relabelled for understanding tasks ([African Next Voices, 2025](../references.md#african-next-voices)); WAXAL ([2026](../references.md#waxal-2026)), NaijaVoices ([Emezue et al., 2025](../references.md#emezue-2025)), and Common Voice ([Ardila et al., 2020](../references.md#ardila-2020)) can all be repurposed with an appropriate label pass, most directly for language identification, since each clip already carries a language tag. Check each corpus licence and consent terms before relabelling it for a new purpose.
 
 The data is one clip per record with its labels. Because a clip can contain more than one thing at once, the label field is a list, so a clip can carry several labels or just one. Each record is one line in the file, shown indented here for readability:
 
@@ -108,11 +111,24 @@ Classifying an audio clip in the AfriAnnotate editor:
 **Evaluation depends on the task:**
 
 - **Whole-clip classification**: macro F1 as the headline metric so rare but important labels are not drowned out by common ones. Aggregate accuracy is misleading for imbalanced label sets and hides class-specific failures.
-- **Event detection**: mean average precision (mAP), which checks the model located events in time as well as named them. An event detected at the wrong time is not a correct detection.
-- **Keyword spotting**: precision at fixed recall (or the reverse), with the specific point on the curve driven by the deployment use case. A wake-word detector that misses commands is a broken product; a health-triage detector that false-flags too often overwhelms clinicians.
+
+- **Event detection**: segment-based and event-based F1 and error rate, which check that the model located events in time as well as named them; event-based scoring uses an onset (and optionally offset) tolerance, such as 200 ms on onset, that you should set to what the deployment needs ([Mesaros et al., 2016](../references.md#mesaros-2016)). The open-source `sed_eval` toolbox implements these metrics. Clip-level mean average precision (mAP), as used for AudioSet-style tagging, says whether a label is present but not when, so it is not enough on its own. An event detected at the wrong time is not a correct detection.
+- **Keyword spotting**: miss rate (false rejections) at a fixed false-alarm rate, often expressed as false alarms per hour of audio, or alternatively precision at fixed recall, with the operating point driven by the deployment use case. A wake-word detector that misses commands is a broken product; a health-triage detector that false-flags too often overwhelms clinicians.
+
 - **Language ID**: per-language accuracy AND per-code-switching-condition accuracy. Aggregate LID accuracy on monolingual clips is unrelated to LID performance on real code-switched deployment input.
 
 **Per-source evaluation.** Split evaluation by data source (radio, community recording, sensor, call-centre) and report per-source metrics. A model whose overall F1 is acceptable but whose call-centre F1 is catastrophic will silently under-serve exactly the deployment use case that motivated the project.
+
+## Quality assurance
+
+Label errors in audio are hard to spot after the fact, because nobody re-listens to a whole corpus. Build checks into the annotation loop instead.
+
+- **Double-label a sample.** Have a second annotator independently label a random 5–10% of each batch and measure agreement per class (Cohen's kappa or Krippendorff's alpha for clip labels; onset/offset agreement within a tolerance for spans). Classes with low agreement point to an unclear definition, not just a careless annotator.
+- **Review rare classes in full.** For the rare-but-important labels (a distress keyword, a specific cough type), have every positive clip checked by a second, locally knowledgeable reviewer. These are the labels the model is least likely to learn and the deployment most depends on.
+- **Audit the "other" and "uncertain" bins.** A growing share of clips in a catch-all class is the earliest sign of taxonomy drift; sample it weekly and feed decisions back into the guidelines.
+- **Check audio at ingest.** Automatically flag clips that are silent, clipped, truncated, at the wrong sample rate, or whose duration does not match the manifest, before annotators spend time on them.
+- **Look for leakage before splitting.** Clips cut from the same broadcast, call, or recording session must stay in the same split; otherwise the model learns the station jingle or the speaker rather than the label, and test scores are inflated.
+
 
 ## Deployment realities
 
@@ -128,5 +144,7 @@ Classifying an audio clip in the AfriAnnotate editor:
 - **Acoustic-condition mismatch.** Studio-clean training data, market-noise deployment audio; F1 drops sharply in production. Fix: match acoustic conditions or plan explicit domain adaptation.
 - **Class-imbalance-hidden failure.** Overall accuracy looks good; per-class F1 reveals the rare-but-important label has near-zero recall. Fix: macro F1 as the headline metric; per-class breakdown always reported.
 - **Consent gap on archived audio.** Archive was consented for one purpose (broadcast, call handling), repurposed for ML training without new consent. Fix: consent is not retroactive; treat repurposed archives as research artefacts and do not release underlying audio.
-- **Event-detection timing sloppiness.** Model marks events with wide margins; mAP looks acceptable at loose tolerances, catastrophic at the deployment tolerance. Fix: measure at the tolerance the deployment actually requires.
+
+- **Event-detection timing sloppiness.** Model marks events with wide margins; event-based F1 looks acceptable at loose onset/offset tolerances, catastrophic at the deployment tolerance, and clip-level mAP hides the problem entirely. Fix: measure at the tolerance the deployment actually requires.
+
 - **Post-quantisation collapse on-device.** Quantisation for on-device inference drops accuracy sharply; the demo worked but production doesn't. Fix: measure at deployment precision from the start; see [compute-poor training](../compute-poor/index.md).

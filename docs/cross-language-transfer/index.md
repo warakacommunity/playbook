@@ -3,7 +3,7 @@ sidebar_position: 1
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Cross-language transfer for African languages
@@ -80,10 +80,10 @@ Where Nilotic transfer fails, cross-family transfer via Kiswahili (as regional l
 
 Tonal, Latin script with lexically-load-bearing diacritics, complex vowel systems.
 
-**Pivots covered in MasakhaNER 2 and NLLB-200:** Yoruba (yor), Igbo (ibo), Ewe (ewe), Twi / Akan (twi), Fon (fon).
+**Pivots covered in MasakhaNER 2 and NLLB-200:** Yorùbá (yor), Igbo (ibo), Ewe (ewe), Twi / Akan (twi), Fon (fon).
 
 Sub-branch transfer patterns:
-- **Yoruba / Igbo → related Volta-Niger languages**: real but variable; both are tonal with different-enough sub-systems that direct transfer needs verification.
+- **Yorùbá / Igbo → related Volta-Niger languages**: real but variable; both are tonal with different-enough sub-systems that direct transfer needs verification.
 - **Ewe, Twi, Fon (Gbe / Tano)**: closely related; transfer among these is generally strong.
 - **Diacritic handling is the single biggest technical footgun**: a pivot model trained with normalized diacritics will systematically mis-recognize entities in a diacritically-faithful target corpus.
 

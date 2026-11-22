@@ -3,7 +3,7 @@ title: Workflow and Adjudication
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-22
   author: Idris Abdulmumin
 ---
 
@@ -15,7 +15,7 @@ Once the task is designed and annotators are trained, the workflow decides how l
 
 ## Use multiple annotators per item
 
-A single annotator's label is a single opinion, and you cannot tell a confident correct call from a confident mistake. Assigning each item to several annotators lets you measure reliability and resolve errors. The common practice for African-language datasets is at least three annotators per item, with an odd number so that a simple majority can settle most cases. The Masakhane named-entity datasets used three native speakers per language under a coordinator, which is enough to catch individual slips while staying affordable for a volunteer team ([Adelani et al., 2022](../references.md#adelani-2022)). More annotators raise reliability and cost together, so the right number is a budget decision as much as a statistical one.
+A single annotator's label is a single opinion, and you cannot tell a confident correct call from a confident mistake. Assigning each item to several annotators lets you measure reliability and resolve errors. The common practice for African-language datasets is at least three annotators per item, with an odd number so that a simple majority can settle most cases. The Masakhane named-entity datasets used three native speakers per language under a coordinator, which is enough to catch individual slips while staying affordable for a volunteer team ([Adelani et al., 2022a](../references.md#adelani-2022)). More annotators raise reliability and cost together, so the right number is a budget decision as much as a statistical one.
 
 ## Assign work with deliberate redundancy
 

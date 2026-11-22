@@ -4,7 +4,7 @@ description: Yadda ake tattara bayanai ta hanyar APIs na hukuma, da kuma dalilin
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: 0cb52be687bd
 translated_at: 2026-09-28

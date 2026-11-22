@@ -5,7 +5,7 @@ description: Ma'anar muhimman kalmomin da aka yi amfani da su a cikin AfriPlaybo
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: 3bbe5f86c09a
 translated_at: 2026-09-28

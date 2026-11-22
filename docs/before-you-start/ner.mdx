@@ -3,8 +3,8 @@ sidebar_position: 2
 title: NER
 ready: true
 last_update:
-  date: 2026-09-26
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Named Entity Recognition
@@ -17,7 +17,7 @@ This page applies the [four steps from Before You Start](./index.md) to named en
 
 Search Hugging Face, Lanfrica, or the ACL Anthology for NER in almost any major African language and you will quickly reach two datasets:
 
-- **[MasakhaNER 2](https://arxiv.org/abs/2210.12391)** (Adelani et al., 2022): 20 languages. Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Kiswahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, and Yoruba.
+- **[MasakhaNER 2](https://arxiv.org/abs/2210.12391)** (Adelani et al., 2022): 20 languages. Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Kiswahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, and Yorùbá.
 - **[MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** (Adelani et al., 2021): the first 10 languages. Version 2 covers most of them, but version 1 is still the one to use for **Amharic**, which version 2 does not include. Its paper also explains how the annotation process was designed.
 
 The data is on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2), and the [GitHub repository](https://github.com/masakhane-io/masakhane-ner) has the annotation guidelines and evaluation scripts.
@@ -35,7 +35,7 @@ You will also find **automatically labelled ("silver") NER data** that covers ma
 - **Splits.** Fixed train, development, and test splits, so results are comparable across papers.
 - **Guidelines.** Released. Even if your language is not covered, the guidelines are the best starting point for writing your own.
 - **Quality.** Annotated by native speakers through a participatory process. The papers describe it in detail.
-- **Diacritics.** In Yoruba, Igbo, and several other languages, tone marks carry meaning. Check that your text processing keeps them, or entity boundaries will shift and results will look worse than they are.
+- **Diacritics.** In Yorùbá, Igbo, and several other languages, tone marks carry meaning. Check that your text processing keeps them, or entity boundaries will shift and results will look worse than they are.
 
 ## Step 3: Reuse, extend, or build
 

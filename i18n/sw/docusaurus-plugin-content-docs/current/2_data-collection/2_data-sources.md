@@ -4,7 +4,7 @@ description: Ramani ya mahali ambapo data ghafi kwa ajili ya mifumo ya AI ya lug
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: c0205e707565
 translated_at: 2026-09-28

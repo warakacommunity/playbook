@@ -2,13 +2,13 @@
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-09-26
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Before You Start
 
-Teams sometimes spend months collecting data that already exists. A team may collect Hausa sentiment data that [AfriSenti](https://arxiv.org/abs/2302.08956) already covers, or annotate Yoruba named entities before discovering [MasakhaNER 2](https://arxiv.org/abs/2210.12391).
+Teams sometimes spend months collecting data that already exists. A team may collect Hausa sentiment data that [AfriSenti](https://arxiv.org/abs/2302.08956) already covers, or annotate Yorùbá named entities before discovering [MasakhaNER 2](https://arxiv.org/abs/2210.12391).
 
 This happens because African-language datasets are hard to find, and the same language often appears under different names and codes. For example, Swahili has at least three codes in common use:
 
@@ -29,7 +29,7 @@ Search for your language and task together (for example, "Hausa sentiment") to f
 - **[ACL Anthology](https://aclanthology.org/)**: the main archive of NLP research papers, from the major conferences, journals, and workshops. Search for your language and task, then check each paper for a released dataset. For a larger, systematic search, the Anthology's [Python package](https://aclanthology.org/faq/api/) (`pip install acl-anthology`) gives you the metadata of every paper to filter yourself.
 - **[Lanfrica](https://lanfrica.com/)**: a continually updated catalogue of African language resources, including datasets, models, and papers.
 - **[AtlasNLP](https://lit.eecs.umich.edu/AtlasNLP/)**: a map of more than 13,000 NLP datasets described in ACL Anthology papers, which you can filter by task, language, and country. Use it to see which datasets already exist for your language or country.
-- **[Hugging Face datasets, filtered by language](https://huggingface.co/datasets?language=swa)**: replace `swa` with your language's code (`hau` Hausa, `yor` Yoruba, `amh` Amharic, `zul` isiZulu). Add a task filter, such as `text-classification`, to narrow the results.
+- **[Hugging Face datasets, filtered by language](https://huggingface.co/datasets?language=swa)**: replace `swa` with your language's code (`hau` Hausa, `yor` Yorùbá, `amh` Amharic, `zul` isiZulu). Add a task filter, such as `text-classification`, to narrow the results.
 - **[AfricaNLP workshop proceedings](https://aclanthology.org/venues/africanlp/)**: papers from the annual workshop on African-language NLP. Skim the latest year to see what is new.
 - **Google Scholar and [arXiv](https://arxiv.org/list/cs.CL/recent)**: new work often appears here first. Combine your language, task, and a date range, for example `"Hausa" sentiment dataset 2023..2026`.
 
@@ -103,4 +103,3 @@ The three pages below apply these four steps to real tasks, using well-known dat
 - [Hate speech and content safety](./hate-speech.mdx): where you must also protect annotators and users.
 
 Each page shows the date it was last reviewed. Newer datasets may have appeared since then.
-

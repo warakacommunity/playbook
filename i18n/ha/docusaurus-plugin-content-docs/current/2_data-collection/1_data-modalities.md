@@ -4,7 +4,7 @@ description: Abin da sigar bayanai ke nufi, dalilin da ya sa take zama mataki na
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: be623628188a
 translated_at: 2026-09-28

@@ -2,8 +2,8 @@
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # How to Write a Chapter
@@ -18,8 +18,9 @@ You can write in **two ways**, but there are more options (see the [How to Contr
 Both produce the same published page. The rules below are written so a Word draft and a Markdown draft turn into identical output.
 
 :::tip[The golden rule]
-**Do not type the chapter title or chapter number yourself.** The playbook adds the title and number (`# 1. Introduction`) automatically from the chapter's place in the sidebar. Your first heading is the page's *first section*, not its title. In Markdown that is `##`; in Word that is **Heading 1**.
+**One title, then sections.** Each page has exactly one title: a single `#` heading on the first line after the front matter (`# Speaker Diarization`). A `title:` field in the front matter is optional; if you add one, keep it identical to the `#` heading. Never type a chapter number; the sidebar shows the page's place in the playbook. Everything after the title is a section, starting at `##`. In Word, the title uses the **Title** style and sections start at **Heading 1**.
 :::
+
 
 ---
 
@@ -27,9 +28,11 @@ Both produce the same published page. The rules below are written so a Word draf
 
 ### Sections and subsections
 
-Headings build the structure of the page and the table of contents on the right. Because the chapter title is added for you, you start one level down:
+Headings build the structure of the page and the table of contents on the right. The page title is the only `#`; every section starts one level down:
 
 ```markdown
+# Page Title            ← the title, once (same as `title:` if the front matter has one)
+
 ## A section            ← top-level section (shows in the right-hand menu)
 
 ### A subsection        ← nested under the section above
@@ -37,12 +40,19 @@ Headings build the structure of the page and the table of contents on the right.
 #### A sub-subsection   ← use sparingly; deep nesting is hard to read
 ```
 
+
 Rules that keep pages clean:
 
-- **Never use a single `#`.** That is the chapter title, and the playbook owns it.
+- **Use a single `#` exactly once**, for the title. Don't number it (`# 3. Data Quality`); the sidebar shows the order, and numbers break when chapters move.
+
 - **Don't skip levels.** A `##` is followed by `###`, not `####`.
 - **Keep headings short.** They become menu entries; a full sentence breaks the layout.
 - **One idea per section.** If a section runs past a screen or two, split it.
+
+### Citing sources
+
+Cite in the text with the author and year inside parentheses, linked to the work's entry on the [References](../references.md) page: `([Adelani et al., 2022a](../references.md#adelani-2022))`. Use the first author's surname, `et al.` for three or more authors, and a comma before the year. For two authors, name both (`Fort & Sagot, 2010`). If the work is not yet on the References page, add an entry there in the same pull request.
+
 
 ### Admonitions: the colored callout boxes
 
@@ -134,18 +144,18 @@ You can draft in **Word** and let a maintainer convert it. To make the conversio
 
 ### Headings map one level down
 
-Because the playbook adds the chapter title automatically, **Word's Heading 1 becomes a section, not the title.** Use this mapping:
+The page title uses Word's **Title** style, so **Word's Heading 1 becomes a section, not the title.** Use this mapping:
 
 | In Word, use… | Becomes in the playbook | Markdown equivalent |
 |------|------|------|
-| *(don't add one)* | The chapter title + number | `# 1. Title` |
+| **Title** (once, at the top) | The page title | `# Title` |
 | **Heading 1** | A top-level section | `##` |
 | **Heading 2** | A subsection | `###` |
 | **Heading 3** | A sub-subsection | `####` |
 | Normal / Body text | A paragraph | plain text |
 | Bulleted / Numbered list | A list | `-` / `1.` |
 
-So: don't type a chapter title at the top of your Word file. Start straight into your first **Heading 1** section.
+So: put the title once at the top in the **Title** style, without a chapter number, then start your first **Heading 1** section.
 
 ### Admonitions in Word
 
@@ -161,8 +171,6 @@ Word has no built-in admonition, so use the convention below. The simplest, most
 ```
 
 When the document is converted, those lines survive as-is and the playbook renders them as a real colored box. Keep a blank paragraph before and after the fences, exactly as in Markdown.
-
-
 
 ### A few more Word tips
 

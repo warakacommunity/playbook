@@ -4,7 +4,7 @@ title: Kwarangwal na rubutun kima
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: 4530f59c36b7
 translated_at: 2026-09-28

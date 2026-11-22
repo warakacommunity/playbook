@@ -4,7 +4,7 @@ description: Jinsi ya kukusanya data kupitia API rasmi, na kwa nini kujenga mpan
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: 0cb52be687bd
 translated_at: 2026-09-28

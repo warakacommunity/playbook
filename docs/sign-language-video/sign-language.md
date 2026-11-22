@@ -1,5 +1,4 @@
 ---
-# wip: true
 ready: true
 title: Sign language
 sidebar_position: 2
@@ -282,21 +281,21 @@ The following are planning estimates from the editors, not measured figures. Fin
 
 ## Further reading
 
-- [Nyst (2020)](../references.md#nyst-2020): an overview of sign languages in Africa and their histories.
-- [Johnston (2010)](../references.md#johnston-2010): how a signed-language corpus moves from archive to annotated corpus, and why ID-glosses matter.
+- [Nyst, 2020](../references.md#nyst-2020): an overview of sign languages in Africa and their histories.
+- [Johnston, 2010](../references.md#johnston-2010): how a signed-language corpus moves from archive to annotated corpus, and why ID-glosses matter.
 - [BSL Corpus conventions](../references.md#bsl-corpus-2017), [Auslan guidelines](../references.md#johnston-2013) and [Corpus NGT conventions](../references.md#corpus-ngt-2020): three complete, published annotation schemes to adapt.
-- [Harris et al. (2009)](../references.md#harris-2009): research ethics with sign-language communities.
-- [AfriSign (2025)](../references.md#afrisign-2025): the reference African sign-language translation dataset.
+- [Harris et al., 2009](../references.md#harris-2009): research ethics with sign-language communities.
+- [AfriSign, 2025](../references.md#afrisign-2025): the reference African sign-language translation dataset.
 
 <details>
 <summary>Additional references</summary>
 
 - [ELAN](../references.md#wittenburg-2006): the annotation tool, and its `.eaf` format.
-- [Schembri et al. (2013)](../references.md#schembri-2013): how the BSL Corpus was built, from recruitment and consent to elicitation tasks.
+- [Schembri et al., 2013](../references.md#schembri-2013): how the BSL Corpus was built, from recruitment and consent to elicitation tasks.
 - [MPI video guidelines](../references.md#mpi-video-guidelines): encoding settings for frame-accurate annotation.
-- [WFD & WASLI (2018)](../references.md#wfd-wasli-2018): the statement on signing avatars.
-- [Camgöz et al. (2020)](../references.md#camgoz-2020): the reference recognition-and-translation architecture.
-- [Müller et al. (2023)](../references.md#muller-2023): what gloss-based translation can and cannot show.
+- [WFD & WASLI, 2018](../references.md#wfd-wasli-2018): the statement on signing avatars.
+- [Camgöz et al., 2020](../references.md#camgoz-2020): the reference recognition-and-translation architecture.
+- [Müller et al., 2023](../references.md#muller-2023): what gloss-based translation can and cannot show.
 - [WLASL](../references.md#wlasl-2020): 2,000 American Sign Language words in 21,083 videos from 119 signers, the reference isolated-sign benchmark.
 - [SignCLIP (2024)](https://arxiv.org/abs/2407.01264) and [Sign2GPT (2024)](https://arxiv.org/abs/2405.04164): retrieval and gloss-free translation.
 

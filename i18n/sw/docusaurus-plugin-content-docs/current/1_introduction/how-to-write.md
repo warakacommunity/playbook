@@ -3,10 +3,10 @@ sidebar_position: 4
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
-source_hash: e146c16c20e6
-translated_at: 2026-09-28
+source_hash: 8357cddc3344
+translated_at: 2026-11-22
 ---
 
 # Jinsi ya Kuandika Sura {#how-to-write-a-chapter}
@@ -21,7 +21,7 @@ Unaweza kuandika kwa **njia mbili**, lakini kuna chaguzi zaidi (tazama sehemu ya
 Zote mbili hutoa ukurasa uleule uliochapishwa. Sheria zilizo hapa chini zimeandikwa ili rasimu ya Word na rasimu ya Markdown zitoe matokeo yanayofanana.
 
 :::tip[Kanuni ya dhahabu]
-**Usichape kichwa cha sura au nambari ya sura wewe mwenyewe.** Kitabu cha mwongozo kinaongeza kichwa na nambari (`# 1. Introduction`) kiotomatiki kutoka kwenye nafasi ya sura katika mwambaa wa kando (sidebar). Kichwa chako cha kwanza ni *sehemu ya kwanza* ya ukurasa, si kichwa chake. Katika Markdown hiyo ni `##`; katika Word hiyo ni **Heading 1**.
+**Kichwa kimoja, kisha sehemu.** Kila ukurasa una kichwa kimoja tu: kichwa kimoja cha `#` kwenye mstari wa kwanza baada ya maelezo ya awali (front matter) (`# Speaker Diarization`). Sehemu ya `title:` katika maelezo ya awali ni ya hiari; ukiiongeza, ifanye ifanane kabisa na kichwa cha `#`. Kamwe usichape nambari ya sura; mwambaa wa kando (sidebar) unaonyesha nafasi ya ukurasa katika kitabu cha mwongozo. Kila kitu kinachofuata baada ya kichwa ni sehemu, kuanzia `##`. Katika Word, kichwa kinatumia mtindo wa **Title** na sehemu zinaanzia **Heading 1**.
 :::
 
 ---
@@ -30,9 +30,11 @@ Zote mbili hutoa ukurasa uleule uliochapishwa. Sheria zilizo hapa chini zimeandi
 
 ### Sehemu na vijisehemu {#sections-and-subsections}
 
-Vichwa vinajenga muundo wa ukurasa na yaliyomo upande wa kulia. Kwa sababu kichwa cha sura kinaongezwa kwa ajili yako, unaanza ngazi moja chini:
+Vichwa vinajenga muundo wa ukurasa na yaliyomo upande wa kulia. Kichwa cha ukurasa ndicho pekee kinachotumia `#`; kila sehemu inaanza ngazi moja chini:
 
 ```markdown
+# Page Title            ← the title, once (same as `title:` if the front matter has one)
+
 ## A section            ← top-level section (shows in the right-hand menu)
 
 ### A subsection        ← nested under the section above
@@ -42,10 +44,15 @@ Vichwa vinajenga muundo wa ukurasa na yaliyomo upande wa kulia. Kwa sababu kichw
 
 Sheria zinazofanya kurasa ziwe safi:
 
-- **Kamwe usitumie `#` moja.** Hicho ni kichwa cha sura, na kitabu cha mwongozo kinakimiliki.
+- **Tumia `#` moja mara moja tu**, kwa ajili ya kichwa. Usikipe nambari (`# 3. Data Quality`); mwambaa wa kando unaonyesha mpangilio, na nambari huharibika sura zinapohamishwa.
+
 - **Usiruke ngazi.** `##` inafuatiwa na `###`, si `####`.
 - **Weka vichwa viwe vifupi.** Vinakuwa vipengee vya menyu; sentensi kamili inaharibu mpangilio.
 - **Wazo moja kwa kila sehemu.** Ikiwa sehemu inazidi skrini moja au mbili, igawanye.
+
+### Kunukuu vyanzo {#citing-sources}
+
+Nukuu ndani ya maandishi kwa kuweka jina la mwandishi na mwaka ndani ya mabano, pamoja na kiungo kwenye ingizo la kazi hiyo katika ukurasa wa [Marejeleo (References)](../references.md): `([Adelani et al., 2022a](../references.md#adelani-2022))`. Tumia jina la ukoo (surname) la mwandishi wa kwanza, `et al.` kwa waandishi watatu au zaidi, na mkato kabla ya mwaka. Kwa waandishi wawili, wataje wote wawili (`Fort & Sagot, 2010`). Ikiwa kazi hiyo bado haipo kwenye ukurasa wa Marejeleo, ongeza ingizo lake hapo katika ombi lilelile la kuvuta (pull request).
 
 ### Visanduku vya wito (Admonitions): visanduku vya wito vyenye rangi {#admonitions-the-colored-callout-boxes}
 
@@ -85,7 +92,7 @@ You don't need to write a whole chapter to help.
 
 - Acha **mstari mtupu kabla na baada** ya kila wigo wa `:::` na kuzunguka maudhui yaliyo ndani.
 - Unaweza kuweka Markdown ya kawaida ndani: **koleza (bold)**, viungo, orodha, msimbo (code).
-- Vitumie kwa kiasi: **angalau kimoja kwa kila sehemu**, la sivyo ukurasa utasomeka kama lebo ya onyo.
+- Vitumie kwa kiasi: **kisizidi kimoja kwa kila sehemu**, la sivyo ukurasa utasomeka kama lebo ya onyo.
 
 ### Lini utumie kisanduku kipi {#when-to-use-which-box}
 
@@ -114,7 +121,7 @@ Hili ni muhimu hasa kwa sura zinazozungumzia vipengele vya kiufundi kama vile us
   ![AfricaNLP papers grew roughly fourteenfold between 2006 and 2024.](../../../../../docs/1_introduction/images/africanlp-growth.svg)
   ```
 
-- **Viungo**: unganisha kwenye kurasa nyingine kwa kutumia njia ya uhusiano (relative path) ili mchakato wa kujenga (build) uweze kuzikagua: `[Kanuni za msingi](./core-principles)`.
+- **Viungo**: unganisha kwenye kurasa nyingine kwa kutumia njia ya uhusiano (relative path) ili mchakato wa kujenga (build) uweze kuzikagua: `[Core principles](./core-principles)`.
 - **Maelezo yanayoweza kukunjwa (Collapsible detail)**: ficha maudhui marefu, ya hiari:
 
   ```markdown
@@ -137,18 +144,18 @@ Unaweza kuandaa rasimu katika **Word** na kumruhusu mtunzaji aibadilishe. Ili ku
 
 ### Vichwa vinashuka ngazi moja chini {#headings-map-one-level-down}
 
-Kwa sababu kitabu cha mwongozo kinaongeza kichwa cha sura kiotomatiki, **Heading 1 ya Word inakuwa sehemu, si kichwa.** Tumia ramani hii:
+Kichwa cha ukurasa kinatumia mtindo wa **Title** wa Word, kwa hivyo **Heading 1 ya Word inakuwa sehemu, si kichwa.** Tumia ramani hii:
 
 | Katika Word, tumia… | Inakuwa katika kitabu cha mwongozo | Sawa na Markdown |
 |------|------|------|
-| *(usiongeze)* | Kichwa cha sura + nambari | `# 1. Title` |
+| **Title** (mara moja, juu kabisa) | Kichwa cha ukurasa | `# Title` |
 | **Heading 1** | Sehemu ya ngazi ya juu | `##` |
 | **Heading 2** | Kijisehemu | `###` |
 | **Heading 3** | Kijisehemu cha ndani zaidi | `####` |
 | Maandishi ya Kawaida / Mwili | Aya | maandishi matupu |
 | Orodha ya Nukta / Nambari | Orodha | `-` / `1.` |
 
-Kwa hivyo: usichape kichwa cha sura juu ya faili yako ya Word. Anza moja kwa moja kwenye sehemu yako ya kwanza ya **Heading 1**.
+Kwa hivyo: weka kichwa mara moja juu kabisa kwa mtindo wa **Title**, bila nambari ya sura, kisha anza sehemu yako ya kwanza ya **Heading 1**.
 
 ### Visanduku vya wito (Admonitions) katika Word {#admonitions-in-word}
 
@@ -165,12 +172,10 @@ Word haina kisanduku cha wito kilichojengewa ndani, kwa hivyo tumia utaratibu ul
 
 Wakati hati inabadilishwa, mistari hiyo inabaki kama ilivyo na kitabu cha mwongozo kinaiwasilisha kama kisanduku halisi chenye rangi. Weka aya tupu kabla na baada ya wigo, sawa kabisa na katika Markdown.
 
-
-
 ### Vidokezo vichache zaidi vya Word {#a-few-more-word-tips}
 
 - **Picha**: zibandike ndani ya mstari (inline) pale zinapostahili, na uandike maelezo mafupi ya mstari mmoja chini ya kila picha ili yaweze kuwa maandishi mbadala (alt text).
-- **Viungo**: tumia viungo halisi vya Word (Ingiza → Kiungo), si URL zilizobandikwa tupu, ili zibadilishwe kwa usahihi.
+- **Viungo**: tumia viungo halisi vya Word (Insert → Link), si URL zilizobandikwa tupu, ili zibadilishwe kwa usahihi.
 - **Usighushi muundo**: epuka uwekaji nambari kwa mikono, visanduku vilivyochorwa kwa mkono, au mistari tupu ya ziada kwa ajili ya nafasi. Ruhusu mitindo ifanye kazi; mpangilio unatumika kwa ajili yako kwenye tovuti.
 
 ---

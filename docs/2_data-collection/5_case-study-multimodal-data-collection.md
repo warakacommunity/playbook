@@ -3,8 +3,8 @@ title: "Case Study: Multimodal Data Collection"
 description: How ArtELingo-28, a 28-language cross-cultural image-emotion benchmark, was actually collected, and the decisions that don't show up in the Modalities, Sources, or API sections until you try to combine them.
 ready: true
 last_update:
-  date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Case Study: Multimodal Data Collection
@@ -29,7 +29,7 @@ The entire scientific premise, that you can compare how different language commu
 
 ## Decision 3: cost and labor planning had to scale by language, not just by image
 
-For a single-language captioning dataset, the unit of collection cost is roughly "per image." Here, the unit is "per image, per language": 2,000 images annotated independently in each of 28 languages is a fundamentally different scale of labor than 2,000 images annotated once. Annotators were recruited through Amazon Mechanical Turk and compensated $0.10 per annotation (roughly $8/hour, given an average of about 45 seconds per task), and the project secured institutional review board approval and informed consent ahead of annotation, given its use of paid crowdworkers. None of those numbers would have been knowable without first deciding the multiplier (28 languages) at the collection-planning stage, which is exactly the work described in [Cost and Resource Planning](./cost-resource-planning).
+For a single-language captioning dataset, the unit of collection cost is roughly "per image." Here, the unit is "per image, per language": 2,000 images annotated independently in each of 28 languages is a fundamentally different scale of labor than 2,000 images annotated once. Annotators were recruited through Amazon Mechanical Turk and compensated \$0.10 per annotation (roughly \$8/hour, given an average of about 45 seconds per task), and the project secured institutional review board approval and informed consent ahead of annotation, given its use of paid crowdworkers. None of those numbers would have been knowable without first deciding the multiplier (28 languages) at the collection-planning stage, which is exactly the work described in [Cost and Resource Planning](./cost-resource-planning).
 
 ## Takeaways for your own multimodal project
 

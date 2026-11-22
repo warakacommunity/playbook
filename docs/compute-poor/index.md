@@ -3,7 +3,7 @@ sidebar_position: 1
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Compute-poor training and evaluation
@@ -19,8 +19,8 @@ The chapter does not tell you to want less. It tells you how to get more out of 
 Four resource profiles cover most African-language NLP work. Every technique in this chapter is discussed with the profile it fits in mind.
 
 - **Grad student / individual researcher.** Personal laptop, free Colab, occasional Kaggle notebook. Effective GPU-hours per week: 10–30.
-- **Community research team.** Shared Colab Pro (~$10/month), Kaggle team account (30 hours free GPU per week per member), occasional access to a shared institutional GPU. Effective GPU-hours per week: 40–150.
-- **Small NGO or early-stage startup.** ~$50–500/month cloud budget on GCP, AWS, or Runpod; occasional grant credits (Google TRC, Microsoft AI for Good). Effective GPU-hours per month: 200–1,500.
+- **Community research team.** Shared Colab Pro (~\$10/month), Kaggle team account (30 hours free GPU per week per member), occasional access to a shared institutional GPU. Effective GPU-hours per week: 40–150.
+- **Small NGO or early-stage startup.** ~\$50–500/month cloud budget on GCP, AWS, or Runpod; occasional grant credits (Google TRC, Microsoft AI for Good). Effective GPU-hours per month: 200–1,500.
 - **University lab.** Shared cluster with a small pool of A100 or H100 GPUs; competition for time is the real constraint, not the dollar cost. Effective GPU-hours: highly variable.
 
 Recognise which profile you are in. Techniques that make sense at profile 4 are wasteful at profile 1, and vice versa.
@@ -79,7 +79,7 @@ For prototyping, small-scale evaluation, or targets where the community explicit
 - **[OpenAI](https://platform.openai.com/), [Anthropic](https://www.anthropic.com/api), [Google (Gemini)](https://ai.google.dev/), [Mistral](https://mistral.ai/)**: general-purpose LLMs with varying African-language coverage. Measure per language; the published multilingual claims are marketing-broad, not accuracy-guaranteed.
 - **[Hugging Face Inference API](https://huggingface.co/inference-api)** and Inference Endpoints: access community-hosted models without provisioning infrastructure. Excellent for one-off runs, expensive at production scale.
 
-Cost is measured in tokens or characters, not GPU-hours; a single evaluation pass of ten thousand test examples with a mid-tier commercial API is typically $5–$50 depending on model. Compare this against the amortised cost of provisioning your own GPU before deciding.
+Cost is measured in tokens or characters, not GPU-hours; a single evaluation pass of ten thousand test examples with a mid-tier commercial API is typically \$5–\$50 depending on model. Compare this against the amortised cost of provisioning your own GPU before deciding.
 
 Warnings that always apply:
 
@@ -89,12 +89,12 @@ Warnings that always apply:
 
 ## Platform-by-platform notes
 
-- **[Google Colab](https://colab.google/)**: free tier gives limited T4 access, quota-limited. Colab Pro at ~$10/month is a 5–10x productivity multiplier for individual researchers. Pro+ at ~$50/month gives longer sessions and better GPUs. The free tier is enough for LoRA fine-tuning of small models on modest datasets; anything larger, budget for Pro.
+- **[Google Colab](https://colab.google/)**: free tier gives limited T4 access, quota-limited. Colab Pro at ~\$10/month is a 5–10x productivity multiplier for individual researchers. Pro+ at ~\$50/month gives longer sessions and better GPUs. The free tier is enough for LoRA fine-tuning of small models on modest datasets; anything larger, budget for Pro.
 - **[Kaggle Notebooks](https://www.kaggle.com/docs/notebooks)**: 30 hours per week of free GPU (T4 x2 or P100). Substantially underused by African NLP teams. Combine with Colab for higher effective throughput.
 - **[Hugging Face Spaces](https://huggingface.co/spaces)**: free CPU compute for demos; paid GPU tiers for hosted inference. Excellent for shipping a demo of a fine-tuned model without provisioning cloud infrastructure.
 - **[Google TPU Research Cloud (TRC)](https://sites.research.google/trc/about/)**: free TPU time for research projects with a lightweight application. Under-applied for by African researchers; the application takes an hour and can unlock hundreds of TPU-hours.
 - **[Microsoft AI for Good / AI for Africa](https://www.microsoft.com/en-us/ai/ai-for-good)**: periodic credit grants for community-benefit projects. Cadence varies; check current programmes.
-- **[NVIDIA Inception programme](https://www.nvidia.com/en-us/startups/)** and **[startup credits from GCP, AWS, and Azure](https://cloud.google.com/startup)**: for teams that qualify as startups; typical credit awards are $1k–$100k with varying restrictions.
+- **[NVIDIA Inception programme](https://www.nvidia.com/en-us/startups/)** and **[startup credits from GCP, AWS, and Azure](https://cloud.google.com/startup)**: for teams that qualify as startups; typical credit awards are \$1k–\$100k with varying restrictions.
 - **Community GPU pools**: several African research communities operate shared GPU access (SunbirdAI, DSN Nigeria, and others; availability changes). Search current listings; do not assume access is automatic.
 - **University clusters**: where they exist, use them. Expect competition, poor documentation, and unclear priority ordering; budget time to negotiate access and to work around cluster idiosyncrasies.
 
@@ -102,10 +102,10 @@ Warnings that always apply:
 
 Rough end-to-end budgets, all figures order-of-magnitude:
 
-- **A LoRA fine-tune of AfroXLMR-large on a MasakhaNER-2 language.** Under 24 GPU-hours on a T4 or better. Feasible on Colab free tier if the run is chunked into checkpointed segments. Total cost: $0–$10.
-- **A LoRA fine-tune of NLLB-200-distilled on LAFAND-MT for one language pair.** 24–72 GPU-hours on a V100 or better. Colab Pro or Kaggle. Total cost: $10–$50.
-- **A QLoRA fine-tune of a 7B multilingual base model.** 100–300 GPU-hours; needs a solid Colab Pro+ or a modest cloud budget. Total cost: $50–$300.
-- **Fine-tuning an MMS adapter on 20 hours of speech.** 40–100 GPU-hours; Kaggle + Colab combined can do it, or ~$40–$120 in cloud spend.
+- **A LoRA fine-tune of AfroXLMR-large on a MasakhaNER-2 language.** Under 24 GPU-hours on a T4 or better. Feasible on Colab free tier if the run is chunked into checkpointed segments. Total cost: \$0–\$10.
+- **A LoRA fine-tune of NLLB-200-distilled on LAFAND-MT for one language pair.** 24–72 GPU-hours on a V100 or better. Colab Pro or Kaggle. Total cost: \$10–\$50.
+- **A QLoRA fine-tune of a 7B multilingual base model.** 100–300 GPU-hours; needs a solid Colab Pro+ or a modest cloud budget. Total cost: \$50–\$300.
+- **Fine-tuning an MMS adapter on 20 hours of speech.** 40–100 GPU-hours; Kaggle + Colab combined can do it, or ~\$40–\$120 in cloud spend.
 - **Full-scale pretraining of a new African-language base model** (rare; do not do this without a compelling reason). 10,000+ GPU-hours; explicitly out of scope for profiles 1–2, sits at the edge of what a well-credited profile-3 team can attempt.
 
 If the budgets above look too tight for what you want to do, that is often a signal that the [cross-language transfer](../cross-language-transfer/index.md) approach or an API-based prototype is a better fit than a full training run.

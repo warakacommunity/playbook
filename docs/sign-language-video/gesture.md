@@ -1,5 +1,4 @@
 ---
-# wip: true
 ready: true
 title: Gesture
 sidebar_position: 3

@@ -4,7 +4,7 @@ description: Kile ambacho ukusanyaji data kutoka wavuti unaweza na usichoweza ku
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: b5530c2d50eb
 translated_at: 2026-09-28

@@ -4,7 +4,7 @@ title: Model card template
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Model card template

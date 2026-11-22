@@ -3,7 +3,7 @@ title: Usimamizi wa Mradi
 ready: true
 last_update:
   date: 2026-09-26
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: f5df8e4cfff4
 translated_at: 2026-09-28

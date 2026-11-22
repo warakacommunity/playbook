@@ -4,18 +4,16 @@
 // data instead of its "Oct 14, 2018 by Author (Simulated during dev for
 // better perf)" dev-mode placeholder.
 //
-// Author is ALWAYS taken from `git log -1 --format=%an` on the specific file
-// (falls back to FALLBACK_AUTHOR if git returns nothing). This keeps
-// attribution honest: whoever last committed the file is credited by name.
+// Author: kept from the existing front matter when present (never overwritten);
+// otherwise `git log -1 --format=%aN` (mailmap-aware; see .mailmap), else FALLBACK_AUTHOR.
 //
-// Date priority:
-//   1. `*Last reviewed: YYYY-MM-DD*` line in the first 30 lines of the body
-//      (author-set, authoritative for editorial freshness).
-//   2. `git log -1 --format=%cs` on the file.
-//   3. FALLBACK_DATE.
+// Date rule: the date only changes when the page's content changes.
+//   - content unchanged vs the committed (HEAD) version -> keep the existing date
+//   - content changed -> today, or the page's `*Last reviewed: YYYY-MM-DD*` line
+//     (first 30 lines of the body) when it has one
+//   - not tracked yet (new or renamed) -> keep the date it declares, else today
+// Only the body is compared; front-matter-only edits do not count as content changes.
 //
-// The script REFRESHES the last_update block on every run (overwrites the
-// existing one) so the footer stays in sync with the most recent commit.
 // Wired as `prestart` and `prebuild` in package.json.
 
 import { promises as fs } from "node:fs";
@@ -83,7 +81,10 @@ function gitLastUpdateFor(absPath) {
     const rel = path.relative(REPO_ROOT, absPath);
     const out = execFileSync(
       "git",
-      ["log", "-1", "--format=%cs\x1f%an", "--", rel],
+      // --follow + -M100% + --diff-filter=AMC: follow the file across renames and
+      // skip pure (100%) renames, so moving a page keeps its real author; a copy,
+      // a new file or any content edit still counts as authorship.
+      ["log", "-1", "--follow", "-M100%", "--diff-filter=AMC", "--format=%cs\x1f%aN", "--", rel],
       { cwd: REPO_ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
     ).trim();
     if (!out) return null;
@@ -93,6 +94,29 @@ function gitLastUpdateFor(absPath) {
   } catch {
     return null;
   }
+}
+
+const TODAY = new Date().toISOString().slice(0, 10);
+
+// The committed (HEAD) version of a file, or null when it is not tracked yet.
+function headVersion(absPath) {
+  try {
+    const rel = path.relative(REPO_ROOT, absPath).split(path.sep).join("/");
+    return execFileSync("git", ["show", `HEAD:${rel}`], {
+      cwd: REPO_ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"],
+    });
+  } catch {
+    return null;
+  }
+}
+
+// A file's content for change detection: the body only (everything after the
+// front matter), so front-matter-only edits (flags, comments, last_update) never
+// move the date.
+function contentOf(raw) {
+  const m = raw.match(FRONTMATTER_RE);
+  // Whitespace-only edits (blank lines, trailing spaces) do not count either.
+  return (m ? raw.slice(m[0].length) : raw).replace(/\s+/g, " ").trim();
 }
 
 function serializeLastUpdate(date, author) {
@@ -109,9 +133,27 @@ async function processFile(file) {
   const reviewed = extractReviewedDate(rest);
   const gitInfo = gitLastUpdateFor(file);
 
-  const date =
-    reviewed || (gitInfo && gitInfo.date) || FALLBACK_DATE;
-  const author = (gitInfo && gitInfo.author) || FALLBACK_AUTHOR;
+  // A file with no git history yet (new or renamed, not yet committed) keeps
+  // whatever last_update it already declares instead of the fallback.
+  const existing = {
+    date: (frontmatter.match(/^last_update:\s*\n(?:[ \t]+.*\n)*?[ \t]+date:\s*(\S+)/m) || [])[1],
+    author: (frontmatter.match(/^last_update:\s*\n(?:[ \t]+.*\n)*?[ \t]+author:\s*(.+?)\s*$/m) || [])[1],
+  };
+  // The date only moves when the page's body changes, compared with the
+  // committed (HEAD) version (front-matter-only edits do not count):
+  //   unchanged             -> keep the existing date
+  //   changed               -> today (or the page's own "Last reviewed" date)
+  //   new / not yet tracked -> keep the date it declares, else today
+  const head = headVersion(file);
+  const changed = head === null ? null : contentOf(head) !== contentOf(raw);
+  const date = changed === false
+    ? existing.date || (gitInfo && gitInfo.date) || FALLBACK_DATE
+    : changed === true
+      ? reviewed || TODAY
+      : existing.date || reviewed || TODAY;
+  // An author already declared in the front matter is never overwritten (chapter
+  // credit stays with whoever it was given to); git only fills it in when missing.
+  const author = existing.author || (gitInfo && gitInfo.author) || FALLBACK_AUTHOR;
   const source = reviewed
     ? gitInfo
       ? "reviewed+git-author"

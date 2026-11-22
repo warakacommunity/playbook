@@ -3,7 +3,7 @@ sidebar_position: 2
 slug: /introduction
 ready: true
 last_update:
-  date: 2026-09-27
+  date: 2026-11-22
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -19,7 +19,8 @@ This playbook is open source and community-owned. You don't need to write a whol
 
 Africa is home to almost a third of the world's living languages: about 2,140 of the roughly 7,160 spoken on Earth ([Ethnologue, 2024](../references.md#ethnologue-2024)). Most of them remain out of reach of the systems now reshaping how the rest of the world reads, writes, searches, translates, and speaks. Even the best-supported, such as Swahili, Hausa and Amharic, lag far behind high-resource languages. When a language model mangles Yorùbá, Chichewa, or Wolof, the cause is usually not the model but the data. The text and speech these systems learn from barely exist in a usable form.
 
-[Joshi et al. (2020)](../references.md#joshi-2020) sort the world's languages into six tiers by how many resources they have. The bottom tier, the *left-behinds*, with essentially no labelled data and little prospect of being served by current methods, holds the overwhelming majority of languages, and African languages crowd into it. Most have no annotated corpus, no benchmark, no tools. Many have tens of millions of speakers. What they lack is data, because almost no one has built it. The picture still holds, though the field now treats *low-resource* as multidimensional: a matter of tools, speakers, funding, and institutional support as much as raw data, with no single agreed definition ([Ranathunga & de Silva, 2022](../references.md#ranathunga-desilva-2022); [Nigatu et al., 2024](../references.md#nigatu-2024)).
+The world's languages can be sorted into six tiers by how many resources they have ([Joshi et al., 2020](../references.md#joshi-2020)). The bottom tier, the *left-behinds*, with essentially no labelled data and little prospect of being served by current methods, holds the overwhelming majority of languages, and African languages crowd into it. Most have no annotated corpus, no benchmark, no tools. Many have tens of millions of speakers. What they lack is data, because almost no one has built it. The picture still holds, though the field now treats *low-resource* as multidimensional: a matter of tools, speakers, funding, and institutional support as much as raw data, with no single agreed definition ([Ranathunga & de Silva, 2022](../references.md#ranathunga-desilva-2022); [Nigatu et al., 2024](../references.md#nigatu-2024)).
+
 
 ![Joshi et al.'s six language resource classes, plotted by how much labelled and unlabelled data each has. Class 0, the left-behinds, holds the overwhelming majority of languages and sits at the bottom with almost no data; African languages crowd into classes 0 and 1. The better-resourced classes hold only a handful of languages each.](images/africanlp-language-classes.svg)
 
@@ -27,7 +28,8 @@ Africa is home to almost a third of the world's living languages: about 2,140 of
 
 When a language has no data, the instinct is to go and scrape more of it: crawl a wider slice of the web and trust that coverage will follow. For African languages, that instinct fails.
 
-The web does not contain much African-language text, and what it contains is thin and noisy. When [Kreutzer et al. (2022)](../references.md#kreutzer-2022) audited the large multilingual crawls everyone trains on, they found that for many low-resource languages a large share of the data was mislabelled, machine-translated, or not language at all. At the tail, quality collapses along with quantity.
+The web does not contain much African-language text, and what it contains is thin and noisy. An audit of the large multilingual crawls everyone trains on found that for many low-resource languages a large share of the data was mislabelled, machine-translated, or not language at all ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). At the tail, quality collapses along with quantity.
+
 
 The only sure way to get high-quality data for African languages is to build it with the people who speak them, the people who know the words, the grammar, the idioms, and the culture. One of the main obstacles in AfricaNLP is that the people who speak these languages are not the ones building the data. The people who build it often cannot tell what is correct, what is offensive, or what is missing. They do not know what matters to the communities behind the language, or how to keep the data they collect from causing harm.
 

@@ -2,7 +2,7 @@
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-09-27
+  date: 2026-11-22
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -102,7 +102,8 @@ Chapters are Markdown files under `docs/`, grouped into folders by topic. To add
 
 ```markdown
 ---
-sidebar_position: 3
+title: Your Chapter Title
+ready: true
 ---
 
 # Your Chapter Title
@@ -110,11 +111,12 @@ sidebar_position: 3
 Your content here.
 ```
 
-`sidebar_position` controls where the page appears in the sidebar. Pick the number for the slot you want, and bump the pages after it if needed.
+Leave `ready: true` out while the page is still being written: until it is there, the site shows an "In development" placeholder instead of the page body. The "Last updated" date and author are filled in automatically from git history, so you do not need to add them.
 
-### Step 6: The sidebar updates itself
 
-The sidebar is generated automatically from the folder structure and each page's `sidebar_position`, so there is nothing extra to edit. To rename a folder's label, edit its `_category_.json`.
+### Step 6: Add the page to the sidebar
+
+The sidebar is listed explicitly in `sidebars.js`, so a new page does not appear until you add it there. Find the chapter it belongs to and add the page's id (its path under `docs/`, without the extension or number prefix, e.g. `'image-data/keypoints'`) in the position you want. Editing an existing page needs no sidebar change.
 
 ### Step 7: Preview your change
 

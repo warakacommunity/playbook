@@ -4,7 +4,7 @@ description: Abin da kwashe bayanai daga yanar gizo zai iya da wanda ba zai iya 
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: b5530c2d50eb
 translated_at: 2026-09-28

@@ -4,7 +4,7 @@ description: Taswirar inda ainihin ɗanyun bayanai (raw data) na tsarin fasahar 
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: c0205e707565
 translated_at: 2026-09-28

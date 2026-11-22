@@ -1,17 +1,30 @@
 ---
-wip: true
+ready: true
 sidebar_position: 2
 title: Retrospective template
 last_update:
-  date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Retrospective template
 
-*Copy this file, rename to your project's slug, remove the `draft: true` line when the answers are ready.*
+*Last reviewed: 2026-11-22.*
 
-## Front matter
+The retrospective structure every page in the [Case Studies](./index.md) chapter follows: a list of project facts, then seventeen questions about what actually happened. Same structure for every project, so readers can compare across them.
+
+## How to use this template
+
+1. Copy this file to `docs/case-studies/<project-slug>.md` and change `title` in its front matter (`last_update` is generated automatically from git history). Leave `ready: true` out while the page is being written: without it, the site shows an "In development" placeholder instead of the page body. Add it when every question is answered, or, for a public-record draft, as described in step 4.
+2. Fill in the project facts. Link to the paper, dataset card, guidelines, and repository rather than restating them.
+3. Answer the seventeen questions. Short and honest beats long and polished.
+4. If you are not a project lead, mark the page as a **public-record draft** with a warning banner, cite your sources, and mark every unconfirmed answer as awaiting project-lead review (see [MasakhaNER 1 → 2](./masakhaner.md) for the pattern). Once every unconfirmed answer is clearly marked in this way, add `ready: true` so the draft is published.
+5. Add the page id (for example `'case-studies/<project-slug>'`) to the Case Studies entry in `sidebars.js`; the chapter's pages are listed there explicitly, so a page that is not added will not appear in the sidebar.
+6. Open a pull request and tag the project leads for review before merging.
+
+## Project facts
+
+*Facts, not reflection. One or two lines each, with a link where a document already exists.*
 
 - **Project name:**
 - **Task and modality:**
@@ -19,7 +32,13 @@ last_update:
 - **Release date(s):**
 - **Canonical paper / repo / dataset URL(s):**
 - **Project leads (attributable):**
-- **License:**
+- **Licence:** the licence, why it was chosen, any restrictions inherited from sources, and any terms negotiated with communities.
+- **Communities and partners:** who speaks the languages, which communities or organisations were involved, and how they took part (consulted, co-designed, annotated, co-own the data).
+- **Data sources:** where the raw data came from (web crawl, social media, broadcast, books, elicitation, recordings), in what volume, and any source that was dropped and why.
+- **Consent and permissions:** how individual and community consent was obtained, from whom, and what contributors were told about reuse. Link the consent form if public ([consent form template](../templates/consent-form.md)).
+- **Guidelines and revisions:** link to the guidelines, the number of versions, and the one or two changes that mattered most ([annotation guidelines template](../templates/annotation-guidelines.md)).
+- **Agreement and quality figures:** the agreement metric used, the figure per language (not only the average), the adjudication process, and any quality checks on the final release.
+
 
 ## The seventeen questions
 
@@ -31,7 +50,8 @@ Answer each. Skip nothing. If a question does not apply, say so and why in one s
 
 ### 2. Who was on the team?
 
-*Total headcount, roles (lead annotator, native-speaker annotator, ML engineer, project manager, community liaison), and how the team was assembled: recruited how, from where, paid or volunteer.*
+*Total headcount, roles (lead annotator, native-speaker annotator, ML engineer, project manager, community liaison), and how the team was assembled: recruited how, from where, how many annotators per language, how they were screened and trained, the pay rate or volunteer arrangement, and how credit was given.*
+
 
 ### 3. How long did it take? (Planned vs. actual)
 
@@ -91,7 +111,8 @@ Answer each. Skip nothing. If a question does not apply, say so and why in one s
 
 ### 17. What is the current state of the project?
 
-*Actively maintained, in caretaker mode, archived, superseded. If superseded, by what.*
+*Actively maintained, in caretaker mode, archived, superseded. If superseded, by what. Say where the data is hosted, which versions have been released, who maintains it now, and how errors are reported ([dataset card template](../templates/dataset-card.md), [sustainability plan template](../templates/sustainability-plan.md)).*
+
 
 ## Appendix (optional)
 

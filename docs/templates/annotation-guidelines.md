@@ -4,7 +4,7 @@ title: Annotation guidelines template
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Annotation guidelines template
@@ -31,7 +31,7 @@ Motivated by the [Annotation Design](../3_annotation-design/annotation-task-desi
 
 ## 1. What we are annotating and why
 
-- **The task in one sentence:** [E.g., "Classify each Twitter post in Hausa, Igbo, or Yoruba as positive, negative, or neutral sentiment."]
+- **The task in one sentence:** [E.g., "Classify each Twitter post in Hausa, Igbo, or Yorùbá as positive, negative, or neutral sentiment."]
 - **What the annotated corpus will be used for:** [Training a specific model, benchmark release, downstream deployment. Be specific; annotators annotate differently when they know the use case.]
 - **What the corpus is NOT for:** [Avoid uses the community has agreed on. Explicit here helps the annotator make judgement calls at the margin.]
 - **Reference project(s) this is modelled on:** [E.g., "MasakhaNER 2 guidelines, adapted for [DOMAIN]."]

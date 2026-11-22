@@ -4,7 +4,7 @@ description: Maana ya muundo wa data (data modality), kwa nini ni uamuzi wa kwan
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: be623628188a
 translated_at: 2026-09-28

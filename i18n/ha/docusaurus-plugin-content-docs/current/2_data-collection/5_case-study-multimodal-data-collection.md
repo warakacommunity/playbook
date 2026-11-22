@@ -4,7 +4,7 @@ description: Yadda aka tattara ArtELingo-28, ma'aunin gwaji na al'adu daban-daba
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: d8b94cc47ea0
 translated_at: 2026-09-28

@@ -4,7 +4,7 @@ description: What data modality means, why it's the first fork in the road for a
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Data Modalities

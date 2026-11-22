@@ -3,8 +3,8 @@ title: Text
 sidebar_label: Overview
 ready: true
 last_update:
-  date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Text
@@ -22,7 +22,9 @@ groundwork; these pages differ only in what is **labelled** and how it is **eval
 - Licensing & toxic-content filtering
 
 ## Tasks
-- **Text classification & labeling** – (sentiment, emotion, hate speech, topic, intent)
+
+- **Text classification & labelling** – (sentiment, emotion, hate speech, topic, [intent](../11_text-classification/intent-classification.md))
 - **Text generation, summarization & QA** – (open generation, summarization, question answering)
 - **Machine translation & parallel corpora** – (parallel mining, alignment, human translation)
-- **Sequence labeling** – (named-entity recognition, part-of-speech, chunking)
+- **[Sequence labelling](../sequence-labelling/index.md)** – ([named-entity recognition](../sequence-labelling/ner.md), [part-of-speech](../sequence-labelling/pos.md), [chunking](../sequence-labelling/index.md#chunking-and-shallow-parsing))
+

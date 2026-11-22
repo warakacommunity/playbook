@@ -4,29 +4,29 @@ title: Edge devices and cheap-hardware inference
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Edge devices and cheap-hardware inference
 
 *Last reviewed: 2026-07-07.*
 
-Most published NLP benchmarks are run on hardware nobody in the target African-language deployment context owns. A 200 ms latency claim on an A100 GPU is not a claim about what your user experiences on a $50 phone. This page is the practical guide to making models run on the hardware that actually reaches African users: Android Go, mid-range Android, single-board computers running as village-scale servers, and everything in between. The [offline chapter](./offline.md) is about *what the app does* when connectivity is bad; this chapter is about *how the model runs* on hardware that is cheap.
+Most published NLP benchmarks are run on hardware nobody in the target African-language deployment context owns. A 200 ms latency claim on an A100 GPU is not a claim about what your user experiences on a \$50 phone. This page is the practical guide to making models run on the hardware that actually reaches African users: Android Go, mid-range Android, single-board computers running as village-scale servers, and everything in between. The [offline chapter](./offline.md) is about *what the app does* when connectivity is bad; this chapter is about *how the model runs* on hardware that is cheap.
 
 ## The phone tier map: the deployment surface
 
 There is no single "African phone" any more than there is a single European phone; but the practical device mix is heavily skewed toward the low end of what the ML press treats as normal. Design against the real distribution, not the median press review.
 
-- **Android Go phones (2 GB RAM, ARM Cortex-A53 class, no NNAPI).** Sub-$80 handsets. Still the fastest-growing tier in many African markets. Inference budget: under 100 MB in RAM, under 200 MB on disk, no acceleration.
-- **Mid-range Android (4-6 GB RAM, ARM Cortex-A75 class, NNAPI available on newer devices).** $80-$300 handsets. The majority tier in urban markets today. Inference budget: under 400 MB in RAM, under 800 MB on disk, NNAPI or on-device NPU on Snapdragon-8-Gen-adjacent chipsets.
-- **High-end Android and modern iOS.** $300+. The lucrative tier commercial products target, and a shrinking share of the actual African deployment surface if reach matters. Inference budget: multi-GB models feasible, GPU or on-device NPU available.
+- **Android Go phones (2 GB RAM, ARM Cortex-A53 class, no NNAPI).** Sub-\$80 handsets. Still the fastest-growing tier in many African markets. Inference budget: under 100 MB in RAM, under 200 MB on disk, no acceleration.
+- **Mid-range Android (4-6 GB RAM, ARM Cortex-A75 class, NNAPI available on newer devices).** \$80-\$300 handsets. The majority tier in urban markets today. Inference budget: under 400 MB in RAM, under 800 MB on disk, NNAPI or on-device NPU on Snapdragon-8-Gen-adjacent chipsets.
+- **High-end Android and modern iOS.** \$300+. The lucrative tier commercial products target, and a shrinking share of the actual African deployment surface if reach matters. Inference budget: multi-GB models feasible, GPU or on-device NPU available.
 - **KaiOS feature phones (Cat B4B) with Firefox OS heritage.** 512 MB - 1 GB RAM. A large residual user base for text-only NLP use cases via web app or PWA. Inference budget: send-to-server, essentially no on-device NLP.
 - **Basic feature phones (no smart OS).** Text via SMS or USSD only; the [SMS/USSD/WhatsApp chapter](./sms-ussd-whatsapp.md) is the design reference.
 
 For non-phone edge deployment (village-scale or clinic-scale server workloads):
 
-- **Raspberry Pi 4 / 5 (4-8 GB RAM, no GPU).** ~$50-$100. Widely deployed as edge servers where mains power is intermittent but not absent.
-- **Jetson Nano / Orin Nano (4-8 GB RAM, small NVIDIA GPU).** ~$150-$500. The workhorse for on-device speech and vision at a village or clinic scale.
+- **Raspberry Pi 4 / 5 (4-8 GB RAM, no GPU).** ~\$50-\$100. Widely deployed as edge servers where mains power is intermittent but not absent.
+- **Jetson Nano / Orin Nano (4-8 GB RAM, small NVIDIA GPU).** ~\$150-\$500. The workhorse for on-device speech and vision at a village or clinic scale.
 - **Old laptops (i5/i7 with 8-16 GB RAM, no GPU).** The de-facto edge-server hardware for many community projects; almost free at second-hand market rates.
 
 Deployment code that targets one tier will not run acceptably on the others. Decide up front which tiers the deployment must support, and design against the lowest one that matters.

@@ -4,7 +4,7 @@ sidebar_position: 2
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Visual question answering
@@ -82,7 +82,7 @@ VQA data is expensive per-record because every record touches an image, a questi
 ## Known limitations to watch for
 
 - **Translated benchmarks over-report quality.** A model that scores well on HaVQA is scoring well on Hausa translations of Visual Genome images, not on Hausa questions about Hausa scenes. The gap between the two settings is large and consistently under-reported.
-- **Multimodal LLMs hallucinate confidently in low-resource languages.** Prompting an MLLM in Yoruba often produces a fluent, grammatical, plausible-looking, and factually wrong answer. Fluency is not a signal of correctness in this class of model on this class of language.
+- **Multimodal LLMs hallucinate confidently in low-resource languages.** Prompting an MLLM in Yorùbá often produces a fluent, grammatical, plausible-looking, and factually wrong answer. Fluency is not a signal of correctness in this class of model on this class of language.
 - **Image bias is not language bias.** A model that handles Hausa questions well on Western images may fail catastrophically on African market scenes, agricultural imagery, or traditional dress, because the visual encoder was trained on a Western-heavy corpus, not because of the language. Diagnose language failure and image failure separately.
 - **VQA scoring credits partial matches unequally.** The classic VQA score (10 annotators, credit for matching 3+) does not translate cleanly to African-language settings where morphological variation multiplies acceptable forms. Report accuracy alongside human agreement on a random sample; do not rely on a single automatic number.
 - **Counting questions are the model's blind spot.** MLLMs consistently underperform on "how many" questions across all languages. If your use case is counting-heavy (agriculture, retail inventory, medical imaging), measure this specifically before scoping.

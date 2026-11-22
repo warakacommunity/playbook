@@ -3,7 +3,7 @@ sidebar_position: 6
 ready: true
 last_update:
   date: 2026-09-26
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: 09681a8900be
 translated_at: 2026-09-28

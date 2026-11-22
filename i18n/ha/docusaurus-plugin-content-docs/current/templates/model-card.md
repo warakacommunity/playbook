@@ -4,7 +4,7 @@ title: Samfurin katin ƙirar fasaha
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: 625694bf6ec6
 translated_at: 2026-09-28

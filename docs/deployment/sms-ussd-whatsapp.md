@@ -4,7 +4,7 @@ title: SMS, USSD, and WhatsApp
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # SMS, USSD, and WhatsApp as NLP surfaces
@@ -35,7 +35,7 @@ Each channel serves a different user need. Design for the channel your users are
 
 **What SMS is good for.** One-shot outbound notifications (appointment reminders, exam results, market prices, weather alerts). Inbound short reports (crop condition, health check-in). Any use case where the transaction is *complete in one message each way* and the recipient does not need to be online.
 
-**What SMS is bad for.** Multi-turn dialog. Complex information exchange. Anything requiring diacritics (the GSM-7 character set does not include the tone marks and diacritics load-bearing in Yoruba, Igbo, and many other African languages; falling back to UCS-2 works but halves the effective message length and doubles the per-message cost).
+**What SMS is bad for.** Multi-turn dialog. Complex information exchange. Anything requiring diacritics (the GSM-7 character set does not include the tone marks and diacritics load-bearing in Yorùbá, Igbo, and many other African languages; falling back to UCS-2 works but halves the effective message length and doubles the per-message cost).
 
 **NLP design implications:**
 
@@ -104,7 +104,7 @@ Across all three channels, the same set of NLP problems show up amplified:
 2. **Assuming SMS or USSD input is in standard orthography.** It never is. Train on real user text or budget for aggressive input normalisation.
 3. **Requiring perfect language identification at high accuracy** when the input is short, code-switched, and noisy. Design the downstream flow to degrade gracefully on LID uncertainty (offer language selection as a fallback).
 4. **Long USSD menu trees.** Depth-first navigation runs out of session budget. Design flat and let the model route from a free-text field where possible.
-5. **Ignoring diacritic loss.** A model whose outputs are semantically correct but drop tone marks may be actively misleading in Yoruba or Igbo. Handle diacritic reconstruction at the response layer if the channel character set drops them.
+5. **Ignoring diacritic loss.** A model whose outputs are semantically correct but drop tone marks may be actively misleading in Yorùbá or Igbo. Handle diacritic reconstruction at the response layer if the channel character set drops them.
 6. **Using outbound WhatsApp templates for anything that requires personalisation.** Templates are strict; the model output has to fit the template placeholder structure. Design around this.
 7. **Not testing on real handsets and real network conditions.** Emulators do not exercise the character-encoding fallbacks, session timeouts, or delivery-order issues that matter in production.
 

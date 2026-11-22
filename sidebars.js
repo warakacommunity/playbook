@@ -95,7 +95,7 @@ const sidebars = {
         ]),
         chapter('Data Collection', '2_data-collection'),
         chapter('Annotation Design', '3_annotation-design', [templateDoc('annotation-guidelines', 'Annotation guidelines', 'annotation-design')]),
-        chapterIndexed('Data Quality', 'data-quality/index', ['data-quality/equipment-setup']),
+        chapterIndexed('Data Quality', 'data-quality/index', ['data-quality/quality-management']),
         chapter('Community', '10_community-collaboration'),
       ],
     },
@@ -112,8 +112,13 @@ const sidebars = {
             'text-classification/sentiment-analysis',
             'text-classification/emotion-analysis',
             'text-classification/hate-speech-analysis',
+            'text-classification/intent-classification',
           ],
         },
+      ]),
+      chapterIndexed('Sequence Labelling', 'sequence-labelling/index', [
+        'sequence-labelling/ner',
+        'sequence-labelling/pos',
       ]),
       chapterIndexed('Text Generation', 'text-generation/index', [
         'text-generation/generation',
@@ -165,7 +170,7 @@ const sidebars = {
         templateDoc('advisory-annotation-guidelines', 'Advisory annotation guidelines', 'agri-advisory'),
       ]),
       chapterIndexed('LLM-Assisted Data', 'llm-assisted-task/index', [
-        'llm-assisted-task/equipment-setup',
+        'llm-assisted-task/synthetic-data',
       ]),
     ]),
 

@@ -1,5 +1,4 @@
 ---
-# wip: true
 ready: true
 title: Image-Text
 last_update:

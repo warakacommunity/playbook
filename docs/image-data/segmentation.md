@@ -1,5 +1,4 @@
 ---
-# wip: true
 ready: true
 title: Segmentation
 sidebar_position: 4

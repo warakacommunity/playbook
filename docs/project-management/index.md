@@ -2,8 +2,8 @@
 title: Project Management
 ready: true
 last_update:
-  date: 2026-09-26
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Project Management
@@ -20,7 +20,7 @@ Mistakes made before collection are the most expensive, because every later step
 
 **Write down the goal and how you will know you are finished.** "A 5,000-sentence Yorùbá sentiment dataset, three annotators per item, inter-annotator agreement above 0.6, released under CC BY 4.0 by December" is a goal you can plan against. "Improve Yorùbá NLP" is not. A concrete goal sets the scale, the budget, and the stopping point, and it stops the project from growing until it runs out of money or volunteers.
 
-**Name the language precisely:** the language, script, regional variety, and register. Swahili collected from Tanzanian news is not interchangeable with Kenyan social-media Swahili, and a model trained on one will underperform on the other. One language done well is usually better than three done badly. Multi-language projects are possible, but they are coordination problems first: MasakhaNER 2 reached 20 languages by running each language as its own sub-team under a shared protocol ([Adelani et al., 2022](../references.md#adelani-2022)).
+**Name the language precisely:** the language, script, regional variety, and register. Swahili collected from Tanzanian news is not interchangeable with Kenyan social-media Swahili, and a model trained on one will underperform on the other. One language done well is usually better than three done badly. Multi-language projects are possible, but they are coordination problems first: MasakhaNER 2 reached 20 languages by running each language as its own sub-team under a shared protocol ([Adelani et al., 2022a](../references.md#adelani-2022)).
 
 **Decide scale, modality, and task together**, because they trade off against each other: how much data, in what form (text, speech, or images), and with what labels. Size the project to the team and budget you have. A small, clean, well-documented dataset is worth more than a large, noisy one, and quality problems are worst in large web-crawled collections for low-resource languages ([Kreutzer et al., 2022](../references.md#kreutzer-2022)).
 

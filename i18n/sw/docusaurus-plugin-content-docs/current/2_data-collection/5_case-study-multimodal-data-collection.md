@@ -4,7 +4,7 @@ description: Jinsi ArtELingo-28, kigezo cha picha na hisia cha kitamaduni mtambu
 ready: true
 last_update:
   date: 2026-09-24
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: d8b94cc47ea0
 translated_at: 2026-09-28

@@ -427,6 +427,9 @@ const config = {
           // Governance templates moved from the Documentation chapter to the Governance Toolkit.
           { from: "/documentation/contributor-agreement", to: "/templates/contributor-agreement" },
           { from: "/documentation/sustainability-plan", to: "/templates/sustainability-plan" },
+          // Template-leftover filenames renamed to match their page titles.
+          { from: "/llm-assisted-task/equipment-setup", to: "/llm-assisted-task/synthetic-data" },
+          { from: "/data-quality/equipment-setup", to: "/data-quality/quality-management" },
           // Worked examples dropped when Before You Start was cut to three.
           ...["asr", "machine-translation", "ocr", "qa", "tts"].map((slug) => ({
             from: `/before-you-start/${slug}`,

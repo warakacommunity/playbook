@@ -3,7 +3,7 @@ title: Annotation Task Design and Human Factors
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-22
   author: Idris Abdulmumin
 ---
 
@@ -13,7 +13,7 @@ The shape of an annotation task decides its quality long before the first label 
 
 ## Estimate task complexity before you scale
 
-Every annotation decision carries a cognitive cost, and that cost compounds over thousands of items. A binary judgment, such as whether a text is offensive or not, is far cheaper than a multi-label one, such as assigning all applicable emotions from a set of eight, which is cheaper again than span-level work like marking every named entity and its type. Estimate the complexity honestly, because it drives both the budget and the error rate. Where a task is genuinely complex, break it into a sequence of simpler decisions rather than asking for everything at once. The Masakhane named-entity effort kept its per-language tasks tractable by giving each language its own small team working to one shared, simple protocol rather than a single sprawling labelling scheme ([Adelani et al., 2022](../references.md#adelani-2022)). Use the pilot to measure the real time per item, and let that number, not optimism, set the schedule.
+Every annotation decision carries a cognitive cost, and that cost compounds over thousands of items. A binary judgment, such as whether a text is offensive or not, is far cheaper than a multi-label one, such as assigning all applicable emotions from a set of eight, which is cheaper again than span-level work like marking every named entity and its type. Estimate the complexity honestly, because it drives both the budget and the error rate. Where a task is genuinely complex, break it into a sequence of simpler decisions rather than asking for everything at once. The Masakhane named-entity effort kept its per-language tasks tractable by giving each language its own small team working to one shared, simple protocol rather than a single sprawling labelling scheme ([Adelani et al., 2022a](../references.md#adelani-2022)). Use the pilot to measure the real time per item, and let that number, not optimism, set the schedule.
 
 ## Design against annotator fatigue
 

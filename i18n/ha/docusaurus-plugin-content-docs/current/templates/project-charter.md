@@ -4,7 +4,7 @@ title: Samfurin kundin tsarin aiki
 ready: true
 last_update:
   date: 2026-07-07
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 translation_status: machine
 source_hash: 75c54fad58e2
 translated_at: 2026-09-28

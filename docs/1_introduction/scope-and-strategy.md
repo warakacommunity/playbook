@@ -3,7 +3,7 @@ sidebar_position: 6
 ready: true
 last_update:
   date: 2026-09-26
-  author: Shamsudddeen Hassan Muhammad
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # What this playbook is (and isn't)

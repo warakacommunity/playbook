@@ -2,8 +2,8 @@
 title: Text-to-Speech
 ready: true
 last_update:
-  date: 2026-09-26
-  author: Shamsudddeen Hassan Muhammad
+  date: 2026-11-22
+  author: Shamsuddeen Hassan Muhammad
 ---
 
 # Text-to-Speech
@@ -33,7 +33,7 @@ Keep the audio itself consistent: a single speaker, one sample rate (22.05 kHz i
 Phonetic coverage is the reason a TTS corpus cannot be assembled from whatever text is convenient. The prompts must contain every phoneme of the target language, and every phoneme in every position (word-initial, medial, word-final) enough times for the model to learn it. What "enough" means depends on the language.
 
 - **Bantu languages** (Kiswahili, Kinyarwanda, isiZulu, Chishona and relatives) have relatively small consonant inventories but rich vowel-length and tone contrasts. Aim for at least twenty-five instances of every phoneme in every position; more is safer for the tone contrasts, which sit on top of the segmental phonemes and need their own coverage.
-- **Volta-Niger languages** (Yoruba, Igbo, Ewe, Twi, Fon) carry lexical tone and vowel harmony. Prompts must exercise every tone-vowel combination; a script that covers the segments but not the tone patterns produces a voice that reads words correctly but wrongly.
+- **Volta-Niger languages** (Yorùbá, Igbo, Ewe, Twi, Fon) carry lexical tone and vowel harmony. Prompts must exercise every tone-vowel combination; a script that covers the segments but not the tone patterns produces a voice that reads words correctly but wrongly.
 - **Chadic languages** (Hausa, and its Ajami-written variants) mix tone with implosive and ejective consonants (`ɓ`, `ɗ`, `ƙ`, `ƴ`) that many text sources drop or misspell. Verify prompts against a linguistic reference before recording; typographic hooks are load-bearing.
 - **Ethiopic Semitic** (Amharic, Tigrinya) has gemination and pharyngeal or ejective consonants that Latin transliteration mangles. Prompts should be in Ge'ez script from the start; converting from Latin transliterations at read time introduces inconsistency.
 - **Nilotic and other tonal languages** (Dholuo, Luganda, Setswana with implosives): treat as with Volta-Niger: tone-vowel coverage is a separate constraint from segmental coverage.

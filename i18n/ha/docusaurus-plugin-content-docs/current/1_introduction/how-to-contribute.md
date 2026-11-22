@@ -5,8 +5,8 @@ last_update:
   date: 2026-09-27
   author: Shamsuddeen Hassan Muhammad
 translation_status: machine
-source_hash: 56e2f9281148
-translated_at: 2026-09-28
+source_hash: ee10c721b8c8
+translated_at: 2026-11-22
 ---
 
 # Yadda Za a Bada Gudummuwa {#how-to-contribute}
@@ -105,7 +105,8 @@ Babi-babi fayilolin Markdown ne a ƙarƙashin `docs/`, waɗanda aka kasa su zuwa
 
 ```markdown
 ---
-sidebar_position: 3
+title: Your Chapter Title
+ready: true
 ---
 
 # Your Chapter Title
@@ -113,11 +114,11 @@ sidebar_position: 3
 Your content here.
 ```
 
-`sidebar_position` yana sarrafa inda shafin zai bayyana a gefen shafin (sidebar). Zaɓi lambar gurbin da kake so, sannan ka matsar da shafukan da ke bayansa idan akwai buƙata.
+Ka bar `ready: true` a waje yayin da ake ci gaba da rubuta shafin: har sai an sa shi, shafin zai nuna abin riƙe gurbi (placeholder) na "In development" (Ana kan haɓaka shi) maimakon ainihin abin da ke cikin shafin. Kwanan watan "Last updated" da sunan marubuci ana cike su ne kai tsaye daga tarihin git, don haka ba ka buƙatar ƙara su.
 
-### Mataki na 6: Gefen shafin (sidebar) yana sabunta kansa {#step-6-the-sidebar-updates-itself}
+### Mataki na 6: Ƙara shafin a gefen shafin (sidebar) {#step-6-add-the-page-to-the-sidebar}
 
-Gefen shafin yana ƙirƙirar kansa kai tsaye daga tsarin babban fayil ɗin da kuma `sidebar_position` na kowane shafi, don haka babu wani ƙarin abin da za a gyara. Don sake sunan lakabin babban fayil, gyara `_category_.json` ɗinsa.
+An jera gefen shafin (sidebar) ne ɗaya bayan ɗaya a cikin `sidebars.js`, don haka sabon shafi ba zai bayyana ba sai ka ƙara shi a can. Nemo babin da shafin yake ciki sannan ka ƙara id ɗin shafin (hanyarsa a ƙarƙashin `docs/`, ba tare da tsawaitawar fayil (extension) ko lambar gaba (number prefix) ba, misali `'image-data/keypoints'`) a gurbin da kake so. Gyaran shafin da yake akwai ba ya buƙatar wani canji a gefen shafin.
 
 ### Mataki na 7: Duba gyaranka {#step-7-preview-your-change}
 
@@ -168,4 +169,4 @@ Al'umma ne ke kula da fassarori. Yi amfani da maɓallin canza harshe a saman dam
 - **Tattauna da al'umma:** [Discord](https://discord.gg/ChNPHV2PPS)
 - **Ka gano matsala (bug):** [buɗe ƙorafi (issue)](https://github.com/warakacommunity/playbook/issues/new)
 
-Duba duk wanda ya bada gudummuwa ya zuwa yanzu a shafin [Masu Bada Gudummuwa](/contributors).
+Duba duk wanda ya bada gudummuwa ya zuwa yanzu a shafin [Masu Bada Gudummuwa](./contributors.mdx).
