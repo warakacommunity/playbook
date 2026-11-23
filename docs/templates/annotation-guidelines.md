@@ -86,13 +86,18 @@ The specific patterns that break the decision tree. Every case listed here is a 
 
 ## 5. Label set
 
-If the task has more than three labels, name them here explicitly with examples.
+Name every label here, with examples. Give every label a **stored code** and a **display name**. The stored code is what the annotation tool saves and what every export contains: keep it short, stable and in one fixed form (for example `POS`, `NEG`, `NEU`). The display name and the definition are what annotators see, and they can be written in the annotators' working language and improved at any time without touching the data.
 
-| Label | Definition | One positive example | One negative example |
-| --- | --- | --- | --- |
-| [LABEL 1] | [DEFINITION] | [EXAMPLE] | [WHAT LOOKS LIKE BUT ISN'T] |
-| [LABEL 2] | [DEFINITION] | [EXAMPLE] | [WHAT LOOKS LIKE BUT ISN'T] |
-| UNCERTAIN | Ambiguous; adjudicator will resolve. | n/a | n/a |
+| Stored code | Display name (annotators' language) | Definition | One positive example | One negative example |
+| --- | --- | --- | --- | --- |
+| [CODE 1] | [NAME SHOWN TO ANNOTATORS] | [DEFINITION] | [EXAMPLE] | [WHAT LOOKS LIKE BUT ISN'T] |
+| [CODE 2] | [NAME SHOWN TO ANNOTATORS] | [DEFINITION] | [EXAMPLE] | [WHAT LOOKS LIKE BUT ISN'T] |
+| UNCERTAIN | [NAME SHOWN TO ANNOTATORS] | Ambiguous; adjudicator will resolve. | n/a | n/a |
+
+- **Shared label list:** [If several projects use this label set, for example one project per language, name the one canonical list they all draw from and where it lives. Reuse it rather than copying it, and map every translated display name back to its stored code.]
+- **Interface language:** [The language the annotation interface and in-task instructions are shown in for this project. One interface language per project.]
+
+Adding a label is cheap in the tool, but items labelled before it existed may need a check for the new category. Changing a stored code, removing a label or merging two labels changes data that already exists: record it in the [change log](#9-change-log) with an old-to-new code mapping, and decide whether affected items are re-mapped or re-annotated.
 
 For sequence-labelling tasks (NER, POS), replace with the tag inventory and the span-boundary rules; see the specific per-tag guidance in [MasakhaNER 2](https://arxiv.org/abs/2210.12391) as the reference.
 
@@ -118,15 +123,20 @@ Load-bearing for African languages. Guidelines that skip this section produce co
 - **When adjudication runs:** [Every UNCERTAIN mark? Every annotator disagreement? Sampled review?]
 - **Decision authority:** [Final say on labels; state whether adjudicator decisions can be over-ruled by the lead annotator or the community reviewer.]
 - **Guideline updates from adjudication:** [If adjudication reveals a systematic issue, when and how the guidelines are revised.]
+- **What gets reviewed:** [Review sampling rate, the per-item rule and seed used to draw the sample, and which flags always send an item to review. See [Decide what gets reviewed](../3_annotation-design/workflow-adjudication.md#decide-what-gets-reviewed-a-sample-plus-escalations).]
+- **Review verdicts:** [Accept / correct and accept / reject with a written reason. State who reviews (never the annotator of the same item), that a corrected item keeps the annotator's original, and that accepted items are locked.]
+- **Reviewer rubric:** [Version number, and for each verdict a rule and a worked example; what a rejection comment must contain; how to treat defensible readings on subjective items. The rubric is versioned with this document.]
+- **Contesting a rejection:** [How an annotator requests one re-review per verdict, who handles it, and how the outcome is communicated. See [Let annotators contest a rejection](../3_annotation-design/workflow-adjudication.md#let-annotators-contest-a-rejection).]
+- **Feedback cadence:** [How often annotators receive their verdicts, for example at the end of every review session, and how often correction and rejection rates per annotator and per label are checked.]
 
 ## 9. Change log
 
 Every version of these guidelines is recorded, dated, and briefly annotated. Guideline changes downstream of pilot annotation are normal; unrecorded changes are the problem.
 
-| Version | Date | Change | Impact on prior annotations |
-| --- | --- | --- | --- |
-| 1.0 | [YYYY-MM-DD] | Initial. | None |
-| [NEXT] | [YYYY-MM-DD] | [CHANGE] | [Re-annotate? Discard? Keep as-is?] |
+| Version | Date | Change | Stored-code mapping | Impact on prior annotations |
+| --- | --- | --- | --- | --- |
+| 1.0 | [YYYY-MM-DD] | Initial. | None | None |
+| [NEXT] | [YYYY-MM-DD] | [CHANGE] | [Old code → new code, or "None" if only display names or definitions changed] | [Re-annotate? Re-map? Discard? Keep as-is?] |
 
 ## 10. Contact and community
 

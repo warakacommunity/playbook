@@ -3,7 +3,7 @@ sidebar_position: 8
 title: Tooling and Infrastructure
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 
@@ -15,6 +15,33 @@ The tools a project uses shape what it can do and how reliably it can do it. For
 
 Choose an annotation tool by usability, scalability, and cost, weighed against the task and the team. Lightweight, self-hosted, or free tools often beat feature-rich paid platforms for a volunteer project, and a tool that works on modest hardware over a poor connection matters more than one with every feature. The annotation chapters cover tool choice for specific tasks in more detail.
 
+### A checklist for choosing a tool
+
+No single tool is best for every project, so judge candidates against your task, your team, and your conditions rather than against a feature list. Start with the general questions that apply to any annotation project:
+
+- **Task and schema.** Does the tool support your task type and label schema (spans, relations, boxes, audio segments, free text) without workarounds?
+- **Scale and team.** Can it handle your expected volume and number of annotators, with the review and adjudication workflow you have designed (see [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md))?
+- **Quality control.** Can you mix in gold items, assign the same item to several annotators, and measure agreement from what it stores?
+- **Data sensitivity.** Does its hosting and access model fit the privacy requirements of your data?
+- **Cost and upkeep.** What does it cost to set up, run, and maintain for the life of the project, including after the funding ends?
+
+Then add the checks that decide whether a tool works for African-language data in the conditions your team actually faces:
+
+- **Scripts.** Does it render and let annotators select text correctly in your target script, including right-to-left text, Ajami, Ge'ez, Tifinagh, and combining diacritics? Check that span offsets stay correct after selection and that what the annotator types is what gets stored (see [Non-Latin scripts in real UIs](../deployment/non-latin-scripts.md)).
+- **Language routing.** Can it send items to annotators by language or variety, so that each item reaches someone who speaks and reads that variety, not whoever happens to be free?
+- **Offline and mobile.** Does it work on the phones and modest laptops your annotators own, and can it keep working offline and sync safely when the connection returns (see [Offline field operations](../2_data-collection/10_offline-field-operations.md))?
+- **Interrupted uploads.** When media is uploaded from the field over a poor connection, does each file transfer on its own and resume after a drop, rather than failing the whole batch or leaving it half imported?
+- **Consent and licence.** Can it keep consent and licence records linked to the items they cover, so they travel with the exports (see [Data Governance](../data-governance/index.md))?
+- **Per-annotator labels and provenance.** Do exports keep every annotator's labels, with who labelled what and when, rather than only one merged answer? Disagreement is often information worth keeping ([Plank, 2022](../references.md#plank-2022)).
+- **Roles and audit trail.** Can you separate annotators, reviewers, and project leads, and see a record of who changed what?
+- **Provider access.** If the tool is hosted by someone else, who at the provider can see your data, where is it stored, and under which country's law (see [Privacy and sensitive data](../data-governance/index.md#privacy-and-sensitive-data))?
+- **Self-hosting.** Can you run it on infrastructure your community controls, and how much technical effort does that take to set up and keep updated?
+- **Open exports.** Can you export everything, including labels, metadata, and governance records, in open formats you can read without the tool (see [Exporting from your annotation tool](./data-storage.md#exporting-from-your-annotation-tool))?
+
+### Verify before you commit
+
+Treat feature claims as claims until you have seen them work. Check each one in the edition and version you will actually use, since hosted, free, and paid editions of the same tool often differ. Then pilot the tool on a small set of real items from your corpus (for example, 20 to 50), including mixed-script and hardest-case items, with your real annotators on their own devices and connections. Export the pilot data and open it to confirm that everything you need came out. Whatever you choose, keep your own regular exports outside the tool, so that the dataset survives a lapsed subscription, a closed service, or a failed server.
+
 ## Pipelines, deployment, and access
 
-Automate the repetitive parts of the pipeline, such as cleaning, formatting, and validation, so they are consistent and reproducible rather than redone by hand each time. Decide between cloud and local deployment by weighing cost, connectivity, and data sensitivity, since sensitive or restricted data may be safer on local infrastructure under the community's control than on a foreign cloud. Throughout, apply sensible security and access control so that personal and sensitive data is seen only by those who should see it, which is part of the governance obligation, not separate from it.
+Automate the repetitive parts of the pipeline, such as cleaning, formatting, and validation, so they are consistent and reproducible rather than redone by hand each time. One such step is converting audio and video into formats that play smoothly in a browser or on a phone before annotators see them (see [Preparing media for annotation](../2_data-collection/7_data-cleaning-preprocessing.md#preparing-media-for-annotation)). Decide between cloud and local deployment by weighing cost, connectivity, and data sensitivity, since sensitive or restricted data may be safer on local infrastructure under the community's control than on a foreign cloud. Throughout, apply sensible security and access control so that personal and sensitive data is seen only by those who should see it, which is part of the governance obligation, not separate from it. [Securing data during annotation](../data-governance/index.md#securing-data-during-annotation) suggests settings matched to how sensitive the data is.

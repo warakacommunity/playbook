@@ -3,7 +3,7 @@ title: Agricultural Advisory Data
 sidebar_position: 0
 ready: true
 last_update:
-  date: 2026-09-30
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -13,7 +13,7 @@ A farmer photographs a sick plant and asks, in her own language, what is wrong a
 
 The chapter carries one worked example throughout: a collection of about 15,000 image-advisory pairs across ten languages, roughly 1,500 per language. A spoken layer covers a subset of the pairs: the worked example records 3,540 speech items. The volumes and thresholds quoted on each page belong to that example. Change them where your crop list or languages differ.
 
-The whole pipeline runs on [AfriAnnotate](https://afriannotate.waraka.org). It does three jobs: it collects the data (offline photo capture and speech recording), it hosts the annotation (labelling, advisory authoring and review), and it pays contributors from its ledger. Where a page says "the platform", it means AfriAnnotate. It runs in the browser and as mobile and desktop apps, which keep working offline and upload when a connection returns. Each task page has a screenshot of its task on the platform: field capture, diagnosis labelling, advisory authoring, speech recording and preference ranking.
+The worked example uses one annotation platform for offline capture, labelling, advisory authoring and review. That is an architectural choice, not a requirement: separate tools can work if they share pair IDs, consent references and interoperable exports. Whatever the architecture, the project must preserve provenance and consent across every hand-off. The [checklist for choosing a tool](../6_documentation/tooling.md#a-checklist-for-choosing-a-tool) helps you assess those capabilities.
 
 ![The advisory pipeline: field photo, ingest, diagnosis label, advisory and speech, all linked by one pair ID and passed through a three-stage QA loop before release](images/advisory-pipeline.svg)
 
@@ -32,7 +32,7 @@ Mint the ID before anything else touches the image, and mint it in one place. Te
 | Diagnosis | ontology label, confidence, ontology version, reviewer chain | agronomist |
 | Advisory | 60–180 words in the language, safety line if a chemical is named | native-speaker author |
 | Speech | farmer question (spontaneous) and advisory (read), 48 kHz, transcript | two speakers, transcriber |
-| Consent | reference, template version, purposes ticked, opt-out deadline | platform |
+| Consent | reference, template version, purposes ticked, opt-out deadline | collector, consent coordinator |
 | QA | status, double-labelled flag, agreement, batch | reviewers, language lead |
 | Split | train, dev or test | export script |
 
@@ -61,7 +61,7 @@ The data is seasonal. You cannot photograph a disease that is not in the field t
 
 ## Three-stage QA
 
-Every pair passes the same loop before it earns credit: an agronomist who did not label the image checks the label and the advisory's safety; a native speaker who did not write the advisory checks that it reads as authored in the local register; and the language lead adjudicates whatever the two stages disagree on. The loop is the same one the playbook describes in [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md), with the agronomist and the linguist as two reviewers with different competences rather than two of the same. The thresholds are Cohen's kappa of at least 0.75 on labels and at least 90% of advisories accepted by round two, reported every Monday, per language. Credit lands on acceptance only.
+Every pair passes the same loop before it is accepted: an agronomist who did not label the image checks the label and the advisory's safety; a native speaker who did not write the advisory checks that it reads as authored in the local register; and the language lead adjudicates whatever the two stages disagree on. The loop follows the general pattern in [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md), with the agronomist and the linguist as two reviewers with different competences rather than two of the same. The thresholds are Cohen's kappa of at least 0.75 on labels and at least 90% of advisories accepted by round two, reported every Monday, per language.
 
 ## What this chapter is not
 
@@ -71,4 +71,4 @@ It is not a guide to training the model. The data described here feeds vision-la
 
 - [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md): the general shape of multi-annotator review and adjudication that this chapter's QA loop specialises.
 - [Legal and consent](../legal-consent/index.md) and [Data governance](../data-governance/index.md): the consent, opt-out and release rules the pipeline enforces.
-- [AfriAnnotate](https://afriannotate.waraka.org): the offline-first, consent-gated platform used in this chapter to collect the data, annotate it and pay contributors, with the coverage matrix, agreement metrics and contribution ledger built in.
+- [A checklist for choosing a tool](../6_documentation/tooling.md#a-checklist-for-choosing-a-tool): assess offline capture, versioned consent records, annotation and agreement exports, shared pair IDs, and interoperable export formats. A coverage matrix and review tracking can live in the annotation tool or in separate project scripts.

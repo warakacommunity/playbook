@@ -86,6 +86,7 @@ If your app searches over text (knowledge base, message history, contact list), 
 - **Test on the actual devices your users use**: Android Go on a mid-range MediaTek chipset, older iPhone models, mid-2010s desktop browsers. Test with the fonts your users actually have loaded, which for most non-default African scripts means testing with your app-bundled font as the exclusive source.
 - **Test with users, in the wild**, not with English-speaking QA. Have native-script users type real content, search real content, edit real content. The bugs your QA process will not find are the ones native users will find in the first ten minutes.
 - **Test copy/paste round-trips.** Text typed into your app, copied out, pasted into another app (WhatsApp, SMS, browser), and copied back must survive round-trip without character corruption.
+- **Test span selection in annotation tools.** If people will label spans in this script, check that a selection on screen is stored as the right character offsets and survives export; see [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets) for a pilot procedure.
 - **Test edge cases**: mixed-script paragraphs, code-switched Latin-Ajami, long-running RTL text with embedded Latin phone numbers or URLs, script-boundary punctuation.
 
 ## Anti-patterns to avoid

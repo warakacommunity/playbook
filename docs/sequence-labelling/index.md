@@ -4,7 +4,7 @@ sidebar_label: Overview
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Seid Muhie Yimam
 ---
 
@@ -16,6 +16,7 @@ This chapter covers what the three tasks share: tagging schemes, the tokenisatio
 
 - [Named Entity Recognition](./ner.md): entity types, guidelines, nested and ambiguous entities, MasakhaNER and other resources.
 - [Part-of-Speech Tagging](./pos.md): the Universal POS tagset, MasakhaPOS, Universal Dependencies treebanks, and the word-segmentation problem.
+- [Relations and Coreference](./relations.md): links between entity spans, coreference chains, relation agreement, and formats that can hold them.
 - Slot filling is covered with intent detection in [Intent Classification](../11_text-classification/intent-classification.md).
 
 Before building a corpus, check what already exists. [Before You Start: NER](../before-you-start/ner.mdx) walks through the reuse, extend or build decision for NER, and the same four steps apply to POS.
@@ -88,6 +89,77 @@ Every sequence-labelling decision rests on the question "what is a token?", and 
 
 Subword tokenisers used by pretrained models add a second layer. A model such as AfroXLMR splits a long agglutinative word into several pieces, but the label belongs to the word. The usual practice is to give the label to the first piece and ignore the rest when computing the loss, then read predictions back from the first piece of each word. Evaluate on words, never on subword pieces.
 
+## Scripts, spans and offsets
+
+Annotators select spans on a screen, but what the tool stores is a pair of character offsets into a string. For Latin-script text the two rarely drift apart. For the other scripts African languages are written in, such as the Arabic-script Ajami used for Hausa, Fulfulde and other languages, Ge'ez for Amharic and Tigrinya, Tifinagh for Tamazight and N'Ko for Manding languages, the path from what is displayed to what is stored has more places to break. Fonts, input methods and rendering in general are covered in [Non-Latin scripts in real UIs](../deployment/non-latin-scripts.md); this section covers only what affects span annotation.
+
+### Pilot the tool on real script samples
+
+Before annotation starts, load a few dozen real sentences in each script your corpus uses into your annotation tool, on the annotators' own devices, and check three things:
+
+1. **Display.** Right-to-left lines, and mixed lines such as Ajami text with Latin names or numbers, appear in the right order, and stay in the right order while a span is highlighted and after it is labelled.
+2. **Selection.** Double-clicking or dragging over a word selects that word by the rules of its script, not by Latin defaults. Watch for letters that join in Arabic script and for Ge'ez text that separates words with the traditional word-space mark (፡) instead of a space.
+3. **Round trip.** Label a few spans, save, reload the item, and export. In the exported file, check that every span's offsets still pick out the text that was labelled.
+
+If any check fails, fix the configuration or change tools before annotators start. A display or offset problem found after annotation means checking every span by hand.
+
+### Choose the selection unit
+
+Whether annotators select characters, words or whole sentences is a design decision, and it interacts with the token rules above.
+
+- **Word selection** (the selection snaps to whole words) removes most boundary noise, since annotators cannot leave off a letter by accident. But it follows the tool's own idea of a word, which may disagree with your project's tokenisation, and it cannot select part of a word.
+- **Character selection** lets annotators mark a span inside a word, such as a name that carries a prefixed preposition or a clitic. It also produces more small boundary disagreements, which the guideline and adjudication must absorb.
+
+Choose with the affix and clitic rule in your guideline in mind (see [Writing the guideline](./ner.md#writing-the-guideline) for NER). If the rule says the span is the whole orthographic word, word selection is safer. If it says to tag only the name inside a longer word, you need character selection, or a tokenisation that splits the word before annotation.
+
+### Store offsets in logical order
+
+Unicode text is stored in logical order, the order in which it is read and typed; the bidirectional algorithm changes only how right-to-left text is displayed ([Unicode Consortium, 2026](../references.md#unicode-uax9)). Offsets must count positions in that stored order, from the start of the string, never positions on the screen. Users of annotation tools have been unsure whether exported offsets on Arabic text count from the left or the right of the line ([an example](https://github.com/HumanSignal/label-studio/issues/2653)); storing offsets in logical order removes the question, as long as the dataset card says that is the convention.
+
+Two further details decide whether an offset means the same thing in every program that reads it:
+
+- **The unit.** Python counts Unicode code points; JavaScript, which many web annotation tools are built on, counts UTF-16 code units. The two agree for the Arabic, Ethiopic (main blocks), Tifinagh and N'Ko blocks, but differ for characters outside the Basic Multilingual Plane, where each character counts as two UTF-16 units. These include emoji, common in social-media text, and some African scripts, such as Adlam (used for Fulfulde) and Mende Kikakui. Convert to code points when you export, and test with a sentence that contains an emoji or an Adlam letter.
+- **Combining marks.** Some tone-marked letters remain two code points even after NFC normalisation, such as Yorùbá *ẹ́* (an *ẹ* followed by a combining acute accent). A span boundary must never fall between a letter and its mark.
+
+Record the convention in the dataset card: the normalisation form (NFC), the unit (code points), logical order, and whether the end offset is exclusive. A short check on every export catches most offset errors:
+
+```python
+import unicodedata
+
+def check_offsets(text: str, spans: list[dict]) -> list[str]:
+    """Check that each span's offsets give its text, in NFC and logical order."""
+    problems = []
+    if unicodedata.normalize("NFC", text) != text:
+        problems.append("text is not NFC-normalised")
+    for s in spans:
+        start, end = s["start"], s["end"]
+        if text[start:end] != s["text"]:
+            problems.append(f"{start}:{end} gives {text[start:end]!r}, expected {s['text']!r}")
+        if end < len(text) and unicodedata.combining(text[end]):
+            problems.append(f"span {start}:{end} cuts a combining mark off its letter")
+        if start < len(text) and unicodedata.combining(text[start]):
+            problems.append(f"span {start}:{end} starts on a combining mark")
+    return problems
+```
+
+### Tag the language and the script
+
+Tag every record with its language and, where the language is written in more than one script, the script: `ha-Latn` and `ha-Arab` for Hausa in Latin and Ajami script, `ff-Arab` for Fulfulde in Ajami, `zgh-Tfng` for Standard Moroccan Tamazight in Tifinagh. These are BCP 47 language tags ([Phillips and Davis, 2009](../references.md#rfc-5646)), the form used on the web, for example in the HTML `lang` attribute. Leave the script subtag out when it adds nothing, for example for Amharic, which the registry already associates with Ge'ez script ([W3C, n.d.](../references.md#w3c-language-tags)).
+
+Other pages of this playbook use the form `hau_Latn` (see [Data Provenance and Traceability](../2_data-collection/8_data-provenance-traceability.md)). It carries the same information: an ISO 639-3 language code and an ISO 15924 script code joined by an underscore, where BCP 47 uses a hyphen and the two-letter ISO 639-1 code when one exists (`ha`, not `hau`). The underscore form always includes the script, so when mapping between the two forms, add the script the registry implies (`am` becomes `amh_Ethi`). Either form works. Pick one for the dataset, use it in every record, and give the mapping to the other in the dataset card.
+
+### Freeze the text annotators saw
+
+Offsets are only valid against the exact string the annotator saw. Normalise Unicode and line endings before import (see [Data Cleaning and Preprocessing](../2_data-collection/7_data-cleaning-preprocessing.md#deduplication-normalization-and-filtering)), never after annotation, and release that exact text with the annotations. Any later cleaning, such as removing a stray space or re-normalising, shifts every offset after it.
+
+### Spans in web pages and PDFs
+
+When annotators mark spans in a rendered web page or a PDF rather than in plain text, the offsets refer to text extracted from the document, and a different extraction (another library, another version, or a re-downloaded page that has changed) produces a different string. Three rules keep such spans usable:
+
+- **Keep a snapshot.** Store the exact HTML file or PDF that was annotated, not just its URL.
+- **State the extraction.** Store offsets against one stated text extraction, and record the tool and version that produced it. If you strip HTML tags during cleaning (as in [Collecting and Preparing Data](../11_text-classification/collecting-and-preparing-data.md#processing--sampling)), annotate the stripped text, not the page.
+- **Re-check a sample.** Before release, re-extract a sample of documents and confirm that every span still resolves to the labelled text.
+
 ## The shared pipeline
 
 The general groundwork is in [Data Collection](../2_data-collection/0_Overview.md), [Annotation Design](../3_annotation-design/annotation-task-design.md) and [Data Quality](../4_data-quality/index.md). For sequence labelling the steps are:
@@ -95,12 +167,12 @@ The general groundwork is in [Data Collection](../2_data-collection/0_Overview.m
 1. **Choose the source text.** News is the most common choice because it is available, varied and full of entities; both MasakhaNER and MasakhaPOS annotated news. If your use case is social media, SMS or government documents, annotate that instead, or at least build a test set from it.
 2. **Fix tokenisation and sentence splitting first.** Write down the token rules from the section above, tokenise the whole corpus once, and freeze it. Every annotator labels the same tokens.
 3. **Write the guideline and pilot it.** Start from an existing guideline (the MasakhaNER guideline for NER, the UD guidelines for POS), translate its examples into your language, and add a section for every language-specific case. Pilot on 50 to 100 sentences with all annotators and revise.
-4. **Pre-annotate where it helps.** For POS, a model trained on the first 100 hand-annotated sentences can propose tags for the rest, and annotators correct them. MasakhaPOS used this to cut the manual effort sharply, since punctuation, numbers and capitalised proper nouns were predicted almost perfectly ([Dione et al., 2023](../references.md#masakhapos-2023)). Watch for anchoring: annotators accept a wrong suggestion more readily than they would make the error themselves.
+4. **Pre-annotate where it helps.** For POS, a model trained on the first 100 hand-annotated sentences can propose tags for the rest, and annotators correct them. MasakhaPOS used this to cut the manual effort sharply, since punctuation, numbers and capitalised proper nouns were predicted almost perfectly ([Dione et al., 2023](../references.md#masakhapos-2023)). Watch for anchoring: annotators accept a wrong suggestion more readily than they would make the error themselves. [Model-Assisted Annotation](../3_annotation-design/model-assisted-annotation.md) covers seeding, review of drafts, and what to record about the model.
 5. **Annotate independently, then adjudicate.** At least two annotators per sentence, a language coordinator who resolves disagreements, and a written record of each decision that changes the guideline. See [Workflow and adjudication](../3_annotation-design/workflow-adjudication.md).
 6. **Run automatic checks.** Flag tokens tagged inconsistently across the corpus, invalid tag sequences, and sentences whose token and label lists differ in length (see the check below).
 7. **Split by document, not by sentence.** Sentences from the same article share names and vocabulary, so put the whole article in one split.
 
-A short validity check catches the most common export errors:
+A short validity check catches the most common export errors. Run it on the release files as well as on the tool's export, since a format conversion can break tag sequences too (see [Verify the export before you release](../9_dataset-lifecycle/release.md#verify-the-export-before-you-release)):
 
 ```python
 def check_sentence(tokens: list[str], tags: list[str]) -> list[str]:

@@ -76,11 +76,83 @@ print(f"mAP@0.75: {result['map_75']:.3f}")  # stricter: punishes loose boxes
 
 The gap between the two thresholds is the useful read: a model that scores well at 0.50 but poorly at 0.75 is finding the right objects but boxing them loosely, which matters when the box itself carries the measurement, such as counting tightly packed livestock or delineating a field.
 
-Drawing a box, and placing keypoints, in the AfriAnnotate editor:
+The annotation interface should support zoom, precise box or keypoint editing, occlusion and truncation flags where required, and exports that preserve image identifiers, coordinates, labels and annotator identities. Test small, overlapping and partially visible objects during the pilot.
 
-![Drawing a bounding box in AfriAnnotate](/afriannotate-demo/gifs/bbox.gif)
+### Agreement when an image has many objects
 
-![Placing keypoints in AfriAnnotate](/afriannotate-demo/gifs/keypoints.gif)
+Measuring agreement between two annotators is harder for detection than for classification, because each annotator draws a different number of boxes in a different order, and nothing says which box of one person corresponds to which box of the other. Comparing only one box per image, or averaging IoU over the whole set without first pairing the boxes, inflates agreement and hides the most common detection error: an object one person boxed and the other missed. The general approach to agreement for non-categorical annotations is in [Data Quality](../4_data-quality/index.md#match-the-metric-to-the-annotation-shape); this section gives the detection-specific procedure. Score each image in four steps.
+
+1. **Pair the regions one to one.** Compute the IoU between every box of annotator A and every box of annotator B, set any IoU below a threshold you state in advance to zero, then find the one-to-one pairing that maximises total overlap. This is the classic assignment problem, solved by the Hungarian method ([Kuhn, 1955](../references.md#kuhn-1955)) and available as [`linear_sum_assignment`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html) in SciPy; a greedy pass that takes the highest-IoU pair first is a reasonable approximation. Keep a pair only if its IoU reaches that threshold, for example 0.5, the criterion the PASCAL VOC benchmark set for a correct detection ([Everingham et al., 2010](../references.md#everingham-2010)). Every box left unpaired is a disagreement.
+2. **Report matched-region F1 at that threshold.** With `m` matched pairs, F1 is `2m / (boxes by A + boxes by B)`. It falls whenever either annotator boxes something the other did not, which is exactly what an averaged IoU hides.
+3. **Report position and label agreement separately.** Pair the boxes on position alone, then report the mean IoU of the matched pairs (how well the boxes fit) and the share of matched pairs with the same class (whether they agree on what the object is). An IoU-only score treats a box labelled "cattle" and a box labelled "goat" in the same place as agreement, because IoU ignores the label.
+4. **Sort every disagreement into a type.** A box only one annotator drew is a *missed object* by the other annotator if you treat the one who drew it as the reference, and an *extra object* otherwise; a matched pair with different classes is a *wrong label*; a matched pair below a stricter IoU, such as 0.75, is a *loose boundary*. A matched pair can carry both a wrong label and a loose boundary; count it under each. The mix tells you what to fix: missed objects point to the small-object and occlusion rules, wrong labels to the class definitions, and loose boundaries to the box-fit rule.
+
+Sum the counts over all images before computing F1 (micro-averaging), rather than averaging per-image scores, so that a crowded image with thirty animals weighs more than an image with one. With three or more annotators, score every pair and report the mean, or score each annotator against the adjudicated reference.
+
+The same procedure works for other region shapes once you swap the overlap measure. For polygons and instance masks, compute IoU on the filled shapes; the [segmentation page](./segmentation.md#annotation-and-evaluation) covers mask IoU and its per-class reading for semantic segmentation. For keypoints, IoU is meaningless, so pair and score with a distance normalised by object size, such as the Object Keypoint Similarity used in the [COCO keypoint evaluation](https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocotools/cocoeval.py), which scales each keypoint error by the object's area and a per-keypoint tolerance.
+
+<details>
+<summary>Python sketch: matched-region agreement for one image</summary>
+
+```python
+# pip install numpy scipy
+import numpy as np
+from scipy.optimize import linear_sum_assignment
+
+
+def iou(a, b):
+    """IoU of two boxes given as [x_min, y_min, x_max, y_max]."""
+    ix = max(0.0, min(a[2], b[2]) - max(a[0], b[0]))
+    iy = max(0.0, min(a[3], b[3]) - max(a[1], b[1]))
+    inter = ix * iy
+    union = (a[2] - a[0]) * (a[3] - a[1]) + (b[2] - b[0]) * (b[3] - b[1]) - inter
+    return inter / union if union > 0 else 0.0
+
+
+def compare(regions_a, regions_b, match_iou=0.5, tight_iou=0.75):
+    """Compare two annotators' regions on ONE image.
+
+    Each region is (box, label). Matching uses position only, so a
+    same-place, different-label pair is reported as a label disagreement
+    rather than as two missed objects.
+    """
+    iou_m = np.array([[iou(a[0], b[0]) for b in regions_b] for a in regions_a])
+    pairs = []
+    if iou_m.size:
+        iou_m[iou_m < match_iou] = 0.0  # below-threshold pairs cannot be matched
+        rows, cols = linear_sum_assignment(iou_m, maximize=True)  # one-to-one
+        pairs = [(r, c) for r, c in zip(rows, cols) if iou_m[r, c] >= match_iou]
+    matched_a = {r for r, _ in pairs}
+    matched_b = {c for _, c in pairs}
+    return {
+        "matched": len(pairs),
+        "only_a": len(regions_a) - len(matched_a),   # missed by B, or extra in A
+        "only_b": len(regions_b) - len(matched_b),   # missed by A, or extra in B
+        "wrong_label": sum(regions_a[r][1] != regions_b[c][1] for r, c in pairs),
+        # a pair can count as both wrong_label and loose_boundary
+        "loose_boundary": sum(iou_m[r, c] < tight_iou for r, c in pairs),
+        "ious": [float(iou_m[r, c]) for r, c in pairs],
+    }
+
+
+# Annotator A boxed three cattle; B boxed two of them and called one a goat.
+a = [([340, 120, 425, 230], "cattle"), ([500, 300, 560, 380], "cattle"),
+     ([700, 90, 760, 150], "cattle")]
+b = [([344, 118, 427, 232], "cattle"), ([505, 310, 552, 378], "goat")]
+
+r = compare(a, b)
+f1 = 2 * r["matched"] / (len(a) + len(b))
+label_agree = 1 - r["wrong_label"] / max(r["matched"], 1)
+print(f"matched-region F1 @0.5: {f1:.2f}")                      # 0.80
+print(f"mean IoU of matched pairs: {np.mean(r['ious']):.2f}")   # 0.78
+print(f"label agreement on matched pairs: {label_agree:.2f}")   # 0.50
+# {'matched': 2, 'only_a': 1, 'only_b': 0, 'wrong_label': 1, 'loose_boundary': 1}
+print({k: v for k, v in r.items() if k != "ious"})
+```
+
+To aggregate over a dataset, sum `matched`, `only_a`, `only_b`, and the box counts across images before computing F1.
+
+</details>
 
 ## The 2026 modelling landscape
 

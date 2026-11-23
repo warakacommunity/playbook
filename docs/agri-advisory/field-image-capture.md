@@ -3,7 +3,7 @@ title: Field Image Capture
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-10-02
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -54,17 +54,13 @@ Two fields deserve attention. `suspected_issue` is the collector's own guess, fr
 
 **The form.** Every photo carries crop, suspected issue (with "not sure" allowed), growth stage, plant part, district and the farmer's question. The form takes under a minute once a collector is used to it, and it is what turns a folder of photos into a dataset. A photo with no form is rejected at ingest.
 
-**Offline first.** Most fields have no signal. The capture app downloads the project, the form and the guidance cards to the phone; each capture goes into an on-device outbox and replays in order when the phone finds a network, and rejected writes are held for review so a collector never loses a day's work to a bad sync. Capture runs on [AfriAnnotate](https://afriannotate.waraka.org), which works this way. Offline capture matters because an app that needs a connection quietly selects for images taken near towns.
+**Offline first.** Most fields have no signal. One suitable architecture downloads the project, form and guidance cards to the phone, places each capture in an on-device outbox, replays uploads in order when a network returns, and holds rejected writes for review. Other tools can meet the same requirement with a different sync design. What matters is that a collector does not lose a day's work and that an app requiring a constant connection does not quietly select for images taken near towns. [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) sets out the general practice.
 
-**Consent at capture.** Before the first photo on a farm, the collector plays the recorded oral consent script in the language, or hands over the written form, and logs the farmer's agreement against an opaque contributor ID. The platform blocks capture until a consent record exists. An oral consent record stays provisional until the language lead has listened to the recording, and the images from that farm earn no credit before then; see [Quality, consent and release](./quality-consent-release.md).
+**Consent at capture.** Before the first photo on a farm, the collector plays the recorded oral consent script in the language, or hands over the written form, and logs the farmer's agreement against an opaque contributor ID. This project requires a consent record before capture; implement and test that gate in the chosen workflow rather than assuming the tool supplies it. An oral consent record stays provisional until the language lead has listened to the recording, and the images from that farm remain outside the accepted dataset before then; see [Quality, consent and release](./quality-consent-release.md).
 
-## On the platform
+## Capture interface
 
-The screenshot below shows the capture task in the AfriAnnotate mobile view, as three screens of one task. The collector photographs the plant, fills in the structured form (crop, suspected issue, growth stage, plant part), and records or types the farmer's question. The app keeps working offline and uploads when a connection returns.
-
-![Field capture in the AfriAnnotate mobile view: the collector takes the photo, selects the crop, suspected issue, growth stage and plant part, and records or types the farmer's question](images/afriannotate-field-capture.jpg)
-
-The photo is a stock image standing in for a field photo. The sample text is in English for the reader; in a project it is in the collector's language.
+The capture interface should let the collector photograph the plant, complete the structured form (crop, suspected issue, growth stage and plant part), and record or type the farmer's question. It should preserve unfinished captures offline, show sync status clearly, and retain rejected uploads for review.
 
 ## Planning coverage
 
@@ -84,7 +80,7 @@ A seed image contributes pixels only. It goes through the same form, the same on
 2. Use natural light. No flash, no shade from your own body, no photographing through plastic.
 3. Fill every field of the form before you leave the plant. If you do not know the issue, choose "not sure". A wrong guess costs the agronomist more time than an honest blank.
 4. Type or record the farmer's question in the farmer's own words. Do not translate it and do not tidy it.
-5. One plant, one capture. Do not photograph the same leaf from five angles; the ingest de-duplication will reject four and you will not be paid for them.
+5. One plant, one capture. Do not photograph the same leaf from five angles; ingest de-duplication will reject the near-duplicates.
 6. Do not photograph people. If a person is unavoidable, keep their face out of frame. Faces are blurred at ingest, and an image where a face cannot be blurred is dropped.
 7. Do not play the consent recording once for the whole village. Consent is per farmer and logged per farm.
 

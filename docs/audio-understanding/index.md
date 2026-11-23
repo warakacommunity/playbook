@@ -2,7 +2,7 @@
 ready: true
 title: Audio Understanding
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -104,9 +104,7 @@ A whole-clip classification config uses multiple-choice over the audio, with `ch
 
 When instead you need to mark *where* an event happens, not just that it is present, switch `<Choices>` for the `<Labels>` and timeline approach from the [Speaker Diarization](../speaker-diarization/index.md) page, which turns the same audio into span-level labels for detection.
 
-Classifying an audio clip in the AfriAnnotate editor:
-
-![Labelling an audio clip in the AfriAnnotate editor](/afriannotate-demo/03-audio/24-audio-event-classification/2-labeling-editor.png)
+The audio-classification interface should support replay, keyboard shortcuts, constrained labels and an uncertainty route. For event detection, it also needs frame- or time-based boundaries and exports that preserve onset, offset, label and annotator.
 
 **Evaluation depends on the task:**
 
@@ -126,7 +124,7 @@ Label errors in audio are hard to spot after the fact, because nobody re-listens
 - **Double-label a sample.** Have a second annotator independently label a random 5–10% of each batch and measure agreement per class (Cohen's kappa or Krippendorff's alpha for clip labels; onset/offset agreement within a tolerance for spans). Classes with low agreement point to an unclear definition, not just a careless annotator.
 - **Review rare classes in full.** For the rare-but-important labels (a distress keyword, a specific cough type), have every positive clip checked by a second, locally knowledgeable reviewer. These are the labels the model is least likely to learn and the deployment most depends on.
 - **Audit the "other" and "uncertain" bins.** A growing share of clips in a catch-all class is the earliest sign of taxonomy drift; sample it weekly and feed decisions back into the guidelines.
-- **Check audio at ingest.** Automatically flag clips that are silent, clipped, truncated, at the wrong sample rate, or whose duration does not match the manifest, before annotators spend time on them.
+- **Check audio at ingest.** Automatically flag clips that are silent, clipped, truncated, at the wrong sample rate, or whose duration does not match the manifest, before annotators spend time on them. Convert files that will be played in a browser or on a phone into widely supported, streamable formats, and keep the original (see [Preparing media for annotation](../2_data-collection/7_data-cleaning-preprocessing.md#preparing-media-for-annotation)).
 - **Look for leakage before splitting.** Clips cut from the same broadcast, call, or recording session must stay in the same split; otherwise the model learns the station jingle or the speaker rather than the label, and test scores are inflated.
 
 

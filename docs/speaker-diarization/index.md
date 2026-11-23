@@ -2,7 +2,7 @@
 ready: true
 title: Speaker Diarization
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -87,9 +87,7 @@ The `Overlap` label gives annotators an explicit way to mark the two-voices-at-o
 - **Non-speech marking.** Music, silence, background noise, laughter: mark as distinct labels or as absence of any speaker label? Absence is simpler but loses the information that "there is nothing happening" is different from "there is background noise here"; a formal `Music` or `Noise` label is often worth the extra annotation work.
 - **Named speakers vs anonymous labels.** In broadcast panels with public figures, are speakers labelled by name or by anonymous ID? Publishing a corpus with named speakers has consent implications; the safer default is anonymous IDs and a separate mapping table that only the project team holds.
 
-Dragging a speaker segment across the audio timeline in AfriAnnotate:
-
-![Marking a speaker segment on the audio timeline in AfriAnnotate](/afriannotate-demo/gifs/audio-segment.gif)
+The diarization interface should provide keyboard-controlled playback, a zoomable timeline, precise segment boundaries, speaker labels and explicit overlap handling. Exports should preserve segment times, speaker identifiers, overlap and annotator identities.
 
 ## Quality assurance during annotation
 
@@ -142,7 +140,7 @@ Few projects need to train a diarizer from scratch. Open-source toolkits such as
 
 - **Annotate an evaluation set first.** A few hours of carefully diarised audio from the real deployment sources, split by source and condition as above, tells you whether the off-the-shelf pipeline is already good enough.
 - **Spend training annotation on the failures.** If the breakdown shows confusion in overlaps or over-splitting of code-switching speakers, annotate more of exactly that audio for fine-tuning rather than more of what the model already handles.
-- **Pre-annotate, then correct.** Running the pretrained pipeline first and having annotators correct its RTTM output is usually faster than marking from scratch, but check a sample annotated from scratch so annotators do not simply accept the model's boundaries.
+- **Pre-annotate, then correct.** Running the pretrained pipeline first and having annotators correct its RTTM output is usually faster than marking from scratch, but check a sample annotated from scratch so annotators do not simply accept the model's boundaries (see [Treat drafts as drafts](../3_annotation-design/model-assisted-annotation.md#treat-drafts-as-drafts)).
 - **Check the model licence and access terms.** Some pretrained pipelines are gated behind a user agreement; confirm the terms allow your intended use and redistribution before building on them.
 
 ## Deployment realities

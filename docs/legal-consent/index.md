@@ -57,6 +57,15 @@ This is more expensive than a paper form. It is also the pattern that survives s
 
 Consent to record a person's voice for building an ASR corpus is not consent to include that voice in a voice-cloning dataset. Consent to translate a sentence into English for a translation benchmark is not consent to have that translation used in a commercial LLM's training data. Be specific in the consent conversation about what the data will and will not be used for, and treat downstream re-use as requiring fresh consent whenever it exceeds the original scope.
 
+Specific wording is only half of purpose limitation. The other half is giving contributors a separate choice for each purpose and then honouring each choice when data leaves the project. Do not bundle purposes into one "I agree". Ask separately, as opt-in boxes that start unticked, for at least:
+
+- **Model training**: the contribution may be used to train or fine-tune models.
+- **Sharing with partners**: the contribution may be passed to named partner organisations under the project's agreements.
+- **Public release**: the contribution may be published openly under the project's licence. Once released, it cannot be recalled (see [Withdrawal](#withdrawal)).
+- **Each specific reuse** the project already foresees, such as quoting examples in publications or including a voice in a speech-synthesis dataset.
+
+A contributor who says no to one purpose can still take part in the others. If a purpose is a condition of taking part at all, it is not an opt-in: say so plainly in the description of the contribution, and do not offer a box that cannot be unticked. Store the answer to each purpose per contributor, in the [consent record](#keeping-consent-records), not only on the paper form. How those answers are checked before data leaves the project is covered in [From consent record to release metadata](#from-consent-record-to-release-metadata).
+
 ### Withdrawal
 
 Contributors must be able to withdraw. This is a legal requirement under most African data protection laws (see the [country reference](#data-protection-laws-in-africa-quick-country-reference) below) and an ethical one everywhere else. Design withdrawal in from the start:
@@ -64,6 +73,70 @@ Contributors must be able to withdraw. This is a legal requirement under most Af
 - The contributor is given a stable, memorable ID (not their name) that allows them to reach the project later and identify their contribution.
 - Withdrawal removes the data from the active corpus and from all future releases. Data that has been publicly released cannot be un-released; the withdrawal record acknowledges this and the project commits to not re-publishing.
 - Withdrawal does not require the contributor to justify the request or to speak in the project's working language. A native-speaker channel for withdrawal requests is part of the design, not an afterthought.
+
+### Keeping consent records
+
+A consent you cannot show is a consent you cannot rely on. Some laws say so directly. Under the EU's General Data Protection Regulation, a controller that relies on consent must be able to demonstrate that the person consented, and withdrawing must be as easy as giving consent ([European Union, 2016](../references.md#gdpr-2016)). Kenya's [Data Protection Act 2019](#data-protection-laws-in-africa-quick-country-reference) likewise places the burden of proving consent on the data controller or processor (section 32(1)). Even where no law requires it, the record is what lets you answer a contributor, an ethics board or a partner years after collection. Keep the consent record as its own register, linked to the data by contributor code.
+
+**What to log.** Each acceptance is one entry with:
+
+| Field | Why it matters |
+| --- | --- |
+| Contributor code | Links the entry to the data without using a name |
+| Consent text version | Shows exactly what the person agreed to |
+| Purposes accepted | One answer per opt-in purpose |
+| Date and project | When, and for which collection |
+| Form | Written, or oral with a link to the consent recording |
+| Country of residence (optional) | Helps decide which data protection law applies |
+
+**Versions.** Any change to the consent text, however small, creates a new version with its own number and date. Existing contributors re-consent to the new version before they contribute anything further. Their earlier contributions stay covered by the version they accepted at the time.
+
+**Append only.** Do not edit or delete entries. A withdrawal is a new entry that refers to the original acceptance; the original stays in the register, so the history shows what was agreed, when it ended, and why data was removed. A withdrawal also notifies whoever processes the data, so that the next export applies it (see [From consent record to release metadata](#from-consent-record-to-release-metadata)). Keep the register for as long as the data, or any release built from it, is in use, plus any period your law or ethics approval sets; retention and disposal are themselves logged as entries.
+
+**Receipts.** Give contributors a copy or receipt each time they sign or withdraw: a printed copy, a message to their phone, or a reference read aloud in an oral session. The receipt names the consent text version and the contributor code.
+
+**Audit and tamper evidence.** The register must be exportable in a plain format (for example CSV) for an audit or an ethics review. Make it tamper-evident, so that a later edit would be noticed. Store a checksum with each archived signed form and consent recording. You can also chain the entries so that each one includes a hash of the one before it, and regularly record the latest hash somewhere the register's keepers cannot change, for example in each release's notes, in contributor receipts, or with the ethics board. A later edit then no longer matches the recorded hash ([Crosby and Wallach, 2009](../references.md#crosby-2009)).
+
+**Enforcement.** Keep a per-contributor checklist of what is still outstanding, such as an unsigned form, an outdated version, or an oral recording not yet checked. Do not accept new submissions from a contributor until the checklist is complete. Run the check where submissions are received, not only on the screen the contributor sees, so that an old link, a bulk upload or an offline device that syncs later cannot get around it. A consent gap found at release time is expensive: data without a valid consent has to be left out, however good it is.
+
+The [agri-advisory case study](../agri-advisory/quality-consent-release.md#consent) keeps the same kind of register in a running project, with versioned consent texts and re-consent when the text changes.
+
+### From consent record to release metadata
+
+Purpose limitation becomes real when the export pipeline checks it, not when it is written on a form. Run these steps before every export, whether it is an internal training set, a batch for a partner, or a public release:
+
+1. **Name the export's purpose.** Each export serves one or more of the purposes on the form, for example "training, internal only" or "public release".
+2. **Link every item to its contributors.** Each item carries, for every contributor, their code and the consent text version in force for them at the time, such as the speaker of a recording and the person who wrote the prompt. Assign these at ingest; adding them at release time is guesswork.
+3. **Join the items to the consent record** by contributor code and version. Judge each contributor's part against the consent text version that contributor had accepted when they contributed to the item.
+4. **Keep only items whose contributors all accepted the export's purpose.** An item with a missing, refused or unclear answer is left out, not included by default.
+5. **Apply every withdrawal received since the last export**, and log each removal against the withdrawal entry that caused it.
+6. **Publish a consent summary with the release.** Report counts per consent form (written or oral) and text version, how many contributors accepted each purpose, the number of items left out and why, and the withdrawals applied. Put it in the [dataset card](../templates/dataset-card.md).
+
+Run the filter as a script that is part of the export, so it runs the same way every time and stops the export if any item cannot be linked to a contributor. A minimal version of steps 3 to 5 looks like this:
+
+```python title="consent_filter.py"
+def eligible(items, consent, withdrawn, purpose):
+    """Keep items whose contributors all accepted `purpose`."""
+    kept, dropped = [], []
+    for item in items:
+        if not item.get("contributors"):
+            raise ValueError(f"item {item['id']} has no contributor codes")
+        reasons = []
+        # contributors: (code, version) pairs, where version is the consent
+        # text version this contributor had accepted when they contributed
+        for code, version in item["contributors"]:
+            record = consent.get((code, version))
+            if code in withdrawn:
+                reasons.append(f"{code}: withdrawn")
+            elif record is None:
+                reasons.append(f"{code}: no consent record")
+            elif not record["purposes"].get(purpose, False):
+                reasons.append(f"{code}: did not accept {purpose}")
+        (dropped if reasons else kept).append((item, reasons))
+    return kept, dropped
+```
+
+The `dropped` list, with its reasons, is the raw material for the consent summary. The [agri-advisory case study](../agri-advisory/quality-consent-release.md#rolling-exports-and-partner-sampling) applies opt-outs in this way before every batch export, and counts the withdrawals in its datasheet.
 
 :::tip[Template: Consent form]
 A starting point for your project's consent process: a written consent form, an oral consent protocol for contributors who do not read, a community consent addendum, and the role of an independent ombudsperson. Adapt it to the data protection law of each country you work in. [Open the consent form template](../templates/consent-form.md).

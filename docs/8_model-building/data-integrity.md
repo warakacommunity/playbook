@@ -3,7 +3,7 @@ title: Data Integrity and Contamination Control
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 
@@ -42,6 +42,63 @@ def dedup_then_split(records, group_key="speaker_id", test_size=0.2, seed=0):
 ```
 
 The `assert` is not decoration: it turns a silent, score-inflating leak into a loud failure at the moment the split is made, which is far cheaper than discovering it after the benchmark has been published.
+
+### Read speech: keep speakers and prompts apart
+
+Read or prompted speech has two grouping keys, not one: every clip has a speaker and a prompt sentence, and either can leak. If the same sentence appears in train and test, read by different people, a model can memorise the sentence text and score better than it should, even though no speaker is shared. For read speech, no speaker and no prompt sentence should appear in more than one of train, dev and test. Common Voice keeps each speaker in a single split and removes repeated sentences from its train, dev and test sets ([Ardila et al., 2020](../references.md#ardila-2020)). The same advice for acted emotion corpora is in the [SER quality assurance section](../speech-emotion-recognition/index.md#quality-assurance).
+
+When several recordings of one sentence are kept, a split by speaker alone is not enough, and a split by prompt alone is not enough either. Treat speakers and prompts as nodes in a graph, link every speaker to every prompt they read, and split by connected component: everything connected through a shared speaker or a shared prompt lands in the same split.
+
+```python
+import random
+from collections import defaultdict
+
+def speaker_prompt_disjoint_split(records, fractions=(0.8, 0.1, 0.1), seed=0):
+    """records: dicts with 'speaker_id' and 'prompt_id'. Returns (splits, dropped)."""
+    # Rows missing either key cannot be placed safely; drop and report them.
+    usable = [r for r in records if r.get("speaker_id") and r.get("prompt_id")]
+    dropped = [r for r in records if not (r.get("speaker_id") and r.get("prompt_id"))]
+
+    # 1. Connected components over shared speaker and shared prompt (union-find).
+    parent = {}
+    def find(a):
+        parent.setdefault(a, a)
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+    for r in usable:
+        parent[find(("spk", r["speaker_id"]))] = find(("prm", r["prompt_id"]))
+
+    components = defaultdict(list)
+    for r in usable:
+        components[find(("spk", r["speaker_id"]))].append(r)
+
+    # 2. Assign whole components to splits, in a fixed-seed random order.
+    comps = list(components.values())
+    random.Random(seed).shuffle(comps)
+    total = len(usable)
+    splits = {"train": [], "dev": [], "test": []}
+    targets = {"dev": fractions[1] * total, "test": fractions[2] * total}
+    for comp in comps:
+        if len(splits["test"]) < targets["test"]:
+            splits["test"].extend(comp)
+        elif len(splits["dev"]) < targets["dev"]:
+            splits["dev"].extend(comp)
+        else:
+            splits["train"].extend(comp)
+
+    # 3. Assert that no speaker or prompt crosses a split boundary.
+    for key in ("speaker_id", "prompt_id"):
+        seen = {}
+        for name, rows in splits.items():
+            for r in rows:
+                assert seen.setdefault(r[key], name) == name, f"{key} {r[key]} leaked"
+
+    return splits, dropped
+```
+
+Report the split sizes, the number of speakers and prompts in each split, and every dropped row in the [dataset card](../templates/dataset-card.md). The fractions in the example are a placeholder, not a norm. If one component swallows most of the corpus, because many speakers read the same small set of prompts, no clean split exists after the fact. You then have to drop the rows that connect the component and report them, or, better, assign each prompt to a split before recording starts, so the graph never joins up.
 
 ## Watch for benchmark overlap
 

@@ -2,7 +2,7 @@
 ready: true
 title: LLM-Assisted Data
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -14,7 +14,7 @@ This chapter has two parts: using LLMs to assist human annotation, below, and [c
 
 ## Human-in-the-loop, not human-out-of-the-loop
 
-The safe pattern is that the LLM proposes and a human disposes. An LLM pre-labels or drafts, and a qualified native speaker reviews, corrects, and approves every item, or at least enough of them to trust the rest. The model is a way to make a human faster, not a way to replace the human, and treating its output as final is where LLM-assisted annotation goes wrong. Measure the LLM against your human annotators the same way you measure two annotators against each other, with agreement, so you know empirically how far to trust it on this task and this language.
+The safe pattern is that the LLM proposes and a human disposes. An LLM pre-labels or drafts, and a qualified native speaker reviews, corrects, and approves every item, or at least enough of them to trust the rest. The model is a way to make a human faster, not a way to replace the human, and treating its output as final is where LLM-assisted annotation goes wrong. Measure the LLM against your human annotators the same way you measure two annotators against each other, with agreement, so you know empirically how far to trust it on this task and this language. The same rules hold for drafts from any model, not only an LLM; [Model-Assisted Annotation](../3_annotation-design/model-assisted-annotation.md) covers them in general, including active learning and what to record about the model.
 
 In practice the pattern is to have the model draft a label, constrain that draft to the allowed label set, and import it as a pre-annotation a human then reviews. The function below keeps the model provider abstract, so it works with any API, and rejects anything the model invents outside the label set:
 

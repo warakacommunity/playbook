@@ -2,7 +2,7 @@
 title: Data Governance
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 
@@ -81,6 +81,15 @@ Whatever licence you pick, require attribution and record provenance: where the 
 
 African-language collection routinely captures personal data: names and places in text, and, unavoidably, voices in audio and faces in images, which identify a person directly. Collect as little as the task needs, anonymise where you can by masking names and stripping metadata, and never treat a recorded voice as anonymous. Where identifiable data is essential, it has to rest on explicit, informed consent, and the consent terms must travel with the data.
 
+The people who label the data need protecting too. An export from an annotation tool usually records who made each label, often as a name, an email address, or an account ID. Released as they are, these fields show which person called a post hateful, and in hate-speech, political, or religious data that can put an annotator at risk. Replace them with pseudonyms before the data leaves the team:
+
+- **Stable within a project.** Each annotator keeps the same pseudonym throughout one dataset, so per-annotator agreement, drift over time, and the individual labels you keep for subjective tasks (see [Resolve disagreement, but read it first](../3_annotation-design/workflow-adjudication.md#resolve-disagreement-but-read-it-first)) all still work.
+- **Different across projects.** The same person gets a different pseudonym in each dataset, so nobody can link their labels across releases. A common way to get both properties is a keyed hash: compute the pseudonym from a secret key, the annotator's account ID, and the project ID, rather than from the account ID alone, which anyone could hash again.
+- **Stable across versions.** Keep the same key for every version of a dataset (v1.0, v1.1, and so on). Changing the key changes every pseudonym and breaks comparisons between versions; it is the project ID in the hash, not a new key, that keeps pseudonyms different across datasets.
+- **Reversible only on purpose.** If no one should ever be able to re-identify an annotator, keep no table that maps pseudonyms to people, and remember that the key itself works like a mapping for anyone who also holds the list of account IDs. If you do need to trace labels back, for example to answer a withdrawal request or investigate a quality issue, keep the mapping and the key under access control, separate from the released data.
+
+Pseudonyms are not anonymity on their own. In a small team, extra fields such as an annotator's region, dialect, or gender can single a person out, so release only the annotator attributes the dataset really needs. Crediting annotators by name in the [dataset card](../templates/dataset-card.md) (see [Benefit-sharing and credit](#benefit-sharing-and-credit)) is compatible with this, as long as the list of names cannot be joined to the labels. Keep internal administrative and working-hours records out of the public release. Decide all of this in the [ethics review](#a-lightweight-ethics-review) before annotation starts, and record in the dataset card which annotator fields were pseudonymised and how.
+
 ### Sensitive and restricted content
 
 Some knowledge should not be public even when it is easy to collect. Sacred or ceremonial material, culturally restricted knowledge, health information, and politically dangerous speech can all put contributors at real risk. This is what CARE's Authority to control protects: the community, not the collector, decides what may be shared and what stays closed ([Carroll et al., 2020](../references.md#carroll-2020)). When unsure, ask the community and default to not releasing.
@@ -96,6 +105,25 @@ Across the continent, governance is now law as much as ethics. By 2026, 44 Afric
 - **African Union, Malabo Convention**: the first continent-wide treaty on personal-data protection and cybersecurity, in force since June 2023 ([Malabo Convention, 2023](../references.md#malabo-2023)).
 
 The practical demands are similar across these laws: collect on a lawful basis, usually informed consent; use the data only for the purpose you stated; honour data-subject rights to access, correction, and deletion; and be ready to run an impact assessment for anything that feeds automated decisions. Check the law of every country your contributors are in, not only your own. African Next Voices makes the point concrete. It gathered roughly 9,000 hours of speech across Kenya, Nigeria, and South Africa ([African Next Voices, 2025](../references.md#african-next-voices)), which placed one project under three separate data-protection regimes at once.
+
+### Securing data during annotation
+
+Data has to be kept safe while people are working on it, not only when it is released. During annotation, copies of the data sit in browsers, on laptops and phones, in exports, and in chat threads, and each copy is a place where it can leak. Choose the controls by how risky the data is, and set them before any data is handed out:
+
+| Data | Controls to consider |
+| --- | --- |
+| Highly sensitive data (health, children, political or religious views) where annotators can work online | No offline copies or browser caching; automatic logout after a period of inactivity; a fresh login before export; exports limited to coordinators. |
+| Personal data that must be worked on offline (for example, field speech in low-connectivity areas) | First check that the consent terms and the applicable law allow data on devices (see [Decide whether data may live on devices](../2_data-collection/10_offline-field-operations.md#decide-whether-data-may-live-on-devices)). If they do: encrypt local copies; one device per annotator; a maximum age after which downloaded data is deleted, once the annotator's work has synced. |
+| Low-risk demos and practice items for training annotators | Standard settings are usually enough. |
+
+Some precautions apply whatever the risk level:
+
+- Use full-disk encryption on field laptops and phones.
+- On shared or internet-café machines, make sure the annotator syncs their work and local data is cleared when they log out.
+- Keep task links out of search engines and public channels, and never paste access tokens or passwords into group chats.
+- Remove access and rotate shared credentials when someone leaves the project.
+
+Tightening the rules later does not recall copies already on people's devices, which is why the decision belongs at the start of the project. For working offline safely, see [Offline field operations](../2_data-collection/10_offline-field-operations.md) and [Offline and patchy-connectivity NLP](../deployment/offline.md).
 
 ## Ethics and harm avoidance
 

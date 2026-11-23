@@ -3,7 +3,7 @@ title: Data Quality Management
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 
@@ -25,4 +25,4 @@ When a model trained on the data makes mistakes, treat those mistakes as data ab
 
 ## Version the dataset
 
-A dataset is not finished at first release; it is corrected, extended, and re-split over time. Treat it like code. Give every release a version number, record what changed and why in a short changelog, and keep the raw collection and the processed versions separate so the original is never overwritten. Versioning is what makes results reproducible, lets a downstream user cite the exact data they trained on, and allows you to roll back when a well-meant "fix" turns out to introduce a regression. Pair the version history with the dataset's documentation and provenance (see [Documentation](../6_documentation/documentation.md) and [Data Governance](../data-governance/index.md)), so that what changed, who changed it, and under what terms are all answerable years later.
+A dataset is not finished at first release; it is corrected, extended, and re-split over time. Treat it like code. Give every release a version number, record what changed and why in a short changelog, and keep the raw collection and the processed versions separate so the original is never overwritten. Versioning is what makes results reproducible, lets a downstream user cite the exact data they trained on, and allows you to roll back when a well-meant "fix" turns out to introduce a regression. Pair the version history with the dataset's documentation and provenance (see [Documentation](../6_documentation/documentation.md) and [Data Governance](../data-governance/index.md)), so that what changed, who changed it, and under what terms are all answerable years later. Each version should start from a dated snapshot of the annotation tool's full export, so that a model trained on it can be tied back to exactly that state of the labels (see [Exporting from your annotation tool](../6_documentation/data-storage.md#exporting-from-your-annotation-tool)).

@@ -4,7 +4,7 @@ title: Glossary
 description: Definitions of key terms used throughout the AfriPlaybook.
 ready: true
 last_update:
-  date: 2026-09-24
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -92,7 +92,15 @@ This is a starting point. Additions and corrections are welcome via the "Edit th
 
 ## T
 
+**TMX (Translation Memory eXchange).** An open XML format for exchanging translation memories between tools with little or no loss of data. Each translation unit holds the same segment in two or more languages. See [Glossaries and translation memory](./machine-translation/index.md#glossaries-and-translation-memory) in the *Machine Translation* chapter.
+
 **Tokenisation.** Splitting text into the basic units a model operates on. Choices around tokenisation (subword, BPE, SentencePiece, character) materially affect downstream performance, especially in morphologically rich languages.
+
+**Translation memory (TM).** A store of approved source and target segment pairs, usually sentences, that translators reuse when the same or a similar segment appears again, so repeated text is translated consistently. See [Glossaries and translation memory](./machine-translation/index.md#glossaries-and-translation-memory).
+
+## X
+
+**XLIFF (XML Localization Interchange File Format).** An open XML format, standardised by OASIS, for carrying bilingual material between the steps of a localisation workflow. Each segment holds a source and an optional target, so a file with existing targets can be loaded for post-editing. See [Glossaries and translation memory](./machine-translation/index.md#glossaries-and-translation-memory).
 
 ## See also
 

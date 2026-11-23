@@ -3,7 +3,7 @@ sidebar_position: 9
 sidebar_label: "Sentiment Analysis"
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 # Sentiment Analysis
@@ -48,6 +48,4 @@ Examples of sentiment analysis are as follows:
 | Mixed | Use only when both are clearly present and roughly balanced. | "Great camera but the battery dies fast." |
 | Neutral | Default when no evaluative stance is expressed. | "The package arrived on Tuesday." |
 
-Labeling a sentiment in the AfriAnnotate editor:
-
-![Selecting a sentiment label in AfriAnnotate](/afriannotate-demo/gifs/sentiment-choice.gif)
+The annotation interface should show the full text and context, constrain the choice to the project's labels, and provide a skip or uncertainty route. Test examples containing sarcasm, code-switching, negation and mixed sentiments before scaling.

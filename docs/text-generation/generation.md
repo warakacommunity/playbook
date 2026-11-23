@@ -3,7 +3,7 @@ ready: true
 title: Open-ended generation
 sidebar_position: 2
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -77,5 +77,4 @@ Because human judgement is the real measure here, the evaluation is itself an an
 
 Scoring fluency and adequacy on a five-point scale makes them ordinal, which Krippendorff's alpha (ordinal) handles directly and unweighted Cohen's kappa does not, so reach for alpha when checking agreement on these ratings. The two factuality and cultural choices stay categorical and catch the confident inventions and cultural displacement that automatic metrics never see.
 
-
-Two practical points make these ratings trustworthy. Show raters the responses in random order and without the name of the system that produced them, so that expectations about a particular model do not colour the scores. And when comparing systems, have every system answer the same held-out prompts, so differences in the scores reflect the models rather than the prompts.
+Two practical points make these ratings trustworthy. Show raters the responses in random order and without the name of the system that produced them, so that expectations about a particular model do not colour the scores. And when comparing systems, have every system answer the same held-out prompts, so differences in the scores reflect the models rather than the prompts. [Human Evaluation Designs](../3_annotation-design/human-evaluation-designs.md) compares absolute ratings with pairwise comparison and ranking, and lists the [controls every design needs](../3_annotation-design/human-evaluation-designs.md#controls-for-every-design).

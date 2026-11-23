@@ -3,7 +3,7 @@ title: Diagnosis Labelling
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-10-02
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -53,13 +53,9 @@ A label is a path through a versioned ontology plus a confidence, and a chain of
 
 **Rubric ownership.** The language lead owns one versioned rubric for the language: the ontology term list in the vernacular, worked examples per node, and the review checklist. A corner case that two agronomists read differently becomes a worked example in the next version.
 
-## On the platform
+## Task interface
 
-The screenshot below shows the labelling task in AfriAnnotate. The agronomist sees the photo and the farmer's question on the left, and sets the crop, the ontology diagnosis, the growth stage, the plant part, a confidence rating and the image quality on the right.
-
-![Diagnosis labelling in AfriAnnotate: the agronomist sees the photo and the farmer's question and sets the crop, the ontology diagnosis, growth stage, plant part, confidence and image quality](images/afriannotate-diagnosis-labelling.jpg)
-
-The photo is a stock image standing in for a field photo.
+The task interface should show the photo and farmer's question beside the crop, ontology diagnosis, growth stage, plant part, confidence and image-quality fields. Export each field with the ontology and rubric versions so the saved label can be interpreted later.
 
 ## Guidelines that matter
 
@@ -69,15 +65,15 @@ The photo is a stock image standing in for a field photo.
 4. Record a secondary label when two issues are visible. Do not pick the one you think matters more and drop the other.
 5. Reject the image, with a reason, when it cannot be labelled: out of focus, wrong plant part, too far away. A rejected image is one lost photo; a mislabelled one leads to an advisory and a speech item built on a wrong diagnosis.
 6. Use the vernacular term list from the rubric, and flag a node whose vernacular name does not match what farmers in your district say. The advisory author will reuse it.
-7. Do not review your own labels. The platform blocks it, and if your tool does not, the language lead must.
+7. Do not review your own labels. Configure assignments to prevent self-review where the tool supports it; otherwise, the language lead must enforce the separation.
 
 ## Quality control
 
 **The kappa floor.** Cohen's kappa is computed on the double-labelled sample per language, per crop and per annotator, every Monday, and the threshold is 0.75. Kappa corrects for the agreement two agronomists would reach by chance, which matters here because some crops have one dominant issue and raw agreement on them looks good even when the labelling is careless. Agreement is an exact match on the full label path: `maize/pest` against `maize/pest/fall_armyworm` is a disagreement, and `uncertain` is a label like any other. The 30% sample is drawn at random. Images that get a second label because the first was `uncertain` or `confidence: low` are double-labelled too, but they stay out of the kappa sample, so the metric measures routine labelling rather than the hard cases. Read the metric's caveats on the [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md) page before you set a floor for a smaller cohort.
 
-**The loop.** While kappa holds above 0.75, the sample stays at 30% and labels are credited on acceptance. When any cell falls below the floor, that cell goes to 100% double labelling: every image of that crop, or every image by that annotator, gets a second label until the cell recovers. An annotator below the floor is paused automatically, retrained on the rubric's worked examples, and resumes on a short calibration set of gold images. A class that falls below the floor twice is a sign the class is badly defined, and the fix is in the ontology: split it, merge it or add worked examples, and raise the version number.
+**The loop.** While kappa holds above 0.75, the sample stays at 30%. When any cell falls below the floor, that cell goes to 100% double labelling: every image of that crop, or every image by that annotator, gets a second label until the cell recovers. Low agreement routes work to another annotator or review; it does not by itself identify the person at fault. A class that falls below the floor twice is a sign the class is badly defined, and the fix is in the ontology: split it, merge it or add worked examples, and raise the version number.
 
-**Gold images.** Mix a small set of pre-adjudicated gold images into every agronomist's stream, unflagged. Ground-truth accuracy against gold gives a per-annotator read that does not wait for the weekly kappa.
+**Gold images.** Mix a small set of pre-adjudicated gold images into every agronomist's stream, unflagged. Ground-truth accuracy against gold gives a per-annotator read that does not wait for the weekly kappa. In this worked example, an annotator below the gold-accuracy floor is paused automatically, retrained on the rubric's worked examples, and resumes on a short calibration set of gold images. Keep this pause rule separate from the agreement signal.
 
 **The three-stage review.** After labelling, every pair still passes the loop on the [Quality, consent and release](./quality-consent-release.md) page, where an independent agronomist reviews the label against the extension standard. A relabel at review is a new entry in the chain, and the original label stays visible.
 
@@ -99,4 +95,4 @@ Adjudicating each disagreement as it arrives spreads the language lead's attenti
 - [Advisory authoring](./advisory-authoring.md): what the author does with the label.
 - [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md): multiple annotators, agreement and adjudication in general.
 - [Annotation guidelines template](../templates/annotation-guidelines.md): the section structure the language rubric follows, and the [advisory-specific sheets](../templates/advisory-annotation-guidelines.md) for this chapter.
-- [AfriAnnotate](https://afriannotate.waraka.org): hierarchical taxonomy labels with an uncertain node, built-in kappa, annotator auto-pause and gold-task accuracy.
+- [A checklist for choosing a tool](../6_documentation/tooling.md#a-checklist-for-choosing-a-tool): the labelling tool needs hierarchical taxonomy labels with an uncertain node, exports for computing kappa, and gold-task accuracy. Low agreement should increase double labelling or review; any automatic pause must follow the project's ground-truth accuracy rule.

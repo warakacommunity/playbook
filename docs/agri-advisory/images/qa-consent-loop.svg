@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 720" width="100%" font-family="Inter,'Segoe UI',Roboto,system-ui,sans-serif" role="img" aria-labelledby="qaTitle qaDesc">
   <title id="qaTitle">Quality, consent and release loop</title>
-  <desc id="qaDesc">A consent gate (written or recorded oral, versioned, with a 60-day opt-out) admits each contribution. Anonymisation at ingest blurs faces, strips EXIF, coarsens GPS to district and assigns opaque IDs. The record then passes three review stages: agronomist review, native-speaker linguistic review and language-lead adjudication, with relabel and rewrite loops back and credit landing only on acceptance. A Monday report reads kappa, advisory agreement, coverage gaps, queue and ledger. A release timeline runs from batch exports every two weeks under partner sampling, to partner delivery under embargo, to public CC-BY-4.0 release 60 days later after the last opt-out window closes.</desc>
+  <desc id="qaDesc">A consent gate (written or recorded oral, versioned, with a 60-day opt-out) admits each contribution. Anonymisation at ingest blurs faces, strips EXIF, coarsens GPS to district and assigns opaque IDs. The record then passes three review stages: agronomist review, native-speaker linguistic review and language-lead adjudication, with relabel and rewrite loops back and acceptance recorded after review. A Monday report reads kappa, advisory review acceptance, coverage gaps, queue and opt-outs. A release timeline runs from batch exports every two weeks under partner sampling, to partner delivery under embargo, to public CC-BY-4.0 release 60 days later after the last opt-out window closes.</desc>
 
   <rect x="6" y="6" width="968" height="708" rx="14" fill="#FBF7F0" stroke="#E7DDCB" stroke-width="1.5"/>
 
   <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Quality, consent and release</text>
-  <text x="30" y="72" font-size="13" fill="#8A7D6E">Consent first &#8594; anonymise at ingest &#8594; three review stages &#8594; credit on acceptance &#8594; report every Monday &#8594; release after the last opt-out.</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">Consent first &#8594; anonymise at ingest &#8594; three review stages &#8594; record acceptance &#8594; report every Monday &#8594; release after the last opt-out.</text>
   <line x1="30" y1="88" x2="950" y2="88" stroke="#E7DDCB" stroke-width="1.5"/>
 
   <defs>
@@ -27,7 +27,7 @@
     <text x="48" y="186" font-size="12" fill="#2B2218">in the language, versioned</text>
     <text x="48" y="208" font-size="12" fill="#2B2218">voice = biometric data,</text>
     <text x="48" y="224" font-size="12" fill="#2B2218">explicit opt-in to release</text>
-    <text x="48" y="246" font-size="11" font-weight="600" fill="#B97F37">60-day opt-out, credit by choice</text>
+    <text x="48" y="246" font-size="11" font-weight="600" fill="#B97F37">60-day opt-out, attribution by choice</text>
   </g>
 
   <line x1="242" y1="185" x2="276" y2="185" stroke="#CBBBA4" stroke-width="2" marker-end="url(#qaArrow)"/>
@@ -51,9 +51,9 @@
     <text x="758" y="140" font-size="15" font-weight="700" fill="#2B2218">Monday report</text>
     <text x="758" y="160" font-size="11" fill="#8A7D6E">per language + aggregate</text>
     <text x="758" y="182" font-size="12" fill="#2B2218">Cohen's &#954; &#8805; 0.75 per crop</text>
-    <text x="758" y="200" font-size="12" fill="#2B2218">advisory agreement &#8805; 90% (r2)</text>
+    <text x="758" y="200" font-size="12" fill="#2B2218">advisory review acceptance &#8805; 90% (r2)</text>
     <text x="758" y="218" font-size="12" fill="#2B2218">coverage gaps, speakers</text>
-    <text x="758" y="236" font-size="12" fill="#2B2218">open queue, opt-outs, ledger</text>
+    <text x="758" y="236" font-size="12" fill="#2B2218">open queue and opt-outs</text>
     <text x="758" y="252" font-size="11" fill="#8A3B25">below threshold &#8594; action line</text>
   </g>
 
@@ -90,14 +90,14 @@
 
     <rect x="826" y="346" width="108" height="86" rx="10" fill="#1F5B3F" stroke="#1F5B3F" stroke-width="1.5"/>
     <text x="880" y="380" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">Accepted</text>
-    <text x="880" y="400" font-size="11" fill="#FFFFFF" text-anchor="middle">credit lands</text>
-    <text x="880" y="416" font-size="11" fill="#FFFFFF" text-anchor="middle">on the ledger</text>
+    <text x="880" y="400" font-size="11" fill="#FFFFFF" text-anchor="middle">record the</text>
+    <text x="880" y="416" font-size="11" fill="#FFFFFF" text-anchor="middle">review outcome</text>
 
     <!-- rework loops (rust) -->
     <path d="M163 432 L163 456 L60 456" fill="none" stroke="#8A3B25" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#qaBack)"/>
-    <text x="170" y="460" font-size="11" fill="#8A3B25">relabel or reject &#8594; back, no credit</text>
+    <text x="170" y="460" font-size="11" fill="#8A3B25">relabel or reject &#8594; return for revision</text>
     <path d="M439 432 L439 474 L336 474" fill="none" stroke="#8A3B25" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#qaBack)"/>
-    <text x="446" y="478" font-size="11" fill="#8A3B25">rewrite request &#8594; back to author, no credit until accepted</text>
+    <text x="446" y="478" font-size="11" fill="#8A3B25">rewrite request &#8594; back to author for revision</text>
   </g>
 
   <!-- ingest -> QA and QA -> report connectors -->

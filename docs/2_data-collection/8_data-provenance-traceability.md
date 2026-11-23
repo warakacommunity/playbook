@@ -1,7 +1,7 @@
 ---
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 # Data Provenance and Traceability
@@ -29,7 +29,7 @@ Understanding where data comes from and how it has been processed is essential f
 ### Transformation Logs
 
 - **Preprocessing steps** – Record cleaning, normalization, and filtering operations  
-- **Annotation processes** – Track labeling methods and guidelines used  
+- **Annotation processes** – Track labeling methods and guidelines used, including any model that pre-labeled items or chose which items to label (see [Record what the model did](../3_annotation-design/model-assisted-annotation.md#record-what-the-model-did))
 - **Modifications** – Log any changes made to the data after collection  
 - **Audit trails** – Maintain records for reproducibility and verification  
 

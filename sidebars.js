@@ -119,6 +119,7 @@ const sidebars = {
       chapterIndexed('Sequence Labelling', 'sequence-labelling/index', [
         'sequence-labelling/ner',
         'sequence-labelling/pos',
+        'sequence-labelling/relations',
       ]),
       chapterIndexed('Text Generation', 'text-generation/index', [
         'text-generation/generation',
@@ -129,7 +130,9 @@ const sidebars = {
     ]),
 
     section('Speech', 'sections/speech', [
-      'asr/index',
+      chapterIndexed('Automatic Speech Recognition (ASR)', 'asr/index', [
+        'asr/audio-quality-control',
+      ]),
       'text-to-speech/index',
       'speech-to-speech-translation/index',
       'audio-understanding/index',

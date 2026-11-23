@@ -3,7 +3,7 @@ ready: true
 title: Question answering
 sidebar_position: 4
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -107,6 +107,4 @@ if __name__ == "__main__":
 
 The example output makes the point: "birnin Kano" is a correct answer but scores zero on Exact Match because of one extra word, while token F1 gives it partial credit. The `normalize` function deliberately omits the article-stripping step from the original English SQuAD scorer, which would silently corrupt answers in languages whose grammar works nothing like English. Report F1 alongside Exact Match, and always sample answers by hand to catch the correct-but-inflected cases that both metrics undercount.
 
-Marking an answer span in the AfriAnnotate editor:
-
-![Selecting an answer span for extractive QA in AfriAnnotate](/afriannotate-demo/01-text-nlp/17-qa-span-selection/2-labeling-editor.png)
+The extractive-QA interface should show the question and full context, support exact span selection, and provide routes for unanswerable or ambiguous questions. Verify that exported offsets reproduce the selected answer text in every target script.

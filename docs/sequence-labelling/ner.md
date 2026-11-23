@@ -4,7 +4,7 @@ sidebar_label: Named Entity Recognition
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Seid Muhie Yimam
 ---
 
@@ -70,7 +70,7 @@ Keep the guideline as a living document. Every adjudication decision that sets a
 
 ## Nested and ambiguous entities
 
-**Nested entities** occur when one entity contains another: a university named after a city contains a LOC inside an ORG. The BIO scheme can represent only one layer, so flat datasets such as CoNLL-2003 and MasakhaNER tag the outermost entity and ignore the inner one. Do the same unless your use case needs the inner entities, and say in the guideline that you do. If you do need them, store spans as character offsets with types (start, end, label), which can hold overlapping spans, and derive a flat BIO view for models that need one.
+**Nested entities** occur when one entity contains another: a university named after a city contains a LOC inside an ORG. The BIO scheme can represent only one layer, so flat datasets such as CoNLL-2003 and MasakhaNER tag the outermost entity and ignore the inner one. Do the same unless your use case needs the inner entities, and say in the guideline that you do. If you do need them, store spans as character offsets with types (start, end, label), which can hold overlapping spans, and derive a flat BIO view for models that need one. If what you need is how entities are connected, such as two mentions of the same person or a person's link to an organisation, that is a separate layer on top of the entity spans; see [Relations and Coreference](./relations.md).
 
 **Ambiguous entities** have one form with different types in different contexts. The commonest cases are:
 

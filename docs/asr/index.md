@@ -2,7 +2,7 @@
 title: Automatic Speech Recognition (ASR)
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -28,9 +28,23 @@ ASR datasets are usually distributed as a manifest: one record per utterance poi
   "sample_rate": 16000,
   "language": "hau",
   "speaker_id": "spk_017",
-  "speech_type": "spontaneous"
+  "speech_type": "spontaneous",
+  "original_file": "originals/hau_0001.wav",
+  "original_sample_rate": 48000,
+  "original_codec": "pcm_s16le",
+  "source_recording_id": "rec_hau_0042",
+  "segment_index": 7,
+  "segment_start": 312.48,
+  "segment_end": 315.68,
+  "prompt_id": null,
+  "up_votes": 2,
+  "down_votes": 0,
+  "validation": "valid",
+  "timing": "utterance"
 }
 ```
+
+The last group of fields records where the clip came from and how it was checked. `original_file` and `original_sample_rate` point at the archived recording the training copy was derived from, and `original_codec` says how it was stored ([Capture high, derive down](#capture-high-derive-down)). `source_recording_id`, `segment_index`, `segment_start` and `segment_end` place a clip cut from a longer recording within that recording, in seconds ([Segmenting long recordings](#segmenting-long-recordings)). `prompt_id` links a read clip to the sentence it was read from, and stays empty for spontaneous speech. The vote counts and `validation` record the outcome of [peer validation](#peer-validation-of-crowd-recordings). `timing` says whether the clip has word-level or only utterance-level timestamps ([Time alignment](#time-alignment-word-and-phoneme-timestamps)).
 
 Recording `speaker_id` is what lets you split train and test by speaker, which matters more than it looks: if the same voice appears in both, the reported error rate flatters the model, because it has heard that speaker before.
 
@@ -51,13 +65,52 @@ Two broad recording modes serve ASR: read speech (speakers reading prepared prom
 
 **Spontaneous speech** matches how people actually talk and produces models that generalise to real deployment surfaces (voice notes, phone calls, market conversations). It is 3–5x more expensive to transcribe per hour of audio than read speech, and requires a code-switching-aware transcription convention. Use when the deployment target is anything other than prepared speech.
 
-**Session structure.** For read-speech recording, sessions of 60 to 90 minutes with breaks work better than four-hour marathons; vocal fatigue produces silent quality drift. For spontaneous speech, capture in natural chunks (interview turns, broadcast segments) and edit into utterance-level clips at post-processing. Record at 16 kHz mono for ASR (higher sample rates buy nothing for speech recognition and inflate storage).
+**Session structure.** For read-speech recording, sessions of 60 to 90 minutes with breaks work better than four-hour marathons; vocal fatigue produces silent quality drift. For spontaneous speech, capture in natural chunks (interview turns, broadcast segments) and cut them into utterance-level clips afterwards (see [Segmenting long recordings](#segmenting-long-recordings)). Train ASR on 16 kHz mono copies: for the training copy, higher sample rates buy nothing for speech recognition and inflate storage. Capture and archive the originals at a higher rate, though, and derive the 16 kHz copies from them (see [Capture high, derive down](#capture-high-derive-down)).
 
 **Community-recording models.** For at-scale African-language corpora, the Common Voice pattern (a web/mobile client that presents prompts and captures contributions from any speaker with a microphone) is the reference. NaijaVoices, African Next Voices, and Common Voice itself all use variants of this pattern. The Common Voice technical description ([Ardila et al., 2020](https://arxiv.org/abs/1912.06670)) is the design reference; adapt but do not skip its contribution-model discipline (per-clip validation by other speakers before a clip enters the released set).
+
+### Sourcing prompt sentences from the community
+
+Read-speech projects usually run out of usable prompt text before they run out of willing speakers. Translated sentences are a poor substitute, because they carry the word order and vocabulary of the source language. The Common Voice paper describes a Sentence Collector: any language community could submit sentences, automatic checks screened them for length, foreign alphabets and numbers, and each sentence needed approval from two of three reviewers before it entered the recording pool ([Ardila et al., 2020](../references.md#ardila-2020)). The same pattern works for any project:
+
+- **Submission with a source and licence.** Each sentence comes with a statement of where it came from: the contributor wrote it, or it comes from a source whose licence is compatible with the planned release. Record this per sentence, not per batch.
+- **Peer review before use.** Other native speakers approve each sentence before anyone records it. Reviewers check spelling, orthography and diacritics against the project's conventions, whether the sentence sounds like something a person would say, offensive content, personal data such as real names and phone numbers, and whether it can be read aloud comfortably in one go.
+- **A per-language length limit.** Set a maximum in words or in characters, whichever suits the script and the morphology. A word count means little for a language that writes long agglutinated words, or one that does not separate words with spaces. Tie the limit to recording length: Common Voice, for example, caps recorded clips at 15 seconds ([Mozilla Common Voice, 2024](../references.md#mozilla-cv-clip-length-2024)).
+- **Provenance on every recording.** Give each accepted sentence an ID and carry that ID, with its source and licence, into every recording made from it. The prompt ID is also what lets you keep each sentence in only one split (see [Evaluation](#evaluation)), and it belongs in the lineage record described in [Data provenance and traceability](../2_data-collection/8_data-provenance-traceability.md#data-lineage).
+- **A licence that matches the release.** Common Voice accepts only public-domain sentences, because it releases its datasets under CC0 ([Mozilla Common Voice, n.d.](../references.md#mozilla-cv-playbook-text)). That rule follows from its release licence and is not a recommendation for yours: see [Licence selection](../legal-consent/index.md#licence-selection). A project releasing under an attribution or non-commercial licence should state the licence for contributed sentences up front and have contributors agree to it when they submit.
+
+The result is a prompt set written in the language rather than translated into it. Check the accepted pool for phonetic coverage as described in [TTS · Phonetic coverage](../text-to-speech/index.md#phonetic-coverage-what-enough-means-per-language-family).
+
+### Capture high, derive down
+
+The quality of the original recording is the ceiling for every copy made from it, so keep the original and work on copies:
+
+- **Capture and archive the original at a higher sample rate**, in a lossless format (WAV or another PCM container) where the capture path allows it. 48 kHz is a sensible choice, not a rule. Common Voice collects at 48 kHz, although it collects and releases MP3 rather than a lossless format, because MP3 is the most widely supported audio format on the web ([Ardila et al., 2020](../references.md#ardila-2020)).
+- **Derive the training copies at export.** Convert to 16 kHz mono for ASR training when you build a release. The original stays untouched, so a later TTS or speaker project can derive a different copy from the same recording.
+- **Process copies, never the original.** Loudness normalisation, silence trimming and resampling run on derived copies and never overwrite the archived file. Record each step in the transformation log ([Data provenance and traceability](../2_data-collection/8_data-provenance-traceability.md#a-transformation-log-that-travels-with-the-data)).
+- **Record the codec when you cannot avoid a lossy one.** Browser and phone capture often produces Opus in WebM, AAC in M4A, or MP3. Store the codec, and the bitrate for a lossy one, with the original (in the manifest, as `original_codec` above, or in the provenance record), so later users know what the audio went through.
+- **Convert MP3 to PCM WAV before time-aligned annotation.** MP3 encoders and decoders add delay and padding samples at the start and end of a file. The LAME encoder writes the leading padding into a header tag that a decoder can use to trim it ([Taylor, 2000](../references.md#lame-tech-faq)). Decode once, with a decoder that reads the encoder tag and removes the leading delay, check that the decoded length matches the expected duration, and annotate the WAV. Otherwise timestamps from one tool may not line up with the audio played in another.
+
+The quality-control page covers the checks to run on originals and copies: [Audio quality control](./audio-quality-control.md).
+
+### Segmenting long recordings
+
+Interviews, radio programmes and field sessions arrive as files of an hour or more, and transcription wants clips of a few seconds. Cut them before annotation:
+
+- **Let silence detection suggest the cuts, and let a person decide.** Set a loudness threshold and a minimum pause length. Place each suggested cut in the middle of a pause, not at its edge, so the clip keeps a little room tone at both ends. A person then listens and confirms, moves or removes each cut. Never cut inside a word.
+- **Bound the clip length.** Set a minimum and a maximum segment length for the project. Merge very short fragments with a neighbour; split long turns at the next pause.
+- **Cut losslessly from the archived original**, then derive training copies from the clips as above.
+- **Store provenance on every clip:** the source recording ID and file name, the clip's index, and its start and end in seconds within the original. Keep the original until the clips have been checked against it. These fields let anyone trace a clip back to its source ([Data provenance and traceability](../2_data-collection/8_data-provenance-traceability.md#data-lineage)).
+- **Check the segment boundaries.** Where the workflow is segment-then-transcribe, check that segments do not overlap, that no stretch of speech falls between two segments, and that the start and end times survive export unchanged.
+- **Plan for heavy files.** Measure each file's duration and size before assigning it, and flag the heavy ones. Annotators working on phones or on metered data should get short clips, or a precomputed waveform with streamed audio, rather than a two-hour file to download.
+
+When a long recording has several speakers, take the turn boundaries from diarization rather than cutting by silence alone (see [Speaker Diarization](../speaker-diarization/index.md)). For video, frame-accurate cutting depends on how the file is encoded: see [Sign language · Recording](../sign-language-video/sign-language.md#recording).
 
 ## Distinctive annotation: transcription is the hard part
 
 For ASR the annotation is transcription, and its conventions decide the dataset's quality. Settle them before you start: how to write tone and diacritics, which orthography to follow when a language has more than one, how to mark code-switching into a colonial language, and how to handle disfluencies, false starts, and overlapping speech. These are not edge cases for African languages, they are the norm, and inconsistent transcription quietly teaches the model the wrong spelling of half its vocabulary. Transcribers must be native speakers, and a second-pass review of a sample is worth its cost.
+
+Cut long recordings into clips first ([Segmenting long recordings](#segmenting-long-recordings)); for word or phoneme timestamps inside a clip, see [Time alignment](#time-alignment-word-and-phoneme-timestamps).
 
 A transcription config plays the audio and gives the transcriber a text box, plus tick-boxes for the conditions that the conventions above need to be applied to consistently. Capturing those conditions as structured labels, rather than leaving them implicit in the text, lets you measure how much of your data is spontaneous, code-switched, or noisy:
 
@@ -79,7 +132,7 @@ A transcription config plays the audio and gives the transcriber a text box, plu
 
 The `$audio` value is the `audio_filepath` from the manifest above, so the same file feeds collection, transcription, and training without reformatting.
 
-![Transcribing audio in the AfriAnnotate editor](/afriannotate-demo/03-audio/23-audio-transcription/2-labeling-editor.png)
+The transcription interface should provide keyboard-controlled playback, adjustable speed, a waveform where useful, and a text field that preserves the target script and diacritics. It should save drafts and export the audio identifier, transcript, annotator and any quality flags together.
 
 **Transcription conventions to fix in writing before annotation begins:**
 
@@ -90,19 +143,78 @@ The `$audio` value is the `audio_filepath` from the manifest above, so the same 
 - **Numbers, dates, abbreviations.** Written as spoken, in the target language. Same discipline as the [TTS chapter's normalisation section](../text-to-speech/index.md#text-preparation-and-normalisation).
 - **Speaker-turn overlaps.** Two speakers talking over each other: transcribe both with a turn marker, or split into per-speaker clips, or discard. Document the rule.
 
+## Time alignment: word and phoneme timestamps
+
+A transcript says what was said; an alignment says when. Word and phoneme timestamps are needed for TTS training, pronunciation and prosody studies, subtitle-style corpora, and for checking that a long transcript matches its audio. Placing every boundary by hand is slow, so align automatically first and have people correct the result.
+
+**Start with an automatic aligner.** Three families of tools are in common use:
+
+- **CTC segmentation** uses a speech model trained with connectionist temporal classification (CTC) to find where each part of a transcript sits in the audio. Its authors used it to extract aligned utterances from unsegmented recordings, as part of a German ASR training set of over 1,700 hours ([Kürzinger et al., 2020](../references.md#kurzinger-2020)).
+- **Multilingual CTC alignment models.** The MMS project aligned recordings in more than 1,100 languages with a CTC alignment model and a forced-alignment implementation that runs on long audio files on GPUs ([Pratap et al., 2023](../references.md#pratap-2023)). For a language with no aligner of its own, a multilingual model is the usual starting point.
+- **Lexicon-based forced aligners** such as the Montreal Forced Aligner train acoustic models on your data and produce word and phone boundaries ([McAuliffe et al., 2017](../references.md#mcauliffe-2017)). They need a pronunciation lexicon, so they suit languages where one exists or can be built.
+
+**Correct only what is wrong.** Native speakers review the aligned output and fix the boundaries that are misplaced, rather than re-placing every boundary. On noisy or overlapping audio, where exact boundaries are hard to hear, have annotators mark the span of speech and assign the words to it instead of fixing each word edge.
+
+**Declare the tier hierarchy.** Decide which tiers exist and how they nest, for example utterance, then word, then phoneme; or utterance with a translation tier beneath it. A child segment must lie inside its parent's interval. Run a check that lists every child segment outside its parent's start and end time, and fix these before release. The tier model, with its tier types, is described in detail on the [sign language](../sign-language-video/sign-language.md#tiers-and-tier-types) page; spoken-language alignment uses the same ideas.
+
+**Export to a standard format.** ELAN's `.eaf` format ([Wittenburg et al., 2006](../references.md#wittenburg-2006)) and Praat's TextGrid format ([Boersma, n.d.](../references.md#praat-textgrid)) both store multiple time-aligned tiers and are read by most speech and phonetics tools.
+
+**Record what timing each item has.** Aligners do not yet work well for many African languages, and an aligner that works on read speech may fail on spontaneous speech. Store per item whether its timing is word-level or only utterance-level (the `timing` field in the manifest above), so users of the corpus know what they can rely on. The [agri-advisory speech layer](../agri-advisory/speech-layer.md#quality-control) is a worked example that records this per clip.
+
 ## Quality assurance during collection
 
 Quality problems caught during transcription cost minutes. The same problems caught at model training cost weeks. Build a per-batch review workflow before the corpus starts.
 
+### Decide the corpus purpose first
+
+Decide whether the corpus is for robust ASR or clean TTS before setting any threshold: for robust ASR, keep real-world noise, log low signal-to-noise ratio and minor clipping as warnings, and hard-reject only corrupt clips. The comparison table, the capture settings to turn off, and the single threshold table shared by the automated checks, the recording instructions and the validators' criteria card (see [Peer validation](#peer-validation-of-crowd-recordings)) are on [Audio quality control](./audio-quality-control.md#decide-the-corpus-purpose-first).
+
+### Batch review checks
+
 - **Per-clip second-pass review.** A second transcriber, independent of the first, listens to a random 5–10% sample of each batch and re-transcribes. Compute per-clip character error rate between the two transcripts; anything above a threshold (typically CER > 0.05) is flagged for adjudication. This is the single cheapest quality signal.
 - **Per-condition sampling.** The `conditions` labels in the transcription config are not just for the trainer's benefit. Sample the flagged clips separately (all "code-switching" flagged, all "background noise" flagged) and review them together. Systematic transcription errors surface in these focused reviews that random sampling misses.
 - **Per-speaker balance.** Track cumulative recorded minutes per speaker and flag imbalances. A corpus where three speakers account for 40% of the data will produce a model that flatters those voices and fails on others.
-- **Duration and audio-quality checks at ingest.** Automated per-clip loudness normalisation, silence trimming, and clipping detection. A clip that peaks at digital zero should be re-recorded, not "fixed" in post.
+- **Duration and audio-quality checks at ingest.** Automated per-clip duration checks, clipping detection and loudness measurement, judged against the [threshold table](./audio-quality-control.md#tier-1-signal-checks-on-every-clip) for the corpus purpose. Loudness normalisation and silence trimming run on the derived training copies, never on the archived original ([Capture high, derive down](#capture-high-derive-down)). A clip that is clipped badly enough to fail the table should be re-recorded, not "fixed" in post.
 - **Weekly IAA measurement**: inter-annotator agreement on the sample second-pass reviewed batch. Falling IAA over time is the earliest signal that transcription guidelines are drifting or annotator fatigue is setting in.
+
+### Peer validation of crowd recordings
+
+When many contributors record, a small review team cannot listen to every clip. Crowd-sourced corpora therefore have contributors validate each other's recordings, after the automated checks have removed the clips no one could use. People should never spend time confirming that an empty file is empty.
+
+**How Common Voice does it.** Listeners mark each audio-and-transcript pair as correct or incorrect. A clip is valid when it first gets two up-votes and invalid when it first gets two down-votes, and at most three people listen to any clip. Any clip or sentence can be skipped or reported as a problem. Only valid clips go into the official train, dev and test sets; clips that have not collected enough votes by release time are released separately, and the up- and down-vote totals ship with the data ([Ardila et al., 2020](../references.md#ardila-2020)).
+
+**Judge against a written criteria card.** Validators make a yes-or-no decision, so they need to know exactly what "yes" means. Derive the card from the same specification as the recording instructions and the threshold table, and keep it visible while people judge. A card you can copy and adapt:
+
+```text
+Say YES only if all of these hold:
+  - Every word is audible.
+  - The speech matches the prompt exactly (read speech only).
+  - There is one main speaker.
+  - The recording is not cut off at the start or the end.
+
+For a robust-ASR corpus, also:
+  - Background noise and background voices are fine, as long as the speech is clear.
+
+For a clean-TTS corpus, also:
+  - The background is quiet.
+  - The volume is steady through the clip.
+
+For spontaneous speech (no prompt):
+  - Drop the "matches the prompt" rule.
+  - Check that the speaker is speaking the project's language.
+```
+
+**Escalate what the crowd cannot settle.** A project can add a review layer on top of the votes: clips with split votes, clips the crowd rejected, and clips someone reported go to an experienced reviewer, who can confirm or override the crowd. Record each override with who made it, when, and why. This hybrid follows the escalation pattern in [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md#escalate-items-that-do-not-agree). Clips still unresolved at release time stay out of train, dev and test.
+
+**Make judging easy to do well.** Keep clips within a bounded duration so each can be judged in one listen, let validators replay a clip, and make the validation screen work on a phone, since many contributors will have no other device. Never show contributors their own clips, and do not count two votes from the same person on one clip ([Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md#serve-items-so-the-counts-stay-honest)). Deliberate repeat items for a consistency check, as in [Speech Emotion Recognition](../speech-emotion-recognition/index.md#quality-assurance), are the exception, and their second judgement is not counted as a vote.
+
+The [agri-advisory speech layer](../agri-advisory/speech-layer.md#quality-control) shows this protocol in a real project: two agreeing native-speaker votes validate a clip, a reviewer settles split votes, and field noise alone is never a reason to reject.
 
 ## Evaluation
 
 ASR is scored by error rate against a reference transcript. [Word Error Rate (WER)](https://en.wikipedia.org/wiki/Word_error_rate) is standard but punishes morphologically rich languages unfairly, since one wrong morpheme can mark a whole word wrong, so report [Character Error Rate (CER)](https://en.wikipedia.org/wiki/Word_error_rate#Character_error_rate) alongside it. CER is more forgiving and more informative for the agglutinative and tonal languages common on the continent. As always, a human listen to a sample catches failures, such as a systematically mis-transcribed dialect, that an aggregate error rate hides.
+
+**Split by speaker and, for read speech, by prompt.** An error rate means something only if the test speakers and the test sentences are new to the model. For read or prompted corpora, no speaker and no prompt sentence should appear in more than one of train, dev and test: if the same sentence is read by one speaker in train and another in test, the model can score well by remembering the sentence rather than recognising the speech. When you keep several recordings of each sentence, split by connected components of shared speakers and prompts, and record in the dataset card how many recordings were dropped. The method and code are in [Data integrity · Read speech: keep speakers and prompts apart](../8_model-building/data-integrity.md#read-speech-keep-speakers-and-prompts-apart).
 
 Both rates are one function call each with `jiwer`, and computing them side by side makes the WER-versus-CER gap visible:
 
@@ -123,7 +235,7 @@ One spelling slip turns into a quarter of the words being "wrong" under WER but 
 
 **Diacritic-preservation check.** For tone languages, run a separate evaluation with tone marks stripped from both reference and hypothesis, and compare to the diacritic-preserving CER. A large gap means the model is systematically dropping tone marks and the aggregate CER is optimistic.
 
-**Human review as a final gate.** Automatic metrics catch consistency; human listeners catch content failures: a systematically mis-transcribed loanword, a dialect the model treats as a different language, a background noise that flips a specific phoneme. Budget a per-release listening pass on 200 random utterances by native speakers before publishing metrics.
+**Human review as a final gate.** Automatic metrics catch consistency; human listeners catch content failures: a systematically mis-transcribed loanword, a dialect the model treats as a different language, a background noise that flips a specific phoneme. Budget a per-release listening pass on 200 random utterances by native speakers before publishing metrics. When listeners compare two systems' transcripts or rate them on a scale, design that judgement like any other human evaluation, with random order and hidden system names (see [Human Evaluation Designs](../3_annotation-design/human-evaluation-designs.md)).
 
 ## Deployment realities
 
@@ -138,7 +250,7 @@ For a language covered by [Meta MMS](https://huggingface.co/facebook/mms-1b-all)
 ## What breaks: common failure modes
 
 - **Diacritic-flat transcripts, tone-flat model.** Transcribers dropped diacritics inconsistently and the model learned to omit them. Fix: audit tone marks in a batch review before continuing collection.
-- **Speaker leakage across splits.** Same speaker in train and test; error rate flatters. Fix: split by `speaker_id`, not by clip.
+- **Speaker or prompt leakage across splits.** Same speaker, or for read speech the same prompt sentence, in train and test; error rate flatters. Fix: split by `speaker_id` and `prompt_id`, not by clip, and assert that neither crosses a split (see [Evaluation](#evaluation)).
 - **Corpus-domain vs. deployment-domain gap.** Model trained on read speech, deployed on spontaneous WhatsApp voice notes; error rate triples. Fix: match training recording condition to deployment condition, or budget a domain-adaptation fine-tune.
 - **Systematic dialect blindness.** Aggregate CER looks acceptable; per-dialect breakdown shows one variety at 3x the average error. Fix: per-dialect evaluation is not optional; if your target deployment covers multiple varieties, the corpus needs to too.
 - **Code-switching collapse.** Monolingual corpus, model fails immediately on real user code-switched input. Fix: include a proportion of code-switched examples in training, marked consistently.

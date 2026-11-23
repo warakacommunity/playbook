@@ -3,7 +3,7 @@ title: Advisory Authoring
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-10-02
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -55,17 +55,13 @@ What makes it usable: the pest has its local name, the product is one sold in Ni
 
 Authors are native speakers who can write the way an extension officer talks to a farmer: extension agents, agricultural teachers, radio farm-programme presenters. Fluency alone does not qualify an author. One who writes in a newspaper register produces text a farmer would not say and a model should not learn.
 
-Plan on 6 to 10 authors per language, with 3 to 5 linguistic reviewers and 1 to 2 agronomists behind them. Authors work in the [AfriAnnotate](https://afriannotate.waraka.org) text-authoring template with the image, the agronomist's diagnosis, the national extension recommendation, and the collector's captured farmer question on one screen. Before the first batch each author is briefed on the vernacular term list, the style guide, and the five-part structure, with the language lead's worked examples for the common classes.
+Plan on 6 to 10 authors per language, with 3 to 5 linguistic reviewers and 1 to 2 agronomists behind them. Authors work in the platform's text-authoring task with the image, the agronomist's diagnosis, the national extension recommendation, and the collector's captured farmer question on one screen. Before the first batch each author is briefed on the vernacular term list, the style guide, and the five-part structure, with the language lead's worked examples for the common classes.
 
 Authors write in the language from the start. Nothing is translated from English. The diagnosis and the recommendation reach the author as facts; the job is to say those facts to a farmer in that district.
 
-## On the platform
+## Authoring interface
 
-The screenshot below shows the authoring task in AfriAnnotate. The author sees the photo, the diagnosis and the extension recommendation on the left, and writes the advisory on the right in its five parts, each in its own box with a character count.
-
-![Advisory authoring in AfriAnnotate: the author sees the photo, the diagnosis and the extension recommendation and writes the advisory in five parts](images/afriannotate-advisory-authoring.jpg)
-
-The photo is a stock image standing in for a field photo. The sample advisory is in English for the reader; in a project the author writes in their own language.
+The authoring interface should show the photo, diagnosis, extension recommendation and farmer's question beside the writing area. It should preserve the five-part advisory structure, save drafts and revisions, and record the rubric version. A single structured text field or several fields can both work; the exact layout is not a requirement.
 
 ## Guidelines that matter
 
@@ -88,7 +84,7 @@ Expect most rewrite requests to name one of four faults: an English sentence str
 
 Every advisory passes two independent reviews before it counts, agronomist first. The agronomist checks that the advisory follows from the diagnosis, matches the national extension recommendation, and is safe where it names a chemical. A native-speaker linguistic reviewer, never the author, then checks register, vernacular terms, and whether a farmer would understand it. Either reviewer can return the draft with a rewrite request; a returned draft gets at most one rewrite before it goes to the language lead for adjudication. The general pattern of review and logged adjudication is in [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md); this page only adds the two domain checks.
 
-The number to track is advisory agreement: the share of advisories the linguistic reviewer accepts without a rewrite request. The target is 90% by round two, reported every Monday per language. A language still below that after two rounds has a briefing or recruitment problem: re-brief the authors with the specific rewrite reasons, then replace anyone still returning calques. The safety line is also checked mechanically, by an export check that refuses any accepted advisory naming a listed product with `safety_line_present` false.
+The number to track is advisory review acceptance: the share of advisories the linguistic reviewer accepts without a rewrite request. This is a first-pass yield measure, not inter-annotator agreement. The target is 90% by round two, reported every Monday per language. A language still below that after two rounds has a briefing or recruitment problem: re-brief the authors with the specific rewrite reasons, then replace anyone still returning calques. The safety line is also checked mechanically, by an export check that refuses any accepted advisory naming a listed product with `safety_line_present` false.
 
 ## Known limitations
 

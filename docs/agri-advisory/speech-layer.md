@@ -3,7 +3,7 @@ title: Speech Layer
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-10-02
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -57,17 +57,13 @@ The two speakers on an item are different people, so no one voice is both sides 
 
 Speakers are recruited through regional facilitators, at least three regions per country, with a target of 100 to 200 distinct speakers per language. Balance across age bands (18-29, 30-44, 45-59, 60+), gender, and region is tracked on the dashboard and recruitment is steered every week, because a pool that drifts to young urban men in month one cannot be rebalanced in month five without recording it again.
 
-Recording happens in facilitated sessions: a facilitator brings a group of speakers together, works through the consent script, and runs the AfriAnnotate recorder at 48 kHz with live metering. A cooperative office or a classroom with the door closed and the generator off is enough; outdoors near the field is acceptable under the `robust_asr` profile as long as every word stays intelligible. Speakers are credited per validated recording and paid out per session.
+Recording happens in facilitated sessions: a facilitator brings a group of speakers together, works through the consent script, and records at 48 kHz with live metering. A cooperative office or a classroom with the door closed and the generator off is enough. Outdoor recording is acceptable only when every word remains intelligible and the clip passes the same loudness, clipping, silence and noise checks as an indoor recording.
 
-Prompts follow a one-speaker-one-prompt rule: no advisory is read by the same person twice, and no speaker records enough of a language's items to dominate it. The platform assigns prompts, so facilitators do not keep the rule by hand.
+Prompts follow a one-speaker-one-prompt rule: no advisory is read by the same person twice, and no speaker records enough of a language's items to dominate it. This project assigns prompts automatically to enforce that rule; another implementation can use a checked assignment sheet if it provides the same guarantees.
 
-## On the platform
+## Recording interface
 
-The screenshot below shows the recording task in AfriAnnotate, here in Hausa. The speaker sees the photo and the advisory to read aloud, and records in the browser or the mobile app. The platform checks the recording automatically when it is saved.
-
-![Speech recording in AfriAnnotate, in Hausa: the speaker sees the photo and the advisory to read aloud and records it with one button](images/afriannotate-speech-recording.jpg)
-
-The photo is a stock image standing in for a field photo.
+The recording interface should show the photo and the advisory or question cue, provide a clear record and re-record control, preserve the pair and speaker IDs, and run the project's automated checks when the recording is saved. Speakers need to see and correct a failed check before leaving the session.
 
 ## Guidelines that matter
 
@@ -90,7 +86,7 @@ For transcribers and validators:
 
 ## Quality control
 
-Automated QC runs on every clip at upload: clipping, loudness, signal-to-noise ratio, silence ratio, duration, and speech ratio. Under the `robust_asr` profile the thresholds admit natural field ambience and reject only clips a human could not use. Corrupt or empty clips never reach a validator.
+Automated QC runs on every clip at upload: clipping, loudness, signal-to-noise ratio, silence ratio, duration, and speech ratio. Set and validate thresholds on a pilot that includes the intended recording environments. Natural field ambience is acceptable when speech remains intelligible; clipping, corruption, empty audio and unusable noise are not. Corrupt or empty clips never reach a validator.
 
 Validation then runs in hybrid mode. Two native-speaker votes that agree validate a clip. A split vote goes to a reviewer, who can override in either direction, and the outcome is recorded on the item. The target is at least 95% of clips validated on first pass, per language, in the weekly report. A language below that usually has a session problem (a noisy venue, a facilitator not watching the meter), and the fix is in the next session.
 

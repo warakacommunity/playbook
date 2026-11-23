@@ -3,7 +3,7 @@ sidebar_position: 9
 title: Data Storage and Release Infrastructure
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 
@@ -34,3 +34,31 @@ hausa-news-2026/
 ```
 
 Version every release with a number and a changelog, so that results stay reproducible and users can cite the exact data they used, which is the same versioning discipline the [Data Quality](../4_data-quality/index.md) and [Dataset Lifecycle](../9_dataset-lifecycle/maintenance.md) chapters require.
+
+## Exporting from your annotation tool
+
+The annotation tool holds more about your data than any single export format shows. How you get the data out decides what you can still check, recompute, and explain later, so plan the export as carefully as the annotation.
+
+### Keep a copy of record
+
+Archive the tool's most complete export, usually its full, nested JSON, as the copy of record. It should hold every annotator's labels, not only a merged answer, together with timestamps, time spent per item, skipped items, review outcomes, and which items were gold. This is the file from which agreement, annotator quality, and calibration can be recomputed if a question comes up after release. It also keeps the disagreement between annotators, which is often information rather than noise ([Plank, 2022](../references.md#plank-2022)), even if the release keeps only one label per item. Keep it in `raw/` in the layout above (for example `raw/annotation-export-2026-11-22.json`), and never overwrite it.
+
+### Treat other formats as derived views
+
+CoNLL files, COCO or YOLO labels, ASR manifests, and flat CSV are views of the copy of record, each built for one use. Always regenerate them from the full export rather than editing them by hand, so that a fix made in one place reaches every format. A converted format can silently lose information the full export holds, so check what each conversion keeps before you rely on it (see [Verify the export before you release](../9_dataset-lifecycle/release.md#verify-the-export-before-you-release)).
+
+### Archive what the export leaves out
+
+Some records the project depends on are not in any annotation export. Agreement scores are computed rather than stored with the labels, and consent records usually live in a separate system. Archive each of them next to the export with the same version number, so that a released dataset can still be traced to its consent and its contributors (see [Keeping consent records](../legal-consent/index.md#keeping-consent-records) and [Benefit-sharing and credit](../data-governance/index.md#benefit-sharing-and-credit)).
+
+### Decide which annotations you release
+
+When several people labelled the same item, decide which annotations go into the release: all of them, only the first or the latest, or only the adjudicated label. Each choice suits a different use, and users cannot tell which one you made unless you say so. Record the choice and the reason in the [dataset card](../templates/dataset-card.md).
+
+### Package deliveries before release
+
+Data often goes to a partner or another team before the public release. Make each such delivery self-contained: the media with relative paths so the bundle works on another machine, a short README, the licence, and a draft data card. Fill the card only with information the project actually holds and leave unknown fields marked as unknown rather than guessed. The rules for the public release bundle are in [Formats and packaging](../9_dataset-lifecycle/hosting.md#formats-and-packaging).
+
+### Tie training runs to a snapshot
+
+Annotation continues while models are trained, so a live export changes from one day to the next. Have each training run record the dated export snapshot it used, so that results can be reproduced and a later label fix can be traced to the runs it affects.

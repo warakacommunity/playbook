@@ -3,7 +3,7 @@ title: Hosting and Preservation
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -97,7 +97,7 @@ Every release needs three small files at the top level:
 - `manifest.jsonl`: one line per example with its id, shard, duration or size, speaker or source id, split, and licence. This is the index people will actually use.
 - `SHA256SUMS`: a checksum for every shipped file. Generate it with `sha256sum release/* > SHA256SUMS`. A reader checks a download with `sha256sum -c SHA256SUMS`. Without it nobody can tell a truncated download from a corrupt one, or prove that the Zenodo copy and the Hugging Face copy are the same bytes.
 
-Keep raw and processed data apart, as the [data storage](../6_documentation/data-storage.md) page lays out. Archive the raw collection once and never overwrite it. Processed releases can be regenerated from raw plus your scripts; the raw collection cannot be regenerated from anything.
+Keep raw and processed data apart, as the [data storage](../6_documentation/data-storage.md) page lays out. Archive the raw collection once and never overwrite it. Processed releases can be regenerated from raw plus your scripts; the raw collection cannot be regenerated from anything. The same holds for annotations: keep your annotation tool's full export as the copy of record, and treat the formats you ship as views derived from it (see [Exporting from your annotation tool](../6_documentation/data-storage.md#exporting-from-your-annotation-tool)).
 
 ### Access control done right
 

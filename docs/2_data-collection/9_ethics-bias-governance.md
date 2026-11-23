@@ -1,7 +1,7 @@
 ---
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 # Ethics, Bias, and Governance
@@ -26,12 +26,12 @@ Datasets directly influence the behavior of language AI systems. Poor handling o
 - **Personal data identification** – Detect names, addresses, contact details, and identifiers  
 - **Automated detection tools** – Use models or rules to flag sensitive information  
 - **Manual review** – Validate automated detection with human checks  
-- **Data removal or masking** – حذف or obfuscate personal identifiers  
+- **Data removal or masking** – Delete or obfuscate personal identifiers
 
 ### Anonymization Strategies
 
 - **De-identification** – Remove or replace identifiable information  
-- **Pseudonymization** – Substitute identifiers with artificial labels  
+- **Pseudonymization** – Substitute identifiers with artificial labels, for the annotators as well as the people in the data: see [Personally identifiable information](../data-governance/index.md#personally-identifiable-information) for pseudonymizing annotator IDs in exports.
 - **Aggregation** – Present data in grouped form to prevent re-identification  
 - **Risk assessment** – Evaluate re-identification risks after anonymization  
 

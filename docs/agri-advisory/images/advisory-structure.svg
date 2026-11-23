@@ -103,7 +103,7 @@
 
     <!-- accepted -->
     <rect x="518" y="462" width="300" height="44" rx="10" fill="#1F5B3F" stroke="#1F5B3F" stroke-width="1.5"/>
-    <text x="668" y="489" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Accepted: credit lands, version 1 or 2</text>
+    <text x="668" y="489" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Accepted: store as version 1 or 2</text>
 
     <!-- rewrite loop (rust) -->
     <path d="M818 324 L860 324 L860 240 L818 240" fill="none" stroke="#8A3B25" stroke-width="2" marker-end="url(#advArrowRust)"/>

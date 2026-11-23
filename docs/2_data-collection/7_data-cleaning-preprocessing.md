@@ -1,7 +1,7 @@
 ---
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 # Data Cleaning and Preprocessing
@@ -36,6 +36,30 @@ Raw data often contains noise, inconsistencies, and errors. Proper cleaning and 
 - **Missing data** – Identify incomplete entries and decide whether to fill, ignore, or remove them  
 - **Corrupted data** – Detect broken or unreadable content and clean or discard it  
 - **Validation checks** – Ensure data integrity after preprocessing  
+
+### Preparing Media for Annotation
+
+Audio and video usually reach annotators through a web browser or a phone. Files that play fine on the collector's laptop can fail there: some codecs do not play in every browser, large files stall on slow links, and a video whose index sits at the end starts slowly and can waste mobile data. Prepare a copy of each file for annotation and keep the original (the master) unchanged.
+
+- **Use widely supported formats.** For video, MP4 with H.264 (AVC) video and AAC audio plays in every major browser; WebM with AV1 and Opus is the open alternative but has gaps on older Apple devices ([MDN Web Docs, 2026c](../references.md#mdn-video-codecs)). For audio, AAC in MP4 and MP3 play in all major browsers, and FLAC is the better-supported choice when you need lossless audio ([MDN Web Docs, 2026d](../references.md#mdn-audio-codecs)). Test your chosen format on the devices your annotators actually use.
+- **Make MP4 files streamable.** An MP4 file has an index (the `moov` atom) that the player needs before it can start. When the index sits at the end of the file, the player must first fetch the end of the file, which costs extra requests and a slower start, or, without range requests, the whole file. FFmpeg's `faststart` option moves the index to the beginning of the file; it is off by default and does not work with fragmented output ([FFmpeg Developers, n.d.-c](../references.md#ffmpeg-formats)).
+- **Serve media from storage that supports range requests.** With HTTP range requests a player can fetch only the part of a file it needs, so annotators can seek within a long recording without downloading all of it. A server that supports them advertises `Accept-Ranges` in its responses ([MDN Web Docs, 2026b](../references.md#mdn-range-requests)). Check this before you point your annotation tool at a storage bucket.
+- **Set limits for heavy files.** Decide a maximum size and duration for one item, based on your annotators' devices and connections, and split or re-encode anything larger. For speech, split at pauses rather than at fixed times (see [Segmenting long recordings](../asr/index.md#segmenting-long-recordings)). Lighter files matter most for people working on phones or [offline](./10_offline-field-operations.md).
+- **Check files before annotators see them.** Empty, truncated or silent files waste annotation time; flag them at ingest (for speech corpora, see [Audio Quality Control](../asr/audio-quality-control.md#tier-1-signal-checks-on-every-clip); see also [Quality assurance in Audio Understanding](../audio-understanding/index.md#quality-assurance)). After any conversion, check that each file's duration still matches the original, because timestamps in the annotations refer to it.
+- **Encode for frame-accurate work when you need it.** Tasks that step frame by frame, such as sign-language glossing, need a constant frame rate and tighter keyframe settings; see [Preparing video for annotation](../sign-language-video/video.md#preparing-video-for-annotation) and, for sign language, [Recording](../sign-language-video/sign-language.md#recording).
+
+A typical conversion for browser playback:
+
+```bash
+# Re-encode a phone video to H.264 video and AAC audio, with the index at the front.
+# yuv420p keeps 8-bit colour, which browsers play (phone HDR video is often 10-bit).
+ffmpeg -i interview.mov -c:v libx264 -pix_fmt yuv420p -c:a aac -movflags +faststart interview.mp4
+
+# A file that is already 8-bit H.264 with AAC audio only needs the index moved, without re-encoding.
+ffmpeg -i clip.mp4 -c copy -movflags +faststart clip_web.mp4
+```
+
+Record each conversion (tool, version, settings) in the [transformation log](./8_data-provenance-traceability.md#a-transformation-log-that-travels-with-the-data), so the annotated copy can always be traced back to its original.
 
 ## A cleaning pipeline, end to end
 

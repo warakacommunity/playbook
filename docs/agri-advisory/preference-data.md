@@ -3,7 +3,7 @@ title: Preference Data
 sidebar_position: 5
 ready: true
 last_update:
-  date: 2026-10-02
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -67,19 +67,15 @@ Choose the source of the candidates before you plan this task. Writing a second 
 
 ## Who does it and how
 
-Raters are native speakers, ideally with farming or extension experience. The linguistic reviewers from [Advisory Authoring](./advisory-authoring.md) are a natural pool. AfriAnnotate blocks a rater from any pair where they wrote or reviewed a candidate.
+Raters are native speakers, ideally with farming or extension experience. The linguistic reviewers from [Advisory Authoring](./advisory-authoring.md) are a natural pool. The assignment workflow must keep raters away from any pair where they wrote or reviewed a candidate, whether through automatic exclusions or a coordinator's checked assignment sheet.
 
-At least one rater judges each pair. A second, independent rater on every pair is worth adding where the budget allows, because agreement between two raters is the only way to tell a firm preference from one person's taste. The rating screen shows the photo and the diagnosis alongside both advisories. Raters are blind to the source of each candidate, and the platform randomises which one appears as A for every pair.
+At least one rater judges each pair. A second, independent rater on every pair is worth adding where the budget allows, because agreement between two raters is the only way to tell a firm preference from one person's taste. The rating screen shows the photo and the diagnosis alongside both advisories. Raters are blind to the source of each candidate, and the project randomises which one appears as A for every pair and records that order.
 
-Work is issued in batches of limited size, because each pair is 120 to 360 words of careful reading and attention drops over a long sitting. A cap of about 30 pairs keeps a batch near an hour. Raters accept the annotator agreement before their first batch and are credited per rating on the ledger.
+Work is issued in batches of limited size, because each pair is 120 to 360 words of careful reading and attention drops over a long sitting. A cap of about 30 pairs keeps a batch near an hour. Raters accept the annotator agreement before their first batch.
 
-## On the platform
+## Rating interface
 
-The screenshot below shows the ranking task in AfriAnnotate. The rater sees the photo and its diagnosis beside the two advisories, shown as A and B in random order with their sources hidden. The rater chooses "A is better", "B is better" or "About the same", and gives a short reason.
-
-![Preference ranking in AfriAnnotate: the rater sees the photo and diagnosis beside advisories A and B, chooses the better one or About the same, and writes a short reason](images/afriannotate-preference-ranking.jpg)
-
-The photo is a stock image standing in for a field photo. The sample text is in English for the reader.
+The rating interface should show the photo and diagnosis beside advisories A and B, hide their sources, preserve the randomised display order, and record a choice of A, B or tie with a short reason. Export the candidate identities as well as the displayed positions so agreement can be computed correctly.
 
 ## Guide for the native-speaker ranker
 
@@ -88,7 +84,7 @@ This is the guide the ranker follows for every pair. Hand it out with the [prefe
 ### Before the first batch
 
 - Read the advisory rubric for your language, so you know what a good advisory contains: what the problem is, why it happens, what to do now, what to do next season, and when to seek help.
-- Complete the practice batch. The language lead goes through your answers with you before you start paid work.
+- Complete the practice batch. The language lead goes through your answers with you before you start production work.
 - Work alone, in a quiet place, on a screen large enough to read both advisories without scrolling back and forth.
 
 ### For each pair
@@ -138,7 +134,7 @@ Four checks run on every batch.
 - **Gold pairs.** The language lead seeds each batch with pairs that have a known answer, for example a candidate with its safety line removed or its diagnosis swapped. A rater whose gold accuracy falls below the floor set in the rubric is paused and retrained.
 - **Rater agreement.** Where pairs have two raters, the share on which both made the same choice is reported every Monday, per language. It has no pass mark; a sudden drop is a reason to look at the batch.
 - **Position bias.** For each rater, the share of A choices among non-tie ratings should sit near half, because the order is random. A rater far from half is choosing by position.
-- **Speed.** The platform flags a rating submitted faster than the two texts can be read.
+- **Speed.** The project QC rules flag a rating submitted faster than the two texts can reasonably be read, using a threshold validated in the pilot.
 
 Disagreements are kept and flagged in the record with `raters_agree` false. Nobody adjudicates them. [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md) explains when disagreement is worth keeping, and the weekly report these numbers join is in [Quality, Consent and Release](./quality-consent-release.md#the-monday-report).
 
@@ -156,3 +152,4 @@ Disagreements are kept and flagged in the record with `raters_agree` false. Nobo
 - [Quality, Consent and Release](./quality-consent-release.md): the weekly report, the annotator agreement and the release that preference records ship in.
 - [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md): why disagreement between raters is worth keeping.
 - [Advisory annotation guidelines](../templates/advisory-annotation-guidelines.md): the preference rater sheet.
+- [Human Evaluation Designs](../3_annotation-design/human-evaluation-designs.md): pairwise comparison and the other rating designs in general, with the controls each needs.

@@ -2,7 +2,7 @@
 title: Project Management
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -38,7 +38,7 @@ These steps take longer than most teams expect, and they must be finished before
 - **Data protection law.** Many African countries now have data protection laws, including South Africa (POPIA), Kenya (Data Protection Act, 2019), and Nigeria (Nigeria Data Protection Act, 2023). Check the rules in every country where you collect data or store it, especially if data will cross borders.
 - **Consent and licence.** Decide how you will ask for consent and which licence you will release under before collection starts. The licence you want at the end limits what data you can collect at the start.
 
-The [Legal, consent, and community IP](../legal-consent/index.md) and [Data Governance](../data-governance/index.md) chapters cover these in detail.
+The [Legal, consent, and community IP](../legal-consent/index.md) and [Data Governance](../data-governance/index.md) chapters cover these in detail. Set up the consent register before the first contribution arrives, not after; [Keeping consent records](../legal-consent/index.md#keeping-consent-records) says what to log for each person.
 
 ## 3. Plan the work
 
@@ -64,7 +64,7 @@ If the answer to any of these is no, revise the guidelines or the scope and pilo
 
 > number of items × annotators per item × time per item × hourly rate
 
-Then add time for review and adjudication, and for coordination. For example, 5,000 items with three annotators at one minute per item is 250 annotator-hours before any review. Use the rate you measured in the pilot, not a guess. The [Cost and Resource Planning](../2_data-collection/6_cost-resource-planning.md) page covers estimation in more detail.
+Then add time for review and adjudication, and for coordination. For example, 5,000 items with three annotators at one minute per item is 250 annotator-hours before any review. Use the rate you measured in the pilot, not a guess. The [Cost and Resource Planning](../2_data-collection/6_cost-resource-planning.md) page covers estimation in more detail. "Annotators per item" need not be the same for every item: giving several annotators only a random sample and one annotator the rest costs far less than full overlap, as the worked figures in [Overlap a sample, not everything](../3_annotation-design/workflow-adjudication.md#overlap-a-sample-not-everything) show.
 
 **Budget for the costs that are easy to forget:**
 
@@ -95,12 +95,22 @@ Most projects have more roles than people, so one person often holds several rol
 | **Language lead** (one per language) | Guidelines, hard cases, and quality for that language. The final authority on what is correct. |
 | **Technical lead** | Annotation tool, data pipeline, storage, and backups. |
 | **Ethics and data lead** | Ethics approval, consent records, data protection, and licensing. |
+| **Field facilitators** (community collection) | Recruiting, onboarding, and supporting a local cohort of contributors. |
 | **Annotators** | Producing labels. |
-| **Reviewers** | Checking quality and resolving disagreements. |
+| **Reviewers** | Applying the rubric and escalating unresolved disagreements to adjudicators. |
 
 Keep annotation and review separate, even if people rotate between them. Reviewing your own work hides the errors you most need to catch. A language lead for each language, rather than one central team labelling everything, is what let Masakhane projects work across many languages at once ([Nekoto et al., 2020](../references.md#nekoto-2020)).
 
 **Recruit early.** Finding fluent native speakers is often the hardest constraint, especially for smaller languages. Give recruitment its own time in the plan. Good places to look include university language and linguistics departments, community organisations, and existing research communities such as [Masakhane](https://www.masakhane.io/). Ask candidates to label a short test set before you hire them, and train everyone on the guidelines before the pilot.
+
+**Recruit through field facilitators when you collect in communities.** Community collection, especially of speech, can recruit people in groups rather than one by one: a teacher brings a class, a community organiser brings neighbours, a cooperative officer brings members. NaijaVoices recruited its more than 5,000 voice donors through trained community facilitators ([Emezue et al., 2025](../references.md#emezue-2025)). Whatever else facilitators do in your project, define the role and keep its powers narrow:
+
+- **Appoint facilitators; nobody becomes one by declaring it.** A facilitator is neither the language lead, who decides what is correct, nor the project lead.
+- **Give them only what they need.** A facilitator sees their own cohort's progress, and nothing else: no admin rights, no access to other cohorts, and no power over the guidelines or the data.
+- **Record who recruited whom.** Give each facilitator a unique sign-up link, or a QR code printed on their posters, so each contributor is linked to the facilitator who brought them. If a facilitator is removed, stop attributing new sign-ups to them.
+- **Never let recruitment replace consent.** A facilitator can explain the project, but each contributor still gives their own [informed consent](../data-governance/index.md#informed-consent), individually.
+
+The [agri-advisory speech layer](../agri-advisory/speech-layer.md#who-does-it-and-how) shows facilitators running regional recording sessions.
 
 **Put agreements in writing.** Each contributor should have a short written agreement that covers pay, working hours, how their data and work will be used, the licence, and how they will be credited.
 
@@ -114,7 +124,7 @@ Keep annotation and review separate, even if people rotate between them. Reviewi
 - one place for the current version of the guidelines;
 - one agreed channel for questions, such as a WhatsApp or Slack group.
 
-Write decisions down, because few people are online at the same time.
+Write decisions down, because few people are online at the same time. If contributors collect or label data away from a reliable connection, plan the sync, conflict and late-work rules before fieldwork starts; see [Offline Field Operations](../2_data-collection/10_offline-field-operations.md).
 
 **Review a few numbers every week or two:**
 
@@ -135,9 +145,10 @@ These risks come up in almost every African-language data project:
 | **Guidelines drift** | Agreement falls over time | Keep the guidelines versioned, and re-check annotators on shared items regularly. |
 | **Payments are delayed** | Finance office has not confirmed the process | Agree on the payment process before work starts, and keep a small float for urgent payments if your organisation allows it. |
 | **Currency changes** | Local currency falls against the grant currency | Recheck the budget before each payment round, and keep a contingency line. |
-| **Connectivity and power fail** | Annotators miss deadlines in the same region | Choose tools that work offline or on a weak connection, and cover mobile data costs. Government internet shutdowns have happened in several countries, so plan for gaps. |
+| **Connectivity and power fail** | Annotators miss deadlines in the same region | Choose tools that work offline or on a weak connection, and cover mobile data costs. Government internet shutdowns have happened in several countries, so plan for gaps. See [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) for sync and late-work rules. |
 | **Funding or a tool disappears** | Grant end date approaches; tool changes its pricing | Keep your own copies of all raw data and exports, and avoid depending on a single service. |
 | **Harm to annotators** | Annotators skip items or leave after sensitive batches | Warn annotators about sensitive content, let them opt out, limit exposure, and review data before release. |
+| **Data leaks during annotation** | Exports or task links shared in public groups; data left on shared or lost devices | Match the security settings to how sensitive the data is, limit who can export, and clear local copies when work has synced. See [Securing data during annotation](../data-governance/index.md#securing-data-during-annotation). |
 
 ## 8. Release and hand over
 

@@ -94,7 +94,7 @@
 
     <rect x="418" y="376" width="514" height="52" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
     <text x="430" y="397" font-size="13" font-weight="600" fill="#2B2218">Perceptual-hash de-duplication</text>
-    <text x="430" y="415" font-size="12" fill="#8A7D6E">near-duplicates of the same leaf are rejected and earn no credit</text>
+    <text x="430" y="415" font-size="12" fill="#8A7D6E">near-duplicates of the same leaf are rejected at ingest</text>
 
     <line x1="675" y1="428" x2="675" y2="446" stroke="#CBBBA4" stroke-width="2" marker-end="url(#arrow)"/>
 

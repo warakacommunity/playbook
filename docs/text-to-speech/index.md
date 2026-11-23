@@ -2,7 +2,7 @@
 title: Text-to-Speech
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -89,14 +89,16 @@ The consent conversation for a TTS speaker must specifically cover **voice-cloni
 
 Quality problems caught in the studio cost minutes. The same problems caught during model training cost weeks. Build a per-session review workflow before recording begins.
 
+A TTS corpus needs clean audio: require a quiet background and a strict noise floor, turn off the recorder's noise suppression and gain control, and ask for a re-record when a clip's signal-to-noise ratio is marginal. [Audio quality control](../asr/audio-quality-control.md#decide-the-corpus-purpose-first) compares the ASR and TTS settings and explains how to share one threshold table across the automated checks, the recording instructions and the reviewers.
+
 - **Per-clip listening review**: a reviewer independent of the speaker listens to every kept clip, matches it against the intended prompt text, and flags mismatches (dropped words, misread numbers, tone errors, environmental noise). Random-sample verification catches statistical drift; full listening catches the individual bad clip.
-- **Technical audio checks**: automated per-clip loudness normalisation, silence trimming, and clipping detection. A clip that peaks at digital zero is unusable and should be re-recorded, not "fixed" in post.
+- **Technical audio checks**: run automated signal checks on every clip as it arrives (duration, clipping, true peak, loudness, signal-to-noise ratio, silence), with strict thresholds for a TTS voice. A clip that peaks at digital zero is unusable and should be re-recorded, not "fixed" in post. The tiered checks and what to do when one fails are on the [Audio quality control](../asr/audio-quality-control.md) page.
 - **Tone-preservation verification**: for tone languages, a randomly-sampled per-week check with a linguist or trained native speaker confirms that tone patterns match the intended text. Tone drift is the single most subtle failure mode.
 - **Speaker-consistency spot check**: every ten hours of recording, compare the first hour and the most recent hour on a matched-prompt basis. Voice drift is normal over long projects; detecting it early lets you either accept it as a stylistic choice or intervene to correct.
 
 ## Evaluation
 
-TTS quality is judged mostly by people. The standard measure is the [Mean Opinion Score (MOS)](https://en.wikipedia.org/wiki/Mean_opinion_score), where listeners rate samples for naturalness, supported by intelligibility tests that check whether listeners can actually understand the output. Objective measures such as Mel-Cepstral Distortion exist and help track progress during development, but they correlate only loosely with what a human ear hears, so native-speaker listening tests remain the real measure of a voice.
+TTS quality is judged mostly by people. The standard measure is the [Mean Opinion Score (MOS)](https://en.wikipedia.org/wiki/Mean_opinion_score), where listeners rate samples for naturalness, supported by intelligibility tests that check whether listeners can actually understand the output. Objective measures such as Mel-Cepstral Distortion exist and help track progress during development, but they correlate only loosely with what a human ear hears, so native-speaker listening tests remain the real measure of a voice. For how to design those tests (anchored rating scales, A/B comparisons, and the controls that keep judgements honest), see [Human Evaluation Designs](../3_annotation-design/human-evaluation-designs.md).
 
 Because MOS is collected from listeners, the listening test is an annotation task a labeling tool can run. The config below plays a synthesized clip, asks for a naturalness rating, and runs an intelligibility check by asking the listener to type what they heard, which catches a voice that sounds smooth but is hard to understand:
 

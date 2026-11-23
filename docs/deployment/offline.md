@@ -25,7 +25,7 @@ Deciding this correctly at project kickoff shapes every downstream decision: mod
 
 ## The local-first design pattern
 
-The pattern that consistently ships in low-connectivity deployments is **local-first**: the model is bundled with the app or downloaded once when connectivity is good, and every subsequent interaction runs locally. Sync (of new data, updated models, or logs) is opportunistic and never blocks a user action.
+The pattern that consistently ships in low-connectivity deployments is **local-first**: the model is bundled with the app or downloaded once when connectivity is good, and every subsequent interaction runs locally. Sync (of new data, updated models, or logs) is opportunistic and never blocks a user action. The same pattern underlies data collection and annotation tools that work offline; for the project-side decisions that go with it (whether data may stay on devices, conflicts, work that arrives late), see [Offline Field Operations](../2_data-collection/10_offline-field-operations.md).
 
 ### What "local-first" means in practice
 

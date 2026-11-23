@@ -4,7 +4,7 @@ title: Tools index
 description: A quick-reference list of the tools mentioned across the AfriPlaybook.
 ready: true
 last_update:
-  date: 2026-09-26
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -14,8 +14,7 @@ Each tool below is explained in the chapter that uses it. This page collects the
 
 ## Annotation
 
-- [Label Studio](https://labelstud.io/): the annotation platform behind AfriAnnotate.
-- [AfriAnnotate](https://github.com/warakacommunity/afriannotate): the AfriPlaybook demo annotation tool.
+- [Label Studio](https://labelstud.io/): an open-source multi-modal annotation platform.
 
 ## Speech
 

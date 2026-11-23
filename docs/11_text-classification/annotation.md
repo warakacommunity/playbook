@@ -4,7 +4,7 @@ title: Annotation
 sidebar_label: "Annotation"
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -51,15 +51,7 @@ This task contains hate speech, offensive, or distressing material.
 
 Text classification data can be annotated using a range of tools, from managed crowdsourcing platforms to self-hosted open-source systems. The choice of tool should depend on the task design, dataset size, number of annotators, required turnaround time, and the availability of qualified annotators.
 
-There is no single best tool. When selecting an annotation tool, the right choice depends on several factors:
-
-- Data sensitivity and privacy requirements.
-- Size of the dataset and expected annotation volume.
-- Number of annotators and required collaboration features.
-- Need for quality assurance, audit trails, and reviewer workflows.
-- Support for the annotation schema and task type.
-- Availability of self-hosting, access control, and export options.
-- Cost, ease of setup, and long-term maintainability.
+There is no single best tool. Judge candidates against your task, team, and conditions using [A checklist for choosing a tool](../6_documentation/tooling.md#a-checklist-for-choosing-a-tool), which covers the general questions (sensitivity, volume, team size, review workflow, schema, self-hosting and exports, cost) and the checks that matter for African-language data, such as script support, offline work, and keeping every annotator's labels.
 
 Based on how annotators are sourced and where the data is hosted, annotation tools can be broadly grouped into two categories: crowdsourcing platforms and in-house (self-hosted) tools. The most common options for text classification are described below.
 
@@ -85,7 +77,6 @@ In-house tools are typically open-source applications that can be customized, de
 
 Common self-hosted tools include:
 
-- AfriAnnotate, the playbook's companion annotation tool, built on the Label Studio configuration format: [https://afriannotate.waraka.org/](https://afriannotate.waraka.org/)
 - POTATO (Portable Text Annotation Tool): [https://github.com/davidjurgens/potato](https://github.com/davidjurgens/potato)
 - Label Studio (open-source edition): [https://labelstud.io](https://labelstud.io/)
 - Doccano: [https://github.com/doccano/doccano](https://github.com/doccano/doccano)
@@ -102,11 +93,11 @@ However, these tools lack the quality-control and management features; they are 
 
 ![Annotation tools](images/annotation-tools.svg)
 
-The annotation tool should match the size and sensitivity of the project. For small pilot studies, spreadsheets may be enough. For medium-sized projects that require labeling workflows, Doccano, AfriAnnotate, or INCEpTION are often suitable. For large projects with distributed workers, crowdsourcing platforms can offer scale, but they require stronger quality control and privacy planning.
+The annotation tool should match the size and sensitivity of the project. For small pilot studies, spreadsheets may be enough. For medium-sized projects that require labeling workflows, Doccano or INCEpTION are often suitable. For large projects with distributed workers, crowdsourcing platforms can offer scale, but they require stronger quality control and privacy planning.
 
 #### A labeling configuration
 
-Whichever self-hosted tool you choose, the labeling task is defined by a small configuration. The examples here use the Label Studio configuration format, an open XML format supported by several tools (AfriAnnotate among them), so the same config is portable. The design points above (constrained inputs, keyboard shortcuts, an explicit skip route) are expressed directly in it. A single-label sentiment task looks like this:
+Whichever self-hosted tool you choose, the labeling task is defined by a small configuration. The examples here use the Label Studio configuration format, an open XML format supported by several tools, so the same config is portable. The design points above (constrained inputs, keyboard shortcuts, an explicit skip route) are expressed directly in it. A single-label sentiment task looks like this:
 
 ```xml
 <View>
@@ -166,9 +157,7 @@ After annotation, the tool exports each task with the labels attached. For the p
 }
 ```
 
-In the tool, the task list and per-task annotation progress are managed from the data manager:
-
-![The AfriAnnotate data manager for a text-classification project](/afriannotate-demo/01-text-nlp/01-sentiment-classification/1-data-manager.png)
+The task list should show assignment status and per-task annotation progress without exposing other annotators' labels. Coordinators need filters for incomplete, skipped, reviewed and exported items, plus an export that preserves each annotator's labels and the source identifiers.
 
 ## Inter-annotator agreement
 
@@ -253,6 +242,36 @@ Pe is the mean agreement probability over all raters if they were randomly assig
 - Is increasingly recommended for modern annotation studies.
 
 For complex annotation projects, Krippendorff's Alpha is often considered the most robust agreement metric.
+
+#### Ordinal and continuous scales
+
+Some labels are ordered: emotion intensity from 0 to 3, a 1-to-5 quality score, or a Likert item from "strongly disagree" to "strongly agree". Plain kappa treats every disagreement the same, so a rating of 2 against 3 counts as badly as 0 against 3. That understates agreement on an ordered scale and hides the difference between annotators who are close and annotators who are far apart. Use a measure that gives partial credit for near misses:
+
+- **Weighted kappa** for two annotators. Disagreements are penalised by how far apart the two ratings are: in proportion to the distance with linear weights, or with quadratic weights, which penalise large gaps much more than small ones. Weighted kappa was introduced for exactly this case ([Cohen, 1968](../references.md#cohen-1968)).
+- **Krippendorff's alpha at the ordinal level** for any number of annotators, with missing ratings allowed ([Artstein and Poesio, 2008](../references.md#artstein-2008)).
+- **Gwet's AC2**, the weighted form of Gwet's AC1, which is less affected than kappa when one rating dominates, for example when most items have zero intensity ([Gwet, 2014](../references.md#gwet-2014)).
+- **A stated tolerance**, such as "two ratings agree if they are within one point". This is easy to explain, but it is not chance-corrected, so report it next to one of the measures above rather than on its own.
+
+For continuous values, such as a score from 0 to 100 or a measured duration, use Krippendorff's alpha at the interval level, or an intraclass correlation coefficient, stating which form you used (for example ICC(2,1)), because the forms give different values ([Shrout and Fleiss, 1979](../references.md#shrout-1979)).
+
+```python
+from sklearn.metrics import cohen_kappa_score
+import krippendorff, numpy as np
+
+# Two annotators, ordered intensity labels 0-3
+y1 = [0, 1, 2, 3, 3, 2]
+y2 = [0, 2, 2, 3, 1, 2]
+# Pass the full scale: scikit-learn weights by the position of the labels it sees,
+# so a level nobody used in this batch would otherwise shrink the distances.
+cohen_kappa_score(y1, y2, labels=[0, 1, 2, 3], weights="quadratic")  # or weights="linear"
+
+# Any number of annotators: rows are annotators, columns are items, np.nan for missing
+data = np.array([y1, y2], dtype=float)
+krippendorff.alpha(reliability_data=data, level_of_measurement="ordinal", value_domain=[0, 1, 2, 3])
+krippendorff.alpha(reliability_data=data, level_of_measurement="interval")  # continuous values
+```
+
+Whatever you choose, report the measure together with its weighting or tolerance, for example "quadratic-weighted kappa" or "ordinal alpha", because the same ratings give quite different numbers under each. For agreement on other shapes of annotation, such as spans, multi-label sets or free text, see [Match the metric to the annotation shape](../4_data-quality/index.md#match-the-metric-to-the-annotation-shape).
 
 #### Deciding the final labels
 
@@ -340,8 +359,10 @@ Before starting large-scale annotation, dataset creators should conduct a pilot 
 
 A common quality-control mechanism is to include control questions, also known as gold-standard items, whose correct labels are already known. These items are randomly inserted into the annotation workflow without informing the annotators. Annotators who repeatedly fail to label these control items correctly may be removed from the project, and their previously annotated data should be reviewed and, if necessary, excluded from the final dataset.
 
+Decide how you will act on these results before annotation starts: how many control items a person must complete before they are judged, whether a low score leads to a warning, a pause and retraining before any removal, and who makes the final decision. [Act on annotator signals fairly](../4_data-quality/index.md#act-on-annotator-signals-fairly) sets out a staged process, and [Diagnose where disagreement comes from](../4_data-quality/index.md#diagnose-where-disagreement-comes-from) shows how to find the labels and annotators behind low agreement before you have a gold set.
+
 #### Determining the number of annotators
 
-For most NLP annotation tasks, using at least three annotators per instance is a common practice for ensuring annotation quality. An odd number of annotators (e.g., 3, 5, or 7) enables majority voting to determine the final label. In general, increasing the number of annotators per instance improves the reliability and robustness of the dataset by reducing the impact of individual biases. However, annotation cost and annotator availability often limit the number of annotators that can be employed.
+Full redundancy with three or more annotators per instance is one design choice, not a universal requirement. An odd number of annotators (e.g., 3, 5, or 7) enables majority voting when the design calls for it. More independent labels can reduce individual bias, but cost and annotator availability matter. A sampled overlap with independent review or adjudication may be more appropriate; choose the design using [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md#overlap-a-sample-not-everything).
 
 When human resources are limited, annotation can be performed by two annotators. In such cases, dataset creators may either retain only the instances on which both annotators agree or introduce an adjudication process, where disagreements are resolved through discussion or by an expert annotator who makes the final decision.

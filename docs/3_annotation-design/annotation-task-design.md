@@ -3,7 +3,7 @@ title: Annotation Task Design and Human Factors
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 
@@ -21,11 +21,13 @@ Quality falls as attention does. Long unbroken sessions, monotonous batches, and
 
 ## Let the interface do some of the work
 
-The annotation tool is part of the task design, not a neutral container. A good interface removes whole classes of error before they happen. It constrains inputs to the allowed label set so a typo cannot become a new category, it shows the surrounding context an annotator needs to judge a word inside a sentence, and it uses keyboard shortcuts so the work is fast and the physical strain is low. Two constraints matter especially for African projects. Many annotators work on modest hardware over intermittent, metered connections, so the tool should be light, tolerant of dropped connections, and usable on a small screen. It should also handle the orthography of the target language properly, including diacritics and non-Latin scripts, so that what the annotator types is what gets stored. A task that is awkward to do will be done awkwardly.
+The annotation tool is part of the task design, not a neutral container. A good interface removes whole classes of error before they happen. It constrains inputs to the allowed label set so a typo cannot become a new category, it shows the surrounding context an annotator needs to judge a word inside a sentence, and it uses keyboard shortcuts so the work is fast and the physical strain is low. Two constraints matter especially for African projects. Many annotators work on modest hardware over intermittent, metered connections, so the tool should be light, tolerant of dropped connections, and usable on a small screen. It should also handle the orthography of the target language properly, including diacritics and non-Latin scripts, so that what the annotator types is what gets stored; for span tasks, check too that the stored offsets still point at the text that was selected (see [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets)). A task that is awkward to do will be done awkwardly. To compare candidate tools against these and other needs, use [A checklist for choosing a tool](../6_documentation/tooling.md#a-checklist-for-choosing-a-tool).
+
+Language matters for the interface as well as the data. Where the tool allows it, show the label names, the in-task instructions and the interface itself in the annotators' working language, so that no one has to translate a category in their head on every item. Pick one interface language per project, so that everyone on a project sees the same wording and the agreement figures compare like with like. Keep the label a tool stores separate from the name annotators see; [A labeling configuration](#a-labeling-configuration) below shows how, and the [annotation guidelines template](../templates/annotation-guidelines.md#5-label-set) has columns for both.
 
 ## A labeling configuration
 
-These principles are not abstract: they are choices you make in the labeling configuration. The examples throughout this playbook use the Label Studio configuration format, an open XML format that several annotation tools support (including the playbook's companion tool, AfriAnnotate), so the configs here are portable rather than tied to any one product. A config is a small, readable document that defines exactly what the annotator sees and what they are allowed to do. The example below sets up a single-label sentiment task of the kind behind AfriSenti ([Muhammad et al., 2023](../references.md#muhammad-2023)).
+These principles are not abstract: they are choices you make in the labeling configuration. The examples throughout this playbook use the Label Studio configuration format, an open XML format that several annotation tools support, so the configs here are portable rather than tied to any one product. A config is a small, readable document that defines exactly what the annotator sees and what they are allowed to do. The example below sets up a single-label sentiment task of the kind behind AfriSenti ([Muhammad et al., 2023](../references.md#muhammad-2023)).
 
 ```xml
 <View>
@@ -54,9 +56,9 @@ These principles are not abstract: they are choices you make in the labeling con
 
 Three of the design points above are enforced directly in this config. `choice="single"` with a fixed `<Choice>` set constrains the input to the allowed labels, so the interface, not the guideline document, prevents stray categories. The `hotkey` attributes let an annotator work entirely from the keyboard, which is both faster and gentler on the hands over a long session. And the `flag` block gives the explicit skip route the fatigue discussion calls for, rather than forcing a guess. Wrapping the text in its own styled `<View>` is a small touch that matters over thousands of items: it sets the content apart from the prompts and labels, so an annotator never confuses what they are reading with what they are being asked.
 
-That configuration renders, for the annotator, as a clean single-task screen where the source text stands out from the question:
+The labels in a config are also the codes your exported data will carry, so treat them as stable identifiers. In the Label Studio format, a choice's `value` is what the annotator sees, and an optional `alias` replaces it in the stored results ([HumanSignal, n.d.](../references.md#labelstudio-choice-tag)). Writing `<Choice value="Positive" alias="POS"/>` lets you later change the display text, for example to the annotators' own word for "positive", without changing a single exported label. Changing a stored code, by contrast, is a data migration: record it in the guideline's change log with an old-to-new mapping. When several projects share an ontology, for example one project per language, keep one canonical label list and build every project's config from it rather than copying and editing it by hand, so that the same category has the same code in every language. Adding a label is cheap in the tool, but items labelled before it existed may need a check for the new category. Removing or merging labels needs a mapping or re-annotation of the affected items.
 
-![A single-label sentiment task in the AfriAnnotate labeling interface](/afriannotate-demo/01-text-nlp/01-sentiment-classification/3-label-selected.png)
+Before importing the full dataset, render this configuration on a few representative tasks. Check that the source text is visually distinct from the instructions, every label and shortcut works, long text and target-script characters display correctly, and the skip route is easy to find.
 
 For a span-level task such as named-entity recognition, the same format expresses a harder job by swapping `<Choices>` for `<Labels>`, which lets the annotator select a stretch of text and tag it:
 
@@ -74,12 +76,15 @@ For a span-level task such as named-entity recognition, the same format expresse
 
 The `$text` field in both configs maps straight onto the `text` field in the cleaned JSONL records from the [Data Collection](../data-collection/data-cleaning-preprocessing) chapter, so the import step is just uploading that file: each line becomes one task, and the provenance fields ride along unchanged. Starting from a tiny config like this, and growing it only when a pilot shows it is needed, keeps the task tractable in the way the complexity discussion above recommends.
 
-Selecting a span and tagging it as an entity, in the AfriAnnotate editor:
-
-![Tagging a named entity in AfriAnnotate](/afriannotate-demo/gifs/ner.gif)
+Pilot span selection with short and long entities, adjacent entities, punctuation and every target script. Verify that the exported text and character offsets reproduce the selected spans exactly.
 
 ## From a config to a running project
 
-Defining the config is only the first step; loading data and labeling it is the rest. The short walkthrough below shows the full loop, creating a project, uploading a CSV of tasks, choosing the labeling template, and annotating every task:
+Defining the config is only the first step. To run and verify the project:
 
-<video controls width="100%" style={{borderRadius: '10px', border: '1px solid var(--ifm-color-emphasis-200)'}} src="/afriannotate-demo/00-workflow/project-creation/process.mp4"></video>
+1. Define and version the configuration and guidelines.
+2. Import a small, representative task set with its provenance fields.
+3. Validate rendering, input constraints, shortcuts, media loading and offline behaviour where needed.
+4. Pilot the task, inspect errors and revise the configuration or guidelines.
+5. Annotate the pilot and export the results.
+6. Verify that labels, annotator identities, timestamps, source identifiers and provenance survive the export before scaling.

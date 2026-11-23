@@ -68,13 +68,9 @@ print("per-class IoU:", {k: round(v, 3) for k, v in ious.items()})
 print("mIoU:", round(np.nanmean(list(ious.values())), 3))
 ```
 
-Averaging IoU across classes rather than across pixels is the deliberate choice: a thin feature like a river covers few pixels, so a pixel-weighted score would let a model ignore it entirely while still looking accurate, whereas per-class mIoU makes that failure visible.
+Averaging IoU across classes rather than across pixels is the deliberate choice: a thin feature like a river covers few pixels, so a pixel-weighted score would let a model ignore it entirely while still looking accurate, whereas per-class mIoU makes that failure visible. The code compares a model's mask with a reference mask. To compare two annotators who each drew several instances in one image, pair the instances one to one first, as described in [Agreement when an image has many objects](./object-detection.md#agreement-when-an-image-has-many-objects), then score each pair with mask IoU.
 
-Tracing a polygon and painting a brush mask in AfriAnnotate:
-
-![Tracing a polygon in AfriAnnotate](/afriannotate-demo/gifs/polygon.gif)
-
-![Painting a brush mask in AfriAnnotate](/afriannotate-demo/gifs/brush.gif)
+The segmentation interface should support zoom, vertex or brush correction, holes and overlapping instances where the schema allows them. Verify that exported masks or polygons align with the source image and preserve class and instance identifiers.
 
 ## The 2026 modelling landscape
 
@@ -87,7 +83,7 @@ Segmentation in 2026 is split between purpose-built segmentation models, foundat
 - **Geospatial models.** **[Prithvi](https://huggingface.co/ibm-nasa-geospatial/Prithvi-100M)** (IBM/NASA, 2023-2024) and **[SatMAE](https://arxiv.org/abs/2207.08051)** (2022) are the workable open geospatial foundation models for satellite-imagery segmentation (crop mapping, land cover, deforestation). Fine-tune on 500-2,000 target-region satellite tiles.
 - **[nnU-Net v2](https://github.com/MIC-DKFZ/nnUNet)**: the reference medical-imaging segmenter (CT / MRI / X-ray); still the workable default for medical-imaging African contexts.
 
-**Editorial opinion.** For a new African-context segmentation project (agriculture crop-field boundaries, environment land-cover, medical-imaging lesion delineation), the shortest defensible path is: use SAM 2 to generate initial masks and human-correct them (5-10x annotation speedup), fine-tune Mask2Former or DINOv3 with a segmentation head on the corrected corpus, and report per-class IoU alongside mIoU. For **satellite imagery**, fine-tune Prithvi or SatMAE on target-region tiles before fine-tuning a general segmenter. The geospatial-pretrained backbones handle the multi-spectral, low-resolution, cloud-affected input distribution substantially better than general-imagery backbones.
+**Editorial opinion.** For a new African-context segmentation project (agriculture crop-field boundaries, environment land-cover, medical-imaging lesion delineation), the shortest defensible path is: use SAM 2 to generate initial masks and human-correct them (5-10x annotation speedup; see [Model-Assisted Annotation](../3_annotation-design/model-assisted-annotation.md#treat-drafts-as-drafts) for keeping annotators from simply accepting the draft), fine-tune Mask2Former or DINOv3 with a segmentation head on the corrected corpus, and report per-class IoU alongside mIoU. For **satellite imagery**, fine-tune Prithvi or SatMAE on target-region tiles before fine-tuning a general segmenter. The geospatial-pretrained backbones handle the multi-spectral, low-resolution, cloud-affected input distribution substantially better than general-imagery backbones.
 
 ## What it will actually cost you
 

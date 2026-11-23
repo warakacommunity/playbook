@@ -110,13 +110,26 @@ Start the ID-gloss lexicon at the same time as the corpus, not before it. A new 
 Sign language is recorded on video, and the recording sets the ceiling on everything after it.
 
 - **Frame rate.** 25 or 30 frames per second is the minimum; 50 or 60 is better, and fingerspelling **should** be filmed at 50 or more, because fast handshape changes fall between frames at lower rates. Record the actual frame rate with each file.
-- **Encoding for annotation.** Stepping to an exact frame is only reliable when the video is encoded for it. The MPI guide for ELAN uses a keyframe interval of 25 frames (about one per second at 25 fps), and advises setting B-frames to 0 when accurate frame positioning is crucial, which it is for glossing. Video with only keyframes works best for frame-by-frame stepping, at the cost of larger files ([MPI, 2024](../references.md#mpi-video-guidelines)).
+- **Encoding for annotation.** Stepping to an exact frame is only reliable when the video is encoded for it. The MPI guide for ELAN uses a keyframe interval of 25 frames (about one per second at 25 fps), and advises setting B-frames to 0 when accurate frame positioning is crucial, which it is for glossing. Video with only keyframes works best for frame-by-frame stepping, at the cost of larger files ([MPI, 2024](../references.md#mpi-video-guidelines)). Make this an annotation copy and keep the original recording unchanged; [Preparing media for annotation](../2_data-collection/7_data-cleaning-preprocessing.md#preparing-media-for-annotation) covers formats and conversion in general.
 - **Framing.** Head to waist, with room for the hands above the head and out to the sides. The face **must** be clearly visible, since it carries grammar.
 - **Light and background.** Even, front lighting without hard shadows; a plain background that contrasts with skin and clothing; plain clothing without patterns, and no jewellery that hides handshapes.
 - **More than one camera.** For conversations, film each signer from the front, plus a wide view of both. A side view helps with movements towards and away from the body. Keep the cameras in sync (a clap or a light flash at the start gives an anchor), and record each camera's offset.
 - **Signer metadata.** For every signer: an identifier, age range, region, whether they are Deaf or hearing, the age at which they acquired the sign language, their schooling, and their dominant hand.
 
-Recording in the browser or on a phone works for elicitation: a contributor sees a written prompt or a picture and signs a response. AfriAnnotate's sign-collection templates do this with a recording tag.
+Converting recordings to a constant frame rate, and applying these encoding settings to the copy that annotators use, is covered in [Preparing video for annotation](./video.md#preparing-video-for-annotation).
+
+### Recording on a phone or in a browser
+
+Recording in the browser or on a phone works for elicitation: a signer sees a written prompt or a picture and signs a response to the device's camera, with no camera operator. The signer then has to check framing and light themselves, so the recording tool has to make that easy. Whatever tool you use, check that it does the following:
+
+- **Live, mirrored preview.** The signer sees themselves before and during the take, mirrored like a selfie, and can check that they are framed head to waist with both hands in view and the face lit. Mirror only the preview, never the saved clip: a flipped clip makes a right-handed signer look left-handed.
+- **A maximum length per prompt type.** A single sign needs a few seconds; a sentence or a spontaneous answer needs more. Set a cap for each kind of prompt (for example, a few seconds for a single sign and up to about half a minute for a sentence) and stop the recording automatically when it is reached, so one take cannot fill a phone.
+- **Play back, discard, re-record.** The signer watches the take and can throw it away and record again before submitting. Keep only the take the signer submits; discarded takes **should not** be stored.
+- **Technical metadata with every clip.** Store the resolution, frame rate and duration as measured from the saved file, not the values the tool asked the camera for, because a phone often delivers less than was requested. These values feed the frame-rate check in [Check recorded clips first](#check-recorded-clips-first).
+- **Saved on the device first.** Write each clip to the device as soon as it is recorded, tell the signer it is saved, and upload it when a connection is available. Large clips **should** upload in resumable chunks, so a dropped connection does not restart the whole file. [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) covers sync, storage and conflicts, and [Offline and patchy connectivity](../deployment/offline.md) the local-first pattern behind it. The [Field Image Capture](../agri-advisory/field-image-capture.md) case study runs phone collection this way.
+- **Audio kept on purpose, or not at all.** Mouthing and other non-manual features are read from the face in the video, so the audio track is rarely needed to annotate signing. It can also record bystanders' voices and conversations in the room, which is personal data nobody consented to. Decide before collection whether to keep it; if you do, the consent **must** say so, and if you do not, drop the audio track at capture or at ingest.
+
+Clips recorded this way still need checking before anyone annotates them (see [Check recorded clips first](#check-recorded-clips-first)), and a normalised copy for frame-accurate work (see [Preparing video for annotation](./video.md#preparing-video-for-annotation)).
 
 ## The annotation model
 
@@ -169,39 +182,63 @@ When a project records the form of signs (handshape, location, movement, orienta
 
 A simpler alternative for a recognition dataset is a controlled vocabulary of handshape names and locations; the KSL Dataset transcribes 4,000 words in HamNoSys ([Wanzare et al., 2024](../references.md#ksl-dataset-2024)).
 
-## Annotating in AfriAnnotate
+## Annotating in an ELAN-style workspace
 
-AfriAnnotate's sign-language projects open in a workspace laid out like ELAN's annotation mode, so annotators who know ELAN can start without retraining. The tier structure is declared in the project's labeling configuration, and every annotator of the project gets the same tiers:
+Most sign-language corpora are annotated in ELAN, or in a workspace laid out like ELAN's annotation mode, with the video above and the time-aligned tiers below ([Wittenburg et al., 2006](../references.md#wittenburg-2006)). Annotators who know ELAN can then start without retraining. Whichever tool you use, declare the tier structure once for the project, so that every annotator works with the same tiers. A basic corpus template has three:
 
-```xml title="Labeling configuration: the basic corpus template"
-<View>
-  <VideoTiers name="tiers" value="$video" lexicon="3">
-    <TierType value="gloss" stereotype="none" lexicon="true"/>
-    <TierType value="free text" stereotype="none"/>
-    <Tier value="RH-IDgloss" tierType="gloss" participant="A"/>
-    <Tier value="LH-IDgloss" tierType="gloss" participant="A"/>
-    <Tier value="Free Translation" tierType="free text" participant="A" lang="eng"/>
-  </VideoTiers>
-</View>
-```
+- **RH-IDgloss** and **LH-IDgloss**: ID-glosses for the right and the left hand, on a gloss tier type linked to the project lexicon.
+- **Free Translation**: a free translation of each utterance into the written language, on a free-text tier type.
 
-What this gives the project:
+Grow the template as the project needs. Common additions are an utterance tier for a first pass, grammatical class, a second signer for conversation, non-manual features, phonology (handshape, location, movement, orientation), fingerspelling, and isolated signs for a lexicon. Treat each template as a starting point to edit, and version it with the guidelines.
 
-- **Shipped templates.** Ten sign-language templates cover the common cases: a first pass (utterances and translation), the basic corpus, full multi-tier annotation, grammatical class, two signers in conversation, non-manual features, phonology (handshape, location, movement, orientation), fingerspelling, isolated signs for a lexicon, and a single-timeline option. Each is a starting point to edit.
-- **Existing ELAN templates.** A project can be created from an ELAN template (`.etf`) or annotation file: its tier types, vocabularies and tiers become the configuration.
-- **A shared lexicon.** With `lexicon` set to a knowledge base of ID-glosses, gloss tiers suggest entries as the annotator types and store each entry's identifier. A sign not yet in the lexicon can be added as a provisional entry, for a curator to confirm or merge. A gloss typed without a lexicon entry is flagged, so the gaps are easy to find.
-- **Locked project tiers, open personal tiers.** Annotators cannot rename or delete the project's tiers, which keeps the corpus consistent. They can add their own tiers of a declared type, for notes or a one-off feature; those are saved with their annotation and can be promoted into the project by a manager.
+Whatever tool you choose, the workspace should support:
+
+- **ELAN templates and files.** A project can start from an existing ELAN template (`.etf`) or annotation file, so that its tier types, controlled vocabularies and tiers carry over.
+- **A shared lexicon.** Gloss tiers suggest ID-glosses from the project lexicon as the annotator types, and store each entry's identifier. A sign not yet in the lexicon is added as a provisional entry, for a curator to confirm or merge. A gloss typed without a lexicon entry is flagged, so the gaps are easy to find.
+- **Locked project tiers.** Annotators cannot rename or delete the project's tiers, which keeps the corpus consistent. Personal tiers for notes or a one-off feature are useful, as long as they stay apart from the project tiers until a manager adopts them.
 - **ELAN interchange.** Annotations export to ELAN's `.eaf` format with their tier types, vocabularies, participants and lexicon identifiers, and `.eaf` files can be imported.
 
-The full reference is the [AfriAnnotate sign-language documentation](https://afriannotate.waraka.org/docs/sign-language/annotation).
-
 :::info
-The workspace measures the video's frame rate as it plays and snaps every boundary to a frame. Annotators step one frame at a time to find a sign's onset, as in ELAN.
+A good workspace measures the video's frame rate as it plays and snaps every boundary to a frame. Annotators step one frame at a time to find a sign's onset, as in ELAN.
 :::
 
 ## Checking quality
 
 Sign-language annotation is slow and expert, so quality checks **should** be planned into the budget rather than added afterwards.
+
+### Check recorded clips first
+
+A clip that is empty, cut short or badly framed wastes an annotator's time, so check every clip before it reaches annotation. Only clips that pass go on.
+
+**Automated checks at upload.** These are cheap and catch broken files:
+
+- the file exists and is not empty;
+- it really is a video, which you know by decoding a video stream from it, not from the file extension;
+- its duration can be read; when the container does not record one, as often happens with browser-recorded WebM, decode the file to measure it (see [Preparing video for annotation](./video.md#preparing-video-for-annotation));
+- it is no longer than the cap set for its prompt.
+
+The same check-on-arrival pattern for speech is in [Audio quality control](../asr/audio-quality-control.md).
+
+**Further checks worth adding.** Your annotation tool may not run these, but a short script over the uploads can:
+
+- resolution and frame rate at or above the project's minimum (see [Recording](#recording));
+- black or frozen stretches, which mean a covered lens, a camera that never started, or an app that went into the background; FFmpeg's `blackdetect` and `freezedetect` filters find both ([FFmpeg Developers, n.d.-b](../references.md#ffmpeg-filters));
+- the measured frame rate against the declared one: a large gap means the phone dropped frames, which hurts fingerspelling first.
+
+**When a check fails or cannot run.** If a check cannot run, for example because the server lacks a decoder for the clip's codec, skip that particular check, mark the clip unchecked for it, and hold the clip for human review. Do not open it for annotation until a person clears it. A clip that fails a check also goes to the human review queue; it is never dropped silently. Rejecting borderline clips automatically is likely to fall hardest on signers with older phones or poor light, and so to skew the corpus towards better-equipped signers.
+
+**Human validation.** Fluent signers, ideally Deaf, then watch each clip against a criteria sheet written for signing. Criteria written for speech (every word audible, one main speaker) do not carry over. A sign-specific sheet asks:
+
+- Is the prompt signed in full?
+- Is the signer framed head to waist?
+- Are both hands visible throughout, including when they go above the head?
+- Is the face fully visible?
+- Is there only one signer in the clip?
+- Does anything hide the hands (an object, clothing, the edge of the frame)?
+
+Use two or more independent judgements per clip and send disagreements to an adjudicator, the same vote-and-adjudicate pattern used for recorded speech in [Peer validation of crowd recordings](../asr/index.md#peer-validation-of-crowd-recordings) (see also [Escalate items that do not agree](../3_annotation-design/workflow-adjudication.md#escalate-items-that-do-not-agree)). The agri-advisory [Speech Layer](../agri-advisory/speech-layer.md#quality-control) shows it in practice.
+
+### Check the annotation
 
 - **Double-annotate a sample.** Have two annotators gloss the same 10 to 20 percent of clips independently. Compare labels (do they use the same ID-gloss?) and boundaries (how far apart are their onsets and offsets, in frames?). Agree the boundary tolerance in frames before comparing, and report it with the agreement figures.
 - **Review the lexicon, not only the annotations.** Provisional lexicon entries and unmatched glosses **should** be reviewed regularly by a curator who merges duplicates (HOUSE and HOME-1 for the same sign) and confirms new signs.

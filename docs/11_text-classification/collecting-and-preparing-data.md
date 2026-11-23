@@ -4,7 +4,7 @@ title: Collecting & Preparing Data
 sidebar_label: "Collecting & preparing data"
 ready: true
 last_update:
-  date: 2026-09-24
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -104,7 +104,7 @@ print(strat["weak"].value_counts(normalize=True))
 
 ![Random sample selection](images/random-sampling.svg)
 
-**Active Learning Method**: Iteratively train a model on a small seed set, then use the model's uncertainty to select the most informative unlabelled examples for human annotation next. Maximizes annotation return on investment by labeling only where the model is confused.
+**Active Learning Method**: Iteratively train a model on a small seed set, then use the model's uncertainty to select the most informative unlabelled examples for human annotation next. Maximizes annotation return on investment by labeling only where the model is confused. For when active learning helps, how to keep a random sample alongside it, and what to record about the model, see [Choose what to label next: active learning](../3_annotation-design/model-assisted-annotation.md#choose-what-to-label-next-active-learning).
 
 ```python
 # Active learning: label where the model is least confident (uncertainty sampling)
@@ -148,7 +148,7 @@ Always store metadata such as source, timestamp, language, and collection method
 
 ## Processing & sampling
 
-After collection, texts should be cleaned and standardized before annotation. Remove obvious noise such as HTML tags, duplicate items, extra whitespace, URLs, and non-textual tokens. Apply language identification to filter out non-target languages, and remove exact or near duplicates to reduce annotation waste and leakage across splits.
+After collection, texts should be cleaned and standardized before annotation. Remove obvious noise such as HTML tags, duplicate items, extra whitespace, URLs, and non-textual tokens. Apply language identification to filter out non-target languages, and remove exact or near duplicates to reduce annotation waste and leakage across splits. Finish this cleaning before annotation starts: if annotators will also mark spans in the text, any later change shifts the stored offsets (see [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets)).
 
 Once the data source has been identified, several preprocessing and sampling steps are required to ensure the quality and representativeness of the dataset. First, texts should be carefully selected to reflect the diversity of the target population and minimize potential biases. For tasks such as hate speech and emotion analysis, keyword-based filtering can be useful for identifying relevant content. Data cleaning involves removing irrelevant elements such as HTML tags, URLs, special characters, and excessive whitespace using text-processing tools. Applying language identification and de-duplication helps eliminate non-target language and repeated content. The overall dataset size should be determined based on factors such as research objectives, available resources, annotation budget, human capacity, and project timelines.
 

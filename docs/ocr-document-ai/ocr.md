@@ -46,9 +46,7 @@ The transcription config shows a line image and a text box, with the guideline t
 
 Scoring is identical to the ASR case: feed the reference and predicted transcripts to `jiwer` and read CER as the headline, WER alongside. The worked snippet and the caution about matching the scorer's normalization to your transcription conventions are on the [ASR](../asr/index.md) page and apply here unchanged.
 
-Drawing a text region on a page and transcribing it, in the AfriAnnotate editor:
-
-![Boxing and transcribing text regions for OCR in AfriAnnotate](/afriannotate-demo/02-vision-documents/28-ocr-text-in-image/2-labeling-editor.png)
+The OCR annotation interface should support zoom, region ordering, precise boundary editing and transcription that preserves the target script and diacritics. Exports should retain page and region identifiers, coordinates, reading order, transcript and annotator.
 
 ## The 2026 modelling landscape
 

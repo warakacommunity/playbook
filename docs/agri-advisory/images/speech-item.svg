@@ -41,7 +41,7 @@
 
     <rect x="48" y="304" width="404" height="40" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
     <text x="60" y="320" font-size="12" font-weight="600" fill="#2B2218">Audio: 48 kHz original + 16 kHz mono derivative</text>
-    <text x="60" y="336" font-size="12" fill="#8A7D6E">robust_asr profile: field ambience kept, every word clear</text>
+    <text x="60" y="336" font-size="12" fill="#8A7D6E">Field ambience allowed when every word stays intelligible</text>
 
     <rect x="48" y="352" width="404" height="40" rx="10" fill="#FFFFFF" stroke="#B97F37" stroke-width="1.5"/>
     <text x="60" y="368" font-size="12" font-weight="600" fill="#2B2218">Transcript: verbatim by a native transcriber</text>
@@ -99,7 +99,7 @@
 
     <rect x="674" y="510" width="258" height="70" rx="10" fill="#8A3B25" stroke="#8A3B25" stroke-width="1.5"/>
     <text x="686" y="530" font-size="13" font-weight="700" fill="#FFFFFF">Validated item</text>
-    <text x="686" y="548" font-size="12" fill="#FFFFFF">credit lands on the ledger</text>
+    <text x="686" y="548" font-size="12" fill="#FFFFFF">accepted for the dataset</text>
     <text x="686" y="564" font-size="12" fill="#FFFFFF">target: 95% pass first time</text>
   </g>
 

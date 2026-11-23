@@ -36,6 +36,10 @@ Use the workflow **before** you collect any data from people, whether recordings
 - **Include a community-nominated reviewer** in the design step, not just the audit step. What is understood as "consent" varies across communities; what constitutes a meaningful IP framework varies across communities; both need community input at design time.
 - **Store the completed consent artefacts alongside the data.** The audio consent recording, the signed form, the community-consent minutes: all travel with the corpus so future reviewers can verify.
 
+Keep a consent register as well as the forms: log every signature or oral agreement, and every withdrawal, against the contributor code and the version of this form. See [Keeping consent records](../legal-consent/index.md#keeping-consent-records) for what to log, and [From consent record to release metadata](../legal-consent/index.md#from-consent-record-to-release-metadata) for how it is checked before each export.
+
+Change the version number on this form whenever its text changes, and ask existing contributors to agree to the new version before they contribute anything more.
+
 ---
 
 ## Section A: Written consent form
@@ -64,10 +68,18 @@ Your contribution will:
 
 #### What we will do with your contribution
 
-Your contribution will be used to:
-1. [SPECIFIC USE ONE, e.g., "train a text-classifier model for Hausa"]
-2. [SPECIFIC USE TWO, e.g., "release publicly as an open dataset so other researchers can also work on Hausa"]
-3. [SPECIFIC USE THREE, e.g., "be included in academic publications with your contribution credited"]
+Your contribution will be used to [CORE USE THAT TAKING PART REQUIRES, e.g., "build a collection of Hausa sentences that the project team studies"]. If you do not agree to this, please do not take part.
+
+For each of the uses below, please choose **yes** or **no**. You can say no to any of them and still take part. We will only use your contribution in the ways you said yes to.
+
+| Use of your contribution | Yes | No |
+| --- | --- | --- |
+| **Model training**: [e.g., "train a computer system that can read Hausa"] | ☐ | ☐ |
+| **Sharing with partners**: [e.g., "give it to [NAMED PARTNER ORGANISATIONS] under our agreements with them"] | ☐ | ☐ |
+| **Public release**: [e.g., "publish it openly as a dataset under [LICENCE]". Once released, it cannot be recalled] | ☐ | ☐ |
+| **[SPECIFIC REUSE]**: [e.g., "quote short examples in academic publications, with your contribution credited"] | ☐ | ☐ |
+
+*Note for the project: add one row per purpose you already foresee, and leave every box unticked. If a use is a condition of taking part, put it in the first sentence above instead of in the table. Record each answer per contributor in your consent register.*
 
 We will **not**:
 - [SPECIFIC AVOID ONE, e.g., "sell your voice recording to companies without asking you first"]
@@ -86,10 +98,12 @@ If we decide to use your contribution for something not on this list, we will co
 
 #### Public release
 
-We plan to release [THE DATA / THE MODEL BUILT FROM IT / BOTH] publicly, under a licence that requires anyone using it to:
+If you said yes to public release above, we plan to release [THE DATA / THE MODEL BUILT FROM IT / BOTH] publicly, under a licence that requires anyone using it to:
 - [ATTRIBUTE THE COMMUNITY IN A SPECIFIED WAY]
 - [NOT USE IT COMMERCIALLY (IF CC BY-NC) OR ANY OTHER RESTRICTIONS]
 - [OTHER TERMS FROM YOUR LICENCE CHOICE]
+
+Contributions from people who said no to public release are not released.
 
 The full licence terms will be documented at [URL] on the release date.
 
@@ -102,6 +116,9 @@ You have the right to:
 - **Ask for a copy of what we have collected from you** at any time.
 - **Refuse to contribute any specific piece, take a break, or stop at any time** even after signing this form, without penalty. You do not need to give a reason.
 - **Ask questions** about the project, your contribution, or your data at any time. The team commits to answering within [TIME, e.g., "seven days"].
+- **Receive a record** each time you agree or withdraw, showing your contributor code, the version of this form, and the date. We will give it to you as [PRINTED COPY / SMS / OTHER].
+
+If we change this form, we will ask you to agree to the new version before you contribute anything more.
 
 After public release, your contribution cannot be withdrawn from copies already in circulation. We will not include your contribution in any future releases.
 
@@ -151,11 +168,11 @@ The audio-recorded consent conversation covers the same ground as the written fo
 
 1. **Who we are and what we are doing.** Introduce yourself, the project, and the ombudsperson.
 2. **What we are asking of you.** In the terms of the contributor's understanding, not the project's terminology.
-3. **What we will do with your contribution.** Include the specific will-do list and the specific will-not-do list. Ask the contributor to describe back what they understand; this is where misunderstandings surface.
+3. **What we will do with your contribution.** State the core use that taking part requires, and the specific will-not-do list. Then ask about each optional use (model training, sharing with partners, public release, each specific reuse) as a separate question, and record a separate yes or no for each. Make clear that saying no to one does not stop the contributor from taking part. Ask the contributor to describe back what they understand; this is where misunderstandings surface.
 4. **How long, where, who has access.** Concrete storage location and retention period.
 5. **Public release plans.** Explicit about the licence and its practical implications ("this means someone in another country could use it to build a phone system, but they cannot sell it").
-6. **Rights.** Withdrawal, copy, refusal, questions.
-7. **Contributor code.** Speak the code aloud so it appears in the recording; ask the contributor to repeat it back.
+6. **Rights.** Withdrawal, copy, refusal, questions, and the record they will receive.
+7. **Contributor code and form version.** Speak the code and the version number of the consent script aloud so both appear in the recording; ask the contributor to repeat the code back.
 8. **Explicit agreement.** "Do you agree to contribute?", recorded verbally.
 
 The full audio recording is stored alongside the data. It is the consent artefact; treat it with the same care as the corpus.

@@ -64,7 +64,7 @@ Short one-line description: **[ONE LINE]**
 Beyond the standard datasheet questions, this section is where the playbook's African-context requirements land. Do not skip.
 
 - **What data acquisition mechanism was used?** [Community recording? Elicited translation? Web scrape? Combination?]
-- **Who was involved in the data collection?** [Named annotators, translators, or contributors, with consent for named attribution. Volunteer or paid; if paid, at what rate against what benchmark.]
+- **Who was involved in the data collection?** [Named annotators, translators, or contributors, with consent for named attribution. Describe contributor roles and recruitment.]
 - **Over what timeframe was the data collected?** [Start and end dates.]
 - **Was the collection process reviewed by any board or committee?** [IRB, ethics review, community steering committee. Name the body and the review date.]
 - **What was the informed consent process?** [Individual + community consent. If contributors are non-literate, what specific pattern was used (see [legal-consent chapter](../legal-consent/index.md#consent-from-non-literate-speakers)).]
@@ -82,6 +82,11 @@ Beyond the standard datasheet questions, this section is where the playbook's Af
 - **What software was used to preprocess?** [Specific libraries and versions, or a link to the preprocessing code.]
 - **Was there inter-annotator agreement measurement?** [What score, on what proportion of the corpus.]
 - **What was the adjudication process for annotator disagreements?** [Second-pass by senior annotator? Consensus vote? Discard?]
+- **What share of the work was reviewed?** [The review sampling rate, for example "20% of ordinary items, 100% of a new annotator's first batch". Say whether "reviewed" means every item or a sample.]
+- **How was each item chosen for review?** [The per-item rule and its seed, for example a hash of the item ID with a fixed seed, so that others can rerun it. See [Decide what gets reviewed](../3_annotation-design/workflow-adjudication.md#decide-what-gets-reviewed-a-sample-plus-escalations).]
+- **Which flags sent an item to review regardless of the sample?** [Low agreement, a lone dissenting annotator, a failed gold item, an automated check, a manual flag. List the rules in force.]
+- **How many items did each annotator label?** [The distribution of items per annotator, and any cap on one annotator's share (see [Cap each annotator's share](../3_annotation-design/workflow-adjudication.md#cap-each-annotators-share)).]
+- **How are annotator identities handled in the release?** [Pseudonymised or removed? Method (for example a keyed hash per project), whether the key stays the same across versions, whether a mapping to real people is kept and who can access it, and which annotator attributes (region, dialect, gender) are released. See [Personally identifiable information](../data-governance/index.md#personally-identifiable-information).]
 
 ## 5. Uses
 

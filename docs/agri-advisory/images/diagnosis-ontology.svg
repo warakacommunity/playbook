@@ -126,7 +126,7 @@
     <rect x="572" y="406" width="150" height="70" rx="10" fill="#E7F1EC" stroke="#1F5B3F" stroke-width="1.5"/>
     <text x="647" y="428" font-size="13" font-weight="700" fill="#1F5B3F" text-anchor="middle">&#954; &#8805; 0.75</text>
     <text x="647" y="446" font-size="12" fill="#2E7D5B" text-anchor="middle">stay at 30%</text>
-    <text x="647" y="462" font-size="12" fill="#2E7D5B" text-anchor="middle">credit on acceptance</text>
+    <text x="647" y="462" font-size="12" fill="#2E7D5B" text-anchor="middle">routine review continues</text>
 
     <rect x="742" y="406" width="190" height="70" rx="10" fill="#F3E0D8" stroke="#8A3B25" stroke-width="1.5"/>
     <text x="837" y="428" font-size="13" font-weight="700" fill="#8A3B25" text-anchor="middle">&#954; &lt; 0.75</text>

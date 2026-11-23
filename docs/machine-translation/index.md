@@ -2,7 +2,7 @@
 title: Machine Translation
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-23
   author: Idris Abdulmumin
 ---
 
@@ -67,13 +67,29 @@ A translation config shows the source sentence and gives the translator a text b
 
 For post-editing rather than translation from scratch, pre-fill the box with a machine-translation draft by adding a `value="$mt_draft"` to the `TextArea` and including an `mt_draft` field in each task. The translator then corrects rather than retypes, which is faster, though it carries the known risk that post-editing can anchor the translator to the machine's phrasing, so it suits routine domains more than creative or culturally loaded text.
 
-Post-editing a machine translation in the AfriAnnotate editor:
+The post-editing interface should show the source beside an editable draft, preserve both the original machine output and the corrected translation, and record the model or draft version. This allows later analysis of edit effort and anchoring effects.
 
-![Post-editing a machine translation in AfriAnnotate](/afriannotate-demo/01-text-nlp/13-parallel-translation-post-edit/2-labeling-editor.png)
+### Glossaries and translation memory
+
+When several translators work on one corpus, or one translator works across many batches, the same term and the same sentence will come up again and again. Without shared records, each person resolves them differently, and the corpus ends up with three spellings of one coined word and two translations of one recurring instruction. Two shared resources prevent this.
+
+**Keep a project glossary.** A glossary (also called a term base) lists each coined, borrowed or domain term with its approved target form, a short note on meaning or usage, and the date it was agreed. Fill it from the term-handling decisions translators already record per item in the config above: when someone ticks "Coined a new term" or "Borrowed from another language", a reviewer decides on the form, and the glossary records that decision once for everyone. Version the glossary like the dataset, make it available to every translator while they work, and tell translators to follow it or to raise a query rather than invent a competing form. This matters most where terminology is being created as the corpus is built, as in the AfriScience-MT work described above ([AfriScience-MT, 2026](../references.md#afriscience-2026)).
+
+**Keep a translation memory.** A translation memory stores approved pairs of source and target segments, usually sentences. When a segment that has already been translated and approved appears again, the translator sees the earlier translation and reuses or adapts it, so repeated segments such as standard instructions, headings and boilerplate come out the same across translators and batches. Many annotation and translation tools can show glossary terms and memory matches next to the translation box. If yours cannot, a shared, searchable spreadsheet of terms and approved segments still gives most of the benefit.
+
+**Use standard formats when you exchange material.** If you share work with professional translators or localisation teams, two open XML formats are worth knowing. TMX (Translation Memory eXchange) is the exchange format for translation memories, designed to move memory data between tools with little or no loss ([LISA, 2005](../references.md#tmx-2005)). XLIFF is the exchange format for bilingual files: each segment holds a source and an optional target, so a file with existing targets can arrive ready for post-editing ([OASIS, 2018](../references.md#xliff-2018)). Treat these as ways to work with other tools, not as requirements. A JSON record per pair, like the one earlier in this chapter, is enough for most research datasets.
+
+**Keep structural context.** Whatever format you use, record as metadata where each segment came from (a heading, a paragraph or a table cell) and its position in the document, so the document can be rebuilt and document-level work stays possible.
+
+:::warning[Suggestions anchor translators too]
+
+Memory matches and glossary hits are drafts, not answers. Like a machine-translation draft (see [Treat drafts as drafts](../3_annotation-design/model-assisted-annotation.md#treat-drafts-as-drafts)), a reused suggestion can anchor the translator to its wording, and an early mistake that enters the memory spreads to every later segment that reuses it. Record in each pair's metadata whether the translation started from a suggestion, review a sample of suggestion-based segments separately, and correct the glossary or memory entry itself when you find an error. Never put test or evaluation sentences into the memory or the glossary: if a test sentence's approved translation sits in the memory, it can be reused in training pairs, and the test set quietly leaks into training.
+
+:::
 
 ## Assure quality
 
-Translation quality control combines automatic filtering with human judgment. Confidence and length-ratio filters can flag suspect pairs for review, but they are no substitute for people. Have native speakers evaluate a sample of the translations for adequacy, meaning whether the translation preserves the source meaning, and fluency, meaning whether it reads naturally, and when several evaluators rate the same items, measure their inter-annotator agreement so you know how reliable the judgments are (see [Data Quality](../4_data-quality/index.md)). Disagreement among evaluators is informative in translation too, since fluency in particular is partly subjective and dialect-dependent.
+Translation quality control combines automatic filtering with human judgment. Confidence and length-ratio filters can flag suspect pairs for review, but they are no substitute for people. Have native speakers evaluate a sample of the translations for adequacy, meaning whether the translation preserves the source meaning, and fluency, meaning whether it reads naturally, and when several evaluators rate the same items, measure their inter-annotator agreement so you know how reliable the judgments are (see [Data Quality](../4_data-quality/index.md), and [Match the metric to the annotation shape](../4_data-quality/index.md#match-the-metric-to-the-annotation-shape) for ratings, rankings and free text; for rating and comparison designs, see [Human Evaluation Designs](../3_annotation-design/human-evaluation-designs.md)). Disagreement among evaluators is informative in translation too, since fluency in particular is partly subjective and dialect-dependent.
 
 ## Evaluate translation
 

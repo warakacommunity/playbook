@@ -3,7 +3,7 @@ sidebar_position: 99
 sidebar_label: References
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-23
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -116,6 +116,10 @@ examples. [arxiv.org/abs/2506.12158](https://arxiv.org/abs/2506.12158)
 
 *Common Voice: A Massively-Multilingual Speech Corpus.* LREC 2020. Describes Mozilla's crowdsourced, openly licensed multilingual read-speech corpus. [arxiv.org/abs/1912.06670](https://arxiv.org/abs/1912.06670)
 
+### Artstein, R., & Poesio, M. (2008) {#artstein-2008}
+
+*Survey Article: Inter-Coder Agreement for Computational Linguistics.* Computational Linguistics, 34(4), 555–596. Surveys kappa, pi and Krippendorff's alpha for NLP annotation, including weighted coefficients and distance functions for non-nominal data. [aclanthology.org/J08-4004](https://aclanthology.org/J08-4004/) (DOI: [10.1162/coli.07-034-R2](https://doi.org/10.1162/coli.07-034-R2))
+
 ### Bandarkar, L., et al. (2024) {#belebele-2024}
 
 *The Belebele Benchmark: a Parallel Reading Comprehension Dataset in 122 Language Variants.* Proceedings of ACL 2024 (Volume 1: Long Papers), pp. 749–775. A fully parallel multiple-choice reading comprehension benchmark built on FLORES-200 passages, covering many African languages. [aclanthology.org/2024.acl-long.44](https://aclanthology.org/2024.acl-long.44/)
@@ -148,6 +152,10 @@ communities whose languages are at stake rather than treating them as data sourc
 ### Blench, R., & Warren (2003) {#blench-warren-2003}
 
 *An unreported African Sign Language for the Deaf among the Bura in Northeast Nigeria.* Describes Bura Sign Language, a village sign language in north-eastern Nigeria.
+
+### Boersma, P. (n.d.) {#praat-textgrid}
+
+*TextGrid file formats.* Praat manual. Documents Praat's TextGrid format of interval tiers and point tiers for time-aligned annotation. [fon.hum.uva.nl/praat/manual/TextGrid_file_formats.html](https://www.fon.hum.uva.nl/praat/manual/TextGrid_file_formats.html)
 
 ### Bredin, H. (2017) {#bredin-2017}
 
@@ -195,6 +203,14 @@ A word-level Central African Sign Language dataset: 60 words, 5,889 videos from 
 
 *TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages.* Transactions of the Association for Computational Linguistics, 8. A QA benchmark in 11 typologically diverse languages, including Swahili, written by people who wanted an answer but did not yet know it, and collected without translation. [aclanthology.org/2020.tacl-1.30](https://aclanthology.org/2020.tacl-1.30/)
 
+### COCO Consortium (n.d.) {#coco-format}
+
+*COCO data format.* Common Objects in Context (COCO) dataset documentation. Defines the JSON layout of images, annotations, and categories; object boxes are `[x, y, width, height]` measured from the top-left image corner, and segmentation is stored as polygons or run-length encoding. [cocodataset.org/#format-data](https://cocodataset.org/#format-data) (source: [github.com/cocodataset/cocodataset.github.io](https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/dataset/format-data.htm))
+
+### Cohen, J. (1968) {#cohen-1968}
+
+*Weighted kappa: Nominal scale agreement with provision for scaled disagreement or partial credit.* Psychological Bulletin, 70(4), 213–220. Introduces weighted kappa, which gives partial credit to near-miss disagreements on ordered scales. [doi.org/10.1037/h0026256](https://doi.org/10.1037/h0026256)
+
 ### Conneau, A., et al. (2022) {#fleurs-2022}
 
 *FLEURS: Few-shot Learning Evaluation of Universal Representations of Speech.* IEEE Spoken Language Technology Workshop (SLT) 2022. An n-way parallel read-speech benchmark in 102 languages, including many African languages, with about 12 hours per language. [arxiv.org/abs/2205.12446](https://arxiv.org/abs/2205.12446)
@@ -206,6 +222,10 @@ Cormier, K., Fenlon, J., Gulamani, S., & Smith, S. *BSL Corpus Annotation Conven
 ### Crasborn, O., et al. (2020) {#corpus-ngt-2020}
 
 Crasborn, O., Zwitserlood, I., van der Kooij, E., Bank, R., & Ormel, E. *Annotation Conventions for the Corpus NGT*, version 4. Radboud University Nijmegen, July 2020. One gloss tier per signer per hand (GlossL S1, GlossR S1, GlossL S2, GlossR S2), with ID-glosses from Global Signbank linked through an external controlled vocabulary. [hdl.handle.net/2066/319186](https://hdl.handle.net/2066/319186)
+
+### Crosby, S. A., & Wallach, D. S. (2009) {#crosby-2009}
+
+*Efficient Data Structures for Tamper-Evident Logging.* Proceedings of the 18th USENIX Security Symposium, Montreal, 2009. Tamper-evident logs based on hash chains and Merkle history trees, in which an auditor holding an earlier commitment can detect later changes to past entries. [usenix.org](https://www.usenix.org/conference/usenixsecurity09/technical-sessions/presentation/efficient-data-structures-tamper-evident)
 
 ### de Marneffe, M.-C., Manning, C. D., Nivre, J., & Zeman, D. (2021) {#ud-2021}
 
@@ -267,9 +287,33 @@ Languages.* arXiv:2502.15916. A community-centric dataset-governance framework a
 *Ethnologue: Languages of the World* (27th ed.). SIL International.
 [ethnologue.com/insights/how-many-languages](https://www.ethnologue.com/insights/how-many-languages/)
 
+### European Broadcasting Union (2014) {#ebu-r128}
+
+*EBU R 128-2014: Loudness normalisation and permitted maximum level of audio signals.* EBU Recommendation, Geneva, June 2014 (first issued 2010, revised 2011 and 2014). Normalises programme loudness to a target of -23.0 LUFS with a permitted deviation of ±0.5 LU (±1.0 LU where this is not practically achievable, for example live programmes), and sets a maximum permitted true peak of -1 dBTP in production. [tech.ebu.ch/docs/r/r128-2014.pdf](https://tech.ebu.ch/docs/r/r128-2014.pdf)
+
+### European Union (2016) {#gdpr-2016}
+
+European Parliament and Council of the European Union. *Regulation (EU) 2016/679 (General Data Protection Regulation).* Official Journal of the European Union, L 119, 4 May 2016. Article 7 sets the conditions for consent: a controller relying on consent must be able to demonstrate it, and withdrawal must be as easy as giving consent. [eur-lex.europa.eu/eli/reg/2016/679/oj](https://eur-lex.europa.eu/eli/reg/2016/679/oj); Article 7 text at [gdpr-info.eu/art-7-gdpr](https://gdpr-info.eu/art-7-gdpr/)
+
 ### European Union of the Deaf (2025) {#eud-2025}
 
 *Sign Language in the Era of Artificial Intelligence.* July 2025. The European Deaf community's position on AI and sign languages. [eud.eu](https://eud.eu/wp-content/uploads/2025/07/Sign-Language-in-the-Era-of-Artificial-Intelligence.pdf)
+
+### Everingham, M., et al. (2010) {#everingham-2010}
+
+Everingham, M., Van Gool, L., Williams, C. K. I., Winn, J., & Zisserman, A. *The PASCAL Visual Object Classes (VOC) Challenge.* International Journal of Computer Vision, 88(2), 303–338. Describes the VOC dataset, its annotation procedure (axis-aligned bounding boxes around the visible extent of each object), and its evaluation. [doi.org/10.1007/s11263-009-0275-4](https://doi.org/10.1007/s11263-009-0275-4)
+
+### FFmpeg Developers (n.d.-a) {#ffmpeg-cli}
+
+*ffmpeg Documentation.* The `-fps_mode` option sets the frame-rate mode: with `cfr`, "frames will be duplicated and dropped to achieve exactly the requested constant frame rate"; as an output option, `-r` duplicates or drops frames before encoding to reach a constant output rate. [ffmpeg.org/ffmpeg.html](https://ffmpeg.org/ffmpeg.html)
+
+### FFmpeg Developers (n.d.-b) {#ffmpeg-filters}
+
+*FFmpeg Filters Documentation.* Lists the `blackdetect` and `freezedetect` video filters, which detect black and frozen stretches of video. [ffmpeg.org/ffmpeg-filters.html](https://ffmpeg.org/ffmpeg-filters.html)
+
+### FFmpeg Developers (n.d.-c) {#ffmpeg-formats}
+
+*FFmpeg Formats Documentation: mov, mp4, ismv muxer options.* The `movflags` option `faststart` runs "a second pass moving the index (moov atom) to the beginning of the file"; it is off by default and does not work with fragmented output. [ffmpeg.org/ffmpeg-formats.html](https://ffmpeg.org/ffmpeg-formats.html)
 
 ### Fidel (2025) {#fidel-2025}
 
@@ -297,9 +341,17 @@ Senegal.* arXiv:2404.01991. 100+ hours of spontaneous agricultural speech in Wol
 *Datasheets for Datasets.* Communications of the ACM, 64(12). A standard questionnaire documenting a
 dataset's motivation, composition, collection, recommended uses, and limitations. [doi.org/10.1145/3458723](https://dl.acm.org/doi/10.1145/3458723)
 
+### Geva, M., Goldberg, Y., & Berant, J. (2019) {#geva-2019}
+
+*Are We Modeling the Task or the Annotator? An Investigation of Annotator Bias in Natural Language Understanding Datasets.* Proceedings of EMNLP-IJCNLP 2019, 1161–1166. Shows that crowdsourced datasets written by a few productive workers let models learn annotator-specific patterns and generalise poorly to unseen annotators; recommends monitoring annotator bias and keeping test-set annotators disjoint from training-set annotators. [aclanthology.org/D19-1107](https://aclanthology.org/D19-1107/) (DOI: [10.18653/v1/D19-1107](https://doi.org/10.18653/v1/D19-1107))
+
 ### Gueuwou, S., et al. (2023) {#jwsign-2023}
 
 Gueuwou, S., Siake, S., Leong, C., & Müller, M. *JWSign: A Highly Multilingual Corpus of Bible Translations for more Diversity in Sign Language Processing.* Findings of EMNLP 2023. 98 sign languages, about 2,530 hours, more than 1,500 signers. [arxiv.org/abs/2311.10174](https://arxiv.org/abs/2311.10174)
+
+### Gwet, K. L. (2014) {#gwet-2014}
+
+*Handbook of Inter-Rater Reliability: The Definitive Guide to Measuring the Extent of Agreement Among Raters.* 4th edition. Gaithersburg, MD: Advanced Analytics, LLC. ISBN 978-0-9708062-8-4. Reference treatment of chance-corrected agreement coefficients, including the AC1 coefficient and its weighted form AC2 for ordinal, interval and ratio ratings. (A 5th edition in two volumes has since been published.) [agreestat.com](https://www.agreestat.com/)
 
 ### Hanke, T. (2004) {#hanke-2004}
 
@@ -321,12 +373,28 @@ Somali, Swahili, Tigrinya, Yorùbá, and more). [aclanthology.org/2021.findings-
 ACL 2023. 6,022 English question-answer pairs over 1,555 Visual Genome images, human-translated to Hausa.
 [aclanthology.org/2023.findings-acl.646](https://aclanthology.org/2023.findings-acl.646/)
 
+### Hovy, D., et al. (2013) {#hovy-2013}
+
+Hovy, D., Berg-Kirkpatrick, T., Vaswani, A., & Hovy, E. *Learning Whom to Trust with MACE.* Proceedings of NAACL-HLT 2013, 1120–1130. An unsupervised item-response model that estimates which annotators are trustworthy and the most likely correct labels from redundant annotations, optionally using control items. [aclanthology.org/N13-1132](https://aclanthology.org/N13-1132/)
+
+### Hripcsak, G., & Rothschild, A. S. (2005) {#hripcsak-2005}
+
+*Agreement, the F-Measure, and Reliability in Information Retrieval.* Journal of the American Medical Informatics Association, 12(3), 296–298. Shows that when the number of negative cases is undefined, kappa cannot be computed, and that the average pairwise F-measure equals positive specific agreement, a suitable reliability measure. [doi.org/10.1197/jamia.M1733](https://doi.org/10.1197/jamia.M1733)
+
 ### Hughes, D. P., & Salathé, M. (2015) {#plantvillage-2015}
 
 *An open access repository of images on plant health to enable the development of mobile disease diagnostics.*
 The PlantVillage dataset: tens of thousands of leaf images photographed on plain backgrounds under controlled
 conditions. Released under CC BY-SA 3.0, so it cannot be relicensed into a CC BY release.
 [arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
+
+### HumanSignal (n.d.) {#labelstudio-choice-tag}
+
+*Choice tag.* Label Studio documentation. Documents the `value` and optional `alias` parameters of a choice; when an alias is set it replaces the choice value in the annotation results and is not shown in the interface. [labelstud.io/tags/choice](https://labelstud.io/tags/choice)
+
+### ITU-R (2023) {#itu-bs1770}
+
+*Recommendation ITU-R BS.1770-5: Algorithms to measure audio programme loudness and true-peak audio level.* International Telecommunication Union, Radiocommunication Sector, November 2023. The standard algorithm for integrated loudness (LKFS/LUFS) and oversampled true-peak measurement. [itu.int/rec/R-REC-BS.1770](https://www.itu.int/rec/R-REC-BS.1770)
 
 ### Jernite, Y., et al. (2022) {#jernite-2022}
 
@@ -352,6 +420,18 @@ custodians, hosts, and users across the whole life of a dataset. [doi.org/10.114
 *The State and Fate of Linguistic Diversity and Inclusion in the NLP World.* Proceedings of ACL 2020.
 [aclanthology.org/2020.acl-main.560](https://aclanthology.org/2020.acl-main.560/)
 
+### Kendall, M. G., & Babington Smith, B. (1940) {#kendall-1940}
+
+*On the Method of Paired Comparisons.* Biometrika, 31(3–4), 324–345. Introduces circular triads (A over B, B over C, C over A) as the inconsistent elements of a set of paired comparisons, and a coefficient of consistency based on counting them. [doi.org/10.1093/biomet/31.3-4.324](https://doi.org/10.1093/biomet/31.3-4.324)
+
+### Kiritchenko, S., & Mohammad, S. M. (2017) {#kiritchenko-2017}
+
+*Best-Worst Scaling More Reliable than Rating Scales: A Case Study on Sentiment Intensity Annotation.* Proceedings of ACL 2017 (Volume 2: Short Papers), 465–470. At the same total number of annotations, best-worst scaling gave more reliable sentiment-intensity scores than a rating scale. [aclanthology.org/P17-2074](https://aclanthology.org/P17-2074/)
+
+### Kleppmann, M., et al. (2019) {#kleppmann-2019}
+
+Kleppmann, M., Wiggins, A., van Hardenberg, P., & McGranaghan, M. *Local-first software: you own your data, in spite of the cloud.* Proceedings of Onward! 2019 (ACM SIGPLAN International Symposium on New Ideas, New Paradigms, and Reflections on Programming and Software), 154–178. Discusses offline editing and sync conflicts, and describes CRDTs that keep conflicting concurrent values and leave them to the application or the user to resolve. [doi.org/10.1145/3359591.3359737](https://doi.org/10.1145/3359591.3359737); [inkandswitch.com/essay/local-first](https://www.inkandswitch.com/essay/local-first/)
+
 ### Kolawole, et al. (2022) {#kolawole-2022}
 
 *Sign-to-Speech Model for Sign Language Understanding: A Case Study of Nigerian Sign Language.* IJCAI 2022, AI for Good track. About 5,000 images of 137 Nigerian Sign Language signs, including the alphabet. [arxiv.org/abs/2111.00995](https://arxiv.org/abs/2111.00995)
@@ -360,6 +440,18 @@ custodians, hosts, and users across the whole life of a dataset. [doi.org/10.114
 
 *Quality at a Glance: An Audit of Web-Crawled Multilingual Datasets.* Transactions of the Association
 for Computational Linguistics (TACL), 10. [aclanthology.org/2022.tacl-1.4](https://aclanthology.org/2022.tacl-1.4/)
+
+### Kuhn, H. W. (1955) {#kuhn-1955}
+
+*The Hungarian Method for the Assignment Problem.* Naval Research Logistics Quarterly, 2(1–2), 83–97. The algorithm for finding the optimal one-to-one assignment between two sets, used to pair annotators' regions before scoring agreement. [doi.org/10.1002/nav.3800020109](https://doi.org/10.1002/nav.3800020109)
+
+### Kulick, S., Bies, A., & Mott, J. (2014) {#kulick-2014}
+
+*Inter-annotator Agreement for ERE Annotation.* Proceedings of the Second Workshop on EVENTS: Definition, Detection, Coreference, and Representation, ACL 2014, 21–25. Describes the LDC's agreement system for entity, relation and event annotation: entity mentions are mapped between annotators first, and relations are compared through that mapping (exact match, type different, no match). [aclanthology.org/W14-2904](https://aclanthology.org/W14-2904/)
+
+### Kürzinger, L., et al. (2020) {#kurzinger-2020}
+
+Kürzinger, L., Winkelbauer, D., Li, L., Watzel, T., & Rigoll, G. *CTC-Segmentation of Large Corpora for German End-to-end Speech Recognition.* Speech and Computer (SPECOM 2020), Lecture Notes in Computer Science 12335, Springer. Aligns long recordings with their text using a CTC-trained model; used to extract aligned utterances from unsegmented recordings as part of a German training set of over 1,700 hours. [doi.org/10.1007/978-3-030-60276-5_27](https://doi.org/10.1007/978-3-030-60276-5_27) (arXiv: [2007.09127](https://arxiv.org/abs/2007.09127))
 
 ### Lacuna Fund (n.d.) {#lacuna-fund}
 
@@ -388,6 +480,14 @@ datasets carry missing or unclear licences, which leaves them legally unusable f
 ### Li, D., et al. (2020) {#wlasl-2020}
 
 Li, D., Rodriguez Opazo, C., Yu, X., & Li, H. *Word-level Deep Sign Language Recognition from Video: A New Large-scale Dataset and Methods Comparison.* WACV 2020. WLASL: 2,000 American Sign Language words, 21,083 videos, 119 signers. [arxiv.org/abs/1910.11006](https://arxiv.org/abs/1910.11006)
+
+### LISA (2005) {#tmx-2005}
+
+Savourel, Y. (Ed.). *TMX 1.4b Specification.* Localization Industry Standards Association (LISA), OSCAR Recommendation, 26 April 2005. The XML exchange format for translation memories. [ttt.org/oscarStandards/tmx/tmx14b.html](https://www.ttt.org/oscarStandards/tmx/tmx14b.html)
+
+### Lowell, D., et al. (2019) {#lowell-2019}
+
+Lowell, D., Lipton, Z. C., & Wallace, B. C. *Practical Obstacles to Deploying Active Learning.* Proceedings of EMNLP-IJCNLP 2019, Hong Kong, China, 21–30. Finds that active-learning gains are inconsistent across models and tasks, and that actively acquired data is coupled to the model that selected it: successor models trained on it do not reliably beat models trained on random samples. [aclanthology.org/D19-1003](https://aclanthology.org/D19-1003/) (DOI: [10.18653/v1/D19-1003](https://doi.org/10.18653/v1/D19-1003))
 
 ### Luccioni, A. S., et al. (2022) {#luccioni-2022}
 
@@ -421,6 +521,30 @@ should decide what data represents their communities, retain ownership of it, an
 
 *On Faithfulness and Factuality in Abstractive Summarization.* ACL 2020. A human evaluation finding that all the neural abstractive summarizers tested produce a substantial share of content not supported by the source document, and that textual-entailment measures track faithfulness better than standard metrics. [aclanthology.org/2020.acl-main.173](https://aclanthology.org/2020.acl-main.173/)
 
+### McAuliffe, M., et al. (2017) {#mcauliffe-2017}
+
+McAuliffe, M., Socolof, M., Mihuc, S., Wagner, M., & Sonderegger, M. *Montreal Forced Aligner: Trainable Text-Speech Alignment Using Kaldi.* Proceedings of Interspeech 2017, 498–502. A trainable, lexicon-based forced aligner producing word and phone boundaries. [doi.org/10.21437/Interspeech.2017-1386](https://doi.org/10.21437/Interspeech.2017-1386)
+
+### MDN Web Docs (2026a) {#mdn-storage-quotas}
+
+*Storage quotas and eviction criteria.* Mozilla, last modified 5 January 2026. Browser storage is best-effort by default; under storage pressure the browser deletes the least recently used origin's data, and it deletes all of an origin's data at once. Origins granted persistent storage are exempt from this eviction; Safari also deletes script-created data for a site not interacted with in the last seven days of browser use. [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria)
+
+### MDN Web Docs (2026b) {#mdn-range-requests}
+
+*HTTP range requests.* Mozilla, last modified 28 July 2026. A server that sends `Accept-Ranges` (other than `none`) supports partial requests, answered with `206 Partial Content`; used by media players that support random access and by resumable downloads. [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests)
+
+### MDN Web Docs (2026c) {#mdn-video-codecs}
+
+*Web video codec guide.* Mozilla, last modified 5 November 2026. Recommends MP4 with AVC (H.264) video and AAC audio as the combination supported by every major browser, with WebM (AV1 and Opus) as the open alternative. [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Video_codecs)
+
+### MDN Web Docs (2026d) {#mdn-audio-codecs}
+
+*Web audio codec guide.* Mozilla, last modified 13 October 2026. Browser support for MP3, AAC, Opus and FLAC; AAC in MP4 and MP3 are supported by all major browsers, and FLAC is the better-supported lossless choice. [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Audio_codecs)
+
+### MDN Web Docs (2026e) {#mdn-media-track-constraints}
+
+*MediaTrackConstraints* (last modified 8 October 2026) and *MediaStreamTrack: getSettings() method* (last modified 12 October 2026). Mozilla. Lists the boolean audio constraints `autoGainControl`, `echoCancellation` and `noiseSuppression`, notes that a browser may not support a given property and uses the closest match it can, and documents `getSettings()` as returning the current values actually applied, including platform defaults and constraints that could not be matched. [developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints); [developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/getSettings](https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/getSettings)
+
 ### Mensah, P. K., et al. (2023) {#ccmt-2023}
 
 *CCMT: Dataset for crop pest and disease detection.* Data in Brief. Field images of cashew, cassava, maize
@@ -442,9 +566,21 @@ arXiv:2207.03546. Up to 86 hours of clean single-speaker TTS audio per language 
 *Model Cards for Model Reporting.* Proceedings of FAccT 2019. A standard for reporting a model's intended
 use, performance across groups, and limitations. [doi.org/10.1145/3287560.3287596](https://dl.acm.org/doi/10.1145/3287560.3287596)
 
+### Mittag, G., et al. (2021) {#mittag-2021}
+
+Mittag, G., Naderi, B., Chehadi, A., & Möller, S. *NISQA: A Deep CNN-Self-Attention Model for Multidimensional Speech Quality Prediction with Crowdsourced Datasets.* Proceedings of Interspeech 2021, 2127–2131. Predicts overall speech quality and the quality dimensions noisiness, coloration, discontinuity and loudness without a clean reference. [doi.org/10.21437/Interspeech.2021-299](https://doi.org/10.21437/Interspeech.2021-299) (arXiv: [2104.09494](https://arxiv.org/abs/2104.09494))
+
 ### Moryossef, A., Müller, M., & Fahrni, R. (2021) {#pose-format-2021}
 
 *pose-format.* A library for reading, writing and processing pose keypoint files from MediaPipe Holistic, OpenPose and AlphaPose. [github.com/sign-language-processing/pose](https://github.com/sign-language-processing/pose)
+
+### Mozilla Common Voice (2024) {#mozilla-cv-clip-length-2024}
+
+*Clip Length Expansion for Common Voice.* Mozilla Foundation blog, 26 March 2024. Raised the maximum recorded clip length from 10 to 15 seconds. [mozillafoundation.org/en/blog/clip-length-expansion-for-common-voice](https://www.mozillafoundation.org/en/blog/clip-length-expansion-for-common-voice/)
+
+### Mozilla Common Voice (n.d.) {#mozilla-cv-playbook-text}
+
+*Text (Community Playbook).* Common Voice Community Playbook. Explains that Common Voice datasets are released under CC0, so copyrighted text cannot be added as prompt sentences unless the copyright owner makes a CC0 waiver. [common-voice.github.io/community-playbook/sub_pages/text.html](https://common-voice.github.io/community-playbook/sub_pages/text.html)
 
 ### Muhammad, S. H., et al. (2023) {#muhammad-2023}
 
@@ -468,6 +604,10 @@ arXiv:2501.08284. Inter-annotator agreement (Randolph's kappa) ranged 0.46–0.8
 by the Makerere AI Lab for a Kaggle competition. The competition data is limited to non-commercial use.
 [arxiv.org/abs/1908.02900](https://arxiv.org/abs/1908.02900)
 
+### Naicu, O. (2026) {#naicu-2026}
+
+*Duration in WebM Videos Produced by Chrome.* Pipe (addpipe.com) blog, 29 May 2026. WebM files from Chrome's MediaStream Recording API lack the Cues seek index in all cases; since Chrome 140, unchunked recordings carry a duration, but recordings made with a timeslice or `requestData()` calls (chunking is recommended for longer videos) still lack it. [blog.addpipe.com/duration-in-webm-videos-produced-by-chrome](https://blog.addpipe.com/duration-in-webm-videos-produced-by-chrome/)
+
 ### Nekoto, W., et al. (2020) {#nekoto-2020}
 
 *Participatory Research for Low-resourced Machine Translation: A Case Study in African Languages.*
@@ -486,6 +626,10 @@ treating native speakers as co-creators of data and models.
 Meta AI; arXiv:2207.04672. Translation and evaluation across 200 languages, including many African ones.
 [arxiv.org/abs/2207.04672](https://arxiv.org/abs/2207.04672)
 
+### Novikova, J., Dušek, O., & Rieser, V. (2018) {#novikova-2018}
+
+*RankME: Reliable Human Ratings for Natural Language Generation.* Proceedings of NAACL-HLT 2018 (Volume 2: Short Papers), 72–78. Rank-based magnitude estimation, combining relative comparison with a continuous scale, gave more reliable and consistent ratings of generated text than Likert scales. [aclanthology.org/N18-2012](https://aclanthology.org/N18-2012/)
+
 ### Nwulite Obodo Open Data License (NOODL) (2025) {#noodl-2025}
 
 *The Nwulite Obodo Open Data License: A New Licence for Sharing African Datasets* (Igbo: "raising,
@@ -497,6 +641,10 @@ users elsewhere. [datasciencelawlab.africa](https://datasciencelawlab.africa/nwu
 ### Nyst, V. (2020) {#nyst-2020}
 
 *Sign languages in Africa.* In R. Vossen & G. J. Dimmendaal (eds.), The Oxford Handbook of African Languages. Oxford University Press. An overview of African sign languages, the spread of ASL through Andrew Foster's schools, LSAF in francophone countries, and village sign languages. [hdl.handle.net/1887/3589964](https://hdl.handle.net/1887/3589964)
+
+### OASIS (2018) {#xliff-2018}
+
+Filip, D., Comerford, T., Saadatfar, S., Sasaki, F., & Savourel, Y. (Eds.). *XLIFF Version 2.1.* OASIS Standard, 13 February 2018. The XML interchange format for localisable content and its translations. [docs.oasis-open.org/xliff/xliff-core/v2.1](https://docs.oasis-open.org/xliff/xliff-core/v2.1/xliff-core-v2.1.html)
 
 ### Ogundepo, O., et al. (2023) {#afriqa-2023}
 
@@ -521,10 +669,18 @@ gap between English and African languages. [arxiv.org/abs/2311.07978](https://ar
 arXiv:2310.00274. 200 hours of accented English from 120 accents across 13 African countries.
 [arxiv.org/abs/2310.00274](https://arxiv.org/abs/2310.00274)
 
+### Ousidhoum, N., et al. (2024) {#semrel-2024}
+
+*SemRel2024: A Collection of Semantic Textual Relatedness Datasets for 13 Languages.* Findings of the Association for Computational Linguistics: ACL 2024, 2512–2530. Semantic-relatedness datasets annotated by native speakers with best-worst scaling, including Afrikaans, Algerian and Moroccan Arabic, Amharic, Hausa and Kinyarwanda. [aclanthology.org/2024.findings-acl.147](https://aclanthology.org/2024.findings-acl.147/)
+
 ### Pan, X., et al. (2017) {#wikiann-2017}
 
 *Cross-lingual Name Tagging and Linking for 282 Languages.* Proceedings of ACL 2017 (Volume 1: Long Papers), pp. 1946–1958. Introduces WikiANN, silver-standard NER data for 282 languages derived from Wikipedia cross-lingual links. [aclanthology.org/P17-1178](https://aclanthology.org/P17-1178/)
 
+
+### Passonneau, R. J. (2004) {#passonneau-2004}
+
+*Computing Reliability for Coreference Annotation.* Proceedings of LREC 2004, Lisbon. Represents each mention's value as the coreference class it belongs to, so that Krippendorff's alpha can be applied, with a distance metric that scales partial disagreements between chains. [aclanthology.org/L04-1486](https://aclanthology.org/L04-1486/)
 
 ### Peng, K., Mathur, A., & Narayanan, A. (2021) {#peng-2021}
 
@@ -538,6 +694,10 @@ for stewardship across the full dataset life cycle. [arxiv.org/abs/2108.02922](h
 *A Universal Part-of-Speech Tagset.* Proceedings of LREC 2012, pp. 2089–2096. Proposes twelve universal POS categories with mappings from 25 treebank tagsets, the forerunner of the UD UPOS tagset. [aclanthology.org/L12-1115](https://aclanthology.org/L12-1115/)
 
 
+### Phillips, A., & Davis, M. (2009) {#rfc-5646}
+
+Phillips, A., & Davis, M. (Eds.). *Tags for Identifying Languages.* IETF RFC 5646 (BCP 47), September 2009. Defines language tags with language, script and region subtags (such as `ha-Arab`). [rfc-editor.org/info/rfc5646](https://www.rfc-editor.org/info/rfc5646)
+
 ### Plank, B. (2022) {#plank-2022}
 
 *The "Problem" of Human Label Variation: On Ground Truth in Data, Modeling and Evaluation.* Proceedings
@@ -549,6 +709,14 @@ than noise. [aclanthology.org/2022.emnlp-main.731](https://aclanthology.org/2022
 *chrF: character n-gram F-score for automatic MT evaluation.* Proceedings of WMT 2015. A character-level
 metric better suited to morphologically rich languages than word-based BLEU.
 [aclanthology.org/W15-3049](https://aclanthology.org/W15-3049/)
+
+### Pradhan, S., et al. (2014) {#pradhan-2014}
+
+Pradhan, S., Luo, X., Recasens, M., Hovy, E., Ng, V., & Strube, M. *Scoring Coreference Partitions of Predicted Mentions: A Reference Implementation.* Proceedings of ACL 2014 (Volume 2: Short Papers), 30–35. The reference scorer for the standard coreference metrics. [aclanthology.org/P14-2006](https://aclanthology.org/P14-2006/)
+
+### Pratap, V., et al. (2023) {#pratap-2023}
+
+Pratap, V., Tjandra, A., Shi, B., Tomasello, P., Babu, A., Kundu, S., Elkahky, A., Ni, Z., Vyas, A., Fazel-Zarandi, M., Baevski, A., Adi, Y., Zhang, X., Hsu, W.-N., Conneau, A., & Auli, M. *Scaling Speech Technology to 1,000+ Languages.* arXiv:2305.13516 (2023); published in Journal of Machine Learning Research, 25(97), 1–52, 2024. The Massively Multilingual Speech (MMS) project; describes a CTC alignment model and a GPU forced-alignment implementation used to align long recordings in over 1,100 languages. [arxiv.org/abs/2305.13516](https://arxiv.org/abs/2305.13516); [jmlr.org/papers/v25/23-1318.html](https://jmlr.org/papers/v25/23-1318.html)
 
 ### Ramshaw, L., & Marcus, M. (1995) {#ramshaw-marcus-1995}
 
@@ -599,6 +767,14 @@ Schembri, A., Fenlon, J., Rentelis, R., Reynolds, S., & Cormier, K. *Building th
 
 Yazdani, S., Hamidullah, Y., España-Bonet, C., & van Genabith, J. *Seeing, Signing, and Saying: A Vision-Language Model-Assisted Pipeline for Sign Language Data Acquisition and Curation from Social Media.* RANLP 2025. Introduces the TikTok-SL-8 corpus. [aclanthology.org/2025.ranlp-1.159](https://aclanthology.org/2025.ranlp-1.159/)
 
+### Settles, B. (2009) {#settles-2009}
+
+*Active Learning Literature Survey.* Computer Sciences Technical Report 1648, University of Wisconsin–Madison (updated 26 January 2010). A general introduction to active learning, covering query scenarios and strategies, including uncertainty sampling, which it calls perhaps the simplest and most commonly used. [burrsettles.com/pub/settles.activelearning.pdf](https://burrsettles.com/pub/settles.activelearning.pdf)
+
+### Shrout, P. E., & Fleiss, J. L. (1979) {#shrout-1979}
+
+*Intraclass correlations: Uses in assessing rater reliability.* Psychological Bulletin, 86(2), 420–428. Defines the main forms of the intraclass correlation coefficient and guides the choice among them for rater reliability on continuous scales. [doi.org/10.1037/0033-2909.86.2.420](https://doi.org/10.1037/0033-2909.86.2.420)
+
 ### Shumailov, I., et al. (2024) {#shumailov-2024}
 
 *AI Models Collapse When Trained on Recursively Generated Data.* Nature, 631, 755–759. Shows that training indiscriminately on model-generated content makes models progressively forget the tails of the real data distribution ("model collapse"). [doi.org/10.1038/s41586-024-07566-y](https://doi.org/10.1038/s41586-024-07566-y)
@@ -644,6 +820,10 @@ arXiv:2506.04557. A learned MT-evaluation metric adapted to sub-Saharan African 
 *The State of Computer Vision Research in Africa.* arXiv:2401.11617. A survey finding African computer
 vision concentrated in agriculture and health and constrained by data scarcity. [arxiv.org/abs/2401.11617](https://arxiv.org/abs/2401.11617)
 
+### Stenetorp, P., et al. (2012) {#stenetorp-2012}
+
+Stenetorp, P., Pyysalo, S., Topić, G., Ohta, T., Ananiadou, S., & Tsujii, J. *brat: a Web-based Tool for NLP-Assisted Text Annotation.* Proceedings of the Demonstrations at EACL 2012, 102–107. An annotation tool whose standoff format stores spans as character offsets and relations as links between span ids. [aclanthology.org/E12-2021](https://aclanthology.org/E12-2021/)
+
 ### Stokoe, W. C. (1960) {#stokoe-1960}
 
 *Sign Language Structure: An Outline of the Visual Communication Systems of the American Deaf.* Studies in Linguistics, Occasional Papers 8. The first linguistic analysis to show that signs have internal structure, with the first sign-language notation.
@@ -651,6 +831,10 @@ vision concentrated in agriculture and health and constrained by data scarcity. 
 ### Sutton, V. (n.d.) {#signwriting}
 
 *History of SignWriting.* SignWriting was developed by Valerie Sutton from 1974, in Denmark, out of her DanceWriting. [signwriting.org](https://www.signwriting.org/archive/docs2/sw0161_History_of_SignWriting.pdf)
+
+### Taylor, M. (2000) {#lame-tech-faq}
+
+*LAME Technical FAQ.* LAME project, June 2000. Explains MP3 encoder delay and padding, and how the LAME info tag stores the leading padding so a decoder can trim it. [lame.sourceforge.io/tech-FAQ.txt](https://lame.sourceforge.io/tech-FAQ.txt)
 
 ### Te Hiku Media: Kaitiakitanga License {#tehiku-kaitiakitanga}
 
@@ -670,11 +854,31 @@ surveillance and unconsented corpus-building. [tehiku.nz](https://tehiku.nz/te-h
 Maintained Fleiss' kappa above 0.82 between peer moderators during validation.
 [arxiv.org/abs/2603.29244](https://arxiv.org/abs/2603.29244)
 
+### Tépper, A. (2017) {#tepper-2017}
+
+*Understanding iPhone framerates for shooting, editing & distribution.* ProVideo Coalition, 21 October 2017. iOS video recording uses a variable frame rate "with only targets, not exact framerates"; editing such footage needs software that supports variable-rate material, or transcoding first. [provideocoalition.com](https://www.provideocoalition.com/understanding-iphone-framerates-for-shooting-editing-distribution/)
+
 ### Tusubira, J. F., et al. (2022) {#makerere-cassava-2022}
 
 *Makerere University cassava image dataset.* Harvard Dataverse. Cassava field images from Uganda, released
 under CC0 1.0.
 [doi.org/10.7910/DVN/T4RB0B](https://doi.org/10.7910/DVN/T4RB0B)
+
+### Ultralytics (n.d.) {#ultralytics-detect-format}
+
+*Object Detection Datasets Overview.* Ultralytics documentation. Specifies the YOLO label format: one text file per image, one row per object as `class x_center y_center width height`, with zero-indexed classes and coordinates normalised to 0–1 by image size. [docs.ultralytics.com/datasets/detect](https://docs.ultralytics.com/datasets/detect/)
+
+### Unicode Consortium (2026) {#unicode-uax9}
+
+Goregaokar, M., & Leroy, R. (Eds.). *Unicode Standard Annex #9: Unicode Bidirectional Algorithm.* Unicode 18.0.0, revision 52, 1 September 2026. Text is stored in logical (memory) order; the algorithm affects only display. [unicode.org/reports/tr9](https://www.unicode.org/reports/tr9/)
+
+### van der Lee, C., et al. (2019) {#vanderlee-2019}
+
+*Best Practices for the Human Evaluation of Automatically Generated Text.* Proceedings of the 12th International Conference on Natural Language Generation (INLG 2019), 355–368. Reviews how human evaluation of generated text is carried out and sets out best practices: separate, well-defined criteria; randomised order; agreement reported with confidence intervals plus percentage agreement; free-text comments for diagnosis. [aclanthology.org/W19-8643](https://aclanthology.org/W19-8643/)
+
+### W3C (n.d.) {#w3c-language-tags}
+
+W3C Internationalization. *Choosing a Language Tag.* World Wide Web Consortium. Practical guidance on BCP 47 tags, including using a script subtag only when it adds distinguishing information. [w3.org/International/questions/qa-choosing-language-tags](https://www.w3.org/International/questions/qa-choosing-language-tags)
 
 ### Wanjawa, B. W., et al. (2023) {#kenswquad-2023}
 
@@ -712,6 +916,10 @@ Wittenburg, P., Brugman, H., Russel, A., Klassmann, A., & Sloetjes, H. *ELAN: a 
 
 *The legal recognition of national sign languages.* The WFD's country-by-country record of constitutional and legislative recognition. [wfdeaf.org](https://wfdeaf.org/the-legal-recognition-of-national-sign-languages/)
 
+
+### Xu, Q., et al. (2016) {#xu-2016}
+
+Xu, Q., Xiong, J., Cao, X., & Yao, Y. *False Discovery Rate Control and Statistical Quality Assessment of Annotators in Crowdsourced Ranking.* Proceedings of the 33rd International Conference on Machine Learning (ICML 2016), PMLR 48, 1282–1291. A statistical method for detecting annotators with position bias in crowdsourced pairwise ranking data. [proceedings.mlr.press/v48/xua16.html](https://proceedings.mlr.press/v48/xua16.html) (arXiv: [1605.05860](https://arxiv.org/abs/1605.05860))
 
 ### Yu, H., et al. (2025) {#injongo-2025}
 

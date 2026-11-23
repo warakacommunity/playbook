@@ -34,6 +34,38 @@ A whole-clip record is one clip with its label or caption:
 
 For captions, write them in the target language directly rather than translating from English, so the descriptions carry how the language actually describes a scene.
 
+## Preparing video for annotation
+
+Video arrives from phones, browsers, broadcast archives and drones, each with its own frame rate and encoding. Annotation timestamps are only as reliable as the file they were made on, so prepare every clip before annotators see it. The general steps for audio and video (browser-friendly formats, streamable MP4, range requests, size limits) are in [Preparing media for annotation](../2_data-collection/7_data-cleaning-preprocessing.md#preparing-media-for-annotation); the points below are the ones specific to video timing.
+
+- **Record how the annotation copy was made.** Annotate a normalised copy, never the master (see the general steps linked above), and record the exact conversion command and the copy's frame rate, because every timestamp in the annotations refers to the copy, not the master.
+- **Convert to a constant frame rate.** Phone video is often recorded at a variable frame rate: iPhones treat the chosen rate as a target, not an exact rate ([Tépper, 2017](../references.md#tepper-2017)). Do not assume other phones or screen recordings differ. A variable-rate file makes frame counts and frame stepping unreliable, so convert it to a constant rate close to the recording's own, then check that the copy's duration matches the master and that sound and picture are still in sync.
+- **Encode for the work.** For frame-by-frame work such as glossing, encode with a keyframe about once a second and no B-frames, as the MPI guide for ELAN recommends ([MPI, 2024](../references.md#mpi-video-guidelines)); see also [Recording](./sign-language.md#recording). Trim the copy so its audio and video streams end together; a longer audio track stretches the file's duration past the last video frame, so the timeline shows time with no picture and duration-based frame counts are off.
+- **Probe every file, and do not trust the container.** Read each copy's measured frame rate, frame count and duration with a tool such as `ffprobe`, and store them in the manifest. Container metadata can be missing or wrong. WebM files recorded in Chrome lack a seek index (Cues) in every case, and lack a duration when the recording is made in chunks (with a timeslice or `requestData()` calls), which is recommended for long recordings; Chrome 140 and later write a duration only for unchunked recordings ([Naicu, 2026](../references.md#naicu-2026)). For such files, measure by decoding the whole file rather than reading the header.
+- **Store times in seconds, tied to one file.** Store each event's start and end in seconds, with the frame rate (or audio sample rate) of the file they were marked on and a hash of that exact file. If a clip is later trimmed or re-encoded, re-map every timestamp, then spot-check a sample of events against the released media to confirm they still line up.
+
+A conversion and probe for frame-accurate annotation:
+
+```bash
+# Normalised copy: constant 30 fps, H.264 with a keyframe every 30 frames and no B-frames,
+# AAC audio, stop at the end of the shorter stream, index at the front for streaming.
+# Set -r and -g to the source's nominal rate (one keyframe per second),
+# e.g. -r 50 -g 50 for 50 fps sign-language video.
+ffmpeg -i master.mov -c:v libx264 -pix_fmt yuv420p -r 30 -fps_mode cfr -g 30 -bf 0 \
+  -c:a aac -b:a 128k -shortest -movflags +faststart clip_annot.mp4
+
+# Count decoded frames; the duration and rate fields come from the header
+# and may be N/A for browser WebM.
+ffprobe -v error -select_streams v:0 -count_frames \
+  -show_entries stream=avg_frame_rate,nb_read_frames,duration -of json clip_annot.mp4
+
+# Measure duration by decoding (works when the header has none):
+# the last time= value printed is the decoded length of the video stream.
+ffmpeg -i master.webm -map 0:v:0 -f null -
+```
+
+With `-fps_mode cfr`, FFmpeg duplicates and drops frames to reach exactly the requested constant rate ([FFmpeg Developers, n.d.-a](../references.md#ffmpeg-cli)); the option exists from FFmpeg 5.1, and older versions use `-vsync cfr`. Log the command and the FFmpeg version in the [transformation log](../2_data-collection/8_data-provenance-traceability.md#a-transformation-log-that-travels-with-the-data).
+
 ## Annotation and evaluation
 
 Video annotation is labelling across time: a whole-clip label is cheap, but marking when actions happen, or captioning, is slow and needs clear rules on event boundaries and on the level of detail a caption should capture. Use tools built for timeline annotation, keep clips short, and measure agreement on a shared set. For marking when an action happens, the config places labels on the video timeline, and the annotator drags each label across the span where that action occurs:
@@ -51,9 +83,7 @@ Video annotation is labelling across time: a whole-clip label is cheap, but mark
 
 For a single label per clip, swap `<Labels>` for `<Choices>`, exactly as in the [audio understanding](../audio-understanding) page. Evaluation depends on the task: accuracy and [F1](https://en.wikipedia.org/wiki/F-score) for classification, [mean Average Precision](https://lightning.ai/docs/torchmetrics/stable/detection/mean_average_precision.html) for temporal detection, and the text-generation metrics from the [Text Generation](../text-generation/index.md) chapter for captioning, where, as with all generation, native-speaker human evaluation is the dependable measure.
 
-Marking events on the video timeline in the AfriAnnotate editor:
-
-![Labelling events on the video timeline in AfriAnnotate](/afriannotate-demo/04-video/31-video-event-classification/2-labeling-editor.png)
+The video annotation interface should provide frame-accurate seeking, playback-speed control, timeline boundaries and constrained event labels. Exports should preserve the video identifier, frame rate, start and end times or frames, labels and annotator.
 
 ## The 2026 modelling landscape
 
@@ -88,6 +118,8 @@ Video corpora are the most storage-and-annotation heavy of any modality in the p
 - **Copyright of broadcast and social media video.** Community-produced and consented material is safe; commercial broadcast, YouTube, and other social platforms have terms of service that constrain redistribution and often training use. Read the terms before scraping.
 - **Temporal detection boundary annotation is subjective.** Where does "harvesting" begin and end? Two annotators produce systematically different boundaries. Report boundary agreement (temporal IoU at multiple thresholds), not just detection F1.
 - **Long-form video reasoning is genuinely hard.** Even 2026 MLLMs handle 5-15 minute video reasoning shakily. Report video-length distribution in every evaluation; averaging across it hides where the model actually breaks.
+
+For the normalisation steps behind the frame-rate point above, see [Preparing video for annotation](#preparing-video-for-annotation). Clips that contributors record themselves also need checks before annotation: that the duration can be read, that there are no black or frozen stretches, and that the measured frame rate matches the declared one. [Check recorded clips first](./sign-language.md#check-recorded-clips-first) on the sign-language page sets these out, and most of them apply to any recorded video.
 
 ## Further reading
 

@@ -99,8 +99,8 @@
       <text x="567" y="253" text-anchor="middle">Doccano</text>
       <rect x="372" y="266" width="78" height="22" rx="11" fill="#E7F1EC"/>
       <text x="411" y="281" text-anchor="middle">INCEpTION</text>
-      <rect x="458" y="266" width="92" height="22" rx="11" fill="#E7F1EC"/>
-      <text x="504" y="281" text-anchor="middle">AfriAnnotate</text>
+      <rect x="458" y="266" width="48" height="22" rx="11" fill="#E7F1EC"/>
+      <text x="482" y="281" text-anchor="middle">brat</text>
     </g>
 
     <text x="372" y="318" font-size="9" font-weight="700" letter-spacing="1" fill="#8A7D6E">WATCH OUT</text>
