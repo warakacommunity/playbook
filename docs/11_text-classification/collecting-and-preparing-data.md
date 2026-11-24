@@ -4,7 +4,7 @@ title: Collecting & Preparing Data
 sidebar_label: "Collecting & preparing data"
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -36,7 +36,7 @@ Data can be collected through APIs, web scraping (with permission), manual colle
 Data collection should be guided by the annotation objective and the expected label distribution. For example, if a dataset is likely to contain too few hateful texts, keyword-based filtering or distant supervision can be used to enrich the sample. If the goal is to estimate natural distribution, random sampling or stratified sampling is more appropriate.
 :::
 
-**Keyword/Dictionary-based Selection:** Select documents or sentences that contain one or more predefined keywords, phrases, or lexicon entries. For example, in hate speech detection, a list of commonly used hate-related or offensive terms in the target language can be compiled and used to identify potentially relevant texts. This method helps enrich the dataset with task-relevant examples while reducing the amount of irrelevant data. A widely used resource for English emotion-related keywords is the NRC Emotion Lexicon.
+**Keyword/Dictionary-based Selection:** Select documents or sentences that contain one or more predefined keywords, phrases, or lexicon entries. For example, in hate speech detection, a list of commonly used hate-related or offensive terms in the target language can be compiled and used to identify potentially relevant texts. This method helps enrich the dataset with task-relevant examples while reducing the amount of irrelevant data. A widely used resource for English emotion-related keywords is the NRC Emotion Lexicon, built by crowdsourcing word-emotion associations ([Mohammad and Turney, 2013](../references.md#mohammad-turney-2013)). Keyword selection also biases the dataset towards explicit cases that contain those words, and classifier scores on popular abusive-language datasets dropped considerably once this bias was reduced ([Wiegand et al., 2019](../references.md#wiegand-2019)). One way to limit the bias is to mix in texts without keywords: an Amharic hate speech project drew 70% of each annotation batch from a keyword-matched pool and 30% from tweets without keywords ([Ayele et al., 2023](../references.md#ayele-2023)).
 
 ```python
 # Keyword / dictionary-based selection (e.g. hate-speech terms or NRC emotion lexicon)
@@ -53,7 +53,7 @@ print(len(selected), "candidate texts enriched for the task")
 
 ![Keyword based selection](images/keyword-based.svg)
 
-**Location-based Selection:** Is a data collection approach where texts are gathered based on the geographic location associated with users or posts. For example, when collecting social media data from X (formerly Twitter), researchers can filter posts originating from specific locations such as Ethiopia, Nigeria, or Kenya. This method is useful for studying regional language variation, local opinions, cultural expressions, or location-specific events, as it helps ensure that the collected data represents the target geographic area.
+**Location-based Selection:** Is a data collection approach where texts are gathered based on the geographic location associated with users or posts. For example, when collecting social media data from X (formerly Twitter), researchers can filter posts originating from specific locations such as Ethiopia, Nigeria, or Kenya. This method is useful for studying regional language variation, local opinions, cultural expressions, or location-specific events, as it helps ensure that the collected data represents the target geographic area. Only a small share of posts carry a location, though. Sloan and Morgan (2015) cite estimates that about 0.85% of tweets are geotagged, and found statistically significant demographic differences between users who share their location and those who do not ([Sloan and Morgan, 2015](../references.md#sloan-morgan-2015)). A location filter therefore returns a small and skewed sample, so combine it with other signals such as language or user profile location.
 
 ```python
 # Location-based filtering of collected posts (place / bounding box)
@@ -64,12 +64,12 @@ def in_region(post):
     return place in TARGET
 
 geo = [p for p in posts if in_region(p)]
-print(len(geo), "geotagged posts (note: usually only ~1-3% are geotagged)")
+print(len(geo), "geotagged posts (note: only a small share of posts are geotagged)")
 ```
 
 ![Location based selection](images/location-based.svg)
 
-**Distant supervision:** Is a method for automatically creating labeled training data by using existing knowledge sources instead of manual annotation. For example, for emotion classification, social media posts containing hashtags such as **#happy**, **#joy**, or **#sad** can be automatically labeled with the corresponding emotions. This approach enables the creation of large training datasets quickly and cheaply, although some automatically assigned labels may be incorrect or noisy.
+**Distant supervision:** Is a method for automatically creating labeled training data by using existing knowledge sources instead of manual annotation. For example, for emotion classification, social media posts containing hashtags such as **#happy**, **#joy**, or **#sad** can be automatically labeled with the corresponding emotions. Mohammad (2012) built an emotion-labelled Twitter corpus this way from emotion-word hashtags and found that the hashtag labels were consistent with those of trained judges ([Mohammad, 2012](../references.md#mohammad-2012)). This approach enables the creation of large training datasets quickly and cheaply, although some automatically assigned labels may be incorrect or noisy.
 
 ```python
 # Distant supervision: weak labels from emotion hashtags
@@ -104,7 +104,7 @@ print(strat["weak"].value_counts(normalize=True))
 
 ![Random sample selection](images/random-sampling.svg)
 
-**Active Learning Method**: Iteratively train a model on a small seed set, then use the model's uncertainty to select the most informative unlabelled examples for human annotation next. Maximizes annotation return on investment by labeling only where the model is confused. For when active learning helps, how to keep a random sample alongside it, and what to record about the model, see [Choose what to label next: active learning](../3_annotation-design/model-assisted-annotation.md#choose-what-to-label-next-active-learning).
+**Active Learning Method**: Iteratively train a model on a small seed set, then use the model's uncertainty to select the most informative unlabelled examples for human annotation next. Uncertainty sampling, which picks the items the model is least sure about, is perhaps the simplest and most commonly used query strategy ([Settles, 2009](../references.md#settles-2009)). The aim is to spend the annotation budget where the model is confused. For when active learning helps, how to keep a random sample alongside it, and what to record about the model, see [Choose what to label next: active learning](../3_annotation-design/model-assisted-annotation.md#choose-what-to-label-next-active-learning).
 
 ```python
 # Active learning: label where the model is least confident (uncertainty sampling)
@@ -148,7 +148,7 @@ Always store metadata such as source, timestamp, language, and collection method
 
 ## Processing & sampling
 
-After collection, texts should be cleaned and standardized before annotation. Remove obvious noise such as HTML tags, duplicate items, extra whitespace, URLs, and non-textual tokens. Apply language identification to filter out non-target languages, and remove exact or near duplicates to reduce annotation waste and leakage across splits. Finish this cleaning before annotation starts: if annotators will also mark spans in the text, any later change shifts the stored offsets (see [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets)).
+After collection, texts should be cleaned and standardized before annotation. Remove obvious noise such as HTML tags, duplicate items, extra whitespace, URLs, and non-textual tokens. Apply language identification to filter out non-target languages (for African languages, AfroLID covers 517 languages and varieties; see [Adebara et al., 2022](../references.md#afrolid-2022)), and remove exact or near duplicates to reduce annotation waste and leakage across splits. Finish this cleaning before annotation starts: if annotators will also mark spans in the text, any later change shifts the stored offsets (see [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets)).
 
 Once the data source has been identified, several preprocessing and sampling steps are required to ensure the quality and representativeness of the dataset. First, texts should be carefully selected to reflect the diversity of the target population and minimize potential biases. For tasks such as hate speech and emotion analysis, keyword-based filtering can be useful for identifying relevant content. Data cleaning involves removing irrelevant elements such as HTML tags, URLs, special characters, and excessive whitespace using text-processing tools. Applying language identification and de-duplication helps eliminate non-target language and repeated content. The overall dataset size should be determined based on factors such as research objectives, available resources, annotation budget, human capacity, and project timelines.
 
@@ -191,9 +191,9 @@ Pilot annotation → guideline revision → main annotation → gold checks → 
 Data quality control ensures that your sentiment labels are accurate, consistent, and reliable.
 
 - Clear annotation guidelines: Provide precise definitions of sentiment classes (positive, negative, neutral) with examples, including tricky cases like sarcasm, negation, and mixed opinions. This reduces confusion and inconsistency.
-- Multiple annotators & agreement: Assign each item to at least 2–3 annotators and measure how much they agree (e.g., using Kappa). High agreement indicates reliable labels.
+- Multiple annotators & agreement: Assign each item to at least 2–3 annotators and measure how much they agree (e.g., using kappa or Krippendorff's alpha; see [Artstein and Poesio, 2008](../references.md#artstein-2008)). High agreement indicates reliable labels.
 - Gold-standard checks: Include a small set of pre-labeled (trusted) examples during annotation to evaluate annotator performance continuously.
-- Disagreement resolution: Use majority voting or expert review to finalize labels when annotators disagree.
+- Disagreement resolution: Use majority voting or expert review to finalize labels when annotators disagree. Models such as MACE can also estimate which annotators are trustworthy and the most likely correct label from redundant annotations ([Hovy et al., 2013](../references.md#hovy-2013)).
 - Data cleaning: Remove duplicates, irrelevant content, spam, and noisy text to improve overall dataset quality.
 - Class balance: Check that sentiment categories are not overly skewed (e.g., too many positives), or account for imbalance during modeling.
 - Ongoing monitoring: Track annotator behavior over time to detect inconsistency or fatigue and take corrective action.
@@ -213,3 +213,9 @@ from collections import Counter
 def majority_vote(labels):
     return Counter(labels).most_common(1)[0][0]
 ```
+
+## Further reading
+
+- Kreutzer et al. (2022) audit web-crawled multilingual corpora and find that at least 15 contain no usable text and a significant fraction have less than 50% acceptable sentences ([Kreutzer et al., 2022](../references.md#kreutzer-2022)).
+- Gebru et al. (2021) give a questionnaire for documenting how a dataset was collected and processed ([Gebru et al., 2021](../references.md#gebru-2021)).
+- Muhammad et al. (2023a) describe how AfriSenti collected and annotated tweets in 14 African languages ([Muhammad et al., 2023a](../references.md#muhammad-2023)).

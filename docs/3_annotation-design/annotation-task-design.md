@@ -45,7 +45,7 @@ For low-variance, single-choice judgements such as straightforward topic triage,
 
 ## A labeling configuration
 
-These principles are not abstract: they are choices you make in the labeling configuration. The examples throughout this playbook use the Label Studio configuration format, an open XML format that several annotation tools support, so the configs here are portable rather than tied to any one product. A config is a small, readable document that defines exactly what the annotator sees and what they are allowed to do. The example below sets up a single-label sentiment task of the kind behind AfriSenti ([Muhammad et al., 2023](../references.md#muhammad-2023)).
+These principles are not abstract: they are choices you make in the labeling configuration. The examples throughout this playbook use the Label Studio configuration format, an open XML format that several annotation tools support, so the configs here are portable rather than tied to any one product. A config is a small, readable document that defines exactly what the annotator sees and what they are allowed to do. The example below sets up a single-label sentiment task of the kind behind AfriSenti ([Muhammad et al., 2023a](../references.md#muhammad-2023)).
 
 ```xml
 <View>

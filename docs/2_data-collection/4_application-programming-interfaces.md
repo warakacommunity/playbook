@@ -3,7 +3,7 @@ title: Application Programming Interfaces (APIs)
 description: How to collect data through official APIs, and why building a project's data plan around any single platform's API is riskier than it looks.
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -19,7 +19,9 @@ This makes APIs more reliable to build a pipeline around in the short term: the 
 
 ## A cautionary, very real example
 
-AfriSenti, the sentiment dataset behind SemEval-2023's first Afrocentric shared task, was built on more than 110,000 tweets across 14 African languages, gathered through Twitter's then-free API access for academic research ([Muhammad et al., 2023](https://arxiv.org/abs/2302.08956)). That access model no longer exists. In 2023, Twitter (now X) ended free academic API access and introduced paid tiers, with enterprise-level access priced at tens of thousands of dollars per month, far beyond what most academic projects can pay ([Brown et al., 2024](https://arxiv.org/abs/2410.23432)). A project planned today that assumed it could reproduce AfriSenti's collection process, on the same terms, simply could not.
+AfriSenti, the sentiment dataset behind SemEval-2023's first Afrocentric shared task, was built on more than 110,000 tweets across 14 African languages, gathered through Twitter's then-free API access for academic research ([Muhammad et al., 2023a](../references.md#muhammad-2023); [Muhammad et al., 2023b](../references.md#afrisenti-semeval-2023)). That access model no longer exists. In 2023, Twitter (now X) ended free academic API access and introduced paid tiers, with small-enterprise access priced at about \$42,000 per month, far beyond what most academic projects can pay ([Brown et al., 2024](../references.md#brown-2024)). A project planned today that assumed it could reproduce AfriSenti's collection process, on the same terms, simply could not.
+
+The platform's own tooling had gaps too. At the time, the Twitter API identified only one African language (Amharic), so the AfriSenti team could not filter tweets by language and instead collected them with location- and vocabulary-based heuristics ([Muhammad et al., 2023a](../references.md#muhammad-2023)). Do not assume an API's language filter covers your language; check before you plan around it.
 
 This isn't a story about one platform behaving badly. It's the generic risk of any API: it's a privilege the platform grants, not a right you hold, and it can be repriced, restricted, or revoked with little notice, for reasons that have nothing to do with you or your research. Plan accordingly.
 
@@ -35,8 +37,8 @@ This isn't a story about one platform behaving badly. It's the generic risk of a
 - **Read the terms of service before you read the API documentation.** What you're allowed to do with the data you collect (store it, redistribute it, publish it as part of a dataset) is governed by the ToS, not by what the API technically lets you request.
 - **Archive what you collect immediately**, in its raw form, rather than re-fetching from the API later. If access changes or disappears, your archived pull is what you have; assume you may not be able to go back for more.
 - **Log the exact endpoint, parameters, API version, and date of every pull.** This is the same provenance discipline as scraping (see [Data Provenance and Traceability](./data-provenance-traceability)), and it matters more here, because an API's behavior can change silently between calls in a way a static web page can't.
-- **Respect rate limits and use backoff.** Getting your access revoked for abuse, even unintentionally, can end a collection effort outright, unlike a scraper simply being slowed down.
-- **Don't design a project's entire data plan around a single platform's API.** Treat any one API as one source among several, and have a sense of what the project does if that source disappears mid-project. As the AfriSenti example shows, it has happened before, with no advance warning.
+- **Respect rate limits and use backoff.** Getting your access revoked for abuse, even unintentionally, can end a collection effort outright, unlike a scraper simply being slowed down. Many APIs publish their own etiquette; the MediaWiki API, for example, asks clients to send requests one at a time, batch titles into one request, and back off when they hit a rate limit ([MediaWiki, n.d.](../references.md#mediawiki-api-etiquette)).
+- **Don't design a project's entire data plan around a single platform's API.** Treat any one API as one source among several, and have a sense of what the project does if that source disappears mid-project. As the AfriSenti example shows, it has happened before, at short notice.
 
 ## A worked example: pulling from a Wikimedia API
 
@@ -96,8 +98,13 @@ if __name__ == "__main__":
             out.write(json.dumps(record, ensure_ascii=False) + "\n")
 ```
 
-The order of operations matters here. The raw response is written to disk before anything is extracted from it, so that if the schema turns out to differ from what was expected, or access changes later, the original pull is preserved and the parsing can be redone offline. Each record carries its license (`CC BY-SA 4.0` for Wikipedia text, which means downstream reuse must attribute and share alike), the exact endpoint, and the pull time. That is the provenance discipline from [Data Provenance and Traceability](./data-provenance-traceability) applied at the point of collection, where it is cheap, rather than reconstructed afterwards, where it is often impossible.
+The order of operations matters here. The raw response is written to disk before anything is extracted from it, so that if the schema turns out to differ from what was expected, or access changes later, the original pull is preserved and the parsing can be redone offline. Each record carries its license (`CC BY-SA 4.0` for Wikipedia text, which means downstream reuse must attribute and share alike; Wikipedia text is also available under the GFDL), the exact endpoint, and the pull time ([Wikimedia Foundation, 2023](../references.md#wikimedia-terms-2023)). That is the provenance discipline from [Data Provenance and Traceability](./data-provenance-traceability) applied at the point of collection, where it is cheap, rather than reconstructed afterwards, where it is often impossible. The script also sends a `User-Agent` with contact details: Wikimedia asks every script to identify itself this way and may block clients that use a generic or empty one ([Wikimedia Foundation, n.d.](../references.md#wikimedia-user-agent-policy)).
 
 ## The bigger pattern
 
 Both this page and [Web Scraping](./web-scraping) point at the same lesson from different directions: methods that depend on a third party's continued goodwill (whether that's a platform's API pricing or a site's tolerance for crawlers) are inherently less stable than methods that don't. Community-sourced data, institutional partnerships, and purpose-built collection campaigns (see [Data Sources](./data-sources)) take longer to set up, but they don't disappear because someone else changed a pricing page.
+
+## Further reading
+
+- [MediaWiki (n.d.)](../references.md#mediawiki-api-etiquette): the API etiquette guide for Wikipedia and other MediaWiki sites, covering batching, rate limits and the `maxlag` parameter.
+- [Wikimedia Foundation (n.d.)](../references.md#wikimedia-user-agent-policy): the User-Agent policy that scripts accessing Wikimedia sites are expected to follow.

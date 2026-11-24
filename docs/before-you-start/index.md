@@ -2,21 +2,21 @@
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Before You Start
 
-Teams sometimes spend months collecting data that already exists. A team may collect Hausa sentiment data that [AfriSenti](https://arxiv.org/abs/2302.08956) already covers, or annotate Yorùbá named entities before discovering [MasakhaNER 2](https://arxiv.org/abs/2210.12391).
+Teams sometimes spend months collecting data that already exists. A team may collect Hausa sentiment data that [AfriSenti](https://arxiv.org/abs/2302.08956) already covers ([Muhammad et al., 2023a](../references.md#muhammad-2023)), or annotate Yorùbá named entities before discovering [MasakhaNER 2](https://arxiv.org/abs/2210.12391) ([Adelani et al., 2022a](../references.md#adelani-2022)).
 
-This happens because African-language datasets are hard to find, and the same language often appears under different names and codes. For example, Swahili has at least three codes in common use:
+This happens because African-language datasets are hard to find, and the same language often appears under different names and codes. For example, Swahili has at least three codes in common use ([SIL International, n.d.](../references.md#iso-639-3)):
 
 - `sw`: the two-letter ISO 639-1 code.
 - `swa`: the ISO 639-3 code for Swahili as a macrolanguage, covering all its varieties.
-- `swh`: the ISO 639-3 code for Coastal (Standard) Swahili alone.
+- `swh`: the ISO 639-3 code for Swahili as an individual language, which leaves out Congo Swahili (`swc`).
 
-All three mean Swahili, but a computer treats them as three different labels, and projects do not agree on which to use. The Masakhane benchmarks (AfriMMLU, AfriXNLI, AfriMGSM) use `swa`. FLORES and Belebele use `swh`. Many Hugging Face datasets and web-crawled corpora use `sw`. If you search for one code, you miss the data filed under the others.
+All three mean Swahili, but a computer treats them as three different labels, and projects do not agree on which to use. The Masakhane benchmarks (AfriMMLU, AfriXNLI, AfriMGSM) use `swa` ([Adelani et al., 2024](../references.md#irokobench-2024)). FLORES and Belebele use `swh` ([NLLB Team, 2022](../references.md#nllb-2022); [Bandarkar et al., 2024](../references.md#belebele-2024)). Many Hugging Face datasets and web-crawled corpora use `sw`. If you search for one code, you miss the data filed under the others.
 
 A complete list of African-language datasets would not solve this, because new datasets appear every month and no list stays current for long. Instead, this chapter describes four steps to take before you build: search for what exists, check whether it fits your needs, decide whether to reuse, extend, or build, and learn from the people who made it.
 
@@ -49,14 +49,14 @@ A fill-in log that follows the four steps on this page: your language's names an
 
 Check each dataset you find against this list:
 
-- **Licence.** Does it allow your use? Many African-language datasets are released for non-commercial use only (CC BY-NC).
+- **Licence.** Does it allow your use? Some widely used African-language datasets are released for non-commercial use only (CC BY-NC), and many carry no licence at all: an audit of 292 African-language datasets found that about one in three did not include one ([Lanfrica, n.d.](../references.md#lanfrica-licensing)).
 - **Access.** Can you download it today, or is it "available on request" from an author who no longer replies? Are you looking at the latest version?
 - **Fit.** Does it match your language variety, dialect, script, and domain? News text does not stand in for social media or conversational speech.
 - **Labels.** Is the label set right for your task, or would you need to relabel?
-- **Splits.** Is the data divided into fixed training, development, and test sets, so that results can be compared across papers? If the test set is public, large language models may have been trained on it, which makes their scores look better than they are.
+- **Splits.** Is the data divided into fixed training, development, and test sets, so that results can be compared across papers? If the test set is public, large language models may have been trained on it, which makes their scores look better than they are ([Sainz et al., 2023](../references.md#sainz-2023)).
 - **Guidelines.** Were the annotation guidelines released? You can reuse good guidelines even if you cannot use the data.
-- **Quality.** Who annotated it: native speakers or crowd workers? Is inter-annotator agreement reported? It measures how often annotators chose the same label, and low agreement is a warning sign.
-- **Documentation.** Is there a datasheet or data card: a document that describes how the data was collected and what it contains? Is consent described?
+- **Quality.** Who annotated it: native speakers or crowd workers? Is inter-annotator agreement reported? It measures how often annotators chose the same label, and low agreement is a warning sign ([Artstein and Poesio, 2008](../references.md#artstein-2008)).
+- **Documentation.** Is there a datasheet or data card: a document that describes how the data was collected and what it contains ([Gebru et al., 2021](../references.md#gebru-2021); [Pushkarna et al., 2022](../references.md#pushkarna-2022))? Is consent described?
 
 A dataset that fails several of these checks may still be worth studying, even if you cannot build on it.
 
@@ -103,3 +103,10 @@ The three pages below apply these four steps to real tasks, using well-known dat
 - [Hate speech and content safety](./hate-speech.mdx): where you must also protect annotators and users.
 
 Each page shows the date it was last reviewed. Newer datasets may have appeared since then.
+
+## Further reading
+
+- [Joshi et al. (2020)](../references.md#joshi-2020): why most of the world's languages, including most African languages, have so little labelled data.
+- [Nekoto et al. (2020)](../references.md#nekoto-2020): participatory research with native speakers, the way of working behind many of the datasets this chapter uses as examples.
+- [Kreutzer et al. (2022)](../references.md#kreutzer-2022): an audit of web-crawled multilingual data. Read it before you trust a large crawled corpus that you found in Step 1.
+- [Gebru et al. (2021)](../references.md#gebru-2021) and [Pushkarna et al. (2022)](../references.md#pushkarna-2022): what good dataset documentation contains, which helps you judge what you find in Step 2.

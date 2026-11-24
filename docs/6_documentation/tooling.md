@@ -17,7 +17,7 @@ Choose an annotation tool by usability, scalability, and cost, weighed against t
 
 ### A checklist for choosing a tool
 
-No single tool is best for every project, so judge candidates against your task, your team, and your conditions rather than against a feature list. Start with the general questions that apply to any annotation project:
+No single tool is best for every project, so judge candidates against your task, your team, and your conditions rather than against a feature list. A hands-on review of 15 annotation tools against 26 criteria found that even the best met only 20 of them ([Neves and Ševa, 2021](../references.md#neves-2021)), and a survey of annotation practice names two core requirements: the tool must support your annotation scheme and handle your language ([Finlayson and Erjavec, 2017](../references.md#finlayson-2017)). Start with the general questions that apply to any annotation project:
 
 - **Task and schema.** Does the tool support your task type and label schema (spans, relations, boxes, audio segments, free text) without workarounds?
 - **Scale and team.** Can it handle your expected volume and number of annotators, with the review and adjudication workflow you have designed (see [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md))?
@@ -59,3 +59,9 @@ Many annotation tools can notify other systems when a label is submitted or edit
 - **Keep the receiving end fast.** Accept the message, store it, and do the real work afterwards in a separate step. A receiver that trains a model or writes to a slow database before replying will time out and miss events.
 - **Accept only messages you can trust.** Require a secret token or signature on every message, send it over HTTPS, and reject anything without it. Annotations can contain personal data, so treat the receiver as part of the secure setup described in [Securing data during annotation](../data-governance/index.md#securing-data-during-annotation).
 - **Treat notifications as a copy, not the record.** Messages can be lost or arrive twice while a network or the receiver is down. The annotation tool's own data stays the record of truth; notifications are a near-real-time copy. Keep taking periodic full exports and archive them as described in [Keep a copy of record](./data-storage.md#keep-a-copy-of-record), and rebuild any downstream copy from an export when the two disagree.
+
+## Further reading
+
+- [Finlayson and Erjavec, 2017](../references.md#finlayson-2017): the annotation process end to end and the capabilities annotation tools need, described without tying them to specific products.
+- [Neves and Ševa, 2021](../references.md#neves-2021): a review of 78 annotation tools, with 15 tested hands-on against 26 functional and technical criteria.
+- [Wilkinson et al., 2016](../references.md#wilkinson-2016): the FAIR principles, a useful test for whether your exports stay findable, accessible, interoperable and reusable outside the tool.

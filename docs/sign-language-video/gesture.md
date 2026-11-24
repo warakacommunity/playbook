@@ -17,7 +17,7 @@ Gesture recognition reads the hand and body movements that accompany or replace 
 
 ## What the data looks like
 
-Gesture data is video or sensor recordings of gestures, labelled with what each one means. The labels can come from cameras or from wearable sensors that capture motion directly. The African-specific point is that gesture is cultural: the same movement can mean different things in different places, and many meaningful gestures in African communities have no equivalent in datasets built elsewhere. A gesture vocabulary has to be defined with the community whose gestures they are, rather than assumed from a foreign taxonomy, or the dataset will encode the wrong meanings.
+Gesture data is video or sensor recordings of gestures, labelled with what each one means. The labels can come from cameras or from wearable sensors that capture motion directly. The point that matters most for African data is that gesture is cultural: the form-meaning link of a gesture is a cultural convention, so the same movement can mean different things in different places ([Kita, 2009](../references.md#kita-2009)), and gestures that matter in an African community may have no equivalent in datasets built elsewhere. A gesture vocabulary has to be defined with the community whose gestures they are, rather than assumed from a foreign taxonomy, or the dataset will encode the wrong meanings.
 
 A record names the gesture and, importantly, the meaning and region it was defined in, since the same movement can mean different things in different places:
 
@@ -54,9 +54,9 @@ Gesture recognition is evaluated with accuracy and [F1](https://en.wikipedia.org
 
 Gesture recognition in 2026 sits at a genuinely different scale from sign language: the tasks are looser, the label sets smaller, and the throughput per corpus much higher. The workable open-model references:
 
-- **Video-classification backbones.** **[VideoMAE v2](https://arxiv.org/abs/2303.16727)** (2023), **[TimeSformer](https://arxiv.org/abs/2102.05095)** (Meta, 2021), **[SlowFast](https://github.com/facebookresearch/SlowFast)** (Meta, 2019): the workable open backbones for video classification tasks including gesture. Fine-tune on 1,000-5,000 target-vocabulary clips.
-- **Pose-based recognition.** **[MediaPipe Holistic](https://google.github.io/mediapipe/solutions/holistic.html)** and **[OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose)** extract body and hand keypoints from video; classification on the extracted keypoints is often more compute-efficient and more robust to camera / lighting variation than end-to-end video classification. Purpose-built for edge deployment.
-- **General MLLMs.** **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)**, **[InternVL 3](https://github.com/OpenGVLab/InternVL)**: capable of open-vocabulary gesture recognition from natural-language descriptions, useful when the deployment surface requires labelling a gesture the training set did not cover.
+- **Video-classification backbones.** **VideoMAE v2** ([Wang et al., 2023](../references.md#videomae-v2-2023)), **TimeSformer** ([Bertasius et al., 2021](../references.md#bertasius-2021)) and **[SlowFast](https://github.com/facebookresearch/SlowFast)** ([Feichtenhofer et al., 2019](../references.md#feichtenhofer-2019)): the workable open backbones for video classification tasks including gesture. As a rough planning figure, budget for a few thousand labelled clips of the target vocabulary; the number you need depends on how many gestures you have and how similar they look.
+- **Pose-based recognition.** **[MediaPipe Holistic Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/holistic_landmarker)** and **[OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose)** ([Cao et al., 2021](../references.md#cao-2021)) extract body and hand keypoints from video. Classifying the extracted keypoints is usually cheaper to compute than end-to-end video classification, and it can be less sensitive to background, clothing and lighting. MediaPipe ships libraries for Android, iOS and the web, so the same pipeline can run on a phone.
+- **General MLLMs.** **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)**, **[InternVL 3](https://github.com/OpenGVLab/InternVL)**: can attempt open-vocabulary gesture recognition from natural-language descriptions, useful when the deployment surface requires labelling a gesture the training set did not cover. Check them on your own clips before relying on them.
 
 If you capture keypoints at recording time, treat pose tracking as an optional preview or a separate keypoint file, never as a reason to block a take or lower the video quality on a weak phone; see [Recording on a phone or in a browser](./sign-language.md#recording-on-a-phone-or-in-a-browser). If people correct or hand-place keypoints, the schema, visibility and agreement rules are in [Keypoints and pose](../image-data/keypoints-pose.md).
 
@@ -74,26 +74,28 @@ Gesture corpora are cheaper per-record than sign-language corpora because the la
 
 ## Known limitations to watch for
 
-- **Regional variation is the rule.** A "beckon" gesture in coastal Kenya differs from a "beckon" gesture in Lagos, differs from a "beckon" gesture in Cape Town. Per-region evaluation is mandatory; a headline number that hides regional performance is misleading.
+- **Regional variation is the rule.** A "beckon" gesture can differ between coastal Kenya, Lagos and Cape Town, because the link between a gesture's form and its meaning is a cultural convention ([Kita, 2009](../references.md#kita-2009)). Evaluate per region; a headline number that hides regional performance is misleading.
 - **Cultural meaning is not physical shape.** Two videos of the same hand movement can encode different meanings in different communities. Labels tied only to the physical shape misrepresent the task.
-- **The same gesture can be sign-language or non-sign-language.** A pointing gesture in a Deaf community may be a linguistic sign; in a hearing community it is a deictic gesture. A model that treats them the same misses both linguistic and cultural distinctions.
-- **Demonstrator variation dominates.** A model trained on 5 demonstrators fails on the 6th. Corpus size in *demonstrators* matters more than corpus size in *clips*. Report cross-demonstrator accuracy.
+- **The same gesture can be sign-language or non-sign-language.** In a signed language, pointing to a location in the signing space is part of the grammar, used to refer to people and things ([Yin et al., 2021](../references.md#yin-2021)); in a hearing community the same movement is a co-speech deictic gesture. A model that treats them the same misses both linguistic and cultural distinctions.
+- **Demonstrator variation dominates.** A model trained on a handful of demonstrators can fail badly on a new one. In practice, the number of *demonstrators* matters more than the number of *clips*. Report accuracy on demonstrators held out of training.
 - **Video PII on people-full-frame data.** A gesture corpus with faces visible is PII. Blurring faces during preprocessing degrades the model's ability to use gaze and facial cues, but blurring during release is often required. Design for both training and release from the start. [Redact for training, or only for release?](../image-data/visual-privacy.md#redact-for-training-or-only-for-release) sets out the choice.
 - **Continuous vs. isolated gesture recognition.** Isolated recognition (one clip = one gesture) is the easy case; continuous recognition (streaming video, model must decide when a gesture starts and stops) is substantially harder. Report the two separately.
 - **Consent for identifiable demonstrators.** Video is fully identifiable; blurring compromises the model. Consent frameworks must be built around the demonstrator being visible in every clip, and remuneration must be at rates comparable to filming, not clip-labelling.
 
 ## Further reading
 
-- [MediaPipe Holistic](https://google.github.io/mediapipe/solutions/holistic.html): the reference pose-extraction stack for gesture recognition; the workable path for compute-efficient gesture pipelines.
-- [VideoMAE v2 (Wang et al., 2023)](https://arxiv.org/abs/2303.16727): the workable video-classification backbone for gesture recognition from raw video.
-- [State of CV in Africa (2024)](https://arxiv.org/abs/): the reference survey of computer-vision research on the continent; useful for understanding where gesture recognition sits in the broader African CV landscape.
+- [Kita, 2009](../references.md#kita-2009): a review of how gestures vary across cultures, including emblems, pointing and politeness norms; the background for defining a gesture vocabulary with the community.
+- [Yin et al., 2021](../references.md#yin-2021): why signed languages belong in language technology, and where they differ from gesture.
+- [MediaPipe Holistic Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/holistic_landmarker): pose, hand and face keypoints in one pipeline, with libraries for Android, iOS and the web; the usual starting point for compute-efficient gesture pipelines.
+- [Wang et al., 2023](../references.md#videomae-v2-2023): VideoMAE v2, a video-classification backbone for gesture recognition from raw video.
+- [State of CV in Africa, 2024](../references.md#cv-africa-2024): a survey of computer-vision research on the continent; useful for seeing where gesture recognition sits in the broader African landscape.
 
 <details>
 <summary>Additional references</summary>
 
-- [TimeSformer (Bertasius et al., 2021)](https://arxiv.org/abs/2102.05095): transformer-based video backbone; useful comparison to VideoMAE.
-- [SlowFast (Feichtenhofer et al., 2019)](https://github.com/facebookresearch/SlowFast): the reference two-stream video backbone; still the workable pretrained baseline for many gesture tasks.
-- [OpenPose (Cao et al., 2019)](https://github.com/CMU-Perceptual-Computing-Lab/openpose): the reference pose-estimation stack; older than MediaPipe but with more granular hand-keypoint output for some use cases.
-- [Jester dataset](https://developer.qualcomm.com/software/ai-datasets/jester): the widely-used gesture-recognition benchmark; useful for calibration of methodology, not for African-context labels.
+- [Bertasius et al., 2021](../references.md#bertasius-2021): TimeSformer, a transformer-based video backbone; a useful comparison to VideoMAE.
+- [Feichtenhofer et al., 2019](../references.md#feichtenhofer-2019): SlowFast, a two-pathway video backbone; code at [github.com/facebookresearch/SlowFast](https://github.com/facebookresearch/SlowFast).
+- [Cao et al., 2021](../references.md#cao-2021): OpenPose, an older pose-estimation stack than MediaPipe, with body, hand and face keypoints; code at [github.com/CMU-Perceptual-Computing-Lab/openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose).
+- [Materzynska et al., 2019](../references.md#materzynska-2019): the Jester dataset, a widely used gesture-recognition benchmark; useful for calibrating methodology, not for African-context labels.
 
 </details>

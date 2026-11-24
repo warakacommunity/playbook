@@ -3,7 +3,7 @@ title: Data Modalities
 description: What data modality means, why it's the first fork in the road for any collection plan, and how it shapes cost, sourcing, and tooling long before anyone writes an annotation guideline.
 ready: true
 last_update:
-  date: 2026-09-24
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -26,16 +26,19 @@ This page covers modality at the **collection** stage: what each modality is and
 ## The modalities you'll most often collect
 
 ### Text
-The most common starting point, and the one with the most existing tooling: web crawls, government archives, books, social media. For most African languages, though, text is also the modality where apparent abundance is most deceptive. [Joshi et al. (2020)](https://aclanthology.org/2020.acl-main.560/) and [Kreutzer et al. (2022)](https://aclanthology.org/2022.tacl-1.4/), discussed in the [Introduction](../1_introduction/introduction.md), found that a large share of what looks like African-language text online is mislabelled, machine-translated, or not the target language at all. Text "exists," in the sense that you can find files containing it; whether it exists in a form worth training on is a separate, harder question.
+
+The most common starting point, and the one with the most existing tooling: web crawls, government archives, books, social media. For most African languages, though, text is also the modality where apparent abundance is most deceptive. Only a small fraction of the world's languages have the resources that current language technology relies on ([Joshi et al., 2020](../references.md#joshi-2020)), and an audit of 205 web-crawled corpora found that lower-resource corpora have systematic problems: at least 15 contained no usable text, a significant share had less than half acceptable sentences, and many were mislabelled or used ambiguous language codes ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). Both are discussed in the [Introduction](../1_introduction/introduction.md). Text "exists," in the sense that you can find files containing it; whether it exists in a form worth training on is a separate, harder question.
 
 ### Speech and audio
-Audio is often the *more* natural modality for many African languages, which carry centuries of oral tradition and, in some cases, no widely used standard orthography. Collecting it well usually means recording, not scraping: radio archives, community recording campaigns, phone-based data collection, or partnerships with broadcasters. It is more expensive per hour than text per word, both because recording requires equipment and consent, and because transcription afterward is itself a specialist annotation task.
+
+Audio is often the *more* natural modality for many African languages, which carry centuries of oral tradition and, in some cases, no widely used standard orthography. Many speakers of these languages are not literate, and voice-based tools may be the most practical way for them to use language technology ([Doumbouya et al., 2021](../references.md#doumbouya-2021)). Collecting it well usually means recording, not scraping: radio archives ([Saeb et al., 2017](../references.md#saeb-2017); [Doumbouya et al., 2021](../references.md#doumbouya-2021)), community recording campaigns ([Ardila et al., 2020](../references.md#ardila-2020); [African Next Voices, 2025](../references.md#african-next-voices)), phone-based data collection, or partnerships with broadcasters. It is more expensive per hour than text per word, both because recording requires equipment and consent, and because transcription afterward is itself a specialist annotation task.
 
 ### Images
 Image data splits into two different collection problems depending on whether you're sourcing existing images (museum archives, public photo collections, satellite imagery) or capturing new ones (camera rigs, mobile photo campaigns). The first raises licensing and redistribution questions; the second raises consent and privacy questions, especially where faces or identifiable locations are involved.
 
 ### Video
-Combines the cost structure of audio (recording, consent) with the storage and bandwidth cost of images, multiplied by time. Video is rarely collected for its own sake in low-resource-language work; it usually appears bundled with another goal: sign language corpora, instructional content, or as source material from which audio and frames are later extracted.
+
+Combines the cost structure of audio (recording, consent) with the storage and bandwidth cost of images, multiplied by time. Video is rarely collected for its own sake in low-resource-language work; it usually appears bundled with another goal: sign language corpora (for example Bible translations signed in African sign languages; [Gueuwou et al., 2023](../references.md#jwsign-2023); [AfriSign, 2025](../references.md#afrisign-2025)), instructional content, or as source material from which audio and frames are later extracted.
 
 ### Multimodal data
 Strictly speaking this isn't a separate modality but a *combination*: paired text-image, audio-video, or image-caption data, collected so the modalities can be analyzed together or against each other. The collection problem here compounds: you need both modalities to exist for the same underlying item, often from different sources, and you need to track which pairs go together. The [case study](./case-study-multimodal-data-collection) later in this chapter walks through exactly this problem for a 28-language image-caption-emotion dataset.

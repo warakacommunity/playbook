@@ -17,10 +17,12 @@ Most published NLP benchmarks are run on hardware nobody in the target African-l
 
 There is no single "African phone" any more than there is a single European phone; but the practical device mix is heavily skewed toward the low end of what the ML press treats as normal. Design against the real distribution, not the median press review.
 
-- **Android Go phones (2 GB RAM, ARM Cortex-A53 class, no NNAPI).** Sub-\$80 handsets. Still the fastest-growing tier in many African markets. Inference budget: under 100 MB in RAM, under 200 MB on disk, no acceleration.
-- **Mid-range Android (4-6 GB RAM, ARM Cortex-A75 class, NNAPI available on newer devices).** \$80-\$300 handsets. The majority tier in urban markets today. Inference budget: under 400 MB in RAM, under 800 MB on disk, NNAPI or on-device NPU on Snapdragon-8-Gen-adjacent chipsets.
-- **High-end Android and modern iOS.** \$300+. The lucrative tier commercial products target, and a shrinking share of the actual African deployment surface if reach matters. Inference budget: multi-GB models feasible, GPU or on-device NPU available.
-- **KaiOS feature phones (Cat B4B) with Firefox OS heritage.** 512 MB - 1 GB RAM. A large residual user base for text-only NLP use cases via web app or PWA. Inference budget: send-to-server, essentially no on-device NLP.
+The inference budgets below are this playbook's rules of thumb for planning, not measured limits; replace them with numbers from your own target devices.
+
+- **Android (Go edition) phones (up to about 2 GB RAM, ARM Cortex-A53 class, CPU only).** Entry-level handsets, often under \$80. Android (Go edition) is the configuration of Android for low-RAM phones; its minimum RAM is 2 GB from Android 13 and was 512 MB to 1 GB on earlier releases still in use ([Android Developers, n.d.-a](../references.md#android-go)). Inference budget: under 100 MB in RAM, under 200 MB on disk, no acceleration.
+- **Mid-range Android (4-6 GB RAM, ARM Cortex-A75 class).** Roughly \$80-\$300 handsets. Inference budget: under 400 MB in RAM, under 800 MB on disk, GPU or on-device NPU on some chipsets. Do not plan around Android's Neural Networks API (NNAPI): it is deprecated as of Android 15, and Google points developers to LiteRT (formerly TensorFlow Lite) with a GPU delegate instead ([Android Developers, n.d.-b](../references.md#android-nnapi)).
+- **High-end Android and modern iOS.** \$300+. The tier commercial products target, but only a part of the African deployment surface if reach matters. Inference budget: multi-GB models feasible, GPU or on-device NPU available.
+- **KaiOS feature phones.** As little as 256 MB RAM on 3G models and 512 MB on 4G models, with a 240 by 320 screen ([KaiOS Technologies, n.d.](../references.md#kaios-hardware)). Suitable for text-only NLP use cases via a web app. Inference budget: send-to-server, essentially no on-device NLP.
 - **Basic feature phones (no smart OS).** Text via SMS or USSD only; the [SMS/USSD/WhatsApp chapter](./sms-ussd-whatsapp.md) is the design reference.
 
 For non-phone edge deployment (village-scale or clinic-scale server workloads):
@@ -35,8 +37,8 @@ Deployment code that targets one tier will not run acceptably on the others. Dec
 
 Reproducing the numbers from the [offline chapter](./offline.md#model-size-budget) because they are the load-bearing part of edge design, with elaboration on how to hit them.
 
-- **Android Go**: model on disk under 200 MB, in RAM under 100 MB, inference in tens to hundreds of milliseconds per short sentence. Sub-100M-parameter models quantised to INT8. Practical: distilled encoder-only models (mBERT-small, DistilBERT-multilingual with LoRA fine-tuning), quantised TrOCR-small, distilled TTS voice models. Full-scale Whisper is out; Whisper-tiny quantised is in.
-- **Mid-range Android**: under 800 MB on disk, under 400 MB in RAM. Distilled 600M-parameter models with careful INT8 quantisation. Practical: NLLB-200-distilled at INT8, AfroXLMR-base with LoRA adapters, MMS ASR adapters, Whisper-small quantised.
+- **Android Go**: model on disk under 200 MB, in RAM under 100 MB, inference in tens to hundreds of milliseconds per short sentence. Sub-100M-parameter models quantised to INT8. Practical: distilled encoder-only models (for example multilingual DistilBERT; distillation made BERT 40% smaller and 60% faster while keeping about 97% of its performance ([Sanh et al., 2019](../references.md#sanh-2019))), fine-tuned with small LoRA adapters ([Hu et al., 2021](../references.md#hu-2021)), quantised TrOCR-small, distilled TTS voice models. Full-scale Whisper is out; Whisper-tiny (39M parameters) quantised is in ([Radford et al., 2023](../references.md#radford-2023)).
+- **Mid-range Android**: under 800 MB on disk, under 400 MB in RAM. Distilled models of up to about 600M parameters with careful INT8 quantisation. Practical: the distilled 600M-parameter NLLB-200 model at INT8 ([NLLB Team, 2022](../references.md#nllb-2022)), AfroXLMR-base ([Alabi et al., 2022](../references.md#alabi-2022)) with LoRA adapters, MMS ASR adapters ([Pratap et al., 2023](../references.md#pratap-2023)), Whisper-small (244M parameters) quantised ([Radford et al., 2023](../references.md#radford-2023)).
 - **High-end phones**: multi-GB feasible but the download UX becomes the binding constraint. See the model-download UX section in the [offline chapter](./offline.md#model-download-ux-the-part-that-gets-ignored).
 
 The right question at any tier is not "will it fit"; it is "will it fit, run in a user-tolerable time, and stay under the thermal + battery envelope." All three tests must pass; passing only "will it fit" is a common failure.
@@ -45,25 +47,25 @@ The right question at any tier is not "will it fit"; it is "will it fit, run in 
 
 The [compute-poor chapter](../compute-poor/index.md#quantisation-the-deployment-lever) covers quantisation as a training-and-deployment technique in general. Here are the edge-specific choices:
 
-- **INT8 dynamic quantisation**: the safe default for on-device inference on Android and iOS. Memory roughly halved, throughput 1.5-2x higher, quality drop typically under 1 point on classification tasks and 1-2 chrF points on generation. Use unless you have measured a problem.
-- **INT8 static (per-channel) quantisation**: better quality retention than dynamic; requires a calibration pass. Worth the extra step for production deployments on mid-range and up.
-- **INT4 quantisation**: aggressive; memory quartered, throughput 2-3x higher, quality drop noticeable on morphology-rich languages. Test extensively on target-language content before deploying; do not rely on English-language benchmark numbers to predict impact.
-- **Mixed-precision (FP16 activations, INT8 weights)**: a compromise that works well on newer devices with NNAPI support. Usually not worth the complexity on Android Go.
-- **Quantisation-aware training (QAT)**: better than post-training quantisation for aggressive levels but requires re-training. Rarely worth it below the small-NGO compute profile.
+- **INT8 dynamic quantisation**: the safe default for on-device inference of transformer models on Android and iOS; ONNX Runtime recommends dynamic quantisation for transformer-based models ([Microsoft, n.d.-b](../references.md#onnxruntime-quantization)). INT8 weights take a quarter of the space of FP32 weights, though the saving on the whole model is smaller when some layers stay in floating point. Speed-up and quality loss depend on the model, task and device, so measure both on your target language before and after.
+- **INT8 static (per-channel) quantisation**: requires a calibration pass on representative data to fix activation scales in advance; ONNX Runtime recommends it mainly for CNNs, and per-channel quantisation can recover accuracy for models with large weight ranges ([Microsoft, n.d.-b](../references.md#onnxruntime-quantization)). Worth trying for production deployments on mid-range and up when dynamic quantisation is too slow.
+- **INT4 quantisation**: aggressive; weights take half the space of INT8. Quality loss is uneven across languages: in a study of multilingual LLMs, non-Latin-script languages were hurt most, and automatic metrics greatly underestimated the damage that human evaluators found ([Marchisio et al., 2024](../references.md#marchisio-2024)). Test extensively on target-language content, with native-speaker checks, before deploying; do not rely on English-language benchmark numbers to predict impact.
+- **Mixed-precision (FP16 activations, INT8 weights)**: a compromise that can work well on newer devices with a capable GPU or NPU. Usually not worth the complexity on Android Go.
+- **Quantisation-aware training (QAT)**: simulates quantisation during training so that accuracy survives it ([Jacob et al., 2017](../references.md#jacob-2017)); better than post-training quantisation for aggressive levels but requires re-training. Rarely worth it below the small-NGO compute profile.
 
-For deployment on phones, **quantisation is not optional**. Deploy a non-quantised model to an Android Go phone and the app will crash on first inference or drain battery within an hour. Every training decision made without quantisation in the eventual deployment stack in mind is a decision that may have to be re-made.
+For deployment on phones, **plan for quantisation from the start**. An unquantised model often does not fit in an entry-level phone's memory at all, and where it does, it runs slower and uses more battery. Every training decision made without quantisation in the eventual deployment stack in mind is a decision that may have to be re-made.
 
 ## Inference runtimes: what actually runs on-device
 
 The training framework and the deployment runtime are usually not the same. Concrete choices:
 
-- **[ONNX Runtime](https://onnxruntime.ai/)** with the Mobile execution provider: the pragmatic default for cross-platform (Android + iOS) deployment of transformer-based models. Supports INT8, INT4, quantised BERT/RoBERTa/T5-family. Documentation is solid.
-- **[TensorFlow Lite (LiteRT)](https://ai.google.dev/edge/litert)**: Android-native runtime with NNAPI integration. Works well for classification and small encoder-decoder models; less mature for large LLM inference than the LLM-specific runtimes below.
-- **[whisper.cpp](https://github.com/ggerganov/whisper.cpp)**: the reference on-device ASR runtime, with quantised model support for Whisper-family models across CPU, ARM, and Apple Silicon. If your deployment is speech, this is your default.
-- **[llama.cpp](https://github.com/ggerganov/llama.cpp)**: the reference on-device LLM runtime, with heavy quantisation and CPU/GPU/Metal/Vulkan backends. Supports many multilingual models including AfroXLMR fine-tunes exported to the runtime's `.gguf` format.
+- **[ONNX Runtime](https://onnxruntime.ai/)** (ONNX Runtime Mobile builds for Android and iOS): the pragmatic default for cross-platform deployment of transformer-based models. Supports INT8 and 4-bit weight-only quantisation ([Microsoft, n.d.-b](../references.md#onnxruntime-quantization)) for BERT/RoBERTa/T5-family models. Documentation is solid.
+- **[LiteRT (formerly TensorFlow Lite)](https://ai.google.dev/edge/litert)**: Google's on-device runtime, with a GPU delegate on Android; Google now recommends it in place of the deprecated NNAPI ([Android Developers, n.d.-b](../references.md#android-nnapi)). Works well for classification and small encoder-decoder models; for LLMs, use Google's LLM layer on top of it or the LLM-specific runtimes below.
+- **[whisper.cpp](https://github.com/ggml-org/whisper.cpp)**: the reference on-device ASR runtime, with quantised model support for Whisper-family models across CPU, ARM, and Apple Silicon. If your deployment is speech, this is your default.
+- **[llama.cpp](https://github.com/ggml-org/llama.cpp)**: the reference on-device LLM runtime, with heavy quantisation and CPU/GPU/Metal/Vulkan backends, for decoder models converted to its `.gguf` format. It is built for generative models; for encoder classifiers such as AfroXLMR fine-tunes, ONNX Runtime is usually the simpler path.
 - **[MLC-LLM](https://mlc.ai/mlc-llm/)**: cross-platform LLM inference (Android, iOS, WebAssembly) with strong quantisation support. A defensible choice for consumer LLM deployment on mid-range and up.
-- **[MediaPipe](https://developers.google.com/mediapipe)** and Google's on-device MMS + Gemma runtimes: Android-native ML deployment, useful for pipelines that combine NLP with vision or audio.
-- **[Meta's PyTorch Executorch](https://pytorch.org/executorch/)**: newer PyTorch-native mobile deployment; worth watching but less mature than the alternatives listed above.
+- **[MediaPipe](https://developers.google.com/mediapipe)**: Google's on-device ML pipelines for Android, iOS and the web, with ready-made solutions for vision, audio and text; useful for pipelines that combine NLP with vision or audio.
+- **[ExecuTorch](https://pytorch.org/executorch/)**: PyTorch's own on-device runtime, the natural choice if your training stack is PyTorch and you want to avoid a format conversion; check its support for your model's operators before committing.
 - **Custom TorchScript / TensorFlow SavedModel deployment**: the manual path. Sometimes necessary; rarely first-choice.
 
 For simplicity: default to whisper.cpp for on-device ASR, llama.cpp or MLC-LLM for on-device generative models, ONNX Runtime Mobile for on-device classification and NER. Reach for the alternatives when a specific constraint (thermal envelope, memory ceiling, specific accelerator) forces it.
@@ -72,16 +74,16 @@ For simplicity: default to whisper.cpp for on-device ASR, llama.cpp or MLC-LLM f
 
 Real device deployment fails at least as often on power and thermal issues as on model-size issues. Concrete rules:
 
-- **Measure battery drain per 100 inferences on the target hardware.** A model that runs correctly but drains 20% battery per 100 inferences is a deployment failure: the user will notice and stop opening the app. Realistic targets: under 1% battery per 100 short-inference calls on mid-range hardware, under 3% on Android Go.
-- **Measure thermal steady-state.** Continuous inference on entry-level phones triggers thermal throttling within seconds. If your app does inference on every keystroke or every seconds-worth of audio, thermal throttling will halve your effective throughput after the first minute. Design for burst-and-idle usage patterns, not steady stream.
-- **Never do inference in the background.** Android and iOS both aggressively kill apps that run compute in the background. Even if the OS permits it, users interpret background compute as a battery-drain problem and the app gets uninstalled.
+- **Measure battery drain per 100 inferences on the target hardware.** A model that runs correctly but drains 20% battery per 100 inferences is a deployment failure: the user will notice and stop opening the app. As a starting target (a rule of thumb, not a published benchmark), aim for under 1% battery per 100 short-inference calls on mid-range hardware and under 3% on Android Go, and adjust once you have measured how your users actually use the app.
+- **Measure thermal steady-state.** Sustained inference on entry-level phones can trigger thermal throttling, after which the chip runs more slowly. If your app does inference on every keystroke or every second of audio, expect throughput to drop as the phone heats up. Design for burst-and-idle usage patterns, not steady stream.
+- **Avoid inference in the background.** Mobile operating systems restrict background work: on Android 8.0 and later, an app's background services are stopped a few minutes after the app leaves the foreground, and deferred work is meant to go through scheduled jobs ([Android Developers, n.d.-c](../references.md#android-background-limits)). Even where the OS permits it, users are likely to read background compute as a battery drain.
 - **On-device sync + inference budgets add up.** If your app both runs a model and syncs data over metered connectivity, both budgets have to fit. Batch sync when charging + on Wi-Fi where possible.
 
 ## Edge-server deployment: single-board computers and old laptops
 
 For village-scale or clinic-scale deployments (a health post, a school computer lab, a community radio station serving a district) the edge is a small server, not a phone. Practical guidance:
 
-- **Raspberry Pi 5 with 8 GB RAM** runs quantised 7B models via llama.cpp at usable speeds for offline chat or transcription workloads with small user counts. It is remarkable how far this hardware has come; treat it as a real deployment target, not a demo platform.
+- **Raspberry Pi 5 with 8 GB RAM** can run small quantised models via llama.cpp or whisper.cpp for offline chat or transcription workloads with small user counts; larger models (around 7B parameters) fit in memory but generate slowly, so measure tokens per second for your model before promising interactive use. Treat it as a real deployment target, not a demo platform.
 - **Jetson Orin Nano** is the workhorse for speech and vision workloads at village scale: small NVIDIA GPU, well-supported by ONNX Runtime and TensorRT.
 - **Old laptops running Linux** are the de-facto edge-server for many community projects; almost free at second-hand market rates, easier to service than embedded hardware, no vendor lock-in.
 - **Solar + battery power budgets** matter more than raw compute for many rural deployments. A model that runs but requires 40 W of continuous power will not survive on solar + battery in dry-season use. Measure idle + inference power draw at deployment scoping time, not after.
@@ -101,7 +103,7 @@ Standard NLP benchmarks are run on desktop / server hardware. That evaluation do
 
 1. **Benchmarking on laptop-class hardware and assuming those numbers hold on the target phone.** They do not.
 2. **Not quantising until it is too late.** A model architecture chosen in float32 may not survive quantisation to INT8; better to make the training decision with the deployment target in mind.
-3. **Assuming Whisper-large runs on-device because it appeared in a demo.** It runs on a laptop with 32 GB of RAM. It does not run on an Android Go phone. Measure on the actual target.
+3. **Assuming Whisper-large runs on-device because it appeared in a demo.** Whisper-large has 1.55 billion parameters, and its reference implementation needs about 10 GB of GPU memory ([Radford et al., 2023](../references.md#radford-2023)). It does not run on an Android Go phone. Measure on the actual target.
 4. **Ignoring thermal and battery** because "the phone is fine in the office." Office use is not real deployment; test in an African market environment with realistic usage patterns and mid-day heat.
 5. **Locking to a single vendor accelerator** (Snapdragon NPU, Qualcomm AI Engine) at the app level. The user base is device-heterogeneous; portable runtimes are worth the small performance cost.
 6. **Building against the latest phone your team owns.** Test the app on a phone your team's grandmother owns.
@@ -109,13 +111,13 @@ Standard NLP benchmarks are run on desktop / server hardware. That evaluation do
 
 ## Further reading
 
-- [Meta MMS on-device technical report](https://ai.meta.com/blog/multilingual-model-speech-recognition/): the reference on on-device multilingual ASR constraints and trade-offs.
-- [whisper.cpp README](https://github.com/ggerganov/whisper.cpp): the practical reference for on-device ASR deployment.
-- [llama.cpp performance discussions](https://github.com/ggerganov/llama.cpp/discussions): the ongoing community documentation of quantised LLM inference on constrained hardware.
-- [ONNX Runtime Mobile documentation](https://onnxruntime.ai/docs/tutorials/mobile/): the canonical reference for cross-platform mobile inference.
+- The Massively Multilingual Speech (MMS) paper ([Pratap et al., 2023](../references.md#pratap-2023)) and its [announcement](https://ai.meta.com/blog/multilingual-model-speech-recognition/): speech models for over 1,100 languages, with small per-language adapters that suit constrained deployment.
+- [whisper.cpp README](https://github.com/ggml-org/whisper.cpp): the practical reference for on-device ASR deployment.
+- [llama.cpp performance discussions](https://github.com/ggml-org/llama.cpp/discussions): the ongoing community documentation of quantised LLM inference on constrained hardware.
+- [ONNX Runtime Mobile documentation](https://onnxruntime.ai/docs/tutorials/mobile/) and its [quantisation guide](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html) ([Microsoft, n.d.-b](../references.md#onnxruntime-quantization)): the canonical reference for cross-platform mobile inference.
 - [MLC-LLM documentation](https://mlc.ai/mlc-llm/): the reference for cross-platform quantised LLM deployment.
-- [Google MLKit on-device ML docs](https://developers.google.com/ml-kit): Google's Android-native ML deployment reference.
-- [GSMA Mobile Economy Sub-Saharan Africa report](https://www.gsma.com/mobileeconomy/sub-saharan-africa/): the industry data on handset mix and device tier distribution in African markets.
+- [Google ML Kit on-device ML docs](https://developers.google.com/ml-kit): Google's ready-made on-device ML APIs for Android and iOS.
+- The GSMA's *Mobile Economy Africa 2025* ([GSMA Intelligence, 2025](../references.md#gsma-me-africa-2025)): industry data on mobile subscription, mobile internet use and the barriers to it, including handset affordability, across Africa.
 
 ---
 

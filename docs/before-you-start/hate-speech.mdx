@@ -3,7 +3,7 @@ sidebar_position: 6
 title: Hate speech and content safety
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -13,30 +13,30 @@ last_update:
 
 This page applies the [four steps from Before You Start](./index.md) to hate speech and abusive language detection. It uses **AfriHate** as the example because it is the largest community-built hate speech collection for African languages, with native-speaker annotators and a published paper. Many smaller, single-language datasets exist, and new ones appear often. If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
 
-This task is different from the others in this chapter in three ways. Annotators read harmful content for hours, so they need support from the first day. A classifier used for automated moderation can cause the same harm it is meant to reduce. And what counts as hate is contested, culturally and politically.
+This task is different from the others in this chapter in three ways. Annotators read harmful content for hours, so they need support from the first day ([Steiger et al., 2021](../references.md#steiger-2021); [Kirk et al., 2022](../references.md#kirk-2022)). A classifier used for automated moderation can cause the same harm it is meant to reduce: models trained on biased labels can flag a minority group's way of speaking as offensive up to twice as often ([Sap et al., 2019](../references.md#sap-2019)). And what counts as hate is contested, culturally and politically, so annotators can disagree for good reasons ([Röttger et al., 2022](../references.md#rottger-2022)).
 
 ## Step 1: What a search turns up
 
 Search Hugging Face, Lanfrica, or the ACL Anthology for hate speech in a major African language and you will find many small datasets, each with its own labels and guidelines. The one that brings most of them together is:
 
-- **[AfriHate](https://aclanthology.org/2025.naacl-long.92/)** (Muhammad et al., 2025): tweets in 15 languages. Algerian Arabic, Amharic, Hausa, Igbo, Kinyarwanda, Moroccan Arabic, Nigerian Pidgin, Oromo, Somali, Swahili, Tigrinya, Twi, isiXhosa, Yorùbá, and isiZulu. Each tweet is labelled hate, abusive, or normal, and hateful tweets also carry a target (ethnicity, politics, gender, disability, religion, or other).
+- **AfriHate** ([Muhammad et al., 2025a](../references.md#afrihate-2025)): tweets in 15 languages. Algerian Arabic, Amharic, Hausa, Igbo, Kinyarwanda, Moroccan Arabic, Nigerian Pidgin, Oromo, Somali, Swahili, Tigrinya, Twi, isiXhosa, Yorùbá, and isiZulu. Each tweet is labelled hate, abusive, or normal, and hateful tweets also carry a target (ethnicity, politics, gender, disability, religion, or other).
 
 The data is on the [Hugging Face Hub](https://huggingface.co/datasets/afrihate/afrihate). The [GitHub repository](https://github.com/AfriHate/AfriHate) lists the language coordinators, who are good people to contact.
 
-You will also find datasets for **nearby tasks** that look useful: emotion data such as [BRIGHTER](https://arxiv.org/abs/2502.11926) (28 languages, with labels that include anger and disgust), or polarization data such as [POLAR](https://arxiv.org/abs/2505.20624) (22 languages, including Amharic, Hausa, and Swahili).
+You will also find datasets for **nearby tasks** that look useful: emotion data such as [BRIGHTER](https://arxiv.org/abs/2502.11926) (28 languages, with labels that include anger and disgust; [Muhammad et al., 2025b](../references.md#brighter-2025)), or polarization data such as [POLAR](https://arxiv.org/abs/2505.20624) (22 languages, including Amharic, Hausa, and Swahili).
 
 ## Step 2: Judging AfriHate against the checklist
 
 - **Licence.** The Hugging Face card lists Apache 2.0, which allows commercial use. The text is tweets, so also check whether the platform's terms affect what you plan to do.
 - **Access.** Gated. You must log in to Hugging Face and agree to share your contact details before you can download it.
-- **Fit.** Twitter/X posts from 2012 to 2023. Comments on other platforms, radio call-ins, WhatsApp messages, or forums look different. Hate speech also changes fast: new slurs, codewords, and spellings appear all the time, so older data misses them.
+- **Fit.** Twitter/X posts from 2012 to 2023 ([Muhammad et al., 2025a](../references.md#afrihate-2025)). Comments on other platforms, radio call-ins, WhatsApp messages, or forums look different. Hate speech also changes fast: new slurs, codewords, and spellings appear all the time, so older data misses them.
 - **Script.** Mostly Latin script. Amharic and Tigrinya are in Ethiopic script, Algerian Arabic is in Arabic script, and Moroccan Arabic appears in both Arabic and Latin script.
-- **Code-switching.** African-language hate speech often mixes in English, French, or Arabic, and the offensive part is often exactly where the switch happens. Check how much of your target text mixes languages, and include such text in your evaluation.
+- **Code-switching.** African-language hate speech often mixes in English, French, or Arabic, and the AfriHate authors note that code-mixing made even identifying the language of a tweet hard ([Muhammad et al., 2025a](../references.md#afrihate-2025)). The offensive part can sit exactly where the switch happens. Check how much of your target text mixes languages, and include such text in your evaluation.
 - **Labels.** Hate, abusive, and normal, plus a target for hateful tweets. What counts as hate is specific to a culture, a region, and a time: a word that is neutral in one place can carry a history of violence in another. Read the paper's definitions before assuming they match yours. Do not import a label scheme from an English corpus without consulting the affected communities.
-- **Splits.** Fixed splits. Each test set has at least 100 examples of each class, so the rare hate class can be measured. Real content is mostly not hate, so also report results per class with the number of examples, not just one overall score.
+- **Splits.** Fixed splits. Each test set has at least 100 examples of each class, so the rare hate class can be measured ([Muhammad et al., 2025a](../references.md#afrihate-2025)). Real content is mostly not hate, so also report results per class with the number of examples, not just one overall score.
 - **Guidelines.** The paper describes the definitions, the keyword lists, and the annotation process. Check what has been released before planning to reuse them, and ask the authors if you cannot find the full guidelines.
-- **Quality.** Annotated by native speakers from the local communities, with three or four annotators per tweet. Agreement is reported per language and ranges from 0.46 to 0.81 (Randolph's kappa), so quality varies by language. Look at the number for yours. The individual annotations are released, which helps if you want to study disagreement.
-- **Documentation.** The paper has limitations and ethics sections. Tweets were found with keyword lists, so the data has selection bias: it only contains hate that matches the words the team searched for. The Twitter/X academic API used to collect it is no longer free, so extending the data the same way is harder today.
+- **Quality.** Annotated by native speakers from the local communities, with three or four annotators per tweet. Agreement is reported per language and ranges from 0.46 to 0.81 (Randolph's kappa), so quality varies by language ([Muhammad et al., 2025a](../references.md#afrihate-2025)). Look at the number for yours. The individual annotations are released, which helps if you want to study disagreement.
+- **Documentation.** The paper has limitations and ethics sections. Tweets were found with keyword lists, so the data has selection bias: it only contains hate that matches the words the team searched for. The free Twitter/X academic API used to collect it has since been suspended, so extending the data the same way is harder today ([Muhammad et al., 2025a](../references.md#afrihate-2025)).
 
 ## Step 3: Reuse, extend, or build
 
@@ -59,8 +59,8 @@ AfriHate was built by language teams across Africa, each with a coordinator, wor
 
 **Read first:**
 
-- The **[AfriHate paper](https://aclanthology.org/2025.naacl-long.92/)** (Muhammad et al., 2025): the 15-language dataset, especially the data collection, limitations, and ethics sections.
-- The **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto et al., 2020): how to involve communities in dataset work. This matters more for label design here than for most tasks.
+- The **AfriHate paper** ([Muhammad et al., 2025a](../references.md#afrihate-2025)): the 15-language dataset, especially the data collection, limitations, and ethics sections.
+- The **participatory research paper** ([Nekoto et al., 2020](../references.md#nekoto-2020)): how to involve communities in dataset work. This matters more for label design here than for most tasks.
 
 **Questions to ask the authors:**
 
@@ -70,7 +70,10 @@ AfriHate was built by language teams across Africa, each with a coordinator, wor
 
 ## Further reading
 
-- [Challenges and frontiers in abusive content detection (Vidgen et al., 2019)](https://aclanthology.org/W19-3509/): a survey of the method problems in this field. Read it before writing guidelines.
-- [The risk of racial bias in hate speech detection (Sap et al., 2019)](https://aclanthology.org/P19-1163/): how annotator background creates biased labels.
+- [Challenges and frontiers in abusive content detection](../references.md#vidgen-2019) (Vidgen et al., 2019): a survey of the method problems in this field. Read it before writing guidelines.
+- [The risk of racial bias in hate speech detection](../references.md#sap-2019) (Sap et al., 2019): how annotator background creates biased labels.
+- [Two contrasting data annotation paradigms](../references.md#rottger-2022) (Röttger et al., 2022): whether to capture annotators' different views of what is hateful or to enforce one standard, with a hate speech annotation experiment.
+- [Handling and presenting harmful text in NLP research](../references.md#kirk-2022) (Kirk et al., 2022): practical steps to protect annotators and researchers, and how to present harmful examples in a paper.
+- [The psychological well-being of content moderators](../references.md#steiger-2021) (Steiger et al., 2021): a review of the harms of repeated exposure to disturbing content and of the support that helps.
 
 Once you have your data, training a model is well covered elsewhere. The [Hugging Face sequence classification tutorial](https://huggingface.co/docs/transformers/tasks/sequence_classification) is a good start.

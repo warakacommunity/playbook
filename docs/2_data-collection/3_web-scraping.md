@@ -3,7 +3,7 @@ title: Web Scraping
 description: What web scraping can and can't deliver for African-language data, the legal and ethical considerations, and the access landscape as it stands.
 ready: true
 last_update:
-  date: 2026-09-24
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -15,11 +15,11 @@ Learn what web scraping is actually good for, where it falls short for African l
 
 Web scraping means programmatically extracting content from web pages, as opposed to using a platform's official API (the next section), or requesting a bulk export from an institution. It's attractive because it's cheap to start and doesn't require anyone's permission to begin (though, as below, that doesn't mean permission isn't needed). It's the most common entry point into data collection for exactly that reason.
 
-It's also, by itself, the weakest tool in this chapter for the playbook's core problem. As the [Introduction](../1_introduction/introduction.md) lays out, when [Kreutzer et al. (2022)](https://aclanthology.org/2022.tacl-1.4/) audited the large multilingual web crawls most NLP pipelines are built on, they found that for many low-resource languages a large share of the supposedly in-language text was mislabelled, machine-translated, or not the target language at all. Scraping more of the web doesn't fix that; it just collects more of the same noise faster. Scraping is a method for reaching a source that already has volume and quality. It cannot manufacture either where they don't exist.
+It's also, by itself, the weakest tool in this chapter for the playbook's core problem. As the [Introduction](../1_introduction/introduction.md) lays out, when Kreutzer et al. audited the large multilingual web crawls most NLP pipelines are built on, they found that for many low-resource languages a large share of the supposedly in-language text was of unacceptable quality, mislabelled, or not in the target language at all, and that some corpora contained no usable text ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). Scraping more of the web doesn't fix that; it just collects more of the same noise faster. Scraping is a method for reaching a source that already has volume and quality. It cannot manufacture either where they don't exist.
 
 ## The access landscape keeps shifting
 
-Scraping plans that assume the open web behaves the way it did five years ago should be reconsidered. A large and growing share of sites now explicitly disallow AI-related crawlers in their `robots.txt` files, and several major platforms have moved to metered or paid access for bulk crawling rather than leaving it open. Legal disputes over scraping and AI training data remain active and unresolved in multiple jurisdictions ([Brown et al., 2024](https://arxiv.org/abs/2410.23432)). None of this makes scraping impossible, but it means:
+Scraping plans that assume the open web behaves the way it did five years ago should be reconsidered. An audit of the web sources behind widely used training corpora found that, between 2023 and 2024, a fast-growing share of them began restricting AI crawlers through their `robots.txt` files and terms of service, often inconsistently between the two ([Longpre et al., 2024b](../references.md#longpre-2024-consent)). Several major platforms have also restricted access through official channels or moved to paid tiers, and the legal rules on scraping, especially for training AI models, are still being tested in court ([Brown et al., 2024](../references.md#brown-2024)). None of this makes scraping impossible, but it means:
 
 - A scraping plan written today may not work the same way in a year. Budget time to re-check access periodically through a project, not just at the start.
 - `robots.txt` and a site's terms of service aren't just etiquette; they're the basis on which a site operator, or a court, will judge whether your collection was legitimate. Read and respect them.
@@ -27,7 +27,7 @@ Scraping plans that assume the open web behaves the way it did five years ago sh
 
 ## A framework for deciding whether and how to scrape
 
-[Brown et al. (2024)](https://arxiv.org/abs/2410.23432) lay out a four-part framework for research scraping that maps directly onto the questions a contributor to this playbook should ask before starting:
+Brown et al. lay out a four-part framework for research scraping, covering legal, ethical, institutional and scientific considerations, that maps directly onto the questions a contributor to this playbook should ask before starting ([Brown et al., 2024](../references.md#brown-2024)):
 
 - **Legal**: Does the site's terms of service prohibit automated access? Is the content copyrighted, and would your intended redistribution plan need a license or fall under an exception?
 - **Ethical**: Did the people who created this content have any reasonable expectation about how it would be used? Scraping a government gazette is different from scraping a personal blog or a forum where people were writing for a small, known audience.
@@ -36,11 +36,11 @@ Scraping plans that assume the open web behaves the way it did five years ago sh
 
 ## Practical guidance
 
-- **Respect `robots.txt` and rate limits.** Aggressive crawling can get your IP blocked, and for a site already wary of AI scraping, it confirms exactly the behavior they were trying to keep out.
+- **Respect `robots.txt` and rate limits.** Aggressive crawling can get your IP blocked, and for a site already wary of AI scraping, it confirms exactly the behavior they were trying to keep out. Note that `robots.txt` (now an internet standard) states a site's crawling preferences; it is not a form of access authorization, so following it does not by itself make a collection lawful ([Koster et al., 2022](../references.md#rfc9309-2022)).
 - **Prefer official archives and bulk-export options over scraping live pages**, where they exist. They're more stable, less likely to break your pipeline mid-collection, and easier to defend later as a collection method.
 - **Document everything as you go**: the exact URL pattern, the date of collection, the scraper version, and any filtering applied. This becomes the backbone of [Data Provenance and Traceability](./data-provenance-traceability). Provenance is much harder to reconstruct after the fact than to log at the time.
-- **Don't scrape behind logins or around anti-bot measures.** Circumventing access controls carries real legal risk and is a hard line many institutional review boards will not approve, regardless of the research value.
-- **For African-language text specifically, validate language identification on anything you scrape.** Off-the-shelf language identifiers are themselves trained mostly on high-resource languages and frequently misclassify African-language text, exactly the failure mode Kreutzer et al. documented at scale. Spot-check a sample with a native speaker before trusting an automated filter.
+- **Don't scrape behind logins or around anti-bot measures.** In the United States, for example, accessing password-protected pages without authorization can fall under computer-misuse law, and courts are less willing to accept scraping of content protected by technical safeguards ([Brown et al., 2024](../references.md#brown-2024)). It is also hard to justify to an ethics review board, regardless of the research value.
+- **For African-language text specifically, validate language identification on anything you scrape.** Most widely used language identifiers cover only a small number of African languages ([Adebara et al., 2022](../references.md#afrolid-2022)), so they often mislabel African-language text, exactly the failure mode Kreutzer et al. documented at scale. Identifiers built for low-resource languages, such as AfroLID (517 African languages and varieties; [Adebara et al., 2022](../references.md#afrolid-2022)) and GlotLID (more than 1,600 languages; [Kargaran et al., 2023](../references.md#glotlid-2023)), are a better starting point, but no identifier is error-free. Spot-check a sample with a native speaker before trusting an automated filter.
 
 ## A minimal, well-behaved scraper
 
@@ -93,16 +93,20 @@ def extract_text(html: str) -> str:
 def collect(urls: list[str], expected_lang: str, out_path: str) -> None:
     """Fetch each URL, keep only text that looks like the target language,
     and record provenance for every record we keep."""
-    from glotlid import GlotLID  # pip install glotlid
+    import fasttext  # pip install fasttext (or the drop-in fasttext-turbo)
+    from huggingface_hub import hf_hub_download  # pip install huggingface_hub
 
-    identifier = GlotLID()
+    model_path = hf_hub_download(repo_id="cis-lmu/glotlid", filename="model.bin")
+    identifier = fasttext.load_model(model_path)
     with open(out_path, "w", encoding="utf-8") as out:
         for url in urls:
             html = fetch(url)
             if html is None:
                 continue
             text = extract_text(html)
-            label, score = identifier.predict(text)  # e.g. ("hau_Latn", 0.97)
+            labels, scores = identifier.predict(text)  # e.g. (("__label__hau_Latn",), [0.97])
+            label = labels[0].replace("__label__", "")  # e.g. "hau_Latn"
+            score = float(scores[0])
             if not label.startswith(expected_lang) or score < 0.7:
                 print(f"Skipped (language {label}, score {score:.2f}): {url}")
                 continue
@@ -125,8 +129,15 @@ if __name__ == "__main__":
     )
 ```
 
-Three things in this script do the work the prose asked for. The `allowed_by_robots` check refuses to fetch anything the site disallows, and fails closed if the policy can't be read. The `RATE_LIMIT_SECONDS` pause keeps the crawl from looking like an attack. And the language check, using [GlotLID](https://github.com/cisnlp/GlotLID) here, drops anything that isn't confidently the target language, which is the single most important filter for African-language scraping given how often general-purpose crawls mislabel it ([Kreutzer et al., 2022](https://aclanthology.org/2022.tacl-1.4/)). The confidence threshold of `0.7` is a starting point, not a universal value: set it by spot-checking a sample with a native speaker, as described above.
+Three things in this script do the work the prose asked for. The `allowed_by_robots` check refuses to fetch anything the site disallows, and fails closed if the policy can't be read. The `RATE_LIMIT_SECONDS` pause keeps the crawl from looking like an attack. And the language check, using the open [GlotLID](https://github.com/cisnlp/GlotLID) model ([Kargaran et al., 2023](../references.md#glotlid-2023)) here, drops anything that isn't confidently the target language, which is the single most important filter for African-language scraping given how often general-purpose crawls mislabel it ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). The confidence threshold of `0.7` is a starting point, not a universal value: set it by spot-checking a sample with a native speaker, as described above.
 
 ## When scraping is the right call
 
 Scraping earns its place when the target source is large, public, has a clear and permissive access policy, and, critically, actually contains meaningful volume in the target language. It's the wrong tool when the honest problem is that the language simply isn't well represented online yet. In that case, the community, institutional, and purpose-built collection routes covered in [Data Sources](./data-sources) are where the real work is.
+
+## Further reading
+
+- [Brown et al. (2024)](../references.md#brown-2024): a detailed review of the legal, ethical, institutional and scientific questions around web scraping for research.
+- [Longpre et al. (2024b)](../references.md#longpre-2024-consent): an audit of how web sources have restricted AI crawlers through `robots.txt` and terms of service.
+- [Koster et al. (2022)](../references.md#rfc9309-2022): RFC 9309, the standard that defines how `robots.txt` rules are written and read.
+- [Kreutzer et al. (2022)](../references.md#kreutzer-2022): the audit of web-crawled multilingual datasets that shows why language checks matter.

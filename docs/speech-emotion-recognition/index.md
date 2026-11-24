@@ -2,7 +2,7 @@
 ready: true
 title: Speech Emotion Recognition
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -24,7 +24,7 @@ Unlike ASR or diarization, SER is not extracting an objective property of the au
 
 ## What the data looks like
 
-SER data is audio clips labelled with an emotion, either as categories such as anger, joy, or sadness, or along continuous dimensions such as how positive and how aroused the speaker sounds. The shortage of African speech-emotion corpora means most work starts from scratch or borrows from related text-emotion efforts: the BRIGHTER and AfriEmo datasets behind SemEval-2025's emotion task cover emotion in text across more than a dozen African languages and are a useful reference for taxonomy and culture, even though they are text rather than speech ([BRIGHTER, 2025](../references.md#brighter-2025)). The deeper difficulty is that emotional expression is cultural. The vocal cues that read as anger or as respect vary across communities, and an emotion taxonomy built for English speakers may not fit how a given African language and culture expresses feeling. Decide the taxonomy with the community, not for it.
+SER data is audio clips labelled with an emotion, either as categories such as anger, joy, or sadness, or along continuous dimensions such as how positive and how aroused the speaker sounds. The shortage of African speech-emotion corpora means most work starts from scratch or borrows from related text-emotion efforts: the BRIGHTER and AfriEmo datasets behind SemEval-2025's emotion task cover emotion in text across more than a dozen African languages and are a useful reference for taxonomy and culture, even though they are text rather than speech ([Muhammad et al., 2025b](../references.md#brighter-2025)). The deeper difficulty is that emotional expression is cultural. The vocal cues that read as anger or as respect vary across communities, and an emotion taxonomy built for English speakers may not fit how a given African language and culture expresses feeling. Decide the taxonomy with the community, not for it.
 
 Dedicated African speech-emotion corpora do exist, but they are few and small. The Amharic Speech Emotion Dataset (ASED), for example, has 2,474 short clips from 65 native speakers across four dialects, labelled with five classes (neutral, fear, happy, sad, angry). Eight judges, two per dialect, confirmed the labels with high agreement ([Retta et al., 2022](../references.md#retta-2022)). A corpus like ASED is a useful starting point and benchmark for a related language, but it reflects one language, one taxonomy and one collection set-up, so check that its classes and recording conditions match your deployment before reusing it.
 

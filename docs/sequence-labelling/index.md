@@ -114,7 +114,7 @@ Choose with the affix and clitic rule in your guideline in mind (see [Writing th
 
 ### Store offsets in logical order
 
-Unicode text is stored in logical order, the order in which it is read and typed; the bidirectional algorithm changes only how right-to-left text is displayed ([Unicode Consortium, 2026](../references.md#unicode-uax9)). Offsets must count positions in that stored order, from the start of the string, never positions on the screen. Users of annotation tools have been unsure whether exported offsets on Arabic text count from the left or the right of the line ([an example](https://github.com/HumanSignal/label-studio/issues/2653)); storing offsets in logical order removes the question, as long as the dataset card says that is the convention.
+Unicode text is stored in logical order, the order in which it is read and typed; the bidirectional algorithm changes only how right-to-left text is displayed ([Unicode Consortium, 2026e](../references.md#unicode-uax9)). Offsets must count positions in that stored order, from the start of the string, never positions on the screen. Users of annotation tools have been unsure whether exported offsets on Arabic text count from the left or the right of the line ([an example](https://github.com/HumanSignal/label-studio/issues/2653)); storing offsets in logical order removes the question, as long as the dataset card says that is the convention.
 
 Two further details decide whether an offset means the same thing in every program that reads it:
 

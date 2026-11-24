@@ -2,7 +2,7 @@
 ready: true
 sidebar_position: 1
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -37,7 +37,7 @@ Named entity recognition benchmark that grew from 10 African languages in Masakh
 
 ### AfriSenti
 
-14-language sentiment corpus of over 110,000 tweets annotated by native speakers, one of the largest community-curated sentiment resources for African languages ([Muhammad et al., 2023](../references.md#muhammad-2023)).
+14-language sentiment corpus of over 110,000 tweets annotated by native speakers, one of the largest community-curated sentiment resources for African languages ([Muhammad et al., 2023a](../references.md#muhammad-2023)).
 
 **Status:** Draft pending. Focus areas for the retrospective: annotator training across 14 languages, per-language IAA challenges, the crowd-vs-community workforce decision.
 

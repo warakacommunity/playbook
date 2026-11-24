@@ -10,7 +10,9 @@ Learn how to track the origin, history, and transformations of your data to ensu
 
 ## Why Provenance Matters
 
-Understanding where data comes from and how it has been processed is essential for building trustworthy datasets. Provenance supports reproducibility, enables auditing, and helps identify potential issues in data quality and bias.
+Understanding where data comes from and how it has been processed is essential for building trustworthy datasets. Provenance is information about the entities, activities and people involved in producing data, and it helps others judge the data's quality, reliability and trustworthiness ([Groth and Moreau, 2013](../references.md#w3c-prov-2013)). It supports reproducibility, enables auditing, and helps identify potential issues in data quality and bias.
+
+The gap is real in practice. An audit of more than 1,800 text datasets found licence omission rates above 70% and licence error rates above 50% on popular dataset hosting sites; it also found that low-resource language datasets tend to carry restrictive licences ([Longpre et al., 2024a](../references.md#longpre-2024)). Recording the source and licence of every item at collection time is far easier than reconstructing them later.
 
 ## Key Components of Provenance
 
@@ -39,11 +41,11 @@ Record the annotation tool, spreadsheet or script used for labelling, with its v
 
 Lock or version submitted labels rather than silently overwriting them. Keep who created, changed or deleted each label and when, so every released label can be traced through review and correction. On sensitive projects, do not let annotators hard-delete submitted work; route corrections through an authorised reviewer. For field audio, lock the submitted recording and its label because the recording may be impossible to repeat. The [agri-advisory reviewer chain](../agri-advisory/diagnosis-labelling.md#what-the-data-looks-like) is a worked example: each action on a label is appended, never overwritten.
 
-This history supports accountability, but it must not prevent an authorised withdrawal or erasure. Apply those requests to active data and future exports, and record the action without publishing the person's identity or reason. Data already released publicly cannot be recalled; see [Withdrawal](../legal-consent/index.md#withdrawal). Governance events such as role and policy changes belong in the separate [accountability log](../data-governance/index.md#keep-an-accountability-log).
+This history supports accountability, but it must not prevent an authorised withdrawal or erasure. Apply those requests to active data and future exports, and record the action without publishing the person's identity or reason. Data already released publicly cannot be recalled: retracted datasets have kept circulating through copies and derived datasets, often without their documentation ([Peng et al., 2021](../references.md#peng-2021); [Luccioni et al., 2022](../references.md#luccioni-2022)); see [Withdrawal](../legal-consent/index.md#withdrawal). Governance events such as role and policy changes belong in the separate [accountability log](../data-governance/index.md#keep-an-accountability-log).
 
 ## A dataset card you can version
 
-Per-record provenance, like the fields the collectors and cleaner attach to each line, answers "where did this row come from". A dataset card answers the same question for the dataset as a whole, in a single file that lives in the repository next to the data and changes with it. Writing it as YAML keeps it readable, diff-friendly in version control, and parseable by tooling. This format follows the spirit of the documentation standards covered in [Documentation](../6_documentation/documentation.md), kept short enough to actually maintain.
+Per-record provenance, like the fields the collectors and cleaner attach to each line, answers "where did this row come from". A dataset card answers the same question for the dataset as a whole, in a single file that lives in the repository next to the data and changes with it. Writing it as YAML keeps it readable, diff-friendly in version control, and parseable by tooling. This format follows the spirit of the documentation standards covered in [Documentation](../6_documentation/documentation.md), such as datasheets ([Gebru et al., 2021](../references.md#gebru-2021)), data statements ([Bender and Friedman, 2018](../references.md#bender-friedman-2018)) and Data Cards ([Pushkarna et al., 2022](../references.md#pushkarna-2022)), kept short enough to actually maintain.
 
 ```yaml
 # dataset-card.yaml
@@ -87,7 +89,7 @@ citation: >
   Example Community NLP Group (2026). hausa-news-2026 (v1.1.0).
 ```
 
-Two fields here earn their place specifically for African-language work. Recording `collected_records` alongside the final `size` makes the drop rate visible: if a cleaning pass kept only a fraction of what was collected, that belongs in the open, not hidden. And pinning the language as `hau_Latn`, with both the ISO 639-3 code and the script, avoids the ambiguity that bare codes like `ha` invite, which matters for languages written in more than one script.
+Two fields here earn their place specifically for African-language work. Recording `collected_records` alongside the final `size` makes the drop rate visible: if a cleaning pass kept only a fraction of what was collected, that belongs in the open, not hidden. And pinning the language as `hau_Latn`, with both the ISO 639-3 code ([SIL International, n.d.](../references.md#iso-639-3)) and the script, avoids the ambiguity that bare codes like `ha` invite, which matters for languages written in more than one script. Standard BCP 47 language tags express the same idea with a script subtag, such as `ha-Arab` for Hausa in Ajami ([Phillips and Davis, 2009](../references.md#rfc-5646)).
 
 ## A transformation log that travels with the data
 
@@ -100,3 +102,11 @@ The dataset card records the current state. A transformation log records the his
 ```
 
 Read top to bottom, this log tells the whole story of the dataset: how much was collected, how much survived cleaning, and what human review changed. That is exactly the audit trail that makes a dataset defensible later, and it is far cheaper to append a line at each step than to reconstruct the history from memory at release time.
+
+## Further reading
+
+- [Groth and Moreau, 2013](../references.md#w3c-prov-2013): the W3C PROV family of standards for describing who and what produced a piece of data.
+- [Longpre et al., 2024a](../references.md#longpre-2024): a large audit of dataset licensing and attribution, with the Data Provenance Explorer for tracing popular collections.
+- [Pushkarna et al., 2022](../references.md#pushkarna-2022): Data Cards, a structured format for documenting a dataset's sources, collection and annotation.
+- [Akhtar et al., 2024](../references.md#akhtar-2024): Croissant, a machine-readable metadata format that lets tools find and load a dataset.
+- [Luccioni et al., 2022](../references.md#luccioni-2022): how to deprecate or withdraw a dataset so that its status travels with it.

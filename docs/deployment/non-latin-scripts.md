@@ -17,21 +17,22 @@ Most African languages that use a non-Latin script are also languages the mainst
 
 Practical African-language deployment usually intersects one of the following. Each has its own quirks; do not treat them as one problem.
 
-- **Ge'ez (Ethiopic) script**: Amharic, Tigrinya, Tigre, and Ge'ez liturgical. Fully supported in Unicode (blocks U+1200–U+137F and extended); base + vowel-order composed characters give a large glyph inventory. Font coverage is decent on Android but inconsistent on iOS and desktop; input methods are widely available but not always as an OS default.
+- **Ge'ez (Ethiopic) script**: Amharic, Tigrinya, Tigre, and Ge'ez liturgical. Fully supported in Unicode (block U+1200–U+137F plus the Ethiopic Supplement and Extended blocks) ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)); base + vowel-order composed characters give a large glyph inventory. Font coverage and keyboard availability vary by platform and OS version, so check them on your users' devices.
 - **Ajami (Arabic script) for African languages**: Hausa Ajami, Wolof Ajami, Fulfulde Ajami, Kanuri Ajami, Mandinka Ajami. Uses the standard Arabic Unicode block plus extended Arabic (U+0600–U+06FF, U+0750–U+077F). Right-to-left. Font support is generally good (any Arabic-script font renders the base characters), but the specific letter forms and diacritics used in each Ajami tradition vary, and no single font handles every convention well.
-- **N'Ko**: used for Manding languages (Bambara, Mandinka, Malinke). Fully supported in Unicode (U+07C0–U+07FF). Right-to-left. Font support is thin: dedicated N'Ko fonts exist but do not ship by default on most OS platforms.
-- **Tifinagh (Neo-Tifinagh)**: Berber / Tamazight languages, including Kabyle and Tamasheq. Unicode block U+2D30–U+2D7F. Left-to-right. Font support is limited; distributed by Moroccan and Algerian standardisation bodies.
-- **Vai**: Vai language of Liberia and Sierra Leone. Unicode block U+A500–U+A63F. Font support is thin; largely a research and community-preservation script.
-- **Osmanya, Kaddare, Borama**: Somali script systems developed at various times, rarely used today; mentioned here for completeness.
+- **N'Ko**: used for Manding languages (Bambara, Mandinka, Malinke). Fully supported in Unicode (U+07C0–U+07FF) and written right to left ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). Font support is thin: dedicated N'Ko fonts exist but do not ship by default on most OS platforms.
+- **Adlam**: an alphabet created in the late 1980s for Fulani (Pular, Fulfulde) and encoded in Unicode; written right to left ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). As with N'Ko, plan to ship the font.
+- **Tifinagh (Neo-Tifinagh)**: Berber / Tamazight languages, including Kabyle and Tamasheq. Unicode block U+2D30–U+2D7F. Modern text is mostly written left to right ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). Font support is limited.
+- **Vai**: Vai language of Liberia and Sierra Leone. Unicode block U+A500–U+A63F. A syllabary written without spaces between words ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). Font support is thin.
+- **Osmanya, Kaddare, Borama**: Somali script systems developed at various times, rarely used today; mentioned here for completeness. Osmanya is encoded in Unicode; Kaddare and Borama are not among the scripts in the Unicode Standard's chapter on African scripts ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)).
 - **Latin with special characters**: Yorùbá (tone-mark diacritics), Igbo (dots below), Hausa (hooked ɓ, ɗ, ƙ, ƴ), Fon (ɔ, ɛ, ɖ), Ewe (ɖ, ƒ), and many others. Not "non-Latin" strictly, but load-bearing enough that a UI that mangles the diacritics is unusable for exactly the same reasons.
 
 ## Unicode support: a starting inventory
 
 For each script, before designing anything, verify:
 
-- **The Unicode blocks used are supported in the OS versions and platforms your users have.** Modern Android (10+) and iOS (14+) support all the scripts named above; older Android Go devices may lack coverage for less-common blocks (N'Ko, Vai, Tifinagh). Fallback to shipping fonts (below) when OS coverage is unreliable.
+- **The Unicode blocks used are supported in the OS versions and platforms your users have.** Recent Android and iOS releases cover many of the scripts named above, but coverage of the less common blocks (N'Ko, Adlam, Vai, Tifinagh) is uneven on older and entry-level devices, and it changes between OS versions. Check on the devices your users actually own, and fall back to shipping fonts (below) when OS coverage is unreliable.
 - **The specific characters your target text uses.** Ajami is not a single character inventory; different traditions use different subsets. A "supports Arabic" claim from a rendering engine does not mean it supports Ajami Fulfulde specifically. Test with samples of the actual text you will process.
-- **Combining characters render correctly.** Ge'ez composed forms, Latin-with-diacritic combinations, and Arabic-with-diacritic (harakat) all rely on correct combining-character handling. A rendering pipeline that decomposes and re-composes wrongly produces tofu (empty rectangles) or double-rendered marks.
+- **Combining characters render correctly.** Latin-with-diacritic combinations, Arabic-with-diacritic (harakat), and the Ethiopic combining marks all rely on correct combining-character handling (most Ge'ez syllables are single precomposed code points). A rendering pipeline that decomposes and re-composes wrongly produces tofu (empty rectangles) or double-rendered marks.
 
 ## Ship the fonts. Do not rely on OS defaults.
 
@@ -54,10 +55,10 @@ Practical rules:
 
 A UI that renders Ajami perfectly but has no way for the user to type it in is not usable. Input-method (IME) availability varies dramatically by platform.
 
-- **Android**: Gboard supports many African languages and scripts natively, including Ajami-adjacent Arabic keyboards and Ethiopic. Coverage of N'Ko, Tifinagh, and Vai keyboards is thinner and typically requires third-party IMEs (GeezIME, Multiling O Keyboard, and similar).
-- **iOS**: native keyboard coverage for African scripts is thinner than Android. Amharic and Tigrinya have decent support; Ajami, N'Ko, Tifinagh users typically install third-party keyboard apps.
-- **Web**: no OS-level input method available; if your users lack a system keyboard, provide an on-screen software keyboard or a Latin-to-target-script transliteration input. Both are engineering work.
-- **KaiOS and feature phones**: input methods are very limited; the practical answer for these users is voice input (see [ASR chapter](../asr/index.md)) or transliterated Latin input.
+- **Android**: Gboard lists layouts for many African languages and scripts, including Amharic and Tigrinya (Ethiopic), Bambara and Jula in N'Ko, Fula in Adlam, Tamazight in Tifinagh, and Vai ([Google, n.d.](../references.md#gboard-languages)). The list does not include Hausa Ajami, so Ajami users may need a generic Arabic layout or a third-party keyboard. The keyboard has to be installed and enabled by the user, which many will not have done.
+- **iOS**: built-in keyboard coverage for African scripts differs from Android's and changes between releases; check the current list for your target scripts. Where a script is missing, users install third-party keyboard apps.
+- **Web**: the page uses whatever keyboard the operating system provides; if your users lack a system keyboard for the script, provide an on-screen software keyboard or a Latin-to-target-script transliteration input. Both are engineering work.
+- **KaiOS and feature phones**: keypad input for these scripts is limited or absent; the practical answer for these users is voice input (see [ASR chapter](../asr/index.md)) or transliterated Latin input.
 
 For a deployment that expects users to type in the target script, **verify with users what keyboards they have installed and how they type**. Do not assume; the reality is usually that a substantial share of your users type in a Latin transliteration and switch mentally, which has downstream implications for search, storage, and matching.
 
@@ -65,21 +66,21 @@ For a deployment that expects users to type in the target script, **verify with 
 
 Common issues to test for on real devices:
 
-- **Bidirectional (bidi) text.** Ajami is right-to-left. Latin is left-to-right. A single message can contain both, and the UI has to lay them out correctly. Bidirectional support in modern web and mobile frameworks is generally solid, but layout bugs surface especially around punctuation ("(This is Latin) and this هو عربي") and mixed-script UI elements (a button label in Latin sitting in a right-to-left text flow).
-- **Contextual shaping for Arabic-script text.** Arabic letters take different forms depending on their position in a word (initial, medial, final, isolated). A rendering engine that gets this wrong produces disconnected letters that read as broken text to users. Rare in modern engines but still happens on older Android WebViews and older desktop browsers.
-- **Combining marks and normalisation.** Same character sequence, different Unicode normalisation forms (NFC vs NFD), can render as different-looking text. Normalise all input to NFC on storage; render from NFC.
-- **Line breaking and word wrap.** Scripts have different line-break rules. Arabic breaks between words but not letters. Ge'ez breaks between syllables. N'Ko has its own conventions. Frameworks usually handle this correctly if the text is tagged with the correct language, and get it wrong if the text is tagged generically.
-- **Text-selection behaviour.** Users double-tap to select a word; the definition of "a word" is language-dependent. Ge'ez script uses spaces less consistently than Latin; Arabic-script languages often need adjustment. If the selection behaviour is unusable, users cannot copy, paste, or edit their own input.
+- **Bidirectional (bidi) text.** Ajami, N'Ko and Adlam are right-to-left. Latin is left-to-right. A single message can contain both, and the UI has to lay them out correctly. Text is stored in logical order and the Unicode Bidirectional Algorithm decides only how it is displayed ([Unicode Consortium, 2026e](../references.md#unicode-uax9)). Bidirectional support in modern web and mobile frameworks is generally solid, but layout bugs surface especially around punctuation ("(This is Latin) and this هو عربي") and mixed-script UI elements (a button label in Latin sitting in a right-to-left text flow).
+- **Contextual shaping for Arabic-script text.** Arabic letters take different forms depending on their position in a word (initial, medial, final, isolated). A rendering engine that gets this wrong produces disconnected letters that read as broken text to users. Modern engines usually get this right; older WebViews and browsers are where to look for failures.
+- **Combining marks and normalisation.** The same text can be stored as different code-point sequences (for example NFC and NFD) that Unicode treats as canonically equivalent, and these can render or compare differently ([Unicode Consortium, 2026c](../references.md#unicode-uax15)). Normalise all input to NFC on storage, as the W3C recommends for web content; render from NFC.
+- **Line breaking and word wrap.** Scripts have different line-break rules, and the defaults can be tailored by language ([Unicode Consortium, 2026b](../references.md#unicode-uax14)). Arabic breaks between words but not letters. Ethiopic text breaks after its wordspace (፡) or a plain space; Vai is written without spaces between words, so breaks fall between syllables ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). Frameworks usually handle this correctly if the text is tagged with the correct language, and get it wrong if the text is tagged generically.
+- **Text-selection behaviour.** Users double-tap to select a word; the definition of "a word" is language-dependent. Ethiopic text may use the traditional wordspace (፡) rather than a space, which word-selection code may not treat as a boundary ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)); Arabic-script languages often need adjustment. If the selection behaviour is unusable, users cannot copy, paste, or edit their own input.
 - **Right-to-left UI mirroring.** For a majority-Ajami interface, the entire UI (nav bar direction, icon positions, scroll direction) should mirror. This is a design decision beyond text rendering.
 
 ## Search and normalisation
 
 If your app searches over text (knowledge base, message history, contact list), a naive search over African-language content will silently fail for users who type slightly differently from how the content is stored.
 
-- **Normalise on storage.** Unicode NFC, consistent diacritic-preserving or diacritic-stripping strategy (decide up front), consistent script variant if the language uses more than one.
-- **Diacritic-insensitive matching as a fallback.** Users writing without diacritics because their keyboard makes it hard should still find diacritic-carrying content. Case-insensitive is standard; add diacritic-insensitive as a fallback branch, not the primary.
+- **Normalise on storage.** Unicode NFC ([Unicode Consortium, 2026c](../references.md#unicode-uax15)), consistent diacritic-preserving or diacritic-stripping strategy (decide up front), consistent script variant if the language uses more than one.
+- **Diacritic-insensitive matching as a fallback.** Users writing without diacritics because their keyboard makes it hard should still find diacritic-carrying content. Case-insensitive is standard; add diacritic-insensitive as a fallback branch, not the primary. The Unicode Collation Algorithm separates base letters, accents and case into comparison levels, so a collation-aware search library can match on base letters alone ([Unicode Consortium, 2026d](../references.md#unicode-uts10)).
 - **Cross-script matching for languages written in more than one script.** A user searching for a Hausa term in Latin should optionally match Ajami content, if the deployment holds both. This requires a transliteration map at index time; the transliteration is not a purely mechanical operation and needs script-community input.
-- **Do not autocorrect.** Autocorrect systems trained on English will destroy Ajami, Ge'ez, and diacritic-carrying Latin input. Disable it on your input fields. Users who want it will re-enable it themselves.
+- **Do not autocorrect.** Autocorrect tuned for English or another dominant language can mangle Ajami, Ge'ez, and diacritic-carrying Latin input. Disable it on your input fields. Users who want it will re-enable it themselves.
 
 ## Testing methodology
 
@@ -101,12 +102,12 @@ If your app searches over text (knowledge base, message history, contact list), 
 
 ## Further reading
 
-- [Google Noto project](https://fonts.google.com/noto): the reference open-font family covering all Unicode scripts including all African scripts named above.
+- [Google Noto project](https://fonts.google.com/noto): the open-font family that aims to cover every script in Unicode, including the encoded African scripts named above.
 - [SIL International fonts](https://software.sil.org/fonts/): the reference for Latin-diacritic African-language rendering (Charis, Doulos, Andika).
 - [Unicode CLDR (Common Locale Data Repository)](https://cldr.unicode.org/): the reference for locale, sorting, and text-processing conventions per language; check for locale coverage before assuming a framework handles your target language correctly.
 - [W3C Internationalisation Working Group articles](https://www.w3.org/International/articles/): the practical guide to bidirectional text, script shaping, and multilingual UI design.
-- [Kelela / OCR4All African community efforts](https://github.com/OCR4all): indirectly relevant: the same script-community expertise required for OCR is required for UI text handling.
-- [Noto team's Ethiopic notes](https://notofonts.github.io/): the Noto project's per-script design considerations, useful reading for anyone diving deeper into Ethiopic or Arabic rendering.
+- The Unicode Standard's chapter on African scripts ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)): per-script notes on direction, word separation, punctuation and line breaking for Ethiopic, N'Ko, Adlam, Tifinagh, Vai and others.
+- [Noto fonts per-script repositories](https://notofonts.github.io/): the source repositories and issue trackers for each Noto script family, useful when a glyph or shaping problem needs reporting upstream.
 
 ---
 

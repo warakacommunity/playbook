@@ -3,7 +3,7 @@ title: Governance Toolkit
 sidebar_position: 0
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -35,6 +35,12 @@ The three experts who drafted these documents worked from different disciplines,
 
 ## What the toolkit is not
 
-It is not legal advice. Every template carries a disclaimer for a reason: data protection, employment, and copyright law differ by country, and several of the questions the toolkit raises have no settled answer in any African jurisdiction. Use the documents to arrive at a well-reasoned draft, then have someone qualified in the relevant country read it.
+It is not legal advice. Every template carries a disclaimer for a reason: data protection, employment, and copyright law differ by country, and several of the questions the toolkit raises have no settled answer in many African jurisdictions. Use the documents to arrive at a well-reasoned draft, then have someone qualified in the relevant country read it.
 
 It is also not a substitute for the conversation with the community. The templates carry opinionated defaults, following the playbook's [editorial rule for templates](../templates/index.md#editorial-rules-for-templates), so that a project starts from a good position rather than a blank page. The community's answer overrides the default every time.
+
+## Further reading
+
+- [Jernite et al. (2022)](../references.md#jernite-2022): a distributed governance structure for language data, developed for the BigScience project.
+- [Carroll et al. (2020)](../references.md#carroll-2020): the CARE Principles, on a community's authority over data about it.
+- [Malabo Convention (2023)](../references.md#malabo-2023): the African Union treaty on personal-data protection, in force since June 2023.

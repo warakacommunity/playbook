@@ -33,7 +33,7 @@ export const tree = {
     },
     fixConsent: {
       result: 'Do not release yet. Go back to the contributors.',
-      summary: 'Re-consent the items whose terms are unclear, or drop them from the release. A licence cannot repair missing consent, and the 60-day opt-out window in the consent form must have closed before anything goes public.',
+      summary: 'Re-consent the items whose terms are unclear, or drop them from the release. A licence cannot repair missing consent, and contributors must have had the chance to withdraw, as the consent form allows, before anything goes public.',
       caveats: ['Keep the withdrawn items out of every future release too.', 'Record which items were dropped and why in the datasheet.'],
     },
     sources: {
@@ -48,7 +48,7 @@ export const tree = {
     },
     checkSources: {
       result: 'Stop and check every source before you continue.',
-      summary: 'List each source with its licence in the datasheet. You cannot grant rights you do not hold, and a single non-commercial image makes a CC BY release unlawful.',
+      summary: 'List each source with its licence in the datasheet. You cannot grant rights you do not hold, and a single non-commercial image released under CC BY breaches the licence of that image.',
       caveats: ['Model outputs: check the provider\'s terms; some forbid training competing models.', 'Scraped text: check the site terms and the data-protection law of the country.'],
     },
     sourceTerms: {
@@ -82,7 +82,7 @@ export const tree = {
     },
     ccBy: {
       result: 'Release under CC BY 4.0.',
-      summary: 'The default for open African-language data and the licence most funders and hubs expect. Reusers must credit the dataset as you specify in the datasheet.',
+      summary: 'The default for open African-language data and a licence many funders and hubs accept. Reusers must credit the dataset as you specify in the datasheet.',
       url: 'https://creativecommons.org/licenses/by/4.0/',
       caveats: ['Record the required citation and the contributor credits in the dataset card.', 'CC0 is an option only when the community explicitly waives attribution.'],
     },
@@ -143,4 +143,12 @@ The dataset card does not always travel with the data. A single split, a sample 
 }
 ```
 
-A licence is hard to change after release. Copies already downloaded keep the terms they were released under, so a later move from CC BY to a community licence only binds new downloads. If the community may want to tighten terms later, start with the tighter licence.
+A licence is hard to change after release. Creative Commons licences cannot be revoked: you may stop distributing under one, but copies already downloaded keep the terms they were released under ([Creative Commons, n.d.-b](../references.md#cc-faq)). A later move from CC BY to a community licence therefore only binds new downloads. If the community may want to tighten terms later, start with the tighter licence.
+
+## Further reading
+
+The outcomes in the tree rest on these licence texts and studies.
+
+- [Creative Commons (n.d.-a)](../references.md#cc-licenses): what each CC licence permits and requires, including share-alike and non-commercial terms.
+- [NOODL (2025)](../references.md#noodl-2025) and [Esethu Framework (2025)](../references.md#esethu-2025): the two African community licences behind the community-licence outcome.
+- [Longpre et al. (2024a)](../references.md#longpre-2024): an audit showing how often dataset licences are missing or wrong on hosting sites, which is why the tree asks you to check every source.

@@ -10,19 +10,19 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-You have a language with a speaker community and essentially no digital resources. There is no MasakhaNER split for it, no NLLB-200 pair, no Meta MMS adapter, no HF Hub dataset card. The [cross-language transfer](../cross-language-transfer/index.md) chapter told you which resourced language to transfer from as a starting point; this chapter is about what comes next: how to build the first real dataset for a language that has none.
+You have a language with a speaker community and essentially no digital resources. There is no MasakhaNER split for it ([Adelani et al., 2021](../references.md#adelani-2021)), no NLLB-200 pair ([NLLB Team, 2022](../references.md#nllb-2022)), no Meta MMS adapter ([Pratap et al., 2023](../references.md#pratap-2023)), no HF Hub dataset card. The [cross-language transfer](../cross-language-transfer/index.md) chapter told you which resourced language to transfer from as a starting point; this chapter is about what comes next: how to build the first real dataset for a language that has none.
 
 This chapter is written for the reader who is often the source of the language itself: a native speaker, a community leader, a linguist working with a community, or a small research group. It is not written for a big lab. Big labs already have their own playbooks. **What this chapter tries not to do is let anyone start a long-tail language project with unrealistic timelines or an extractive plan.**
 
 ## What "long-tail" means here
 
-We use "long-tail" to describe languages sitting in Joshi et al.'s ([2020](https://aclanthology.org/2020.acl-main.560/)) resource classes 0 or 1: no substantial labelled corpus, little unlabelled text, no benchmark, no widely-deployed model. Most African languages are in this position, and the reasoning below applies to any of them. It also applies to well-resourced-elsewhere languages that lack a specific modality or task. A language with plentiful text but no speech corpus is long-tail for ASR.
+We use "long-tail" to describe languages sitting in the resource classes 0 or 1 of [Joshi et al. (2020)](../references.md#joshi-2020): no substantial labelled corpus, little unlabelled text, no benchmark, no widely-deployed model. Most African languages are in this position, and the reasoning below applies to any of them. It also applies to well-resourced-elsewhere languages that lack a specific modality or task. A language with plentiful text but no speech corpus is long-tail for ASR.
 
 The framing is *not* about speaker population. Some long-tail languages have tens of millions of speakers. The gap is in resources, not in size.
 
 ## Step 0: before any data collection
 
-Before recording a single sentence, three things must be settled with the community. Every project that skipped this step and tried to catch up later has paid for it downstream.
+Before recording a single sentence, three things must be settled with the community. In our experience, projects that skip this step and try to catch up later pay for it downstream.
 
 ### Orthography
 
@@ -46,7 +46,7 @@ The use case shapes everything: what genres to record, what vocabulary to priori
 
 Who owns what the project produces? Under whose licence is it released? Who has the right to re-license it if a commercial actor asks? Who decides if a foreign lab wants to use the data to train a commercial model? These questions belong at the start, in writing, agreed with the community whose language is being recorded, not left to be figured out at release time.
 
-The [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference for what needs to be agreed and how, including consent workflows for non-literate contributors, licence selection (why CC BY-NC 4.0 is the honest default for community-derived African-language data), and the anti-extraction release patterns that keep the community in control after release. The [Nekoto et al. (2020) participatory model](https://aclanthology.org/2020.findings-emnlp.195/) is the reference for how Masakhane handles this end-to-end; adopt it or something equivalent, but do not skip it. See also the [core principles](../1_introduction/core-principles.md): consent and community ownership are load-bearing here.
+The [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference for what needs to be agreed and how, including consent workflows for non-literate contributors, licence selection (why CC BY-NC 4.0 is the honest default for community-derived African-language data), and the anti-extraction release patterns that keep the community in control after release. The participatory model of [Nekoto et al. (2020)](../references.md#nekoto-2020) is the reference for how Masakhane handles this end-to-end; adopt it or something equivalent, but do not skip it. See also the [core principles](../1_introduction/core-principles.md): consent and community ownership are load-bearing here.
 
 ## Step 1: the team
 
@@ -56,9 +56,9 @@ The team that works well for a long-tail project is not the team that works well
 - **A community liaison**: a person the speaker community trusts, empowered to raise concerns or halt the project when something is going wrong. This is a distinct role from the native-speaker annotator; they need not overlap.
 - **A linguistically-trained consultant** familiar with the language family. For a very under-studied language, this is essential; the risk of mis-analysing morphology or tone is high without it.
 - **A technical lead** who can build the tokeniser, run the training, ship the model. This person does not need to be a native speaker, but does need to work as a partner to the native speakers, not as a supervisor.
-- **A project coordinator**: someone whose full job is keeping the schedule, managing consent forms, keeping data organised, running weekly check-ins. Long-tail projects fail from coordination collapse more often than from technical problems.
+- **A project coordinator**: someone whose full job is keeping the schedule, managing consent forms, keeping data organised, running weekly check-ins. Long-tail projects often stall on coordination rather than on technical problems.
 
-Under-staffing on any of the first three roles is the single most common way long-tail projects run into unrecoverable trouble.
+In our experience, under-staffing any of the first three roles is one of the most common ways long-tail projects run into unrecoverable trouble.
 
 ## Step 2: realistic milestones
 
@@ -98,14 +98,14 @@ Where should the sentences come from? In order of preference:
 
 1. **Community-produced original content.** Interviews, radio, storytelling, community-generated text. Highest quality, highest community buy-in, most representative.
 2. **Existing translated texts, once vetted.** Government publications, health materials, textbooks. Domain-restricted (formal, written register) but useful. Vet each source with the community, since some may be poorly translated and worse than nothing.
-3. **Bible translations and similar religious content.** Available for many long-tail African languages via [JW300](https://aclanthology.org/P19-1310/) and similar. Useful as a bootstrap corpus, dangerous as a *sole* corpus because it locks the model into a single narrow domain. Never build only on this.
+3. **Bible translations and similar religious content.** Available for many long-tail African languages; JW300, for example, covered over 300 languages ([Agić and Vulić, 2019](../references.md#agic-2019)). Check the rights before use: JW300's source website bars text and data mining, a request for permission was refused, and Masakhane stopped using it ([Cashdan, 2025](../references.md#cashdan-2025)). Where the rights are clear, religious text is useful as a bootstrap corpus, dangerous as a *sole* corpus because it locks the model into a single narrow domain. Never build only on this.
 4. **Elicited translations from a lingua franca.** Ask native speakers to translate a defined set of sentences. Controllable, expensive, prone to "translationese": sentences that read like translations, not native language. Use in moderation.
-5. **Machine-translated bootstrap.** Very last resort. Machine translation into a low-resource language produces low-quality output that then contaminates every downstream model trained on it. If you must use it, mark it clearly and never mix it with human-produced content without a flag.
+5. **Machine-translated bootstrap.** Very last resort. Machine translation into a low-resource language produces low-quality output that then contaminates every downstream model trained on it; machine-translated text already makes up a large share of web content in lower-resource languages ([Thompson et al., 2024](../references.md#thompson-2024)). If you must use it, mark it clearly and never mix it with human-produced content without a flag.
 
 Sources to **avoid**, in order of severity:
 
-- **Social media scrapes** for languages this under-served. The quality problems documented by [Kreutzer et al. (2022)](https://aclanthology.org/2022.tacl-1.4/) (mislabelled languages, machine-translated posts, off-topic content, spam) are magnified for long-tail languages. Assume 60-90% of what a naive scrape returns is unusable, and the effort of filtering is often greater than the effort of collecting cleaner data from the start.
-- **Web crawls of unclear provenance** (Common Crawl low-resource extracts, CC-100 low-resource pairs, arbitrary OPUS entries for the language). Same reasoning. If you use these, spot-check a random 200-sentence sample with native speakers before training.
+- **Social media scrapes** for languages this under-served. Mislabelled languages, machine-translated posts, off-topic content and spam are magnified for long-tail languages. Expect much of what a naive scrape returns to be unusable; the effort of filtering is often greater than the effort of collecting cleaner data from the start.
+- **Web crawls of unclear provenance** (Common Crawl low-resource extracts, CC-100 low-resource pairs, arbitrary OPUS entries for the language). An audit of large web-crawled multilingual corpora found that at least 15 corpora had no usable text and that a significant fraction of the lower-resource corpora had less than 50% of sentences of acceptable quality ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). If you use these, spot-check a random 200-sentence sample with native speakers before training.
 - **Agency-purchased translations** from non-community sources. Fast, expensive, and quality varies wildly. Non-community translation also cuts against the community-IP framework in Step 0: the community did not agree to this data existing.
 - **Old missionary linguistic material** as anything other than a linguistic-history reference. Orthography and analysis in colonial-era materials often reflect the analyst's assumptions rather than the community's practice.
 
@@ -120,12 +120,12 @@ Sources to **avoid**, in order of severity:
 
 ## Further reading
 
-- [Nekoto et al., 2020, the participatory approach](https://aclanthology.org/2020.findings-emnlp.195/): the foundational Masakhane paper on how a community-led long-tail language project actually works.
-- [Joshi et al., 2020, resource classes](https://aclanthology.org/2020.acl-main.560/): the taxonomy that frames why the first thousand clean sentences matter.
-- [Kreutzer et al., 2022, low-resource corpus quality](https://aclanthology.org/2022.tacl-1.4/): required reading before touching any web crawl for a long-tail language.
-- [Bird, 2020, decolonising speech and language technology](https://aclanthology.org/2020.coling-main.313/): the ethical framing for whose language is being processed and on whose terms.
-- [MasakhaNER 1 (Adelani et al., 2021)](https://aclanthology.org/2021.tacl-1.66/): a worked example of the participatory workflow in a specific NER project; useful as a template for scope, effort, and team structure.
-- [Common Voice technical description](https://arxiv.org/abs/1912.06670): the design of a scalable community-recording effort; useful reading for anyone approaching Milestone 3-4 in speech.
+- [Nekoto et al. (2020)](../references.md#nekoto-2020), the participatory approach: the foundational Masakhane paper on how a community-led long-tail language project actually works.
+- [Joshi et al. (2020)](../references.md#joshi-2020), resource classes: the taxonomy that frames why the first thousand clean sentences matter.
+- [Kreutzer et al. (2022)](../references.md#kreutzer-2022), low-resource corpus quality: required reading before touching any web crawl for a long-tail language.
+- [Bird (2020)](../references.md#bird-2020), decolonising speech and language technology: the ethical framing for whose language is being processed and on whose terms.
+- [Adelani et al. (2021)](../references.md#adelani-2021), MasakhaNER: a worked example of the participatory workflow in a specific NER project; useful as a template for scope, effort, and team structure.
+- [Ardila et al. (2020)](../references.md#ardila-2020), Common Voice: the design of a scalable community-recording effort; useful reading for anyone approaching Milestone 3-4 in speech.
 
 ---
 

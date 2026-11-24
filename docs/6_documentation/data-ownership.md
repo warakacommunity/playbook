@@ -3,13 +3,13 @@ sidebar_position: 4
 title: Data Ownership Documentation Template
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
 # Data Ownership Documentation Template
 
-This template records who owns and controls a dataset, who contributed to it, and what may be done with it. It is the written backbone of the community-ownership principle, and it is what lets you answer, years later, the question of who decides.
+This template records who owns and controls a dataset, who contributed to it, and what may be done with it. It is the written backbone of the community-ownership principle, which echoes the CARE principles' call for communities to hold authority over data about them ([Carroll et al., 2020](../references.md#carroll-2020)), and it is what lets you answer, years later, the question of who decides.
 
 ## When to use this template
 
@@ -38,3 +38,9 @@ The dataset's identity, its owners and rights holders, the rights in any source 
 ---
 
 This document works hand in hand with the licence and the [data governance](../data-governance/index.md) chapter: governance is the reasoning, this is the record.
+
+## Further reading
+
+- [Carroll et al. (2020)](../references.md#carroll-2020): the CARE Principles for Indigenous Data Governance (collective benefit, authority to control, responsibility, ethics).
+- [Te Hiku Media](../references.md#tehiku-kaitiakitanga): the Kaitiakitanga licence, which treats data as held in guardianship for the source community rather than owned.
+- [Local Contexts (n.d.)](../references.md#localcontexts-labels): Traditional Knowledge and Biocultural Labels that let communities attach their own conditions of use to data.

@@ -30,7 +30,7 @@
     <path d="M568 154 l14 14 M582 154 l-14 14"/>
     <path d="M568 196 l14 14 M582 196 l-14 14"/>
   </g>
-  <text x="600" y="124" font-size="16" fill="#2B2218">Only ~1&#8211;3% of tweets are geotagged</text>
+  <text x="600" y="124" font-size="16" fill="#2B2218">Only about 1% of tweets are geotagged</text>
   <text x="600" y="166" font-size="16" fill="#2B2218">Location &#8800; author&#8217;s language region</text>
   <text x="600" y="208" font-size="16" fill="#2B2218">Platform-dependent metadata</text>
 </svg>

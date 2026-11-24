@@ -3,7 +3,7 @@ sidebar_position: 2
 title: NER
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -17,25 +17,25 @@ This page applies the [four steps from Before You Start](./index.md) to named en
 
 Search Hugging Face, Lanfrica, or the ACL Anthology for NER in almost any major African language and you will quickly reach two datasets:
 
-- **[MasakhaNER 2](https://arxiv.org/abs/2210.12391)** (Adelani et al., 2022): 20 languages. Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Kiswahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, and Yorùbá.
-- **[MasakhaNER 1](https://aclanthology.org/2021.tacl-1.66/)** (Adelani et al., 2021): the first 10 languages. Version 2 covers most of them, but version 1 is still the one to use for **Amharic**, which version 2 does not include. Its paper also explains how the annotation process was designed.
+- **MasakhaNER 2** ([Adelani et al., 2022a](../references.md#adelani-2022)): 20 languages. Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Kiswahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, and Yorùbá.
+- **MasakhaNER 1** ([Adelani et al., 2021](../references.md#adelani-2021)): the first 10 languages. Version 2 covers most of them, but version 1 is still the one to use for **Amharic**, which version 2 does not include. Its paper also explains how the annotation process was designed.
 
 The data is on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2), and the [GitHub repository](https://github.com/masakhane-io/masakhane-ner) has the annotation guidelines and evaluation scripts.
 
-You will also find **automatically labelled ("silver") NER data** that covers many more languages, built by projecting labels from Wikipedia links rather than by human annotators. It is tempting because of its coverage. Step 2 is where you find out whether its quality is good enough for your purpose.
+You will also find **automatically labelled ("silver") NER data** that covers many more languages, such as WikiAnn, built by projecting labels from Wikipedia links rather than by human annotators ([Pan et al., 2017](../references.md#wikiann-2017)). It is tempting because of its coverage. Step 2 is where you find out whether its quality is good enough for your purpose.
 
 ## Step 2: Judging MasakhaNER 2 against the checklist
 
-- **Licence.** CC BY-NC 4.0: free for research, **not for commercial use**. If you are building a product, check this first.
+- **Licence.** Non-commercial: the dataset card states CC 4.0 Non-Commercial in its licensing section, although its metadata field shows a different licence. It is free for research but **not for commercial use**. If you are building a product, check this first, and confirm with the authors if the card is unclear.
 - **Access.** Openly downloadable from Hugging Face and GitHub.
-- **Fit.** News text. Social media, government documents, or speech transcripts look different, so expect lower accuracy on them.
+- **Fit.** News text from local news sources ([Adelani et al., 2022a](../references.md#adelani-2022)). Social media, government documents, or speech transcripts look different, so expect lower accuracy on them.
 - **Script.** Latin script only. Hausa Ajami, Arabic-script Wolof, and Ge'ez-script languages are not covered.
 - **Code-switching.** The sentences are monolingual. Real text often mixes languages within a sentence (Hausa–English, Swahili–English, French–Wolof). If yours does, expect results to be worse than the published numbers.
-- **Labels.** Person, organisation, location, and date. "Organisation" may not match what your use case means by it, so read the guidelines before assuming the label set fits.
+- **Labels.** Person, organisation, location, and date ([Adelani et al., 2022a](../references.md#adelani-2022)). "Organisation" may not match what your use case means by it, so read the guidelines before assuming the label set fits.
 - **Splits.** Fixed train, development, and test splits, so results are comparable across papers.
 - **Guidelines.** Released. Even if your language is not covered, the guidelines are the best starting point for writing your own.
-- **Quality.** Annotated by native speakers through a participatory process. The papers describe it in detail.
-- **Diacritics.** In Yorùbá, Igbo, and several other languages, tone marks carry meaning. Check that your text processing keeps them, or entity boundaries will shift and results will look worse than they are.
+- **Quality.** Each language was annotated by three native speakers, supervised by a language coordinator ([Adelani et al., 2022a](../references.md#adelani-2022)). The papers describe the process in detail.
+- **Diacritics.** In Yorùbá, Igbo, and several other languages, tone marks carry meaning. The MasakhaNER 2 team had native speakers add missing diacritics to Yorùbá text before annotation ([Adelani et al., 2022a](../references.md#adelani-2022)). Check that your text processing keeps them, or entity boundaries will shift and results will look worse than they are.
 
 ## Step 3: Reuse, extend, or build
 
@@ -48,7 +48,7 @@ Find the row that matches your situation, then follow it across. The first quest
 | Your language is **covered** by MasakhaNER 2, and its labels (person, organisation, location, date) are enough for your task | **Reuse MasakhaNER 2** | Do not build a new corpus for these labels. |
 | Your language is **covered**, but you need **extra entity types** (money, products, culture-specific) | **Extend it** | Annotate the extra types on the existing splits and reuse the guidelines. Do not re-annotate person, organisation, and location; merge. |
 | Your language is **not covered**, but it is **related** to one of the 20 (same family or script) | **Borrow, then build small** | Try [cross-language transfer](/cross-language-transfer) from the closest covered language, then build a small evaluation set in your own language using the MasakhaNER guidelines. |
-| Your language is **not covered** and **not related** to any of the 20 | **Build from scratch** | Start with the [long-tail language onboarding](/long-tail-language) chapter, then [Data Collection](/data-collection/Overview), [Annotation Design](/annotation-design/annotation-task-design), and [Data Quality](/data-quality). Read the MasakhaNER guidelines before writing your own, and aim for 5,000–10,000 sentences to start. |
+| Your language is **not covered** and **not related** to any of the 20 | **Build from scratch** | Start with the [long-tail language onboarding](/long-tail-language) chapter, then [Data Collection](/data-collection/Overview), [Annotation Design](/annotation-design/annotation-task-design), and [Data Quality](/data-quality). Read the MasakhaNER guidelines before writing your own, and plan for several thousand sentences: MasakhaNER 2 annotated between about 4,800 and 11,000 sentences per language. |
 
 </div>
 
@@ -59,9 +59,9 @@ MasakhaNER was built by volunteer researchers and native-speaker annotators acro
 **Read first:**
 
 - The **[MasakhaNER case study](../case-studies/masakhaner.md)** in this playbook: how the project was organised and what the team learned.
-- The **[MasakhaNER 2 paper](https://arxiv.org/abs/2210.12391)** (Adelani et al., 2022): the 20-language dataset and its analysis.
-- The **[MasakhaNER 1 paper](https://aclanthology.org/2021.tacl-1.66/)** (Adelani et al., 2021): how the annotation process was designed.
-- The **[participatory research paper](https://aclanthology.org/2020.findings-emnlp.195/)** (Nekoto et al., 2020): the Masakhane way of working that MasakhaNER grew out of.
+- The **MasakhaNER 2 paper** ([Adelani et al., 2022a](../references.md#adelani-2022)): the 20-language dataset and its analysis.
+- The **MasakhaNER 1 paper** ([Adelani et al., 2021](../references.md#adelani-2021)): how the annotation process was designed.
+- The **participatory research paper** ([Nekoto et al., 2020](../references.md#nekoto-2020)): the Masakhane way of working that MasakhaNER grew out of.
 
 **Questions to ask the authors:**
 

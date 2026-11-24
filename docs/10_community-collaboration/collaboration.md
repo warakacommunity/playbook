@@ -3,7 +3,7 @@ title: Collaboration and Shared Tasks
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -13,7 +13,7 @@ Beyond standing communities, African NLP advances through organised collaboratio
 
 ## Shared tasks and benchmarks
 
-A shared task sets a common problem, a common dataset, and a common way of scoring, then invites everyone to take part. The effect multiplies effort: many teams build data and models for the same goal at once, and the field gets a benchmark to measure progress against afterward. African NLP has used this pattern repeatedly and well. AfriSenti became a SemEval shared task that produced sentiment datasets for fourteen languages and drew dozens of participating systems ([Muhammad et al., 2023](../references.md#muhammad-2023)), the MasakhaNER efforts coordinated named-entity annotation across twenty languages ([Adelani et al., 2022a](../references.md#adelani-2022)), and benchmarks like IrokoBench now give the community a shared yardstick for large language models on African languages. Contributing to a shared task is one of the most efficient ways to add a new language to the map, because you inherit the protocol, the tooling, and the company of others doing the same work.
+A shared task sets a common problem, a common dataset, and a common way of scoring, then invites everyone to take part. The effect multiplies effort: many teams build data and models for the same goal at once, and the field gets a benchmark to measure progress against afterward. African NLP has used this pattern repeatedly and well. AfriSenti became a SemEval shared task that produced sentiment datasets for fourteen languages and drew dozens of participating systems ([Muhammad et al., 2023a](../references.md#muhammad-2023)), the MasakhaNER efforts coordinated named-entity annotation across twenty languages ([Adelani et al., 2022a](../references.md#adelani-2022)), and benchmarks like IrokoBench now give the community a shared yardstick for large language models on African languages. Contributing to a shared task is one of the most efficient ways to add a new language to the map, because you inherit the protocol, the tooling, and the company of others doing the same work.
 
 ## Workshops and open challenges
 

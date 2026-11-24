@@ -17,7 +17,7 @@ Visual question answering (VQA) asks a model a question in natural language abou
 
 ## What the data looks like
 
-A VQA dataset is images, questions about them, and answers, usually many questions per image. The first substantial African resource, HaVQA, built Hausa VQA by carefully translating 6,022 English question-answer pairs over 1,555 Visual Genome images, keeping the translations faithful to what the images show ([HaVQA, 2023](../references.md#havqa-2023)). That translation route is the pragmatic starting point, but it has a ceiling: the images and questions come from a Western dataset, so they reflect Western scenes and assumptions. Collecting questions written natively by speakers about images from their own context is harder, but it produces data that actually fits the users, and cultural multimodal benchmarks such as Afri-MCQA push in that direction.
+A VQA dataset is images, questions about them, and answers, usually many questions per image. The first substantial African resource, HaVQA, built Hausa VQA by carefully translating 6,022 English question-answer pairs over 1,555 Visual Genome images, keeping the translations faithful to what the images show ([HaVQA, 2023](../references.md#havqa-2023)). That translation route is the pragmatic starting point, but it has a ceiling: the images and questions come from a Western dataset, so they reflect Western scenes and assumptions. Collecting questions written natively by speakers about images from their own context is harder, but it produces data that actually fits the users. Cultural multimodal benchmarks push in that direction: CVQA covers 31 languages, including Amharic, Oromo, Swahili, Igbo and Kinyarwanda, with culturally relevant images and native questions ([Romero et al., 2024](../references.md#romero-2024-cvqa)), and Afri-MCQA has about 7,500 question-answer pairs in 15 African languages written by native speakers ([Tonja et al., 2026](../references.md#tonja-2026-afrimcqa)).
 
 A record links an image to a question and the answers people gave, with a list of answers so the scoring below can credit any accepted form:
 
@@ -53,17 +53,17 @@ VQA annotation is writing questions and marking correct answers, or translating 
 </View>
 ```
 
-VQA is scored by answer accuracy, often with a VQA score that gives credit when an answer matches several human responses, and the same morphology caveats apply as in text question answering, so the [Exact Match and token-F1 approach](../text-generation/question-answering.md) from there carries over, with a human check on a sample needed alongside the automatic number.
+VQA is scored by answer accuracy, often with the VQA score, which collects 10 human answers per question and counts an answer fully correct if at least 3 people gave it ([Antol et al., 2015](../references.md#antol-2015)), and the same morphology caveats apply as in text question answering, so the [Exact Match and token-F1 approach](../text-generation/question-answering.md) from there carries over, with a human check on a sample needed alongside the automatic number.
 
 ## The 2026 modelling landscape
 
 The dominant shift since HaVQA is that **general-purpose multimodal large language models** (MLLMs) now handle VQA out-of-the-box as a prompting task, replacing the fine-tuned encoder-decoder VQA architectures of 2020-2023. The workable open baselines for African-language VQA in mid-2026 are:
 
-- **[PaliGemma 2](https://arxiv.org/abs/2412.03555)** (Google, 2024): a compact vision-language model built on Gemma 2, 3B/10B/28B parameter variants, 224/448/896 pixel resolutions, Apache-2.0 licensed. The strongest small-scale open baseline for VQA on Latin-script African languages via prompting or lightweight fine-tuning.
-- **[Qwen2-VL](https://arxiv.org/abs/2409.12191)** and **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)** (Alibaba, 2024-2025): 2B/7B/72B variants, strong on multi-image and video reasoning, Apache-2.0 licensed. Consistently top-of-leaderboard on multilingual VQA benchmarks; measure against PaliGemma 2 as the honest open comparison.
-- **[InternVL 2.5 / 3](https://github.com/OpenGVLab/InternVL)** (OpenGVLab, 2025-2026): 1B–78B variants, MIT-licensed, published multilingual VQA numbers competitive with Qwen2.5-VL. Worth including in a candidate measurement plan.
-- **[LLaVA-NeXT](https://llava-vl.github.io/blog/2024-01-30-llava-next/)** and its multilingual variants: the earlier open-source MLLM lineage; useful as a baseline for reproducibility, less strong than the 2025-2026 releases.
-- **[Molmo](https://molmo.allenai.org/)** (Allen AI, 2024): Apache-2.0 fully open (data + weights + code), pointing-grounded VQA, worth measuring for use cases where the answer must reference a specific location in the image.
+- **PaliGemma 2** (Google, 2024): a compact vision-language model built on Gemma 2 and the SigLIP image encoder, in 3B/10B/28B variants at 224/448/896 pixel resolutions ([Steiner et al., 2024](../references.md#steiner-2024-paligemma2)). The weights are released under the Gemma terms of use rather than an OSI licence. A strong small-scale open baseline for VQA on Latin-script African languages via prompting or lightweight fine-tuning.
+- **Qwen2-VL** ([Wang et al., 2024](../references.md#wang-2024-qwen2vl)) and **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)** (Alibaba, 2024-2025): 2B to 72B variants, strong on multi-image and video reasoning. Licences differ by model: several are Apache-2.0, but the 72B models use Alibaba's own Qwen licence and the Qwen2.5-VL 3B model is under a research-only licence, so check each model card. A competitive open baseline on multilingual benchmarks; measure against PaliGemma 2 as the honest open comparison.
+- **[InternVL 2.5 / 3](https://github.com/OpenGVLab/InternVL)** (OpenGVLab, 2024-2025): 1B–78B variants ([Chen et al., 2024](../references.md#chen-2024-internvl25)). The code is MIT-licensed, but individual model weights inherit the licences of their components, so check each model card. Worth including in a candidate measurement plan.
+- **[LLaVA-NeXT](https://llava-vl.github.io/blog/2024-01-30-llava-next/)** and the LLaVA-1.5 recipe it builds on ([Liu et al., 2024](../references.md#liu-2024-llava15)): the earlier open-source MLLM lineage; useful as a baseline for reproducibility, less strong than the 2025-2026 releases.
+- **[Molmo](https://molmo.allenai.org/)** (Allen AI, 2024): open weights, open training data (PixMo) and open code, with a 2D pointing dataset that supports answers grounded in a specific location in the image ([Deitke et al., 2024](../references.md#deitke-2024-molmo)). Worth measuring for use cases where the answer must reference a specific location.
 
 **Closed-API baselines.** For teams building a research reference rather than a shippable deployment, **Gemini 2.5 Flash / Pro**, **GPT-4o / GPT-4.1**, and **Claude Sonnet 4** all handle African-language VQA to varying degrees. Their coverage is uneven per-language and per-orthography, and licensing prevents redistribution or reproducible evaluation without live API access. Use them as the ceiling reference against which open MLLMs are measured, not as the primary deployment surface unless the budget and terms permit it. See the [compute-poor chapter's API caveats](../compute-poor/index.md#api-based-approaches-legitimate-but-not-free).
 
@@ -81,25 +81,27 @@ VQA data is expensive per-record because every record touches an image, a questi
 
 ## Known limitations to watch for
 
-- **Translated benchmarks over-report quality.** A model that scores well on HaVQA is scoring well on Hausa translations of Visual Genome images, not on Hausa questions about Hausa scenes. The gap between the two settings is large and consistently under-reported.
-- **Multimodal LLMs hallucinate confidently in low-resource languages.** Prompting an MLLM in Yorùbá often produces a fluent, grammatical, plausible-looking, and factually wrong answer. Fluency is not a signal of correctness in this class of model on this class of language.
-- **Image bias is not language bias.** A model that handles Hausa questions well on Western images may fail catastrophically on African market scenes, agricultural imagery, or traditional dress, because the visual encoder was trained on a Western-heavy corpus, not because of the language. Diagnose language failure and image failure separately.
-- **VQA scoring credits partial matches unequally.** The classic VQA score (10 annotators, credit for matching 3+) does not translate cleanly to African-language settings where morphological variation multiplies acceptable forms. Report accuracy alongside human agreement on a random sample; do not rely on a single automatic number.
-- **Counting questions are the model's blind spot.** MLLMs consistently underperform on "how many" questions across all languages. If your use case is counting-heavy (agriculture, retail inventory, medical imaging), measure this specifically before scoping.
-- **Cross-script transfer is unusually weak.** A VQA model prompted in Latin-script Hausa handles Ajami-script Hausa poorly, and vice versa. Script is treated as a separate language by most tokenisers.
+- **Translated benchmarks over-report quality.** A model that scores well on HaVQA is scoring well on Hausa translations of Visual Genome images, not on Hausa questions about Hausa scenes. Benchmarks built natively from local images and questions are much harder: open-weight models score near zero on open-ended VQA in native African languages in Afri-MCQA ([Tonja et al., 2026](../references.md#tonja-2026-afrimcqa)).
+- **Multimodal LLMs can answer fluently and wrongly in low-resource languages.** Prompting an MLLM in Yorùbá can produce a fluent, grammatical, plausible-looking, and factually wrong answer. Fluency is not a signal of correctness; check answers against the image.
+- **Image bias is not language bias.** A model that handles Hausa questions well on Western images may fail on African market scenes, agricultural imagery, or traditional dress because of what its visual encoder was trained on, not because of the language. CVQA finds models struggle on culturally specific images even in English, and do worse again when the question is in the local language ([Romero et al., 2024](../references.md#romero-2024-cvqa)); Afri-MCQA's control experiments likewise separate language competence from cultural knowledge ([Tonja et al., 2026](../references.md#tonja-2026-afrimcqa)). Diagnose language failure and image failure separately.
+- **VQA scoring credits partial matches unequally.** The classic VQA score (10 human answers, full credit when at least 3 match) ([Antol et al., 2015](../references.md#antol-2015)) does not translate cleanly to African-language settings where morphological variation multiplies acceptable forms. Report accuracy alongside human agreement on a random sample; do not rely on a single automatic number.
+- **Counting questions are a known weak spot.** In the original VQA benchmark, "number" questions scored far below yes/no questions for every model ([Antol et al., 2015](../references.md#antol-2015)), and counting remains hard for current MLLMs. If your use case is counting-heavy (agriculture, retail inventory, medical imaging), measure this specifically before scoping.
+- **Cross-script transfer may be weak.** A VQA model prompted in Latin-script Hausa may handle Ajami-script Hausa poorly, and vice versa, since tokenisers and training data see the two scripts very differently. Test each script separately.
 
 ## Further reading
 
-- [HaVQA paper (Parida et al., 2023)](https://arxiv.org/abs/2305.17690): the reference African-language VQA corpus and its translation-based construction methodology. Required reading for any team scoping VQA in an African language.
-- [PaliGemma 2 (Steiner et al., 2024)](https://arxiv.org/abs/2412.03555): the workable small-scale open MLLM baseline; the model card documents which languages have been validated in evaluation.
-- [Qwen2-VL (Wang et al., 2024)](https://arxiv.org/abs/2409.12191): the current strongest open MLLM lineage for multilingual VQA; the paper's multilingual evaluation is the reference for expected out-of-the-box performance across languages.
+- [HaVQA, 2023](../references.md#havqa-2023): the reference African-language VQA corpus and its translation-based construction methodology. Required reading for any team scoping VQA in an African language.
+- Afri-MCQA ([Tonja et al., 2026](../references.md#tonja-2026-afrimcqa)): a multimodal cultural QA benchmark with about 7,500 pairs in 15 African languages, in text and speech; the closest African-language multimodal QA measurement surface.
+- CVQA ([Romero et al., 2024](../references.md#romero-2024-cvqa)): a culturally diverse multilingual VQA benchmark with native questions in 31 languages, several of them African.
+- VQA ([Antol et al., 2015](../references.md#antol-2015)): the original benchmark and the source of the standard VQA accuracy metric.
+- PaliGemma 2 ([Steiner et al., 2024](../references.md#steiner-2024-paligemma2)): the workable small-scale open MLLM baseline.
+- Qwen2-VL ([Wang et al., 2024](../references.md#wang-2024-qwen2vl)): a strong open MLLM lineage for multilingual VQA and text-in-image understanding.
 
 <details>
 <summary>Additional references</summary>
 
-- [InternVL 2.5 / 3 (Chen et al., 2024-2026)](https://arxiv.org/abs/2412.05271): the competing OpenGVLab MLLM lineage; worth measuring against Qwen2.5-VL for language coverage.
-- [Molmo (Deitke et al., 2024)](https://arxiv.org/abs/2409.17146): the fully-open Allen AI MLLM with pointing-grounded VQA; use when the answer must reference a specific location in the image.
-- [Afri-MCQA (ACL 2026)](https://aclanthology.org/): the multi-modal QA benchmark with 15 African languages, 7.5k pairs, text+speech configurations. Not strictly VQA but the closest African-language multimodal QA measurement surface.
-- [LLaVA-NeXT (Liu et al., 2024)](https://arxiv.org/abs/2410.02713): the earlier open MLLM lineage; useful for reproducibility baselines.
+- InternVL 2.5 ([Chen et al., 2024](../references.md#chen-2024-internvl25)): the competing OpenGVLab MLLM lineage; worth measuring against Qwen2.5-VL for language coverage.
+- Molmo and PixMo ([Deitke et al., 2024](../references.md#deitke-2024-molmo)): the fully open Allen AI MLLM with pointing-grounded answers; use when the answer must reference a specific location in the image.
+- LLaVA-1.5 ([Liu et al., 2024](../references.md#liu-2024-llava15)): the earlier open MLLM recipe; useful for reproducibility baselines.
 
 </details>

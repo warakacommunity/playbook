@@ -2,22 +2,22 @@
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-09-26
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Deployment for African contexts
 
-Most NLP deployment writing assumes a fibre connection, a GPU-backed cloud region a short round-trip away, a modern laptop or high-end phone, and a monolingual user typing standard-orthography input. **None of these assumptions hold across the majority of African deployment surfaces.** Connectivity is patchy or expensive; a large share of interactions happen on Android Go phones with 2 GB of RAM; users switch languages within a single conversation; and the practical text-entry surface is often SMS or WhatsApp, not a native app.
+Most NLP deployment writing assumes a fibre connection, a GPU-backed cloud region a short round-trip away, a modern laptop or high-end phone, and a monolingual user typing standard-orthography input. **None of these assumptions hold across most African deployment surfaces.** Connectivity is patchy or expensive: about 36% of people in Africa use the Internet, against 74% of the world's population ([ITU, 2025](../references.md#itu-ff-2025)), and the cost of handsets and data is one of the main barriers to mobile internet use ([GSMA, 2025](../references.md#gsma-somic-2025)). Many users are on entry-level Android phones, including Android (Go edition), the lighter configuration of Android for low-RAM devices ([Android Developers, n.d.-a](../references.md#android-go)); users switch languages within a single conversation; and the practical text-entry surface is often SMS or WhatsApp, not a native app.
 
-This chapter is opinionated deployment guidance for the surfaces where African-language NLP actually meets its users. It is not a general MLOps guide. For cloud deployment, latency budgets in low-hundreds-of-milliseconds, and standard-issue Kubernetes practice, use [ML Systems (Chip Huyen)](https://huyenchip.com/ml-interviews-book/) or the cloud providers' own material. This chapter picks up where those leave off.
+This chapter is opinionated deployment guidance for the surfaces where African-language NLP actually meets its users. It is not a general MLOps guide. For cloud deployment, latency budgets in low-hundreds-of-milliseconds, and standard-issue Kubernetes practice, use Chip Huyen's [*Designing Machine Learning Systems*](https://huyenchip.com/books/) or the cloud providers' own material. This chapter picks up where those leave off.
 
 ## What this chapter covers
 
 - **[Offline and patchy-connectivity NLP](./offline.md)**: the design pattern where the model runs on-device or in a locally-cached scenario, syncs opportunistically, and degrades gracefully when the network drops mid-session. *Available now.*
-- **[SMS, USSD, and WhatsApp as NLP surfaces](./sms-ussd-whatsapp.md)**: the three practical text-entry channels for hundreds of millions of African users, with channel-by-channel design implications and NLP problems each magnifies. *Available now.*
+- **[SMS, USSD, and WhatsApp as NLP surfaces](./sms-ussd-whatsapp.md)**: the three practical text-entry channels for hundreds of millions of African users (about 47% of Africa's population had a mobile subscription in 2024; [GSMA Intelligence, 2025](../references.md#gsma-me-africa-2025)), with channel-by-channel design implications and NLP problems each magnifies. *Available now.*
 - **[Edge devices and cheap-hardware inference](./edge-devices.md)**: the phone tier map, quantised model inference, on-device runtimes (whisper.cpp / llama.cpp / ONNX Runtime Mobile / MLC-LLM), battery and thermal realities, single-board-computer edge servers. *Available now.*
-- **[Multilingual switching within a session](./multilingual-switching.md)**: code-switching as the majority interaction pattern for African users, four granularities of switching, detection strategies, response strategies, model training implications, and the UI patterns that make code-switched deployment usable. *Available now.*
+- **[Multilingual switching within a session](./multilingual-switching.md)**: code-switching as an everyday interaction pattern for African users, four granularities of switching, detection strategies, response strategies, model training implications, and the UI patterns that make code-switched deployment usable. *Available now.*
 - **[Non-Latin scripts in real UIs](./non-latin-scripts.md)**: Ajami, Ge'ez, N'Ko, Tifinagh, Vai, and Latin-with-diacritics; Unicode support, font shipping, input-method availability, rendering pitfalls, search and normalisation, testing methodology. *Available now.*
 
 ## Why this chapter belongs in a playbook, not a blog post

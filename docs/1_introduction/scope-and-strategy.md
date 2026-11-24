@@ -2,7 +2,7 @@
 sidebar_position: 6
 ready: true
 last_update:
-  date: 2026-09-26
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -19,14 +19,14 @@ Everything the playbook adds should sharpen that sentence. Everything it removes
 - It is **not** a tutorial on training or fine-tuning models. That work is well covered by the [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course), the [Google Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook), the [Google Text Classification guide](https://developers.google.com/machine-learning/guides/text-classification), and [Advanced NLP with spaCy](https://course.spacy.io/en/). We link to them; we do not rewrite them.
 - It is **not** a textbook. For the theory (tokenisation, sequence models, evaluation metrics, statistical foundations), go to Jurafsky and Martin's [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/). It is authoritative and free.
 - It is **not** a catalogue of code recipes. Code drifts out of date faster than any playbook can be maintained. When we point at code, we point at a live, versioned, maintained repository. When we ship code ourselves, it lives in a companion repo that ships its own release tags.
-- It is **not** neutral. We take positions. Character-level metrics for morphology-rich languages ([`chrF`](https://aclanthology.org/W15-3049/), CER) over word-level ones (BLEU, WER). Per-language and per-class score reporting over a single average. Human evaluation for anything generative. Consent from the people in the data. Community ownership of the resources built. If you disagree with those positions, this is not the playbook for you.
+- It is **not** neutral. We take positions. Character-level metrics for morphology-rich languages, such as chrF ([Popović, 2015](../references.md#popovic-2015)) and CER, over word-level ones (BLEU, WER). Per-language and per-class score reporting over a single average. Human evaluation for anything generative. Consent from the people in the data. Community ownership of the resources built. If you disagree with those positions, this is not the playbook for you.
 
 ## What this playbook is
 
-Structurally, this playbook belongs to the genre of **dataset-lifecycle and responsible-AI handbooks**. Its closest cousins are [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) (Gebru et al., 2018), [Data Statements for NLP](https://aclanthology.org/Q18-1041/) (Bender & Friedman, 2018), [Model Cards](https://arxiv.org/abs/1810.03993) (Mitchell et al., 2019), and [The Turing Way](https://the-turing-way.netlify.app/). What we add on top of that lineage:
+Structurally, this playbook belongs to the genre of **dataset-lifecycle and responsible-AI handbooks**. Its closest cousins are Datasheets for Datasets ([Gebru et al., 2021](../references.md#gebru-2021)), Data Statements for NLP ([Bender and Friedman, 2018](../references.md#bender-friedman-2018)), Model Cards ([Mitchell et al., 2019](../references.md#mitchell-2019)), and [The Turing Way](https://the-turing-way.netlify.app/). What we add on top of that lineage:
 
 - A **first-class annotation-workforce chapter** (how to design work, hire, brief, review, pay, and retain annotators), which most dataset-lifecycle handbooks touch only lightly.
-- **First-class modality tracks** for African-language reality: text, speech (ASR, TTS, S2ST), OCR/document AI, sign language and video. Most NLP playbooks are text-only.
+- **First-class modality tracks** for African-language reality: text, speech (ASR, TTS, S2ST), OCR/document AI, sign language and video. Most of the NLP guides named above focus on text.
 - An **explicit low-resource, African-context lens**: patchy connectivity, multiple scripts, code-switching, small compute budgets, community-led workflows, community IP concerns.
 
 Substantively, our job is to be the one document a new project can read that saves it a quarter of duplicated work.
@@ -37,7 +37,7 @@ In July 2026 we commissioned an independent research pass comparing AfriPlaybook
 
 > Eight of ten numbered chapters center on data collection, annotation workforce, quality assurance, governance, documentation, and community. Only the model-building chapter touches modelling, and it is a short chapter. The canonical Group-A NLP playbooks are structured around model choice, fine-tuning, hyperparameter tuning, and deployment, and explicitly exclude annotation, low-resource languages, and cultural considerations. AfriPlaybook is structurally a data/annotation-handbook, not a model-tuning-playbook.
 
-That is not a criticism. It is a positioning. The playbook is what those Group-A playbooks assume has already been done. Trying to compete with them on their own territory would spread AfriPlaybook thin and produce content that dates within a year. Owning the annotation, data quality, evaluation, community, and African-context deployment space is defensible, durable, and, for the community the playbook serves, genuinely load-bearing.
+That is not a criticism. It is a positioning. The playbook is what those Group-A playbooks assume has already been done. Trying to compete with them on their own territory would spread AfriPlaybook thin and produce content that dates within a year. Owning the annotation, data quality, evaluation, community, and African-context deployment space is defensible, durable, and, for the community the playbook serves, genuinely load-bearing. Wider evidence points the same way. Practitioners, including teams in East and West Africa, report that data work is undervalued compared with model work, and that poor data causes compounding problems later ([Sambasivan et al., 2021](../references.md#sambasivan-2021)). Most of the world's languages, including most African languages, still have little labelled data ([Joshi et al., 2020](../references.md#joshi-2020)).
 
 ## What comes next: the phased plan
 
@@ -51,16 +51,16 @@ The current playbook is a solid draft of the dataset-lifecycle spine. The next e
 ### Phase 2: cross-cutting realism
 
 - **Deployment for African contexts.** Offline and patchy-connectivity NLP. Edge devices. SMS/USSD/WhatsApp as NLP surfaces. Multilingual switching in a single conversation. Non-standard scripts (Ajami, Ge'ez, N'Ko) in real UIs.
-- **Cross-language transfer matrix.** Empirical guidance, drawn from Masakhane's own papers, on which African languages benefit from which transfer sources. Bantu-to-Bantu, Cushitic-to-Cushitic, script transfer where relevant.
+- **Cross-language transfer matrix.** Empirical guidance, drawn from Masakhane's own papers, on which African languages benefit from which transfer sources. Bantu-to-Bantu, Cushitic-to-Cushitic, script transfer where relevant. MasakhaNER 2.0, for example, found that the choice of source language for transfer significantly affects performance ([Adelani et al., 2022a](../references.md#adelani-2022)).
 
 ### Phase 3: durable governance
 
-- **Legal, consent, and community IP.** Country-level data laws (Nigeria NDPA, Kenya DPA, South Africa PoPIA, Ghana DPA, Rwanda) and their practical implications. Consent frameworks that work with non-literate speakers. Community IP frameworks. Anti-extraction release patterns.
+- **Legal, consent, and community IP.** Country-level data laws (Nigeria's Data Protection Act 2023 ([Federal Republic of Nigeria, 2023](../references.md#ndpa-2023)), Kenya's Data Protection Act 2019 ([Republic of Kenya, 2019](../references.md#kenya-dpa-2019)), South Africa's POPIA ([Republic of South Africa, 2013](../references.md#popia-2013)), Ghana's Data Protection Act 2012 ([Republic of Ghana, 2012](../references.md#ghana-dpa-2012)), and Rwanda's Law No. 058/2021 ([Republic of Rwanda, 2021](../references.md#rwanda-dpl-2021))) and their practical implications. Consent frameworks that work with non-literate speakers. Community IP frameworks. Anti-extraction release patterns.
 - **Long-tail language onboarding.** For a language with a speaker community but no digital corpus, what is step one? Orthography, corpus bootstrapping, community mobilisation, anti-patterns.
 
 ### Phase 4: compute-poor practice
 
-- **Compute-poor training and evaluation.** Community-GPU, Colab, Kaggle patterns. LoRA and QLoRA (linked to canonical, not re-derived). Distillation for edge deployment. When cross-language transfer is a compute-saving strategy.
+- **Compute-poor training and evaluation.** Community-GPU, Colab, Kaggle patterns. LoRA ([Hu et al., 2021](../references.md#hu-2021)) and QLoRA ([Dettmers et al., 2023](../references.md#dettmers-2023)) (linked to canonical, not re-derived). Distillation for edge deployment. When cross-language transfer is a compute-saving strategy.
 
 ### Phase 5: finding current resources (redesigned)
 

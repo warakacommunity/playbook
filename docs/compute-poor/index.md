@@ -18,8 +18,10 @@ The chapter does not tell you to want less. It tells you how to get more out of 
 
 Four resource profiles cover most African-language NLP work. Every technique in this chapter is discussed with the profile it fits in mind.
 
+The GPU-hour figures below are the authors' rough estimates for planning, not measured averages, and platform quotas and prices change often.
+
 - **Grad student / individual researcher.** Personal laptop, free Colab, occasional Kaggle notebook. Effective GPU-hours per week: 10–30.
-- **Community research team.** Shared Colab Pro (~\$10/month), Kaggle team account (30 hours free GPU per week per member), occasional access to a shared institutional GPU. Effective GPU-hours per week: 40–150.
+- **Community research team.** Shared Colab Pro (a low-cost monthly subscription; check current pricing), Kaggle accounts (each with a free weekly GPU quota, around 30 hours at the time of writing), occasional access to a shared institutional GPU. Effective GPU-hours per week: 40–150.
 - **Small NGO or early-stage startup.** ~\$50–500/month cloud budget on GCP, AWS, or Runpod; occasional grant credits (Google TRC, Microsoft AI for Good). Effective GPU-hours per month: 200–1,500.
 - **University lab.** Shared cluster with a small pool of A100 or H100 GPUs; competition for time is the real constraint, not the dollar cost. Effective GPU-hours: highly variable.
 
@@ -29,10 +31,10 @@ Recognise which profile you are in. Techniques that make sense at profile 4 are 
 
 For most African-language NLP tasks, the compute-cheapest path to a usable model is:
 
-1. **Start from a checkpoint that already knows a lot.** Never train from scratch. Every task in this playbook has a defensible starting checkpoint: AfroXLMR for text, NLLB-200-distilled for MT, MMS or Whisper for ASR, XLS-R for low-resource speech. Fine-tuning from a good checkpoint is one to two orders of magnitude cheaper than training from scratch, at every parameter count.
-2. **Use parameter-efficient fine-tuning.** LoRA and QLoRA update a small fraction of the model's parameters and drop memory usage by 10x or more, with negligible quality loss for most tasks. This is the technique that turns "we cannot fit this on our GPU" into "we can fine-tune this on a Colab T4."
-3. **Quantise for inference.** INT8 or INT4 quantised inference roughly halves or quarters the memory and speeds up throughput 1.5–3x, with quality degradation that is usually small and always measurable. This is the technique that turns "we fine-tuned it but cannot serve it" into "we can serve it on-device."
-4. **Use cross-language transfer as a compute-saving strategy.** Transferring from a closely-related resourced language is nearly always cheaper than training on a much larger corpus in the target language, and often produces comparable quality. See the [cross-language transfer](../cross-language-transfer/index.md) chapter for pivot guidance.
+1. **Start from a checkpoint that already knows a lot.** Never train from scratch. Every task in this playbook has a defensible starting checkpoint: AfroXLMR for text ([Alabi et al., 2022](../references.md#alabi-2022)), NLLB-200-distilled for MT ([NLLB Team, 2022](../references.md#nllb-2022)), MMS or Whisper for ASR ([Pratap et al., 2023](../references.md#pratap-2023); [Radford et al., 2023](../references.md#radford-2023)), XLS-R for low-resource speech ([Babu et al., 2021](../references.md#babu-2021)). Fine-tuning from a good checkpoint costs a small fraction of what pre-training that checkpoint cost.
+2. **Use parameter-efficient fine-tuning.** LoRA trains a tiny fraction of the model's parameters: on GPT-3 175B its authors cut trainable parameters by about 10,000 times and training memory by about 3 times, while matching full fine-tuning quality on their benchmarks ([Hu et al., 2021](../references.md#hu-2021)). QLoRA adds a 4-bit base model and cuts memory much further ([Dettmers et al., 2023](../references.md#dettmers-2023)). This is the technique that turns "we cannot fit this on our GPU" into "we can fine-tune this on a Colab T4."
+3. **Quantise for inference.** INT8 or INT4 weights take roughly a half or a quarter of the memory of 16-bit weights. INT8 inference can preserve full-precision quality even for very large models ([Dettmers et al., 2022](../references.md#dettmers-2022)); lower precision can hurt some languages more than others ([Marchisio et al., 2024](../references.md#marchisio-2024)), so always measure. Speed gains depend on your hardware and library. This is the technique that turns "we fine-tuned it but cannot serve it" into "we can serve it on-device."
+4. **Use cross-language transfer as a compute-saving strategy.** Transferring from a well-chosen related language with resources is usually cheaper than building and training on a much larger corpus in the target language, and the choice of source language makes a large difference to quality ([Adelani et al., 2022a](../references.md#adelani-2022)). See the [cross-language transfer](../cross-language-transfer/index.md) chapter for pivot guidance.
 5. **Consider distillation only when serving cost is the binding constraint.** Distillation trades training cost for inference cost: you spend more compute up-front to run a smaller model at deployment. If your deployment is small-scale, quantisation is easier and cheaper.
 6. **Consider APIs for prototyping.** Cohere, OpenAI, Anthropic, Google, and others expose multilingual models via API. For prototyping a use case, evaluating whether a task is feasible, or running one-off inference on hundreds of test examples, the cost is often lower than provisioning your own GPU. For production deployment, weigh cost per call, latency, data-sovereignty implications, and licence terms; API dependency introduces its own risks.
 
@@ -40,15 +42,15 @@ The techniques compose. LoRA on a base model + INT8 quantisation for serving + s
 
 ## LoRA and QLoRA: what and when
 
-[LoRA (Low-Rank Adaptation)](https://arxiv.org/abs/2106.09685) adds small trainable rank-decomposition matrices to a frozen pre-trained model. You update a few million parameters instead of hundreds of millions or billions, and the resulting adapter is small enough to distribute freely.
+LoRA (Low-Rank Adaptation) adds small trainable rank-decomposition matrices to a frozen pre-trained model ([Hu et al., 2021](../references.md#hu-2021)). You update a few million parameters instead of hundreds of millions or billions, and the resulting adapter is small enough to distribute freely.
 
-[QLoRA](https://arxiv.org/abs/2305.14314) runs LoRA on top of a 4-bit quantised base model. Memory reduction is dramatic: a 7B model that would need 28 GB of GPU memory for standard fine-tuning fits in around 6 GB with QLoRA. This is the difference between "cannot run" and "runs on a Colab free tier."
+QLoRA runs LoRA on top of a 4-bit quantised base model ([Dettmers et al., 2023](../references.md#dettmers-2023)). Memory reduction is dramatic: its authors fine-tune a 65B model on a single 48 GB GPU, and report matching 16-bit fine-tuning on their academic benchmarks. For 7B models, this is often the difference between "cannot run" and "runs on a single free or low-cost GPU."
 
 Practical guidance:
 
-- **Default to LoRA** for parameter-efficient fine-tuning on a memory-adequate GPU (T4, V100, A100). Quality is essentially unchanged from full fine-tuning for the great majority of tasks.
-- **Move to QLoRA** when memory is the binding constraint or when the base model is 7B+. Expect a small but measurable quality drop versus LoRA; measure it.
-- **Rank matters less than people think.** Rank 8 or 16 is usually enough. Higher ranks add parameters without improving quality on most African-language tasks.
+- **Default to LoRA** for parameter-efficient fine-tuning on a memory-adequate GPU (T4, V100, A100). In the original paper it matched or beat full fine-tuning on most of the benchmarks tested ([Hu et al., 2021](../references.md#hu-2021)); check this on your own task.
+- **Move to QLoRA** when memory is the binding constraint or when the base model is 7B+. Quantising the base model can cost more quality on some languages than on English, so measure it on your target language ([Marchisio et al., 2024](../references.md#marchisio-2024)).
+- **Rank matters less than people think.** The LoRA paper found ranks as small as 1 to 8 competitive on its tasks, while warning that this may not hold for every task ([Hu et al., 2021](../references.md#hu-2021)). Rank 8 or 16 is a common default; there is little published evidence specific to African languages, so try a couple of values on your development set.
 - **Alpha and dropout matter for stability.** Follow the published recipes for your model architecture; do not over-tune.
 - **Use the [Hugging Face PEFT library](https://huggingface.co/docs/peft/)** as the canonical implementation. Reinventing this stack is not a good use of your compute budget.
 
@@ -56,8 +58,8 @@ Practical guidance:
 
 For inference-time compute reduction:
 
-- **INT8 quantisation** with libraries like [bitsandbytes](https://github.com/TimDettmers/bitsandbytes) is nearly free: a quality drop of a fraction of a percentage point on most tasks, memory roughly halved, throughput 1.5–2x higher. Default to it for serving unless you have measured a quality problem.
-- **INT4 quantisation** is more aggressive: memory quartered, throughput 2–3x higher, but quality drop is noticeable on morphology-rich tasks. Always measure the drop on your target language before deploying.
+- **INT8 quantisation** with libraries like [bitsandbytes](https://github.com/TimDettmers/bitsandbytes) roughly halves weight memory, and the LLM.int8() method behind it was shown to run models up to 175B parameters without loss of quality on the authors' benchmarks ([Dettmers et al., 2022](../references.md#dettmers-2022)). Speed gains vary with hardware and model size, so measure throughput rather than assume it. Default to INT8 for serving unless you have measured a quality problem.
+- **INT4 quantisation** is more aggressive: weight memory is about a quarter of 16-bit. Quality loss varies by language; a study of multilingual LLMs found non-Latin-script languages hit hardest, and found that automatic metrics understated the damage that human raters noticed ([Marchisio et al., 2024](../references.md#marchisio-2024)). Always measure the drop on your target language, with some human checking, before deploying.
 - **Quantisation-aware training** (QAT) preserves quality better than post-training quantisation for aggressive levels but requires more compute. Rarely worth it at profiles 1–2; sometimes worth it at 3–4.
 - **On-device deployment** (see [Deployment for African contexts](../deployment/offline.md)) essentially requires quantised inference. Plan for it from the training stage. A model trained without quantisation in mind may fail its accuracy target after quantisation and require retraining.
 
@@ -65,7 +67,7 @@ For ASR specifically, [whisper.cpp](https://github.com/ggerganov/whisper.cpp) an
 
 ## Distillation: when it earns its cost
 
-Distillation is training a smaller model to reproduce a larger model's outputs. It reduces inference cost but increases training cost, and it usually loses some quality. Practical guidance:
+Distillation is training a smaller model to reproduce a larger model's outputs ([Hinton et al., 2015](../references.md#hinton-2015)). It reduces inference cost but increases training cost, and it usually loses some quality. DistilBERT is a well-known example: 40% smaller and 60% faster than BERT while keeping 97% of its language-understanding performance ([Sanh et al., 2019](../references.md#sanh-2019)). Practical guidance:
 
 - **Use it when serving cost is the binding constraint.** High-QPS deployment where a 3B model would work but a 300M model would work more cheaply.
 - **Do not use it when training cost is the binding constraint.** For a research project shipping a research release, quantisation of the larger model is easier, cheaper, and typically produces comparable inference cost.
@@ -79,28 +81,30 @@ For prototyping, small-scale evaluation, or targets where the community explicit
 - **[OpenAI](https://platform.openai.com/), [Anthropic](https://www.anthropic.com/api), [Google (Gemini)](https://ai.google.dev/), [Mistral](https://mistral.ai/)**: general-purpose LLMs with varying African-language coverage. Measure per language; the published multilingual claims are marketing-broad, not accuracy-guaranteed.
 - **[Hugging Face Inference API](https://huggingface.co/inference-api)** and Inference Endpoints: access community-hosted models without provisioning infrastructure. Excellent for one-off runs, expensive at production scale.
 
-Cost is measured in tokens or characters, not GPU-hours; a single evaluation pass of ten thousand test examples with a mid-tier commercial API is typically \$5–\$50 depending on model. Compare this against the amortised cost of provisioning your own GPU before deciding.
+Cost is measured in tokens or characters, not GPU-hours. As a rough guide only, a single evaluation pass of ten thousand short test examples with a mid-tier commercial API has tended to cost in the range of \$5–\$50, depending on model and prompt length; check the provider's current per-token prices. The same content can take many more tokens, and so cost more, in some languages than in English ([Ahia et al., 2023](../references.md#ahia-2023)). Compare this against the amortised cost of provisioning your own GPU before deciding.
 
 Warnings that always apply:
 
 - **Data sovereignty.** Sending community-derived African-language data to a foreign API means the data leaves the jurisdiction it was collected in. Check the [legal, consent, and community IP](../legal-consent/index.md) chapter. This is usually not what the community agreed to.
-- **Licence and re-use.** Many commercial APIs' terms allow the provider to use your inputs to train their own models. Read the terms; this is often not what the community agreed to either.
+- **Licence and re-use.** Some providers' terms, particularly for free or consumer tiers, allow the provider to use your inputs to improve or train their models. Read the terms for the exact tier you use; this is often not what the community agreed to either.
 - **Reproducibility.** APIs deprecate models. A benchmark you ran last quarter on a commercial API may not be reproducible next quarter. Publish the specific model version and note the reproducibility caveat.
 
 ## Platform-by-platform notes
 
-- **[Google Colab](https://colab.google/)**: free tier gives limited T4 access, quota-limited. Colab Pro at ~\$10/month is a 5–10x productivity multiplier for individual researchers. Pro+ at ~\$50/month gives longer sessions and better GPUs. The free tier is enough for LoRA fine-tuning of small models on modest datasets; anything larger, budget for Pro.
-- **[Kaggle Notebooks](https://www.kaggle.com/docs/notebooks)**: 30 hours per week of free GPU (T4 x2 or P100). Substantially underused by African NLP teams. Combine with Colab for higher effective throughput.
-- **[Hugging Face Spaces](https://huggingface.co/spaces)**: free CPU compute for demos; paid GPU tiers for hosted inference. Excellent for shipping a demo of a fine-tuned model without provisioning cloud infrastructure.
-- **[Google TPU Research Cloud (TRC)](https://sites.research.google/trc/about/)**: free TPU time for research projects with a lightweight application. Under-applied for by African researchers; the application takes an hour and can unlock hundreds of TPU-hours.
+Quotas, prices and programmes on these platforms change often; treat the details below as a snapshot and check the provider's page before planning.
+
+- **[Google Colab](https://colab.google/)**: free tier gives limited T4 access, quota-limited. The paid Pro and Pro+ tiers add compute and longer sessions for a monthly fee (check current pricing); for an individual researcher, Pro is often worth it. The free tier is enough for LoRA fine-tuning of small models on modest datasets; anything larger, budget for Pro.
+- **[Kaggle Notebooks](https://www.kaggle.com/docs/notebooks)**: a free weekly GPU quota (around 30 hours at the time of writing, on accelerators such as dual T4s; your account settings show the current figure). Combine with Colab for higher effective throughput.
+- **[Hugging Face Spaces](https://huggingface.co/spaces)**: free static Spaces and a free basic CPU tier, with paid GPU hardware for hosted inference and [community GPU grants](https://huggingface.co/docs/hub/spaces-gpus#community-gpu-grants) for some open projects. Check the current terms, since running compute-backed Spaces may require a paid plan. Good for shipping a demo of a fine-tuned model without provisioning cloud infrastructure.
+- **[Google TPU Research Cloud (TRC)](https://sites.research.google/trc/about/)**: free access to a large pool of Cloud TPUs for accepted researchers, who are expected to share their TRC-supported research publicly. Applying starts with a short expression-of-interest form, and is worth the effort for any team with a research project.
 - **[Microsoft AI for Good / AI for Africa](https://www.microsoft.com/en-us/ai/ai-for-good)**: periodic credit grants for community-benefit projects. Cadence varies; check current programmes.
-- **[NVIDIA Inception programme](https://www.nvidia.com/en-us/startups/)** and **[startup credits from GCP, AWS, and Azure](https://cloud.google.com/startup)**: for teams that qualify as startups; typical credit awards are \$1k–\$100k with varying restrictions.
+- **[NVIDIA Inception programme](https://www.nvidia.com/en-us/startups/)** and **[startup credits from GCP, AWS, and Azure](https://cloud.google.com/startup)**: for teams that qualify as startups; credit amounts and restrictions vary by programme and change over time.
 - **Community GPU pools**: several African research communities operate shared GPU access (SunbirdAI, DSN Nigeria, and others; availability changes). Search current listings; do not assume access is automatic.
 - **University clusters**: where they exist, use them. Expect competition, poor documentation, and unclear priority ordering; budget time to negotiate access and to work around cluster idiosyncrasies.
 
 ## Realistic budgets
 
-Rough end-to-end budgets, all figures order-of-magnitude:
+Rough end-to-end budgets, all figures order-of-magnitude. These are the authors' planning estimates, not measured benchmarks; record what your own runs cost and share it (see the note at the end of this page).
 
 - **A LoRA fine-tune of AfroXLMR-large on a MasakhaNER-2 language.** Under 24 GPU-hours on a T4 or better. Feasible on Colab free tier if the run is chunked into checkpointed segments. Total cost: \$0–\$10.
 - **A LoRA fine-tune of NLLB-200-distilled on LAFAND-MT for one language pair.** 24–72 GPU-hours on a V100 or better. Colab Pro or Kaggle. Total cost: \$10–\$50.
@@ -131,13 +135,16 @@ Evaluation costs GPU-hours too, and evaluation quality is where compute-poor wor
 
 ## Further reading
 
-- [LoRA paper (Hu et al., 2021)](https://arxiv.org/abs/2106.09685): the foundational parameter-efficient fine-tuning method.
-- [QLoRA paper (Dettmers et al., 2023)](https://arxiv.org/abs/2305.14314): the memory-efficient extension that makes 7B+ fine-tuning feasible on modest hardware.
+- [Hu et al. (2021)](../references.md#hu-2021): LoRA, the foundational parameter-efficient fine-tuning method.
+- [Dettmers et al. (2023)](../references.md#dettmers-2023): QLoRA, the memory-efficient extension that makes 7B+ fine-tuning feasible on modest hardware.
+- [Dettmers et al. (2022)](../references.md#dettmers-2022): LLM.int8(), the 8-bit inference method behind the bitsandbytes library.
+- [Marchisio et al. (2024)](../references.md#marchisio-2024): how quantisation affects multilingual models, language by language.
+- [Ahia et al. (2023)](../references.md#ahia-2023): why commercial API costs differ across languages.
+- [Menghani (2021)](../references.md#menghani-2021): a survey of efficient deep learning, covering distillation, quantisation, pruning and more.
 - [Hugging Face PEFT library docs](https://huggingface.co/docs/peft/): the canonical implementation used across the ecosystem.
 - [bitsandbytes GitHub](https://github.com/TimDettmers/bitsandbytes): the canonical INT8/INT4 quantisation library.
-- [Efficient Deep Learning (Menghani, 2023)](https://arxiv.org/abs/2106.08962): the survey covering distillation, quantisation, pruning, and NAS at book length.
-- [Google TPU Research Cloud programme](https://sites.research.google/trc/about/): free TPU time for qualifying academic and community projects.
-- [Hugging Face Community Compute](https://huggingface.co/blog/community-gpu): periodic grants of community-hosted GPU time for open-source projects.
+- [Google TPU Research Cloud programme](https://sites.research.google/trc/about/): free TPU time for accepted research projects.
+- [Hugging Face community GPU grants](https://huggingface.co/docs/hub/spaces-gpus#community-gpu-grants): grants of GPU hardware for Spaces built by the community.
 
 ---
 
