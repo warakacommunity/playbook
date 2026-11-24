@@ -3,7 +3,7 @@ title: Workflow and Adjudication
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -20,6 +20,10 @@ A single annotator's label is a single opinion, and you cannot tell a confident 
 ## Assign work with deliberate redundancy
 
 Decide on purpose how items overlap between annotators. Some overlap is essential, because the items that more than one person labels are what let you compute agreement and spot annotators who have drifted. Mixing a small set of trusted, pre-labelled "gold" items into the stream, without flagging them, gives a continuous read on whether each annotator is still applying the guideline correctly. Plan the assignment so that every item receives its required number of independent labels and so that no annotator reviews their own work, since self-review hides the very errors review exists to catch.
+
+### Match annotators to language and variety
+
+Send each item only to annotators who speak its language and relevant variety. Otherwise an apparent disagreement may compare people interpreting different linguistic forms. Record the annotator's language and variety with each label, using the project's controlled codes, so agreement can be calculated within a variety and differences between varieties remain visible. If you deliberately mix varieties to study variation, document that design and report the groups separately rather than treating their labels as interchangeable.
 
 ### Overlap a sample, not everything
 
@@ -42,6 +46,8 @@ When an item has received all its planned labels, compute how far its annotators
 - **Add one more independent annotator.** This suits tasks where a majority vote is the resolution rule. Set a cap on how many extra annotators an item can receive, so that a few truly contested items cannot absorb unlimited labour. An item that still does not settle at the cap goes to adjudication.
 - **Send it straight to adjudication.** This suits expert tasks, where another non-expert vote adds little, and tasks where a single wrong label is costly.
 
+Kappa, alpha and AC1 are corpus-level coefficients: they need a set of items and cannot be computed for one item. Per-item observed agreement routes work; the corpus coefficient describes dataset reliability. Never average per-item observed agreement and call the result kappa. When one label dominates, read kappa together with raw and per-class agreement and the sample size, as explained in [the prevalence paradox](../4_data-quality/index.md#measure-inter-annotator-agreement).
+
 On subjective tasks, low agreement on an item may be real variation between valid readings rather than error. Before you escalate it away, read the section on [resolving disagreement](#resolve-disagreement-but-read-it-first) below.
 
 ### Serve items so the counts stay honest
@@ -58,6 +64,12 @@ A few operational rules keep the overlap you planned from drifting:
 ### Cap each annotator's share
 
 Volunteer and crowd projects tend to rely on a few very productive people. That creates a quiet bias: models trained on such data can learn the habits of the most productive annotators and then do worse on text from people who were not in the training set ([Geva et al., 2019](../references.md#geva-2019)). Their study looked at datasets where workers wrote the text themselves, but the same caution applies whenever one person's choices make up a large part of a dataset. Set a maximum share of the dataset that any one annotator may contribute, and stop serving new items to them once they reach it. Combine this with [recruiting a diverse pool](./inclusive-bias-aware.md#recruit-for-diversity-deliberately), since a cap only helps if there are other people to take up the work. Report the distribution of items per annotator in the [dataset card](../templates/dataset-card.md#4-preprocessing-cleaning-labeling). Where you can, also keep the annotators of your test set apart from those of your training set, which is the study's own recommendation.
+
+## Track skips and unfinished items
+
+Before launch, decide whether a skipped item goes to another annotator, returns later, or is retired. Retiring every difficult or distressing item biases the dataset towards easy cases, so report that choice rather than hiding it. Record a short reason such as `unclear`, `wrong_language`, `distressing` or `cannot_judge`, and keep "nothing to label here" as a substantive answer, not a skip. Route repeatedly skipped items to the guideline owner or adjudicator.
+
+Track each item as not started, partly labelled, at target, skipped or stale. Empty submissions and skips do not fill the required label count. Add skip counts and reasons to the weekly review, and publish the shares skipped and excluded in the [dataset card](../templates/dataset-card.md#4-preprocessing-cleaning-labeling). Skipping remains a wellbeing right; tracking its effect on the data does not make anyone explain a personal reason publicly.
 
 ## Review submitted work
 
@@ -82,7 +94,7 @@ The [agri-advisory case study](../agri-advisory/quality-consent-release.md#three
 Reviewer time is the scarcest resource in most projects, so plan review as a budget. Keep three rates separate: the **independent-label overlap rate** is the share of items assigned to multiple annotators; the **submission-review rate** is the share of submitted work a reviewer checks; and the **expert-check rate** is the share checked by a domain expert. They answer different questions and need not have the same value. Two streams of work enter submission review:
 
 1. **A random sample of ordinary work.** Choose the share by risk: for example 20 percent for a routine classification task, and 100 percent for sensitive data, safety-critical labels, or a new annotator's first batches. Decide for each item whether it is in the sample using a fixed rule that depends only on that item, for example a hash of the item ID combined with a fixed seed, kept when the result falls below the sampling rate. Items already in the sample stay in it as new items arrive, anyone can rerun the rule later to audit it, and you can describe it exactly in the dataset card.
-2. **Every flagged item, reviewed first.** Flags come from many places: low agreement on an item, a single annotator who disagrees with everyone else, a failed [gold item](../4_data-quality/index.md#use-gold-data-and-control-checks), an automated quality check, a report from another contributor, or a manual flag from an annotator who marked the item as unclear. Flagged items are always reviewed, whether or not they fall in the sample. When the same item is flagged for several reasons, merge the flags into one review task that lists all the reasons.
+2. **Every flagged item, reviewed first.** Flags come from many places: low agreement on an item, a single annotator who disagrees with everyone else, a failed [gold item](../4_data-quality/index.md#use-gold-data-and-control-checks), an automated quality check, a report from another contributor, or a manual flag from an annotator who marked the item as unclear. Flagged items are always reviewed, whether or not they fall in the sample. When the same item is flagged for several reasons, merge the flags into one review task that lists all the reasons. Automated checks filter work for attention; people judge contestable or negative calls. Bulk acceptance must leave flagged items untouched and report how many it skipped. See [Machines filter, humans judge](../4_data-quality/index.md#machines-filter-humans-judge).
 
 Reviewing only the items where annotators disagree saves a great deal of time, but it misses errors that everyone made together, such as a guideline rule that the whole team misread. If you use a "disagreements only" approach, pair it with a small random sample of unanimous items. Within the ordinary sample, you can optionally review the items with the lowest agreement, or the lowest model confidence if you use [model-assisted annotation](./model-assisted-annotation.md), first.
 

@@ -3,7 +3,7 @@ title: Field Image Capture
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -86,7 +86,7 @@ A seed image contributes pixels only. It goes through the same form, the same on
 
 ## Quality control
 
-Ingest is the first quality gate and it runs before any annotator sees the image. EXIF and device metadata are stripped. Device GPS is read once to derive the district name, and the coordinates are discarded. Faces are detected and blurred automatically, images flagged as containing people get a human check, and any image where a person cannot be blurred is dropped. A perceptual hash rejects near-duplicates within the batch and against the seed. Then the pair ID is minted and the image is tagged with its source: field or open seed.
+Ingest is the first quality gate and it runs before any annotator sees the image. Apply EXIF orientation to the pixels before stripping EXIF and device metadata, so later annotation coordinates refer to the displayed image ([Coordinates and image orientation](../image-data/object-detection.md#coordinates-and-image-orientation)). Device GPS is read once to derive the district name, and the coordinates are discarded. Faces are detected and blurred automatically, images flagged as containing people get a human check, and any image where a person cannot be blurred is dropped. A perceptual hash rejects near-duplicates within the batch and against the seed. Then the pair ID is minted and the image is tagged with its source: field or open seed.
 
 The second gate is the agronomist at diagnosis time, who can reject an image for quality with a reason that goes back to the collector in the app. The language lead watches rejection rates per collector and the coverage matrix each week, pauses and retrains a collector whose rejections stay high, and steers capture targets while the season is still open.
 

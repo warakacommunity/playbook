@@ -3,7 +3,7 @@ sidebar_position: 9
 title: Data Storage and Release Infrastructure
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -34,6 +34,14 @@ hausa-news-2026/
 ```
 
 Version every release with a number and a changelog, so that results stay reproducible and users can cite the exact data they used, which is the same versioning discipline the [Data Quality](../4_data-quality/index.md) and [Dataset Lifecycle](../9_dataset-lifecycle/maintenance.md) chapters require.
+
+For imports with several input fields, use a JSONL or CSV manifest that names every field explicitly. Keep larger media collections in storage controlled by the project or community, in a separate folder per project and close enough to annotators for reliable access. Let the tool reference those files rather than making uncontrolled copies. Treat referenced media as immutable: labels and timestamps may point into a particular file. Store a checksum with each item, and give a corrected file a new ID and a new import rather than replacing it underneath existing labels.
+
+## Know where every copy lives, and for how long
+
+Keep an inventory of tool storage, project buckets, export snapshots, backups and authorised personal downloads. For every copy, record the provider, system, location and country, its purpose, who can access it, and its retention and deletion dates. Check these entries against the storage and retention promises in the consent form and privacy notice.
+
+Schedule deletion of expired working exports and other data whose retention has ended. Run the deletion as a dry run first, inspect what it would remove, and confirm that the real job is scheduled and monitored. Prefer media storage that the project or community controls, with the annotation tool reading from it there. The inventory also makes withdrawal, erasure and exit exports tractable; see [Closing a project](../project-management/index.md#8-release-and-hand-over).
 
 ## Exporting from your annotation tool
 

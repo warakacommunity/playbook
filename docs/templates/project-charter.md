@@ -62,7 +62,7 @@ Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.
 - **Sources of data:** [Community-produced original content, existing texts, elicited translations. Ranked and justified. See the [long-tail chapter's source-selection ranking](../long-tail-language/index.md#source-selection).]
 - **Contributors:** [Who contributes: recording speakers, translators, annotators. Anonymised or named-with-consent.]
 - **Consent framework:** [Reference to the [consent form template](./consent-form.md) or the project's specific consent artefact.]
-- **Storage:** [Location (country + institution + system), access controls, retention period.]
+- **Storage:** [Every copy: provider, system, location and country; access controls; consent-aligned retention and deletion schedule; owner of the copy inventory. See [Know where every copy lives](../6_documentation/data-storage.md#know-where-every-copy-lives-and-for-how-long).]
 
 ## 5. Community IP and licence
 

@@ -3,7 +3,7 @@ title: Release Checklist
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -14,12 +14,13 @@ Releasing a dataset is the moment the work becomes useful to others, and a clear
 ## Before you release
 
 - **Data cleaned and validated.** Noise removed, duplicates dropped before splitting, language and format checked (see [Data Quality](../4_data-quality/index.md)).
-- **Annotation quality verified.** Inter-annotator agreement measured and reported, gold checks passed, disagreement understood rather than hidden (see [Data Quality](../4_data-quality/index.md) and [Annotation Design](../3_annotation-design/workflow-adjudication.md)).
+- **Annotation quality verified.** Inter-annotator agreement measured and reported, gold checks passed, disagreement understood rather than hidden (see [Data Quality](../4_data-quality/index.md) and [Annotation Design](../3_annotation-design/workflow-adjudication.md)). Report coverage, mean agreement with support, reviewer-verified share, per-field label balance and gold-based per-class scores separately, not as one blended readiness score (see [Report readiness as separate measures](../4_data-quality/index.md#report-readiness-as-separate-measures)).
 - **Documentation completed.** A datasheet describing what the data is, how it was collected, from whom, and its known limitations (see [Documentation](../6_documentation/documentation.md)).
 - **Licensing defined.** A clear licence chosen on purpose, applied to the data, with attribution and provenance recorded (see [Data Governance](../data-governance/index.md)).
 - **Ethical review conducted.** Consent confirmed, personal and sensitive data handled, harms considered, community authority respected (see [Data Governance](../data-governance/index.md)).
 - **Consent filter run for this export's purpose.** Items without an accepted purpose left out, withdrawals since the last export applied, consent summary in the dataset card (see [Legal and consent](../legal-consent/index.md#from-consent-record-to-release-metadata)).
 - **Annotators pseudonymised.** Annotator names, emails and account IDs replaced by per-project pseudonyms, and internal administrative records excluded (see [Personally identifiable information](../data-governance/index.md#personally-identifiable-information)).
+- **Source provenance retained for re-annotation.** Each record carries its source dataset ID, version or revision, configuration, split and stable row ID, plus the source URL, licence and transformations needed to join it back and check for leakage. A row number alone is not stable across versions (see the [dataset card](../templates/dataset-card.md#4-preprocessing-cleaning-labeling)).
 - **Baselines and splits provided.** Official train, development, and test splits, and at least baseline results, so others can compare fairly (see [Evaluation](../8_model-building/starter-kit.md)).
 - **Public access ensured.** Hosted where the community can find it, with a persistent identifier and a listing in the catalogues people search (see [Hosting and preservation](./hosting.md) and [Identifiers, versions, and catalogues](./discoverability.md)).
 - **A steward named.** Someone answers for the dataset after release, and the maintenance plan says how (see [Maintenance and stewardship](./maintenance.md)).

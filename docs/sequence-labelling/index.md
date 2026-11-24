@@ -4,7 +4,7 @@ sidebar_label: Overview
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Seid Muhie Yimam
 ---
 
@@ -150,7 +150,13 @@ Other pages of this playbook use the form `hau_Latn` (see [Data Provenance and T
 
 ### Freeze the text annotators saw
 
-Offsets are only valid against the exact string the annotator saw. Normalise Unicode and line endings before import (see [Data Cleaning and Preprocessing](../2_data-collection/7_data-cleaning-preprocessing.md#deduplication-normalization-and-filtering)), never after annotation, and release that exact text with the annotations. Any later cleaning, such as removing a stray space or re-normalising, shifts every offset after it.
+Offsets are only valid against the exact string the annotator saw. Normalise Unicode and line endings before import (see [Data Cleaning and Preprocessing](../2_data-collection/7_data-cleaning-preprocessing.md#freeze-the-text-before-span-annotation)), never after annotation, and release that exact text with the annotations. Any later cleaning, such as removing a stray space or re-normalising, shifts every offset after it.
+
+### Language identification of code-switched text
+
+Language identification can be an annotation task in its own right. Tag each token or span with a controlled ISO 639-3 code rather than a free-text language name, using the script-tagged form above where scripts mix. Define conventions for named entities, mixed forms within a word, and other or unknown language. Show a searchable list that matches native names and aliases but stores the code, and route varieties missing from the standard through a reviewed `other` entry.
+
+Apply the same coded-value rule to metadata such as speaker language, country and script so exports can be merged. Deployment-time detection is a separate problem; see [Multilingual Code-Switching](../deployment/multilingual-switching.md#detection-strategies).
 
 ### Spans in web pages and PDFs
 

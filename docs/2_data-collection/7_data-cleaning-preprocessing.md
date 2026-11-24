@@ -1,7 +1,7 @@
 ---
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 # Data Cleaning and Preprocessing
@@ -36,6 +36,10 @@ Raw data often contains noise, inconsistencies, and errors. Proper cleaning and 
 - **Missing data** – Identify incomplete entries and decide whether to fill, ignore, or remove them  
 - **Corrupted data** – Detect broken or unreadable content and clean or discard it  
 - **Validation checks** – Ensure data integrity after preprocessing  
+
+### Freeze the text before span annotation
+
+Span labels are character offsets into the exact string the annotator saw. Before import, normalise line endings from CRLF to LF and Unicode to NFC; never do this after annotation. Do not let the tool or pipeline trim or collapse whitespace, and read files with consistent newline handling. Store the annotated text, or its hash, with each result. On export, assert that `text[start:end]` equals the stored span text. The script-specific rules are in [Sequence Labelling](../sequence-labelling/index.md#freeze-the-text-annotators-saw), and the same check applies to [extractive question answering](../text-generation/question-answering.md).
 
 ### Preparing Media for Annotation
 

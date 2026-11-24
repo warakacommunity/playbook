@@ -3,7 +3,7 @@ title: Audio Quality Control
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Seid Muhie Yimam
 ---
 
@@ -114,9 +114,15 @@ Store the returned values with the clip, not just a pass or fail. The values are
 
 ## Tier 2: model-based checks (optional)
 
-Some failures are invisible to signal checks: a contributor who read a different sentence, spoke another language, or handed the phone to someone else halfway through. Pretrained models can flag these. You can decode the clip with a multilingual ASR model and compare the result with the prompt, run spoken language identification, compare speaker embeddings across windows of the clip to detect a change of speaker, or use a predicted quality score such as NISQA ([Mittag et al., 2021](../references.md#mittag-2021)). Forced alignment can add word timings and a confidence signal (see [time alignment in the ASR chapter](./index.md#time-alignment-word-and-phoneme-timestamps)).
+Some failures are invisible to signal checks: a contributor who read a different sentence, spoke another language, or handed the phone to someone else halfway through. Pretrained models can flag these, but each result is a triage signal rather than a verdict:
 
-These checks cost far more than tier 1, usually need a GPU at scale, and rest on models that are often weak on African languages. A low score may say more about the model than the clip. Keep them optional, loosen their thresholds, and send failures to a human reviewer rather than rejecting the clip automatically.
+- **Prompt mismatch.** Decode the clip with a multilingual ASR model such as MMS and compute CER against the prompt ([Pratap et al., 2023](../references.md#pratap-2023)). A high value can mean a wrong reading, a different orthography, or a recogniser that does not know the language.
+- **Unexpected language.** Run spoken language identification and compare its prediction with the languages the clip is meant to contain. Code-switching is not automatically an error.
+- **Speaker change.** Compare fixed-length speaker embeddings across windows of the clip. ECAPA-TDNN is one speaker-verification architecture that produces such embeddings ([Desplanques et al., 2020](../references.md#desplanques-2020)); a change of similarity can flag a possible change of speaker for listening.
+- **Predicted perceptual quality.** DNSMOS P.835 predicts speech quality (`SIG`), background-noise quality (`BAK`) and overall quality (`OVRL`) from P.835 human ratings ([Reddy et al., 2021](../references.md#reddy-2021)). NISQA predicts overall quality plus noisiness, coloration, discontinuity and loudness ([Mittag et al., 2021](../references.md#mittag-2021)). Use either as a review signal, not as a universal quality threshold.
+- **Alignment confidence.** Forced alignment can add word timings and a confidence signal (see [time alignment in the ASR chapter](./index.md#time-alignment-word-and-phoneme-timestamps)).
+
+These checks cost far more than tier 1, usually need a GPU at scale, and rest on models that are often weak on African languages. A low score may say more about the model than the clip. Keep them optional, calibrate them on locally reviewed clips, and send failures to a human reviewer rather than rejecting the clip automatically. The same caution applies when the audio is intended for TTS: a model score cannot decide whether a voice is suitable for release.
 
 ## Tier 3: failures that always block
 

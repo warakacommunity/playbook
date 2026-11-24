@@ -1,7 +1,7 @@
 ---
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 # Data Provenance and Traceability
@@ -32,6 +32,12 @@ Understanding where data comes from and how it has been processed is essential f
 - **Annotation processes** – Track labeling methods and guidelines used, including any model that pre-labeled items or chose which items to label (see [Record what the model did](../3_annotation-design/model-assisted-annotation.md#record-what-the-model-did))
 - **Modifications** – Log any changes made to the data after collection  
 - **Audit trails** – Maintain records for reproducibility and verification  
+
+### Label-level change history
+
+Lock or version submitted labels rather than silently overwriting them. Keep who created, changed or deleted each label and when, so every released label can be traced through review and correction. On sensitive projects, do not let annotators hard-delete submitted work; route corrections through an authorised reviewer. For field audio, lock the submitted recording and its label because the recording may be impossible to repeat.
+
+This history supports accountability, but it must not prevent an authorised withdrawal or erasure. Apply those requests to active data and future exports, and record the action without publishing the person's identity or reason. Governance events such as role and policy changes belong in the separate [accountability log](../data-governance/index.md#keep-an-accountability-log).
 
 ## A dataset card you can version
 

@@ -3,7 +3,7 @@ title: Diagnosis Labelling
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -69,7 +69,9 @@ The task interface should show the photo and farmer's question beside the crop, 
 
 ## Quality control
 
-**The kappa floor.** Cohen's kappa is computed on the double-labelled sample per language, per crop and per annotator, every Monday, and the threshold is 0.75. Kappa corrects for the agreement two agronomists would reach by chance, which matters here because some crops have one dominant issue and raw agreement on them looks good even when the labelling is careless. Agreement is an exact match on the full label path: `maize/pest` against `maize/pest/fall_armyworm` is a disagreement, and `uncertain` is a label like any other. The 30% sample is drawn at random. Images that get a second label because the first was `uncertain` or `confidence: low` are double-labelled too, but they stay out of the kappa sample, so the metric measures routine labelling rather than the hard cases. Read the metric's caveats on the [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md) page before you set a floor for a smaller cohort.
+**The kappa floor.** Cohen's kappa is computed on the double-labelled sample per language, per crop and per annotator, every Monday, and the threshold is 0.75. Kappa corrects for the agreement two agronomists would reach by chance, which matters here because some crops have one dominant issue and raw agreement on them looks good even when the labelling is careless. Agreement is an exact match on the full label path: `maize/pest` against `maize/pest/fall_armyworm` is a disagreement, and `uncertain` is a label like any other. The 30% sample is drawn at random. Images that get a second label because the first was `uncertain` or `confidence: low` are double-labelled too, but they stay out of the kappa sample, so the metric measures routine labelling rather than the hard cases. Read the metric's caveats on the [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md#escalate-items-that-do-not-agree) page before you set a floor for a smaller cohort. The 0.75 value belongs to this worked example, not to every diagnosis task.
+
+Add agreement at crop, issue-family and leaf level as a diagnostic alongside exact-path kappa. It shows whether annotators disagree about the broad problem or only its fine-grained name; it does not replace the exact-path score used for release decisions.
 
 **The loop.** While kappa holds above 0.75, the sample stays at 30%. When any cell falls below the floor, that cell goes to 100% double labelling: every image of that crop, or every image by that annotator, gets a second label until the cell recovers. Low agreement routes work to another annotator or review; it does not by itself identify the person at fault. A class that falls below the floor twice is a sign the class is badly defined, and the fix is in the ontology: split it, merge it or add worked examples, and raise the version number.
 

@@ -85,6 +85,12 @@ For a single label per clip, swap `<Labels>` for `<Choices>`, exactly as in the 
 
 The video annotation interface should provide frame-accurate seeking, playback-speed control, timeline boundaries and constrained event labels. Exports should preserve the video identifier, frame rate, start and end times or frames, labels and annotator.
 
+### Tracking objects across frames
+
+For multi-object tracking, annotators draw boxes on keyframes and interpolation fills intermediate frames. A reviewer checks interpolated frames at a fixed interval, including frames where objects enter, leave or overlap. Keep one track ID from entry to exit, and write rules for occlusion, re-entry, frame-edge truncation and minimum object size. A new detection is not automatically a new identity.
+
+Evaluate identity as well as detection. IDF1 measures the agreement between ground-truth and computed identities after a global one-to-one assignment ([Ristani et al., 2016](../references.md#ristani-2016)). HOTA balances detection, association and localisation and provides diagnostic sub-metrics ([Luiten et al., 2020](../references.md#luiten-2020)). Report these alongside detection mAP rather than treating mAP alone as evidence that identities were preserved.
+
 ## The 2026 modelling landscape
 
 Video understanding in 2026 is split between short-clip classification (dominated by video-transformer backbones), long-form video captioning and reasoning (dominated by multimodal LLMs), and temporal detection (a mix of both).

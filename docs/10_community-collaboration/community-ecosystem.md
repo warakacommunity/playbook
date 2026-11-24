@@ -3,7 +3,7 @@ title: Community Ecosystems
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -22,3 +22,9 @@ Good African-language datasets increasingly come from partnerships that cross th
 ## Contributing, and crediting contributors
 
 A community resource is only as strong as the people who contribute to it, so make contribution easy and make credit real. Provide clear contributor guidelines that say what kinds of help are wanted, whether that is writing, reviewing, sharing a dataset, or translating, and how to get started. Lower the barrier to a first contribution, because many of the field's most valuable people began as students who fixed one small thing. And name contributors in datasheets, in publications, and in release notes, because recognition is both fair and the cheapest way to keep a volunteer community alive. The growth of African NLP over two decades, from a handful of papers a year to hundreds, has been driven precisely by this widening circle of contributors ([Belay et al., 2025](../references.md#belay-2025)).
+
+### Motivate without surveillance
+
+Keep personal goals and streaks private by default. If a project uses a leaderboard, make it opt-in, use a chosen alias, and rank validated work rather than raw submissions. Count validation, review, mentoring and documentation as contributions, not only new labels. Prefer community-level progress towards shared language or coverage goals, and never publish personal totals without consent.
+
+Do not frame monitoring as motivation or use rankings to pressure people into faster work. Avoid pushy re-engagement messages, public comparisons of sensitive or low-volume contributors, and penalties for taking a break. Recognition should make participation more visible and rewarding without turning the community into a surveillance system.

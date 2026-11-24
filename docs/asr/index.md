@@ -2,7 +2,7 @@
 title: Automatic Speech Recognition (ASR)
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -27,7 +27,14 @@ ASR datasets are usually distributed as a manifest: one record per utterance poi
   "duration": 3.2,
   "sample_rate": 16000,
   "language": "hau",
+  "languages_present": ["hau", "eng"],
   "speaker_id": "spk_017",
+  "speaker_profile": {
+    "age_band": "25-34",
+    "gender": "prefer_not_to_say",
+    "language_varieties": ["hau_kano", "hau_standard"]
+  },
+  "speaker_profile_release_consent": "speaker-profile-v1",
   "speech_type": "spontaneous",
   "original_file": "originals/hau_0001.wav",
   "original_sample_rate": 48000,
@@ -48,6 +55,8 @@ The last group of fields records where the clip came from and how it was checked
 
 Recording `speaker_id` is what lets you split train and test by speaker, which matters more than it looks: if the same voice appears in both, the reported error rate flatters the model, because it has heard that speaker before.
 
+The `speaker_profile` fields above are optional and illustrative. Include them only where the speaker deliberately supplied them and accepted the named, versioned row-level release consent. Otherwise omit the whole profile object and its consent field, rather than exporting empty values. Use coarse categories, allow "prefer not to say", and never copy one speaker's profile onto a multi-speaker clip. See [Make speaker profiles optional and deliberate](../sections/speech.md#make-speaker-profiles-optional-and-deliberate).
+
 ## What "African-language speech" actually varies on
 
 Every ASR corpus decision cascades through the model. The variation African languages carry, and that generic ASR pipelines routinely under-serve, sits along four axes.
@@ -64,6 +73,27 @@ Two broad recording modes serve ASR: read speech (speakers reading prepared prom
 **Read speech** is the fastest path to a corpus and the cheapest to transcribe (the transcript is the prompt). It is the right choice when the deployment target is broadcast-adjacent (announcements, prepared speeches, formal contexts) or when the project is early and needs any usable model quickly. Prompts must be curated for phonetic coverage: every phoneme in every position, including tone contrasts. See [TTS · Phonetic coverage](../text-to-speech/index.md#phonetic-coverage-what-enough-means-per-language-family) for the per-family constraints.
 
 **Spontaneous speech** matches how people actually talk and produces models that generalise to real deployment surfaces (voice notes, phone calls, market conversations). It is 3–5x more expensive to transcribe per hour of audio than read speech, and requires a code-switching-aware transcription convention. Use when the deployment target is anything other than prepared speech.
+
+### Give feedback while the speaker can still re-record
+
+Show a simple input-level or peak meter during recording, with plain-language warnings for clipping, input that is too low, and long silences. Use the same corpus-purpose thresholds as the [audio quality-control checks](./audio-quality-control.md#decide-the-corpus-purpose-first), so the recorder does not reject noise that a robust ASR corpus is meant to retain. A clean-speech project may additionally warn when the background is not quiet enough. Let the speaker correct the problem and re-record before submission; do not wait for a later validator to discover it.
+
+After the take, a speaking-rate check can flag an unusually fast or slow recording for review. Estimate rate with syllables per second where that is practical, or characters per second for agglutinative languages whose written words are long. Treat the result as a prompt for human listening, not an automatic rejection. On a low-end device, a basic level meter and a re-record button are the minimum useful feedback.
+
+### Choose an elicitation style
+
+Use one collection task per style and attach its prompt ID to every recording. The style determines both the speech you obtain and the transcription work that follows:
+
+| Style | Output | Transcription cost | Suitability |
+|---|---|---|---|
+| Read aloud | A prepared sentence read verbatim | Low: the prompt is the starting transcript | Phonetic coverage, benchmarks, early corpora |
+| Prompted question | A short answer to a question | Medium: a verbatim pass is needed | Everyday vocabulary and short spontaneous answers |
+| Long-form monologue | A sustained narrative or explanation | High: segmentation and verbatim transcription | Prosody, discourse, and natural domain speech |
+| Listen-and-repeat | A repeated sentence or phrase | Low to medium: check against the heard prompt | Speakers who can hear a prompt but cannot read it; check for accent carryover |
+| Translation-to-speech | A spoken rendering of a source sentence | High: both sides need checking | Interpreting and speech-translation pairs |
+| Image-prompted description | A description of a picture or scene | Medium to high: unconstrained wording | Literacy-sensitive collection and grounded descriptions |
+
+For spontaneous recordings, validators check audibility, the intended language or languages, one main speaker, and that the start and end are not cut off. The transcript comes from a separate verbatim pass, not from the validator's summary. Offer listen-and-repeat or picture prompts where literacy varies, and record the elicitation style so that read, repeated, and spontaneous speech are not silently mixed. Listen-and-repeat can carry the prompt reader's accent into the recording, so monitor it as a separate condition.
 
 **Session structure.** For read-speech recording, sessions of 60 to 90 minutes with breaks work better than four-hour marathons; vocal fatigue produces silent quality drift. For spontaneous speech, capture in natural chunks (interview turns, broadcast segments) and cut them into utterance-level clips afterwards (see [Segmenting long recordings](#segmenting-long-recordings)). Train ASR on 16 kHz mono copies: for the training copy, higher sample rates buy nothing for speech recognition and inflate storage. Capture and archive the originals at a higher rate, though, and derive the 16 kHz copies from them (see [Capture high, derive down](#capture-high-derive-down)).
 
@@ -120,6 +150,12 @@ A transcription config plays the audio and gives the transcriber a text box, plu
   <TextArea name="transcript" toName="audio" rows="3"
             editable="true" required="true"
             placeholder="Transcribe exactly what is said, following the guidelines"/>
+  <Choices name="languages_present" toName="audio" choice="multiple">
+    <!-- Populate these choices from the project's controlled ISO 639-3 list. -->
+    <Choice value="hau"/>
+    <Choice value="eng"/>
+    <Choice value="other_language_needs_review"/>
+  </Choices>
   <Choices name="conditions" toName="audio" choice="multiple">
     <Choice value="Code-switching"/>
     <Choice value="Overlapping speech"/>
@@ -132,13 +168,18 @@ A transcription config plays the audio and gives the transcriber a text box, plu
 
 The `$audio` value is the `audio_filepath` from the manifest above, so the same file feeds collection, transcription, and training without reformatting.
 
+### Use drafts without losing the reference
+
+Segment a long recording first, then optionally pre-fill each segment with a draft from a usable recogniser. A draft can save typing, but it can anchor the transcriber to the recogniser's wording in the same way that post-editing machine translation can anchor a translator. Keep a from-scratch audit sample, and record whether each transcript was written from scratch or post-edited, together with the draft or model version where applicable. The primary guidance is in [Model-assisted annotation](../3_annotation-design/model-assisted-annotation.md#by-modality); the related translation workflow is in [Machine translation](../machine-translation/index.md#annotate-translations).
+
 The transcription interface should provide keyboard-controlled playback, adjustable speed, a waveform where useful, and a text field that preserves the target script and diacritics. It should save drafts and export the audio identifier, transcript, annotator and any quality flags together.
 
 **Transcription conventions to fix in writing before annotation begins:**
 
 - **Orthography and script.** Which convention applies (Latin vs. Ajami for Hausa, Ge'ez vs. Latin transliteration for Amharic). Mixing scripts within a single corpus teaches the model a bimodal spelling distribution that later inference cannot reproduce.
 - **Diacritic and tone marking.** Preserve fully, normalise to Unicode NFC, or strip, with the reasoning documented and enforced in evaluation. See the [non-Latin scripts in real UIs](../deployment/non-latin-scripts.md) chapter for the deployment-side implications.
-- **Code-switching notation.** How to mark a switch (inline tag, separate field, no marking). Whatever you choose, apply it consistently; inconsistent marking is worse than none.
+- **Canonical spelling list.** Maintain a living list of proper names, place names, loanwords and code-switched terms, visible during transcription and extended during adjudication. Inconsistent spellings inflate WER and CER and fragment the vocabulary; the same reviewed list can feed a TTS pronunciation lexicon.
+- **Languages present and code-switching notation.** Record every language heard in `languages_present`, using controlled ISO 639-3 codes narrowed to the relevant country or region where the project distinguishes varieties. Store codes such as `pcm`, not free-text language names. Provide a controlled `other_language_needs_review` route for a missing language or variety, and resolve it during adjudication rather than inventing a new code. Mark the span-level switch using the project's inline-tag, separate-field or no-marking convention, and apply it consistently; the text equivalent is in [Sequence labelling](../sequence-labelling/index.md#language-identification-of-code-switched-text).
 - **Disfluencies and false starts.** Verbatim transcription including fillers (`um`, `eh`, restarts) produces models that transcribe those tokens, which is useful for some downstream tasks and noise for others. Decide up front and document.
 - **Numbers, dates, abbreviations.** Written as spoken, in the target language. Same discipline as the [TTS chapter's normalisation section](../text-to-speech/index.md#text-preparation-and-normalisation).
 - **Speaker-turn overlaps.** Two speakers talking over each other: transcribe both with a turn marker, or split into per-speaker clips, or discard. Document the rule.
@@ -175,7 +216,14 @@ Decide whether the corpus is for robust ASR or clean TTS before setting any thre
 - **Per-condition sampling.** The `conditions` labels in the transcription config are not just for the trainer's benefit. Sample the flagged clips separately (all "code-switching" flagged, all "background noise" flagged) and review them together. Systematic transcription errors surface in these focused reviews that random sampling misses.
 - **Per-speaker balance.** Track cumulative recorded minutes per speaker and flag imbalances. A corpus where three speakers account for 40% of the data will produce a model that flatters those voices and fails on others.
 - **Duration and audio-quality checks at ingest.** Automated per-clip duration checks, clipping detection and loudness measurement, judged against the [threshold table](./audio-quality-control.md#tier-1-signal-checks-on-every-clip) for the corpus purpose. Loudness normalisation and silence trimming run on the derived training copies, never on the archived original ([Capture high, derive down](#capture-high-derive-down)). A clip that is clipped badly enough to fail the table should be re-recorded, not "fixed" in post.
-- **Weekly IAA measurement**: inter-annotator agreement on the sample second-pass reviewed batch. Falling IAA over time is the earliest signal that transcription guidelines are drifting or annotator fatigue is setting in.
+- **Weekly IAA measurement**: inter-annotator agreement on the sample second-pass reviewed batch. Falling IAA over time is the earliest signal that transcription guidelines are drifting or annotator fatigue is setting in. For a symmetric human-to-human comparison, divide character or word edit distance by the length of the longer transcript. This differs from one-sided model-versus-reference CER or WER, which divides by the reference length. Set a separate triage threshold for the symmetric score; do not reuse the model-evaluation threshold above.
+
+### Keep prompt and speaker diversity at assignment time
+
+- Do not assign the same sentence to the same speaker twice, and cap how many recordings each sentence can receive. Prefer many speakers reading fewer sentences over a few speakers reading the whole prompt pool.
+- Let contributors skip or return a prompt they cannot read, hear or say comfortably. A skip is not a failed recording.
+- Enforce the speaker-and-prompt duplicate rule again at acceptance, not only when ordering prompts. This catches retries and concurrent assignments.
+- Keep the caps in the collection report. Capped repeats reduce the number of rows lost when prompt-disjoint train, development and test splits are constructed ([Evaluation](#evaluation)).
 
 ### Peer validation of crowd recordings
 

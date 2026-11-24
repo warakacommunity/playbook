@@ -3,7 +3,7 @@ sidebar_position: 99
 sidebar_label: References
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -238,6 +238,10 @@ Crasborn, O., Zwitserlood, I., van der Kooij, E., Bank, R., & Ormel, E. *Annotat
 2017, with a mission for Africans to be owners and shapers of AI. Its local IndabaX events grew from 13
 in 2018 to 47 countries by 2024–2025, aiming for every African country by 2027. [deeplearningindaba.com](https://deeplearningindaba.com/)
 
+### Desplanques, B., Thienpondt, J., & Demuynck, K. (2020) {#desplanques-2020}
+
+*ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN Based Speaker Verification.* Interspeech 2020. Introduces a speaker-verification architecture that produces fixed-length speaker-characterising embeddings. [doi.org/10.21437/Interspeech.2020-2650](https://doi.org/10.21437/Interspeech.2020-2650) (arXiv: [2005.07143](https://arxiv.org/abs/2005.07143))
+
 ### Dione, C. M. B., et al. (2023) {#masakhapos-2023}
 
 *MasakhaPOS: Part-of-Speech Tagging for Typologically Diverse African languages.* Proceedings of ACL 2023 (Volume 1: Long Papers), pp. 10883–10900. A UPOS-annotated news dataset of about 1,500 sentences in each of 20 African languages, built by Masakhane, with an analysis of tokenisation challenges and cross-lingual transfer. [aclanthology.org/2023.acl-long.609](https://aclanthology.org/2023.acl-long.609/)
@@ -303,6 +307,10 @@ European Parliament and Council of the European Union. *Regulation (EU) 2016/679
 
 Everingham, M., Van Gool, L., Williams, C. K. I., Winn, J., & Zisserman, A. *The PASCAL Visual Object Classes (VOC) Challenge.* International Journal of Computer Vision, 88(2), 303–338. Describes the VOC dataset, its annotation procedure (axis-aligned bounding boxes around the visible extent of each object), and its evaluation. [doi.org/10.1007/s11263-009-0275-4](https://doi.org/10.1007/s11263-009-0275-4)
 
+### Feinstein, A. R., & Cicchetti, D. V. (1990) {#feinstein-1990}
+
+*High agreement but low Kappa: I. The problems of two paradoxes.* Journal of Clinical Epidemiology, 43(6), 543–549. Explains how imbalanced category prevalences can produce low kappa despite high observed agreement. [doi.org/10.1016/0895-4356(90)90158-L](https://doi.org/10.1016/0895-4356(90)90158-L)
+
 ### FFmpeg Developers (n.d.-a) {#ffmpeg-cli}
 
 *ffmpeg Documentation.* The `-fps_mode` option sets the frame-rate mode: with `cfr`, "frames will be duplicated and dropped to achieve exactly the requested constant frame rate"; as an output option, `-r` duplicates or drops frames before encoding to reach a constant output rate. [ffmpeg.org/ffmpeg.html](https://ffmpeg.org/ffmpeg.html)
@@ -329,6 +337,10 @@ typed line images from 411 native writers, spanning handwritten, typed, and synt
 ### Fort, K., & Sagot, B. (2010) {#fort-sagot-2010}
 
 *Influence of Pre-annotation on POS-tagged Corpus Development.* Proceedings of the Fourth Linguistic Annotation Workshop (LAW IV), ACL, pp. 56–63. A controlled study showing that automatic pre-annotation speeds annotators up and can raise quality, but also biases them towards the pre-annotation. [aclanthology.org/W10-1807](https://aclanthology.org/W10-1807/)
+
+### Frerebeau, N. (2025) {#frerebeau-2025}
+
+*Alpha Diversity.* `tabula` package vignette, 4 September 2025. Defines Shannon heterogeneity and its evenness form, normalised by the logarithm of the number of categories. [stat.ethz.ch/CRAN/web/packages/tabula/vignettes/alpha.html](https://stat.ethz.ch/CRAN/web/packages/tabula/vignettes/alpha.html)
 
 ### Gauthier, E., et al. (2024) {#kallaama-2024}
 
@@ -488,6 +500,10 @@ Savourel, Y. (Ed.). *TMX 1.4b Specification.* Localization Industry Standards As
 ### Lowell, D., et al. (2019) {#lowell-2019}
 
 Lowell, D., Lipton, Z. C., & Wallace, B. C. *Practical Obstacles to Deploying Active Learning.* Proceedings of EMNLP-IJCNLP 2019, Hong Kong, China, 21–30. Finds that active-learning gains are inconsistent across models and tasks, and that actively acquired data is coupled to the model that selected it: successor models trained on it do not reliably beat models trained on random samples. [aclanthology.org/D19-1003](https://aclanthology.org/D19-1003/) (DOI: [10.18653/v1/D19-1003](https://doi.org/10.18653/v1/D19-1003))
+
+### Luiten, J., et al. (2020) {#luiten-2020}
+
+Luiten, J., Osep, A., Dendorfer, P., Torr, P., Geiger, A., Leal-Taixé, L., & Leibe, B. *HOTA: A Higher Order Metric for Evaluating Multi-Object Tracking.* International Journal of Computer Vision. HOTA balances detection, association and localisation, with sub-metrics for analysing those error sources separately. [doi.org/10.1007/s11263-020-01375-2](https://doi.org/10.1007/s11263-020-01375-2) (arXiv: [2009.07736](https://arxiv.org/abs/2009.07736))
 
 ### Luccioni, A. S., et al. (2022) {#luccioni-2022}
 
@@ -728,9 +744,17 @@ Pratap, V., Tjandra, A., Shi, B., Tomasello, P., Babu, A., Kundu, S., Elkahky, A
 *Some Languages are More Equal than Others: Probing Deeper into the Linguistic Disparity in the NLP
 World.* arXiv:2210.08523. [arxiv.org/abs/2210.08523](https://arxiv.org/abs/2210.08523)
 
+### Reddy, C. K. A., Gopal, V., & Cutler, R. (2021) {#reddy-2021}
+
+*DNSMOS P.835: A Non-Intrusive Perceptual Objective Speech Quality Metric to Evaluate Noise Suppressors.* arXiv:2110.01763, submitted 2021 and revised 2022. Predicts speech quality (`SIG`), background-noise quality (`BAK`) and overall quality (`OVRL`) from P.835 human ratings. [arxiv.org/abs/2110.01763](https://arxiv.org/abs/2110.01763)
+
 ### Retta, E. A., et al. (2022) {#retta-2022}
 
 *A New Amharic Speech Emotion Dataset and Classification Benchmark.* arXiv:2201.02710. Introduces ASED, an Amharic speech emotion dataset of 2,474 clips from 65 speakers across four dialects and five emotion classes, with a VGG-based benchmark. [arxiv.org/abs/2201.02710](https://arxiv.org/abs/2201.02710)
+
+### Ristani, E., et al. (2016) {#ristani-2016}
+
+Ristani, E., Solera, F., Zou, R. S., Cucchiara, R., & Tomasi, C. *Performance Measures and a Data Set for Multi-Target, Multi-Camera Tracking.* arXiv:1609.01775. Defines identity-aware tracking measures, including identification precision, identification recall and IDF1, using a global one-to-one assignment between ground-truth and computed identities. [arxiv.org/abs/1609.01775](https://arxiv.org/abs/1609.01775)
 
 ### Ryant, N., et al. (2019) {#ryant-2019}
 

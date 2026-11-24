@@ -2,7 +2,7 @@
 ready: true
 title: Text Generation
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -10,13 +10,16 @@ last_update:
 
 Text generation covers the tasks where a model produces language rather than just labelling it: writing open-ended text, summarising a longer document, and answering questions. These are the tasks closest to what people picture when they think of modern language models, and they are where African languages fall furthest behind, because generation needs both large, clean text to learn from and careful human data to steer and check it. Benchmarks that test large language models across the continent find a persistent gap between English and African languages on exactly these tasks ([AfroBench](../references.md#afrobench)).
 
-This chapter covers three generation tasks:
+This chapter covers three established generation tasks, plus a related page on dialogue annotation:
 
 - **[Open-ended generation](./generation.md)**: producing fluent, useful text from a prompt.
 - **[Summarization](./summarization.md)**: condensing a document while keeping its meaning.
 - **[Question answering](./question-answering.md)**: returning a correct answer to a question, from a passage or from the model's own knowledge.
+- **[Dialogue](./dialogue.md)**: annotating ordered conversations, target turns and responses with their context preserved.
 
 ![The three text-generation tasks and their shared reliance on native-speaker human evaluation](images/text-generation-tasks.svg)
+
+The diagram illustrates the three established generation tasks. Dialogue is an additional related page focused on conversation structure and context.
 
 ## What the three tasks share
 

@@ -29,6 +29,12 @@ lines/gazette_0002.png,An gudanar da zaɓen cikin lumana.
 
 The transcription must preserve every diacritic and special character exactly as printed, since for OCR the text column is the ground truth the model is scored against, and a dropped accent there teaches and then rewards the wrong spelling.
 
+### Scene text
+
+Contributors can photograph signs, posters, shopfronts and public notices that contain local-language text. Record the languages and scripts present and transcribe exactly what is visible, preserving diacritics and mixed-script text. Where the task needs locations, annotate a box or polygon for each line and keep its reading order.
+
+Scene photographs bring perspective, uneven lighting, stylised fonts and mixed scripts that clean scans do not. Include these conditions in the pilot and evaluation rather than treating scan performance as a substitute. Before release, blur faces and number plates and coarsen or drop location metadata; the same privacy sequence is described in [Field image capture](../agri-advisory/field-image-capture.md#quality-control).
+
 ## Annotation and evaluation
 
 For OCR the annotation is transcription, the same discipline as in [speech](../asr/index.md): native readers, exact diacritics, and a fixed convention for ambiguous characters. The work can be sped up by correcting an existing OCR engine's output rather than typing from scratch, as long as the corrections are careful. OCR is evaluated by error rate against the reference, with Character Error Rate (CER) the primary measure because it is fair to the large character sets and rich morphology of African scripts, and Word Error Rate (WER) reported alongside it.

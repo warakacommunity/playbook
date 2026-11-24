@@ -2,7 +2,7 @@
 title: Project Management
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -93,15 +93,21 @@ Most projects have more roles than people, so one person often holds several rol
 | --- | --- |
 | **Project lead** | Schedule, budget, communication, and reporting to the funder. |
 | **Language lead** (one per language) | Guidelines, hard cases, and quality for that language. The final authority on what is correct. |
-| **Technical lead** | Annotation tool, data pipeline, storage, and backups. |
+| **Technical lead** | Annotation tool, data pipeline, storage, scheduled backups and tested restores. |
 | **Ethics and data lead** | Ethics approval, consent records, data protection, and licensing. |
 | **Field facilitators** (community collection) | Recruiting, onboarding, and supporting a local cohort of contributors. |
 | **Annotators** | Producing labels. |
-| **Reviewers** | Applying the rubric and escalating unresolved disagreements to adjudicators. |
+| **Reviewers** | Applying the rubric and escalating unresolved disagreements to adjudicators. Plan enough independent reviewers per language to keep the review queue moving. |
 
-Keep annotation and review separate, even if people rotate between them. Reviewing your own work hides the errors you most need to catch. A language lead for each language, rather than one central team labelling everything, is what let Masakhane projects work across many languages at once ([Nekoto et al., 2020](../references.md#nekoto-2020)).
+Keep annotation and review separate, even if people rotate between them. Reviewing your own work hides the errors you most need to catch. A language lead for each language, rather than one central team labelling everything, is what let Masakhane projects work across many languages at once ([Nekoto et al., 2020](../references.md#nekoto-2020)). Give each person only the access their role needs, and review and revoke it as described in [Who has access](../data-governance/index.md#who-has-access).
 
-**Recruit early.** Finding fluent native speakers is often the hardest constraint, especially for smaller languages. Give recruitment its own time in the plan. Good places to look include university language and linguistics departments, community organisations, and existing research communities such as [Masakhane](https://www.masakhane.io/). Ask candidates to label a short test set before you hire them, and train everyone on the guidelines before the pilot.
+**Recruit early.** Finding fluent native speakers is often the hardest constraint, especially for smaller languages. Give recruitment its own timeline and owner. Good places to look include university language and linguistics departments, community organisations, and existing research communities such as [Masakhane](https://www.masakhane.io/). Use a staged funnel:
+
+1. **Call.** Combine open calls with invitations through community networks. Ask only for the language, variety, region and device information needed to plan the work.
+2. **Screen.** Check language and task readiness with a short, reviewed exercise.
+3. **Onboard.** Train everyone on the guidelines before the pilot, and keep a reserve pool for dropouts.
+
+For an open project, start private and open joining deliberately. Use reviewed requests for sensitive tasks. Take consent at joining and check it again when work is submitted. Cap active contributors at what your reviewers can support, and say whether the task works on a phone. Publish only a summary of the purpose, languages, contribution terms and consent conditions, never task data or the member list. Distinguish leaving the project from withdrawing consent, which follows the [withdrawal process](../legal-consent/index.md#withdrawal). See [Inclusive and Bias-Aware Annotation](../3_annotation-design/inclusive-bias-aware.md) and [Community Ecosystems](../10_community-collaboration/community-ecosystem.md).
 
 **Recruit through field facilitators when you collect in communities.** Community collection, especially of speech, can recruit people in groups rather than one by one: a teacher brings a class, a community organiser brings neighbours, a cooperative officer brings members. NaijaVoices recruited its more than 5,000 voice donors through trained community facilitators ([Emezue et al., 2025](../references.md#emezue-2025)). Whatever else facilitators do in your project, define the role and keep its powers narrow:
 
@@ -131,7 +137,13 @@ Write decisions down, because few people are online at the same time. If contrib
 - items completed against the plan;
 - agreement between annotators;
 - how many annotators are active;
-- cost per item so far.
+- cost per item so far;
+- skipped and repeatedly skipped items, with their reason codes and what happened to them ([Track skips and unfinished items](../3_annotation-design/workflow-adjudication.md#track-skips-and-unfinished-items));
+- open item-level questions, especially those waiting for a reviewer ([Close the feedback loop](../4_data-quality/index.md#close-the-feedback-loop)).
+
+For several languages or projects, use one table with a row per language or project and investigate the weakest rows first. Show agreement only where at least two independent labels overlap, with its support count; use "not yet scored", never zero, where it cannot be calculated. Alongside it report coverage, required annotations (items multiplied by planned overlap), open review items and the age of the oldest, rolling completion velocity over a fixed recent window, and the estimated finish date against the plan. Track open flags and rejection rates, and plan reviewer capacity where the backlog is growing. Keep coverage, agreement, reviewer-verified share, per-field label balance and gold-based per-class scores separate rather than combining them into one readiness score; see [Report readiness as separate measures](../4_data-quality/index.md#report-readiness-as-separate-measures).
+
+Per annotator, watch skip rate, time per item and label distribution. A sudden shift is a prompt to investigate, not proof of drift or misconduct. Use one fixed reporting time zone, such as UTC, so daily counts do not move between reports. The [agri-advisory weekly report](../agri-advisory/quality-consent-release.md) provides a worked monitoring example. Keep recognition and personal goals separate from this monitoring; see [Motivate without surveillance](../10_community-collaboration/community-ecosystem.md#motivate-without-surveillance).
 
 Falling agreement usually means the guidelines need fixing, not that annotators need correcting. Annotators dropping out usually points to problems with pay, workload, or distressing content. A problem caught in week two costs far less than one found at release ([Sambasivan et al., 2021](../references.md#sambasivan-2021)).
 
@@ -146,7 +158,8 @@ These risks come up in almost every African-language data project:
 | **Payments are delayed** | Finance office has not confirmed the process | Agree on the payment process before work starts, and keep a small float for urgent payments if your organisation allows it. |
 | **Currency changes** | Local currency falls against the grant currency | Recheck the budget before each payment round, and keep a contingency line. |
 | **Connectivity and power fail** | Annotators miss deadlines in the same region | Choose tools that work offline or on a weak connection, and cover mobile data costs. Government internet shutdowns have happened in several countries, so plan for gaps. See [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) for sync and late-work rules. |
-| **Funding or a tool disappears** | Grant end date approaches; tool changes its pricing | Keep your own copies of all raw data and exports, and avoid depending on a single service. |
+| **Funding or a tool disappears** | Grant end date approaches; tool changes its pricing | Keep your own copies of all raw data and exports, test a complete exit export periodically, and avoid depending on a single service. |
+| **Data loss** | A backup has never been restored; storage syncs or exports fail unnoticed | Schedule database and media backups with a retention period, test restores regularly, and check service health, failed syncs and failed exports weekly. |
 | **Harm to annotators** | Annotators skip items or leave after sensitive batches | Warn annotators about sensitive content, let them opt out, limit exposure, and review data before release. |
 | **Data leaks during annotation** | Exports or task links shared in public groups; data left on shared or lost devices | Match the security settings to how sensitive the data is, limit who can export, and clear local copies when work has synced. See [Securing data during annotation](../data-governance/index.md#securing-data-during-annotation). |
 
@@ -155,6 +168,10 @@ These risks come up in almost every African-language data project:
 **Plan the release from the start.** Decide where the dataset will be hosted, under which licence, how versions will be numbered, and who will answer questions and fix errors after the grant ends. The [Documentation](../6_documentation/documentation.md) chapter explains how to write a datasheet for the release.
 
 **Assume someone else will finish the project.** Team members graduate, change jobs, or run out of time. Keep the guidelines, schema, consent records, and processing scripts in a shared repository, not on one person's laptop. This lets the next person pick up the work, and it lets you show where the data came from years later.
+
+**Prepare to close before you have to.** Periodically export more than annotations: the contributor roster with roles and dates, consent records, review history and the accountability log. These records may need separate exports, so verify that each is complete and readable outside the tool.
+
+When work ends, choose deliberately between **pause** (not active now, still managed), **archive** (closed to new work but readable, exportable and reversible) and **delete** (irreversible). Prefer a readable archive where retention duties permit, so consent and provenance survive. Delete only after confirming the required exports and archive copy, and after applying erasure, withdrawal and retention obligations. An archive still contains personal data; it does not suspend those obligations. See [Know where every copy lives](../6_documentation/data-storage.md#know-where-every-copy-lives-and-for-how-long).
 
 **Write down what you learned.** When the project ends, record what worked and what did not, using the [retrospective template](../case-studies/retrospective-template.md). It helps the next team plan better than you could.
 

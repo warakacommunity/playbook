@@ -2,7 +2,7 @@
 ready: true
 title: Speech-to-Speech Translation
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -32,6 +32,8 @@ Two axes matter more than the specific model choice.
 ## Building the data
 
 If you collect S2ST data directly, the unit is aligned speech across two languages: the same utterance spoken in the source and in the target, with a transcript on each side for training and evaluation. This is expensive, so most projects start cascaded and compose existing resources: an ASR corpus for the source language, a parallel text corpus for the pair (see [Machine Translation](../machine-translation/index.md)), and a TTS corpus for the target.
+
+Choose the source and target collection tasks deliberately. Read prompts, prompted answers, listen-and-repeat, translation-to-speech and image descriptions produce different speech and transcription costs; the comparison is in [ASR · Choose an elicitation style](../asr/index.md#choose-an-elicitation-style). Keep the elicitation style and prompt ID on both sides of an aligned record.
 
 Where you do collect end-to-end data, treat consent and voice rights as you would for TTS, since the target side is synthesised or re-spoken speech. Voice-consent conversations must cover both sides of the pair explicitly. A speaker whose source-language voice is recorded may not have consented to their voice being used to produce target-language output.
 

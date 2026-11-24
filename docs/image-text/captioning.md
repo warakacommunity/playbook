@@ -52,6 +52,8 @@ Run several annotators over the same images to collect the multiple references t
 
 For embedding-based semantic scoring, a useful second opinion, **[CLIPScore](https://arxiv.org/abs/2104.08718)** measures caption-image alignment without needing reference captions, and **[BERTScore](https://github.com/Tiiiger/bert_score)** applied to captions in the target language gives a reference-based semantic signal that partially corrects for BLEU's morphology blindness. Neither replaces human evaluation; both are useful for tracking regression during development.
 
+For agreement between human captions, surface overlap can understate agreement because several wordings may describe the same image correctly. Use chrF between caption pairs as one diagnostic ([Popović, 2015](../references.md#popovic-2015)), and an embedding-based similarity only after checking that the model handles the target language. Spot-check a sample by hand, especially where language coverage is weak, and do not interpret these scores as interchangeable with kappa.
+
 ## The 2026 modelling landscape
 
 Image captioning in 2026 is dominated by the same multimodal LLM (MLLM) lineage that took over VQA. Prompt-based captioning from a general MLLM is the workable baseline, not a fine-tuned encoder-decoder captioner. The specific open-model recommendations in mid-2026:

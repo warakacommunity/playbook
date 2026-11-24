@@ -86,7 +86,10 @@ Beyond the standard datasheet questions, this section is where the playbook's Af
 - **How was each item chosen for review?** [The per-item rule and its seed, for example a hash of the item ID with a fixed seed, so that others can rerun it. See [Decide what gets reviewed](../3_annotation-design/workflow-adjudication.md#decide-what-gets-reviewed-a-sample-plus-escalations).]
 - **Which flags sent an item to review regardless of the sample?** [Low agreement, a lone dissenting annotator, a failed gold item, an automated check, a manual flag. List the rules in force.]
 - **How many items did each annotator label?** [The distribution of items per annotator, and any cap on one annotator's share (see [Cap each annotator's share](../3_annotation-design/workflow-adjudication.md#cap-each-annotators-share)).]
+- **How were skips and unfinished items handled?** [The reason codes, reassignment or retirement policy, and the share of items skipped or excluded. Keep "nothing to label" separate from "skipped". See [Track skips and unfinished items](../3_annotation-design/workflow-adjudication.md#track-skips-and-unfinished-items).]
 - **How are annotator identities handled in the release?** [Pseudonymised or removed? Method (for example a keyed hash per project), whether the key stays the same across versions, whether a mapping to real people is kept and who can access it, and which annotator attributes (region, dialect, gender) are released. See [Personally identifiable information](../data-governance/index.md#personally-identifiable-information).]
+- **How were released labels produced?** [Single annotation, majority vote, adjudication, model-assisted draft with human correction, or another rule. State whether per-annotator labels are also released, under what access conditions, and how disagreement is preserved.]
+- **What source provenance supports re-annotation?** [For every row or a resolvable mapping: source dataset ID, version or revision, configuration, split and row ID; source URL and licence; any transformations. A row number alone is not stable across versions.]
 
 ## 5. Uses
 

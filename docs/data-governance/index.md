@@ -2,7 +2,7 @@
 title: Data Governance
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -90,6 +90,14 @@ The people who label the data need protecting too. An export from an annotation 
 
 Pseudonyms are not anonymity on their own. In a small team, extra fields such as an annotator's region, dialect, or gender can single a person out, so release only the annotator attributes the dataset really needs. Crediting annotators by name in the [dataset card](../templates/dataset-card.md) (see [Benefit-sharing and credit](#benefit-sharing-and-credit)) is compatible with this, as long as the list of names cannot be joined to the labels. Keep internal administrative and working-hours records out of the public release. Decide all of this in the [ethics review](#a-lightweight-ethics-review) before annotation starts, and record in the dataset card which annotator fields were pseudonymised and how.
 
+### Data about your annotators
+
+Annotators are data subjects too. A project may hold their identity and contact details, country and age band, device and connection logs, quality scores, review outcomes and suspension reasons. Explain these uses before work starts, collect only what coordination and quality control need, and set a retention period for each category. Do not collect identity-document photographs unless there is a stated, necessary purpose and a deletion date.
+
+Ask background questions once, after consent and before the first item. Say which answers are required, which are optional, and who can see them. Link answers to labels through the pseudonymous IDs above. Restrict per-person quality scores and review histories to the people who need them; annotators must not see one another's records. Where applications require approval, make that an explicit decision and give unsuccessful applicants a reason. Keep identities out of releases unless a person has separately chosen to be credited by name.
+
+Publish a [privacy notice](../templates/privacy-notice.md) that covers contributors and annotators. A notice explains processing; it does not replace consent where consent is the basis for the processing.
+
 ### Sensitive and restricted content
 
 Some knowledge should not be public even when it is easy to collect. Sacred or ceremonial material, culturally restricted knowledge, health information, and politically dangerous speech can all put contributors at real risk. This is what CARE's Authority to control protects: the community, not the collector, decides what may be shared and what stays closed ([Carroll et al., 2020](../references.md#carroll-2020)). When unsure, ask the community and default to not releasing.
@@ -124,6 +132,24 @@ Some precautions apply whatever the risk level:
 - Remove access and rotate shared credentials when someone leaves the project.
 
 Tightening the rules later does not recall copies already on people's devices, which is why the decision belongs at the start of the project. For working offline safely, see [Offline field operations](../2_data-collection/10_offline-field-operations.md) and [Offline and patchy-connectivity NLP](../deployment/offline.md).
+
+### Who has access
+
+Use the narrowest role that lets each person do their work: project management, review, annotation, view-only observation, or administration of records without access to task data. Scope access to one project where possible, start new joiners at the lowest suitable role, and limit exports to named managers. Annotators see only their assigned work; outside contributors see their own work, not other contributors' records. Make API tokens project-scoped, time-limited where possible, and revocable.
+
+Treat shared invitation links as credentials and reset them after a cohort joins. Make ownership transferable and name a successor. Review access to the annotation tool, shared drives and chat groups monthly and at every phase change. Use reversible suspension for leave or a quality review. When someone leaves, revoke their access the same day, explain the decision, apply the agreement on their past annotations, and record the role change in the accountability log.
+
+### Keep an accountability log
+
+Keep an append-only log, or at minimum a dated change register, for people added or removed, role changes, consent accepted or withdrawn, policy changes and exports. Each entry records the actor, time, target and relevant details, including old and new roles or policy values. A spreadsheet is sufficient for a small project if its history is protected.
+
+Never put passwords, tokens or other secrets in the log. Set a retention period consistent with the applicable law and the project's privacy notice. State what the log deliberately excludes, such as the contents of individual annotations; label history belongs in [data provenance](../2_data-collection/8_data-provenance-traceability.md#label-level-change-history).
+
+### Make the rules enforceable
+
+Set essential governance rules once for the organisation or community and prevent individual projects from quietly overriding them. For example, require a licence and consent text before export or public release, restrict exports to named roles, allow media only in approved storage locations, and prohibit third-party hotlinked media in task data. Separate project-configurable defaults from enforced rules, and log every policy change. Where the tooling cannot enforce a rule, document the manual check and name its approver.
+
+Provider or host staff should have no default access to project data. The data owner grants support access for a stated reason and fixed period; it is revocable and logged. Include these controls in the [tooling checklist](../6_documentation/tooling.md#a-checklist-for-choosing-a-tool).
 
 ## Ethics and harm avoidance
 

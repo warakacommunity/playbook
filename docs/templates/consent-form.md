@@ -40,6 +40,8 @@ Keep a consent register as well as the forms: log every signature or oral agreem
 
 Change the version number on this form whenever its text changes, and ask existing contributors to agree to the new version before they contribute anything more.
 
+Publish a separate [privacy notice](./privacy-notice.md) describing the controller, processors, data categories, access, storage, transfers, retention and data-subject rights. The notice is not itself consent. For speech projects, add a separate optional choice for releasing speaker-profile fields with individual recordings; leave it unselected, and omit those fields where the speaker does not opt in.
+
 ---
 
 ## Section A: Written consent form
@@ -136,11 +138,19 @@ By signing below, you confirm that:
 - Your questions have been answered.
 - You are agreeing voluntarily, without pressure.
 - You understand you can withdraw before the public release.
-- You are [AGE OF LEGAL CONSENT IN THIS JURISDICTION] or older.
+- Your age band is: [AGE BAND], and you meet the applicable age of consent; or the parent, guardian or legally competent person below gives the required consent.
 
 **Contributor name (printed):** __________________________________________
 
 **Signature or thumbprint:** ______________________________________________
+
+**Date:** __________________________________________________________________
+
+**Parent, guardian or legally competent person, where required:** ____________
+
+**Relationship or legal capacity:** _________________________________________
+
+**Signature or recorded oral consent reference:** ____________________________
 
 **Date:** __________________________________________________________________
 

@@ -96,10 +96,21 @@ Name every label here, with examples. Give every label a **stored code** and a *
 
 - **Shared label list:** [If several projects use this label set, for example one project per language, name the one canonical list they all draw from and where it lives. Reuse it rather than copying it, and map every translated display name back to its stored code.]
 - **Interface language:** [The language the annotation interface and in-task instructions are shown in for this project. One interface language per project.]
+- **Language-identification tasks:** [Name the controlled language-code list, its version, and the conventions for named entities, mixed forms, other and unknown. See [Language identification of code-switched text](../sequence-labelling/index.md#language-identification-of-code-switched-text).]
 
 Adding a label is cheap in the tool, but items labelled before it existed may need a check for the new category. Changing a stored code, removing a label or merging two labels changes data that already exists: record it in the [change log](#9-change-log) with an old-to-new code mapping, and decide whether affected items are re-mapped or re-annotated.
 
 For sequence-labelling tasks (NER, POS), replace with the tag inventory and the span-boundary rules; see the specific per-tag guidance in [MasakhaNER 2](https://arxiv.org/abs/2210.12391) as the reference.
+
+For rating tasks, add an anchor table and show it in the annotation interface:
+
+| Score | One-line anchor | Worked example |
+| --- | --- | --- |
+| [MINIMUM] | [WHAT THIS SCORE MEANS] | [EXAMPLE] |
+| [EACH REMAINING POINT] | [WHAT THIS SCORE MEANS] | [EXAMPLE] |
+| [MAXIMUM] | [WHAT THIS SCORE MEANS] | [EXAMPLE] |
+
+State the numeric minimum, maximum and step, whether a neutral midpoint is intended, and the separate `cannot_judge` or `not_applicable` route. Treat the resulting scores as ordinal.
 
 ## 6. Orthography, script, and diacritics
 

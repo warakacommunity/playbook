@@ -3,7 +3,7 @@ title: Data Quality Management
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -14,6 +14,8 @@ Assurance keeps individual labels honest. Management looks after the dataset as 
 ## Handle class imbalance
 
 Low-resource datasets are rarely balanced. Hate speech is a small fraction of normal posts, a minority dialect is a small fraction of a national language, and rare entity types barely appear. Left alone, imbalance lets a model score well by ignoring the classes you care about most. There are three honest responses, and most projects combine them. Enrich rare classes at collection time through targeted or keyword-based sampling, as hate-speech and emotion projects do to find enough positive cases. Use stratified sampling so minority classes and subgroups are always present in the annotation set. And when imbalance is unavoidable, account for it in evaluation by reporting per-class results rather than a single accuracy that the majority class can dominate. Decide which of these you are relying on, and write it down, because an unstated sampling choice is itself a quality problem.
+
+For a comparable balance measure across categorical fields and releases, use normalised Shannon entropy: entropy divided by the logarithm of the number of planned classes. A value of 1 means perfect balance. Keep zero-item classes in the denominator's class count, and report the measure as undefined for one class or an empty field. Balance is not correctness or adequate coverage, so report it alongside the other [readiness measures](./index.md#report-readiness-as-separate-measures), not as a blended score ([Frerebeau, 2025](../references.md#frerebeau-2025)).
 
 ## Detect noise and outliers
 

@@ -3,7 +3,7 @@ title: Training and Guidelines
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -22,6 +22,8 @@ A fill-in guidelines document modelled on MasakhaNER 2 and AfriSenti. It covers 
 ## Train and calibrate until annotators converge
 
 Training turns a written guideline into shared judgment, so run it before annotation starts and give it structure rather than leaving it to a read-through. The Masakhane named-entity work offers a concrete model. For MasakhaNER 2.0, each language had a coordinator who first annotated a set of sentences themselves and was trained across two online workshops, and who then trained a team of three native-speaker annotators for that language ([Adelani et al., 2022a](../references.md#adelani-2022)). Calibration rounds apply the same logic at a smaller scale: have several annotators label the same sample, compare their labels, discuss the disagreements openly, and repeat until agreement reaches an acceptable level before the full task begins. AfriSenti reached inter-annotator agreement above 0.70 on sentiment by combining native speakers with clear guidelines and exactly this kind of calibration ([Muhammad et al., 2023](../references.md#muhammad-2023)). Agreement reached this way is earned, not assumed.
+
+Continue calibration inside the live task: serve a new annotator only gold items for their first `N` assignments, with `N` chosen for the task and stated in the project plan. Graduation happens after that item count; any retraining or pause is a separate decision based on enough evidence and the fair process in [Data Quality](../4_data-quality/index.md#act-on-annotator-signals-fairly). This onboarding set gives an initial per-annotator score without presenting practice items as independent production labels.
 
 ## Pilot, then iterate the design
 

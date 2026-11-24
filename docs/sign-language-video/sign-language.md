@@ -97,6 +97,8 @@ Established corpora use a mix of tasks, so that the corpus covers both careful a
 
 Stories and pictures **should** be adapted to the local context where needed, and checked with Deaf collaborators for anything that does not make sense locally.
 
+For phone or browser elicitation, use written sentences, pictures and open questions as distinct prompt types. Pictures are useful where literacy varies; open questions elicit spontaneous continuous signing and need longer recording caps than isolated signs or prepared sentences. Each signer records each prompt once, while the same concept is collected from many signers. Cap any one signer's share of the corpus, and collect the optional signer profile before the first recording so that consent and metadata are not reconstructed afterwards. Keep the warning above about generated or translated prompts: natural signing and local meaning matter more than prompt volume.
+
 ### Staged annotation
 
 No corpus annotates every tier in one pass, and none **should** try. Plan **staged passes**: a first pass marks utterances and translates them, which is useful on its own and can be done by fluent signers new to corpus work. A second pass glosses one hand. Later passes add the other hand, mouthing and non-manual features, done by trained annotators. Each pass builds on the boundaries the previous one set.
@@ -128,6 +130,8 @@ Recording in the browser or on a phone works for elicitation: a signer sees a wr
 - **Technical metadata with every clip.** Store the resolution, frame rate and duration as measured from the saved file, not the values the tool asked the camera for, because a phone often delivers less than was requested. These values feed the frame-rate check in [Check recorded clips first](#check-recorded-clips-first).
 - **Saved on the device first.** Write each clip to the device as soon as it is recorded, tell the signer it is saved, and upload it when a connection is available. Large clips **should** upload in resumable chunks, so a dropped connection does not restart the whole file. [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) covers sync, storage and conflicts, and [Offline and patchy connectivity](../deployment/offline.md) the local-first pattern behind it. The [Field Image Capture](../agri-advisory/field-image-capture.md) case study runs phone collection this way.
 - **Audio kept on purpose, or not at all.** Mouthing and other non-manual features are read from the face in the video, so the audio track is rarely needed to annotate signing. It can also record bystanders' voices and conversations in the room, which is personal data nobody consented to. Decide before collection whether to keep it; if you do, the consent **must** say so, and if you do not, drop the audio track at capture or at ingest.
+
+- **Optional pose preview, never a recording gate.** A lightweight tracker can show a skeleton preview and save keypoints separately, with the achieved tracking rate. Track only the hands, face or body parts the task needs. On a weak phone, disable the preview or save plain video rather than lowering the recording rate or blocking a take; choose the camera for the signing task, not for the tracker. Pose remains identifiable movement data, as described under [Consider releasing pose](#releasing-the-data).
 
 Clips recorded this way still need checking before anyone annotates them (see [Check recorded clips first](#check-recorded-clips-first)), and a normalised copy for frame-accurate work (see [Preparing video for annotation](./video.md#preparing-video-for-annotation)).
 
@@ -167,6 +171,14 @@ A tier type can also carry a **controlled vocabulary**, a fixed list of allowed 
 - Set boundaries consistently. The Auslan guidelines start a sign when the hands change direction after completing the previous sign, or start to change handshape, and end it just before the next such change or when the hands begin to return to rest ([Johnston, 2013](../references.md#johnston-2013)); the BSL conventions add changes of orientation ([Cormier et al., 2017](../references.md#bsl-corpus-2017)).
 - Leave a gap between annotations on the same tier: at least one frame in the Auslan guidelines, two frames in the BSL Corpus. Signs that touch make searches for overlapping signs on other tiers return false matches.
 - Mark mouthings (borrowed spoken words) and mouth gestures (native mouth actions) on separate tiers; they are different phenomena.
+
+:::tip[A glossing self-check]
+If I saw this exact sign in a completely different sentence tomorrow, would I write the same gloss? If not, I am writing a translation.
+:::
+
+:::warning[Common glossing failures]
+Do not put translations in gloss fields, invent duplicate glosses for an existing sign, put both hands on one tier, attach a clause-level brow raise to one sign, confuse right/left with dominant/non-dominant, or gloss before the parent utterance boundaries exist. Send these cases back to the relevant annotation pass or lexicon review.
+:::
 
 ### Templates that follow published conventions
 

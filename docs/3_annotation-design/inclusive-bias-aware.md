@@ -3,7 +3,7 @@ title: Inclusive and Bias-Aware Annotation
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -21,7 +21,9 @@ Build the annotator pool to reflect the community whose language it is, across g
 
 ## Record annotator context, with consent
 
-Where it is ethical and consented, record basic, anonymised information about each annotator, such as language background, region, and relevant expertise. This metadata serves two purposes. It lets you check after the fact whether labels split along demographic lines, which is how you detect bias rather than guess at it. It also makes a perspectivist approach possible, since you can only preserve and study different readings if you know whose reading each label is. Collect only what you need, anonymise it, and treat it under the same consent and privacy terms as the rest of the data (see [Data Governance](../data-governance/index.md)).
+Where it is ethical and consented, record basic, pseudonymised information about each annotator, such as language background, region, and relevant expertise. This metadata serves two purposes. It lets you check after the fact whether labels split along demographic lines, which is how you detect bias rather than guess at it. It also makes a perspectivist approach possible, since you can only preserve and study different readings if you know whose reading each label is. Collect only what you need, and treat it under the same consent and privacy terms as the rest of the data.
+
+Ask background questions once, after consent and before the first item. Mark required and optional questions clearly, allow optional answers to be withdrawn, and say which project roles can see them. Link answers to labels through a pseudonymous ID rather than a name or email address. Restrict individual quality scores and review histories, and never expose one annotator's record to another. See [Data about your annotators](../data-governance/index.md#data-about-your-annotators).
 
 ## Build awareness, and involve the community
 

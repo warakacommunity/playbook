@@ -4,7 +4,7 @@ sidebar_label: Named Entity Recognition
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Seid Muhie Yimam
 ---
 
@@ -79,6 +79,12 @@ Keep the guideline as a living document. Every adjudication decision that sets a
 - **Organisation or product.** A media outlet's name can refer to the company or to the broadcast.
 
 Give annotators a way to flag a sentence as uncertain rather than forcing a guess. The flagged sentences are exactly what the coordinator should review and what the next guideline version should resolve.
+
+## Beyond spans: linking entities
+
+Entity linking is an optional layer for when the downstream use needs to identify the referent, not just its type. Link a typed span to an entry in Wikidata or a project-local list. Choose `NIL` when no entry exists, and review NIL items regularly to grow the local list. Store aliases and spelling variants in every script the language uses.
+
+Store the external or local identifier with the label, and record the knowledge-base name and version with each annotation. Define extra attributes such as subtype, confidence and evidence as a fixed schema, not free text. The general controlled-list rules are in [Structured attributes and concept linking](../3_annotation-design/annotation-task-design.md#structured-attributes-and-concept-linking).
 
 ## Annotation and agreement
 

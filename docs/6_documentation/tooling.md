@@ -3,7 +3,7 @@ sidebar_position: 8
 title: Tooling and Infrastructure
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -33,8 +33,8 @@ Then add the checks that decide whether a tool works for African-language data i
 - **Interrupted uploads.** When media is uploaded from the field over a poor connection, does each file transfer on its own and resume after a drop, rather than failing the whole batch or leaving it half imported?
 - **Consent and licence.** Can it keep consent and licence records linked to the items they cover, so they travel with the exports (see [Data Governance](../data-governance/index.md))?
 - **Per-annotator labels and provenance.** Do exports keep every annotator's labels, with who labelled what and when, rather than only one merged answer? Disagreement is often information worth keeping ([Plank, 2022](../references.md#plank-2022)).
-- **Roles and audit trail.** Can you separate annotators, reviewers, and project leads, and see a record of who changed what?
-- **Provider access.** If the tool is hosted by someone else, who at the provider can see your data, where is it stored, and under which country's law (see [Privacy and sensitive data](../data-governance/index.md#privacy-and-sensitive-data))?
+- **Roles and audit trail.** Can you separate annotators, reviewers, and project leads, scope and revoke tokens, review access, and see a record of who changed what? See [Who has access](../data-governance/index.md#who-has-access).
+- **Provider access.** If the tool is hosted by someone else, who at the provider can see your data, where is it stored, and under which country's law? Can the data owner grant time-limited, logged support access (see [Make the rules enforceable](../data-governance/index.md#make-the-rules-enforceable))?
 - **Self-hosting.** Can you run it on infrastructure your community controls, and how much technical effort does that take to set up and keep updated?
 - **Open exports.** Can you export everything, including labels, metadata, and governance records, in open formats you can read without the tool (see [Exporting from your annotation tool](./data-storage.md#exporting-from-your-annotation-tool))?
 
@@ -43,5 +43,11 @@ Then add the checks that decide whether a tool works for African-language data i
 Treat feature claims as claims until you have seen them work. Check each one in the edition and version you will actually use, since hosted, free, and paid editions of the same tool often differ. Then pilot the tool on a small set of real items from your corpus (for example, 20 to 50), including mixed-script and hardest-case items, with your real annotators on their own devices and connections. Export the pilot data and open it to confirm that everything you need came out. Whatever you choose, keep your own regular exports outside the tool, so that the dataset survives a lapsed subscription, a closed service, or a failed server.
 
 ## Pipelines, deployment, and access
+
+### Getting data into the tool
+
+Before importing, list every input field the interface expects. Where a task has several inputs, use a JSONL or CSV manifest that names each field. Import a handful of tasks first and open them in the interface to confirm that text, media and metadata display correctly before importing the full batch. Prefer a few checked imports to many small, untracked ones.
+
+Beyond a small pilot, keep media in storage the project controls and have the tool reference it rather than copy it. Use a separate storage folder per project, located close enough to annotators for reliable access. Treat referenced media as immutable, store a checksum per item, and import corrected media under a new ID. The storage rules are in [Formats, metadata, and versioning](./data-storage.md#formats-metadata-and-versioning).
 
 Automate the repetitive parts of the pipeline, such as cleaning, formatting, and validation, so they are consistent and reproducible rather than redone by hand each time. One such step is converting audio and video into formats that play smoothly in a browser or on a phone before annotators see them (see [Preparing media for annotation](../2_data-collection/7_data-cleaning-preprocessing.md#preparing-media-for-annotation)). Decide between cloud and local deployment by weighing cost, connectivity, and data sensitivity, since sensitive or restricted data may be safer on local infrastructure under the community's control than on a foreign cloud. Throughout, apply sensible security and access control so that personal and sensitive data is seen only by those who should see it, which is part of the governance obligation, not separate from it. [Securing data during annotation](../data-governance/index.md#securing-data-during-annotation) suggests settings matched to how sensitive the data is.

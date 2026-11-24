@@ -29,6 +29,10 @@ field_0007_mask.png     # same width and height; pixel value = class id
 
 Storing the mask as a single-channel id map, rather than a colour image, keeps it exact: a colour PNG can be re-compressed and shift a pixel's value, which silently changes its class, while an id map stays faithful to what the annotator drew.
 
+### Store polygons and masks without ambiguity
+
+Store polygons as ordered vertex lists, with explicit rules for holes and multi-part objects. Store masks as single-channel raster PNGs or run-length encoding, and record which representation is authoritative. Large raster exports can be heavy, so measure their storage and transfer cost before choosing the release format. Brush strokes are approximate: display the raw pixels without smoothing when pixel-exact correction is required. If polygons are rasterised for agreement or evaluation, document the rasterisation rule so every comparison uses the same representation.
+
 ## Annotation and evaluation
 
 Pixel-level annotation is the most expensive labelling in this playbook, so design it to be feasible: use tools with smart boundary assistance, define exactly how to treat ambiguous edges and mixed pixels, and pilot to measure how long a mask really takes before committing a budget. Because masks are so detailed, agreement is best measured by overlap rather than exact match. Segmentation is evaluated with [mean Intersection over Union (mIoU)](https://en.wikipedia.org/wiki/Jaccard_index), and with the [Dice coefficient](https://en.wikipedia.org/wiki/Dice-S%C3%B8rensen_coefficient) or pixel accuracy, all of which compare predicted masks to reference masks by how much they overlap rather than demanding identical pixels.
@@ -71,6 +75,12 @@ print("mIoU:", round(np.nanmean(list(ious.values())), 3))
 Averaging IoU across classes rather than across pixels is the deliberate choice: a thin feature like a river covers few pixels, so a pixel-weighted score would let a model ignore it entirely while still looking accurate, whereas per-class mIoU makes that failure visible. The code compares a model's mask with a reference mask. To compare two annotators who each drew several instances in one image, pair the instances one to one first, as described in [Agreement when an image has many objects](./object-detection.md#agreement-when-an-image-has-many-objects), then score each pair with mask IoU.
 
 The segmentation interface should support zoom, vertex or brush correction, holes and overlapping instances where the schema allows them. Verify that exported masks or polygons align with the source image and preserve class and instance identifiers.
+
+### Thin and diffuse features
+
+Represent thin linear features such as roads, rivers, field boundaries, roots and cracks as open polylines or branching skeletons rather than thin painted masks. Specify vertex density and how curves are sampled. Evaluate them with a project-chosen tolerance buffer around the reference geometry rather than plain IoU, and report that tolerance with the score.
+
+Diffuse, low-contrast regions such as cloud, smoke and flood water may use threshold or flood-fill selection as a cheap draft. Keep the raw pixels visible and require human correction: these selections can leak across weak edges and should not become final labels without review.
 
 ## The 2026 modelling landscape
 

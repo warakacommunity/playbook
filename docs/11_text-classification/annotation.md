@@ -4,7 +4,7 @@ title: Annotation
 sidebar_label: "Annotation"
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -35,7 +35,7 @@ Use a short qualification round before the main task. The goal is not only to se
 
 Protecting annotator well-being is essential, particularly when working with harmful, offensive, or emotionally distressing content. Annotators should be informed about potential risks before participation, allowed to opt out of sensitive tasks, and given the freedom to skip items or withdraw without penalty. Exposure to harmful content should be carefully managed through content filtering, workload limits, regular breaks, and task rotation. Projects should provide appropriate training, clear safety protocols, and access to psychological support resources when needed. Continuous monitoring of annotator well-being, respectful communication, protection of privacy, fair compensation, and adherence to ethical and legal standards are also critical for maintaining a safe and sustainable annotation environment.
 
-Protecting annotators through informed consent, controlled exposure, breaks, and support systems improves both well-being and annotation quality.
+Protecting annotators through informed consent, controlled exposure, breaks, and support systems improves both well-being and annotation quality. Record skips and their operational reasons without asking anyone to disclose personal details publicly; [Track skips and unfinished items](../3_annotation-design/workflow-adjudication.md#track-skips-and-unfinished-items) explains how to reassign or review them and how to report their effect on the dataset.
 
 ![](images/annotator-safety-and-mental-health-1ijc2ov5oy4.svg)
 
@@ -273,6 +273,12 @@ krippendorff.alpha(reliability_data=data, level_of_measurement="interval")  # co
 
 Whatever you choose, report the measure together with its weighting or tolerance, for example "quadratic-weighted kappa" or "ordinal alpha", because the same ratings give quite different numbers under each. For agreement on other shapes of annotation, such as spans, multi-label sets or free text, see [Match the metric to the annotation shape](../4_data-quality/index.md#match-the-metric-to-the-annotation-shape).
 
+#### Multi-label and hierarchical labels
+
+Exact match gives no partial credit. If one annotator chooses `{anger, sadness}` and another chooses `{anger}`, exact match calls it a complete disagreement. For multi-label items, compute Jaccard overlap instead: the intersection size divided by the union size, here $1/2 = 0.5$. Average the per-item Jaccard scores over the dataset, or report kappa separately for each label's presence or absence.
+
+For hierarchical labels, expand each selected path to include its ancestors before computing Jaccard. Two sibling leaves then receive more credit than leaves in different branches. Alternatively, report agreement separately at each level. These diagnostics complement, rather than replace, exact full-path agreement when the downstream task requires the complete path.
+
 #### Deciding the final labels
 
 When multiple annotators label the same instance, the final label is usually determined through majority voting.
@@ -300,6 +306,8 @@ Above 0.80: considered very strong agreement.
 
 For highly subjective tasks such as emotion classification, sarcasm detection, or offensiveness annotation, lower agreement scores may still be acceptable due to genuine differences in human interpretation.
 
+A dominant class can also produce high percentage agreement but low kappa, because expected chance agreement is high. Report raw and per-class agreement, the class distribution and the number of scored items alongside kappa rather than discarding the chance correction. See [the prevalence paradox](../4_data-quality/index.md#measure-inter-annotator-agreement) ([Feinstein and Cicchetti, 1990](../references.md#feinstein-1990)).
+
 #### What to report
 
 When publishing a dataset, researchers should report:
@@ -310,6 +318,7 @@ When publishing a dataset, researchers should report:
 4. Cohen's Kappa (for two annotators) or Fleiss' Kappa/Krippendorff's Alpha (for three or more annotators) agreement score.
 5. Any adjudication process used to resolve disagreements.
 6. Annotator-level dataset for further annotator subjectivity and disagreement research.
+7. Which annotations entered the agreement calculation: how model drafts, gold checks, blanks, skips, cancellations and pairs without overlap were handled, plus the number of items supporting each score.
 
 Transparent reporting of annotation agreement improves the credibility, reproducibility, and scientific value of the dataset.
 
@@ -359,7 +368,7 @@ Before starting large-scale annotation, dataset creators should conduct a pilot 
 
 A common quality-control mechanism is to include control questions, also known as gold-standard items, whose correct labels are already known. These items are randomly inserted into the annotation workflow without informing the annotators. Annotators who repeatedly fail to label these control items correctly may be removed from the project, and their previously annotated data should be reviewed and, if necessary, excluded from the final dataset.
 
-Decide how you will act on these results before annotation starts: how many control items a person must complete before they are judged, whether a low score leads to a warning, a pause and retraining before any removal, and who makes the final decision. [Act on annotator signals fairly](../4_data-quality/index.md#act-on-annotator-signals-fairly) sets out a staged process, and [Diagnose where disagreement comes from](../4_data-quality/index.md#diagnose-where-disagreement-comes-from) shows how to find the labels and annotators behind low agreement before you have a gold set.
+Decide how you will act on these results before annotation starts: how many control items a person must complete before they are judged, whether a low score leads to a warning, a pause and retraining before any removal, and who makes the final decision. [Act on annotator signals fairly](../4_data-quality/index.md#act-on-annotator-signals-fairly) sets out a staged process, and [Diagnose where disagreement comes from](../4_data-quality/index.md#diagnose-where-disagreement-comes-from) shows how to find the labels and annotators behind low agreement before you have a gold set. For each annotator, [score gold items per class](../4_data-quality/index.md#use-gold-data-and-control-checks) with precision, recall and F1, and use macro-F1 so rare-class errors are not hidden by overall accuracy.
 
 #### Determining the number of annotators
 

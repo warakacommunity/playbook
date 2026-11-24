@@ -35,6 +35,14 @@ The most widely supported format is COCO, where one JSON file holds the images, 
 
 COCO is worth using even for a small African dataset, because the evaluation tools below read it directly, so you avoid writing a custom parser and your results stay comparable with everyone else reporting mAP.
 
+### Coordinates and image orientation
+
+State whether coordinates are pixels, fractions or percentages, and check the actual export convention rather than assuming it from the interface. Every record should carry the original image width and height and any rotation applied to the pixels. For rotated boxes or ellipses, record the angle unit, direction and anchor point as well as the shape coordinates.
+
+Apply EXIF orientation to the image pixels before annotation, and only then strip metadata for privacy. Otherwise a box drawn on the displayed image can point to the wrong place in the stored image. Validate that every exported shape lies within the image bounds, including after rotation or resizing. The same orientation-before-stripping rule applies to [field image capture](../agri-advisory/field-image-capture.md#quality-control).
+
+For objects that persist across video frames, keep one identity per object and follow [Tracking objects across frames](../sign-language-video/video.md#tracking-objects-across-frames).
+
 ## Annotation and evaluation
 
 Box annotation needs explicit rules: how tightly to fit the box, how to handle occluded or overlapping objects, how small an object must be to mark, and what to do at the image edge. These rules are where annotators silently diverge, so pin them down and measure agreement on a shared set. Detection is evaluated with [mean Average Precision (mAP)](https://lightning.ai/docs/torchmetrics/stable/detection/mean_average_precision.html), which rewards both correct labels and accurate placement, built on [Intersection over Union (IoU)](https://en.wikipedia.org/wiki/Jaccard_index), the overlap between a predicted box and the true one. Report the IoU threshold you used, since mAP at a loose threshold flatters a model that places boxes sloppily.

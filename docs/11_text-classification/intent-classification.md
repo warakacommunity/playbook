@@ -4,7 +4,7 @@ sidebar_position: 12
 sidebar_label: "Intent Classification"
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Seid Muhie Yimam
 ---
 
@@ -83,6 +83,8 @@ When utterances are elicited per intent, the intent label comes from the scenari
 - **Merge or drop rare slot types.** INJONGO started with 34 slot types and reduced them to 23 after annotation by deleting and merging types. Expect to do the same, and record what changed.
 
 Measure intent agreement with Cohen's or Fleiss' kappa (see [Annotation](./annotation.md#inter-annotator-agreement)) and slot agreement with entity-level F1 between annotators. INJONGO reported Fleiss' kappa before and after a review round, from a lowest pre-review score of 0.618 (isiZulu) to post-review scores between 0.912 and 1.00 ([Yu et al., 2025](../references.md#injongo-2025)). As with NER, report both figures.
+
+For multi-turn conversations, label the target turn only after reading a fixed amount of earlier context. Keep earlier turns read-only, record the context window, and distinguish the target turn's intent from an intent expressed earlier in the conversation. See [Dialogue and Multi-Turn Annotation](../text-generation/dialogue.md).
 
 ## Evaluation
 
