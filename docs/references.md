@@ -16,6 +16,10 @@ and year with an id (`### Surname, I., et al. (year) {#surname-year}`; a dataset
 Entries are in alphabetical order by heading.
 
 
+### Abbas, A., et al. (2023) {#abbas-2023}
+
+Abbas, A., Tirumala, K., Simig, D., Ganguli, S., & Morcos, A. S. *SemDeDup: Data-efficient learning at web-scale through semantic deduplication.* arXiv:2303.09540. [arxiv.org/abs/2303.09540](https://arxiv.org/abs/2303.09540)
+
 ### Abdulmumin, I., et al. (2026) {#abdulmumin-2026}
 
 *Temporal Simultaneity Predicts Annotation Quality in Sentiment Corpora.* arXiv:2605.27239. A Setswana
@@ -36,7 +40,6 @@ than a day apart fell to κ = 0.65, revealing annotator drift over time. [arxiv.
 *MasakhaNER 2.0: Africa-centric Transfer Learning for Named Entity Recognition.* Proceedings of
 EMNLP 2022. A human-annotated NER dataset spanning 20 African languages, built by the Masakhane
 community. [aclanthology.org/2022.emnlp-main.298](https://aclanthology.org/2022.emnlp-main.298/)
-
 
 ### Adelani, D. I., et al. (2022b) {#mafand-2022}
 
@@ -92,16 +95,31 @@ arXiv:2403.19546. A JSON-LD vocabulary built on schema.org that describes a data
 structure, and ML semantics in one document, so tools can find and load it without custom code. Emitted
 automatically by Hugging Face, Kaggle, and OpenML. [arxiv.org/abs/2403.19546](https://arxiv.org/abs/2403.19546)
 
+### Akyon, F. C., Altinuc, S. O., & Temizel, A. (2022) {#akyon-2022}
+
+*Slicing Aided Hyper Inference and Fine-tuning for Small Object Detection.* 2022 IEEE International Conference on Image Processing (ICIP), pp. 966–970. Runs a detector on overlapping image slices and fine-tunes on slices; on the VisDrone and xView aerial datasets it raised AP for several detectors. [doi.org/10.1109/ICIP46576.2022.9897990](https://doi.org/10.1109/ICIP46576.2022.9897990) (arXiv: [2202.06934](https://arxiv.org/abs/2202.06934))
+
 ### Alabi, J. O., et al. (2020) {#alabi-2020}
 
 *Massive vs. Curated Embeddings for Low-Resourced Languages: the Case of Yorùbá and Twi.* Proceedings of LREC 2020, pp. 2754–2762. Compares web-scale and curated word embeddings for Yorùbá and Twi, and annotates the Global Voices corpus for Yorùbá with named entities. [aclanthology.org/2020.lrec-1.335](https://aclanthology.org/2020.lrec-1.335/)
-
 
 ### Alabi, J. O., et al. (2025) {#afrihubert-2025}
 
 *AfriHuBERT: A self-supervised speech representation model for African languages.* Interspeech 2025;
 arXiv:2409.20201. Pretrains on raw African-language audio so that little labelled data goes further.
 [arxiv.org/abs/2409.20201](https://arxiv.org/abs/2409.20201)
+
+### Algorine Research and Ghana NLP (n.d.) {#khaya-app}
+
+*Khaya* (mobile translation app for African languages). Algorine Inc. and Ghana NLP. App Store listing; the description lists "Submit improved translation corrections and recommendations directly from the app." [apps.apple.com/us/app/khaya/id1549294522](https://apps.apple.com/us/app/khaya/id1549294522) (accessed 24 November 2026)
+
+### Amazon Mechanical Turk (2026) {#mturk-closure-2026}
+
+*Amazon Mechanical Turk closure notice.* Amazon Web Services, 2026. The MTurk home page states that Amazon Mechanical Turk permanently closed on 30 September 2026 and is no longer available. [www.mturk.com](https://www.mturk.com/) (accessed 24 November 2026)
+
+### Andriluka, M., et al. (2014) {#andriluka-2014}
+
+Andriluka, M., Pishchulin, L., Gehler, P., & Schiele, B. *2D Human Pose Estimation: New Benchmark and State of the Art Analysis.* Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR 2014), 3686–3693. Introduces the MPII Human Pose benchmark (about 25,000 images, over 40,000 people), annotated "person centric" (left and right refer to the person's own limbs) with joint visibility, and defines PCKh: a joint is correct within 50% of the head segment length. [openaccess.thecvf.com](https://openaccess.thecvf.com/content_cvpr_2014/html/Andriluka_2D_Human_Pose_2014_CVPR_paper.html) (DOI: [10.1109/CVPR.2014.471](https://doi.org/10.1109/CVPR.2014.471))
 
 ### Anikina, T., et al. (2025) {#llm-datagen-2025}
 
@@ -110,7 +128,6 @@ Ostermann, S. Proceedings of EMNLP 2025 (Main); arXiv:2506.12158. Across 11 lang
 combining target-language demonstrations with LLM self-revision brings downstream performance to within about 5 F1 points
 of real data in some settings, but the gap widens for lower-resource languages and is largest without target-language
 examples. [arxiv.org/abs/2506.12158](https://arxiv.org/abs/2506.12158)
-
 
 ### Ardila, R., et al. (2020) {#ardila-2020}
 
@@ -124,6 +141,17 @@ examples. [arxiv.org/abs/2506.12158](https://arxiv.org/abs/2506.12158)
 
 *The Belebele Benchmark: a Parallel Reading Comprehension Dataset in 122 Language Variants.* Proceedings of ACL 2024 (Volume 1: Long Papers), pp. 749–775. A fully parallel multiple-choice reading comprehension benchmark built on FLORES-200 passages, covering many African languages. [aclanthology.org/2024.acl-long.44](https://aclanthology.org/2024.acl-long.44/)
 
+### Barz, B., & Denzler, J. (2020) {#barz-2020}
+
+*Do We Train on Test Data? Purging CIFAR of Near-Duplicates.* Journal of Imaging, 6(6), 41. [doi.org/10.3390/jimaging6060041](https://doi.org/10.3390/jimaging6060041) (preprint: [arxiv.org/abs/1902.00423](https://arxiv.org/abs/1902.00423))
+
+### Beck, J., et al. (2025) {#beck-2025}
+
+Beck, J., Eckman, S., Kern, C., & Kreuter, F. *Bias in the Loop: How Humans Evaluate AI-Generated Suggestions.* arXiv:2509.08514. A randomised experiment with 2,784 crowdworkers checking AI pre-annotations of values in report tables: surface errors such as confused digits were corrected 82% of the time, errors that required knowing the annotation rules far less often, and annotators sceptical of AI detected errors more reliably. [arxiv.org/abs/2509.08514](https://arxiv.org/abs/2509.08514)
+
+### Beery, S., et al. (2018) {#beery-2018}
+
+Beery, S., Van Horn, G., & Perona, P. *Recognition in Terra Incognita.* European Conference on Computer Vision (ECCV 2018). [arxiv.org/abs/1807.04975](https://arxiv.org/abs/1807.04975)
 
 ### Belay, T. D., et al. (2025) {#belay-2025}
 
@@ -161,7 +189,6 @@ communities whose languages are at stake rather than treating them as data sourc
 
 *pyannote.metrics: A Toolkit for Reproducible Evaluation, Diagnostic, and Error Analysis of Speaker Diarization Systems.* Interspeech 2017, pp. 3587–3591. Open-source Python library and command-line tool for computing DER and related diarization metrics, with error-analysis features. [isca-archive.org/interspeech_2017/bredin17_interspeech.html](https://www.isca-archive.org/interspeech_2017/bredin17_interspeech.html)
 
-
 ### Bredin, H., et al. (2020) {#bredin-2020}
 
 *pyannote.audio: Neural Building Blocks for Speaker Diarization.* ICASSP 2020. Open-source toolkit providing trainable and pretrained neural components for voice activity detection, speaker change detection, speaker embedding and diarization. [arxiv.org/abs/1911.01255](https://arxiv.org/abs/1911.01255)
@@ -171,6 +198,22 @@ communities whose languages are at stake rather than treating them as data sourc
 *BRIGHTER: Bridging the Gap in Text-Based Emotion Detection* (SemEval-2025 Task 11). Multilingual
 emotion-in-text datasets covering many African languages; a useful taxonomy reference for emotion work.
 [arxiv.org/abs/2502.11926](https://arxiv.org/abs/2502.11926)
+
+### Buchner, J. (n.d.) {#imagehash}
+
+*ImageHash: A Python perceptual image hashing module* (average, perceptual, difference, wavelet, colour and crop-resistant hashes). Open-source software. [github.com/JohannesBuchner/imagehash](https://github.com/JohannesBuchner/imagehash)
+
+### Buolamwini, J., & Gebru, T. (2018) {#buolamwini-2018}
+
+*Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification.* Proceedings of the 1st Conference on Fairness, Accountability and Transparency, PMLR 81:77–91. Labels faces with the Fitzpatrick skin type scale, finds two benchmark face sets 79.6% and 86.2% lighter-skinned, builds the Pilot Parliaments Benchmark (1,270 parliamentarians from Rwanda, Senegal, South Africa, Iceland, Finland and Sweden), and reports error rates of up to 34.7% for darker-skinned women against at most 0.8% for lighter-skinned men. [proceedings.mlr.press/v81/buolamwini18a.html](https://proceedings.mlr.press/v81/buolamwini18a.html)
+
+### Butler, H., et al. (2016) {#rfc-7946}
+
+Butler, H., Daly, M., Doyle, A., Gillies, S., Hagen, S., & Schaub, T. *The GeoJSON Format.* IETF RFC 7946. Requires WGS 84 longitude and latitude, in that order, as the coordinate reference system for GeoJSON. [datatracker.ietf.org/doc/html/rfc7946](https://datatracker.ietf.org/doc/html/rfc7946)
+
+### Caba Heilbron, F., et al. (2015) {#caba-heilbron-2015}
+
+Caba Heilbron, F., Escorcia, V., Ghanem, B., & Niebles, J. C. *ActivityNet: A Large-Scale Video Benchmark for Human Activity Understanding.* Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR 2015), 961–970. 203 activity classes, 849 hours of untrimmed video; untrimmed video classification, trimmed activity classification and activity detection. [openaccess.thecvf.com](https://openaccess.thecvf.com/content_cvpr_2015/html/Heilbron_ActivityNet_A_Large-Scale_2015_CVPR_paper.html)
 
 ### Camgöz, N. C., et al. (2018) {#camgoz-2018}
 
@@ -195,17 +238,37 @@ benefit, Authority to control, Responsibility, Ethics: the community's right to 
 
 A word-level Central African Sign Language dataset: 60 words, 5,889 videos from 19 signers. Data in Brief, 2025. [doi.org/10.1016/j.dib.2025.111790](https://doi.org/10.1016/j.dib.2025.111790)
 
+### Castellano, B. (n.d.) {#pyscenedetect}
+
+*PySceneDetect documentation* (v0.7.3). Open-source (BSD 3-Clause) shot and scene detection: content, adaptive, threshold, histogram and hash detectors; CSV scene lists, per-scene images, and splitting with FFmpeg or mkvmerge, where stream copy is "faster but less precise". [scenedetect.com](https://www.scenedetect.com/docs/latest/)
+
 ### Chen, M., et al. (2023) {#blaser-2023}
 
 *BLASER: A Text-Free Speech-to-Speech Translation Evaluation Metric.* Proceedings of ACL 2023. A metric that scores speech-to-speech translation directly from audio embeddings, without an ASR step. [aclanthology.org/2023.acl-long.504](https://aclanthology.org/2023.acl-long.504)
+
+### Chung, J. S., & Zisserman, A. (2016) {#chung-2016}
+
+*Out of time: automated lip sync in the wild.* Workshop on Multi-view Lip-reading, ACCV 2016. Estimates the audio-video offset between mouth motion and speech (SyncNet). [robots.ox.ac.uk](https://www.robots.ox.ac.uk/~vgg/publications/2016/Chung16a/)
 
 ### Clark, J. H., et al. (2020) {#tydiqa-2020}
 
 *TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages.* Transactions of the Association for Computational Linguistics, 8. A QA benchmark in 11 typologically diverse languages, including Swahili, written by people who wanted an answer but did not yet know it, and collected without translation. [aclanthology.org/2020.tacl-1.30](https://aclanthology.org/2020.tacl-1.30/)
 
+### Cloud Optimized GeoTIFF (n.d.) {#cogeo}
+
+*Cloud Optimized GeoTIFF.* cogeo.org. Describes the COG as a regular GeoTIFF organised so that clients can fetch only the parts they need with HTTP range requests; the format is published as an OGC standard (OGC 21-026). [cogeo.org](https://www.cogeo.org/)
+
 ### COCO Consortium (n.d.) {#coco-format}
 
 *COCO data format.* Common Objects in Context (COCO) dataset documentation. Defines the JSON layout of images, annotations, and categories; object boxes are `[x, y, width, height]` measured from the top-left image corner, and segmentation is stored as polygons or run-length encoding. [cocodataset.org/#format-data](https://cocodataset.org/#format-data) (source: [github.com/cocodataset/cocodataset.github.io](https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/dataset/format-data.htm))
+
+### COCO Consortium (n.d.) {#coco-eval}
+
+*COCO detection evaluation.* Common Objects in Context (COCO) dataset documentation. Defines the metrics used to score detection on COCO, including separate AP and AR for small (area under 32 × 32 pixels), medium and large (over 96 × 96 pixels) objects. [cocodataset.org/#detection-eval](https://cocodataset.org/#detection-eval) (source: [github.com/cocodataset/cocodataset.github.io](https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/dataset/detection-eval.htm))
+
+### COCO Consortium (n.d.) {#coco-keypoints-eval}
+
+*Keypoint evaluation.* Common Objects in Context (COCO) dataset documentation. Defines Object Keypoint Similarity (OKS), with per-keypoint constants estimated from 5,000 redundantly annotated validation images (κ = 2σ), averaged over labelled keypoints (v greater than 0) and AP averaged over OKS 0.50 to 0.95; notes that small objects (area under 32²) and crowds carry no keypoints, and names left/right confusion as an error source. [cocodataset.org/#keypoints-eval](https://cocodataset.org/#keypoints-eval) (source: [github.com/cocodataset/cocodataset.github.io](https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/dataset/keypoints-eval.htm))
 
 ### Cohen, J. (1968) {#cohen-1968}
 
@@ -227,10 +290,13 @@ Crasborn, O., Zwitserlood, I., van der Kooij, E., Bank, R., & Ormel, E. *Annotat
 
 *Efficient Data Structures for Tamper-Evident Logging.* Proceedings of the 18th USENIX Security Symposium, Montreal, 2009. Tamper-evident logs based on hash chains and Merkle history trees, in which an auditor holding an earlier commitment can detect later changes to past entries. [usenix.org](https://www.usenix.org/conference/usenixsecurity09/technical-sessions/presentation/efficient-data-structures-tamper-evident)
 
+### CVAT.ai (n.d.) {#cvat-xml-format}
+
+*CVAT for image* (also covers the CVAT for video format). CVAT documentation. Describes the XML annotation format; in video (interpolation) mode each track has an id and label, and each shape carries `frame`, corner coordinates `xtl, ytl, xbr, ybr`, and `keyframe`, `outside` and `occluded` flags. [docs.cvat.ai/docs/dataset_management/formats/format-cvat](https://docs.cvat.ai/docs/dataset_management/formats/format-cvat/)
+
 ### de Marneffe, M.-C., Manning, C. D., Nivre, J., & Zeman, D. (2021) {#ud-2021}
 
 *Universal Dependencies.* Computational Linguistics, 47(2), 255–308. Describes the UD framework for cross-linguistically consistent morphosyntactic annotation, used for treebanks in more than 100 languages. [aclanthology.org/2021.cl-2.11](https://aclanthology.org/2021.cl-2.11/)
-
 
 ### Deep Learning Indaba {#deep-learning-indaba}
 
@@ -240,12 +306,15 @@ in 2018 to 47 countries by 2024–2025, aiming for every African country by 2027
 
 ### Desplanques, B., Thienpondt, J., & Demuynck, K. (2020) {#desplanques-2020}
 
-*ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN Based Speaker Verification.* Interspeech 2020. Introduces a speaker-verification architecture that produces fixed-length speaker-characterising embeddings. [doi.org/10.21437/Interspeech.2020-2650](https://doi.org/10.21437/Interspeech.2020-2650) (arXiv: [2005.07143](https://arxiv.org/abs/2005.07143))
+*ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN Based Speaker Verification.* Interspeech 2020, pp. 3830–3834. Introduces a speaker-verification architecture that produces fixed-length speaker-characterising embeddings. [doi.org/10.21437/Interspeech.2020-2650](https://doi.org/10.21437/Interspeech.2020-2650) (arXiv: [2005.07143](https://arxiv.org/abs/2005.07143))
+
+### DeVries, T., et al. (2019) {#devries-2019}
+
+*Does Object Recognition Work for Everyone?* arXiv:1906.02659. Using the Dollar Street images of household items from 264 homes in 54 countries, finds that six object-recognition systems were roughly 10% less accurate for households earning under US\$50 a month than for those earning over US\$3,500, and about 15% (absolute) more accurate on items photographed in the United States than in Somalia or Burkina Faso; attributes the gap to unrepresentative geographic sampling and English-first data collection. [arxiv.org/abs/1906.02659](https://arxiv.org/abs/1906.02659)
 
 ### Dione, C. M. B., et al. (2023) {#masakhapos-2023}
 
 *MasakhaPOS: Part-of-Speech Tagging for Typologically Diverse African languages.* Proceedings of ACL 2023 (Volume 1: Long Papers), pp. 10883–10900. A UPOS-annotated news dataset of about 1,500 sentences in each of 20 African languages, built by Masakhane, with an analysis of tokenisation challenges and cross-lingual transfer. [aclanthology.org/2023.acl-long.609](https://aclanthology.org/2023.acl-long.609/)
-
 
 ### Duarte, A., et al. (2021) {#how2sign-2021}
 
@@ -255,16 +324,13 @@ in 2018 to 47 countries by 2024–2025, aiming for every African country by 2027
 
 *Developing Text Resources for Ten South African Languages.* Proceedings of LREC 2014, pp. 3698–3703. The NCHLT text project: monolingual corpora, a subset annotated on token, morphological and morphosyntactic layers, and tokenisers, lemmatisers and POS taggers for ten languages. [aclanthology.org/L14-1106](https://aclanthology.org/L14-1106/)
 
-
 ### Eiselen, R. (2016a) {#eiselen-2016-chunking}
 
 *South African Language Resources: Phrase Chunking.* Proceedings of LREC 2016, pp. 689–693. Annotation protocols, phrase-chunked data and CRF chunkers for ten South African languages, finding that disjunctively written languages do better with limited data. [aclanthology.org/L16-1109](https://aclanthology.org/L16-1109/)
 
-
 ### Eiselen, R. (2016b) {#eiselen-2016-ner}
 
 *Government Domain Named Entity Recognition for South African Languages.* Proceedings of LREC 2016, pp. 3344–3348. Annotation protocols, government-domain NER data and CRF recognisers for ten South African languages. [aclanthology.org/L16-1533](https://aclanthology.org/L16-1533/)
-
 
 ### Emezue, C. C., & Dossou, B. F. P. (2020) {#emezue-dossou-2020}
 
@@ -295,6 +361,10 @@ Languages.* arXiv:2502.15916. A community-centric dataset-governance framework a
 
 *EBU R 128-2014: Loudness normalisation and permitted maximum level of audio signals.* EBU Recommendation, Geneva, June 2014 (first issued 2010, revised 2011 and 2014). Normalises programme loudness to a target of -23.0 LUFS with a permitted deviation of ±0.5 LU (±1.0 LU where this is not practically achievable, for example live programmes), and sets a maximum permitted true peak of -1 dBTP in production. [tech.ebu.ch/docs/r/r128-2014.pdf](https://tech.ebu.ch/docs/r/r128-2014.pdf)
 
+### European Commission (n.d.) {#copernicus-sentinel-notice}
+
+European Commission, DG Internal Market, Industry, Entrepreneurship and SMEs. *Legal notice on the use of Copernicus Sentinel Data and Service Information.* Grants free, full and open access, including reproduction, distribution and modification, and requires the notice "Copernicus Sentinel data [Year]" or "Contains modified Copernicus Sentinel data [Year]". [sentinels.copernicus.eu (PDF)](https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice)
+
 ### European Union (2016) {#gdpr-2016}
 
 European Parliament and Council of the European Union. *Regulation (EU) 2016/679 (General Data Protection Regulation).* Official Journal of the European Union, L 119, 4 May 2016. Article 7 sets the conditions for consent: a controller relying on consent must be able to demonstrate it, and withdrawal must be as easy as giving consent. [eur-lex.europa.eu/eli/reg/2016/679/oj](https://eur-lex.europa.eu/eli/reg/2016/679/oj); Article 7 text at [gdpr-info.eu/art-7-gdpr](https://gdpr-info.eu/art-7-gdpr/)
@@ -306,6 +376,10 @@ European Parliament and Council of the European Union. *Regulation (EU) 2016/679
 ### Everingham, M., et al. (2010) {#everingham-2010}
 
 Everingham, M., Van Gool, L., Williams, C. K. I., Winn, J., & Zisserman, A. *The PASCAL Visual Object Classes (VOC) Challenge.* International Journal of Computer Vision, 88(2), 303–338. Describes the VOC dataset, its annotation procedure (axis-aligned bounding boxes around the visible extent of each object), and its evaluation. [doi.org/10.1007/s11263-009-0275-4](https://doi.org/10.1007/s11263-009-0275-4)
+
+### Everingham, M., & Winn, J. (2012) {#voc2012-devkit}
+
+*The PASCAL Visual Object Classes Challenge 2012 (VOC2012) Development Kit.* Defines the VOC XML annotation fields, including the truncated, occluded and difficult flags (difficult objects are ignored in evaluation), and the segmentation PNGs, where a five-pixel border band and ambiguous or too-small regions carry the void label 255 and are ignored in evaluation. [robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2012/htmldoc](https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2012/htmldoc/index.html)
 
 ### Feinstein, A. R., & Cicchetti, D. V. (1990) {#feinstein-1990}
 
@@ -333,14 +407,21 @@ typed line images from 411 native writers, spanning handwritten, typed, and synt
 
 *MASSIVE: A 1M-Example Multilingual Natural Language Understanding Dataset with 51 Typologically-Diverse Languages.* Proceedings of ACL 2023 (Volume 1: Long Papers), pp. 4277–4302. Virtual-assistant utterances localised from English SLURP into 50 languages, including Afrikaans, Amharic and Kiswahili, with 60 intents and 55 slot types. [aclanthology.org/2023.acl-long.235](https://aclanthology.org/2023.acl-long.235/)
 
-
 ### Fort, K., & Sagot, B. (2010) {#fort-sagot-2010}
 
 *Influence of Pre-annotation on POS-tagged Corpus Development.* Proceedings of the Fourth Linguistic Annotation Workshop (LAW IV), ACL, pp. 56–63. A controlled study showing that automatic pre-annotation speeds annotators up and can raise quality, but also biases them towards the pre-annotation. [aclanthology.org/W10-1807](https://aclanthology.org/W10-1807/)
 
 ### Frerebeau, N. (2025) {#frerebeau-2025}
 
-*Alpha Diversity.* `tabula` package vignette, 4 September 2025. Defines Shannon heterogeneity and its evenness form, normalised by the logarithm of the number of categories. [stat.ethz.ch/CRAN/web/packages/tabula/vignettes/alpha.html](https://stat.ethz.ch/CRAN/web/packages/tabula/vignettes/alpha.html)
+*Alpha Diversity.* `tabula` package vignette, 4 September 2025. Defines Shannon heterogeneity and its evenness form, the index divided by the natural logarithm of the number of categories (taxa) observed in the sample. [stat.ethz.ch/CRAN/web/packages/tabula/vignettes/alpha.html](https://stat.ethz.ch/CRAN/web/packages/tabula/vignettes/alpha.html)
+
+### Frome, A., et al. (2009) {#frome-2009}
+
+*Large-scale Privacy Protection in Google Street View.* Proceedings of the IEEE International Conference on Computer Vision (ICCV 2009), pp. 2373–2380. Describes an automatic system that detects and blurs faces and licence plates in street-level imagery; finds off-the-shelf face detectors lack the recall needed and reports blurring more than 89% of faces and 94–96% of plates in its evaluation sets. [doi.org/10.1109/ICCV.2009.5459413](https://doi.org/10.1109/ICCV.2009.5459413); [research.google](https://research.google/pubs/large-scale-privacy-protection-in-google-street-view/)
+
+### Gambäck, B., & Sikdar, U. K. (2017) {#gamback-2017}
+
+*Named Entity Recognition for Amharic Using Deep Learning.* 2017 IST-Africa Week Conference, pp. 1–8. A bidirectional LSTM tagger trained on an Amharic corpus labelled with six classes: Person, Location, Organization, Time, Title and Other. [doi.org/10.23919/ISTAFRICA.2017.8102402](https://doi.org/10.23919/ISTAFRICA.2017.8102402)
 
 ### Gauthier, E., et al. (2024) {#kallaama-2024}
 
@@ -357,9 +438,33 @@ dataset's motivation, composition, collection, recommended uses, and limitations
 
 *Are We Modeling the Task or the Annotator? An Investigation of Annotator Bias in Natural Language Understanding Datasets.* Proceedings of EMNLP-IJCNLP 2019, 1161–1166. Shows that crowdsourced datasets written by a few productive workers let models learn annotator-specific patterns and generalise poorly to unseen annotators; recommends monitoring annotator bias and keeping test-set annotators disjoint from training-set annotators. [aclanthology.org/D19-1107](https://aclanthology.org/D19-1107/) (DOI: [10.18653/v1/D19-1107](https://doi.org/10.18653/v1/D19-1107))
 
+### Google (2022) {#monk-scale-2022}
+
+*Improving skin tone representation across Google.* Google blog, 11 May 2022. Announces the open release of the 10-shade Monk Skin Tone scale, developed with Harvard sociologist Ellis Monk, and its use to evaluate face detection and to diversify image results. [blog.google/products/search/monk-skin-tone-scale](https://blog.google/products/search/monk-skin-tone-scale/)
+
+### Google Earth Engine (n.d.) {#nicfi-basemaps}
+
+Google Earth Engine Data Catalog. *NICFI Satellite Data Program Basemaps for Tropical Forest Monitoring - Africa.* Planet basemaps of tropical Africa at 4.77 m per pixel, monthly or biannual, with usage, reproduction and distribution restrictions under the NICFI Participant License Agreement. [developers.google.com/earth-engine/datasets/catalog/projects_planet-nicfi_assets_basemaps_africa](https://developers.google.com/earth-engine/datasets/catalog/projects_planet-nicfi_assets_basemaps_africa)
+
+### Google Research (n.d.) {#open-buildings}
+
+*Open Buildings.* Building footprint polygons with a confidence score and a Plus Code per building, for Africa and other regions, under CC BY 4.0 or ODbL v1.0; documents per-tile precision thresholds and lower accuracy for small structures, contiguous buildings, rural and desert areas. [sites.research.google/gr/open-buildings](https://sites.research.google/gr/open-buildings/)
+
+### Grauman, K., et al. (2022) {#grauman-2022}
+
+*Ego4D: Around the World in 3,000 Hours of Egocentric Video.* Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR 2022). A large egocentric video dataset collected with consenting participants under privacy and ethics standards, with de-identification procedures where relevant. [arxiv.org/abs/2110.07058](https://arxiv.org/abs/2110.07058)
+
+### Groh, M., et al. (2021) {#fitzpatrick17k-2021}
+
+*Evaluating Deep Neural Networks Trained on Clinical Images in Dermatology with the Fitzpatrick 17k Dataset.* Proceedings of the IEEE/CVF CVPR Workshops 2021, 1820–1828; arXiv:2104.09957. Annotates 16,577 clinical images with Fitzpatrick skin type; the set holds far more light than dark skin, and a classifier of 114 conditions was most accurate on skin types like those it was trained on. Also compares ITA with human Fitzpatrick labels. [arxiv.org/abs/2104.09957](https://arxiv.org/abs/2104.09957)
+
 ### Gueuwou, S., et al. (2023) {#jwsign-2023}
 
 Gueuwou, S., Siake, S., Leong, C., & Müller, M. *JWSign: A Highly Multilingual Corpus of Bible Translations for more Diversity in Sign Language Processing.* Findings of EMNLP 2023. 98 sign languages, about 2,530 hours, more than 1,500 signers. [arxiv.org/abs/2311.10174](https://arxiv.org/abs/2311.10174)
+
+### Gupta, A., Dollár, P., & Girshick, R. (2019) {#lvis-2019}
+
+*LVIS: A Dataset for Large Vocabulary Instance Segmentation.* CVPR 2019; arXiv:1908.03195. A 1,000+ category dataset with a long tail of rare categories, grouped by training-image frequency into rare (1–10 images), common (11–100) and frequent; introduces repeat factor sampling, which oversamples images containing categories present in less than a threshold fraction of training images. [arxiv.org/abs/1908.03195](https://arxiv.org/abs/1908.03195)
 
 ### Gwet, K. L. (2014) {#gwet-2014}
 
@@ -372,6 +477,10 @@ Gueuwou, S., Siake, S., Leong, C., & Müller, M. *JWSign: A Highly Multilingual 
 ### Harris, R., Holmes, H. M., & Mertens, D. M. (2009) {#harris-2009}
 
 *Research ethics in sign language communities.* Sign Language Studies 9(2), 104-131. Proposes Sign Language Communities' Terms of Reference for research with signing communities. [doi.org/10.1353/sls.0.0011](https://doi.org/10.1353/sls.0.0011)
+
+### Harvey, P. (2026) {#exiftool}
+
+*ExifTool.* Software and documentation, including the QuickTime tag reference. Reads and writes EXIF, GPS, IPTC, XMP and maker-note metadata, deletes all metadata with `-all=`, and warns that deletion is not guaranteed to remove every block; documents location and device make and model tags in MP4 and QuickTime files. [exiftool.org](https://exiftool.org/); [exiftool.org/TagNames/QuickTime.html](https://exiftool.org/TagNames/QuickTime.html) (accessed 24 November 2026)
 
 ### Hasan, T., et al. (2021) {#xlsum-2021}
 
@@ -400,9 +509,17 @@ The PlantVillage dataset: tens of thousands of leaf images photographed on plain
 conditions. Released under CC BY-SA 3.0, so it cannot be relicensed into a CC BY release.
 [arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
 
+### Hukkelås, H., & Lindseth, F. (2023) {#hukkelas-2023}
+
+*DeepPrivacy2: Towards Realistic Full-Body Anonymization.* Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV 2023). Extends GAN-based anonymisation from faces to whole human figures. [arxiv.org/abs/2211.09454](https://arxiv.org/abs/2211.09454)
+
 ### HumanSignal (n.d.) {#labelstudio-choice-tag}
 
 *Choice tag.* Label Studio documentation. Documents the `value` and optional `alias` parameters of a choice; when an alias is set it replaces the choice value in the annotation results and is not shown in the interface. [labelstud.io/tags/choice](https://labelstud.io/tags/choice)
+
+### ITU-R (1998) {#itu-bt1359}
+
+*Recommendation ITU-R BT.1359-1: Relative timing of sound and vision for broadcasting.* International Telecommunication Union, Radiocommunication Sector, 1998. Detectability thresholds about +45 ms to −125 ms and acceptability thresholds about +90 ms to −185 ms on average; a positive value means sound is advanced with respect to vision. [itu.int](https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.1359-1-199811-I!!PDF-E.pdf)
 
 ### ITU-R (2023) {#itu-bs1770}
 
@@ -419,6 +536,10 @@ custodians, hosts, and users across the whole life of a dataset. [doi.org/10.114
 
 *CVSS Corpus and Massively Multilingual Speech-to-Speech Translation.* Proceedings of LREC 2022. A speech-to-speech translation corpus from 21 languages into English, built from Common Voice and CoVoST 2 with TTS-synthesised targets. [arxiv.org/abs/2201.03713](https://arxiv.org/abs/2201.03713)
 
+### Jin, S., et al. (2020) {#jin-2020}
+
+Jin, S., Xu, L., Xu, J., Wang, C., Liu, W., Qian, C., Ouyang, W., & Luo, P. *Whole-Body Human Pose Estimation in the Wild.* Proceedings of ECCV 2020. Introduces COCO-WholeBody: 133 keypoints per person (17 body, 6 foot, 68 face, 21 per hand), stored as separate arrays with a validity flag per part. [arxiv.org/abs/2007.11858](https://arxiv.org/abs/2007.11858) (data format: [github.com/jin-s13/COCO-WholeBody](https://github.com/jin-s13/COCO-WholeBody/blob/master/data_format.md))
+
 ### Johnston, T. (2010) {#johnston-2010}
 
 *From archive to corpus: Transcription and annotation in the creation of signed language corpora.* International Journal of Corpus Linguistics 15(1), 106-131. Why a signed-language corpus needs ID-glosses tied to a lexicon, and how annotation on parallel tiers turns an archive of video into a corpus. [doi.org/10.1075/ijcl.15.1.05joh](https://doi.org/10.1075/ijcl.15.1.05joh)
@@ -432,9 +553,25 @@ custodians, hosts, and users across the whole life of a dataset. [doi.org/10.114
 *The State and Fate of Linguistic Diversity and Inclusion in the NLP World.* Proceedings of ACL 2020.
 [aclanthology.org/2020.acl-main.560](https://aclanthology.org/2020.acl-main.560/)
 
+### Kapoor, S., & Narayanan, A. (2022) {#kapoor-2022}
+
+*Leakage and the Reproducibility Crisis in ML-based Science.* arXiv:2207.07048; published as "Leakage and the reproducibility crisis in machine-learning-based science", Patterns, 4(9), 100804 (2023). [arxiv.org/abs/2207.07048](https://arxiv.org/abs/2207.07048) (DOI: [10.1016/j.patter.2023.100804](https://doi.org/10.1016/j.patter.2023.100804))
+
+### Kazemzadeh, S., et al. (2014) {#kazemzadeh-2014}
+
+Kazemzadeh, S., Ordonez, V., Matten, M., & Berg, T. *ReferItGame: Referring to Objects in Photographs of Natural Scenes.* Proceedings of EMNLP 2014, pp. 787–798. [doi.org/10.3115/v1/D14-1086](https://doi.org/10.3115/v1/D14-1086)
+
 ### Kendall, M. G., & Babington Smith, B. (1940) {#kendall-1940}
 
 *On the Method of Paired Comparisons.* Biometrika, 31(3–4), 324–345. Introduces circular triads (A over B, B over C, C over A) as the inconsistent elements of a set of paired comparisons, and a coefficient of consistency based on counting them. [doi.org/10.1093/biomet/31.3-4.324](https://doi.org/10.1093/biomet/31.3-4.324)
+
+### Kinyanjui, N. M., et al. (2019) {#kinyanjui-2019}
+
+*Estimating Skin Tone and Effects on Classification Performance in Dermatology Datasets.* NeurIPS 2019 Workshop on Fair ML for Health; arXiv:1910.13268. Estimates skin tone with the individual typology angle (ITA) on segmented healthy skin and finds most images in the ISIC 2018 and SD-198 dermatology datasets fall in the lighter-skin range. [arxiv.org/abs/1910.13268](https://arxiv.org/abs/1910.13268)
+
+### Kirillov, A., et al. (2023) {#kirillov-2023}
+
+Kirillov, A., Mintun, E., Ravi, N., Mao, H., Rolland, C., Gustafson, L., Xiao, T., Whitehead, S., Berg, A. C., Lo, W.-Y., Dollár, P., & Girshick, R. *Segment Anything.* Proceedings of ICCV 2023; arXiv:2304.02643. Describes the SAM data engine: in the model-assisted manual stage the average time per mask fell from 34 to 14 seconds as the model was retrained; in the semi-automatic stage, where annotators labelled objects the model had not found, it rose back to 34 seconds because those objects were harder. [arxiv.org/abs/2304.02643](https://arxiv.org/abs/2304.02643)
 
 ### Kiritchenko, S., & Mohammad, S. M. (2017) {#kiritchenko-2017}
 
@@ -465,6 +602,10 @@ for Computational Linguistics (TACL), 10. [aclanthology.org/2022.tacl-1.4](https
 
 Kürzinger, L., Winkelbauer, D., Li, L., Watzel, T., & Rigoll, G. *CTC-Segmentation of Large Corpora for German End-to-end Speech Recognition.* Speech and Computer (SPECOM 2020), Lecture Notes in Computer Science 12335, Springer. Aligns long recordings with their text using a CTC-trained model; used to extract aligned utterances from unsegmented recordings as part of a German training set of over 1,700 hours. [doi.org/10.1007/978-3-030-60276-5_27](https://doi.org/10.1007/978-3-030-60276-5_27) (arXiv: [2007.09127](https://arxiv.org/abs/2007.09127))
 
+### Kuznetsova, A., et al. (2020) {#kuznetsova-2020}
+
+Kuznetsova, A., Rom, H., Alldrin, N., Uijlings, J., Krasin, I., Pont-Tuset, J., Kamali, S., Popov, S., Malloci, M., Kolesnikov, A., Duerig, T., & Ferrari, V. *The Open Images Dataset V4: Unified image classification, object detection, and visual relationship detection at scale.* International Journal of Computer Vision, 128(7), 1956–1981. Section 2.4 defines a perfect box as the smallest box containing all visible parts, describes per-class example boxes and common mistakes shown to annotators, group-of boxes over more than 5 heavily overlapping instances, and the occluded, truncated, depiction and inside attributes. [doi.org/10.1007/s11263-020-01316-z](https://doi.org/10.1007/s11263-020-01316-z); [arxiv.org/abs/1811.00982](https://arxiv.org/abs/1811.00982)
+
 ### Lacuna Fund (n.d.) {#lacuna-fund}
 
 *Language: Lacuna Fund.* Co-founded in 2020 by The Rockefeller Foundation, Google.org, and Canada's
@@ -488,10 +629,13 @@ datasets carry missing or unclear licences, which leaves them legally unusable f
 
 *An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction.* Proceedings of EMNLP-IJCNLP 2019, pp. 1311–1316. The CLINC150 dataset of 150 intents plus out-of-scope queries, showing that classifiers struggle to reject out-of-scope input. [aclanthology.org/D19-1131](https://aclanthology.org/D19-1131/)
 
-
 ### Li, D., et al. (2020) {#wlasl-2020}
 
 Li, D., Rodriguez Opazo, C., Yu, X., & Li, H. *Word-level Deep Sign Language Recognition from Video: A New Large-scale Dataset and Methods Comparison.* WACV 2020. WLASL: 2,000 American Sign Language words, 21,083 videos, 119 signers. [arxiv.org/abs/1910.11006](https://arxiv.org/abs/1910.11006)
+
+### Lin, T.-Y., et al. (2014) {#lin-2014}
+
+Lin, T.-Y., Maire, M., Belongie, S., Bourdev, L., Girshick, R., Hays, J., Perona, P., Ramanan, D., Zitnick, C. L., & Dollár, P. *Microsoft COCO: Common Objects in Context.* ECCV 2014; arXiv:1405.0312. Describes the COCO annotation pipeline; after 10 to 15 instances of a category were segmented in an image, the rest were marked as a single crowd region, which is ignored in evaluation. [arxiv.org/abs/1405.0312](https://arxiv.org/abs/1405.0312)
 
 ### LISA (2005) {#tmx-2005}
 
@@ -503,7 +647,7 @@ Lowell, D., Lipton, Z. C., & Wallace, B. C. *Practical Obstacles to Deploying Ac
 
 ### Luiten, J., et al. (2020) {#luiten-2020}
 
-Luiten, J., Osep, A., Dendorfer, P., Torr, P., Geiger, A., Leal-Taixé, L., & Leibe, B. *HOTA: A Higher Order Metric for Evaluating Multi-Object Tracking.* International Journal of Computer Vision. HOTA balances detection, association and localisation, with sub-metrics for analysing those error sources separately. [doi.org/10.1007/s11263-020-01375-2](https://doi.org/10.1007/s11263-020-01375-2) (arXiv: [2009.07736](https://arxiv.org/abs/2009.07736))
+Luiten, J., Osep, A., Dendorfer, P., Torr, P., Geiger, A., Leal-Taixé, L., & Leibe, B. *HOTA: A Higher Order Metric for Evaluating Multi-Object Tracking.* International Journal of Computer Vision, 129(2), 548–578 (published online 2020, in print 2021). HOTA balances detection, association and localisation, with sub-metrics for analysing those error sources separately. [doi.org/10.1007/s11263-020-01375-2](https://doi.org/10.1007/s11263-020-01375-2) (arXiv: [2009.07736](https://arxiv.org/abs/2009.07736))
 
 ### Luccioni, A. S., et al. (2022) {#luccioni-2022}
 
@@ -529,6 +673,10 @@ on personal-data protection and cybersecurity.
 should decide what data represents their communities, retain ownership of it, and know how it is used.
 [masakhane.io](https://www.masakhane.io/)
 
+### Mathis, A., et al. (2018) {#mathis-2018}
+
+Mathis, A., Mamidanna, P., Cury, K. M., Abe, T., Murthy, V. N., Mathis, M. W., & Bethge, M. *DeepLabCut: markerless pose estimation of user-defined body parts with deep learning.* Nature Neuroscience, 21(9), 1281–1289. Reports tracking comparable to human accuracy with about 200 labelled frames. [doi.org/10.1038/s41593-018-0209-y](https://doi.org/10.1038/s41593-018-0209-y) (arXiv: [1804.03142](https://arxiv.org/abs/1804.03142))
+
 ### Max Planck Institute for Psycholinguistics (2024) {#mpi-video-guidelines}
 
 *Processing videos for use with ELAN.* October 2024. Encoding settings for frame-accurate annotation, including a keyframe interval of 25 frames and no B-frames when exact frame positioning is crucial. [mpi.nl](https://www.mpi.nl/tools/elan/docs/Video_encoding_guidelines_ELAN.pdf)
@@ -540,6 +688,10 @@ should decide what data represents their communities, retain ownership of it, an
 ### McAuliffe, M., et al. (2017) {#mcauliffe-2017}
 
 McAuliffe, M., Socolof, M., Mihuc, S., Wagner, M., & Sonderegger, M. *Montreal Forced Aligner: Trainable Text-Speech Alignment Using Kaldi.* Proceedings of Interspeech 2017, 498–502. A trainable, lexicon-based forced aligner producing word and phone boundaries. [doi.org/10.21437/Interspeech.2017-1386](https://doi.org/10.21437/Interspeech.2017-1386)
+
+### McPherson, R., Shokri, R., & Shmatikov, V. (2016) {#mcpherson-2016}
+
+*Defeating Image Obfuscation with Deep Learning.* arXiv preprint 1609.00408. Shows that neural networks can recognise faces, objects and handwritten digits in images protected by mosaicing, blurring and P3. [arxiv.org/abs/1609.00408](https://arxiv.org/abs/1609.00408)
 
 ### MDN Web Docs (2026a) {#mdn-storage-quotas}
 
@@ -577,6 +729,14 @@ and tomato pests and diseases collected in Ghana. CC BY 4.0.
 arXiv:2207.03546. Up to 86 hours of clean single-speaker TTS audio per language under CC-BY-SA.
 [arxiv.org/abs/2207.03546](https://arxiv.org/abs/2207.03546)
 
+### Microsoft (n.d.) {#ms-building-footprints}
+
+*Global ML Building Footprints.* GitHub repository. Building footprint polygons derived from aerial and satellite imagery, under the CDLA Permissive 2.0 licence, with reported precision and recall per region and advice to check quality locally before importing into OpenStreetMap. [github.com/microsoft/GlobalMLBuildingFootprints](https://github.com/microsoft/GlobalMLBuildingFootprints)
+
+### Milan, A., et al. (2016) {#milan-2016}
+
+Milan, A., Leal-Taixé, L., Reid, I., Roth, S., & Schindler, K. *MOT16: A Benchmark for Multi-Object Tracking.* arXiv:1603.00831. Introduces the MOT16 benchmark and its comma-separated annotation format: frame, identity, box left, top, width, height, a confidence or consider/ignore flag, class and visibility ratio, with all values 1-based. [arxiv.org/abs/1603.00831](https://arxiv.org/abs/1603.00831)
+
 ### Mitchell, M., et al. (2019) {#mitchell-2019}
 
 *Model Cards for Model Reporting.* Proceedings of FAccT 2019. A standard for reporting a model's intended
@@ -585,6 +745,10 @@ use, performance across groups, and limitations. [doi.org/10.1145/3287560.328759
 ### Mittag, G., et al. (2021) {#mittag-2021}
 
 Mittag, G., Naderi, B., Chehadi, A., & Möller, S. *NISQA: A Deep CNN-Self-Attention Model for Multidimensional Speech Quality Prediction with Crowdsourced Datasets.* Proceedings of Interspeech 2021, 2127–2131. Predicts overall speech quality and the quality dimensions noisiness, coloration, discontinuity and loudness without a clean reference. [doi.org/10.21437/Interspeech.2021-299](https://doi.org/10.21437/Interspeech.2021-299) (arXiv: [2104.09494](https://arxiv.org/abs/2104.09494))
+
+### Mnih, V., & Hinton, G. E. (2010) {#mnih-2010}
+
+*Learning to detect roads in high-resolution aerial images.* Computer Vision – ECCV 2010, Lecture Notes in Computer Science 6316, pp. 210–223. Introduces relaxed completeness and correctness (precision and recall within a pixel tolerance) for evaluating thin linear features. [doi.org/10.1007/978-3-642-15567-3_16](https://doi.org/10.1007/978-3-642-15567-3_16)
 
 ### Moryossef, A., Müller, M., & Fahrni, R. (2021) {#pose-format-2021}
 
@@ -646,6 +810,10 @@ Meta AI; arXiv:2207.04672. Translation and evaluation across 200 languages, incl
 
 *RankME: Reliable Human Ratings for Natural Language Generation.* Proceedings of NAACL-HLT 2018 (Volume 2: Short Papers), 72–78. Rank-based magnitude estimation, combining relative comparison with a continuous scale, gave more reliable and consistent ratings of generated text than Likert scales. [aclanthology.org/N18-2012](https://aclanthology.org/N18-2012/)
 
+### Noyan, M. A. (2022) {#noyan-2022}
+
+*Uncovering bias in the PlantVillage dataset.* arXiv:2206.04374. [arxiv.org/abs/2206.04374](https://arxiv.org/abs/2206.04374)
+
 ### Nwulite Obodo Open Data License (NOODL) (2025) {#noodl-2025}
 
 *The Nwulite Obodo Open Data License: A New Licence for Sharing African Datasets* (Igbo: "raising,
@@ -662,18 +830,25 @@ users elsewhere. [datasciencelawlab.africa](https://datasciencelawlab.africa/nwu
 
 Filip, D., Comerford, T., Saadatfar, S., Sasaki, F., & Savourel, Y. (Eds.). *XLIFF Version 2.1.* OASIS Standard, 13 February 2018. The XML interchange format for localisable content and its translations. [docs.oasis-open.org/xliff/xliff-core/v2.1](https://docs.oasis-open.org/xliff/xliff-core/v2.1/xliff-core-v2.1.html)
 
+### OGC (n.d.) {#ogc-geotiff}
+
+Open Geospatial Consortium. *OGC GeoTIFF Standard*, version 1.1 (OGC 19-008r4). Defines how TIFF files carry georeferencing information for exchanging georeferenced or geocoded imagery, using the EPSG register for coordinate reference systems. [ogc.org/standards/geotiff](https://www.ogc.org/standards/geotiff/)
+
 ### Ogundepo, O., et al. (2023) {#afriqa-2023}
 
 *AfriQA: Cross-lingual Open-Retrieval Question Answering for African Languages.* Findings of EMNLP 2023.
 The first cross-lingual open-retrieval QA dataset for African languages: 12,000+ questions across 10
 languages, with answers retrieved from English or French passages. [arxiv.org/abs/2305.06897](https://arxiv.org/abs/2305.06897)
 
+### Oh, S. J., et al. (2016) {#oh-2016}
+
+*Faceless Person Recognition: Privacy Implications in Social Media.* Proceedings of the European Conference on Computer Vision (ECCV 2016). Shows that a handful of tagged images can be enough to recognise people even when their heads are obfuscated. [arxiv.org/abs/1607.08438](https://arxiv.org/abs/1607.08438)
+
 ### Ojo, J., et al. (2025) {#afrobench}
 
 *AfroBench: How Good are Large Language Models on African Languages?* Ojo, J., Ogundepo, O., Oladipo, A., Ogueji, K., Lin, J., Stenetorp, P., & Adelani, D. I. Findings of ACL 2025; arXiv:2311.07978. A
 large-scale LLM benchmark spanning 64 African languages, 15 tasks, and 22 datasets, showing a persistent
 gap between English and African languages. [arxiv.org/abs/2311.07978](https://arxiv.org/abs/2311.07978)
-
 
 ### Oladipo, A., et al. (2023) {#oladipo-2023}
 
@@ -685,6 +860,18 @@ gap between English and African languages. [arxiv.org/abs/2311.07978](https://ar
 arXiv:2310.00274. 200 hours of accented English from 120 accents across 13 African countries.
 [arxiv.org/abs/2310.00274](https://arxiv.org/abs/2310.00274)
 
+### Open Images (n.d.) {#openimages-v7}
+
+*Open Images V7: download and data formats.* Google. Describes the box annotation files and their attributes (IsOccluded, IsTruncated, IsGroupOf, IsDepiction, IsInside), each stored as 1 (present), 0 (absent) or -1 (unknown). [storage.googleapis.com/openimages/web/download_v7.html](https://storage.googleapis.com/openimages/web/download_v7.html)
+
+### OpenStreetMap Foundation (n.d.) {#osm-copyright}
+
+*Copyright and License.* OpenStreetMap data is licensed under the Open Database License (ODbL); users must credit OpenStreetMap and distribute altered or built-upon data only under the same licence. [openstreetmap.org/copyright](https://www.openstreetmap.org/copyright)
+
+### OpenStreetMap Wiki (n.d.) {#osm-tasking-manager}
+
+*Tasking Manager.* A tool that divides a mapping job into smaller tasks that can be completed rapidly and shows which areas need mapping and which need validation. [wiki.openstreetmap.org/wiki/Tasking_Manager](https://wiki.openstreetmap.org/wiki/Tasking_Manager)
+
 ### Ousidhoum, N., et al. (2024) {#semrel-2024}
 
 *SemRel2024: A Collection of Semantic Textual Relatedness Datasets for 13 Languages.* Findings of the Association for Computational Linguistics: ACL 2024, 2512–2530. Semantic-relatedness datasets annotated by native speakers with best-worst scaling, including Afrikaans, Algerian and Moroccan Arabic, Amharic, Hausa and Kinyarwanda. [aclanthology.org/2024.findings-acl.147](https://aclanthology.org/2024.findings-acl.147/)
@@ -693,6 +880,17 @@ arXiv:2310.00274. 200 hours of accented English from 120 accents across 13 Afric
 
 *Cross-lingual Name Tagging and Linking for 282 Languages.* Proceedings of ACL 2017 (Volume 1: Long Papers), pp. 1946–1958. Introduces WikiANN, silver-standard NER data for 282 languages derived from Wikipedia cross-lingual links. [aclanthology.org/P17-1178](https://aclanthology.org/P17-1178/)
 
+### Papadopoulos, D. P., et al. (2016) {#papadopoulos-2016}
+
+Papadopoulos, D. P., Uijlings, J. R. R., Keller, F., & Ferrari, V. *We don't need no bounding-boxes: Training object class detectors using only human verification.* Proceedings of CVPR 2016, 854–863. Annotators only verify boxes proposed by the learner; the authors estimate a six- to nine-fold reduction in total annotation time. [arxiv.org/abs/1602.08405](https://arxiv.org/abs/1602.08405)
+
+### Papadopoulos, D. P., et al. (2017) {#papadopoulos-2017}
+
+Papadopoulos, D. P., Uijlings, J. R. R., Keller, F., & Ferrari, V. *Extreme clicking for efficient object annotation.* Proceedings of ICCV 2017. Annotators click the top, bottom, left-most and right-most points of an object instead of dragging box corners; about 7 seconds per box, roughly five times faster than the traditional way. [arxiv.org/abs/1708.02750](https://arxiv.org/abs/1708.02750)
+
+### PASCAL VOC (2011) {#voc-guidelines-2011}
+
+*VOC2011 Annotation Guidelines.* The PASCAL Visual Object Classes Challenge. One-page guidelines on what to label, bounding-box extent (visible area only), truncation (more than 15 to 20% outside the box) and occlusion (more than 5% hidden) flags, image quality, clothing and mud, transparency, mirrors and pictures. [host.robots.ox.ac.uk/pascal/VOC/voc2011/guidelines.html](http://host.robots.ox.ac.uk/pascal/VOC/voc2011/guidelines.html)
 
 ### Passonneau, R. J. (2004) {#passonneau-2004}
 
@@ -709,7 +907,6 @@ for stewardship across the full dataset life cycle. [arxiv.org/abs/2108.02922](h
 
 *A Universal Part-of-Speech Tagset.* Proceedings of LREC 2012, pp. 2089–2096. Proposes twelve universal POS categories with mappings from 25 treebank tagsets, the forerunner of the UD UPOS tagset. [aclanthology.org/L12-1115](https://aclanthology.org/L12-1115/)
 
-
 ### Phillips, A., & Davis, M. (2009) {#rfc-5646}
 
 Phillips, A., & Davis, M. (Eds.). *Tags for Identifying Languages.* IETF RFC 5646 (BCP 47), September 2009. Defines language tags with language, script and region subtags (such as `ha-Arab`). [rfc-editor.org/info/rfc5646](https://www.rfc-editor.org/info/rfc5646)
@@ -719,6 +916,18 @@ Phillips, A., & Davis, M. (Eds.). *Tags for Identifying Languages.* IETF RFC 564
 *The "Problem" of Human Label Variation: On Ground Truth in Data, Modeling and Evaluation.* Proceedings
 of EMNLP 2022. Argues that annotator disagreement often reflects genuine, informative variation rather
 than noise. [aclanthology.org/2022.emnlp-main.731](https://aclanthology.org/2022.emnlp-main.731/)
+
+### Ploton, P., et al. (2020) {#ploton-2020}
+
+Ploton, P., Mortier, F., Réjou-Méchain, M., Barbier, N., Picard, N., Rossi, V., Dormann, C., Cornu, G., Viennois, G., Bayol, N., Lyapustin, A., Gourlet-Fleury, S., & Pélissier, R. *Spatial validation reveals poor predictive performance of large-scale ecological mapping models.* Nature Communications, 11, 4540. Using 11.8 million trees in central Africa, random validation suggested the model explained over half of the biomass variation, while spatial validation showed quasi-null predictive power. [doi.org/10.1038/s41467-020-18321-y](https://doi.org/10.1038/s41467-020-18321-y)
+
+### Plummer, B. A., et al. (2017) {#plummer-2017}
+
+Plummer, B. A., Wang, L., Cervantes, C. M., Caicedo, J. C., Hockenmaier, J., & Lazebnik, S. *Flickr30k Entities: Collecting Region-to-Phrase Correspondences for Richer Image-to-Sentence Models.* International Journal of Computer Vision, 123(1), 74–93. [doi.org/10.1007/s11263-016-0965-7](https://doi.org/10.1007/s11263-016-0965-7) (preprint: [arxiv.org/abs/1505.04870](https://arxiv.org/abs/1505.04870))
+
+### Pont-Tuset, J., et al. (2020) {#pont-tuset-2020}
+
+Pont-Tuset, J., Uijlings, J., Changpinyo, S., Soricut, R., & Ferrari, V. *Connecting Vision and Language with Localized Narratives.* Proceedings of ECCV 2020. [arxiv.org/abs/1912.03098](https://arxiv.org/abs/1912.03098)
 
 ### Popović, M. (2015) {#popovic-2015}
 
@@ -734,19 +943,38 @@ Pradhan, S., Luo, X., Recasens, M., Hovy, E., Ng, V., & Strube, M. *Scoring Core
 
 Pratap, V., Tjandra, A., Shi, B., Tomasello, P., Babu, A., Kundu, S., Elkahky, A., Ni, Z., Vyas, A., Fazel-Zarandi, M., Baevski, A., Adi, Y., Zhang, X., Hsu, W.-N., Conneau, A., & Auli, M. *Scaling Speech Technology to 1,000+ Languages.* arXiv:2305.13516 (2023); published in Journal of Machine Learning Research, 25(97), 1–52, 2024. The Massively Multilingual Speech (MMS) project; describes a CTC alignment model and a GPU forced-alignment implementation used to align long recordings in over 1,100 languages. [arxiv.org/abs/2305.13516](https://arxiv.org/abs/2305.13516); [jmlr.org/papers/v25/23-1318.html](https://jmlr.org/papers/v25/23-1318.html)
 
+### Preston, C. C., & Colman, A. M. (2000) {#preston-2000}
+
+*Optimal number of response categories in rating scales: Reliability, validity, discriminating power, and respondent preferences.* Acta Psychologica, 104(1), 1–15. [doi.org/10.1016/S0001-6918(99)00050-5](https://doi.org/10.1016/S0001-6918(99)00050-5)
+
+### Prolific (2026a) {#prolific-pricing-2026}
+
+*What is your pricing?* Prolific Researcher Help Centre, last updated 9 October 2026. States that researchers pay a platform fee calculated as a percentage on top of participant rewards, with different rates for corporate and for academic or non-profit customers. [researcher-help.prolific.com/en/articles/445239-what-is-your-pricing](https://researcher-help.prolific.com/en/articles/445239-what-is-your-pricing) (accessed 24 November 2026)
+
+### Prolific (2026b) {#prolific-screening-2026}
+
+*Can I screen participants within my study?* Prolific Researcher Help Centre, last updated 12 May 2026. Describes custom screening for groups that the built-in prescreening filters do not cover, and states that screened-out participants are paid a fixed reward set by the researcher. [researcher-help.prolific.com/en/articles/445165-can-i-screen-participants-within-my-study](https://researcher-help.prolific.com/en/articles/445165-can-i-screen-participants-within-my-study) (accessed 24 November 2026)
+
 ### Ramshaw, L., & Marcus, M. (1995) {#ramshaw-marcus-1995}
 
 *Text Chunking using Transformation-Based Learning.* Third Workshop on Very Large Corpora, 1995. Recasts chunking as tagging, with chunk structure encoded in per-word tags, which is the origin of the IOB tagging scheme. [aclanthology.org/W95-0107](https://aclanthology.org/W95-0107/)
-
 
 ### Ranathunga, S., & de Silva, N. (2022) {#ranathunga-desilva-2022}
 
 *Some Languages are More Equal than Others: Probing Deeper into the Linguistic Disparity in the NLP
 World.* arXiv:2210.08523. [arxiv.org/abs/2210.08523](https://arxiv.org/abs/2210.08523)
 
+### Ravi, N., et al. (2024) {#ravi-2024}
+
+Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., Khedr, H., Rädle, R., Rolland, C., Gustafson, L., Mintun, E., Pan, J., Alwala, K. V., Carion, N., Wu, C.-Y., Girshick, R., Dollár, P., & Feichtenhofer, C. *SAM 2: Segment Anything in Images and Videos.* arXiv:2408.00714 (2024); ICLR 2025. Its video data engine reports 37.8 s per frame with SAM on every frame, 7.4 s with mask propagation and 4.5 s with SAM 2, about 19% of frames still edited per masklet, and a separate verification pass that sent unsatisfactory masklets back for refinement. [arxiv.org/abs/2408.00714](https://arxiv.org/abs/2408.00714)
+
 ### Reddy, C. K. A., Gopal, V., & Cutler, R. (2021) {#reddy-2021}
 
 *DNSMOS P.835: A Non-Intrusive Perceptual Objective Speech Quality Metric to Evaluate Noise Suppressors.* arXiv:2110.01763, submitted 2021 and revised 2022. Predicts speech quality (`SIG`), background-noise quality (`BAK`) and overall quality (`OVRL`) from P.835 human ratings. [arxiv.org/abs/2110.01763](https://arxiv.org/abs/2110.01763)
+
+### Republic of South Africa (2013) {#popia-2013}
+
+*Protection of Personal Information Act 4 of 2013 (POPIA).* Government Gazette No. 37067, 26 November 2013; main provisions in force from 1 July 2020. Section 1 defines a child as a natural person under 18 who is not legally competent to act without the assistance of a competent person; section 35(1) permits processing of children's personal information with the prior consent of a competent person, and on narrower grounds, including historical, statistical or research purposes that serve a public interest (section 35(1)(d)). Section texts at [popia.co.za/section-1-definitions](https://popia.co.za/section-1-definitions/) and [popia.co.za/section-35](https://popia.co.za/section-35-general-authorisation-concerning-personal-information-of-children/)
 
 ### Retta, E. A., et al. (2022) {#retta-2022}
 
@@ -755,6 +983,10 @@ World.* arXiv:2210.08523. [arxiv.org/abs/2210.08523](https://arxiv.org/abs/2210.
 ### Ristani, E., et al. (2016) {#ristani-2016}
 
 Ristani, E., Solera, F., Zou, R. S., Cucchiara, R., & Tomasi, C. *Performance Measures and a Data Set for Multi-Target, Multi-Camera Tracking.* arXiv:1609.01775. Defines identity-aware tracking measures, including identification precision, identification recall and IDF1, using a global one-to-one assignment between ground-truth and computed identities. [arxiv.org/abs/1609.01775](https://arxiv.org/abs/1609.01775)
+
+### Roberts, D. R., et al. (2017) {#roberts-2017}
+
+Roberts, D. R., Bahn, V., Ciuti, S., Boyce, M. S., Elith, J., Guillera-Arroita, G., Hauenstein, S., Lahoz-Monfort, J. J., Schröder, B., Thuiller, W., Warton, D. I., Wintle, B. A., Hartig, F., & Dormann, C. F. *Cross-validation strategies for data with temporal, spatial, hierarchical, or phylogenetic structure.* Ecography, 40(8), 913–929. Random cross-validation on structured data seriously underestimates predictive error; block cross-validation is the recommended remedy. [doi.org/10.1111/ecog.02881](https://doi.org/10.1111/ecog.02881)
 
 ### Ryant, N., et al. (2019) {#ryant-2019}
 
@@ -783,6 +1015,10 @@ Schembri, A., Fenlon, J., Rentelis, R., Reynolds, S., & Cormier, K. *Building th
 
 *Maganar Hannu, Language of the Hands: A Descriptive Analysis of Hausa Sign Language.* Hamburg: Signum (International Studies on Sign Language and Communication of the Deaf 35).
 
+### Schumann, C., et al. (2023) {#schumann-2023}
+
+*Consensus and Subjectivity of Skin Tone Annotation for ML Fairness.* arXiv:2305.09073 (2023, revised 2024). Finds that annotators can label skin tone on the 10-point Monk Skin Tone scale reliably and in line with an expert, even in difficult capture conditions, but that annotators from different regions hold different mental models of the categories; releases the MST-E training set (1,515 images, 31 videos) and recommends a diverse annotator pool and more annotations per image. [arxiv.org/abs/2305.09073](https://arxiv.org/abs/2305.09073)
+
 ### Seamless Communication, Barrault, L., et al. (2023) {#seamless-2023}
 
 *SeamlessM4T: Massively Multilingual & Multimodal Machine Translation.* arXiv preprint 2308.11596. A single model for speech and text translation across up to ~100 languages, with speech output for a smaller subset. [arxiv.org/abs/2308.11596](https://arxiv.org/abs/2308.11596)
@@ -794,6 +1030,14 @@ Yazdani, S., Hamidullah, Y., España-Bonet, C., & van Genabith, J. *Seeing, Sign
 ### Settles, B. (2009) {#settles-2009}
 
 *Active Learning Literature Survey.* Computer Sciences Technical Report 1648, University of Wisconsin–Madison (updated 26 January 2010). A general introduction to active learning, covering query scenarios and strategies, including uncertainty sampling, which it calls perhaps the simplest and most commonly used. [burrsettles.com/pub/settles.activelearning.pdf](https://burrsettles.com/pub/settles.activelearning.pdf)
+
+### Shankar, S., et al. (2017) {#shankar-2017}
+
+*No Classification without Representation: Assessing Geodiversity Issues in Open Data Sets for the Developing World.* NIPS 2017 Workshop on Machine Learning for the Developing World; arXiv:1711.08536. Of the Open Images images that could be geolocated, more than 32% were US-based and 60% came from six North American and European countries; in the ImageNet sample about 45% were US-based, while China and India held about 1% and 2%. Classifiers trained on these sets performed worse on images from under-represented locales. [arxiv.org/abs/1711.08536](https://arxiv.org/abs/1711.08536)
+
+### Shen, W., Wang, J., & Han, J. (2015) {#shen-2015}
+
+*Entity Linking with a Knowledge Base: Issues, Techniques, and Solutions.* IEEE Transactions on Knowledge and Data Engineering, 27(2), 443–460. Survey of entity linking; defines unlinkable mentions and the special label NIL for mentions with no knowledge-base entry. [doi.org/10.1109/TKDE.2014.2327028](https://doi.org/10.1109/TKDE.2014.2327028)
 
 ### Shrout, P. E., & Fleiss, J. L. (1979) {#shrout-1979}
 
@@ -811,11 +1055,14 @@ Ahene, et al. A Ghanaian Sign Language dataset for healthcare: 9,879 videos of 4
 
 *BIG-C: a Multimodal Multi-Purpose Dataset for Bemba.* Proceedings of ACL 2023. Over 180 hours of image-grounded Bemba conversational speech with transcripts and English translations, supporting ASR, MT and speech translation. [aclanthology.org/2023.acl-long.115](https://aclanthology.org/2023.acl-long.115)
 
-
 ### Sikasote, C., et al. (2023) {#zambezi-2023}
 
 *Zambezi Voice: A Multilingual Speech Corpus for Zambian Languages.* Interspeech 2023. 79 hours labelled
 across Bemba, Nyanja, Tonga, and Lozi, plus 525 hours of unlabelled radio audio. [arxiv.org/abs/2306.04428](https://arxiv.org/abs/2306.04428)
+
+### SIL International (n.d.) {#iso-639-3}
+
+SIL International, ISO 639-3 Registration Authority. *ISO 639-3: Codes for the representation of names of languages.* Code tables and documentation, including the scope of denotation: "The dialects of a language are included within the denotation represented by the identifier for that language." Example entry: `pcm` (Nigerian Pidgin). [iso639-3.sil.org](https://iso639-3.sil.org/); [iso639-3.sil.org/about/scope](https://iso639-3.sil.org/about/scope)
 
 ### Siminyu, K., et al. (2021) {#siminyu-2021}
 
@@ -832,6 +1079,22 @@ across 13 plant species. CC BY 4.0.
 ### Singh, S., et al. (2024) {#aya-2024}
 
 *Aya Dataset: An Open-Access Collection for Multilingual Instruction Tuning.* Proceedings of ACL 2024 (Volume 1: Long Papers), pp. 11521–11567. A human-curated instruction-following dataset in 65 languages, written by fluent speakers rather than translated. [aclanthology.org/2024.acl-long.620](https://aclanthology.org/2024.acl-long.620/)
+
+### Sirko, W., et al. (2021) {#sirko-2021}
+
+Sirko, W., Kashubin, S., Ritter, M., Annkah, A., Bouchareb, Y. S. E., Dauphin, Y., Keysers, D., Neumann, M., Cisse, M., & Quinn, J. *Continental-Scale Building Detection from High Resolution Satellite Imagery.* arXiv:2107.12283. Trains building detection for the whole of Africa on 50 cm imagery from about 1.75M manually labelled building instances; produced the Open Buildings dataset. [arxiv.org/abs/2107.12283](https://arxiv.org/abs/2107.12283)
+
+### Solovyev, R., Wang, W., & Gabruseva, T. (2021) {#solovyev-2021}
+
+*Weighted boxes fusion: Ensembling boxes from different object detection models.* Image and Vision Computing, 107, 104117. Fuses overlapping boxes from several models into one box whose coordinates are the confidence-weighted average of the cluster, and lowers the fused confidence when fewer models contributed. [doi.org/10.1016/j.imavis.2021.104117](https://doi.org/10.1016/j.imavis.2021.104117) (arXiv: [1910.13302](https://arxiv.org/abs/1910.13302))
+
+### Soomro, K., Zamir, A. R., & Shah, M. (2012) {#soomro-2012}
+
+*UCF101: A Dataset of 101 Human Actions Classes From Videos in The Wild.* arXiv:1212.0402. [arxiv.org/abs/1212.0402](https://arxiv.org/abs/1212.0402)
+
+### Souček, T., & Lokoč, J. (2020) {#soucek-2020}
+
+*TransNet V2: An effective deep network architecture for fast shot transition detection.* arXiv:2008.04838. [arxiv.org/abs/2008.04838](https://arxiv.org/abs/2008.04838)
 
 ### SSA-COMET (2025) {#ssa-comet-2025}
 
@@ -882,6 +1145,14 @@ Maintained Fleiss' kappa above 0.82 between peer moderators during validation.
 
 *Understanding iPhone framerates for shooting, editing & distribution.* ProVideo Coalition, 21 October 2017. iOS video recording uses a variable frame rate "with only targets, not exact framerates"; editing such footage needs software that supports variable-rate material, or transcoding first. [provideocoalition.com](https://www.provideocoalition.com/understanding-iphone-framerates-for-shooting-editing-distribution/)
 
+### Tonja, A. L., et al. (2024) {#tonja-2024-ethiollm}
+
+Tonja, A. L., Azime, I. A., Belay, T. D., et al. *EthioLLM: Multilingual Large Language Models for Ethiopian Languages with Task Evaluation.* Proceedings of LREC-COLING 2024. Multilingual models and a benchmark for five Ethiopian languages; its Amharic NER benchmark merges two existing corpora and drops the TIME and TTL classes to harmonise their label sets. [arxiv.org/abs/2403.13737](https://arxiv.org/abs/2403.13737)
+
+### Tseng, G., et al. (2021) {#tseng-2021}
+
+Tseng, G., Zvonkov, I., Nakalembe, C., & Kerner, H. *CropHarvest: A global dataset for crop-type classification.* Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks, Round 2. A satellite dataset of more than 90,000 geographically diverse samples with agricultural labels, paired with Sentinel-1, Sentinel-2, elevation and climate data. [datasets-benchmarks-proceedings.neurips.cc](https://datasets-benchmarks-proceedings.neurips.cc/paper/2021/hash/54229abfcfa5649e7003b83dd4755294-Abstract-round2.html)
+
 ### Tusubira, J. F., et al. (2022) {#makerere-cassava-2022}
 
 *Makerere University cassava image dataset.* Harvard Dataverse. Cassava field images from Uganda, released
@@ -892,17 +1163,41 @@ under CC0 1.0.
 
 *Object Detection Datasets Overview.* Ultralytics documentation. Specifies the YOLO label format: one text file per image, one row per object as `class x_center y_center width height`, with zero-indexed classes and coordinates normalised to 0–1 by image size. [docs.ultralytics.com/datasets/detect](https://docs.ultralytics.com/datasets/detect/)
 
+### Ultralytics (n.d.) {#ultralytics-segment-format}
+
+*Instance Segmentation Datasets.* Ultralytics documentation. Specifies the YOLO segmentation label format: one text file per image, one row per object as the class index followed by polygon `x y` pairs normalised to 0–1, with at least three points per polygon. [docs.ultralytics.com/datasets/segment](https://docs.ultralytics.com/datasets/segment/)
+
 ### Unicode Consortium (2026) {#unicode-uax9}
 
 Goregaokar, M., & Leroy, R. (Eds.). *Unicode Standard Annex #9: Unicode Bidirectional Algorithm.* Unicode 18.0.0, revision 52, 1 September 2026. Text is stored in logical (memory) order; the algorithm affects only display. [unicode.org/reports/tr9](https://www.unicode.org/reports/tr9/)
+
+### USGS (n.d.) {#usgs-landsat-use}
+
+U.S. Geological Survey. *Are there any restrictions on the use or redistribution of Landsat data?* FAQ. Landsat data downloaded from the USGS carry no restrictions on use or redistribution; the USGS asks that the source be credited. [usgs.gov/faqs/are-there-any-restrictions-use-or-redistribution-landsat-data](https://www.usgs.gov/faqs/are-there-any-restrictions-use-or-redistribution-landsat-data)
 
 ### van der Lee, C., et al. (2019) {#vanderlee-2019}
 
 *Best Practices for the Human Evaluation of Automatically Generated Text.* Proceedings of the 12th International Conference on Natural Language Generation (INLG 2019), 355–368. Reviews how human evaluation of generated text is carried out and sets out best practices: separate, well-defined criteria; randomised order; agreement reported with confidence intervals plus percentage agreement; free-text comments for diagnosis. [aclanthology.org/W19-8643](https://aclanthology.org/W19-8643/)
 
+### Vondrick, C., Patterson, D., & Ramanan, D. (2013) {#vondrick-2013}
+
+*Efficiently Scaling Up Crowdsourced Video Annotation: A Set of Best Practices for High Quality, Economical Video Labeling.* International Journal of Computer Vision, 101(1), 184–204. A three-year study of crowdsourced video annotation, finding that video annotation needs specialised skill and robust quality control. [doi.org/10.1007/s11263-012-0564-1](https://doi.org/10.1007/s11263-012-0564-1)
+
+### Vrandečić, D., & Krötzsch, M. (2014) {#vrandecic-2014}
+
+*Wikidata: A Free Collaborative Knowledgebase.* Communications of the ACM, 57(10), 78–85. Describes Wikidata, the collaboratively edited knowledge base behind Wikipedia, with stable item identifiers. [doi.org/10.1145/2629489](https://doi.org/10.1145/2629489)
+
 ### W3C (n.d.) {#w3c-language-tags}
 
 W3C Internationalization. *Choosing a Language Tag.* World Wide Web Consortium. Practical guidance on BCP 47 tags, including using a script subtag only when it adds distinguishing information. [w3.org/International/questions/qa-choosing-language-tags](https://www.w3.org/International/questions/qa-choosing-language-tags)
+
+### Wang, A., et al. (2020) {#revise-2020}
+
+*REVISE: A Tool for Measuring and Mitigating Bias in Visual Datasets.* ECCV 2020 (extended version arXiv:2004.07999). An open tool that surfaces object-based, person-based and geography-based patterns in a visual dataset and suggests mitigation steps, leaving the judgement of which patterns are harmful to the user. [arxiv.org/abs/2004.07999](https://arxiv.org/abs/2004.07999)
+
+### Wang, L., et al. (2016) {#wang-2016-tsn}
+
+Wang, L., Xiong, Y., Wang, Z., Qiao, Y., Lin, D., Tang, X., & Van Gool, L. *Temporal Segment Networks: Towards Good Practices for Deep Action Recognition.* European Conference on Computer Vision (ECCV 2016). Sparse temporal sampling with video-level supervision. [arxiv.org/abs/1608.00859](https://arxiv.org/abs/1608.00859)
 
 ### Wanjawa, B. W., et al. (2023) {#kenswquad-2023}
 
@@ -911,6 +1206,10 @@ W3C Internationalization. *Choosing a Language Tag.* World Wide Web Consortium. 
 ### Wanzare, et al. (2024) {#ksl-dataset-2024}
 
 Wanzare, Okutoyi, Kang'ahi & Ayere. *KSL Dataset.* About 14,000 English sentences with Kenyan Sign Language glosses, about 20,000 KSL videos, and 4,000 words transcribed in HamNoSys. [arxiv.org/abs/2410.18295](https://arxiv.org/abs/2410.18295)
+
+### Warfield, S. K., Zou, K. H., & Wells, W. M. (2004) {#warfield-2004}
+
+*Simultaneous Truth and Performance Level Estimation (STAPLE): An Algorithm for the Validation of Image Segmentation.* IEEE Transactions on Medical Imaging, 23(7), 903–921. An expectation-maximisation algorithm that takes several segmentations of the same image and estimates both a probabilistic true segmentation and each rater's sensitivity and specificity. [doi.org/10.1109/TMI.2004.828354](https://doi.org/10.1109/TMI.2004.828354) (open access: [PMC1283110](https://pmc.ncbi.nlm.nih.gov/articles/PMC1283110/))
 
 ### WAXAL (2026) {#waxal-2026}
 
@@ -940,12 +1239,26 @@ Wittenburg, P., Brugman, H., Russel, A., Klassmann, A., & Sloetjes, H. *ELAN: a 
 
 *The legal recognition of national sign languages.* The WFD's country-by-country record of constitutional and legislative recognition. [wfdeaf.org](https://wfdeaf.org/the-legal-recognition-of-national-sign-languages/)
 
-
 ### Xu, Q., et al. (2016) {#xu-2016}
 
 Xu, Q., Xiong, J., Cao, X., & Yao, Y. *False Discovery Rate Control and Statistical Quality Assessment of Annotators in Crowdsourced Ranking.* Proceedings of the 33rd International Conference on Machine Learning (ICML 2016), PMLR 48, 1282–1291. A statistical method for detecting annotators with position bias in crowdsourced pairwise ranking data. [proceedings.mlr.press/v48/xua16.html](https://proceedings.mlr.press/v48/xua16.html) (arXiv: [1605.05860](https://arxiv.org/abs/1605.05860))
 
+### Yang, K., et al. (2022) {#yang-2022}
+
+*A Study of Face Obfuscation in ImageNet.* Proceedings of the 39th International Conference on Machine Learning (ICML 2022). Annotates faces in ImageNet and finds that obfuscating them lowers overall recognition accuracy by no more than 1.0%, with features that transfer about as well to downstream tasks. [arxiv.org/abs/2103.06191](https://arxiv.org/abs/2103.06191)
+
+### Yang, Y., & Ramanan, D. (2013) {#yang-2013}
+
+*Articulated Human Detection with Flexible Mixtures of Parts.* IEEE Transactions on Pattern Analysis and Machine Intelligence, 35(12), 2878–2890. Defines PCK (Percentage of Correct Keypoints): a keypoint is correct if it lies within α · max(h, w) pixels of the ground truth, where h and w are the person box's height and width (α = 0.1 for full-body Parse, 0.2 for half-body Buffy), and APK. [doi.org/10.1109/TPAMI.2012.261](https://doi.org/10.1109/TPAMI.2012.261)
+
+### Yong, Z.-X., Menghini, C., & Bach, S. H. (2023) {#yong-2023}
+
+*Low-Resource Languages Jailbreak GPT-4.* NeurIPS 2023 Workshop on Socially Responsible Language Modelling Research (SoLaR). [arxiv.org/abs/2310.02446](https://arxiv.org/abs/2310.02446)
+
+### Yu, H., et al. (2021) {#ap10k-2021}
+
+Yu, H., Xu, Y., Zhang, J., Zhao, W., Guan, Z., & Tao, D. *AP-10K: A Benchmark for Animal Pose Estimation in the Wild.* NeurIPS 2021 Datasets and Benchmarks Track. 10,015 images of 54 species from 23 animal families with a shared keypoint definition. [arxiv.org/abs/2108.12617](https://arxiv.org/abs/2108.12617)
+
 ### Yu, H., et al. (2025) {#injongo-2025}
 
 *INJONGO: A Multicultural Intent Detection and Slot-filling Dataset for 16 African Languages.* Proceedings of ACL 2025 (Volume 1: Long Papers), pp. 9429–9452. Native-speaker-written utterances for 40 intents in five domains with 23 slot types, in 16 African languages plus English. [aclanthology.org/2025.acl-long.464](https://aclanthology.org/2025.acl-long.464/)
-

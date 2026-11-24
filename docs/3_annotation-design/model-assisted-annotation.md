@@ -3,7 +3,7 @@ title: Model-Assisted Annotation
 sidebar_position: 5
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-24
   author: Seid Muhie Yimam
 ---
 
@@ -82,6 +82,92 @@ Some workflows turn a trusted model's output directly into final labels, with no
 
 :::
 
+## Images and video: masks, boxes and tracks
+
+Drawing is the slowest part of vision annotation, so this is where model help saves the most time and where unchecked drafts do the most damage. Three forms are common: a click that becomes a mask, boxes pre-filled by a detector, and objects carried from frame to frame by a tracker. The rules in [Treat drafts as drafts](#treat-drafts-as-drafts) apply to all three. This section adds what is specific to images and video, then how to audit the result.
+
+### Click-to-mask
+
+A promptable segmentation model of the Segment Anything (SAM) family returns a mask when the annotator clicks on an object or draws a box around it. The annotator adds clicks inside the object or outside it to fix the mask, then touches up the edges with a brush or eraser. In the first stage of building the SAM dataset, annotators worked this way, and the average time per mask fell from 34 to 14 seconds as the model was retrained on their corrections. In the next stage the model's confident masks were filled in automatically and annotators labelled only the objects it had missed; the time per mask went back up to 34 seconds, because those objects were harder ([Kirillov et al., 2023](../references.md#kirillov-2023)).
+
+The lesson for your project is that a speed-up measured on easy, prominent objects does not carry over to the leftovers. Pilot on your own images and time the masks that need the most correction, not the average. Then write down what a reviewer must check on every model-drawn mask:
+
+- edges follow your guideline's boundary rule, not the model's idea of where the object ends;
+- holes, thin parts and fine structures (stems, leaf tips, wires, fingers) are present;
+- two touching objects have not been merged into one mask, and one object has not been split in two;
+- the mask does not leak into shadow, background or a neighbouring object of similar colour.
+
+These models are trained mostly on everyday photos. Expect weaker drafts on medical, satellite and other unusual imagery; see [Segmentation](../image-data/segmentation.md#known-limitations-to-watch-for). For very large images, prompt the model on tiles rather than the whole image; see [Tiling with overlap](../image-data/large-imagery.md#tiling-with-overlap).
+
+### Detector pre-labels
+
+For boxes, run a detector over the batch and let annotators accept, adjust or delete each proposed box and add any it missed. Three problems are specific to this mode:
+
+- **Missed objects stay missed.** A draft shows what the model found. Nothing in it prompts the annotator to look for what it did not find, so small, partly hidden and unusual objects are the ones most likely to be left out. Ask annotators to scan the whole image for missing objects before they submit, and track how many boxes they add (see the audit below).
+- **The detector's box conventions may not be yours.** A detector trained on another dataset draws boxes the way that dataset did: around the visible part or the whole object, one box per crowd or one per person. Check its drafts against your [box and region rules](../image-data/region-guidelines.md#how-tight-the-box-should-be) on the pilot, and map its class names to your label set by hand rather than trusting a label that looks the same.
+- **The confidence threshold sets the type of work.** A low threshold fills the image with false boxes to delete; a high one leaves more objects to add from scratch. Choose it on the pilot and record it with the model version.
+
+A cheaper variant asks annotators only to answer yes or no for each proposed box. Papadopoulos and colleagues trained detectors this way, with no boxes drawn by hand, and estimated that it cut total annotation time by a factor of six to nine ([Papadopoulos et al., 2016](../references.md#papadopoulos-2016)). Open Images used the same idea for image-level labels: classifiers proposed candidate labels and people verified each one as present or absent. The paper treats any class that was not verified as unknown, not absent ([Kuznetsova et al., 2020](../references.md#kuznetsova-2020)). The same holds for your data. A label the model never proposed was never checked, so record which classes were verified for each image and do not read a missing label as a negative.
+
+When annotators do draw boxes from scratch, for the blind slice or for objects the model missed, clicking the four extreme points of the object (top, bottom, left-most and right-most) is about five times faster than dragging box corners ([Papadopoulos et al., 2017](../references.md#papadopoulos-2017)).
+
+### Auto-tracking in video
+
+In video, the annotator draws or confirms an object in one frame and a tracking or mask-propagation model carries it through the frames that follow. Where it drifts, the annotator corrects that frame and propagates again. In the data engine for SAM 2, labelling with the image model on every frame took 37.8 seconds per frame; adding mask propagation brought this to 7.4 seconds, and the full video model to 4.5 seconds. Annotators still edited about 19% of frames in each tracked object, and a separate group of annotators checked every tracked object, sending back any that did not follow the target correctly through all frames ([Ravi et al., 2024](../references.md#ravi-2024)).
+
+Trackers fail in predictable places: occlusion, objects crossing each other, an object leaving and re-entering the frame, fast motion, motion blur and shot cuts. These are where identities get swapped, which a frame-by-frame look can miss. Review each track by playing it through from entry to exit, check frames at a fixed interval and at every entry, exit and occlusion, and follow the identity rules in [Tracking objects across frames](../sign-language-video/video.md#tracking-objects-across-frames). Cut long videos into chunks at shot boundaries before propagating, so that a track does not jump across a cut; see [Long video](../sign-language-video/long-video.md#shot-boundaries-and-keyframes). Video annotation needs skilled annotators and strong quality control even without a model ([Vondrick et al., 2013](../references.md#vondrick-2013)), and auto-tracking does not remove that need.
+
+### Auditing auto-labels
+
+A batch where nearly every draft was accepted can mean a good model or annotators who stopped looking. The audit separates the two. Build it into the workflow from the first batch, not after a problem shows up.
+
+1. **Compare against a blind slice.** Have a random sample of items labelled from scratch by annotators who do not see the draft, as described in [Treat drafts as drafts](#treat-drafts-as-drafts). Match the regions in the corrected drafts to the scratch regions, using the one-to-one pairing in [Agreement when an image has many objects](../image-data/object-detection.md#agreement-when-an-image-has-many-objects), and count what the corrected version missed, added wrongly or placed differently. This is the only measure of what review let through.
+2. **Measure correction rates.** For every region, record whether the draft was accepted unchanged, adjusted, deleted, or added by the annotator because the model missed it. For adjusted regions, also record how far the final region moved from the draft, as the IoU between them. Report these per class, per annotator, per batch and per model version.
+3. **Review a sample of accepted drafts.** Reviewers tend to look at what changed. Send a random sample of drafts accepted unchanged to review as well, with extra weight on small objects, rare classes and low-confidence drafts.
+4. **Plant known errors.** Mix in a few drafts with errors you made on purpose, such as a shifted box, a removed object or a wrong class, and count how many annotators catch. In a study of crowdworkers checking pre-filled values extracted from report tables, errors such as confused digits were corrected 82% of the time, but errors that could only be spotted by knowing the annotation rules were handled correctly only 31% of the time, and annotators who were sceptical of AI were more accurate ([Beck et al., 2025](../references.md#beck-2025)). Plant errors of both kinds, tell annotators that such checks exist, and remove planted items before release.
+
+Read the correction rates as signals, not as accuracy. Very low adjustment and addition rates from one annotator, compared with others on the same kind of data, suggest rubber-stamping; check that annotator's work against the blind slice. Additions near zero while the blind slice keeps finding missed objects mean annotators are anchored to the draft. A rate that changes sharply after a model update tells you to re-measure the blind slice. Pre-annotation pulls annotators towards the model's choices ([Fort and Sagot, 2010](../references.md#fort-sagot-2010)), and in vision this pull is easy to miss: a boundary that is close enough looks right, so the model's edge becomes the dataset's edge.
+
+The sketch below counts the four outcomes for boxes in one image from the draft and the final annotation. The thresholds are examples; set your own and report them.
+
+```python
+# pip install numpy scipy
+import numpy as np
+from scipy.optimize import linear_sum_assignment
+
+def iou(a, b):
+    # boxes as [x_min, y_min, x_max, y_max]
+    ix = max(0, min(a[2], b[2]) - max(a[0], b[0]))
+    iy = max(0, min(a[3], b[3]) - max(a[1], b[1]))
+    inter = ix * iy
+    union = (a[2] - a[0]) * (a[3] - a[1]) + (b[2] - b[0]) * (b[3] - b[1]) - inter
+    return inter / union if union else 0.0
+
+def correction_counts(draft, final, match_iou=0.5, unchanged_iou=0.95):
+    """draft, final: lists of (label, box). Returns counts of each outcome."""
+    counts = {"unchanged": 0, "adjusted": 0, "deleted": 0, "added": 0}
+    if draft and final:
+        cost = np.array([[1 - iou(d[1], f[1]) for f in final] for d in draft])
+        rows, cols = linear_sum_assignment(cost)
+        pairs = [(r, c) for r, c in zip(rows, cols) if 1 - cost[r, c] >= match_iou]
+    else:
+        pairs = []
+    for r, c in pairs:
+        same_label = draft[r][0] == final[c][0]
+        same_box = 1 - cost[r, c] >= unchanged_iou
+        counts["unchanged" if same_label and same_box else "adjusted"] += 1
+    counts["deleted"] = len(draft) - len(pairs)
+    counts["added"] = len(final) - len(pairs)
+    return counts
+
+draft = [("goat", [10, 10, 50, 60]), ("goat", [70, 15, 110, 70])]
+final = [("goat", [10, 10, 50, 60]), ("sheep", [72, 14, 112, 72]), ("goat", [130, 20, 160, 66])]
+print(correction_counts(draft, final))
+# {'unchanged': 1, 'adjusted': 1, 'deleted': 0, 'added': 1}
+```
+
+If your tool keeps a link from each saved region to the draft region it came from, as recommended in [Record what the model did](#record-what-the-model-did), use that link instead of matching by overlap. For masks, compute IoU on the masks instead of the boxes. To merge regions from several annotators into one label, see [Formats and merging](../image-data/formats-and-merging.md#merging-boxes-from-several-annotators).
+
 ## Where the model runs
 
 Model assistance sends your data to wherever the model runs. Before you connect a model, check:
@@ -98,7 +184,7 @@ The same practice appears throughout the playbook. Each bullet gives the modalit
 - **Transcription.** Where a usable recogniser exists, pre-fill each segment with its draft for correction. This is faster, but it anchors transcribers the same way post-editing machine translation does, so transcribe an audit sample from scratch and record for each transcript whether it was written from scratch or post-edited. For transcription conventions, see [ASR](../asr/index.md#distinctive-annotation-transcription-is-the-hard-part); for post-editing translations, see [Machine Translation](../machine-translation/index.md#annotate-translations).
 - **Speaker turns.** Correct a pretrained pipeline's output: [Speaker Diarization](../speaker-diarization/index.md#starting-from-a-pretrained-pipeline).
 - **Automated audio checks.** Models used to screen recordings rather than to draft labels: [Audio quality control](../asr/audio-quality-control.md#tier-2-model-based-checks-optional). These models are often weak on African languages, so route clips that fail to a human rather than rejecting them.
-- **Images and video.** Promptable segmentation models turn a click or a box into a draft mask: [Segmentation](../image-data/segmentation.md#the-2026-modelling-landscape).
+- **Images and video.** Click-to-mask, detector pre-labels and auto-tracking are covered [above](#images-and-video-masks-boxes-and-tracks); the models themselves are listed in [Segmentation](../image-data/segmentation.md#the-2026-modelling-landscape) and [Object detection](../image-data/object-detection.md#the-2026-modelling-landscape).
 - **Sign language.** Model-proposed segment boundaries or pose overlays are a first draft only: fluent signers check every boundary, the data records which segments the machine proposed, and a sample is double-annotated from scratch ([Fort and Sagot, 2010](../references.md#fort-sagot-2010)). For the annotation tiers themselves, see [Sign language](../sign-language-video/sign-language.md#the-annotation-model).
 - **LLM drafts.** Constraining drafts to the label set and when not to use an LLM: [LLM-Assisted Data](../7_llm-assisted-task/index.md).
 

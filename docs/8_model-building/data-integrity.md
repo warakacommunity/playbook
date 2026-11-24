@@ -3,7 +3,7 @@ title: Data Integrity and Contamination Control
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 
@@ -14,6 +14,8 @@ A benchmark only measures what it claims to if the test data is genuinely unseen
 ## Prevent train-test leakage
 
 The most basic failure is leakage: the same or near-identical examples appearing in both training and test. It inflates scores and hides real weakness, and it is easy to introduce when deduplication happens after splitting rather than before. Deduplicate first, including near-duplicates, then split, and keep the splits fixed so that no one accidentally trains on the test set later. Watch for subtler leakage too, such as the same speaker or document spanning splits in speech and document tasks, which lets a model recognise the source rather than learn the task.
+
+For images and video, where duplicates are resized or recompressed copies and the grouping key is usually a site, device, subject or source video, see [Splits and near-duplicates](../image-data/splits-and-duplicates.md).
 
 Both rules, deduplicate first and split by group, fit in one function. Splitting by a group key such as `speaker_id` or `document_id` is what stops the same source landing on both sides:
 

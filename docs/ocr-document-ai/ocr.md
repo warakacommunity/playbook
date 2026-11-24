@@ -33,7 +33,7 @@ The transcription must preserve every diacritic and special character exactly as
 
 Contributors can photograph signs, posters, shopfronts and public notices that contain local-language text. Record the languages and scripts present and transcribe exactly what is visible, preserving diacritics and mixed-script text. Where the task needs locations, annotate a box or polygon for each line and keep its reading order.
 
-Scene photographs bring perspective, uneven lighting, stylised fonts and mixed scripts that clean scans do not. Include these conditions in the pilot and evaluation rather than treating scan performance as a substitute. Before release, blur faces and number plates and coarsen or drop location metadata; the same privacy sequence is described in [Field image capture](../agri-advisory/field-image-capture.md#quality-control).
+Scene photographs bring perspective, uneven lighting, stylised fonts and mixed scripts that clean scans do not. Include these conditions in the pilot and evaluation rather than treating scan performance as a substitute. Phone photos often store their rotation as metadata, so apply it to the pixels before annotation ([Coordinates and image orientation](../image-data/object-detection.md#coordinates-and-image-orientation)). Before release, blur faces and number plates and coarsen or drop location metadata ([Visual privacy](../image-data/visual-privacy.md)). [Field image capture](../agri-advisory/field-image-capture.md#quality-control) shows the face-blurring and location steps in a real project.
 
 ## Annotation and evaluation
 

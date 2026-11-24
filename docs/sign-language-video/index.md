@@ -2,7 +2,7 @@
 ready: true
 title: Video
 last_update:
-  date: 2026-10-01
+  date: 2026-11-24
   author: Tadesse Destaw
 ---
 
@@ -15,6 +15,7 @@ This chapter covers:
 - **[Sign language](./sign-language.md)**: building corpora of the visual languages of Deaf communities, from recording and tier-based annotation to release and modelling.
 - **[Gesture](./gesture.md)**: recognising hand and body gestures, which vary by culture.
 - **[Video](./video.md)**: general video understanding, such as classification and captioning.
+- **[Long video](./long-video.md)**: chunking long recordings with provenance, frame sampling, shot boundaries and audio-video sync.
 
 ## What the three tasks share
 

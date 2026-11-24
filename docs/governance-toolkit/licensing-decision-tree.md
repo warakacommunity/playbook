@@ -3,7 +3,7 @@ title: Licensing decision tree
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-09-30
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -129,5 +129,18 @@ export const tree = {
 ## After the tree
 
 Write the outcome into three places: the licence field of the [dataset card](../templates/dataset-card.md), the licensing agreement in [Licensing](../6_documentation/licensing.md), and the sustainability plan's business-model section, which must respect the licence you chose. Then check the two agreements that grant the project its rights: the [contributor agreement](../templates/contributor-agreement.md) and the [annotator contract](../templates/annotator-contract.md) must grant at least what the licence gives away, and no more.
+
+The dataset card does not always travel with the data. A single split, a sample sent to a partner, or a file copied out of a release can end up far from the card. So put the licence inside the data as well: in the manifest or metadata file that ships with every export and every partial copy, record the licence's [SPDX identifier](https://spdx.org/licenses/) (for example `CC-BY-4.0` or `CC-BY-SA-4.0`) and the URL of the licence text. Write it per version, so a copy of an older release still states the terms it was released under.
+
+```json
+{
+  "dataset": "hausa-news-2026",
+  "version": "1.1.0",
+  "license": {
+    "identifier": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}
+```
 
 A licence is hard to change after release. Copies already downloaded keep the terms they were released under, so a later move from CC BY to a community licence only binds new downloads. If the community may want to tighten terms later, start with the tighter licence.

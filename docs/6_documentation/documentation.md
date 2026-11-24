@@ -3,7 +3,7 @@ sidebar_position: 7
 title: Documentation and Reporting
 ready: true
 last_update:
-  date: 2026-09-26
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -24,6 +24,8 @@ A datasheet you fill in and release with your data. It follows Datasheets for Da
 ## Document the things people most need, and most often omit
 
 Whatever template you use, three things matter most and are most often skipped. Record the **languages and varieties precisely**, naming the language, script, region, and register rather than a vague label like "Swahili." Be honest about **limitations and failure cases**, since every dataset has gaps, biases, and conditions where it should not be used, and stating them is a strength rather than an admission of weakness. And make the collection **transparent**, recording where the data came from, from whom, under what consent, and how it was processed, which is the provenance the [data governance](../data-governance/index.md) chapter depends on.
+
+Name the tool too. Say which annotation tool, spreadsheet or script was used to label the data, its version, and how it was configured, and keep a screenshot of the labelling screen. The [dataset card template](../templates/dataset-card.md#4-preprocessing-cleaning-labeling) has a field for it.
 
 A data statement captures exactly these linguistic and demographic details in a short, readable file that travels with the data. This is a fuller, human-facing companion to the machine-readable [dataset card](../2_data-collection/8_data-provenance-traceability.md) from Data Collection, and a starting template looks like this:
 

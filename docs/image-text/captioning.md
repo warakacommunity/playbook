@@ -52,7 +52,67 @@ Run several annotators over the same images to collect the multiple references t
 
 For embedding-based semantic scoring, a useful second opinion, **[CLIPScore](https://arxiv.org/abs/2104.08718)** measures caption-image alignment without needing reference captions, and **[BERTScore](https://github.com/Tiiiger/bert_score)** applied to captions in the target language gives a reference-based semantic signal that partially corrects for BLEU's morphology blindness. Neither replaces human evaluation; both are useful for tracking regression during development.
 
-For agreement between human captions, surface overlap can understate agreement because several wordings may describe the same image correctly. Use chrF between caption pairs as one diagnostic ([Popović, 2015](../references.md#popovic-2015)), and an embedding-based similarity only after checking that the model handles the target language. Spot-check a sample by hand, especially where language coverage is weak, and do not interpret these scores as interchangeable with kappa.
+For agreement between human captions, surface overlap can understate agreement because several wordings may describe the same image correctly. Use chrF between caption pairs as one diagnostic ([Popović, 2015](../references.md#popovic-2015)), and an embedding-based similarity only after checking that the model handles the target language. Common chrF implementations weight recall above precision by default, so the score changes when you swap the two captions; for agreement, compute it in both directions and average, or set the weight so precision and recall count equally. Spot-check a sample by hand, especially where language coverage is weak, and do not interpret these scores as interchangeable with kappa. The [agreement table in Data quality](../4_data-quality/index.md#match-the-metric-to-the-annotation-shape) lists the measures for other annotation shapes.
+
+## Grounding caption phrases to image regions
+
+A plain caption says what is in the image but not where. Grounded captioning data adds that link: each noun phrase in a caption that names something visible ("a woman", "the green buckets") is tied to the image region it describes, usually a bounding box. Flickr30k Entities is the reference example. It added 244,035 coreference chains and 275,775 bounding boxes to the 158,915 captions of the 31,783 Flickr30k images, linking mentions of the same entity across the five captions of each image ([Plummer et al., 2017](../references.md#plummer-2017)). ReferItGame collected a related kind of data, referring expressions for single objects, through a two-player game in which one player described an outlined object and the other had to click on it ([Kazemzadeh et al., 2014](../references.md#kazemzadeh-2014)).
+
+### When grounding is worth the cost
+
+Grounding is much more expensive than captioning. Pont-Tuset et al. estimate that the two Flickr30k Entities stages took about 643 seconds per image (235 seconds to mark the entities and 408 to draw the boxes), not counting the time to write the captions ([Pont-Tuset et al., 2020](../references.md#pont-tuset-2020)). Budget for it only when a use needs the regions:
+
+- **Evaluation of phrase localisation or grounded captioning**, where a model must point to what it names.
+- **Checking object hallucination.** With grounded references you can see whether a generated caption names things that have no region in the image.
+- **Training detectors or region-text models** for objects and local names that standard label sets lack, such as local dishes, tools or garments.
+
+For a plain captioning model, grounding adds little. A common compromise is to ground only the evaluation split, or a few hundred images of it, and leave the training captions ungrounded. A cheaper alternative exists: Localized Narratives has annotators describe the image aloud while moving the mouse over what they describe, so each word gets a mouse-trace segment. It took about 145 seconds per image on average, including manual transcription, but a trace is a rough path, not a box, and annotators often circle around an object or move the mouse slightly before or after they name it ([Pont-Tuset et al., 2020](../references.md#pont-tuset-2020)). Use traces when coarse location is enough. Use boxes when you will score localisation with overlap thresholds.
+
+### What a grounded record looks like
+
+Store mentions as character offsets into the caption text, group them into chains, and attach boxes to chains rather than to single mentions. Record mentions that should have no box with an explicit reason, so that "no box" is never confused with "not yet annotated". The excerpt below shows two chains; a full record would also cover the produce ("kayan lambu", "ganye"):
+
+```json
+{
+  "image": "images/market_0007.jpg",
+  "captions": [
+    "Mata suna sayar da kayan lambu a kasuwa.",
+    "Wasu mata na kasuwanci da ganye a kasuwa."
+  ],
+  "mentions": [
+    {"id": "m1", "caption": 0, "start": 0, "end": 4, "text": "Mata", "chain": "c1"},
+    {"id": "m2", "caption": 1, "start": 5, "end": 9, "text": "mata", "chain": "c1"},
+    {"id": "m3", "caption": 0, "start": 33, "end": 39, "text": "kasuwa", "chain": "c2"},
+    {"id": "m4", "caption": 1, "start": 34, "end": 40, "text": "kasuwa", "chain": "c2"}
+  ],
+  "chains": [
+    {"id": "c1", "type": "people", "boxes": [[112, 40, 210, 380], [260, 52, 351, 377]]},
+    {"id": "c2", "type": "scene", "boxes": [], "no_box_reason": "scene"}
+  ]
+}
+```
+
+Fix the text normalisation (for example, Unicode NFC) before computing offsets, and never edit a caption after mentions are marked without re-checking them. The [formats page](../image-data/formats-and-merging.md#coordinate-conventions-that-break-conversions) covers box coordinate conventions.
+
+### How to annotate it
+
+Flickr30k Entities did not ask one worker to do everything at once. It split the work into small tasks and checked each one ([Plummer et al., 2017](../references.md#plummer-2017)). The same order works with any annotation tool:
+
+1. **Mark the mentions.** Flickr30k Entities took noun-phrase chunks from an automatic chunker as candidates. For many African languages, a chunker may not exist or may be unreliable, so annotators mark the spans themselves. The guidelines must say where a mention starts and ends when the noun carries prefixes or suffixes, or is written together with a preposition or possessive. The span rules from [named-entity work](../sequence-labelling/ner.md) carry over.
+2. **Link mentions that refer to the same thing** across the captions of one image. Ask pairwise "same entity?" questions instead of asking someone to build whole chains, then have a second person check each chain with more than one mention. Flickr30k Entities assumed that two mentions in the same caption, or of different coarse types such as people and vehicles, are not coreferent. This cut the number of questions. See [coreference annotation](../sequence-labelling/relations.md#coreference-as-a-special-case) for the general method.
+3. **Decide whether a box is needed.** Mentions of the whole scene ("at the market"), of things outside the frame, and of actions or abstract ideas get no box. Record which reason applies.
+4. **Draw the boxes.** Draw one box per entity that can be told apart, and one box around a group whose members cannot (a crowd, a pile of tomatoes). Apply the same tightness, occlusion and crowd rules as for detection; [Box and region rules](../image-data/region-guidelines.md) sets these out.
+5. **Check quality and coverage.** A second person judges each new box (tight, not a duplicate) and then whether all required boxes are present. Flickr30k Entities asked for a second opinion before accepting "all boxes drawn", and a third to break ties.
+
+### How to check it
+
+- **Automatic checks.** Every offset must match its mention text, every chain with a visual type must have at least one box or a recorded no-box reason, and every box must lie inside the image.
+- **Gold items.** Flickr30k Entities mixed verification questions with known answers into the jobs, and kept only workers who maintained accuracy on them ([Plummer et al., 2017](../references.md#plummer-2017)). The [gold data section](../4_data-quality/index.md#use-gold-data-and-control-checks) explains how to run this fairly.
+- **A click test.** Borrow the ReferItGame idea for a sample: show a second annotator the image and one phrase, ask them to click on what it names, and treat a miss as a sign that the phrase is ambiguous or the box is wrong ([Kazemzadeh et al., 2014](../references.md#kazemzadeh-2014)).
+- **Box agreement.** For a doubly annotated sample, compare boxes for the same mention by overlap (IoU), as in [merging boxes from several annotators](../image-data/formats-and-merging.md#merging-boxes-from-several-annotators).
+- **Report the residual error.** Even after these checks, the Flickr30k Entities authors estimated that about 8% of their images contained some chunking or coreference error ([Plummer et al., 2017](../references.md#plummer-2017)). Publish a hand-checked estimate for your own data in the dataset card.
+
+Grounding raises the privacy stakes. A phrase that names or describes a person, tied to a box around that person, makes the record more identifying than the caption alone. Apply the [visual privacy rules](../image-data/visual-privacy.md#consent-for-people-in-images) before grounding people.
 
 ## The 2026 modelling landscape
 

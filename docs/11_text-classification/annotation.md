@@ -62,14 +62,19 @@ Crowdsourcing platforms give you access to a large, on-demand pool of remote ann
 Common platforms include:
 
 - Toloka AI: [https://toloka.ai](https://toloka.ai/)
-- Amazon Mechanical Turk (MTurk): [https://www.mturk.com](https://www.mturk.com/)
 - Prolific: [https://www.prolific.com](https://www.prolific.com/)
 - Appen: [https://www.appen.com](https://www.appen.com/)
 - Label Studio Enterprise: [https://labelstud.io](https://labelstud.io/)
 
+Amazon Mechanical Turk (MTurk), which much of the older crowdsourcing literature describes, closed permanently on 30 September 2026 ([Amazon Mechanical Turk, 2026](../references.md#mturk-closure-2026)). Its guidance on task design and quality control still applies, but it can no longer be used to run new work.
+
 Many of these platforms support multiple data modalities (text, image, audio, video) and increasingly offer AI-assisted features such as pre-labeling, model-in-the-loop suggestions, and automated quality checks.
 
 Trade-offs. Crowdsourcing scales easily and reduces recruitment overhead, but it offers less direct control over annotators and may make it difficult to source native speakers of low-resource languages or specific dialects. It also requires careful task design, qualification filters, and it raises data-privacy considerations because the data is sent to an external platform.
+
+Check what a marketplace can actually filter on before you rely on it for an African language. A filter for your language or dialect may not exist, and the profile filters that do exist are mostly based on answers workers give about themselves. A location filter describes where someone lives now, not which variety they speak. Plan to write and run your own short screening test in the target language, scored against items a trusted native speaker has checked, and pay people for the time it takes. Prolific, for example, offers a custom screening step for groups its built-in filters do not cover, and pays screened-out participants a fixed reward that the researcher sets ([Prolific, 2026b](../references.md#prolific-screening-2026)).
+
+Budget for the platform's fee as well as for worker pay. Some marketplaces calculate a service fee on top of the rewards paid to workers, at a rate that can differ between academic and commercial customers ([Prolific, 2026a](../references.md#prolific-pricing-2026)). Check the current price page when you draw up the budget, because rates change.
 
 #### In-house (self-hosted) tools
 
@@ -275,7 +280,7 @@ Whatever you choose, report the measure together with its weighting or tolerance
 
 #### Multi-label and hierarchical labels
 
-Exact match gives no partial credit. If one annotator chooses `{anger, sadness}` and another chooses `{anger}`, exact match calls it a complete disagreement. For multi-label items, compute Jaccard overlap instead: the intersection size divided by the union size, here $1/2 = 0.5$. Average the per-item Jaccard scores over the dataset, or report kappa separately for each label's presence or absence.
+Exact match gives no partial credit. If one annotator chooses `{anger, sadness}` and another chooses `{anger}`, exact match calls it a complete disagreement. For multi-label items, compute Jaccard overlap instead: the intersection size divided by the union size, here $1/2 = 0.5$. Average the per-item Jaccard scores over the dataset, or report kappa separately for each label's presence or absence. Decide in advance how to score an item where both annotators chose no label (Jaccard is undefined there; counting it as full agreement is common) and state the choice. Mean Jaccard is not corrected for chance, so read it like percentage agreement, not like kappa.
 
 For hierarchical labels, expand each selected path to include its ancestors before computing Jaccard. Two sibling leaves then receive more credit than leaves in different branches. Alternatively, report agreement separately at each level. These diagnostics complement, rather than replace, exact full-path agreement when the downstream task requires the complete path.
 

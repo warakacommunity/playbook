@@ -1,7 +1,7 @@
 ---
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-24
   author: Idris Abdulmumin
 ---
 # Cost and Resource Planning
@@ -27,6 +27,8 @@ Dataset creation can be resource-intensive. Proper planning helps ensure efficie
 - **Annotator speed** – Estimate based on pilot studies or benchmarks  
 - **Project phases** – Include setup, training, annotation, and validation  
 - **Buffer time** – Plan for delays and iterations  
+
+**Clean pilot timings before you turn them into cost.** The time per item that an annotation tool records usually covers the whole period an item was open, including breaks, interruptions and items left open overnight. Ask annotators to submit the item, or leave it, before they step away. When you summarise pilot timings, look at the spread first, set aside clear outliers such as items open for hours, and use the median rather than the mean, because a few very long values pull the mean upwards. Record what you excluded and why. Only then convert the median into annotator-hours, budget and pay rates, and check the figure again after the first full batch.
 
 ### Scaling Strategy
 

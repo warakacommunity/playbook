@@ -33,11 +33,13 @@ Understanding where data comes from and how it has been processed is essential f
 - **Modifications** – Log any changes made to the data after collection  
 - **Audit trails** – Maintain records for reproducibility and verification  
 
+Record the annotation tool, spreadsheet or script used for labelling, with its version, alongside each batch. If the tool is updated mid-project, the batch record shows which labels were made under which version and configuration.
+
 ### Label-level change history
 
-Lock or version submitted labels rather than silently overwriting them. Keep who created, changed or deleted each label and when, so every released label can be traced through review and correction. On sensitive projects, do not let annotators hard-delete submitted work; route corrections through an authorised reviewer. For field audio, lock the submitted recording and its label because the recording may be impossible to repeat.
+Lock or version submitted labels rather than silently overwriting them. Keep who created, changed or deleted each label and when, so every released label can be traced through review and correction. On sensitive projects, do not let annotators hard-delete submitted work; route corrections through an authorised reviewer. For field audio, lock the submitted recording and its label because the recording may be impossible to repeat. The [agri-advisory reviewer chain](../agri-advisory/diagnosis-labelling.md#what-the-data-looks-like) is a worked example: each action on a label is appended, never overwritten.
 
-This history supports accountability, but it must not prevent an authorised withdrawal or erasure. Apply those requests to active data and future exports, and record the action without publishing the person's identity or reason. Governance events such as role and policy changes belong in the separate [accountability log](../data-governance/index.md#keep-an-accountability-log).
+This history supports accountability, but it must not prevent an authorised withdrawal or erasure. Apply those requests to active data and future exports, and record the action without publishing the person's identity or reason. Data already released publicly cannot be recalled; see [Withdrawal](../legal-consent/index.md#withdrawal). Governance events such as role and policy changes belong in the separate [accountability log](../data-governance/index.md#keep-an-accountability-log).
 
 ## A dataset card you can version
 

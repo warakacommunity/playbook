@@ -25,7 +25,7 @@ recording, consent and quality groundwork; they differ in what is produced from 
 
 ### Make speaker profiles optional and deliberate
 
-Before a contributor's first recording, offer a speaker-profile step with nothing preselected. Every field may be left blank or answered "prefer not to say", and declining does not block contribution. Use coarse fields such as age band rather than birthdate, gender, and language varieties listed strongest first. Do not ask reviewers who only correct clips to complete a speaker profile.
+Before a contributor's first recording, offer a speaker-profile step with nothing preselected. Every field may be left blank or answered "prefer not to say", and declining does not block contribution. Keep the fields coarse: an age band rather than a birthdate, gender, and the language varieties the speaker uses, listed strongest first. Do not ask reviewers who only correct clips to complete a speaker profile.
 
 Take separate, versioned consent before attaching these fields to released rows. Without it, omit the fields entirely rather than exporting blanks. Apply revocation at the next export. Never attach one person's profile to a row that combines several speakers, and release demographics only in aggregate unless the speaker opted into row-level release. See [Purpose limitation and downstream use](../legal-consent/index.md#purpose-limitation-and-downstream-use).
 

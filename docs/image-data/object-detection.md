@@ -39,13 +39,15 @@ COCO is worth using even for a small African dataset, because the evaluation too
 
 State whether coordinates are pixels, fractions or percentages, and check the actual export convention rather than assuming it from the interface. Every record should carry the original image width and height and any rotation applied to the pixels. For rotated boxes or ellipses, record the angle unit, direction and anchor point as well as the shape coordinates.
 
-Apply EXIF orientation to the image pixels before annotation, and only then strip metadata for privacy. Otherwise a box drawn on the displayed image can point to the wrong place in the stored image. Validate that every exported shape lies within the image bounds, including after rotation or resizing. The same orientation-before-stripping rule applies to [field image capture](../agri-advisory/field-image-capture.md#quality-control).
+Apply EXIF orientation to the image pixels before annotation, and only then strip metadata for privacy. Otherwise a box drawn on the displayed image can point to the wrong place in the stored image. Validate that every exported shape lies within the image bounds, including after rotation or resizing. The same orientation-before-stripping rule applies to [field image capture](../agri-advisory/field-image-capture.md#quality-control). Stripping and redaction are covered in [Visual privacy](./visual-privacy.md).
+
+For how COCO, YOLO, PASCAL VOC and tracking formats map to each other, and how to merge boxes from several annotators into one, see [Formats and merging](./formats-and-merging.md).
 
 For objects that persist across video frames, keep one identity per object and follow [Tracking objects across frames](../sign-language-video/video.md#tracking-objects-across-frames).
 
 ## Annotation and evaluation
 
-Box annotation needs explicit rules: how tightly to fit the box, how to handle occluded or overlapping objects, how small an object must be to mark, and what to do at the image edge. These rules are where annotators silently diverge, so pin them down and measure agreement on a shared set. Detection is evaluated with [mean Average Precision (mAP)](https://lightning.ai/docs/torchmetrics/stable/detection/mean_average_precision.html), which rewards both correct labels and accurate placement, built on [Intersection over Union (IoU)](https://en.wikipedia.org/wiki/Jaccard_index), the overlap between a predicted box and the true one. Report the IoU threshold you used, since mAP at a loose threshold flatters a model that places boxes sloppily.
+Box annotation needs explicit rules: how tightly to fit the box, how to handle occluded or overlapping objects, how small an object must be to mark, and what to do at the image edge. These rules are where annotators silently diverge, so pin them down and measure agreement on a shared set; [Box and region rules](./region-guidelines.md) gives a tested set to start from. Detection is evaluated with [mean Average Precision (mAP)](https://lightning.ai/docs/torchmetrics/stable/detection/mean_average_precision.html), which rewards both correct labels and accurate placement, built on [Intersection over Union (IoU)](https://en.wikipedia.org/wiki/Jaccard_index), the overlap between a predicted box and the true one. Report the IoU threshold you used, since mAP at a loose threshold flatters a model that places boxes sloppily.
 
 The labeling config gives the annotator a set of box labels to draw over the image:
 
@@ -86,6 +88,8 @@ The gap between the two thresholds is the useful read: a model that scores well 
 
 The annotation interface should support zoom, precise box or keypoint editing, occlusion and truncation flags where required, and exports that preserve image identifiers, coordinates, labels and annotator identities. Test small, overlapping and partially visible objects during the pilot.
 
+Keypoints mark named points on each object, such as joints, hooves or leaf tips, and join them into a skeleton. They need their own schema, a visibility rule for hidden points, a stated left/right convention and distance-based agreement measures rather than IoU, so they have their own page: [Keypoints and pose](./keypoints-pose.md).
+
 ### Agreement when an image has many objects
 
 Measuring agreement between two annotators is harder for detection than for classification, because each annotator draws a different number of boxes in a different order, and nothing says which box of one person corresponds to which box of the other. Comparing only one box per image, or averaging IoU over the whole set without first pairing the boxes, inflates agreement and hides the most common detection error: an object one person boxed and the other missed. The general approach to agreement for non-categorical annotations is in [Data Quality](../4_data-quality/index.md#match-the-metric-to-the-annotation-shape); this section gives the detection-specific procedure. Score each image in four steps.
@@ -97,7 +101,7 @@ Measuring agreement between two annotators is harder for detection than for clas
 
 Sum the counts over all images before computing F1 (micro-averaging), rather than averaging per-image scores, so that a crowded image with thirty animals weighs more than an image with one. With three or more annotators, score every pair and report the mean, or score each annotator against the adjudicated reference.
 
-The same procedure works for other region shapes once you swap the overlap measure. For polygons and instance masks, compute IoU on the filled shapes; the [segmentation page](./segmentation.md#annotation-and-evaluation) covers mask IoU and its per-class reading for semantic segmentation. For keypoints, IoU is meaningless, so pair and score with a distance normalised by object size, such as the Object Keypoint Similarity used in the [COCO keypoint evaluation](https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocotools/cocoeval.py), which scales each keypoint error by the object's area and a per-keypoint tolerance.
+The same procedure works for other region shapes once you swap the overlap measure. For polygons and instance masks, compute IoU on the filled shapes; the [segmentation page](./segmentation.md#annotation-and-evaluation) covers mask IoU and its per-class reading for semantic segmentation. For keypoints, IoU is meaningless, so pair and score with a size-normalised distance such as Object Keypoint Similarity (OKS); [Keypoints and pose](./keypoints-pose.md#agreement-and-evaluation) covers OKS, PCK and checks for left/right swaps.
 
 <details>
 <summary>Python sketch: matched-region agreement for one image</summary>
@@ -172,7 +176,7 @@ Object detection in 2026 is dominated by transformer-based detectors and open-vo
 - **Open-vocabulary detectors.** **[Grounding DINO](https://arxiv.org/abs/2303.05499)** (IDEA-Research, 2023), **[OWLv2](https://arxiv.org/abs/2306.09683)** (Google, 2023), **[YOLO-World](https://arxiv.org/abs/2401.17270)** (Tencent, 2024): detect arbitrary categories from natural-language prompts without a fixed training vocabulary. Useful when the deployment surface has a growing or long-tail category set.
 - **General MLLMs with detection.** **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)** and **[Molmo](https://molmo.allenai.org/)** produce bounding-box output from natural-language prompts; workable when the detection is one part of a larger multimodal task, weaker than dedicated detectors on pure-detection benchmarks.
 
-**Editorial opinion.** For a new African-context detection project (agriculture, environment, wildlife, infrastructure), the shortest defensible path is: fine-tune RT-DETR v2 on 2,000-10,000 annotated target-domain images, evaluate mAP at IoU 0.50 AND 0.75 (report both), and report per-class AP alongside the mean. For edge deployment, distil to a YOLO11 or MobileNetV4-based detector after training. For long-tail or growing vocabularies, evaluate Grounding DINO zero-shot before committing to a closed-vocabulary detector.
+**Editorial opinion.** For a new African-context detection project (agriculture, environment, wildlife, infrastructure), the shortest defensible path is: fine-tune RT-DETR v2 on 2,000-10,000 annotated target-domain images, evaluate mAP at IoU 0.50 AND 0.75 (report both), and report per-class AP alongside the mean. For edge deployment, distil to a YOLO11 or MobileNetV4-based detector after training. For long-tail or growing vocabularies, evaluate Grounding DINO zero-shot before committing to a closed-vocabulary detector. If you use a detector to pre-label boxes for annotators, see [Detector pre-labels](../3_annotation-design/model-assisted-annotation.md#detector-pre-labels) for the problems that come with correcting a detector's drafts.
 
 ## What it will actually cost you
 
@@ -180,7 +184,7 @@ Detection is 3-10x more expensive per-record than classification because every o
 
 - **Fine-tuning RT-DETR v2 or YOLO11 on an existing detection corpus.** One to three person-weeks; twenty to a hundred GPU-hours.
 - **Building a new detection corpus** for an African-context task (2,000-10,000 images with 5-30 boxes per image). Six to fifteen months elapsed; six to fifteen person-months. Box-tightness adjudication is the constraint; a corpus with strict box-fit rules costs 30-50% more than one with loose rules.
-- **Extending to keypoint annotation on top of boxes.** Add 50-100% to annotation effort per image.
+- **Extending to keypoint annotation on top of boxes.** Roughly 50-100% more annotation effort per image; see [Keypoints and pose](./keypoints-pose.md#what-it-will-actually-cost-you).
 - **Evaluation-only detection sets** (500-2,000 images). Three to six months; three to six person-months.
 - **Satellite / drone-imagery annotation.** Faster per-object (small objects on aerial imagery) but requires GIS-familiar annotators: a smaller pool than classification-annotators and typically higher hourly rates.
 - **Human evaluation of detection output.** Two to three person-weeks per evaluator per 200 images. Detection evaluation is slow because the evaluator must check both class correctness and box-fit correctness.
@@ -188,12 +192,12 @@ Detection is 3-10x more expensive per-record than classification because every o
 ## Known limitations to watch for
 
 - **Report mAP@0.75, not just mAP@0.50.** A detector that scores well at 0.50 but poorly at 0.75 is placing loose boxes. If your downstream task uses the box for measurement (counting, area estimation, cropping for downstream classification), loose boxes destroy the downstream signal.
-- **Small-object performance is the hidden failure.** Aerial and satellite imagery is dominated by small objects; most detectors trained on natural-imagery benchmarks under-perform on small objects. Report AP by object size (small / medium / large) as separate numbers.
+- **Small-object performance is the hidden failure.** Aerial and satellite imagery is dominated by small objects; most detectors trained on natural-imagery benchmarks under-perform on small objects. Report AP by object size (small / medium / large) as separate numbers. For very large aerial and satellite images, tile with overlap; see [Large and geo-referenced imagery](./large-imagery.md).
 - **Class imbalance in the same imagery.** A field-imagery corpus with 1,000 healthy plants and 5 diseased plants per image trains a detector that ignores the diseased class. Rebalance during training (oversampling, class-weighted loss) or accept the failure.
 - **Dense-scene occlusion.** Livestock counting, market-scene detection, and crowd analysis all involve dense scenes where objects occlude each other. Standard detectors under-perform in dense scenes; report crowd-scene AP separately.
 - **Confounded backgrounds.** If all photos of the diseased class were taken in one field and all photos of the healthy class in another, the detector learns to distinguish fields, not classes. This is the object-detection version of the classification confound.
 - **Satellite-imagery seasonality.** A detector trained on rainy-season satellite imagery of maize fields fails on dry-season imagery. Multi-seasonal training data is not optional.
-- **Consent and identifiability at aerial resolution.** Drone imagery of a village at 5cm/pixel resolution shows identifiable people, homes, and possessions. Regulatory frameworks vary by country; the [data governance chapter](../data-governance/index.md) covers the discipline.
+- **Consent and identifiability at aerial resolution.** Drone imagery of a village at 5cm/pixel resolution shows identifiable people, homes, and possessions. Regulatory frameworks vary by country; the [data governance chapter](../data-governance/index.md) covers the discipline, and [Privacy at high resolution](./large-imagery.md#privacy-at-high-resolution) and [Visual privacy](./visual-privacy.md) apply it to images.
 - **Licence caveat for YOLO lineage.** YOLOv5, v8, v10, v11, v12 are AGPL-3.0. Commercial deployment requires an Ultralytics licence. Check before shipping.
 
 ## Further reading

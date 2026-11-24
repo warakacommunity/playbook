@@ -84,6 +84,8 @@ The specific patterns that break the decision tree. Every case listed here is a 
 - **[CORNER CASE 1]:** [Example + correct label + reasoning.]
 - **[CORNER CASE 2]:** [Same shape.]
 
+For image boxes and regions, [Box and region rules](../image-data/region-guidelines.md#worked-examples) gives worked corner cases you can adapt.
+
 ## 5. Label set
 
 Name every label here, with examples. Give every label a **stored code** and a **display name**. The stored code is what the annotation tool saves and what every export contains: keep it short, stable and in one fixed form (for example `POS`, `NEG`, `NEU`). The display name and the definition are what annotators see, and they can be written in the annotators' working language and improved at any time without touching the data.
@@ -110,7 +112,7 @@ For rating tasks, add an anchor table and show it in the annotation interface:
 | [EACH REMAINING POINT] | [WHAT THIS SCORE MEANS] | [EXAMPLE] |
 | [MAXIMUM] | [WHAT THIS SCORE MEANS] | [EXAMPLE] |
 
-State the numeric minimum, maximum and step, whether a neutral midpoint is intended, and the separate `cannot_judge` or `not_applicable` route. Treat the resulting scores as ordinal.
+State the numeric minimum, maximum and step, whether a neutral midpoint is intended, and the separate `cannot_judge` or `not_applicable` route. Treat the resulting scores as ordinal. See [Designing rating scales](../3_annotation-design/annotation-task-design.md#designing-rating-scales) for how to choose these.
 
 ## 6. Orthography, script, and diacritics
 

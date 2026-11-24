@@ -39,7 +39,7 @@ Raw data often contains noise, inconsistencies, and errors. Proper cleaning and 
 
 ### Freeze the text before span annotation
 
-Span labels are character offsets into the exact string the annotator saw. Before import, normalise line endings from CRLF to LF and Unicode to NFC; never do this after annotation. Do not let the tool or pipeline trim or collapse whitespace, and read files with consistent newline handling. Store the annotated text, or its hash, with each result. On export, assert that `text[start:end]` equals the stored span text. The script-specific rules are in [Sequence Labelling](../sequence-labelling/index.md#freeze-the-text-annotators-saw), and the same check applies to [extractive question answering](../text-generation/question-answering.md).
+Span labels are character offsets into the exact string the annotator saw. Before import, normalise line endings from CRLF to LF and Unicode to NFC; never do this after annotation, because every offset after a changed character would shift. Do not let the tool or pipeline trim or collapse whitespace, and read files with consistent newline handling. Store the annotated text, or its hash, with each result so you can prove the text has not changed. On export, assert that `text[start:end]` equals the stored span text, with offsets counted in the same unit as your code (web tools often count UTF-16 code units, Python counts code points). The script-specific rules, including that unit difference, are in [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets), and the same check applies to [extractive question answering](../text-generation/question-answering.md).
 
 ### Preparing Media for Annotation
 

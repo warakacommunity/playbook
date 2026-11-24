@@ -2,7 +2,7 @@
 title: Text-to-Speech
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -92,7 +92,7 @@ Quality problems caught in the studio cost minutes. The same problems caught dur
 A TTS corpus needs clean audio: require a quiet background and a strict noise floor, turn off the recorder's noise suppression and gain control, and ask for a re-record when a clip's signal-to-noise ratio is marginal. [Audio quality control](../asr/audio-quality-control.md#decide-the-corpus-purpose-first) compares the ASR and TTS settings and explains how to share one threshold table across the automated checks, the recording instructions and the reviewers.
 
 - **Per-clip listening review**: a reviewer independent of the speaker listens to every kept clip, matches it against the intended prompt text, and flags mismatches (dropped words, misread numbers, tone errors, environmental noise). Random-sample verification catches statistical drift; full listening catches the individual bad clip.
-- **Technical audio checks**: run automated signal checks on every clip as it arrives (duration, clipping, true peak, loudness, signal-to-noise ratio, silence), with strict thresholds for a TTS voice. A clip that peaks at digital zero is unusable and should be re-recorded, not "fixed" in post. The tiered checks and what to do when one fails are on the [Audio quality control](../asr/audio-quality-control.md) page.
+- **Technical audio checks**: run automated signal checks on every clip as it arrives (duration, clipping, true peak, loudness, signal-to-noise ratio, silence), with strict thresholds for a TTS voice. A clip that peaks at digital zero is unusable and should be re-recorded, not "fixed" in post. The tiered checks and what to do when one fails are on the [Audio quality control](../asr/audio-quality-control.md) page. Model-based checks, such as predicted quality scores, can help triage, but they are optional and cannot decide whether a voice is fit for release; see [tier 2 on Audio quality control](../asr/audio-quality-control.md#tier-2-model-based-checks-optional).
 - **Tone-preservation verification**: for tone languages, a randomly-sampled per-week check with a linguist or trained native speaker confirms that tone patterns match the intended text. Tone drift is the single most subtle failure mode.
 - **Speaker-consistency spot check**: every ten hours of recording, compare the first hour and the most recent hour on a matched-prompt basis. Voice drift is normal over long projects; detecting it early lets you either accept it as a stylistic choice or intervene to correct.
 

@@ -3,7 +3,7 @@ title: Maintenance and Stewardship
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -52,6 +52,17 @@ Distinguish errata from a recall. An erratum fixes a mistake that does not chang
 :::danger
 Never quietly overwrite a released version to remove an item. Users with the old files cannot tell what changed, and the person who withdrew has no evidence that you acted. Publish a new version and a notice.
 :::
+
+### Corrections from a deployed app
+
+A translation or speech app built on your data can keep feeding it. The Khaya app from Ghana NLP and Algorine, for example, lets users submit improved translations directly from the app ([Algorine Research and Ghana NLP, n.d.](../references.md#khaya-app)). User corrections are real usage, including the code-switched input that curated corpora often miss (see [Multilingual switching within a session](../deployment/multilingual-switching.md#model-training-implications)). They are also contributions from people who did not sign up as annotators, so handle them as a new collection stream, not as free data:
+
+- **Ask for consent when the correction is made.** Before the first submission, say in plain words, in the user's language, that the correction may be kept and used to build future datasets or models, and let people decline and still use the app.
+- **Review before training.** A correction is one user's suggestion, not a gold label. Route corrections through the same review as other annotations, and keep spam, abuse and personal details out.
+- **Record provenance.** Store with each correction the app version, the date, the original output it corrects, and the consent status, so that every item can be traced and filtered later.
+- **Handle withdrawal the same way.** A user who asks to remove their corrections goes through the process above and the [withdrawal](../legal-consent/index.md#withdrawal) design. That only works if each correction is linked to a contributor code from the start.
+
+Describe the stream in the dataset card: where corrections came from, how they were reviewed, and what share of the release they make up.
 
 ## Deprecation and succession
 

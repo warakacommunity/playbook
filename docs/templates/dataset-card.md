@@ -52,6 +52,7 @@ Short one-line description: **[ONE LINE]**
 - **Does the dataset contain all possible instances, or a sample?** [If a sample, how was it sampled? What is it a sample of?]
 - **What data does each instance consist of?** [Fields, types, encoding.]
 - **Are there labels?** [Task, label set, annotation guidelines URL.]
+- **How representative is the dataset of its target population?** [Coverage counts by the dimensions that matter, how each attribute was obtained, and any thin or empty cells. For image data, see [Representativeness audits](../image-data/representativeness.md).]
 - **Is any information missing from individual instances?** [If yes, why.]
 - **Are relationships between individual instances made explicit?** [Same speaker? Same document? Sequence?]
 - **Are there recommended data splits?** [Train / dev / test proportions and how they were derived.]
@@ -80,6 +81,9 @@ Beyond the standard datasheet questions, this section is where the playbook's Af
 - **Was any preprocessing / cleaning / labeling of the data done?** [Tokenisation, normalisation, diacritic handling, script conversion, deduplication, filtering.]
 - **Was the raw data saved in addition to the preprocessed data?** [If not, why not.]
 - **What software was used to preprocess?** [Specific libraries and versions, or a link to the preprocessing code.]
+
+- **What was used to label the data, and which version?** [The annotation tool, spreadsheet or custom script, with its version or commit. If the version changed during the project, say which batches were labelled with which version. Link the labelling configuration (label set, task layout, any pre-filled model suggestions) and add a screenshot of the labelling screen, so readers can see what annotators saw.]
+
 - **Was there inter-annotator agreement measurement?** [What score, on what proportion of the corpus.]
 - **What was the adjudication process for annotator disagreements?** [Second-pass by senior annotator? Consensus vote? Discard?]
 - **What share of the work was reviewed?** [The review sampling rate, for example "20% of ordinary items, 100% of a new annotator's first batch". Say whether "reviewed" means every item or a sample.]

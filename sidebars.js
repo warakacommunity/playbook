@@ -147,6 +147,13 @@ const sidebars = {
         'image-data/classification',
         'image-data/object-detection',
         'image-data/segmentation',
+        'image-data/keypoints-pose',
+        'image-data/region-guidelines',
+        'image-data/formats-and-merging',
+        'image-data/large-imagery',
+        'image-data/visual-privacy',
+        'image-data/splits-and-duplicates',
+        'image-data/representativeness',
       ]),
       chapterIndexed('Document AI', 'ocr-document-ai/index', [
         'ocr-document-ai/ocr',
@@ -157,6 +164,7 @@ const sidebars = {
         'sign-language-video/sign-language',
         'sign-language-video/gesture',
         'sign-language-video/video',
+        'sign-language-video/long-video',
       ]),
     ]),
 

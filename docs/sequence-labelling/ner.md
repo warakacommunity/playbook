@@ -66,6 +66,8 @@ Read the [MasakhaNER annotation guideline](https://github.com/masakhane-io/masak
 - **Names that are also common words.** Many African personal names are ordinary words or phrases. Annotators tag them only when they refer to a person, which needs the context of the sentence, and the guideline should give contrasting examples.
 - **Entities in another language.** English or French organisation names inside a Hausa or Wolof sentence are still entities. Tag them by type, whatever their language.
 
+Titles can also be a type of their own rather than part of PER. An early Amharic NER dataset labelled six classes: person, location, organisation, time, title and other ([Gambäck and Sikdar, 2017](../references.md#gamback-2017)). In Amharic, honorifics such as አቶ (Mr), ወ/ሮ (Mrs), ወ/ሪት (Miss) and ዶክተር (Dr) come before the name. A separate title class tags them apart from the name instead of folding them into the PER span. That choice has a cost later. When EthioLLM combined this dataset with a four-class Amharic corpus into one benchmark, the authors dropped the time and title classes to make the label sets match ([Tonja et al., 2024](../references.md#tonja-2024-ethiollm)). Whichever way you decide, record the choice and the reason in the label-set rationale of the guideline and the dataset card, so that anyone merging your data with another corpus knows how titles were handled.
+
 Keep the guideline as a living document. Every adjudication decision that sets a precedent goes into it with an example, and the version number goes into the dataset card.
 
 ## Nested and ambiguous entities
@@ -82,9 +84,9 @@ Give annotators a way to flag a sentence as uncertain rather than forcing a gues
 
 ## Beyond spans: linking entities
 
-Entity linking is an optional layer for when the downstream use needs to identify the referent, not just its type. Link a typed span to an entry in Wikidata or a project-local list. Choose `NIL` when no entry exists, and review NIL items regularly to grow the local list. Store aliases and spelling variants in every script the language uses.
+Entity linking is an optional layer for when the downstream use needs to identify the referent, not just its type. It links each typed span to an entry in a knowledge base, such as Wikidata ([Vrandečić and Krötzsch, 2014](../references.md#vrandecic-2014)) or a project-local list. A mention with no matching entry is unlinkable and gets the label `NIL`, the usual convention in entity-linking work ([Shen et al., 2015](../references.md#shen-2015)). Review NIL items regularly to grow the local list. Store aliases and spelling variants in every script the language uses.
 
-Store the external or local identifier with the label, and record the knowledge-base name and version with each annotation. Define extra attributes such as subtype, confidence and evidence as a fixed schema, not free text. The general controlled-list rules are in [Structured attributes and concept linking](../3_annotation-design/annotation-task-design.md#structured-attributes-and-concept-linking).
+Store the external or local identifier with the label, and record the knowledge-base name and version with each annotation. Wikidata is edited continuously, so record the dump or retrieval date in place of a version. Define extra attributes such as subtype, confidence and evidence as a fixed schema, not free text. The general controlled-list rules are in [Structured attributes and concept linking](../3_annotation-design/annotation-task-design.md#structured-attributes-and-concept-linking).
 
 ## Annotation and agreement
 

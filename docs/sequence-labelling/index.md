@@ -154,9 +154,9 @@ Offsets are only valid against the exact string the annotator saw. Normalise Uni
 
 ### Language identification of code-switched text
 
-Language identification can be an annotation task in its own right. Tag each token or span with a controlled ISO 639-3 code rather than a free-text language name, using the script-tagged form above where scripts mix. Define conventions for named entities, mixed forms within a word, and other or unknown language. Show a searchable list that matches native names and aliases but stores the code, and route varieties missing from the standard through a reviewed `other` entry.
+Language identification can be an annotation task in its own right. Tag each token or span with a code from a controlled list rather than a free-text language name. Use the same code form as the record tags above (an ISO 639-3 code, or the BCP 47 tag), and add the script where scripts mix. Define conventions for named entities, mixed forms within a word, and other or unknown language. Show a searchable list that matches native names and aliases but stores the code, and route varieties missing from the standard through a reviewed `other` entry.
 
-Apply the same coded-value rule to metadata such as speaker language, country and script so exports can be merged. Deployment-time detection is a separate problem; see [Multilingual Code-Switching](../deployment/multilingual-switching.md#detection-strategies).
+Apply the same coded-value rule to metadata such as speaker language, country and script so exports can be merged. Deployment-time detection is a separate problem; see [Multilingual switching within a session](../deployment/multilingual-switching.md#detection-strategies).
 
 ### Spans in web pages and PDFs
 

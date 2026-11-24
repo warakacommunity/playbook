@@ -97,11 +97,15 @@ Established corpora use a mix of tasks, so that the corpus covers both careful a
 
 Stories and pictures **should** be adapted to the local context where needed, and checked with Deaf collaborators for anything that does not make sense locally.
 
-For phone or browser elicitation, use written sentences, pictures and open questions as distinct prompt types. Pictures are useful where literacy varies; open questions elicit spontaneous continuous signing and need longer recording caps than isolated signs or prepared sentences. Each signer records each prompt once, while the same concept is collected from many signers. Cap any one signer's share of the corpus, and collect the optional signer profile before the first recording so that consent and metadata are not reconstructed afterwards. Keep the warning above about generated or translated prompts: natural signing and local meaning matter more than prompt volume.
+For phone or browser elicitation, plan three prompt types: a written sentence, a picture and an open question. A written prompt assumes the signer reads the surrounding written language well; a picture does not, so use pictures where literacy varies among signers. Open questions draw out spontaneous, continuous signing and need a longer recording cap than a single sign or a prepared sentence (see [Recording on a phone or in a browser](#recording-on-a-phone-or-in-a-browser)).
+
+Allocate prompts on purpose. For lexical-variation work, ask each signer for each concept once and collect the same concept from many signers, as the BSL Corpus did with its 102 concepts ([Schembri et al., 2013](../references.md#schembri-2013)). Cap how much of the corpus any one signer contributes, so no single signer dominates it; the [agri-advisory speech layer](../agri-advisory/speech-layer.md#who-does-it-and-how) applies the same rule to speakers. Record the signer metadata listed under [Recording](#recording), and the signer's consent, before their first clip, not afterwards. Prompts written or generated in a spoken language shape the signing, so check them with Deaf collaborators before filming (see [Known limitations to watch for](#known-limitations-to-watch-for)).
 
 ### Staged annotation
 
 No corpus annotates every tier in one pass, and none **should** try. Plan **staged passes**: a first pass marks utterances and translates them, which is useful on its own and can be done by fluent signers new to corpus work. A second pass glosses one hand. Later passes add the other hand, mouthing and non-manual features, done by trained annotators. Each pass builds on the boundaries the previous one set.
+
+Keep collection and annotation as separate stages of the same corpus. Recording and annotating then differ in who does them, how long they take and what is checked, so each stage can be planned, staffed and quality-checked on its own. It also means only clips that have passed the [recorded-clip checks](#check-recorded-clips-first) reach annotators. Recording and glossing in one sitting suits only signers who annotate their own signing.
 
 :::tip
 Start the ID-gloss lexicon at the same time as the corpus, not before it. A new sign language rarely has a lexicon, and the two are built together: annotators propose a gloss for a sign they meet, and a lexicon curator confirms or merges it. Corpus NGT links its glosses to Global Signbank, a lexical database at Radboud University that also holds other sign languages ([Crasborn et al., 2020](../references.md#corpus-ngt-2020)).
@@ -131,7 +135,7 @@ Recording in the browser or on a phone works for elicitation: a signer sees a wr
 - **Saved on the device first.** Write each clip to the device as soon as it is recorded, tell the signer it is saved, and upload it when a connection is available. Large clips **should** upload in resumable chunks, so a dropped connection does not restart the whole file. [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) covers sync, storage and conflicts, and [Offline and patchy connectivity](../deployment/offline.md) the local-first pattern behind it. The [Field Image Capture](../agri-advisory/field-image-capture.md) case study runs phone collection this way.
 - **Audio kept on purpose, or not at all.** Mouthing and other non-manual features are read from the face in the video, so the audio track is rarely needed to annotate signing. It can also record bystanders' voices and conversations in the room, which is personal data nobody consented to. Decide before collection whether to keep it; if you do, the consent **must** say so, and if you do not, drop the audio track at capture or at ingest.
 
-- **Optional pose preview, never a recording gate.** A lightweight tracker can show a skeleton preview and save keypoints separately, with the achieved tracking rate. Track only the hands, face or body parts the task needs. On a weak phone, disable the preview or save plain video rather than lowering the recording rate or blocking a take; choose the camera for the signing task, not for the tracker. Pose remains identifiable movement data, as described under [Consider releasing pose](#releasing-the-data).
+**Pose at recording time.** A lightweight pose tracker can draw a skeleton over the preview, so the signer sees at once when a hand leaves the frame. If you keep the keypoints, save them as a separate file next to each clip, with the tracking rate actually achieved. Track only what the task needs (hands, face or body). Tracking **must** stay optional and **must not** block a take: on a weak phone, lower the tracking rate, turn the overlay off or record a plain clip, but do not lower the video's own frame rate for it. Choose the camera for the signing, not for the tracker. Keypoints are not anonymous (see [Releasing the data](#releasing-the-data)).
 
 Clips recorded this way still need checking before anyone annotates them (see [Check recorded clips first](#check-recorded-clips-first)), and a normalised copy for frame-accurate work (see [Preparing video for annotation](./video.md#preparing-video-for-annotation)).
 
@@ -172,12 +176,19 @@ A tier type can also carry a **controlled vocabulary**, a fixed list of allowed 
 - Leave a gap between annotations on the same tier: at least one frame in the Auslan guidelines, two frames in the BSL Corpus. Signs that touch make searches for overlapping signs on other tiers return false matches.
 - Mark mouthings (borrowed spoken words) and mouth gestures (native mouth actions) on separate tiers; they are different phenomena.
 
+Annotate non-manual features (head, gaze, eyes and brows) on their own independent tiers. The Auslan guidelines code each one against a neutral position, with the annotation covering the time span of the behaviour itself ([Johnston, 2013](../references.md#johnston-2013)), not the span of a single sign. A grammatical brow raise or headshake therefore often runs across several signs, as the raised brows over the whole question do in the figure above.
+
 :::tip[A glossing self-check]
 If I saw this exact sign in a completely different sentence tomorrow, would I write the same gloss? If not, I am writing a translation.
 :::
 
 :::warning[Common glossing failures]
-Do not put translations in gloss fields, invent duplicate glosses for an existing sign, put both hands on one tier, attach a clause-level brow raise to one sign, confuse right/left with dominant/non-dominant, or gloss before the parent utterance boundaries exist. Send these cases back to the relevant annotation pass or lexicon review.
+- A translation in the gloss field: replace it with the sign's ID-gloss from the lexicon.
+- A new gloss for a sign the lexicon already has: send it to the lexicon curator to merge.
+- Both hands glossed on one tier: split them across the two hand tiers.
+- A brow raise or headshake attached to one sign: extend it over the span it actually covers, on its own tier.
+- Right and left confused with dominant and non-dominant: check the project's convention and the signer's recorded handedness.
+- Signs glossed before the utterance boundaries exist: finish the utterance pass first (see [Staged annotation](#staged-annotation)).
 :::
 
 ### Templates that follow published conventions
@@ -257,6 +268,8 @@ Use two or more independent judgements per clip and send disagreements to an adj
 - **Check timing logic.** Dependent annotations **must** sit inside their parent (a mouthing inside its sign). A check that lists every annotation outside its parent catches errors after boundaries are edited.
 - **Watch for drift.** Annotators' boundary decisions shift over weeks. Re-annotating a few early clips later in the project shows whether the convention is still being applied the same way.
 
+- **Treat machine proposals as drafts.** Segment boundaries proposed by a model, or pose overlays drawn from pre-computed keypoints, give annotators a first draft only. Fluent signers check every proposed boundary, and the data records which segments the machine proposed and which a person drew or changed. Pre-annotation pulls annotators towards the model's choices ([Fort and Sagot, 2010](../references.md#fort-sagot-2010)), so double-annotate a sample from scratch, with no draft shown. The general rules are in [Treat drafts as drafts](../3_annotation-design/model-assisted-annotation.md#treat-drafts-as-drafts) and [Reviewing drafts without rubber-stamping](../7_llm-assisted-task/index.md#reviewing-drafts-without-rubber-stamping); speaker diarization applies the same pattern in [Starting from a pretrained pipeline](../speaker-diarization/index.md#starting-from-a-pretrained-pipeline).
+
 ## Releasing the data
 
 A released record pairs the video with its tiers and the signer metadata that signer-independent evaluation depends on:
@@ -280,6 +293,8 @@ A released record pairs the video with its tiers and the signer metadata that si
 - **Ship ELAN files as well as JSON.** Linguists will open the corpus in ELAN; the `.eaf` export keeps the tier structure intact.
 - **Consider releasing pose.** Pose keypoints (for example from MediaPipe Holistic, which gives 33 body, 468 face and 21 points per hand, and which Google now lists as a legacy solution) reduce video to movement, which is lighter to share and train on. The [pose-format](../references.md#pose-format-2021) library reads and writes them. Pose is not anonymous: a person's movement can still identify them to people who know them.
 - **Control access to the video.** Because signers cannot be anonymised, video **should** be released under access terms the signers agreed to, which may mean registered access rather than open download. The annotations alone can often be released more openly. See [Data Governance](../data-governance/index.md).
+
+Keypoint files saved at recording time (see [Recording on a phone or in a browser](#recording-on-a-phone-or-in-a-browser)) need the same care as released pose. The per-signer cap set at elicitation (see [Elicitation materials](#elicitation-materials)) also keeps any one signer from dominating a split. For checking or correcting keypoints by hand, see [Keypoints and pose](../image-data/keypoints-pose.md).
 
 ## Tasks and how they are evaluated
 

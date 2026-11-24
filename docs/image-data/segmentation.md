@@ -15,7 +15,7 @@ Segmentation is the most detailed image task: instead of a box, it labels every 
 
 ## What the data looks like
 
-A segmentation dataset pairs images with pixel-level masks. Semantic segmentation labels every pixel by class without separating individual objects, while instance segmentation also tells apart one object from another of the same class. The data is dominated by the same high-value African domains, with crop-field boundary sets like LacunaLabels and land-cover sets like LandCoverNet built because precise African-landscape masks did not exist. Satellite segmentation carries its own difficulty, cloud cover, which leaves gaps that are often filled by combining optical with radar imagery.
+A segmentation dataset pairs images with pixel-level masks. Semantic segmentation labels every pixel by class without separating individual objects, while instance segmentation also tells apart one object from another of the same class. The data is dominated by the same high-value African domains, with crop-field boundary sets like LacunaLabels and land-cover sets like LandCoverNet built because precise African-landscape masks did not exist. Satellite segmentation carries its own difficulty, cloud cover, which leaves gaps that are often filled by combining optical with radar imagery. For tiling, coordinate systems and imagery licences, see [Large and geo-referenced imagery](./large-imagery.md).
 
 A mask is usually stored as a PNG the same size as the image, where each pixel value is a class id, paired with a small mapping from id to class name:
 
@@ -32,6 +32,8 @@ Storing the mask as a single-channel id map, rather than a colour image, keeps i
 ### Store polygons and masks without ambiguity
 
 Store polygons as ordered vertex lists, with explicit rules for holes and multi-part objects. Store masks as single-channel raster PNGs or run-length encoding, and record which representation is authoritative. Large raster exports can be heavy, so measure their storage and transfer cost before choosing the release format. Brush strokes are approximate: display the raw pixels without smoothing when pixel-exact correction is required. If polygons are rasterised for agreement or evaluation, document the rasterisation rule so every comparison uses the same representation.
+
+For RLE, id-map and polygon conversions, and for merging several annotators' masks (pixel voting, STAPLE), see [Formats and merging](./formats-and-merging.md).
 
 ## Annotation and evaluation
 
@@ -74,11 +76,11 @@ print("mIoU:", round(np.nanmean(list(ious.values())), 3))
 
 Averaging IoU across classes rather than across pixels is the deliberate choice: a thin feature like a river covers few pixels, so a pixel-weighted score would let a model ignore it entirely while still looking accurate, whereas per-class mIoU makes that failure visible. The code compares a model's mask with a reference mask. To compare two annotators who each drew several instances in one image, pair the instances one to one first, as described in [Agreement when an image has many objects](./object-detection.md#agreement-when-an-image-has-many-objects), then score each pair with mask IoU.
 
-The segmentation interface should support zoom, vertex or brush correction, holes and overlapping instances where the schema allows them. Verify that exported masks or polygons align with the source image and preserve class and instance identifiers.
+The segmentation interface should support zoom, vertex or brush correction, holes and overlapping instances where the schema allows them. Verify that exported masks or polygons align with the source image and preserve class and instance identifiers. The occlusion, crowd and ignore-region rules in [Box and region rules](./region-guidelines.md) apply to polygons and masks too.
 
 ### Thin and diffuse features
 
-Represent thin linear features such as roads, rivers, field boundaries, roots and cracks as open polylines or branching skeletons rather than thin painted masks. Specify vertex density and how curves are sampled. Evaluate them with a project-chosen tolerance buffer around the reference geometry rather than plain IoU, and report that tolerance with the score.
+Represent thin linear features such as roads, rivers, field boundaries, roots and cracks as open polylines or branching skeletons rather than thin painted masks. Specify vertex density and how curves are sampled. Plain IoU punishes a line drawn one or two pixels off as heavily as a missed one, so evaluate with a tolerance buffer instead: relaxed precision and recall count a predicted pixel as correct if it lies within a set number of pixels of the reference, and the other way round ([Mnih and Hinton, 2010](../references.md#mnih-2010)). Choose the tolerance for your project and report it with the score.
 
 Diffuse, low-contrast regions such as cloud, smoke and flood water may use threshold or flood-fill selection as a cheap draft. Keep the raw pixels visible and require human correction: these selections can leak across weak edges and should not become final labels without review.
 
@@ -86,14 +88,14 @@ Diffuse, low-contrast regions such as cloud, smoke and flood water may use thres
 
 Segmentation in 2026 is split between purpose-built segmentation models, foundation segmenters that generalise across tasks with minimal fine-tuning, and geospatial-domain-specific models. The workable open-model references:
 
-- **[Segment Anything Model (SAM 2)](https://arxiv.org/abs/2408.00714)** (Meta, 2024): the reference open foundation segmenter, Apache-2.0 licensed, promptable via boxes / points / text. Substantially reduces the cost of segmentation annotation (SAM-assisted labelling with human correction is 5-10x faster than pure manual labelling). The workable frontier for annotation-time productivity.
+- **[Segment Anything Model (SAM 2)](https://arxiv.org/abs/2408.00714)** (Meta, 2024): the reference open foundation segmenter, Apache-2.0 licensed, promptable with points, boxes or masks (it takes no text prompts). Substantially reduces the cost of segmentation annotation when annotators correct its masks rather than draw from scratch, but the speed-up depends on the objects: it shrinks for the small, thin and unusual objects the model misses (see [Click-to-mask](../3_annotation-design/model-assisted-annotation.md#click-to-mask)). The workable frontier for annotation-time productivity.
 - **[Mask2Former](https://arxiv.org/abs/2112.01527)** (Meta, 2021): the unified transformer-based architecture for semantic, instance, and panoptic segmentation. Fine-tuning on 500-3,000 target-domain masks produces a competitive task-specific segmenter.
 - **[OneFormer](https://arxiv.org/abs/2211.06220)** (2022) and **[Mask DINO](https://arxiv.org/abs/2206.02777)** (2022): competing unified segmenters; measure against Mask2Former on your specific task.
-- **[DINOv3](https://github.com/facebookresearch/dinov2)** (Meta, 2025) as a segmentation backbone: the strongest current self-supervised pretraining for dense prediction; fine-tune a segmentation head on top for tasks with limited labelled data.
+- **[DINOv3](https://github.com/facebookresearch/dinov3)** (Meta, 2025) as a segmentation backbone: the strongest current self-supervised pretraining for dense prediction; fine-tune a segmentation head on top for tasks with limited labelled data.
 - **Geospatial models.** **[Prithvi](https://huggingface.co/ibm-nasa-geospatial/Prithvi-100M)** (IBM/NASA, 2023-2024) and **[SatMAE](https://arxiv.org/abs/2207.08051)** (2022) are the workable open geospatial foundation models for satellite-imagery segmentation (crop mapping, land cover, deforestation). Fine-tune on 500-2,000 target-region satellite tiles.
 - **[nnU-Net v2](https://github.com/MIC-DKFZ/nnUNet)**: the reference medical-imaging segmenter (CT / MRI / X-ray); still the workable default for medical-imaging African contexts.
 
-**Editorial opinion.** For a new African-context segmentation project (agriculture crop-field boundaries, environment land-cover, medical-imaging lesion delineation), the shortest defensible path is: use SAM 2 to generate initial masks and human-correct them (5-10x annotation speedup; see [Model-Assisted Annotation](../3_annotation-design/model-assisted-annotation.md#treat-drafts-as-drafts) for keeping annotators from simply accepting the draft), fine-tune Mask2Former or DINOv3 with a segmentation head on the corrected corpus, and report per-class IoU alongside mIoU. For **satellite imagery**, fine-tune Prithvi or SatMAE on target-region tiles before fine-tuning a general segmenter. The geospatial-pretrained backbones handle the multi-spectral, low-resolution, cloud-affected input distribution substantially better than general-imagery backbones.
+**Editorial opinion.** For a new African-context segmentation project (agriculture crop-field boundaries, environment land-cover, medical-imaging lesion delineation), the shortest defensible path is: use SAM 2 to generate initial masks and human-correct them (measure the speed-up on your own pilot, and see [Model-Assisted Annotation](../3_annotation-design/model-assisted-annotation.md#images-and-video-masks-boxes-and-tracks) for what reviewers must check and how to keep annotators from simply accepting the draft), fine-tune Mask2Former or DINOv3 with a segmentation head on the corrected corpus, and report per-class IoU alongside mIoU. For **satellite imagery**, fine-tune Prithvi or SatMAE on target-region tiles before fine-tuning a general segmenter. The geospatial-pretrained backbones handle the multi-spectral, low-resolution, cloud-affected input distribution substantially better than general-imagery backbones.
 
 ## What it will actually cost you
 

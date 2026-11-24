@@ -3,7 +3,7 @@ ready: true
 title: Open-ended generation
 sidebar_position: 2
 last_update:
-  date: 2026-11-23
+  date: 2026-11-24
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -46,6 +46,19 @@ Every written example should be read by a second native speaker before it enters
 ## Distinctive challenges
 
 Three problems recur. Fluency is hard to reach when training data is small, and an undertrained model slips into the dominant colonial language or produces grammatical-looking nonsense. Factuality is fragile, because a model with thin knowledge of a language will invent confidently. And cultural grounding is easily missed, since a model trained mostly on translated or foreign text generates content that is linguistically African but culturally displaced. Native-speaker review is the only reliable check on all three.
+
+## Adversarial testing (red-teaming)
+
+A model that behaves safely in English may not behave safely in an African language. In a 2023 study, unsafe English prompts translated into low-resource languages, including Zulu, got past GPT-4's safeguards far more often than the English originals: combining four low-resource languages produced a harmful response for about 79% of the prompts in the AdvBench benchmark ([Yong et al., 2023](../references.md#yong-2023)). Models have changed since then, but the lesson holds: safety has to be tested in the language itself.
+
+Red-teaming is a data-collection task like any other. Native speakers write adversarial prompts in the target language, and the model's responses are rated:
+
+- **Adapt the harm taxonomy to local context.** Start from a general list of harms, then add what matters where the model will be used, such as ethnic or religious slurs, local political violence, and health misinformation. [Hate Speech Analysis](../11_text-classification/hate-speech-analysis.md) shows how local hate categories are defined.
+- **Recruit native-speaker red-teamers.** Ask them to attack the way real users write, including code-switching, transliteration, and non-standard spelling, not only clean standard text.
+- **Record every attempt in a fixed structure.** For each attempt, keep the attack category, the prompt, the model's response, and a severity rating, plus the usual language and provenance fields, so results can be counted and the prompts reused as a regression test.
+- **Protect the red-teamers.** Writing and reading harmful content takes a toll, so apply the same safeguards as for hate-speech labelling: informed opt-in, limits on exposure, the right to skip without penalty, and access to support (see [annotator safety and well-being](../11_text-classification/annotation.md#annotator-safety--well-being)).
+
+Keep the adversarial prompts out of public training releases unless you have decided otherwise on purpose, because a published attack set is also a ready-made tool for misuse.
 
 ## Evaluation
 

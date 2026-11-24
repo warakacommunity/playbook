@@ -66,9 +66,11 @@ ffmpeg -i master.webm -map 0:v:0 -f null -
 
 With `-fps_mode cfr`, FFmpeg duplicates and drops frames to reach exactly the requested constant rate ([FFmpeg Developers, n.d.-a](../references.md#ffmpeg-cli)); the option exists from FFmpeg 5.1, and older versions use `-vsync cfr`. Log the command and the FFmpeg version in the [transformation log](../2_data-collection/8_data-provenance-traceability.md#a-transformation-log-that-travels-with-the-data).
 
+For recordings longer than a few minutes (cutting them into chunks that trace back to the source, choosing a frame-sampling rate, shot boundaries and sync checks), see [Long video](./long-video.md).
+
 ## Annotation and evaluation
 
-Video annotation is labelling across time: a whole-clip label is cheap, but marking when actions happen, or captioning, is slow and needs clear rules on event boundaries and on the level of detail a caption should capture. Use tools built for timeline annotation, keep clips short, and measure agreement on a shared set. For marking when an action happens, the config places labels on the video timeline, and the annotator drags each label across the span where that action occurs:
+Video annotation is labelling across time: a whole-clip label is cheap, but marking when actions happen, or captioning, is slow and needs clear rules on event boundaries and on the level of detail a caption should capture. Use tools built for timeline annotation, keep clips short (see [Long video](./long-video.md) for cutting long recordings into traceable chunks), and measure agreement on a shared set. For marking when an action happens, the config places labels on the video timeline, and the annotator drags each label across the span where that action occurs:
 
 ```xml
 <View>
@@ -87,7 +89,7 @@ The video annotation interface should provide frame-accurate seeking, playback-s
 
 ### Tracking objects across frames
 
-For multi-object tracking, annotators draw boxes on keyframes and interpolation fills intermediate frames. A reviewer checks interpolated frames at a fixed interval, including frames where objects enter, leave or overlap. Keep one track ID from entry to exit, and write rules for occlusion, re-entry, frame-edge truncation and minimum object size. A new detection is not automatically a new identity.
+For multi-object tracking, annotators draw boxes on keyframes and the annotation tool interpolates the frames in between. A reviewer checks interpolated frames at a fixed interval, including frames where objects enter, leave or overlap. Keep one track ID from entry to exit, and write rules for occlusion, re-entry, frame-edge truncation and minimum object size. A new detection is not automatically a new identity. If a tracking model propagates the boxes or masks for you, review it as described in [Auto-tracking in video](../3_annotation-design/model-assisted-annotation.md#auto-tracking-in-video). Converting keyframe tracks to per-frame MOT rows is covered in [Formats and merging](../image-data/formats-and-merging.md#video-tracks-mot-and-keyframe-tracks).
 
 Evaluate identity as well as detection. IDF1 measures the agreement between ground-truth and computed identities after a global one-to-one assignment ([Ristani et al., 2016](../references.md#ristani-2016)). HOTA balances detection, association and localisation and provides diagnostic sub-metrics ([Luiten et al., 2020](../references.md#luiten-2020)). Report these alongside detection mAP rather than treating mAP alone as evidence that identities were preserved.
 
@@ -120,12 +122,14 @@ Video corpora are the most storage-and-annotation heavy of any modality in the p
 - **Storage and bandwidth constrain corpus size more than annotation cost.** A team that can afford to annotate 10,000 clips may not be able to store and stream them. Design for constrained infrastructure.
 - **Frame-rate and resolution normalisation is load-bearing.** Broadcast video, phone-camera video, and drone video have different frame rates, aspect ratios, and resolutions. A model trained on a mixed corpus without normalisation learns to distinguish by source, not by content.
 - **Consent is heavier for video than for photos.** A photo shows an identifiable person at one moment; a video shows the same person over time, revealing more about behaviour, movement, and context. Consent frameworks must be video-specific.
-- **Face-visibility trade-off.** Blurring faces during preprocessing degrades most video-understanding models; blurring during release is often mandatory. Design for both from the start.
+- **Face-visibility trade-off.** Blurring faces during preprocessing degrades models that need the face, such as those for signing, gesture, emotion or speaking-person tasks; for object and scene tasks the cost can be small. Blurring for release is often required. Decide per task, as described in [Redact for training, or only for release?](../image-data/visual-privacy.md#redact-for-training-or-only-for-release)
 - **Copyright of broadcast and social media video.** Community-produced and consented material is safe; commercial broadcast, YouTube, and other social platforms have terms of service that constrain redistribution and often training use. Read the terms before scraping.
 - **Temporal detection boundary annotation is subjective.** Where does "harvesting" begin and end? Two annotators produce systematically different boundaries. Report boundary agreement (temporal IoU at multiple thresholds), not just detection F1.
 - **Long-form video reasoning is genuinely hard.** Even 2026 MLLMs handle 5-15 minute video reasoning shakily. Report video-length distribution in every evaluation; averaging across it hides where the model actually breaks.
 
 For the normalisation steps behind the frame-rate point above, see [Preparing video for annotation](#preparing-video-for-annotation). Clips that contributors record themselves also need checks before annotation: that the duration can be read, that there are no black or frozen stretches, and that the measured frame rate matches the declared one. [Check recorded clips first](./sign-language.md#check-recorded-clips-first) on the sign-language page sets these out, and most of them apply to any recorded video.
+
+Frames from one video are near-copies of each other, so split by whole video, never by frame; see [Split video by video, not by frame](../image-data/splits-and-duplicates.md#split-video-by-video-not-by-frame).
 
 ## Further reading
 

@@ -79,7 +79,7 @@ Whatever licence you pick, require attribution and record provenance: where the 
 
 ### Personally identifiable information
 
-African-language collection routinely captures personal data: names and places in text, and, unavoidably, voices in audio and faces in images, which identify a person directly. Collect as little as the task needs, anonymise where you can by masking names and stripping metadata, and never treat a recorded voice as anonymous. Where identifiable data is essential, it has to rest on explicit, informed consent, and the consent terms must travel with the data.
+African-language collection routinely captures personal data: names and places in text, and, unavoidably, voices in audio and faces in images, which identify a person directly. Collect as little as the task needs, anonymise where you can by masking names and stripping metadata, and never treat a recorded voice as anonymous. Where identifiable data is essential, it has to rest on explicit, informed consent, and the consent terms must travel with the data. For images and video, [Visual privacy](../image-data/visual-privacy.md) covers what in a frame can identify someone, how to strip file metadata, and where blurring fails.
 
 The people who label the data need protecting too. An export from an annotation tool usually records who made each label, often as a name, an email address, or an account ID. Released as they are, these fields show which person called a post hateful, and in hate-speech, political, or religious data that can put an annotator at risk. Replace them with pseudonyms before the data leaves the team:
 
@@ -92,9 +92,9 @@ Pseudonyms are not anonymity on their own. In a small team, extra fields such as
 
 ### Data about your annotators
 
-Annotators are data subjects too. A project may hold their identity and contact details, country and age band, device and connection logs, quality scores, review outcomes and suspension reasons. Explain these uses before work starts, collect only what coordination and quality control need, and set a retention period for each category. Do not collect identity-document photographs unless there is a stated, necessary purpose and a deletion date.
+Annotators are data subjects too. A project may hold their identity and contact details, country and age band, payment and mobile-money details, device and connection logs, quality scores, review outcomes and suspension reasons. Explain these uses before work starts, collect only what payment, coordination and quality control need, and set a retention period for each category. Do not collect identity-document photographs unless there is a stated, necessary purpose and a deletion date.
 
-Ask background questions once, after consent and before the first item. Say which answers are required, which are optional, and who can see them. Link answers to labels through the pseudonymous IDs above. Restrict per-person quality scores and review histories to the people who need them; annotators must not see one another's records. Where applications require approval, make that an explicit decision and give unsuccessful applicants a reason. Keep identities out of releases unless a person has separately chosen to be credited by name.
+For when to ask background questions and how to link the answers to labels through pseudonymous IDs, see [Record annotator context, with consent](../3_annotation-design/inclusive-bias-aware.md#record-annotator-context-with-consent). Tell annotators which answers are required, which are optional, and which roles can see them. Restrict per-person quality scores, review histories and payment records to the people who need them; annotators must not see one another's records. Where applications require approval, make that an explicit decision and give unsuccessful applicants a reason. Keep identities out of releases unless a person has separately chosen to be credited by name.
 
 Publish a [privacy notice](../templates/privacy-notice.md) that covers contributors and annotators. A notice explains processing; it does not replace consent where consent is the basis for the processing.
 
@@ -137,11 +137,11 @@ Tightening the rules later does not recall copies already on people's devices, w
 
 Use the narrowest role that lets each person do their work: project management, review, annotation, view-only observation, or administration of records without access to task data. Scope access to one project where possible, start new joiners at the lowest suitable role, and limit exports to named managers. Annotators see only their assigned work; outside contributors see their own work, not other contributors' records. Make API tokens project-scoped, time-limited where possible, and revocable.
 
-Treat shared invitation links as credentials and reset them after a cohort joins. Make ownership transferable and name a successor. Review access to the annotation tool, shared drives and chat groups monthly and at every phase change. Use reversible suspension for leave or a quality review. When someone leaves, revoke their access the same day, explain the decision, apply the agreement on their past annotations, and record the role change in the accountability log.
+Treat shared invitation links as credentials and reset them after a cohort joins. Make ownership transferable and name a successor. Review access to the annotation tool, shared drives and chat groups monthly and at every phase change. For leave or a quality review, pause access in a way that can be undone rather than removing the person. When someone leaves or is removed, revoke their access the same day, give the reason for any removal, decide what happens to their past annotations under their agreement, and record the role change in the [accountability log](#keep-an-accountability-log).
 
 ### Keep an accountability log
 
-Keep an append-only log, or at minimum a dated change register, for people added or removed, role changes, consent accepted or withdrawn, policy changes and exports. Each entry records the actor, time, target and relevant details, including old and new roles or policy values. A spreadsheet is sufficient for a small project if its history is protected.
+Keep an append-only log, or at minimum a dated change register, for people added or removed, role changes, consent accepted or withdrawn, payout runs and rate changes, policy changes and exports. Each entry records the actor, time, target and relevant details, including old and new roles or policy values. A spreadsheet is sufficient for a small project if its history is protected.
 
 Never put passwords, tokens or other secrets in the log. Set a retention period consistent with the applicable law and the project's privacy notice. State what the log deliberately excludes, such as the contents of individual annotations; label history belongs in [data provenance](../2_data-collection/8_data-provenance-traceability.md#label-level-change-history).
 
