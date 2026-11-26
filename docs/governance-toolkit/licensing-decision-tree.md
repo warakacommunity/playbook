@@ -3,7 +3,7 @@ title: Licensing decision tree
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -11,7 +11,17 @@ import DecisionTree from '@site/src/components/DecisionTree/DecisionTree';
 
 # Licensing decision tree
 
-A licence can only grant what the people in the data agreed to and what the sources you built on allow. This tree walks those two constraints first, then the community's wishes, and ends at one of five outcomes. Work through it before the [project charter](../templates/project-charter.md) is signed, and again before release, because consent terms and source data often change during a project. The reasoning behind each licence is in [Data Governance](../data-governance/index.md); the practical notes on each type are in [Licensing](../6_documentation/licensing.md).
+A licence can only grant what the people in the data agreed to and what the sources you built on allow. This tree walks those two constraints first, then the community's wishes, and ends at a licence, a restricted or split release, or a step you must take before releasing anything. Work through it before the [project charter](../templates/project-charter.md) is signed, and again before release, because consent terms and source data often change during a project. The reasoning behind each licence is in [Data Governance](../data-governance/index.md); the practical notes on each type are in [Licensing](../6_documentation/licensing.md).
+
+:::tip[Key points]
+
+- A licence cannot grant more than the contributors consented to or the source data allows.
+- Check consent first, then every source licence, then the community's decision on who may benefit.
+- It ends in a licence, a restricted or split release, or a step to fix consent or sources first.
+- CC BY 4.0 is the default for open release; CC BY-NC or stricter terms are an exception, used where the community or the consent terms require it.
+- Record the outcome in the dataset card and in the data itself; Creative Commons licences cannot be revoked later.
+
+:::
 
 :::info[Before you start]
 Have three things in front of you: the consent form your contributors signed or recorded, the licence of every dataset, corpus or model output you reused, and the community's decision on who may benefit from the data (recorded in the charter). The tree asks about each.
@@ -60,7 +70,7 @@ export const tree = {
     },
     inherit: {
       result: 'Your licence inherits the strictest source term.',
-      summary: 'A share-alike source forces CC BY-SA on the whole release; a non-commercial source forces CC BY-NC; competition-only sources cannot be redistributed at all and must be removed. Say which source imposed the term in the datasheet.',
+      summary: 'Material under a share-alike or non-commercial term keeps that term. If your dataset adapts that material (for example, translates or edits it), release it under the same or a compatible licence: CC BY-SA for a share-alike source, a non-commercial licence such as CC BY-NC for a non-commercial source, CC BY-NC-SA if the source carries both. When you are unsure, release the whole dataset under the strictest source term. Competition-only sources usually forbid redistribution, so remove that material. Say which source imposed the term in the datasheet.',
       caveats: ['Share-alike and non-commercial data cannot be combined with a community licence such as NOODL without the source owner\'s permission.'],
     },
     community: {
@@ -82,15 +92,15 @@ export const tree = {
     },
     ccBy: {
       result: 'Release under CC BY 4.0.',
-      summary: 'The default for open African-language data and a licence many funders and hubs accept. Reusers must credit the dataset as you specify in the datasheet.',
+      summary: 'The playbook\'s default for open release: a widely used open licence that many funders and data hubs accept. Reusers must credit the dataset as you specify in the datasheet.',
       url: 'https://creativecommons.org/licenses/by/4.0/',
-      caveats: ['Record the required citation and the contributor credits in the dataset card.', 'CC0 is an option only when the community explicitly waives attribution.'],
+      caveats: ['Record the required citation and the contributor credits in the dataset card.', 'If the community requires it, or consent covers non-commercial use only, release under CC BY-NC 4.0 instead and record the reason in the dataset card.', 'CC0 is an option only when the community explicitly waives attribution.'],
     },
     ccBySa: {
       result: 'Release under CC BY-SA 4.0.',
       summary: 'Attribution plus share-alike: anyone who adapts the data must release the adaptation under the same licence.',
       url: 'https://creativecommons.org/licenses/by-sa/4.0/',
-      caveats: ['Share-alike data cannot be mixed into a CC BY release downstream; some reusers will pass.'],
+      caveats: ['Share-alike data cannot be mixed into a CC BY release downstream; some reusers will pass.', 'If the community requires it, or consent covers non-commercial use only, release under CC BY-NC-SA 4.0 instead and record the reason in the dataset card.'],
     },
     communityLicence: {
       result: 'Release under a community licence: NOODL or Esethu.',
@@ -117,9 +127,9 @@ export const tree = {
 **Printed version of the tree.**
 
 1. Did every contributor consent to public release? No or unclear: do not release; re-consent or drop the items. Research-only consent: go to restricted release (step 6).
-2. Does the dataset include material you did not create? If unchecked: stop and list every source with its licence. If a source is share-alike, non-commercial or competition-only and cannot be removed: your licence inherits the strictest term (CC BY-SA, CC BY-NC, or remove the material).
+2. Does the dataset include material you did not create? If unchecked: stop and list every source with its licence. If a source is share-alike or non-commercial and cannot be removed: that material keeps its term, and a dataset that adapts it must use the same or a compatible licence (CC BY-SA; a non-commercial licence such as CC BY-NC; CC BY-NC-SA if the source carries both). When unsure, use the strictest source term for the whole release ([Creative Commons, n.d.-a](../references.md#cc-licenses)). Competition-only material usually cannot be redistributed: remove it.
 3. What did the community decide about benefit? Anyone may reuse with credit: step 4. Benefit must flow back: step 5. Named partners only: step 6. Some material must stay closed: step 7.
-4. Should adaptations stay open under the same terms? Yes: CC BY-SA 4.0. No: CC BY 4.0.
+4. Should adaptations stay open under the same terms? Yes: CC BY-SA 4.0. No: CC BY 4.0, the playbook's default for open release. If the community requires it, or consent covers non-commercial use only, use CC BY-NC-SA 4.0 or CC BY-NC 4.0 instead and record the reason in the dataset card.
 5. Community licence: NOODL for a community-held corpus, Esethu when a steward will license the data and reinvest the revenue.
 6. Restricted release: gated access with a data-use agreement; publish the datasheet, schema and a consented sample openly.
 7. Split the release: keep the restricted partition closed and run the open remainder through the tree again.

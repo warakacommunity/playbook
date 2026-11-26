@@ -3,7 +3,7 @@ title: Release Checklist
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -11,10 +11,19 @@ last_update:
 
 Releasing a dataset is the moment the work becomes useful to others, and a clear checklist is the difference between a resource people can trust and a folder of files they cannot. Run through these before you publish. Each item links to the chapter that covers it in depth.
 
+:::tip[Key points]
+
+- Do not release until quality, documentation, licence, consent and a named steward are all in place.
+- Keep the annotation tool's full export as the copy of record, and check every converted format against it.
+- Pseudonymise annotators and leave out internal fields before you publish.
+- Publish fixed splits with a version tag, and set the licence on the repository itself.
+
+:::
+
 ## Before you release
 
 - **Data cleaned and validated.** Noise removed, duplicates dropped before splitting, language and format checked (see [Data Quality](../4_data-quality/index.md)).
-- **Annotation quality verified.** Inter-annotator agreement measured and reported, gold checks passed, disagreement understood rather than hidden (see [Data Quality](../4_data-quality/index.md) and [Annotation Design](../3_annotation-design/workflow-adjudication.md)). Report coverage, mean agreement with support, reviewer-verified share, per-field label balance and gold-based per-class scores separately, not as one blended readiness score (see [Report readiness as separate measures](../4_data-quality/index.md#report-readiness-as-separate-measures)).
+- **Annotation quality verified.** Inter-annotator agreement measured and reported, gold checks passed, disagreement understood rather than hidden (see [Data Quality](../4_data-quality/index.md) and [Annotation Design](../3_annotation-design/workflow-adjudication.md)). Report coverage, agreement with the number of items behind it, the share checked by a reviewer, label balance and per-class scores on gold items as separate numbers, not one combined score (see [Report readiness as separate measures](../4_data-quality/index.md#report-readiness-as-separate-measures)).
 - **Documentation completed.** A datasheet describing what the data is, how it was collected, from whom, and its known limitations (see [Documentation](../6_documentation/documentation.md)).
 - **Licensing defined.** A clear licence chosen on purpose, applied to the data, with attribution and provenance recorded (see [Data Governance](../data-governance/index.md)).
 - **Ethical review conducted.** Consent confirmed, personal and sensitive data handled, harms considered, community authority respected (see [Data Governance](../data-governance/index.md)).
@@ -31,7 +40,7 @@ The release files are usually not the annotation tool's own records but a conver
 
 - **Overlapping and nested spans.** Flat BIO or CoNLL tagging gives each token one tag ([Ramshaw and Marcus, 1995](../references.md#ramshaw-marcus-1995)), so a span inside another span, or two labels on the same words, cannot both be represented. A converter has to drop or alter one of them, often without warning.
 - **Relations, skipped items, and region notes.** Links between spans, items an annotator skipped, and free-text notes attached to a region may be missing from some formats. For relation and coreference layers, see [Relations and Coreference](../sequence-labelling/relations.md#release-format).
-- **Segmentation masks.** Brush or pixel masks are exported differently by different converters. Some write one binary image per mask, so the label and the link to the item must travel in file names or a separate index; COCO stores them as polygons or run-length encoding inside the JSON ([COCO Consortium, n.d.](../references.md#coco-format)); see [Masks: polygons, RLE and id maps](../image-data/formats-and-merging.md#masks-polygons-rle-and-id-maps).
+- **Segmentation masks.** Pixel masks are exported differently by different converters. Some write one binary image per mask, so the label and the link to the item must travel in file names or a separate index; COCO stores them as polygons or run-length encoding inside the JSON ([COCO Consortium, n.d.-a](../references.md#coco-format)); see [Masks: polygons, RLE and id maps](../image-data/formats-and-merging.md#masks-polygons-rle-and-id-maps).
 - **Bounding-box conventions.** COCO, PASCAL VOC and YOLO measure boxes differently (corner or centre, width or second corner, pixels or fractions), so a box converted with the wrong convention still loads but lands in the wrong place. [Formats and merging](../image-data/formats-and-merging.md#coordinate-conventions-that-break-conversions) sets out each convention and the round-trip checks for image and video labels.
 - **Line breaks in free text.** Transcripts, translations, and comments with line breaks can be split or merged when written to CSV, which is one reason not to ship free text as CSV (see [Formats and packaging](./hosting.md#formats-and-packaging)).
 
@@ -41,15 +50,16 @@ Before release, run a short conversion check:
 2. **Count annotations per type before and after** conversion. Any difference should be one you expected and can explain.
 3. **Open a few converted records by eye**, and for images draw the converted boxes or masks back onto the picture.
 4. **Confirm the record count** in the release matches the selection you meant to release (for example, all items, or only adjudicated ones; see [Decide which annotations you release](../6_documentation/data-storage.md#decide-which-annotations-you-release)).
-5. **Handle internal bookkeeping fields.** Replace annotator names, emails, or account IDs with pseudonyms (see [Personally identifiable information](../data-governance/index.md#personally-identifiable-information)), or drop them if you release only one label per item. Remove timestamps and time spent unless the dataset card documents them and says why they are included.
+5. **Remove or pseudonymise annotator details and internal fields.** Replace annotator names, emails, or account IDs with pseudonyms (see [Personally identifiable information](../data-governance/index.md#personally-identifiable-information)), or drop them if you release only one label per item. Remove timestamps and time spent unless the dataset card documents them and says why they are included.
 
 ## Publishing to a hub
 
-Once the boxes are ticked, publishing the fixed splits is short with the Hugging Face `datasets` library, which gives versioning and a documentation page in one step:
+Once the boxes are ticked, publishing the fixed splits takes a few lines with the Hugging Face `datasets` library. The Hub keeps every commit, gives the dataset a documentation page, and lets you tag the exact version you release:
 
 ```python
-# pip install datasets
+# pip install datasets huggingface_hub
 from datasets import load_dataset
+from huggingface_hub import HfApi
 
 # Load the fixed splits produced in earlier chapters.
 dataset = load_dataset("json", data_files={
@@ -58,8 +68,9 @@ dataset = load_dataset("json", data_files={
     "test": "data/test.jsonl",
 })
 
-# Publish with a version tag so others can cite the exact data they used.
-dataset.push_to_hub("your-org/hausa-news-2026", revision="v1.1.0")
+# Publish the splits, then tag this commit so others can cite the exact data they used.
+dataset.push_to_hub("your-org/hausa-news-2026")
+HfApi().create_tag("your-org/hausa-news-2026", tag="v1.1.0", repo_type="dataset")
 ```
 
 Two notes specific to responsible release. Set the licence on the repository to match the one in your [dataset card](../6_documentation/documentation.md), so the terms travel with the data rather than living only in a separate document. And if you kept a private held-out portion to guard against contamination (see [Data Integrity](../8_model-building/data-integrity.md)), publish only the public splits here and keep the private set off the hub.

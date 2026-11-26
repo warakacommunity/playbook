@@ -7,13 +7,25 @@ last_update:
   author: Shamsuddeen Hassan Muhammad
 ---
 
-# SMS, USSD, and WhatsApp as NLP surfaces
+# SMS, USSD, and WhatsApp
 
 *Last reviewed: 2026-07-07.*
 
-Many African mobile users reach digital services through SMS, USSD, or WhatsApp rather than through native apps. In 2024, about 47% of Africa's population had a mobile subscription, but only about 28% used mobile internet ([GSMA Intelligence, 2025](../references.md#gsma-me-africa-2025)); SMS and USSD work on any GSM phone without a data connection, so they reach the people a data-only app misses. Whether the user is checking a bank balance, receiving a health reminder, applying for a service, or asking a question of a government helpline, the interaction often happens on one of these three channels. Any NLP system aiming for real African-market reach lands here. An NLP system designed only for a native app with a full keyboard will miss many of the intended users.
+Many African mobile users reach digital services through SMS, USSD or WhatsApp rather than through native apps. In 2024, about 47% of Africa's population had a mobile subscription, but only about 28% used mobile internet ([GSMA Intelligence, 2025](../references.md#gsma-me-africa-2025)). SMS and USSD work on any GSM phone without a data connection, so they reach the people a data-only app misses.
 
-This page is the practical guide to the three channels: what each is good for, what breaks NLP models on them, and the design choices that separate a chatbot that ships from a demo that never gets adopted.
+Checking a bank balance, receiving a health reminder, applying for a service, asking a government helpline a question: these interactions often happen on one of the three channels. An NLP system that aims for real reach in Africa lands here. One designed only for a native app with a full keyboard will miss many of its intended users.
+
+This page is a practical guide to the three channels: what each is good for, what breaks NLP models on them, and the design choices that separate a chatbot that ships from a demo that never gets adopted.
+
+:::tip[Key points]
+
+- Choose the channel your users are actually on: SMS and USSD reach any GSM phone, WhatsApp needs a smartphone and data.
+- Fit every response to the channel's character limit at generation time; tone marks and special letters can force a much shorter limit.
+- Expect short, abbreviated, code-switched input without diacritics; language identification is the main failure point.
+- On WhatsApp, plan for voice notes, Meta's business approval and template rules from the start.
+- Test on real handsets and real networks, not emulators.
+
+:::
 
 ## The three channels compared
 
@@ -43,7 +55,7 @@ Each channel serves a different user need. Design for the channel your users are
 
 - **Every response must fit in 160 GSM-7 characters or 70 UCS-2 characters** ([ETSI, 2000](../references.md#etsi-ts-123038)). Multi-SMS responses are technically supported but each part is billed, and parts can arrive separately or out of order on some handsets and networks. Design the model output length limit at generation time; do not truncate after the fact.
 - **User input is heavily abbreviated, code-switched, and often has no diacritics.** A model expecting clean orthography will fail on inputs like `"i wnt 2 knw d price of maiz"`, `"kabari za soko?"` (Swahili), `"anyi na-agu ihe"` (Igbo). Train and evaluate on real SMS-noise text, not on clean corpora.
-- **Language identification is one of the hardest problems.** The same phone number may send `"hello"`, `"karibu"`, `"how much?"`, and `"bei ni ngapi?"` on consecutive days. LID models that score well on clean test sets can fail badly on real text from outside their training domain ([Caswell et al., 2020](../references.md#caswell-2020)). Use LID built for African languages and tested on noisy text, such as AfroLID ([Adebara et al., 2022](../references.md#afrolid-2022)), evaluate it on your own messages, or condition on user metadata (region, prior interactions).
+- **Language identification (LID) is one of the hardest problems.** The same phone number may send `"hello"`, `"karibu"`, `"how much?"`, and `"bei ni ngapi?"` on consecutive days. See [the problems these channels magnify](#the-nlp-problems-these-channels-magnify) for why benchmark LID scores mislead here and what to use instead.
 - **No formatting.** No bold, no bullet points, no links that most feature phones can open. Response design is prose only.
 
 **Reference platforms and aggregators:**
@@ -71,7 +83,7 @@ Each channel serves a different user need. Design for the channel your users are
 
 ## WhatsApp: rich, persistent, gated
 
-**What WhatsApp is good for.** Consumer-facing chatbots that need media (images, voice notes, documents). Persistent conversations that survive across days or weeks. Rich UI patterns (quick-reply buttons, list menus, media carousels). Anything where the user is on a smartphone with data, which is a growing but non-universal share of the African market: in 2024, about 28% of Africa's population used mobile internet ([GSMA Intelligence, 2025](../references.md#gsma-me-africa-2025)).
+**What WhatsApp is good for.** Consumer-facing chatbots that need media (images, voice notes, documents). Persistent conversations that survive across days or weeks. Rich UI patterns (quick-reply buttons, list menus, media carousels). Anything where the user is on a smartphone with data, which is a growing but far from universal share of the African market (see the mobile-internet figure at the top of this page).
 
 **What WhatsApp is bad for.** Rural, no-data, feature-phone users. Users who cannot afford the data bundle for the WhatsApp Business chat window (though WhatsApp bundles are cheap in many markets and sometimes zero-rated by operators). One-off outbound notifications at very large scale: since July 2025, business-initiated template messages are charged per message ([Meta, n.d.-a](../references.md#meta-whatsapp-pricing)), and the cost adds up.
 
@@ -92,9 +104,9 @@ Each channel serves a different user need. Design for the channel your users are
 
 ## The NLP problems these channels magnify
 
-Across all three channels, the same set of NLP problems show up amplified:
+Across all three channels, the same NLP problems show up amplified:
 
-1. **Language identification on short, noisy, code-switched input.** The dominant failure mode. LID accuracy measured on clean benchmark text does not carry over to real user text: in a web-crawl study, models that scored well on held-out test sets produced corpora that human judges found only about 5% correct for many lower-resource languages ([Caswell et al., 2020](../references.md#caswell-2020)). Measure LID on a sample of your own messages, train it on real user text, or condition on metadata (region, prior turns).
+1. **Language identification on short, noisy, code-switched input.** The dominant failure mode. LID accuracy measured on clean benchmark text does not carry over to real user text: in a web-crawl study, models that scored well on held-out test sets produced corpora that human judges found only about 5% correct for many lower-resource languages ([Caswell et al., 2020](../references.md#caswell-2020)). Start from LID built for African languages, such as AfroLID ([Adebara et al., 2022](../references.md#afrolid-2022)); measure it on a sample of your own messages; train it on real user text; or condition on metadata (region, prior turns).
 2. **Robust input normalisation.** Users write phonetically, abbreviate freely, drop diacritics, mix scripts, and swap languages mid-sentence. The pipeline needs to survive this without silently mis-routing.
 3. **Response length control.** SMS's 160-character hard limit means model outputs must be constrained at generation time. USSD's per-menu budget is similar. WhatsApp is unconstrained on length but rewards short responses in practice.
 4. **Cost per interaction is user-visible or paid.** Unlike a web app where the marginal cost of a longer response is invisible, on these channels the cost is real. Design responses to minimise per-interaction billing.
@@ -116,7 +128,7 @@ Across all three channels, the same set of NLP problems show up amplified:
 - **Input normalisation** for SMS-noise text is part of the [data quality](../4_data-quality/index.md) chapter's scope; work on annotation guidelines that reflect real user text rather than clean-corpus text belongs there.
 - **ASR quality** on WhatsApp voice notes is directly the [ASR chapter's](../asr/index.md) scope; the channel just moves ASR from "feature" to "deployment blocker."
 - **Response-length control** is a training-time concern, not just a decoding-time one. As a working assumption, fine-tuning on short-response data (WhatsApp, SMS, Twitter-like text) suits these channels better than fine-tuning on long-form content; test this on your own channel data.
-- **Deployment for offline / patchy connectivity** ([the previous page](./offline.md)) applies to WhatsApp as much as to any other channel that requires a data connection.
+- **Deployment for offline / patchy connectivity** ([Offline and patchy-connectivity NLP](./offline.md)) applies to WhatsApp as much as to any other channel that requires a data connection.
 
 ## Further reading
 

@@ -3,7 +3,7 @@ title: Lifecycle & Release
 sidebar_label: Overview
 ready: true
 last_update:
-  date: 2026-07-07
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 
@@ -20,6 +20,6 @@ it alive. These stages apply to **every** modality above.
 - Discoverability, versioning & long-term maintenance
 
 ## Stages
-- **Evaluation, benchmarking & data integrity** – (benchmarks, leakage, contamination control)
-- **Documentation, release & sustainability** – (datasheets, licensing, hosting, sustainability)
-- **Dataset lifecycle & release checklist** – (maintenance, post-release strategy, release checklist)
+- **Evaluation, benchmarking & data integrity**: benchmarks, leakage, contamination control
+- **Documentation, release & sustainability**: datasheets, licensing, hosting, sustainability
+- **Dataset lifecycle & release checklist**: maintenance, post-release strategy, release checklist

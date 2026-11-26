@@ -11,7 +11,7 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-*A task-agnostic starting point for a new corpus's annotation guidelines document, modelled on the structure MasakhaNER 2 ([Adelani et al., 2022](https://arxiv.org/abs/2210.12391)) and AfriSenti ([Muhammad et al., 2023](https://arxiv.org/abs/2302.08956)) use. Fork this file, rename it, drop your task in, and adapt the sections. The section structure is what matters: it is the same structure the playbook's Case Studies chapter compares projects against.*
+*A starting point for the annotation guidelines of a new corpus, for any labelling task. It draws on practice in community-built African-language datasets such as MasakhaNER 2 ([Adelani et al., 2022a](../references.md#adelani-2022)) and AfriSenti ([Muhammad et al., 2023a](../references.md#muhammad-2023)). Copy this file, rename it, put in your task and adapt the sections. The [case-study retrospective template](../case-studies/retrospective-template.md) asks each project to link its guidelines and their revisions, so a document in this shape is easy to cite there.*
 
 ## How to use this template
 
@@ -21,7 +21,7 @@ last_update:
 4. Version this document. Annotation guidelines drift; a guidelines document without a version and a change log is untrustworthy.
 5. Store the guidelines alongside the corpus so future readers can verify what an annotator was actually told.
 
-Motivated by the [Annotation Design](../3_annotation-design/annotation-task-design.md) chapter and by every corpus retrospective in the [Case Studies](../case-studies/index.md) chapter that names annotation-guideline drift as a source of quality problems.
+For the reasoning behind each section, see [Annotation Task Design](../3_annotation-design/annotation-task-design.md). To compare your project with others, see the [Case Studies](../case-studies/index.md).
 
 ---
 
@@ -43,7 +43,7 @@ Motivated by the [Annotation Design](../3_annotation-design/annotation-task-desi
 - **Adjudicator:** [The person who resolves disagreements. Usually the lead annotator; can be someone else.]
 - **Linguistic consultant, if any:** [NAME + role]
 - **Reviewer / auditor:** [The person who periodically checks annotation quality without doing annotation themselves.]
-- **How annotators were compensated:** [Rate + benchmark. Fair-rate community-anchored rates are part of the [core principles](../1_introduction/core-principles.md); state what you paid.]
+- **How annotators were compensated:** [Rate + benchmark. State what you paid and how you set the rate. The [core principles](../1_introduction/core-principles.md#build-with-speakers-not-just-for-them) treat speakers as co-creators, not cheap labellers, and [Data Governance](../data-governance/index.md#informed-consent) agrees fair compensation together with consent, at the point of collection.]
 
 ## 3. Definitions
 
@@ -97,12 +97,12 @@ Name every label here, with examples. Give every label a **stored code** and a *
 | UNCERTAIN | [NAME SHOWN TO ANNOTATORS] | Ambiguous; adjudicator will resolve. | n/a | n/a |
 
 - **Shared label list:** [If several projects use this label set, for example one project per language, name the one canonical list they all draw from and where it lives. Reuse it rather than copying it, and map every translated display name back to its stored code.]
-- **Interface language:** [The language the annotation interface and in-task instructions are shown in for this project. One interface language per project.]
+- **Interface language:** [The language the annotation interface and in-task instructions are shown in. If different annotator groups work in different languages, say which group sees which.]
 - **Language-identification tasks:** [Name the controlled language-code list, its version, and the conventions for named entities, mixed forms, other and unknown. See [Language identification of code-switched text](../sequence-labelling/index.md#language-identification-of-code-switched-text).]
 
-Adding a label is cheap in the tool, but items labelled before it existed may need a check for the new category. Changing a stored code, removing a label or merging two labels changes data that already exists: record it in the [change log](#9-change-log) with an old-to-new code mapping, and decide whether affected items are re-mapped or re-annotated.
+Adding a label is usually easy, but items labelled before it existed may need a check for the new category. Changing a stored code, removing a label or merging two labels changes data that already exists: record it in the [change log](#9-change-log) with an old-to-new code mapping, and decide whether affected items are re-mapped or re-annotated.
 
-For sequence-labelling tasks (NER, POS), replace with the tag inventory and the span-boundary rules; see the specific per-tag guidance in [MasakhaNER 2](https://arxiv.org/abs/2210.12391) as the reference.
+For sequence-labelling tasks (NER, POS), replace the table with the tag inventory and the span-boundary rules. The MasakhaNER annotation guideline, published in the [project repository](https://github.com/masakhane-io/masakhane-ner), is a worked reference ([MasakhaNER case study](../case-studies/masakhaner.md)).
 
 For rating tasks, add an anchor table and show it in the annotation interface:
 
@@ -125,8 +125,8 @@ Load-bearing for African languages. Guidelines that skip this section produce co
 
 ## 7. Inter-annotator agreement
 
-- **Metric used:** [Cohen's kappa for two annotators, Krippendorff's alpha for more, span-level F1 for sequence tagging. See the [evaluation-script template](./evaluation-script.md) for the metric implementations.]
-- **Target level:** [E.g., "κ ≥ 0.7 by the end of the second round"; state what "acceptable" means for this project.]
+- **Metric used:** [For example Cohen's kappa for two annotators, Fleiss' kappa for three or more, Krippendorff's alpha when labels are missing or the scale is ordinal, span-level F1 for sequence tagging. For how to choose and compute one, see [Measure inter-annotator agreement](../4_data-quality/index.md#measure-inter-annotator-agreement); worked formulas are in [Inter-annotator agreement](../11_text-classification/annotation.md#inter-annotator-agreement).]
+- **Target level:** [State what "acceptable" means for this project and by when, for example after the second round. See [Data Quality](../4_data-quality/index.md#measure-inter-annotator-agreement) for how to choose a target and what to report with it.]
 - **Cadence:** [How often IAA is measured: after every N examples per annotator, every round, etc.]
 - **What happens when IAA is below target:** [Additional training, guideline revision, annotator recalibration. The response is a design choice; state it.]
 

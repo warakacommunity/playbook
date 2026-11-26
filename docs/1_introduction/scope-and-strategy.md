@@ -2,11 +2,23 @@
 sidebar_position: 6
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # What this playbook is (and isn't)
+
+This page sets out the playbook's scope: what it covers, what it leaves to other guides, and why. Read it if you want to know whether the playbook will answer your question, or if you plan to write a new chapter.
+
+:::tip[Key points]
+
+- The playbook is a guide to building African-language datasets, not a model-training tutorial or a textbook.
+- It takes clear positions, such as human evaluation for generative tasks and community ownership of data.
+- It adds what similar handbooks cover only lightly: annotation workforce, non-text modalities, and an African, low-resource lens.
+- For model training, tuning and serving, it links to established guides instead of rewriting them.
+- Every chapter must give a reader an actionable next step within fifteen minutes.
+
+:::
 
 ## The one-sentence framing
 
@@ -19,7 +31,15 @@ Everything the playbook adds should sharpen that sentence. Everything it removes
 - It is **not** a tutorial on training or fine-tuning models. That work is well covered by the [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course), the [Google Deep Learning Tuning Playbook](https://github.com/google-research/tuning_playbook), the [Google Text Classification guide](https://developers.google.com/machine-learning/guides/text-classification), and [Advanced NLP with spaCy](https://course.spacy.io/en/). We link to them; we do not rewrite them.
 - It is **not** a textbook. For the theory (tokenisation, sequence models, evaluation metrics, statistical foundations), go to Jurafsky and Martin's [*Speech and Language Processing*](https://web.stanford.edu/~jurafsky/slp3/). It is authoritative and free.
 - It is **not** a catalogue of code recipes. Code drifts out of date faster than any playbook can be maintained. When we point at code, we point at a live, versioned, maintained repository. When we ship code ourselves, it lives in a companion repo that ships its own release tags.
-- It is **not** neutral. We take positions. Character-level metrics for morphology-rich languages, such as chrF ([Popović, 2015](../references.md#popovic-2015)) and CER, over word-level ones (BLEU, WER). Per-language and per-class score reporting over a single average. Human evaluation for anything generative. Consent from the people in the data. Community ownership of the resources built. If you disagree with those positions, this is not the playbook for you.
+
+- It is **not** neutral. We take positions:
+  - character-level metrics for morphology-rich languages, such as chrF ([Popović, 2015](../references.md#popovic-2015)) and CER (character error rate), over word-level ones (BLEU, WER);
+  - per-language and per-class score reporting over a single average;
+  - human evaluation for anything generative;
+  - consent from the people in the data;
+  - community ownership of the resources built.
+
+  If you disagree with those positions, this is not the playbook for you.
 
 ## What this playbook is
 
@@ -31,44 +51,28 @@ Structurally, this playbook belongs to the genre of **dataset-lifecycle and resp
 
 Substantively, our job is to be the one document a new project can read that saves it a quarter of duplicated work.
 
-## Why this scope: the evidence
+## Why the focus is on data
 
-In July 2026 we commissioned an independent research pass comparing AfriPlaybook against twenty candidate "playbooks" across three groups: canonical model-and-training NLP playbooks (Google DL Tuning, Google Text Classification, Hugging Face NLP Course, spaCy), data / responsible-AI handbooks (Datasheets, Data Statements, Model Cards, Turing Way, PAIR, BigScience ROOTS, Deon), and low-resource work AfriPlaybook already sits alongside (MasakhaneMT, MasakhaNER 1 and 2, AfriSenti, AfriQA, LAFAND-MT, FLORES, NLLB). The verdict was clear:
+The playbook focuses on data on purpose. The best-known NLP playbooks are built around model choice, fine-tuning, hyperparameter tuning and deployment. Most leave out annotation, low-resource languages and cultural context. This playbook covers what those guides assume has already been done.
 
-> Eight of ten numbered chapters center on data collection, annotation workforce, quality assurance, governance, documentation, and community. Only the model-building chapter touches modelling, and it is a short chapter. The canonical Group-A NLP playbooks are structured around model choice, fine-tuning, hyperparameter tuning, and deployment, and explicitly exclude annotation, low-resource languages, and cultural considerations. AfriPlaybook is structurally a data/annotation-handbook, not a model-tuning-playbook.
+The evidence points the same way:
 
-That is not a criticism. It is a positioning. The playbook is what those Group-A playbooks assume has already been done. Trying to compete with them on their own territory would spread AfriPlaybook thin and produce content that dates within a year. Owning the annotation, data quality, evaluation, community, and African-context deployment space is defensible, durable, and, for the community the playbook serves, genuinely load-bearing. Wider evidence points the same way. Practitioners, including teams in East and West Africa, report that data work is undervalued compared with model work, and that poor data causes compounding problems later ([Sambasivan et al., 2021](../references.md#sambasivan-2021)). Most of the world's languages, including most African languages, still have little labelled data ([Joshi et al., 2020](../references.md#joshi-2020)).
+- Practitioners, including teams in East and West Africa, report that data work is undervalued compared with model work, and that poor data causes compounding problems later ([Sambasivan et al., 2021](../references.md#sambasivan-2021)).
+- Most of the world's languages, including most African languages, still have little labelled data ([Joshi et al., 2020](../references.md#joshi-2020)).
 
-## What comes next: the phased plan
+Owning the annotation, data quality, evaluation, community and African-context space keeps the playbook focused and durable. Competing with model-training guides on their own ground would spread it thin and produce content that dates within a year.
 
-The current playbook is a solid draft of the dataset-lifecycle spine. The next expansion is about making the playbook **the shortest path to a working project** for the reader who has a task and a language and doesn't know where to start. In priority order:
+## Related chapters beyond the dataset lifecycle
 
-### Phase 1: the two highest-leverage additions
+Some chapters go beyond building a dataset, but only where the African context changes the answer:
 
-- **[Before You Start](../before-you-start/index.md)**. A four-step method for checking prior work before building a dataset: search for what exists, judge it against a checklist, decide whether to reuse, extend, or build, and learn from the people who built it. Three worked examples (NER, sentiment, and hate speech) apply the method to well-known datasets. They are examples, not complete lists, because no hand-written list can keep up with the field.
-- **[Case Studies](../case-studies/index.md)**: real retrospectives from Masakhane's own body of work: MasakhaNER 1 and 2, AfriSenti, AfroBench, LAFAND-MT, AfriQA. Each answers the same set of questions (team size, timeline, budget, hardest problem, biggest mistake, what surprised the team) from the people who did the work. Two case studies of this quality are worth more than ten chapters of general prose.
-
-### Phase 2: cross-cutting realism
-
-- **Deployment for African contexts.** Offline and patchy-connectivity NLP. Edge devices. SMS/USSD/WhatsApp as NLP surfaces. Multilingual switching in a single conversation. Non-standard scripts (Ajami, Ge'ez, N'Ko) in real UIs.
-- **Cross-language transfer matrix.** Empirical guidance, drawn from Masakhane's own papers, on which African languages benefit from which transfer sources. Bantu-to-Bantu, Cushitic-to-Cushitic, script transfer where relevant. MasakhaNER 2.0, for example, found that the choice of source language for transfer significantly affects performance ([Adelani et al., 2022a](../references.md#adelani-2022)).
-
-### Phase 3: durable governance
-
-- **Legal, consent, and community IP.** Country-level data laws (Nigeria's Data Protection Act 2023 ([Federal Republic of Nigeria, 2023](../references.md#ndpa-2023)), Kenya's Data Protection Act 2019 ([Republic of Kenya, 2019](../references.md#kenya-dpa-2019)), South Africa's POPIA ([Republic of South Africa, 2013](../references.md#popia-2013)), Ghana's Data Protection Act 2012 ([Republic of Ghana, 2012](../references.md#ghana-dpa-2012)), and Rwanda's Law No. 058/2021 ([Republic of Rwanda, 2021](../references.md#rwanda-dpl-2021))) and their practical implications. Consent frameworks that work with non-literate speakers. Community IP frameworks. Anti-extraction release patterns.
-- **Long-tail language onboarding.** For a language with a speaker community but no digital corpus, what is step one? Orthography, corpus bootstrapping, community mobilisation, anti-patterns.
-
-### Phase 4: compute-poor practice
-
-- **Compute-poor training and evaluation.** Community-GPU, Colab, Kaggle patterns. LoRA ([Hu et al., 2021](../references.md#hu-2021)) and QLoRA ([Dettmers et al., 2023](../references.md#dettmers-2023)) (linked to canonical, not re-derived). Distillation for edge deployment. When cross-language transfer is a compute-saving strategy.
-
-### Phase 5: finding current resources (redesigned)
-
-The original Phase 5 was a curated living directory: every African-language dataset, model, tool, and benchmark, with a one-line editorial opinion on each entry, updated on a semiannual review cadence. On honest reflection, the review cadence was the load-bearing part, and no team has capacity to eyeball 200+ entries semiannually and give each a fresh editorial line. A stale directory that says "SOTA as of 2026-Q3" in 2027 is worse than no directory.
-
-The redesigned Phase 5 ships as **[Step 1 of Before You Start](../before-you-start/index.md#step-1-search-for-prior-work)**, which names a few places to start searching (the ACL Anthology, Lanfrica, Hugging Face, the AfricaNLP workshop proceedings, Google Scholar, and arXiv) and teaches search patterns that find current African-language datasets. It does not list datasets; the sources list themselves.
-
-**Tradeoff acknowledged**: we give up per-entry editorial opinion on every dataset and model (readers learn to judge entries themselves with the checklist in [Before You Start](../before-you-start/index.md#step-2-judge-what-you-find)). We gain a chapter that stays honest for years without touch and does not require a named maintainer to unblock.
+- [Before You Start](../before-you-start/index.md): how to search for prior work, judge what you find, and decide whether to reuse, extend or build. It teaches search patterns instead of keeping a list of datasets, because no hand-written list can keep up with the field.
+- [Case Studies](../case-studies/index.md): retrospectives from people who built African-language datasets.
+- [Deployment](../deployment/index.md): offline and low-connectivity use, edge devices, messaging channels, and non-standard scripts.
+- [Cross-language transfer](../cross-language-transfer/index.md): which related languages can help when your language has little data.
+- [Legal, consent, and community IP](../legal-consent/index.md): data laws, consent and community rights.
+- [Long-tail language onboarding](../long-tail-language/index.md): where to start for a language with speakers but no digital corpus.
+- [Compute-poor training and evaluation](../compute-poor/index.md): working with small compute budgets.
 
 ## What we deprioritise
 
@@ -86,4 +90,4 @@ If yes, the chapter earns its place. If no, it is either rewritten to answer tha
 
 ---
 
-*This decision record will be revisited at each major playbook release. See the [changelog](https://github.com/warakacommunity/playbook/releases) for the record of what changed and when.*
+*This scope is reviewed at major playbook releases. See the [changelog](https://github.com/warakacommunity/playbook/releases) for what changed and when.*

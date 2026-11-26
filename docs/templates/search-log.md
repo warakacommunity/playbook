@@ -3,11 +3,11 @@ sidebar_position: 2
 title: Dataset search log template
 ready: true
 last_update:
-  date: 2026-09-26
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
-# Dataset search log
+# Dataset search log template
 
 Use this log while you work through [Before You Start](../before-you-start/index.md). Fill in one copy per project. Keep it with your project files, and share it with your team. It shows that you checked for existing work, and it gives you the related-work section of your paper.
 
@@ -48,13 +48,13 @@ The table shows example searches for a Hausa sentiment project. Replace them wit
 | | Hugging Face (language filter) | e.g. language `hau`, task `text-classification` | |
 | | AfricaNLP workshop proceedings | e.g. skim the last two years' paper titles for "Hausa" and "sentiment" | |
 | | Google Scholar / arXiv | e.g. `"Hausa" sentiment dataset 2020..2026` | |
-| | Asked the community (where?) | e.g. Masakhane Slack: "Does anyone know of Hausa sentiment data?" | |
+| | Asked the community (where?) | e.g. a post in the Masakhane community: "Does anyone know of Hausa sentiment data?" | |
 | | | | |
 | | | | |
 
 ## Step 2: Datasets found
 
-One row per dataset. For each check, write **Pass**, **Partly**, or **Fail**, and add a short note where needed.
+One row per dataset. For each check in the [Step 2 checklist](../before-you-start/index.md#step-2-judge-what-you-find), write **Pass**, **Partly**, or **Fail**, and add a short note where needed.
 
 | Dataset | Link | Languages | Size | Licence | Access | Fit | Labels | Splits | Guidelines | Quality | Documentation |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -65,7 +65,7 @@ One row per dataset. For each check, write **Pass**, **Partly**, or **Fail**, an
 
 | Question | Your answer |
 |---|---|
-| Which row of the Step 3 table applies? | Reuse / Extend / Build a new one, learning from the old one / Borrow, then build small / Build from scratch |
+| Which row of the [Step 3 table](../before-you-start/index.md#step-3-reuse-extend-or-build) applies? | Reuse / Extend / Build a new one, learning from the old one / Borrow, then build small / Build from scratch |
 | Which dataset(s) is the decision based on? | |
 | Why? (two or three sentences) | |
 | Decided by, and date | |

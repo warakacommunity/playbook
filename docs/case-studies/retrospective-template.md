@@ -15,12 +15,12 @@ The retrospective structure every page in the [Case Studies](./index.md) chapter
 
 ## How to use this template
 
-1. Copy this file to `docs/case-studies/<project-slug>.md` and change `title` in its front matter (`last_update` is generated automatically from git history). Leave `ready: true` out while the page is being written: without it, the site shows an "In development" placeholder instead of the page body. Add it when every question is answered, or, for a public-record draft, as described in step 4.
-2. Fill in the project facts. Link to the paper, dataset card, guidelines, and repository rather than restating them.
-3. Answer the seventeen questions. Short and honest beats long and polished.
-4. If you are not a project lead, mark the page as a **public-record draft** with a warning banner, cite your sources, and mark every unconfirmed answer as awaiting project-lead review (see [MasakhaNER 1 → 2](./masakhaner.md) for the pattern). Once every unconfirmed answer is clearly marked in this way, add `ready: true` so the draft is published.
-5. Add the page id (for example `'case-studies/<project-slug>'`) to the Case Studies entry in `sidebars.js`; the chapter's pages are listed there explicitly, so a page that is not added will not appear in the sidebar.
-6. Open a pull request and tag the project leads for review before merging.
+1. **Create the page.** Copy this file to `docs/case-studies/<project-slug>.md`, named after the project (for example `afrisenti.md` or `mafand-mt.md`), and change `title` in its front matter. Do not set `last_update` by hand; it is generated automatically from git history. Leave `ready: true` out while you write: without it, the site shows an "In development" placeholder instead of the page body. Add it when every question is answered, or, for a public-record draft, as described in step 4.
+2. **Fill in the project facts.** Link to the paper, dataset card, guidelines and repository rather than restating them.
+3. **Answer the seventeen questions.** Short and honest beats long and polished. If a question is not applicable, say so and why.
+4. **Mark public-record drafts.** If you are not a project lead, mark the page as a **public-record draft** with a warning banner, cite your sources, and mark every unconfirmed answer as awaiting project-lead review (see [MasakhaNER 1 → 2](./masakhaner.md) for the pattern). Once every unconfirmed answer is clearly marked, add `ready: true` so the draft is published.
+5. **Add the page to the sidebar.** Add the page id (for example `'case-studies/<project-slug>'`) to the Case Studies entry in `sidebars.js`. The chapter's pages are listed there explicitly, so a page that is not added will not appear in the sidebar.
+6. **Open a pull request** and tag the project leads for review before merging.
 
 ## Project facts
 

@@ -3,7 +3,7 @@ ready: true
 sidebar_position: 2
 title: MasakhaNER 1 → 2
 last_update:
-  date: 2026-11-22
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -12,7 +12,7 @@ last_update:
 *Public-record draft. Last reviewed: 2026-11-22.*
 
 :::warning[Public-record draft: awaiting project-lead review]
-This retrospective is assembled from the published papers ([Adelani et al., 2021](https://aclanthology.org/2021.tacl-1.66/); [Adelani et al., 2022](https://arxiv.org/abs/2210.12391)), the [MasakhaNER GitHub repository](https://github.com/masakhane-io/masakhane-ner), and the [MasakhaNER 2 dataset card on the Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2). **It has not been reviewed or approved by the project leads.** Numbers, dates, and social/political narrative may be incomplete, wrong at the margins, or missing what actually happened.
+This retrospective is assembled from the published papers ([Adelani et al., 2021](../references.md#adelani-2021); [Adelani et al., 2022a](../references.md#adelani-2022)), the [MasakhaNER GitHub repository](https://github.com/masakhane-io/masakhane-ner), and the [MasakhaNER 2 dataset card on the Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhaner2). **It has not been reviewed or approved by the project leads.** Numbers, dates, and social/political narrative may be incomplete, wrong at the margins, or missing what actually happened.
 
 If you led this project, please open a pull request replacing this draft with your own voice. The questionnaire below is exactly the structure the retrospective needs, and the public-record answers give you a starting point to correct rather than a blank page.
 :::
@@ -21,7 +21,10 @@ If you led this project, please open a pull request replacing this draft with yo
 
 - **Project name:** MasakhaNER 1 (2021) → MasakhaNER 2 (2022)
 - **Task and modality:** Named Entity Recognition, text (news domain)
-- **Languages covered:** MasakhaNER 1 (10 African languages): Amharic, Hausa, Igbo, Kinyarwanda, Luganda, Luo, Nigerian Pidgin, Swahili, Wolof, Yorùbá. MasakhaNER 2 (20): Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Swahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, Yorùbá. Amharic is in version 1 only; version 2 drops it and adds eleven new languages.
+- **Languages covered:**
+  - MasakhaNER 1 (10 African languages): Amharic, Hausa, Igbo, Kinyarwanda, Luganda, Luo, Nigerian Pidgin, Swahili, Wolof, Yorùbá.
+  - MasakhaNER 2 (20): Bambara, Chichewa, chiShona, Ewe, Fon, Ghomala, Hausa, Igbo, isiXhosa, isiZulu, Kinyarwanda, Swahili, Luganda, Luo, Mossi, Nigerian Pidgin, Setswana, Twi, Wolof, Yorùbá.
+  - Amharic is in version 1 only; version 2 drops it and adds eleven new languages.
 - **Release date(s):** v1, preprint March 2021, published in *Transactions of the ACL* vol. 9 (2021); v2, preprint October 2022, published at EMNLP 2022.
 - **Canonical paper / repo / dataset URL(s):**
   - v1: [Adelani et al., 2021](../references.md#adelani-2021), TACL
@@ -149,8 +152,7 @@ Public-record inference from the papers:
 1. Read the MasakhaNER annotation guideline (in the [GitHub repository](https://github.com/masakhane-io/masakhane-ner)) before writing your own. It is the reference for applying PER, ORG, LOC and DATE to African-language news.
 2. Budget for a coordinator per language who discusses and resolves disagreements with the annotators. In v2, this is what moved Nigerian Pidgin from κ = 0.648 to 0.966 (after coordinator intervention, before final adjudication).
 3. Publish per-language and per-class F1, not only an average. The average hides where the corpus's coverage is thin.
-4. Before annotating thousands of sentences, try transfer from the closest covered language. In v2, zero-shot transfer from the best source language came close to training on 500 annotated target sentences (about two and a half hours of annotation), and fine-tuning on 100 to 500 target sentences on top of it helped further. See [cross-language transfer](/cross-language-transfer).
-
+4. Before annotating thousands of sentences, try transfer from the closest covered language. In v2, zero-shot transfer from the best source language came close to training on 500 annotated target sentences (about two and a half hours of annotation), and fine-tuning on 100 to 500 target sentences on top of it helped further. See [cross-language transfer](../cross-language-transfer/index.md).
 
 *[Awaiting project-lead confirmation and additions.]*
 

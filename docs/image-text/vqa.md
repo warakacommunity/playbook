@@ -13,11 +13,26 @@ last_update:
 
 Visual question answering (VQA) asks a model a question in natural language about an image and expects an answer: what colour is the car, how many people are there, what is the person doing. For African languages it is a demanding test, because the model must understand both the image and a question posed in a low-resource language at the same time.
 
+:::tip[Key points]
+
+- Translating an English VQA set is the quick route, but it keeps Western images and assumptions.
+- Native speakers must check every translated question and answer against the image.
+- Keep several accepted answers per question, so inflected forms are not marked wrong.
+- Translated benchmarks over-report quality; test on local images and native questions.
+- Diagnose language failures and image failures separately.
+
+:::
+
 ![Visual question answering: an image plus a question in an African language yields an answer](images/vqa-flow.svg)
 
 ## What the data looks like
 
-A VQA dataset is images, questions about them, and answers, usually many questions per image. The first substantial African resource, HaVQA, built Hausa VQA by carefully translating 6,022 English question-answer pairs over 1,555 Visual Genome images, keeping the translations faithful to what the images show ([HaVQA, 2023](../references.md#havqa-2023)). That translation route is the pragmatic starting point, but it has a ceiling: the images and questions come from a Western dataset, so they reflect Western scenes and assumptions. Collecting questions written natively by speakers about images from their own context is harder, but it produces data that actually fits the users. Cultural multimodal benchmarks push in that direction: CVQA covers 31 languages, including Amharic, Oromo, Swahili, Igbo and Kinyarwanda, with culturally relevant images and native questions ([Romero et al., 2024](../references.md#romero-2024-cvqa)), and Afri-MCQA has about 7,500 question-answer pairs in 15 African languages written by native speakers ([Tonja et al., 2026](../references.md#tonja-2026-afrimcqa)).
+A VQA dataset is images, questions about them, and answers, usually many questions per image. The first substantial African resource, HaVQA, built Hausa VQA by carefully translating 6,022 English question-answer pairs over 1,555 Visual Genome images. The translations were kept faithful to what the images show ([HaVQA, 2023](../references.md#havqa-2023)).
+
+That translation route is the pragmatic starting point, but it has a ceiling. The images and questions come from a Western dataset, so they reflect Western scenes and assumptions. Collecting questions written natively by speakers about images from their own context is harder, but it produces data that actually fits the users. Cultural multimodal benchmarks push in that direction:
+
+- **CVQA** covers 31 languages, including Amharic, Oromo, Swahili, Igbo and Kinyarwanda, with culturally relevant images and native questions ([Romero et al., 2024](../references.md#romero-2024-cvqa)).
+- **Afri-MCQA** has about 7,500 question-answer pairs in 15 African languages, written by native speakers ([Tonja et al., 2026](../references.md#tonja-2026-afrimcqa)).
 
 A record links an image to a question and the answers people gave, with a list of answers so the scoring below can credit any accepted form:
 
@@ -35,43 +50,32 @@ Keeping several accepted answers per question matters here for the same morpholo
 
 ## Annotation and evaluation
 
-VQA annotation is writing questions and marking correct answers, or translating and verifying them against the image, which native speakers must do, since a translated question that no longer matches the picture is worse than useless. Define how to handle open-ended answers, synonyms, and inflected forms before starting. The config shows the image and gives a box for the question and the answer, so a native speaker can author a pair or, in the translation route, retype and correct them against the picture. The check that the question still matches the image is built in as an explicit choice:
+VQA annotation means writing questions and marking correct answers, or translating them and verifying them against the image. Native speakers must do this, because a translated question that no longer matches the picture is worse than useless. Before starting, define how to handle open-ended answers, synonyms and inflected forms.
 
-```xml
-<View>
-  <Image name="image" value="$image"/>
-  <Header value="Question about the image"/>
-  <TextArea name="question" toName="image" rows="1" editable="true"
-            placeholder="Write a question about what the image shows"/>
-  <Header value="Answer"/>
-  <TextArea name="answer" toName="image" rows="1" editable="true"
-            placeholder="Write the correct answer"/>
-  <Choices name="matches_image" toName="image" choice="single" required="true">
-    <Choice value="Question and answer match the image"/>
-    <Choice value="Does not match, discard"/>
-  </Choices>
-</View>
-```
+The task shows the image with a box for the question and one for the answer. A native speaker can write a new pair or, on the translation route, retype and correct a translated pair against the picture. The check that the pair still matches the image is an explicit, required choice:
 
-VQA is scored by answer accuracy, often with the VQA score, which collects 10 human answers per question and counts an answer fully correct if at least 3 people gave it ([Antol et al., 2015](../references.md#antol-2015)), and the same morphology caveats apply as in text question answering, so the [Exact Match and token-F1 approach](../text-generation/question-answering.md) from there carries over, with a human check on a sample needed alongside the automatic number.
+**Task specification: VQA question-answer pair**
+
+| Setting | Value |
+|---|---|
+| Annotator sees | The image (and, on the translation route, the translated question and answer to correct) |
+| Annotator gives | A one-line question about what the image shows; a one-line correct answer; a match judgement |
+| Choice | Question and answer: free text, editable. Match judgement: exactly one of "Question and answer match the image" / "Does not match, discard"; required |
+
+VQA is scored by answer accuracy, often with the VQA score. It collects 10 human answers per question and counts an answer fully correct if at least 3 people gave it ([Antol et al., 2015](../references.md#antol-2015)). The same morphology caveats apply as in text question answering, so the [Exact Match and token-F1 approach](../text-generation/question-answering.md) carries over. Check a sample by hand alongside the automatic number.
 
 ## The 2026 modelling landscape
 
-The dominant shift since HaVQA is that **general-purpose multimodal large language models** (MLLMs) now handle VQA out-of-the-box as a prompting task, replacing the fine-tuned encoder-decoder VQA architectures of 2020-2023. The workable open baselines for African-language VQA in mid-2026 are:
+General multimodal LLMs now handle VQA by prompting. The model options, licences and closed-API caveats are shared with captioning and are set out in [Models for image-text tasks in 2026](./index.md#models-for-image-text-tasks-in-2026). Two points are specific to VQA:
 
-- **PaliGemma 2** (Google, 2024): a compact vision-language model built on Gemma 2 and the SigLIP image encoder, in 3B/10B/28B variants at 224/448/896 pixel resolutions ([Steiner et al., 2024](../references.md#steiner-2024-paligemma2)). The weights are released under the Gemma terms of use rather than an OSI licence. A strong small-scale open baseline for VQA on Latin-script African languages via prompting or lightweight fine-tuning.
-- **Qwen2-VL** ([Wang et al., 2024](../references.md#wang-2024-qwen2vl)) and **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)** (Alibaba, 2024-2025): 2B to 72B variants, strong on multi-image and video reasoning. Licences differ by model: several are Apache-2.0, but the 72B models use Alibaba's own Qwen licence and the Qwen2.5-VL 3B model is under a research-only licence, so check each model card. A competitive open baseline on multilingual benchmarks; measure against PaliGemma 2 as the honest open comparison.
-- **[InternVL 2.5 / 3](https://github.com/OpenGVLab/InternVL)** (OpenGVLab, 2024-2025): 1B–78B variants ([Chen et al., 2024](../references.md#chen-2024-internvl25)). The code is MIT-licensed, but individual model weights inherit the licences of their components, so check each model card. Worth including in a candidate measurement plan.
-- **[LLaVA-NeXT](https://llava-vl.github.io/blog/2024-01-30-llava-next/)** and the LLaVA-1.5 recipe it builds on ([Liu et al., 2024](../references.md#liu-2024-llava15)): the earlier open-source MLLM lineage; useful as a baseline for reproducibility, less strong than the 2025-2026 releases.
-- **[Molmo](https://molmo.allenai.org/)** (Allen AI, 2024): open weights, open training data (PixMo) and open code, with a 2D pointing dataset that supports answers grounded in a specific location in the image ([Deitke et al., 2024](../references.md#deitke-2024-molmo)). Worth measuring for use cases where the answer must reference a specific location.
-
-**Closed-API baselines.** For teams building a research reference rather than a shippable deployment, **Gemini 2.5 Flash / Pro**, **GPT-4o / GPT-4.1**, and **Claude Sonnet 4** all handle African-language VQA to varying degrees. Their coverage is uneven per-language and per-orthography, and licensing prevents redistribution or reproducible evaluation without live API access. Use them as the ceiling reference against which open MLLMs are measured, not as the primary deployment surface unless the budget and terms permit it. See the [compute-poor chapter's API caveats](../compute-poor/index.md#api-based-approaches-legitimate-but-not-free).
-
-**Editorial opinion.** For a new African-language VQA project in 2026, the shortest defensible path is: **prompt-based evaluation of Qwen2.5-VL-7B and PaliGemma 2 (10B or 28B)** against your candidate test set, followed by lightweight LoRA fine-tuning on HaVQA (Hausa) or your language's translated Visual Genome subset if prompt-only performance is inadequate. Do not skip native-speaker evaluation of 200+ outputs: automatic VQA scores on translated benchmarks systematically over-report perceived quality.
+- **Answers that point to a place.** If the answer must refer to a location in the image, include Molmo, whose 2D pointing data supports grounded answers ([Deitke et al., 2024](../references.md#deitke-2024-molmo)).
+- **Fine-tuning data.** If prompting falls short, LoRA fine-tune on HaVQA (Hausa) or a translated Visual Genome subset for your language. Still have native speakers check 200+ outputs: automatic VQA scores on translated benchmarks over-report quality.
 
 ## What it will actually cost you
 
-VQA data is expensive per-record because every record touches an image, a question, and an answer, and every one needs a native speaker's judgement that all three are consistent. Rough order-of-magnitude:
+VQA data is expensive per record because every record touches an image, a question and an answer, and every one needs a native speaker's judgement that all three are consistent.
+
+The figures below are rough, order-of-magnitude planning estimates from practitioner experience, not measured or published figures. Use them to start a budget conversation, then replace them with your own quotes and pilot numbers.
 
 - **Prompt-only evaluation of open MLLMs (PaliGemma 2, Qwen2.5-VL) on HaVQA or a translated benchmark.** One to two person-weeks; ten to forty GPU-hours for inference across the candidate models. Colab Pro / Kaggle is enough for 7B-class models at inference; 28B/72B needs a dedicated GPU.
 - **LoRA fine-tuning an MLLM on HaVQA for a covered language.** Two to four person-weeks; twenty to eighty GPU-hours. Adapter weights can be released independently of the base model, which sidesteps some redistribution restrictions.

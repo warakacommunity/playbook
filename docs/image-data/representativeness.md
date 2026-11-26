@@ -3,7 +3,7 @@ title: Representativeness audits
 sidebar_position: 11
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -12,6 +12,16 @@ last_update:
 A representativeness audit asks whether the images in a dataset cover the places, people, conditions and classes the model will meet once it is used. It is a count, not an opinion: you record what each image shows and how it was taken, tabulate it against the population you are building for, and report the gaps. The [classification](./classification.md) page names domain shift as the main way a vision model fails in African settings, and the same risk applies to [object detection](./object-detection.md) and [segmentation](./segmentation.md). This page shows how to find that shift in your own data before a model does.
 
 The need is well documented. Of the Open Images pictures whose country could be recovered, more than 32% were from the United States and 60% from six North American and European countries, while China and India held about 1% and 2%; ImageNet was similarly skewed ([Shankar et al., 2017](../references.md#shankar-2017)). On household items photographed in homes around the world, six object-recognition systems were about 15 percentage points more accurate on items from the United States than on the same kinds of items from Somalia or Burkina Faso, and about 10% less accurate for the poorest households than for the richest ([DeVries et al., 2019](../references.md#devries-2019)). A dataset collected in Africa is not automatically free of the problem: it can still come from one city, one phone, one season or one skin-tone range.
+
+:::tip[Key points]
+
+- Write down the target population first: it is the yardstick for every count.
+- Record the attributes that matter for your task (such as location, people, lighting, device and collector) for each image at capture time.
+- Gaps hide in crossed cells (for example region by season), and confounds hide in capture attributes crossed with labels.
+- Only targeted collection adds real variety; resampling just reuses what you have.
+- Report the audit, its gaps and per-group results in the dataset card, giving people's attributes only as aggregate counts.
+
+:::
 
 ## Start from the target population
 
@@ -38,7 +48,15 @@ Record location at the coarsest unit that still answers your questions, usually 
 
 ### Skin tone
 
-When people appear in the images, skin tone is the attribute most often audited and most often missing. The Fitzpatrick scale, developed in dermatology, has six types; the Gender Shades study used it to show that two widely used face benchmarks were 79.6% and 86.2% lighter-skinned, built a benchmark of parliamentarians from Rwanda, Senegal and South Africa alongside three Nordic countries, and found commercial gender classifiers erred on up to 34.7% of darker-skinned women against at most 0.8% of lighter-skinned men ([Buolamwini and Gebru, 2018](../references.md#buolamwini-2018)). Dermatology image sets show the same skew: most images in two public sets fell in the lighter-skin range when skin tone was estimated from the pixels ([Kinyanjui et al., 2019](../references.md#kinyanjui-2019)), and a classifier trained on a set with far more light than dark skin was most accurate on skin types like those it was trained on ([Groh et al., 2021](../references.md#fitzpatrick17k-2021)).
+When people appear in the images, skin tone is the attribute most often audited and most often missing.
+
+The Fitzpatrick scale, developed in dermatology, has six skin types. The Gender Shades study used it ([Buolamwini and Gebru, 2018](../references.md#buolamwini-2018)):
+
+- It found that two widely used face benchmarks were 79.6% and 86.2% lighter-skinned.
+- Its authors built a new benchmark of parliamentarians from Rwanda, Senegal and South Africa alongside three Nordic countries.
+- It found that commercial gender classifiers erred on up to 34.7% of darker-skinned women, against at most 0.8% of lighter-skinned men.
+
+Dermatology image sets show the same skew. Most images in two public sets fell in the lighter-skin range when skin tone was estimated from the pixels ([Kinyanjui et al., 2019](../references.md#kinyanjui-2019)). A classifier trained on a set with far more light than dark skin was most accurate on skin types like those it was trained on ([Groh et al., 2021](../references.md#fitzpatrick17k-2021)).
 
 The Monk Skin Tone (MST) scale is a 10-shade alternative released openly by Google with the sociologist Ellis Monk ([Google, 2022](../references.md#monk-scale-2022)). A study of MST annotation found that annotators can label it reliably and in line with an expert, even in difficult conditions, but that annotators from different regions held different mental models of the shades. Its authors recommend a diverse annotator pool and more annotations per image, and released a set of example images for training annotators ([Schumann et al., 2023](../references.md#schumann-2023)).
 
@@ -60,7 +78,14 @@ Phone cameras differ in resolution, colour processing, compression and lens. Rec
 
 ### Classes and the long tail
 
-Most real image collections have a few common classes and many rare ones, and the rare ones are often the ones that matter: the unusual disease, the uncommon species, the less frequent road hazard. Report the images and instances per class, and summarise imbalance with two numbers: the imbalance ratio (largest class count divided by smallest) and normalised entropy (1 when the planned classes are equally filled, 0 when one class takes everything). Divide by the logarithm of the number of planned classes, not only those observed, so an empty class still lowers the score, as in [Report readiness as separate measures](../4_data-quality/index.md#report-readiness-as-separate-measures). The LVIS benchmark groups categories as rare (1 to 10 training images), common (11 to 100) and frequent, and reports results for each group separately ([Gupta et al., 2019](../references.md#lvis-2019)). That grouping is a useful way to report a long-tailed dataset too.
+Most real image collections have a few common classes and many rare ones. The rare ones are often the ones that matter: the unusual disease, the uncommon species, the less frequent road hazard.
+
+Report the images and instances per class, and summarise imbalance with two numbers:
+
+- **Imbalance ratio:** the largest class count divided by the smallest.
+- **Normalised entropy:** 1 when the planned classes are equally filled, 0 when one class takes everything. Divide by the logarithm of the number of *planned* classes, not only those observed, so an empty class still lowers the score, as in [Report readiness as separate measures](../4_data-quality/index.md#report-readiness-as-separate-measures).
+
+The LVIS benchmark groups categories as rare (1 to 10 training images), common (11 to 100) and frequent (more than 100), and reports results for each group separately ([Gupta et al., 2019](../references.md#lvis-2019)). That grouping is a useful way to report a long-tailed dataset too.
 
 Resampling can help a model learn rare classes. LVIS introduced repeat factor sampling, which repeats training images that contain rare categories more often in each epoch ([Gupta et al., 2019](../references.md#lvis-2019)). Resampling only reuses the images you already have, though. It cannot add variety that was never collected, and it does nothing for a test set too small to measure a rare class. The real fix is targeted collection.
 

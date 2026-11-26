@@ -13,9 +13,26 @@ last_update:
 
 Object detection goes a step beyond classification: it finds where objects are in an image and draws a labelled box around each one. In African contexts it powers tasks like counting livestock from drone imagery, spotting infrastructure in satellite photos, or locating individual plants in a field.
 
+:::tip[Key points]
+
+- A detection dataset is images plus one labelled box per object; store it in COCO format.
+- Write explicit box rules (fit, occlusion, minimum size, image edge) before annotating.
+- Measure agreement by pairing boxes one to one, not by averaging IoU.
+- Report mAP at IoU 0.50 and 0.75, per class and by object size.
+- Collect images from real local conditions and several seasons; check model licences before deployment.
+
+:::
+
 ## What the data looks like
 
-A detection dataset is images annotated with bounding boxes, each box marking the location and class of one object. The annotation is far more laborious than classification, since every object in every image must be boxed, which makes tool choice and clear guidelines matter more. African detection data is dominated by aerial and satellite imagery for agriculture and the environment, where boxes mark fields, buildings, or vehicles, and by wildlife and livestock monitoring. As with classification, images captured in real African conditions, low resolution, oblique angles, dense scenes, are essential, because models trained on clean benchmarks degrade on them.
+A detection dataset is a set of images annotated with bounding boxes. Each box marks the location and class of one object. Every object in every image must be boxed, so annotation takes far more work than classification. Clear guidelines and a suitable annotation tool matter more as a result.
+
+Most African detection data falls into two groups:
+
+- **Aerial and satellite imagery** for agriculture and the environment, where boxes mark fields, buildings or vehicles.
+- **Wildlife and livestock monitoring**, often from camera traps or drones.
+
+As with classification, use images captured in real local conditions: low resolution, oblique angles and dense scenes. Models trained only on clean benchmark images perform worse on such images.
 
 The most widely supported format is COCO, where one JSON file holds the images, the boxes, and the categories, linked by id. Each box is `[x, y, width, height]` in pixels from the top-left corner:
 
@@ -47,25 +64,32 @@ For objects that persist across video frames, keep one identity per object and f
 
 ## Annotation and evaluation
 
-Box annotation needs explicit rules: how tightly to fit the box, how to handle occluded or overlapping objects, how small an object must be to mark, and what to do at the image edge. These rules are where annotators silently diverge, so pin them down and measure agreement on a shared set; [Box and region rules](./region-guidelines.md) gives a tested set to start from. Detection is evaluated with [mean Average Precision (mAP)](https://lightning.ai/docs/torchmetrics/stable/detection/mean_average_precision.html), which rewards both correct labels and accurate placement, built on [Intersection over Union (IoU)](https://en.wikipedia.org/wiki/Jaccard_index), the overlap between a predicted box and the true one. Report the IoU threshold you used, since mAP at a loose threshold flatters a model that places boxes sloppily.
+Box annotation needs explicit rules for:
 
-The labeling config gives the annotator a set of box labels to draw over the image:
+- how tightly to fit the box;
+- how to handle occluded or overlapping objects;
+- how small an object must be to mark;
+- what to do at the image edge.
 
-```xml
-<View>
-  <Image name="image" value="$image"/>
-  <RectangleLabels name="bbox" toName="image">
-    <Label value="Cattle"   background="#C66A3D"/>
-    <Label value="Building"  background="#1F5B3F"/>
-    <Label value="Vehicle"   background="#E0A458"/>
-  </RectangleLabels>
-</View>
-```
+Annotators quietly diverge on exactly these points. Write the rules down and measure agreement on a shared set of images. [Box and region rules](./region-guidelines.md) gives a tested set to start from.
 
-`torchmetrics` computes mAP from predictions and targets, and reads the IoU threshold straight off so you can report it honestly:
+A typical box task looks like this:
+
+**Task specification: object boxes**
+
+| Setting | Value |
+|---|---|
+| Annotator sees | One image, with zoom |
+| Annotator gives | A rectangle around each target object, with one class: Cattle, Building or Vehicle |
+| Choice | Exactly one class per box; as many boxes as there are objects, or none if the image has no target objects |
+| Notes | Give each class its own colour so boxes are easy to tell apart. Add occlusion and truncation flags only if you will use them (see [Box and region rules](./region-guidelines.md#occlusion-and-truncation-flags)). |
+
+Detection is evaluated with [mean Average Precision (mAP)](https://lightning.ai/docs/torchmetrics/stable/detection/mean_average_precision.html). mAP rewards both correct labels and accurate placement. It is built on [Intersection over Union (IoU)](https://en.wikipedia.org/wiki/Jaccard_index), the overlap between a predicted box and the true one. Always report the IoU threshold you used: mAP at a loose threshold flatters a model that places boxes carelessly.
+
+The `torchmetrics` library computes mAP from predictions and targets at the IoU thresholds you choose, so you can report each one:
 
 ```python
-# pip install torchmetrics
+# pip install torchmetrics pycocotools
 import torch
 from torchmetrics.detection import MeanAveragePrecision
 
@@ -168,51 +192,67 @@ To aggregate over a dataset, sum `matched`, `only_a`, `only_b`, and the box coun
 
 ## The 2026 modelling landscape
 
-Object detection in 2026 is dominated by transformer-based detectors and open-vocabulary detectors. The workable open-model references:
+Object detection in 2026 is led by transformer-based detectors and open-vocabulary detectors. Open models worth knowing:
 
-- **[RT-DETR / RT-DETR v2](https://arxiv.org/abs/2304.08069)** (Baidu, 2023-2024): the real-time DETR variant, Apache-2.0 licensed, competitive mAP with substantially better inference latency than YOLO-lineage detectors. The defensible default for a new African-context detection project.
-- **[Co-DETR](https://arxiv.org/abs/2211.12860)** and **[DINO-DETR](https://arxiv.org/abs/2203.03605)**: the strongest current closed-vocabulary DETR variants for accuracy at the cost of inference speed. Useful when accuracy dominates deployment cost.
-- **[YOLOv10 / YOLO11 / YOLO12](https://docs.ultralytics.com/)** (Ultralytics, 2024-2026): the widely-deployed YOLO lineage, AGPL-3.0 licensed (commercial deployments require an Ultralytics licence). Still the workable default for edge deployment where inference speed dominates. Note the licence caveat before committing to production.
-- **Open-vocabulary detectors.** **[Grounding DINO](https://arxiv.org/abs/2303.05499)** (IDEA-Research, 2023), **[OWLv2](https://arxiv.org/abs/2306.09683)** (Google, 2023), **[YOLO-World](https://arxiv.org/abs/2401.17270)** (Tencent, 2024): detect arbitrary categories from natural-language prompts without a fixed training vocabulary. Useful when the deployment surface has a growing or long-tail category set.
-- **General MLLMs with detection.** **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)** and **[Molmo](https://molmo.allenai.org/)** produce bounding-box output from natural-language prompts; workable when the detection is one part of a larger multimodal task, weaker than dedicated detectors on pure-detection benchmarks.
+| Model family | What it offers | Licence and notes |
+|---|---|---|
+| **[RT-DETR](https://arxiv.org/abs/2304.08069) / [RT-DETRv2](https://arxiv.org/abs/2407.17140)** (Baidu, 2023-2024) | Real-time transformer detector; its authors report better speed and accuracy than YOLO detectors of similar size | Apache-2.0. A sensible default for a new project |
+| **[Co-DETR](https://arxiv.org/abs/2211.12860)** and **[DINO](https://arxiv.org/abs/2203.03605)** | High-accuracy transformer detectors, slower at inference | Use when accuracy matters more than deployment cost |
+| **YOLO family** (YOLOv10, YOLO11, YOLO12; packaged in the [Ultralytics](https://docs.ultralytics.com/) library) | Widely deployed; fast, suits edge devices | AGPL-3.0; closed-source commercial use needs a separate commercial licence. Check before production |
+| **Open-vocabulary detectors**: [Grounding DINO](https://arxiv.org/abs/2303.05499) (IDEA Research, 2023), [OWLv2](https://arxiv.org/abs/2306.09683) (Google, 2023), [YOLO-World](https://arxiv.org/abs/2401.17270) (Tencent, 2024) | Detect categories named in a text prompt, with no fixed training vocabulary | Useful when the category set is long-tailed or keeps growing |
+| **Multimodal LLMs**: [Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/) (boxes), [Molmo](https://molmo.allenai.org/) (points) | Locate objects from a natural-language prompt | Useful when detection is one step in a larger multimodal task; usually weaker than dedicated detectors on pure detection |
 
-**Editorial opinion.** For a new African-context detection project (agriculture, environment, wildlife, infrastructure), the shortest defensible path is: fine-tune RT-DETR v2 on 2,000-10,000 annotated target-domain images, evaluate mAP at IoU 0.50 AND 0.75 (report both), and report per-class AP alongside the mean. For edge deployment, distil to a YOLO11 or MobileNetV4-based detector after training. For long-tail or growing vocabularies, evaluate Grounding DINO zero-shot before committing to a closed-vocabulary detector. If you use a detector to pre-label boxes for annotators, see [Detector pre-labels](../3_annotation-design/model-assisted-annotation.md#detector-pre-labels) for the problems that come with correcting a detector's drafts.
+:::note[Editorial opinion]
+
+For a new African-context detection project (agriculture, environment, wildlife, infrastructure), the shortest defensible path is:
+
+1. Fine-tune RT-DETRv2 on roughly 2,000 to 10,000 annotated images from your target domain.
+2. Evaluate mAP at IoU 0.50 **and** 0.75, and report per-class AP alongside the mean.
+3. For edge deployment, distil the trained model into a smaller, faster detector, such as a YOLO11 or MobileNet-based model.
+4. For long-tail or growing vocabularies, test Grounding DINO zero-shot before committing to a closed-vocabulary detector.
+
+:::
+
+If you use a detector to pre-label boxes for annotators, see [Detector pre-labels](../3_annotation-design/model-assisted-annotation.md#detector-pre-labels) for the problems that come with correcting a detector's drafts.
 
 ## What it will actually cost you
 
-Detection is 3-10x more expensive per-record than classification because every object in every image must be boxed, and adjudicating box tightness across annotators is slow. Rough order-of-magnitude:
+Every object in every image must be boxed, and settling disagreements about box fit is slow. Expect detection to cost several times more per image than classification. The figures below are rough planning estimates from experience, not measured benchmarks:
 
-- **Fine-tuning RT-DETR v2 or YOLO11 on an existing detection corpus.** One to three person-weeks; twenty to a hundred GPU-hours.
-- **Building a new detection corpus** for an African-context task (2,000-10,000 images with 5-30 boxes per image). Six to fifteen months elapsed; six to fifteen person-months. Box-tightness adjudication is the constraint; a corpus with strict box-fit rules costs 30-50% more than one with loose rules.
-- **Extending to keypoint annotation on top of boxes.** Roughly 50-100% more annotation effort per image; see [Keypoints and pose](./keypoints-pose.md#what-it-will-actually-cost-you).
-- **Evaluation-only detection sets** (500-2,000 images). Three to six months; three to six person-months.
-- **Satellite / drone-imagery annotation.** Faster per-object (small objects on aerial imagery) but requires GIS-familiar annotators: a smaller pool than classification-annotators and typically higher hourly rates.
-- **Human evaluation of detection output.** Two to three person-weeks per evaluator per 200 images. Detection evaluation is slow because the evaluator must check both class correctness and box-fit correctness.
+| Activity | Rough effort |
+|---|---|
+| Fine-tuning RT-DETRv2 or YOLO11 on an existing detection corpus | One to three person-weeks; twenty to a hundred GPU-hours |
+| Building a new corpus (2,000 to 10,000 images, 5 to 30 boxes each) | Six to fifteen months elapsed; six to fifteen person-months. Box-fit adjudication is the bottleneck; strict box-fit rules cost noticeably more than loose ones |
+| Adding keypoints on top of boxes | Extra effort per image that grows with the number of points and how often they are hidden; time it in your pilot (see [Keypoints and pose](./keypoints-pose.md#what-it-will-actually-cost-you)) |
+| Evaluation-only set (500 to 2,000 images) | Three to six months; three to six person-months |
+| Satellite or drone imagery | Objects are small and often quick to box, but annotators need some familiarity with aerial imagery and maps, which narrows the pool |
+| Human evaluation of detector output | Two to three person-weeks per evaluator per 200 images; evaluators must check both the class and the box fit |
 
 ## Known limitations to watch for
 
-- **Report mAP@0.75, not just mAP@0.50.** A detector that scores well at 0.50 but poorly at 0.75 is placing loose boxes. If your downstream task uses the box for measurement (counting, area estimation, cropping for downstream classification), loose boxes destroy the downstream signal.
-- **Small-object performance is the hidden failure.** Aerial and satellite imagery is dominated by small objects; most detectors trained on natural-imagery benchmarks under-perform on small objects. Report AP by object size (small / medium / large) as separate numbers. For very large aerial and satellite images, tile with overlap; see [Large and geo-referenced imagery](./large-imagery.md).
-- **Class imbalance in the same imagery.** A field-imagery corpus with 1,000 healthy plants and 5 diseased plants per image trains a detector that ignores the diseased class. Rebalance during training (oversampling, class-weighted loss) or accept the failure.
-- **Dense-scene occlusion.** Livestock counting, market-scene detection, and crowd analysis all involve dense scenes where objects occlude each other. Standard detectors under-perform in dense scenes; report crowd-scene AP separately.
-- **Confounded backgrounds.** If all photos of the diseased class were taken in one field and all photos of the healthy class in another, the detector learns to distinguish fields, not classes. This is the object-detection version of the classification confound.
-- **Satellite-imagery seasonality.** A detector trained on rainy-season satellite imagery of maize fields fails on dry-season imagery. Multi-seasonal training data is not optional.
-- **Consent and identifiability at aerial resolution.** Drone imagery of a village at 5cm/pixel resolution shows identifiable people, homes, and possessions. Regulatory frameworks vary by country; the [data governance chapter](../data-governance/index.md) covers the discipline, and [Privacy at high resolution](./large-imagery.md#privacy-at-high-resolution) and [Visual privacy](./visual-privacy.md) apply it to images.
-- **Licence caveat for YOLO lineage.** YOLOv5, v8, v10, v11, v12 are AGPL-3.0. Commercial deployment requires an Ultralytics licence. Check before shipping.
+- **Report mAP@0.75, not just mAP@0.50.** A detector that scores well at 0.50 but poorly at 0.75 places loose boxes. If your downstream task uses the box for measurement (counting, area estimation, cropping for a classifier), loose boxes destroy that signal.
+- **Small objects are the hidden failure.** Aerial and satellite imagery is full of small objects, and most detectors trained on everyday photos do worse on them. Report AP by object size (small, medium, large) as separate numbers. For very large images, tile with overlap; see [Large and geo-referenced imagery](./large-imagery.md).
+- **Class imbalance within the same images.** A field corpus with 1,000 healthy plants and 5 diseased plants per image trains a detector that ignores the diseased class. Rebalance during training (oversampling, class-weighted loss) or accept the failure.
+- **Dense scenes.** Livestock counting, market scenes and crowds all involve objects hiding each other. Standard detectors do worse here; report AP on crowded scenes separately.
+- **Confounded backgrounds.** If all photos of diseased plants come from one field and all healthy ones from another, the detector learns to tell the fields apart, not the classes. This is the detection version of the classification confound.
+- **Seasonality in satellite imagery.** A detector trained on rainy-season images of maize fields can fail on dry-season images. Include several seasons in the training data.
+- **Consent and identifiability from the air.** High-resolution drone imagery of a village (a few centimetres per pixel) shows people, homes and possessions, which can make them identifiable. Rules vary by country. The [data governance chapter](../data-governance/index.md) covers the discipline, and [Privacy at high resolution](./large-imagery.md#privacy-at-high-resolution) and [Visual privacy](./visual-privacy.md) apply it to images.
+- **YOLO licences.** The Ultralytics YOLO releases (YOLOv5, YOLOv8, YOLO11) are AGPL-3.0, and so are the YOLOv10 and YOLO12 code releases. Commercial deployment without releasing your code needs a commercial licence. Check before shipping.
 
 ## Further reading
 
 - [RT-DETR v2 (Lv et al., 2024)](https://arxiv.org/abs/2407.17140): the workable real-time DETR-lineage detector; the defensible default for African-context detection projects.
 - [Grounding DINO (Liu et al., 2023)](https://arxiv.org/abs/2303.05499): the workable open-vocabulary detector; useful for long-tail or growing category sets.
-- [State of CV in Africa (2024)](https://arxiv.org/abs/): the reference survey of the field on the continent; useful for understanding where detection sits among the African CV corpora.
+- [State of CV in Africa (2024)](../references.md#cv-africa-2024): a survey of computer-vision research on the continent; useful for seeing where detection sits among African CV work.
 
 <details>
 <summary>Additional references</summary>
 
-- [YOLO11 (Ultralytics, 2024)](https://docs.ultralytics.com/): the widely-deployed YOLO lineage; note the AGPL-3.0 licence.
+- [RT-DETR (Zhao et al., 2024)](https://arxiv.org/abs/2304.08069): the original real-time DETR paper.
+- [YOLO11 (Ultralytics, 2024)](https://docs.ultralytics.com/): the widely deployed YOLO family; note the AGPL-3.0 licence.
 - [OWLv2 (Minderer et al., 2023)](https://arxiv.org/abs/2306.09683): the Google open-vocabulary detector.
 - [YOLO-World (Cheng et al., 2024)](https://arxiv.org/abs/2401.17270): real-time open-vocabulary detection.
-- [Co-DETR (Zong et al., 2022)](https://arxiv.org/abs/2211.12860): the strongest current DETR variant for closed-vocabulary accuracy.
+- [Co-DETR (Zong et al., 2022)](https://arxiv.org/abs/2211.12860): a high-accuracy DETR variant for closed-vocabulary detection.
 - [COCO (Lin et al., 2014)](https://cocodataset.org/): the reference detection benchmark; useful for calibration and cross-corpus comparison.
 
 </details>

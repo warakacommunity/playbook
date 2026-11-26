@@ -2,15 +2,25 @@
 title: Project Management
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Project Management
 
-An African-language dataset is usually built by a small, distributed team: researchers, native-speaker annotators, and volunteers working part-time across several countries, time zones, and languages, often on a small grant. The Masakhane machine translation project, for example, was written by 49 authors across Africa and beyond, who coordinated almost entirely online ([Nekoto et al., 2020](../references.md#nekoto-2020)).
+An African-language dataset is usually built by a small, distributed team: researchers, native-speaker annotators, and volunteers working part-time across several countries, time zones, and languages, often on a small grant. The Masakhane machine translation project, for example, was written by more than 45 authors across Africa and beyond, who coordinated almost entirely online ([Nekoto et al., 2020](../references.md#nekoto-2020)).
 
 Projects like these fail for reasons that have little to do with the data itself. In a study of 53 AI practitioners in India, East and West Africa, and the United States, 92% reported at least one "data cascade": a problem introduced early, in how data was scoped, collected, or labelled, that stayed hidden until it caused expensive damage later ([Sambasivan et al., 2021](../references.md#sambasivan-2021)). Many of these problems start with planning decisions. This chapter walks through those decisions in the order you will face them.
+
+:::tip[Key points]
+
+- Fix the goal, language variety, scale and licence in a written project charter before anything else.
+- Start ethics approval, consent and data-protection checks early; consent cannot be added later.
+- Run a small pilot and make a go/no-go decision before committing the full budget.
+- Pay annotators fairly, on time and through a payment route agreed before work starts.
+- Give every role a named owner, track a few numbers often, and plan the release and handover from day one.
+
+:::
 
 ## 1. Scope the project
 
@@ -44,17 +54,9 @@ The [Legal, consent, and community IP](../legal-consent/index.md) and [Data Gove
 
 **Build the timeline backwards** from your release date, through the stages that must happen in order: guidelines, pilot, revision, main annotation, quality control, documentation, and release.
 
-**Run a pilot first.** Annotate 50 to 200 items with your real annotators and your real guidelines before you commit the full budget. A pilot shows you unclear instructions, hard cases, and disagreements while they are still cheap to fix. It also gives you a measured annotation rate (items per hour) to plan the rest of the schedule from.
+**Run a pilot first.** Schedule a pilot of 50 to 200 items, and a go/no-go decision with criteria agreed in advance, before you commit the full budget. The annotation rate you measure in the pilot (items per hour) feeds the rest of the timeline. [Pilot the design, then decide whether to scale](../3_annotation-design/training_guidlines.md#pilot-then-iterate-the-design) explains how to run it and what to decide.
 
-**Make a go/no-go decision after the pilot.** Agree on the criteria beforehand, for example:
-
-- Is agreement between annotators close to your target?
-- Did the guidelines answer most of the annotators' questions?
-- At the measured rate, does the full dataset fit the budget and the timeline?
-
-If the answer to any of these is no, revise the guidelines or the scope and pilot again. Do not scale up a design that is not working.
-
-**Test in private, then save the setup.** Dry-run every new configuration in a private test project that annotators cannot see, and open it to them only when it behaves as intended. Once a pilot has settled the interface, guidelines, review rules, overlap and sampling, save the whole set as a versioned template for the next language or phase. A template usually carries settings only: data, members, storage credentials and links to project-specific resources must be added again, so check them in each new project. In most tools a template is a snapshot, so later changes to it do not reach projects already created from it. Group projects by language or phase, and archive finished groups rather than deleting them.
+**Test the setup before annotators see it, then reuse it.** Try every new task setup yourself, out of the annotators' view, and release it only when it behaves as intended. Once a pilot has settled the interface, guidelines, review rules, overlap and sampling, write them down as a versioned setup for the next language or phase. When you copy a setup into a new project, check that the data, team members, storage access and links to project-specific resources are in place too, because these often do not carry over. Keep finished phases archived rather than deleted.
 
 **Respect the order of dependent steps.** Guidelines must be stable before main annotation starts, or you will re-annotate. Ethics approval and consent must be in place before collection.
 
@@ -96,7 +98,7 @@ Then add time for review and adjudication, and for coordination. For example, 5,
 
 **If rates must change mid-project**, usually because the local currency has moved, treat it as a change to each contributor's agreement:
 
-- By default, apply the new rate only to work done after the change. Amounts already included in a payout run never change.
+- By default, apply the new rate only to work done after the change. Amounts already approved for payment never change.
 - Tell contributors before the change takes effect, showing the old and new rates side by side.
 - Let each contributor choose to accept the new rate or to leave, with their validated balance paid in full. Leaving over a pay change must never count against them later.
 - Record who changed which rate and when, and each contributor's decision.
@@ -129,15 +131,23 @@ Keep annotation and review separate, even if people rotate between them. Reviewi
 2. **Screen.** Check language and task readiness with a short, reviewed exercise.
 3. **Onboard.** Train everyone on the guidelines before the pilot, and keep a reserve pool for dropouts.
 
-**Test sign-up before the onboarding day.** Try account creation with the email providers your annotators actually use. University and workplace mail filters often hold back or block verification emails, so have a way to verify accounts manually and a second channel, such as a WhatsApp group, to reach people whose email does not arrive. If annotators install a test version of a mobile app, the invitation may go to the email of their app-store account rather than their work address. Before each annotation round, ask everyone to update to the current version of the tool, and check that they have.
+**Test sign-up before the onboarding day.** Try creating an account with the email providers your annotators actually use. University and workplace mail filters often delay or block verification emails, so have a way to verify accounts by hand and a second channel, such as a WhatsApp group, for people whose email does not arrive. Before each annotation round, ask everyone to update to the current version of the tool, and check that they have.
 
-For an open project, start private and open joining deliberately. Use reviewed requests for sensitive tasks. Take consent at joining and check it again when work is submitted. Cap active contributors at what your reviewers can support, and say whether the task works on a phone. Publish only a summary of the purpose, languages, contribution terms and consent conditions, never task data or the member list. Distinguish leaving the project from withdrawing consent, which follows the [withdrawal process](../legal-consent/index.md#withdrawal). See [Inclusive and Bias-Aware Annotation](../3_annotation-design/inclusive-bias-aware.md) and [Community Ecosystems](../10_community-collaboration/community-ecosystem.md).
+**If anyone can join, open the project in stages.** Start with a closed group and open joining only when the setup is stable.
+
+- Review requests to join before giving access to sensitive tasks.
+- Take consent when people join, and confirm it again when they submit work.
+- Accept only as many active contributors as your reviewers can support, and say whether the task works on a phone.
+- In public, describe only the purpose, languages, contribution terms and consent conditions; never publish task data or the member list.
+- Treat leaving the project and withdrawing consent as different things; withdrawal follows the [withdrawal process](../legal-consent/index.md#withdrawal).
+
+See [Inclusive and Bias-Aware Annotation](../3_annotation-design/inclusive-bias-aware.md) and [Community Ecosystems](../10_community-collaboration/community-ecosystem.md).
 
 **Recruit through field facilitators when you collect in communities.** Community collection, especially of speech, can recruit people in groups rather than one by one: a teacher brings a class, a community organiser brings neighbours, a cooperative officer brings members. NaijaVoices recruited its more than 5,000 voice donors through trained community facilitators ([Emezue et al., 2025](../references.md#emezue-2025)). Whatever else facilitators do in your project, define the role and keep its powers narrow:
 
 - **Appoint facilitators; nobody becomes one by declaring it.** A facilitator is neither the language lead, who decides what is correct, nor the project lead.
-- **Give them only what they need.** A facilitator sees their own cohort's progress, and nothing else: no admin rights, no access to other cohorts, and no power over the guidelines or the data.
-- **Record who recruited whom.** Give each facilitator a unique sign-up link, or a QR code printed on their posters, so each contributor is linked to the facilitator who brought them. If a facilitator is removed, stop attributing new sign-ups to them.
+- **Give them only what they need.** A facilitator follows their own group's progress, and nothing else: no control over the project, no access to other groups, and no power over the guidelines or the data.
+- **Record who recruited whom.** Note which facilitator brought each contributor, for example with a sign-up code per facilitator, so that support and any facilitator payments follow the right people. If a facilitator leaves the role, stop crediting new sign-ups to them.
 - **Never let recruitment replace consent.** A facilitator can explain the project, but each contributor still gives their own [informed consent](../data-governance/index.md#informed-consent), individually.
 
 The [agri-advisory speech layer](../agri-advisory/speech-layer.md#who-does-it-and-how) shows facilitators running regional recording sessions.
@@ -165,9 +175,16 @@ Write decisions down, because few people are online at the same time. If contrib
 - skipped and repeatedly skipped items, with their reason codes and what happened to them ([Track skips and unfinished items](../3_annotation-design/workflow-adjudication.md#track-skips-and-unfinished-items));
 - open item-level questions, especially those waiting for a reviewer ([Close the feedback loop](../4_data-quality/index.md#close-the-feedback-loop)).
 
-For several languages or projects, use one table with a row per language or project and investigate the weakest rows first. Show agreement only where at least two independent labels overlap, with its support count; use "not yet scored", never zero, where it cannot be calculated. Alongside it report coverage, required annotations (items multiplied by planned overlap), open review items and the age of the oldest, rolling completion velocity over a fixed recent window, and the estimated finish date against the plan. Track open flags and rejection rates, and plan reviewer capacity where the backlog is growing. Keep these measures separate rather than combining them into one readiness score; [Report readiness as separate measures](../4_data-quality/index.md#report-readiness-as-separate-measures) lists what to report.
+**Across several languages or projects**, keep one table with a row per language or project, and look at the weakest rows first.
 
-Per annotator, watch skip rate, time per item and label distribution. A sudden shift is a prompt to investigate, not proof of drift or misconduct. Use one fixed reporting time zone, such as UTC, so daily counts do not move between reports. The [agri-advisory Monday report](../agri-advisory/quality-consent-release.md#the-monday-report) is a worked monitoring example. Keep recognition and personal goals separate from this monitoring; see [Motivate without surveillance](../10_community-collaboration/community-ecosystem.md#motivate-without-surveillance).
+- Report agreement only where at least two independent labels overlap, and say how many items it is based on. Where it cannot be calculated yet, write "not yet scored", not zero.
+- Next to it, show progress against the planned total (items times planned annotators per item), the review backlog and how long the oldest item has waited, the recent completion rate, and the expected finish date against the plan.
+- Watch open flags and rejection rates, and add reviewers where the backlog is growing.
+- Keep these measures separate rather than combining them into one readiness score; [Report readiness as separate measures](../4_data-quality/index.md#report-readiness-as-separate-measures) lists what to report.
+
+**Per annotator**, watch skip rate, time per item and label distribution. A sudden shift is a prompt to investigate, not proof of drift or misconduct. Count days in one fixed time zone, such as UTC, so daily figures do not shift between reports.
+
+The [agri-advisory Monday report](../agri-advisory/quality-consent-release.md#the-monday-report) is a worked monitoring example. Keep recognition and personal goals separate from this monitoring; see [Motivate without surveillance](../10_community-collaboration/community-ecosystem.md#motivate-without-surveillance).
 
 Falling agreement usually means the guidelines need fixing, not that annotators need correcting. Annotators dropping out usually points to problems with pay, workload, or distressing content. A problem caught in week two costs far less than one found at release ([Sambasivan et al., 2021](../references.md#sambasivan-2021)).
 
@@ -185,7 +202,7 @@ These risks come up in almost every African-language data project:
 | **Connectivity and power fail** | Annotators miss deadlines in the same region | Choose tools that work offline or on a weak connection, and cover mobile data costs. Governments shut down the internet 30 times in 15 African countries in 2025, with protests the leading trigger ([Access Now, 2026](../references.md#accessnow-2026)), so plan for gaps. See [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) for sync and late-work rules. |
 | **Funding or a tool disappears** | Grant end date approaches; tool changes its pricing | Keep your own copies of all raw data and exports, test a complete exit export periodically, and avoid depending on a single service. |
 | **Data loss** | A backup has never been restored; storage syncs or exports fail unnoticed | Schedule database and media backups with a retention period, test restores regularly, and check service health, failed syncs and failed exports weekly. |
-| **Harm to annotators** | Annotators skip items or leave after sensitive batches | Warn annotators about sensitive content, let them opt out, limit exposure, and review data before release. |
+| **Harm to annotators** | Annotators skip items or leave after sensitive batches | Warn annotators about sensitive content, let them opt out, limit exposure, and review data before release. See [Protect annotators from harmful content](../3_annotation-design/annotation-task-design.md#protect-annotators-from-harmful-content). |
 | **Data leaks during annotation** | Exports or task links shared in public groups; data left on shared or lost devices | Match the security settings to how sensitive the data is, limit who can export, and clear local copies when work has synced. See [Securing data during annotation](../data-governance/index.md#securing-data-during-annotation). |
 
 ## 8. Release and hand over

@@ -4,7 +4,7 @@ sidebar_label: Overview
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -20,6 +20,16 @@ This chapter covers what the three tasks share: tagging schemes, the tokenisatio
 - Slot filling is covered with intent detection in [Intent Classification](../11_text-classification/intent-classification.md).
 
 Before building a corpus, check what already exists. [Before You Start: NER](../before-you-start/ner.mdx) walks through the reuse, extend or build decision for NER, and the same four steps apply to POS.
+
+:::tip[Key points]
+
+- Decide what a token is before annotation starts; agglutination, clitics and tone marks make this a real decision in many African languages.
+- Store labels in BIO, let the tool or a script write the tags, and normalise every file to one scheme before merging.
+- Normalise text to NFC once, freeze it, and store offsets in logical order and in code points.
+- Annotate independently, adjudicate, run automatic checks, and split by document.
+- Score NER and chunking with span-level F1, POS with token accuracy, and report per-language and per-type results.
+
+:::
 
 ## What the data looks like
 
@@ -51,7 +61,7 @@ Whatever the format, the two lists must have the same length for every sentence.
 
 ## Tagging schemes
 
-A label set such as PER, ORG and LOC names the categories; a tagging scheme says how a multi-token span is written as one label per token. Treating chunking as tagging, with the span structure encoded in the tags rather than as brackets, goes back to [Ramshaw & Marcus (1995)](../references.md#ramshaw-marcus-1995).
+A label set such as PER, ORG and LOC names the categories; a tagging scheme says how a multi-token span is written as one label per token. Treating chunking as tagging, with the span structure encoded in the tags rather than as brackets, goes back to [Ramshaw and Marcus (1995)](../references.md#ramshaw-marcus-1995).
 
 - **BIO (also called IOB2).** `B-` marks the first token of a span, `I-` every following token inside it, and `O` a token outside any span. Two adjacent entities of the same type stay separate because the second starts with `B-`. This is the default for NER and the scheme MasakhaNER uses.
 - **BIOES (also called IOBES or BILOU).** Adds `E-` for the last token of a multi-token span and `S-` for a single-token span. It gives the model more explicit boundary information, at the cost of twice as many labels.
@@ -154,9 +164,14 @@ Offsets are only valid against the exact string the annotator saw. Normalise Uni
 
 ### Language identification of code-switched text
 
-Language identification can be an annotation task in its own right. Tag each token or span with a code from a controlled list rather than a free-text language name. Use the same code form as the record tags above (an ISO 639-3 code, or the BCP 47 tag), and add the script where scripts mix. Define conventions for named entities, mixed forms within a word, and other or unknown language. Show a searchable list that matches native names and aliases but stores the code, and route varieties missing from the standard through a reviewed `other` entry.
+Language identification can be an annotation task in its own right. The guideline should settle four things:
 
-Apply the same coded-value rule to metadata such as speaker language, country and script so exports can be merged. Deployment-time detection is a separate problem; see [Multilingual switching within a session](../deployment/multilingual-switching.md#detection-strategies).
+- **Codes, not names.** Tag each token or span with a code from a controlled list, not a free-text language name. Use the same code form as the record tags above (an ISO 639-3 code, or the BCP 47 tag), and add the script where scripts mix.
+- **Hard cases.** Say how to tag named entities, words that mix two languages, and text whose language is other or unknown.
+- **Finding the code.** Annotators know languages by their own names, not by codes. Let them look a language up by its native name or a common alternative name, while the data records the code.
+- **Missing varieties.** Provide an `other` option with a free-text note, and have a coordinator review those notes regularly and add a code where one exists.
+
+Apply the same coded-value rule to metadata such as speaker language, country and script, so that exports from different batches can be merged. Detecting the language at deployment time is a separate problem; see [Multilingual switching within a session](../deployment/multilingual-switching.md#detection-strategies).
 
 ### Spans in web pages and PDFs
 
@@ -173,7 +188,7 @@ The general groundwork is in [Data Collection](../2_data-collection/0_Overview.m
 1. **Choose the source text.** News is the most common choice because it is available, varied and full of entities; both MasakhaNER and MasakhaPOS annotated news. If your use case is social media, SMS or government documents, annotate that instead, or at least build a test set from it.
 2. **Fix tokenisation and sentence splitting first.** Write down the token rules from the section above, tokenise the whole corpus once, and freeze it. Every annotator labels the same tokens.
 3. **Write the guideline and pilot it.** Start from an existing guideline (the MasakhaNER guideline for NER, the UD guidelines for POS), translate its examples into your language, and add a section for every language-specific case. Pilot on 50 to 100 sentences with all annotators and revise.
-4. **Pre-annotate where it helps.** For POS, a model trained on the first 100 hand-annotated sentences can propose tags for the rest, and annotators correct them. MasakhaPOS used this to cut the manual effort sharply, since punctuation, numbers and capitalised proper nouns were predicted almost perfectly ([Dione et al., 2023](../references.md#masakhapos-2023)). Watch for anchoring: annotators accept a wrong suggestion more readily than they would make the error themselves. [Model-Assisted Annotation](../3_annotation-design/model-assisted-annotation.md) covers seeding, review of drafts, and what to record about the model.
+4. **Pre-annotate where it helps.** For POS, a model trained on a small hand-annotated seed can propose tags for annotators to correct, as MasakhaPOS did (see [Part-of-Speech Tagging](./pos.md#annotation)). Watch for anchoring: annotators accept a wrong suggestion more readily than they would make the error themselves. [Model-Assisted Annotation](../3_annotation-design/model-assisted-annotation.md) covers seeding, review of drafts, and what to record about the model.
 5. **Annotate independently, then adjudicate.** At least two annotators per sentence, a language coordinator who resolves disagreements, and a written record of each decision that changes the guideline. See [Workflow and adjudication](../3_annotation-design/workflow-adjudication.md).
 6. **Run automatic checks.** Flag tokens tagged inconsistently across the corpus, invalid tag sequences, and sentences whose token and label lists differ in length (see the check below).
 7. **Split by document, not by sentence.** Sentences from the same article share names and vocabulary, so put the whole article in one split.
@@ -233,7 +248,12 @@ Report per-language and per-type scores, not only an average. A single average a
 
 Chunking divides a sentence into non-overlapping phrases (noun phrases, verb phrases, prepositional phrases) without building a full parse tree. It is cheaper to annotate than a treebank and useful for terminology extraction, information extraction and grammar checking.
 
-Resources for African languages are scarce, and we know of only one multilingual effort. Eiselen built annotation protocols, annotated phrase-chunking data and CRF chunkers for ten South African languages, using government-domain text and storing the chunks in the IOB format ([Eiselen, 2016a](../references.md#eiselen-2016-chunking)). Two of its findings carry over to any new project: the disjunctively written languages (such as Setswana and Sesotho) reached notably better results with limited data, while character n-gram features helped the conjunctively written languages (such as isiZulu and isiXhosa), where one orthographic word holds several phrase-level units. The per-language corpora, produced in the NCHLT Text Resource Development project, are distributed through the [SADiLaR repository](https://repo.sadilar.org/) under a Creative Commons Attribution licence; the [NCHLT isiZulu Phrase Chunk Annotated Corpus](https://hdl.handle.net/20.500.12185/320) is one example.
+Resources for African languages are scarce, and we know of only one multilingual effort. Eiselen built annotation protocols, annotated phrase-chunking data and CRF chunkers for ten South African languages, using government-domain text and storing the chunks in the IOB format ([Eiselen, 2016a](../references.md#eiselen-2016-chunking)). Two of its findings carry over to any new project:
+
+- The disjunctively written languages (such as Setswana and Sesotho) reached notably better results with limited data.
+- Character n-gram features helped the conjunctively written languages (such as isiZulu and isiXhosa), where one orthographic word holds several phrase-level units.
+
+The per-language corpora, produced in the NCHLT Text Resource Development project, are distributed through the [SADiLaR repository](https://repo.sadilar.org/) under a Creative Commons Attribution licence; the [NCHLT isiZulu Phrase Chunk Annotated Corpus](https://hdl.handle.net/20.500.12185/320) is one example.
 
 Beyond that, we found no openly released chunking dataset for other African languages. If you need one, the practical routes are:
 

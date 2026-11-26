@@ -3,7 +3,7 @@ title: Identifiers, Versions, and Catalogues
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -11,27 +11,47 @@ last_update:
 
 A dataset nobody can find, cite, or pin to a version might as well not exist. This page covers the small set of habits that make a released dataset findable and citable for years: a persistent identifier, a versioning rule, metadata that machines can read, listings in the catalogues African-language researchers search, and a way to track who uses it.
 
+:::tip[Key points]
+
+- Give every release a DOI; cite the version DOI for results and put the concept DOI in the README.
+- Number releases MAJOR.MINOR.PATCH by what the change does to old results, and keep a changelog.
+- Fill in the machine-readable metadata (card front matter, DOI record); that is what search engines and filters read.
+- List the dataset in the catalogues African-language researchers use, such as Lanfrica and the Masakhane list.
+- Make citation effortless with `CITATION.cff` and a BibTeX entry, and track downloads and citations.
+
+:::
+
 ## Persistent identifiers
 
 A URL points to a place. A DOI (Digital Object Identifier) points to a thing. When your lab moves its website or a student's Google Drive is deleted, the URL dies and every paper that linked to it points at nothing. A DOI survives because it is a name registered with an agency (for datasets, usually [DataCite](https://datacite.org/)) and resolved through doi.org. You update the record when the data moves, and old citations keep working.
 
 You have three practical ways to mint one:
 
-- **Zenodo.** Run by CERN and open to anyone. You register, upload, fill in the form, and publish, and the record gets a DataCite DOI. The [limit is 50 GB per record](https://about.zenodo.org/policies/), and records are kept for the lifetime of the repository. You can reserve the DOI before publishing, so it can appear in the paper first. This is the right default for a community project without institutional backing.
+- **Zenodo.** Run by CERN and open to anyone. You register, upload, fill in the form, and publish, and the record gets a DataCite DOI. The [limit is 50 GB per record](https://about.zenodo.org/policies/), and records are kept for the lifetime of the repository. You can reserve the DOI before publishing, so it can appear in the paper first. This is the right default for a community project without institutional backing; [Publish in two places](./hosting.md#publish-in-two-places) shows how to pair it with a working copy.
 - **DataCite through your institution.** Universities and national libraries that are [DataCite members](https://datacite.org/create-dois/) register DOIs directly in DataCite Fabrica. Ask your library. The DOI then carries your institution's prefix and sits in its repository.
 - **Dataverse.** Many university repositories run Dataverse. A dataset there [gets a DOI when you publish it](https://guides.dataverse.org/en/latest/user/dataset-management.html), and the software enforces major and minor versions.
 
 Zenodo gives you two DOIs. A **version DOI** points at one release. A **concept DOI** [represents all versions](https://support.zenodo.org/help/en-gb/1-upload-deposit/97-what-is-doi-versioning) and resolves to the latest. Put the concept DOI in the README. Ask people who report results to cite the version DOI, because that one still describes the exact files they used after you release a fix.
 
-A DOI record is only as useful as its metadata. Fill in every field the Zenodo form offers: resource type (dataset), a title that names the languages, all creators with ORCID iDs, a description that repeats the key facts from the dataset card, the licence, keywords that include language names and ISO codes, the publisher, and the funder. Search engines and DataCite Commons read this record, not your README.
+A DOI record is only as useful as its metadata. Search engines and DataCite Commons read this record, not your README, so fill in every field the Zenodo form offers:
+
+- resource type (dataset);
+- a title that names the languages;
+- all creators, with ORCID iDs;
+- a description that repeats the key facts from the dataset card;
+- the licence;
+- keywords that include language names and ISO codes;
+- the publisher and the funder.
 
 ## Versioning for datasets
 
 Software uses [semantic versioning](https://semver.org/): MAJOR.MINOR.PATCH, where major means incompatible change, minor means added functionality, and patch means a compatible fix. Data needs a translation of those words. Here is the one we use.
 
-- **Major (2.0.0):** anything that changes what a result on the old version means. You changed the label scheme, re-split train and test, dropped a language, or fixed so many labels that scores are no longer comparable.
-- **Minor (1.1.0):** you added examples, a language, or an annotation layer, and the old examples and splits are untouched. Old results stand.
-- **Patch (1.0.1):** you fixed typos in the card, corrected a handful of wrong labels, or repaired a file encoding. A model trained on 1.0.0 and 1.0.1 should score the same within noise.
+| Bump | Example | When | Old results |
+|---|---|---|---|
+| **Major** | 2.0.0 | Anything that changes what a result on the old version means: you changed the label scheme, re-split train and test, dropped a language, or fixed so many labels that scores are no longer comparable | No longer comparable |
+| **Minor** | 1.1.0 | You added examples, a language, or an annotation layer, and the old examples and splits are untouched | Still stand |
+| **Patch** | 1.0.1 | You fixed typos in the card, corrected a handful of wrong labels, or repaired a file encoding | A model trained on 1.0.0 and 1.0.1 should score the same within noise |
 
 Dataverse hard-codes a version of this rule: [adding or removing files forces a major version](https://guides.dataverse.org/en/latest/user/dataset-management.html), and metadata-only edits may be minor.
 
@@ -49,6 +69,8 @@ ds = load_dataset("ede-lab/yoruba-news-topics", revision="v1.0.0")
 ```
 
 Keep a `CHANGELOG.md` at the repository root with one entry per version: date, version, what changed, how many rows were affected, and whether old results are still comparable. Two lines per release is enough.
+
+Build each version from a dated snapshot of your annotation tool's full export, so any model trained on it can be tied back to exactly that state of the labels (see [Tie training runs to a snapshot](../6_documentation/data-storage.md#tie-training-runs-to-a-snapshot)).
 
 The reason for all this is reproducibility. A paper that says "we evaluate on YorùbáNews" cannot be checked a year later if the dataset has quietly changed. A paper that says "v1.0.0, DOI 10.5281/zenodo.NNNNNNN" can.
 
@@ -117,7 +139,7 @@ The FAIR principles ([Wilkinson et al., 2016](../references.md#wilkinson-2016)) 
 
 A dataset that lives only in your repository is found only by people who already know your name. List it where African-language researchers look. All of these were checked on 28 September 2026.
 
-- **[Lanfrica](https://lanfrica.com/)** ([Lanfrica](../references.md#lanfrica)) catalogues African datasets, models, papers, and policies in its African AI Atlas. It began as a participatory index of MT research ([Emezue and Dossou, 2020](../references.md#emezue-dossou-2020)). Reach the team through the [contribute page](https://lanfrica.com/en/contribute), its Discord, or `info@lanfrica.com`. A listing puts your dataset next to every other resource for the same language.
+- **[Lanfrica](https://lanfrica.com/)** ([Lanfrica](../references.md#lanfrica)) catalogues African datasets, models, papers, and policies in its [Atlas of AI in Africa](https://lanfrica.com/en/atlas). It began as a participatory index of MT research ([Emezue and Dossou, 2020](../references.md#emezue-dossou-2020)). Reach the team through the [contribute page](https://lanfrica.com/en/contribute), its Discord, or `info@lanfrica.com`. A listing puts your dataset next to every other resource for the same language.
 - **[Masakhane list of datasets](https://github.com/masakhane-io/masakhane-community/blob/master/list-of-datasets.md)** is a Markdown file in the `masakhane-community` GitHub repository, organised by task. Open a pull request that adds a line. The people who read it are the ones most likely to reuse your data.
 - **[Hugging Face collections](https://huggingface.co/docs/hub/en/collections)** group datasets, models, papers, and Spaces on one public page, including repositories you do not own. Create one for your project and ask the maintainers of language or community collections to add you.
 - **[Google Dataset Search](https://datasetsearch.research.google.com/)** has no submission form. You are indexed when your landing page carries schema.org markup or your repository is already indexed, as Hugging Face and Zenodo are.

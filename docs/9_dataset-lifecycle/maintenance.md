@@ -3,13 +3,23 @@ title: Maintenance and Stewardship
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Maintenance and Stewardship
 
 Release is a milestone, not the end. A dataset that is corrected, extended, and answered for grows in value. One that is published and left alone decays: links rot, errors stay, and it falls out of step with the field. This page is about who does that work after the grant, how a volunteer community can keep it up, and what to do when something has to be corrected, withdrawn, or retired.
+
+:::tip[Key points]
+
+- Name a steward before release, and keep decision rights with the language community.
+- Put repositories under an organisation account with at least two admins.
+- Promise response times that volunteers can keep, and batch fixes into scheduled releases.
+- Act on consent withdrawals at once: publish a new version and a notice, never overwrite quietly.
+- Retire a dataset by pointing to its successor; keep old versions available.
+
+:::
 
 ## Who owns the long tail
 
@@ -19,7 +29,7 @@ A steward can be a person, a lab, or a community body. A person is responsive bu
 
 Separate the two in writing. Decision rights cover what may change in the data, who may use restricted parts, when a version is withdrawn, and whether the licence changes. Under CARE, Authority to control places these decisions with the community the data describes, not with whoever holds the repository password ([Carroll et al., 2020](../references.md#carroll-2020)). Operating duties cover triage, releases, and correspondence. When the person leaves, the duties move and the rights stay put.
 
-Plan the handover before it is needed. Keep repositories under an organisation account. Hugging Face lets you transfer a repository from a user to an organisation and redirects the old URL, keeping download counts ([Hugging Face Hub docs, repository settings](https://huggingface.co/docs/hub/repositories-settings)). Give two people admin access to every host, the DOI record, and the mailbox. Write a one-page succession note: who takes over, how they are appointed, and what they inherit.
+Plan the handover before it is needed. Keep repositories under an organisation account. Hugging Face lets you transfer a repository from a user to an organisation, and the old URL redirects to the new one while download counts and likes are kept ([Hugging Face Hub docs, repository settings](https://huggingface.co/docs/hub/repositories-settings)). Give two people admin access to every host, the DOI record, and the mailbox. Write a one-page succession note: who takes over, how they are appointed, and what they inherit.
 
 :::warning
 A dataset whose only maintainer login belongs to a graduating student is one password reset away from being orphaned. Move ownership to an organisation before release.
@@ -37,7 +47,12 @@ Volunteer maintenance fails when it promises what paid staff would deliver. Writ
 
 **Who approves.** Maintainers may merge metadata and documentation fixes. Only the steward, or a small approval group that includes a native speaker, may approve changes to the data itself. Removal for consent or safety needs the steward alone; it should never wait on a committee.
 
-**Credit.** Credit is the main currency a volunteer project has. Adopt the all-contributors convention, a specification for recognising contributors "in a way that rewards every contribution, not just code," with types for data, translation, review, and maintenance ([all-contributors](https://github.com/all-contributors/all-contributors)). Keep a `CONTRIBUTORS.md` naming annotators, transcribers, reviewers, and speakers who agreed to be named. On each versioned Zenodo release, list that version's contributors as authors of the record, so their work carries a citable DOI. [Community Ecosystems](../10_community-collaboration/community-ecosystem.md) makes the case for naming contributors; the maintenance plan makes it routine.
+**Credit.** Credit is the main currency a volunteer project has. Adopt the all-contributors convention, a specification for recognising contributors "in a way that rewards every contribution, not just code" ([all-contributors](https://github.com/all-contributors/all-contributors)). It has contribution types for data, translation, review, and maintenance.
+
+- Keep a `CONTRIBUTORS.md` naming annotators, transcribers, reviewers, and speakers who agreed to be named.
+- On each versioned Zenodo release, list that version's contributors as authors of the record, so their work carries a citable DOI.
+
+[Community Ecosystems](../10_community-collaboration/community-ecosystem.md) makes the case for naming contributors; the maintenance plan makes it routine.
 
 ## Corrections, withdrawals, and consent revocation
 
@@ -45,9 +60,16 @@ Distinguish errata from a recall. An erratum fixes a mistake that does not chang
 
 **When a speaker withdraws consent.** Your consent form should already say that withdrawal is possible (see [Informed consent](../data-governance/index.md#informed-consent)). Verify that the request comes from the speaker or their representative, find their items by speaker identifier, and remove them from the working copy the same week. Publish a new version without them, and record in the changelog that items were removed at a contributor's request, without naming the person or giving their reasons.
 
-**Removing across versions and mirrors.** Withdrawal is harder than release because copies multiply. On Hugging Face, a new commit removes items from the current revision, but earlier revisions stay in the repository history, so full removal means rewriting history or making the repository private. On Zenodo, each version is a separate record with its own persistent identifier, and old versions stay available by design so that a citation to a version always resolves to unchanged files ([Zenodo help, managing versions](https://help.zenodo.org/docs/deposit/manage-versions/)). Removing an item from a published version therefore means asking Zenodo to withdraw the record. Zenodo treats withdrawal as exceptional: the record is replaced by a tombstone page that states the reason and keeps the citation, and the DOI continues to resolve to that page ([Zenodo policies](https://about.zenodo.org/policies/)). DataCite, which issues the DOIs, holds that a DOI cannot be deleted and that a tombstone page should confirm the item existed and is no longer available ([DataCite support](https://support.datacite.org/docs/tombstone-pages)). Write to every mirror you know of. You cannot force a copy off a stranger's server, and you should tell the speaker so.
+**Removing across versions and mirrors.** Withdrawal is harder than release because copies multiply:
 
-**Communicating a correction.** Post one notice, in the same words, in the dataset card, the changelog, the issue tracker, and the release notes. Say what changed, which versions are affected, and what users should do. For a recall, also email everyone with gated access and open an issue on every derivative you know of. Peng, Mathur and Narayanan traced nearly a thousand papers that used three retracted face datasets and found that derivatives kept circulating after the originals were withdrawn, and that unclear licences and weak management made the harm hard to contain ([Peng et al., 2021](../references.md#peng-2021)). A recall notice that never reaches the derivatives has not done its job.
+- **Hugging Face.** A new commit removes items from the current revision, but earlier revisions stay in the repository history. Full removal means rewriting history or making the repository private.
+- **Zenodo.** Each version is a separate record with its own persistent identifier. Old versions stay available by design, so that a citation to a version always resolves to unchanged files ([Zenodo help, managing versions](https://help.zenodo.org/docs/deposit/manage-versions/)). Removing an item from a published version therefore means asking Zenodo to withdraw the record. Zenodo treats withdrawal as exceptional: the record is replaced by a tombstone page that states the reason, and the DOI and URL of the original record are retained, so they lead to that page ([Zenodo policies](https://about.zenodo.org/policies/)).
+- **DOIs.** DataCite, which issues the DOIs, holds that a DOI cannot be deleted, and that a tombstone page should confirm the item existed and is no longer available ([DataCite support](https://support.datacite.org/docs/tombstone-pages)).
+- **Mirrors.** Write to every mirror you know of. You cannot force a copy off a stranger's server, and you should tell the speaker so.
+
+**Communicating a correction.** Post one notice, in the same words, in the dataset card, the changelog, the issue tracker, and the release notes. Say what changed, which versions are affected, and what users should do. For a recall, also email everyone with gated access and open an issue on every derivative you know of.
+
+Peng, Mathur and Narayanan studied nearly 1,000 papers that used three widely used face datasets, two of which had been retracted. They found that derivatives kept circulating after the originals were withdrawn, and that unclear licences and weak management made the harm hard to contain ([Peng et al., 2021](../references.md#peng-2021)). A recall notice that never reaches the derivatives has not done its job.
 
 :::danger
 Never quietly overwrite a released version to remove an item. Users with the old files cannot tell what changed, and the person who withdrew has no evidence that you acted. Publish a new version and a notice.
@@ -98,7 +120,17 @@ No single pattern is enough. Write the mix into Part 6 of the sustainability pla
 
 ## Measuring impact
 
-Funders and communities want different evidence, and both are cheap to collect. Record downloads from the host's counters, and say plainly that a download is not a use. Track citations with a Google Scholar alert on the paper and a DOI search on the Zenodo record. List derived datasets and models: search the Hub for repositories that name yours, and ask users to open an issue when they publish a derivative. Count the languages and varieties served. Collect stories with permission: a teacher who used the corpus in class, a start-up that shipped a keyboard, a speaker who heard their language in a demo. Two quoted stories do more in a funder report than a download graph, and they matter more to the community whose voices are in the data.
+Funders and communities want different evidence, and both are cheap to collect:
+
+| Evidence | How to collect it |
+|---|---|
+| Downloads | Read the host's counters, and say plainly that a download is not a use. |
+| Citations | Set a Google Scholar alert on the paper and search for the Zenodo record's DOI. |
+| Derived datasets and models | Search the Hub for repositories that name yours, and ask users to open an issue when they publish a derivative. |
+| Reach | Count the languages and varieties served. |
+| Stories | Collect them with permission: a teacher who used the corpus in class, a start-up that shipped a keyboard, a speaker who heard their language in a demo. |
+
+Two quoted stories do more in a funder report than a download graph, and they matter more to the community whose voices are in the data.
 
 ## A worked example
 
@@ -153,8 +185,8 @@ Deprecation
 
 Credit
   Contributors are listed in CONTRIBUTORS.md following the
-  all-contributors convention, with types for recording,
-  transcription, review, and maintenance.
+  all-contributors convention, using its data, review, and
+  maintenance contribution types.
 
 Licence
   Version 1.x is released under CC BY-SA 4.0. Any change of licence

@@ -2,7 +2,7 @@
 ready: true
 title: Speech-to-Speech Translation
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -10,7 +10,17 @@ last_update:
 
 Speech-to-speech translation (S2ST) takes speech in one language and produces speech in another, the spoken equivalent of a human interpreter. For African languages it is the most ambitious speech task and the least resourced, because it sits on top of three hard tasks at once. This page is the practical guide to how to assemble a working system from the pieces that exist, how to evaluate it honestly, and what has to be true before deployment.
 
-Before building data for any of the three tasks this one combines (MT, ASR, and TTS), check what already exists with [Before You Start](../before-you-start/index.md). The [ASR](../asr/index.md) and [Text-to-Speech](../text-to-speech/index.md) chapters cover those tasks in depth. This page details how the three fit together, and the deep-dive decisions specific to speech-in-speech-out.
+S2ST combines three tasks: automatic speech recognition (ASR), machine translation (MT) and text-to-speech (TTS). Before building data for any of them, check what already exists with [Before You Start](../before-you-start/index.md). The [ASR](../asr/index.md) and [Text-to-Speech](../text-to-speech/index.md) chapters cover those tasks in depth. This page shows how the three fit together and the decisions that are specific to speech in, speech out.
+
+:::tip[Key points]
+
+- For most African language pairs, a cascade (ASR, then MT, then TTS) is the realistic starting point.
+- Tone and code-switching must be handled at every stage, not only in the final output.
+- Record whether target speech is human or synthesised, and get voice consent for both sides of the pair.
+- Report per-stage scores, ASR-chrF, BLASER and human evaluation together; no single metric is enough.
+- Design for latency, cost and consent at deployment scale before choosing cascade or direct.
+
+:::
 
 ![Cascaded (ASR to MT to TTS) versus direct speech-to-speech translation](images/s2st-cascaded-direct.svg)
 
@@ -20,14 +30,30 @@ There are two ways to build S2ST. A **cascaded** system chains three components 
 
 The cost of cascading is that errors compound: a mistake in transcription becomes a mistranslation becomes a wrong word spoken aloud. Direct systems avoid that but need paired source-and-target speech that, for most African language pairs, no one has collected.
 
-The landscape has shifted since 2023. **Meta SeamlessM4T** ([Seamless Communication et al., 2023](../references.md#seamless-2023)) is a foundation model covering speech-to-speech, speech-to-text, and text-to-text translation for up to ~100 languages, but its African coverage is lopsided: many African languages (among them Amharic, Igbo, Luganda, Shona, Somali, Yorùbá, and Zulu) are supported as *speech input*, while among sub-Saharan languages only Swahili is supported as *speech output*, and some major languages such as Hausa are absent altogether. Check the model card for your exact pair before planning around it. **CVSS** ([Jia et al., 2022](../references.md#cvss-2022)) is a large parallel speech-to-speech corpus from 21 languages into English, built on Common Voice and the CoVoST 2 speech-translation corpus, with the English target side synthesised by TTS (CVSS-C uses one canonical voice, CVSS-T transfers each source speaker's voice); it contains no sub-Saharan African source language, so its value here is as a recipe rather than as data. Direct S2ST is no longer purely research-grade: the models exist and can be fine-tuned for language pairs they don't natively cover. Cascaded remains the default for most African pairs; direct is worth measuring where SeamlessM4T's coverage is close and your team can afford to human-evaluate the tradeoff.
+### Resources that changed the picture
+
+The landscape has shifted since 2023. Two resources matter most:
+
+| Resource | What it is | What it means for African languages |
+|---|---|---|
+| **SeamlessM4T** ([Seamless Communication et al., 2023](../references.md#seamless-2023)) | A foundation model for speech-to-speech, speech-to-text and text-to-text translation in up to about 100 languages. | Coverage is lopsided. Many African languages (among them Amharic, Igbo, Luganda, Shona, Somali, Yorùbá and Zulu) are supported as *speech input*. Among sub-Saharan languages, only Swahili is supported as *speech output*. Some major languages, such as Hausa, are absent altogether. |
+| **CVSS** ([Jia et al., 2022](../references.md#cvss-2022)) | A large parallel speech-to-speech corpus from 21 languages into English, built on Common Voice and the CoVoST 2 speech-translation corpus. The English target side is synthesised by TTS: CVSS-C uses one canonical voice, CVSS-T transfers each source speaker's voice. | It contains no sub-Saharan African source language, so its value here is as a recipe, not as data. |
+
+Check the model card for your exact language pair before planning around any model.
+
+Direct S2ST is no longer only a research topic: the models exist and can be fine-tuned for language pairs they do not cover natively. Cascaded remains the default for most African pairs. Direct is worth measuring where a model's coverage is close to your pair and your team can afford human evaluation to compare the two.
 
 ## What African-language S2ST actually varies on
 
 Two axes matter more than the specific model choice.
 
-- **Tone preservation across the language boundary.** If the target language is tonal (Yorùbá, Igbo, most Bantu) and the source language is not (English, French, standard Arabic), the tone information in the target must come from the translation and TTS stages; it is not present in the source audio at all. A pipeline that treats target-side tone as "just another diacritic to preserve" will produce tone-flat synthesised speech. Conversely, if the source is tonal and the target is not, the ASR must transcribe tone faithfully or the translation loses the lexical distinctions the tone carried.
-- **Code-switching on either side.** Real African-language conversation code-switches with English, French, Arabic, or a regional lingua franca. A source-side monolingual ASR fails on code-switched input; a source-side ASR that handles code-switching then hands the translator a document whose language ID is genuinely mixed, which MT models trained on strict-monolingual data fail on. Design the cascade to handle code-switching end-to-end or budget an explicit code-switching layer at each stage.
+- **Tone preservation across the language boundary.**
+  - *Tonal target, non-tonal source* (for example English, French or Standard Arabic into Yorùbá, Igbo or most Bantu languages): the target's tone is not in the source audio at all. It must come from the translation and TTS stages. A pipeline that treats target-side tone as "just another diacritic to preserve" will produce tone-flat synthesised speech.
+  - *Tonal source, non-tonal target:* the ASR must transcribe tone faithfully, or the translation loses the word distinctions that tone carried.
+- **Code-switching on either side.** Real African-language conversation mixes in English, French, Arabic or a regional lingua franca.
+  - A monolingual source ASR fails on code-switched input.
+  - An ASR that does handle code-switching passes on text in more than one language, and MT models trained only on monolingual text often fail on it.
+  - Design the cascade to handle code-switching end to end, or budget for an explicit code-switching step at each stage.
 
 ## Building the data
 
@@ -37,9 +63,20 @@ Choose the source and target collection tasks deliberately. Read prompts, prompt
 
 Where you do collect end-to-end data, treat consent and voice rights as you would for TTS, since the target side is synthesised or re-spoken speech. Voice-consent conversations must cover both sides of the pair explicitly. A speaker whose source-language voice is recorded may not have consented to their voice being used to produce target-language output.
 
-**For direct-S2ST corpus building**, the CVSS recipe is the reference: start from a speech-to-text translation corpus (source-language speech with its transcript and a target-language translation), synthesise the target side with a TTS model, verify a sample with native listeners, and release the aligned set (source speech, source transcript, target text, target speech). African speech-translation corpora of this shape exist; BIG-C, for example, pairs about 180 hours of conversational Bemba speech with transcripts and English translations ([Sikasote et al., 2023](../references.md#bigc-2023)). A text-only parallel corpus such as MAFAND-MT ([Adelani et al., 2022b](../references.md#mafand-2022)) is not enough on its own, because it has no source speech: you would have to record the source side (read speech) as well as synthesise the target. The result is not "real" end-to-end data (the target speech is synthesised), but it is enough to fine-tune a direct S2ST model past the point where cascading is obviously better.
+### Two routes to a direct-S2ST corpus
 
-**For a genuinely end-to-end corpus** (real target-side speech, not TTS-synthesised), the collection method is expensive: professional interpreters produce the target-side recording in a controlled setting, aligned utterance-by-utterance to the source recording. Budget accordingly: this is closer to a TTS-scale corpus effort than an ASR-scale one, and it must satisfy the voice-consent framework for both source and target speakers.
+**Route 1: synthesise the target side (the CVSS recipe).**
+
+1. Start from a speech-to-text translation corpus: source-language speech with its transcript and a target-language translation.
+2. Synthesise the target side with a TTS model.
+3. Have native listeners check a sample.
+4. Release the aligned set: source speech, source transcript, target text, target speech.
+
+African speech-translation corpora of this shape exist. BIG-C, for example, pairs more than 180 hours of conversational Bemba speech with transcripts and English translations ([Sikasote et al., 2023a](../references.md#bigc-2023)). A text-only parallel corpus such as MAFAND-MT ([Adelani et al., 2022b](../references.md#mafand-2022)) is not enough on its own, because it has no source speech: you would have to record the source side (read speech) as well as synthesise the target.
+
+The result is not "real" end-to-end data, because the target speech is synthesised. It can still give a direct S2ST model enough data to fine-tune on, so that you can compare it fairly with a cascade.
+
+**Route 2: record real target speech.** A genuinely end-to-end corpus uses human target speech, not TTS. Professional interpreters record the target side in a controlled setting, aligned utterance by utterance to the source recording. This is expensive: budget for something closer to a TTS-scale corpus than an ASR-scale one. It must also meet the voice-consent requirements for both source and target speakers.
 
 ### What a record looks like
 
@@ -87,11 +124,17 @@ print(f"ASR-chrF: {chrf.score:.2f}")
 
 One caution specific to this cascade: the score now blends two error sources, the translation and the ASR model used to read it back, so a poor number can mean a bad translation or simply a weak target-language recognizer. For most African target languages the ASR step is itself under-resourced, so interpret ASR-BLEU as a loose proxy and lean harder on the human evaluation than you would for text translation.
 
-**A better metric bundle.** For a defensible release, report all three:
+### A metric bundle for release
 
-- **ASR-chrF** (as above): the classical proxy; useful for tracking training progress.
-- **BLASER**: reads the audio directly, so the ASR-in-the-metric problem disappears; still not a substitute for human eval.
-- **Human evaluation**: bilingual listeners rate three axes on a 1–5 scale: **adequacy** (does the target speech convey the source meaning?), **fluency** (does the target speech sound natural?), and **acoustic quality** (is the synthesised voice clear and pleasant?). Two evaluators per clip minimum; adjudicate disagreements. Time a small pilot batch first to estimate the listening budget, since clip length and the number of systems compared drive the cost.
+For a defensible release, report all three:
+
+| Measure | What it does | Limits |
+|---|---|---|
+| **ASR-chrF** (as above) | The classic proxy; useful for tracking training progress. | Mixes translation errors with errors of the ASR used to score. |
+| **BLASER** | Scores the audio directly, so no ASR sits inside the metric. | Still not a substitute for human evaluation. |
+| **Human evaluation** | Bilingual listeners rate each clip from 1 to 5 on **adequacy** (does the target speech convey the source meaning?), **fluency** (does it sound natural?) and **acoustic quality** (is the voice clear and pleasant?). | Costs listening time; see the tips below. |
+
+For human evaluation, use at least two evaluators per clip and adjudicate disagreements. Time a small pilot batch first to estimate the listening budget, since clip length and the number of systems compared drive the cost.
 
 **Evaluate the cascade honestly.** In a cascaded system, aggregate ASR-chrF is not enough. Report the per-stage error: ASR CER on the source recognition, chrF on the intermediate translation (against a reference text translation), then ASR-chrF end-to-end. This isolates where errors compound and lets you invest fixing effort at the right stage.
 
@@ -99,7 +142,7 @@ One caution specific to this cascade: the score now blends two error sources, th
 
 ## Deployment realities
 
-- **Latency budget.** Real-time S2ST for conversation needs sub-second latency on each utterance; cascaded systems accumulate latency across three model calls plus network round-trips. Direct S2ST with a single model call is often lower-latency, when its quality is acceptable. Design the target UX first (real-time interpretation? batched translation of recorded content?) then choose cascade vs direct with the latency target in mind.
+- **Latency budget.** Live conversation needs each translated utterance to arrive quickly, and cascaded systems add up the delay of three model calls plus network round-trips. Direct S2ST, with a single model call, is often faster when its quality is acceptable. Decide the use case first (live interpretation, or batch translation of recorded content?), set a latency target, then choose cascade or direct.
 - **Compute cost per interaction.** A cascade makes three model calls per input where a direct system makes one. Each stage is often smaller than a single large direct model, so the cost gap depends on the models chosen: measure cost per interaction rather than assuming it. For at-scale deployment (a customer-service bot handling thousands of calls per day), the difference matters.
 - **Cascade failure isolation is a feature.** When a cascaded system produces bad output, you can inspect each stage's intermediate result and pinpoint which stage failed. Direct systems are more opaque: a wrong output is a wrong output with no clear diagnosis. For production deployment with SLAs and error triage, the cascade's diagnostic transparency is often worth the quality tradeoff.
 - **Voice-cloning risk on the target side.** Direct S2ST or TTS-based cascade targets can be trained to produce a specific voice; the same voice-cloning consent conversation from [TTS · Voice consent](../text-to-speech/index.md#distinctive-annotation-and-consent) applies here. The consent conversation must cover the voice used to produce target-language output, distinct from the voice of the source speaker.

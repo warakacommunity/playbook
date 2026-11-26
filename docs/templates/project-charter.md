@@ -11,17 +11,19 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-*The Step-0 community agreement covering orthography, use case, IP framework, and team structure that the [long-tail language onboarding](../long-tail-language/index.md) chapter argues must be settled in writing before data collection begins. Fork it, negotiate it with the community, sign it, and store it alongside the corpus release.*
+The Step 0 community agreement. The [long-tail language onboarding](../long-tail-language/index.md) chapter argues that orthography, use case, intellectual property (IP) and team structure must be settled in writing before data collection begins. This charter is where you write them down.
+
+Fork it, negotiate it with the community, sign it, and store it with the corpus release.
 
 ## How to use this template
 
 1. Copy everything below the divider into a new file (`docs/project-charter.md` in your project repo or the community-owned repository).
-2. Fill in every `[BRACKETED FIELD]` with a real answer negotiated with the community, not decided by the project team alone.
-3. Convene the community consultation described in [Section C of the consent template](./consent-form.md#section-c-community-consent-addendum). The charter is the artefact that comes out of that consultation.
-4. Sign it. All named parties (project lead, community stewards, institutional sponsor, ombudsperson) sign a physical or digitally-witnessed copy. Store one copy in each party's possession.
-5. Version it. The charter can be amended; amendments require the same signature process.
+2. Fill in every `[BRACKETED FIELD]` with an answer negotiated with the community, not decided by the project team alone.
+3. Convene the community consultation described in [Section C of the consent template](./consent-form.md#section-c-community-consent-addendum). The charter is the record of what that consultation agreed.
+4. Sign it. All named parties (project lead, community stewards, institutional sponsor, ombudsperson) sign a physical or digitally witnessed copy. Each party keeps a copy.
+5. Version it. The charter can be amended; amendments need the same signatures.
 
-Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.md#step-0-before-any-data-collection), the [legal, consent, and community IP](../legal-consent/index.md) chapter, and every Case Study in the playbook where a missing charter shows up as the root cause of a downstream dispute.
+Motivated by [long-tail language onboarding Step 0](../long-tail-language/index.md#step-0-before-any-data-collection) and the [legal, consent, and community IP](../legal-consent/index.md) chapter. A written agreement made at the start gives everyone something to return to if a dispute arises later.
 
 ---
 
@@ -71,7 +73,7 @@ The centre of the charter. Every question below is answered explicitly.
 - **Who owns the raw data?** [Contributor, community, project, with the reasoning.]
 - **Who owns the annotated corpus?** [Named party or shared-ownership arrangement.]
 - **Who owns the models built from the corpus?** [Same.]
-- **Under what licence is the corpus released?** [SPDX identifier + reasoning. See the [licence selection section](../legal-consent/index.md#licence-selection). CC BY-NC 4.0 is the playbook's honest default; document why if choosing something different.]
+- **Under what licence is the corpus released?** [SPDX identifier + reasoning. See the [licence selection section](../legal-consent/index.md#licence-selection). The playbook's default for open release is CC BY 4.0. Choose CC BY-NC 4.0 or stricter terms only by exception: the community requires it, consent covers non-commercial use only, or the material is sacred or sensitive. Record the reason in the dataset card.]
 - **Under what licence are models released?** [Model release is a separate decision from data release; document it.]
 - **What re-use requires community approval?** [E.g., "commercial use", "inclusion in a downstream release under a different licence", "use in a foreign-owned model's training data".]
 - **Who has the standing to approve re-use requests?** [Named body or steward.]

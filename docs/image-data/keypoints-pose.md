@@ -3,7 +3,7 @@ title: Keypoints and pose
 sidebar_position: 5
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -11,11 +11,28 @@ last_update:
 
 Keypoint annotation marks a fixed set of named points on each object in an image: the joints of a person, the hooves and spine of a cow, the tip and base of a leaf, the corners of the eyes. Joined by lines, the points form a skeleton, and the skeleton is the pose. Keypoints sit between a box and a mask in effort, but they carry something neither can: where the parts of an object are and how they relate to each other.
 
-In African work keypoints serve several groups of tasks. Sign language and gesture data can be shared as pose keypoints as well as, or instead of, video (see [Sign language](../sign-language-video/sign-language.md#releasing-the-data) and [Gesture](../sign-language-video/gesture.md)). Livestock and wildlife projects use body landmarks to study posture, gait and body shape. Plant-phenotyping work places landmarks on leaves, stems and fruit to measure growth. Health and rehabilitation projects use body or facial landmarks, which makes them some of the most sensitive images a project can hold. This page covers keypoints on still images; for points that follow an object through a video, see [Tracking objects across frames](../sign-language-video/video.md#tracking-objects-across-frames).
+In African work keypoints serve several groups of tasks:
+
+- **Sign language and gesture.** Data can be shared as pose keypoints as well as, or instead of, video (see [Sign language](../sign-language-video/sign-language.md#releasing-the-data) and [Gesture](../sign-language-video/gesture.md)).
+- **Livestock and wildlife.** Body landmarks are used to study posture, gait and body shape.
+- **Plant phenotyping.** Landmarks on leaves, stems and fruit are used to measure growth.
+- **Health and rehabilitation.** These projects use body or facial landmarks, which makes them some of the most sensitive images a project can hold.
+
+This page covers keypoints on still images. For points that follow an object through a video, see [Tracking objects across frames](../sign-language-video/video.md#tracking-objects-across-frames).
+
+:::tip[Key points]
+
+- Fix and version the ordered point list, the skeleton and the left/right rule before the pilot.
+- Use the visibility flag carefully: annotators must never guess a point they cannot place.
+- Compare annotations by size-normalised distance (OKS or PCK), never by IoU, and report it per point.
+- Estimate your own per-point tolerances from a double-annotated pilot; COCO's fit only human bodies.
+- Body and face landmarks are personal data, even when released instead of video.
+
+:::
 
 ## What the data looks like
 
-The COCO format is the common exchange format for keypoints. Each category lists its keypoint names in a fixed order and a `skeleton` of edges between them (1-based indices into that list, used for drawing). Each object stores a flat `keypoints` array of `x, y, v` triples, one per name, plus `num_keypoints`, the number of points that were labelled ([COCO Consortium, n.d.](../references.md#coco-format)). A small livestock schema looks like this:
+The COCO format is the common exchange format for keypoints. Each category lists its keypoint names in a fixed order and a `skeleton` of edges between them (1-based indices into that list, used for drawing). Each object stores a flat `keypoints` array of `x, y, v` triples, one per name, plus `num_keypoints`, the number of points that were labelled ([COCO Consortium, n.d.-a](../references.md#coco-format)). A small livestock schema looks like this:
 
 ```json
 {
@@ -45,12 +62,12 @@ Fix the schema before the first pilot image, and version it. Changing the point 
 - **The ordered point list.** Name each point, give a one-line definition and a picture of where it goes ("withers: the highest point of the back, between the shoulder blades"). Keep only the points the downstream task needs; every extra point costs time on every object.
 - **The skeleton.** List the edges. They are mainly for drawing and review, but an edge that looks wrong on screen is the fastest way to spot a misplaced point.
 - **Left and right.** State whether left means the subject's left or the viewer's left. MPII Human Pose annotated joints "person centric", so a left joint is the left limb of the person, whichever side of the image it falls on ([Andriluka et al., 2014](../references.md#andriluka-2014)). Use the same rule for animals (the animal's own left). Record the mirror pairs in the schema, because a horizontal-flip augmentation must swap them.
-- **What gets points.** Say which objects are annotated: every instance, or only those above a minimum size. COCO does not annotate keypoints on small objects (segment area under 32 by 32 pixels) and gives crowds no keypoints ([COCO Consortium, n.d.](../references.md#coco-keypoints-eval)). Say what to do with a tight group of animals, and whether points may only go on an object that already has a box.
+- **What gets points.** Say which objects are annotated: every instance, or only those above a minimum size. COCO does not annotate keypoints on small objects (segment area under 32 by 32 pixels) and gives crowds no keypoints ([COCO Consortium, n.d.-c](../references.md#coco-keypoints-eval)). Say what to do with a tight group of animals, and whether points may only go on an object that already has a box.
 - **The edge of the image.** A point outside the frame is not labelled. Never move it to the image border, which teaches the model a false position.
 
 ## Visibility and occlusion
 
-Each point carries a visibility flag. In COCO, `v=0` means not labelled (and then `x=y=0`), `v=1` labelled but not visible, and `v=2` labelled and visible ([COCO Consortium, n.d.](../references.md#coco-format)). The flag is where annotators diverge most, so write the rule down:
+Each point carries a visibility flag. In COCO, `v=0` means not labelled (and then `x=y=0`), `v=1` labelled but not visible, and `v=2` labelled and visible ([COCO Consortium, n.d.-a](../references.md#coco-format)). The flag is where annotators diverge most, so write the rule down:
 
 - **`v=2`** when the point itself can be seen.
 - **`v=1`** when it is hidden, for example behind another animal or the subject's own body, but its position can be placed with confidence from the parts that are visible. Decide in the guidelines how much inference is allowed, and give examples.
@@ -76,11 +93,25 @@ $$
 \mathrm{OKS} = \frac{\sum_i \exp\left(-d_i^2 / 2 s^2 \kappa_i^2\right)\,\delta(v_i > 0)}{\sum_i \delta(v_i > 0)}
 $$
 
-Here `d_i` is the distance between the two positions of point `i`, `s` is the object's scale (the square root of its segment area), and `κ_i` is a per-point tolerance. COCO estimated the tolerances from 5,000 redundantly annotated validation images, measuring how far annotators disagreed on each point type relative to object scale, then set `κ_i = 2σ_i`. Points that are not labelled in the reference do not affect the score, and COCO averages precision over OKS thresholds from 0.50 to 0.95 ([COCO Consortium, n.d.](../references.md#coco-keypoints-eval)). The COCO tolerances fit COCO's 17 human points only. For your own schema, estimate them the same way from the double-annotated pilot: a hoof is easier to place than the withers, and the tolerance should say so.
+In this formula:
 
-**Percentage of Correct Keypoints (PCK)** is simpler to explain. A point is correct if it lies within `α × max(h, w)` pixels of the reference, where `h` and `w` are the height and width of the object's box. Yang and Ramanan used α = 0.1 for full-body and 0.2 for upper-body people ([Yang and Ramanan, 2013](../references.md#yang-2013)). PCKh replaces the box with the head: the threshold is 50% of the head segment length, which does not change as the body bends ([Andriluka et al., 2014](../references.md#andriluka-2014)). For animals or plants, pick a reference length that is stable in your images (body length, leaf length) and report α with every score.
+- `d_i` is the distance between the two positions of point `i`.
+- `s` is the object's scale (the square root of its segment area).
+- `κ_i` is a per-point tolerance.
 
-Report agreement per point, not only the mean, because the mean hides the one point annotators cannot agree on. Check for left/right swaps explicitly: the COCO evaluation names confusion of left and right as a source of annotation error and of model error ([COCO Consortium, n.d.](../references.md#coco-keypoints-eval)), and a swapped pair costs little on OKS when the two points lie close together, as front hooves often do.
+COCO estimated the tolerances from 5,000 redundantly annotated validation images. It measured how far annotators disagreed on each point type relative to object scale, then set `κ_i = 2σ_i`. Points that are not labelled in the reference do not affect the score, and COCO averages precision over OKS thresholds from 0.50 to 0.95 ([COCO Consortium, n.d.-c](../references.md#coco-keypoints-eval)).
+
+:::warning
+
+The COCO tolerances fit COCO's 17 human points only. For your own schema, estimate them the same way from the double-annotated pilot: a hoof is easier to place than the withers, and the tolerance should say so.
+
+:::
+
+**Percentage of Correct Keypoints (PCK)** is simpler to explain. A point is correct if it lies within `α × max(h, w)` pixels of the reference, where `h` and `w` are the height and width of the object's box. Yang and Ramanan used α = 0.1 for full-body and 0.2 for upper-body people ([Yang and Ramanan, 2013](../references.md#yang-2013)).
+
+PCKh replaces the box with the head: the threshold is 50% of the head segment length, which does not change as the body bends ([Andriluka et al., 2014](../references.md#andriluka-2014)). For animals or plants, pick a reference length that is stable in your images (body length, leaf length) and report α with every score.
+
+Report agreement per point, not only the mean, because the mean hides the one point annotators cannot agree on. Check for left/right swaps explicitly: the COCO evaluation names confusion of left and right as a source of annotation error and of model error ([COCO Consortium, n.d.-c](../references.md#coco-keypoints-eval)), and a swapped pair costs little on OKS when the two points lie close together, as front hooves often do.
 
 <details>
 <summary>Python sketch: OKS, PCK and swap check for one pair of annotations</summary>
@@ -156,7 +187,7 @@ Body and face landmarks are personal data. A face mesh is close to a biometric t
 
 ## What it will actually cost you
 
-Keypoints cost more than boxes and less than full masks, but the range is wide, because cost grows with the number of points per object and with how often points are hidden. As a rough order of magnitude, adding keypoints on top of boxes adds 50-100% to the annotation effort per image. The other costs to plan for:
+Keypoints usually cost more than boxes and less than full masks, but the range is wide, because cost grows with the number of points per object and with how often points are hidden. Time annotators during the pilot to get your own cost per object rather than relying on a general figure. The other costs to plan for:
 
 - **Schema work.** Writing point definitions with pictures and settling the visibility rule takes several rounds of piloting with domain experts (a veterinarian for livestock, an agronomist for plants, Deaf signers for sign language).
 - **Double annotation for the pilot.** You need it twice over: once to measure agreement and once to estimate your own per-point tolerances for OKS.

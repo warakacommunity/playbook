@@ -100,7 +100,7 @@
     <text x="434" y="498" text-anchor="middle" fill="#8A3B25" font-size="12">unclear</text>
     <text x="476" y="499" fill="#8A7D6E">&#8594; marked, not guessed</text>
   </g>
-  <text x="396" y="540" font-size="13" fill="#8A7D6E">perRegion text box keeps each</text>
+  <text x="396" y="540" font-size="13" fill="#8A7D6E">A text box per region keeps each</text>
   <text x="396" y="557" font-size="13" fill="#8A7D6E">transcript bound to its line image.</text>
 
   <!-- arrow B -> export -->

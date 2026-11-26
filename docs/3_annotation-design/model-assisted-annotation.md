@@ -3,15 +3,32 @@ title: Model-Assisted Annotation
 sidebar_position: 5
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
 # Model-Assisted Annotation
 
-A model can do part of the annotation work before or while a person does the rest. For example, a tagger proposes part-of-speech tags; a speech recogniser drafts a transcript; a diarization pipeline proposes speaker turns; a segmentation model turns a click into a mask. The annotator then corrects the draft instead of starting from an empty form. Done carefully, this saves effort where the model is already good and keeps human attention for the hard cases. Done carelessly, it fills a dataset with the model's own mistakes, now carrying a human's approval.
+A model can do part of the annotation work before or while a person does the rest. For example:
 
-This page covers model assistance from any kind of model: a small model you trained on your own seed data, a pretrained speech or vision model, or a large language model. The LLM-specific parts (prompting, constraining output to the label set, when not to use an LLM at all) are in [LLM-Assisted Data](../7_llm-assisted-task/index.md). This page adds what applies to every kind of model: how drafts reach annotators, how to store and retire them, how to choose which items people label next, and how to record what the model did.
+- a tagger proposes part-of-speech tags;
+- a speech recogniser drafts a transcript;
+- a diarization pipeline proposes speaker turns;
+- a segmentation model turns a click into a mask.
+
+The annotator then corrects the draft instead of starting from an empty form. Done carefully, this saves effort where the model is already good and keeps human attention for the hard cases. Done carelessly, it fills a dataset with the model's own mistakes, now carrying a human's approval.
+
+This page covers help from any kind of model: a small model you trained on your own seed data, a pretrained speech or vision model, or a large language model (LLM). It explains how drafts reach annotators, how to store and retire them, how to choose which items people label next, and how to record what the model did. The LLM-specific parts (prompting, keeping output inside the label set, and when not to use an LLM at all) are in [LLM-Assisted Data](../7_llm-assisted-task/index.md).
+
+:::tip[Key points]
+
+- A model's output is a draft, not a label: store it separately and tag it with the model version.
+- Keep gold, agreement and test items human-only, labelled from scratch with no draft shown.
+- Drafts pull annotators towards the model; a blind slice labelled from scratch shows how much.
+- Active learning picks hard items, not typical ones; keep a random sample beside it.
+- Record, per item, whether a label came from a draft, and report the shares in the documentation.
+
+:::
 
 ## Two ways a model can help
 
@@ -24,13 +41,18 @@ There are two different modes, and they place different demands on the model and
 
 Interactive suggestions only help if they are fast enough that the annotator does not sit waiting for them. If the model cannot answer quickly for your annotators, on their devices and their connections, use bulk pre-annotation instead.
 
-In both modes, annotation must carry on when the model fails. If a draft could not be produced, the item should open with an empty form for the annotator to label from scratch, and if an interactive suggestion does not arrive, the annotator should be able to keep drawing by hand. A model outage should cost you the speed-up, never the annotation session.
+In both modes, plan for the model failing. Before you rely on a setup, check what happens when the model is down or returns nothing:
+
+- an item with no draft should still be labelled from scratch, not skipped or blocked;
+- an annotator waiting for a suggestion that never comes should be able to carry on by hand.
+
+A model outage should cost you the speed-up, never the annotation session.
 
 For annotators who work offline or on unreliable connections, compute drafts before the batch goes to their devices and do not rely on interactive suggestions. For offline work in general, see [Offline field operations](../2_data-collection/10_offline-field-operations.md).
 
 ## Start from a small hand-labelled seed
 
-If no usable model exists for your language and task, do not wait for one. Label a small seed set by hand, train a model on it, and use that model to draft the rest. MasakhaPOS worked this way: annotators tagged the first 100 sentences per language by hand, a model fine-tuned on them predicted tags for the remaining sentences, and annotators corrected those predictions. Punctuation, numbers and symbols were predicted almost perfectly and proper nouns well, which removed much of the effort ([Dione et al., 2023](../references.md#masakhapos-2023)). The details are on the [Part-of-Speech Tagging](../sequence-labelling/pos.md#annotation) page.
+If no usable model exists for your language and task, do not wait for one. Label a small seed set by hand, train a model on it, and use that model to draft the rest for annotators to correct. MasakhaPOS used this seed-then-correct approach ([Dione et al., 2023](../references.md#masakhapos-2023)); see [Part-of-Speech Tagging](../sequence-labelling/pos.md#annotation).
 
 The seed is also the first test of your guidelines. Label it with the same care as any other data, ideally with more than one annotator, because a model trained on an inconsistent seed will draft the same inconsistencies into every later item.
 
@@ -43,7 +65,14 @@ A model's output is a proposal, not an annotation. Keep that distinction in how 
 - **Retire stale drafts after a model change.** When you retrain or swap the model, delete or regenerate the drafts the old version made on items no one has annotated yet. Otherwise annotators work from a mix of model versions, which makes batches harder to compare and reproduce and leaves stale suggestions in the queue. Human annotations already made keep their record of the version they started from.
 - **Keep gold, evaluation and test sets human-only.** Items used as gold checks, items used to measure agreement, and the test set should be labelled from scratch with no draft shown. A test set corrected from model drafts is biased towards that model, and every model you later evaluate on it inherits the bias.
 
-Pre-filled drafts also pull annotators towards the model's choices. A controlled study of pre-annotation for part-of-speech tagging found that it sped annotators up and could raise quality, but also biased them towards the pre-annotation ([Fort and Sagot, 2010](../references.md#fort-sagot-2010)). The checks on the LLM page apply to any model ([Reviewing drafts without rubber-stamping](../7_llm-assisted-task/index.md#reviewing-drafts-without-rubber-stamping)): above all, keep a blind slice labelled from scratch and re-measure whenever the model changes.
+### Review drafts without rubber-stamping
+
+Pre-filled drafts pull annotators towards the model's choices. A controlled study of pre-annotation for part-of-speech tagging found that it sped annotators up and could raise quality, but also biased them towards the pre-annotation ([Fort and Sagot, 2010](../references.md#fort-sagot-2010)). A few habits keep the review honest:
+
+- **Keep a blind control slice.** Have annotators label a random slice of items from scratch, with no draft shown. Compare the model's agreement with them on that slice to the acceptance rate on drafted items. If reviewers accept far more drafts than the slice says are correct, they are rubber-stamping.
+- **Track the edit rate per annotator and per batch.** An annotator who never changes a draft, or a batch where corrections suddenly drop, needs a closer look, not praise for speed.
+- **Hide model confidence.** Do not show the model's scores or explanations next to the draft. They can make anchoring worse, and a high score does not show that a draft is right. The project team can still use the scores behind the scenes, for example to pick low-confidence drafts for audit.
+- **Re-measure when anything changes.** A new model version, prompt, language or domain resets what you know about the model's accuracy, so repeat the blind-slice check before scaling up again.
 
 When two annotators start from the same draft, their agreement partly measures the shared draft. Compute inter-annotator agreement on items both annotators labelled from scratch, using the metrics in [Data Quality](../4_data-quality/index.md#measure-inter-annotator-agreement). To measure how good the model itself is, treat its output as one more annotator and compare it with the human labels.
 

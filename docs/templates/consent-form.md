@@ -40,7 +40,9 @@ Keep a consent register as well as the forms: log every signature or oral agreem
 
 Change the version number on this form whenever its text changes, and ask existing contributors to agree to the new version before they contribute anything more.
 
-Publish a separate [privacy notice](./privacy-notice.md) describing the controller, processors, data categories, access, storage, transfers, retention and data-subject rights. The notice is not itself consent. For speech projects, add a separate optional choice for releasing speaker-profile fields with individual recordings; leave it unselected, and omit those fields where the speaker does not opt in.
+Publish a separate [privacy notice](./privacy-notice.md) describing the controller, processors, data categories, access, storage, transfers, retention and data-subject rights. The notice is not itself consent.
+
+For speech projects, add a separate optional choice for releasing speaker-profile fields (such as age band, gender or dialect) with individual recordings. Leave it unselected by default, and omit those fields where the speaker does not opt in.
 
 ---
 
@@ -96,7 +98,7 @@ If we decide to use your contribution for something not on this list, we will co
 - Stored at: [STORAGE LOCATION: country + institution + system]
 - Retained for: [PERIOD, e.g., "5 years, then reviewed for further extension"]
 - Access is limited to: [PROJECT TEAM ROLES + external reviewers if any]
-- If we release the data publicly: [LICENCE, e.g., CC BY-NC 4.0] (see below).
+- If we release the data publicly: [LICENCE, e.g., CC BY 4.0; or CC BY-NC 4.0 if the community requires it or this consent covers non-commercial use only] (see below).
 
 #### Public release
 
@@ -258,21 +260,23 @@ The ombudsperson's role is documented in a separate written agreement between th
 
 ## Anti-patterns to avoid
 
-1. **Adapting only the written form** and skipping the oral protocol. For most African-language projects, most contributors are more comfortable with oral consent.
-2. **Translating the form into the contributor's language with a machine translator** and skipping human review. A poorly translated consent form is not informed consent; it is a formality that will not survive review.
-3. **Using the project team as the "witness"** for oral consent. The witness must be independent; the project's own staff are not independent.
-4. **Skipping the visual aid** because "the contributor speaks English/French anyway". The visual aid is not for language competence; it is for concept accessibility. Some concepts (open licence, data centre, model release) do not have a natural translation in every language.
-5. **Storing the consent artefact separately from the data.** They must travel together. Otherwise the corpus becomes usable without the consent record, and the consent record becomes an audit-only artefact rather than an operational one.
-6. **Community consent from a single "elder" or "leader" figure** as substitute for a formal consultation. Individual authority is not the same as community consent even in strongly hierarchical contexts.
-7. **Using the community-consultation minutes as a marketing document.** The minutes are a record; keep them factual, and address disagreements in the record, not through selective quotation later.
+| Anti-pattern | Why it fails |
+| --- | --- |
+| **Adapting only the written form** and skipping the oral protocol | Many contributors, especially in rural or low-literacy settings, are more comfortable giving consent orally. A written-only process leaves them out or reduces consent to a signature they cannot check. |
+| **Translating the form with a machine translator** and skipping human review | A poorly translated consent form is not informed consent. It is a formality that will not survive review. |
+| **Using the project team as the "witness"** for oral consent | The witness must be independent, and the project's own staff are not. |
+| **Skipping the visual aid** because "the contributor speaks English or French anyway" | The visual aid is about understanding concepts, not language skill. Some concepts (open licence, data centre, model release) have no natural translation in every language. |
+| **Storing the consent artefact separately from the data** | The corpus becomes usable without its consent record, and the record becomes an audit-only artefact rather than an operational one. Keep them together. |
+| **Taking community consent from a single "elder" or "leader"** instead of a formal consultation | Individual authority is not the same as community consent, even in strongly hierarchical settings. |
+| **Using the consultation minutes as a marketing document** | The minutes are a record. Keep them factual, and address disagreements in the record, not through selective quotation later. |
 
 ## Further reading
 
 - The [legal, consent, and community IP](../legal-consent/index.md) chapter: the framework this template implements.
-- [Nekoto et al., 2020, participatory approach](https://aclanthology.org/2020.findings-emnlp.195/): the reference Masakhane consent + community-consultation workflow.
-- [CARE Principles for Indigenous Data Governance](https://www.gida-global.org/care): the community-authority framing that shapes the community-consent addendum.
-- [WHO Ethical considerations in health research](https://www.who.int/publications/i/item/9789240085879): general reference on informed-consent workflows in low-resource contexts; useful for the health-adjacent consent question.
-- [The Belmont Report (US)](https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/read-the-belmont-report/index.html): historical background on the informed-consent framework much of the field builds on; useful for its explicit discussion of what makes consent voluntary.
+- Masakhane's participatory approach to research on African languages ([Nekoto et al., 2020](../references.md#nekoto-2020)): an example of involving language communities throughout a project, which the community-consent addendum builds on.
+- The CARE Principles for Indigenous Data Governance ([Carroll et al., 2020](../references.md#carroll-2020); [gida-global.org/careprinciples](https://www.gida-global.org/careprinciples)): the community-authority framing behind the community-consent addendum.
+- [CIOMS International Ethical Guidelines for Health-related Research Involving Humans (2016)](https://cioms.ch/publications/product/international-ethical-guidelines-for-health-related-research-involving-humans/): international guidance on informed consent, community engagement and research in low-resource settings; useful for health-adjacent collections.
+- [The Belmont Report (US)](https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/read-the-belmont-report/index.html): historical background on the informed-consent framework much of the field builds on, including what makes consent voluntary.
 
 ---
 

@@ -3,13 +3,27 @@ ready: true
 title: Summarization
 sidebar_position: 3
 last_update:
-  date: 2026-11-22
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Summarization
 
-Summarization condenses a longer text into a shorter one that preserves its meaning. It comes in two forms. Extractive summarization selects the most important sentences from the source, while abstractive summarization rewrites the content in new words, which is harder and more useful but also more prone to error. For African languages summarization is valuable because it makes long documents in health, news, and government accessible quickly, and it is difficult for the same reason all generation is: scarce training data and morphologically rich languages that defeat simple methods.
+Summarization condenses a longer text into a shorter one that preserves its meaning. It comes in two forms:
+
+- **Extractive summarization** selects the most important sentences from the source.
+- **Abstractive summarization** rewrites the content in new words. This is harder and more useful, but also more prone to error.
+
+For African languages, summarization is valuable because it makes long documents in health, news and government quick to read. It is difficult for the same reasons as all generation: scarce training data, and morphologically rich languages that defeat simple methods.
+
+:::tip[Key points]
+
+- XL-Sum is the main multilingual starting point; beyond it, most projects write their own reference summaries.
+- Agree a written guideline first: fixed length, only what the source says, natural register, main point first.
+- Faithfulness is the central risk; check it by hand on a sample.
+- Use ROUGE only as a rough signal, with a tokenizer that keeps your script's characters, and check that any BERTScore model covers your language.
+
+:::
 
 ![Extractive versus abstractive summarization](images/summarization-types.svg)
 
@@ -50,7 +64,10 @@ The central risk in summarization is faithfulness. An abstractive summary that r
 
 The standard automatic metric, [ROUGE](https://pypi.org/project/rouge-score/), measures the overlap of words and short sequences between the generated summary and a reference. It is convenient but unreliable for African languages, because morphological richness means a correct summary can use different surface forms and still be marked wrong, the same weakness that affects BLEU in translation. Embedding-based metrics such as [BERTScore](https://github.com/Tiiiger/bert_score) capture meaning better, and a dedicated faithfulness or factuality check, whether automatic or human, catches the inventions that overlap metrics miss. As everywhere in generation, native-speaker human evaluation remains the ground truth.
 
-In practice you compute both, read ROUGE as a rough signal, and lean on BERTScore with a multilingual model that has seen the target language. Note two traps in the defaults. The `rouge-score` package's built-in tokenizer keeps only the ASCII characters a-z and 0-9 and turns everything else into spaces, so letters such as Hausa ɗ, ƙ and ɓ, Yorùbá tone-marked vowels, and every character of Ge'ez script (Amharic, Tigrinya) are silently dropped; pass your own tokenizer instead. And multilingual BERT (`bert-base-multilingual-cased`) was not trained on Hausa, Amharic or Igbo, so pick a model whose pretraining languages include yours, such as XLM-RoBERTa, which covers Hausa:
+In practice you compute both, read ROUGE as a rough signal, and lean on BERTScore with a multilingual model that has seen the target language. Watch for two traps in the defaults:
+
+- **ROUGE's built-in tokenizer drops non-ASCII letters.** The `rouge-score` package keeps only the characters a-z and 0-9 and turns everything else into spaces. Letters such as Hausa ɗ, ƙ and ɓ, Yorùbá tone-marked vowels, and every character of Ge'ez script (Amharic, Tigrinya) are silently dropped. Pass your own tokenizer instead.
+- **Multilingual BERT does not cover every language.** `bert-base-multilingual-cased` was not trained on Hausa, Amharic or Igbo. Pick a model whose pretraining languages include yours, such as XLM-RoBERTa, which covers Hausa.
 
 ```python
 # pip install rouge-score bert-score
@@ -82,7 +99,11 @@ P, R, F1 = bert_score(predictions, references, lang="ha",
 print(f"BERTScore F1: {F1.mean().item():.3f}")
 ```
 
-Two further cautions specific to African languages. ROUGE uses no stemmer here, because the stemmers shipped with these tools target English and mangle agglutinative or richly inflected words; the simple whitespace tokenizer above also leaves punctuation attached to words, so normalise punctuation the same way for predictions and references. And BERTScore is only as good as its underlying model: if the language is absent from the multilingual model, the score is meaningless, so verify coverage before trusting it, and fall back to human evaluation when no model covers the language. Whatever you report, state the metric implementation, tokenizer and model used, since scores computed with different settings are not comparable.
+Three further cautions apply to African languages:
+
+- **No stemmer.** The code above uses no stemmer, because the stemmers shipped with these tools target English and mangle agglutinative or richly inflected words. The simple whitespace tokenizer also leaves punctuation attached to words, so normalise punctuation the same way for predictions and references.
+- **Check model coverage.** BERTScore is only as good as its underlying model. If the language is absent from the multilingual model, the score is meaningless, so verify coverage before trusting it, and fall back to human evaluation when no model covers the language.
+- **Report your settings.** State the metric implementation, tokenizer and model used, since scores computed with different settings are not comparable.
 
 ## What breaks: common failure modes
 

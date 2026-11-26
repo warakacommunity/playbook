@@ -10,9 +10,25 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-Africa is home to roughly 2,140 living languages ([Ethnologue, 2024](../references.md#ethnologue-2024)). The best-covered public NLP resources reach a small fraction of that: MasakhaNER 2 covers 20 languages ([Adelani et al., 2022a](../references.md#adelani-2022)), NLLB-200 covers 55 African languages by Meta's count ([NLLB Team, 2022](../references.md#nllb-2022); [Meta AI, 2022](../references.md#meta-nllb-2022)), and Meta MMS reaches more languages for speech, about 1,100 in total ([Pratap et al., 2023](../references.md#pratap-2023)), often with little data per language. The overwhelming majority of African languages have **no dedicated model, no substantial training corpus, and no benchmark**. Cross-language transfer, starting from a well-resourced related language and adapting to an uncovered one, is the practical route for most of them, and often the only route.
+Africa is home to roughly 2,140 living languages ([Ethnologue, 2024](../references.md#ethnologue-2024)). The best-covered public NLP resources reach only a small fraction of them:
+
+- MasakhaNER 2 covers 20 languages ([Adelani et al., 2022a](../references.md#adelani-2022)).
+- NLLB-200 covers 55 African languages by Meta's count ([NLLB Team, 2022](../references.md#nllb-2022); [Meta AI, 2022](../references.md#meta-nllb-2022)).
+- Meta MMS reaches more languages for speech, about 1,100 in total ([Pratap et al., 2023](../references.md#pratap-2023)), often with little data per language.
+
+The overwhelming majority of African languages have **no dedicated model, no substantial training corpus, and no benchmark**. Cross-language transfer means starting from a well-resourced related language (the *pivot* or *source*) and adapting to an uncovered one (the *target*). It is the practical route for most African languages, and often the only one.
 
 This chapter is the map. It answers: *given a target African language that no released model covers well, which resourced language should you transfer from, and when should you not bother trying?*
+
+:::tip[Key points]
+
+- Three things predict good transfer: shared ancestry, shared script and similar grammar. Check all three.
+- Start from the closest related language in the same script that a released model covers.
+- Script is a major barrier: transfer from Latin script to Ge'ez, Ajami or N'Ko is not solved.
+- Measure transfer on a small native-speaker-checked test set (200–500 items) before building a big corpus.
+- Most family-level patterns below are expectations, not measured results: test them.
+
+:::
 
 ## Why cross-language transfer works, and when it does
 
@@ -34,7 +50,30 @@ That heuristic will not always give the best answer, but it will always give a d
 
 ## Per-family transfer guidance
 
-The families below cover most of the African linguistic landscape. Within each, we name the pivots that have public models (MasakhaNER or MasakhaNER 2 for NER, NLLB-200 for MT, MMS for ASR), and note where transfer typically works and where it typically does not. All pivot lists are current as of the last review date at the top of this page. Check the source repos for updates. Unless a sentence cites a study, the sub-branch transfer patterns are expectations based on linguistic relatedness, not measured results: treat them as hypotheses to test with the procedure in [How to measure transfer success](#how-to-measure-transfer-success-on-your-target).
+The families below cover most of the African linguistic landscape. Within each, we name the pivots that have public models (MasakhaNER or MasakhaNER 2 for NER, NLLB-200 for MT, MMS for ASR), and note where transfer typically works and where it typically does not.
+
+All pivot lists are current as of the last review date at the top of this page; check the source repositories for updates.
+
+:::warning[Hypotheses, not results]
+
+Unless a sentence cites a study, the sub-branch transfer patterns below are expectations based on linguistic relatedness, not measured results. Treat them as hypotheses to test with the procedure in [How to measure transfer success](#how-to-measure-transfer-success-on-your-target).
+
+:::
+
+**Pivots at a glance**
+
+| Family | Main covered pivots | Script notes |
+|---|---|---|
+| Bantu | Kiswahili, isiZulu, isiXhosa, Kinyarwanda, Luganda, Chichewa, Chishona, Setswana | Latin |
+| Chadic | Hausa | Resources are Latin-script; Ajami Hausa is not covered |
+| Nilotic | Dholuo | Latin |
+| Volta-Niger and Kwa | Yorùbá, Igbo, Ewe, Twi, Fon | Latin, with meaningful diacritics |
+| Cushitic | Somali | Latin for Somali and Oromo; some languages use Ge'ez |
+| Ethiopic Semitic | Amharic, Tigrinya | Ge'ez |
+| Mande | Bambara | Latin; N'Ko also used for Manding |
+| Atlantic | Wolof; Fulfulde (partial) | Latin; Ajami also used |
+| Grassfields, Gur | Ghomala, Mossi | Latin |
+| Khoisan | None well covered | Latin |
 
 ### Bantu (~500 languages, sub-Saharan)
 
@@ -70,7 +109,7 @@ Where a Chadic pivot fails, the next best options are:
 
 Tonal, mostly Latin script, some VSO word order. Includes some of the most under-resourced African language groups.
 
-**Pivots:** Dholuo (luo) is covered in MasakhaNER 2 and (partially) in NLLB-200. No dedicated MMS adapter for many Nilotic languages.
+**Pivots:** Dholuo (luo) is covered in MasakhaNER 2 and NLLB-200. For speech, MMS covers Dholuo and several other Nilotic languages, among them Acholi, Alur, Lango, Nuer, Shilluk, Ateso and some Dinka varieties, but not all of them (Maasai and Anuak, for example, have no MMS speech-recognition support) ([Meta AI, 2023](../references.md#meta-mms-coverage-2023)). Data per language is often small ([Pratap et al., 2023](../references.md#pratap-2023)).
 
 Sub-branch transfer patterns:
 - **Dholuo → other Western Nilotic (Dinka, Nuer, Anuak, Shilluk)**: modest; genealogically related but Dholuo has substantial East African contact features.
@@ -85,8 +124,9 @@ Tonal, Latin script with lexically-load-bearing diacritics, complex vowel system
 **Pivots covered in MasakhaNER 2 and NLLB-200:** Yorùbá (yor), Igbo (ibo), Ewe (ewe), Twi / Akan (twi), Fon (fon).
 
 Sub-branch transfer patterns:
+
 - **Yorùbá / Igbo → related Volta-Niger languages**: real but variable; both are tonal with different-enough sub-systems that direct transfer needs verification.
-- **Ewe, Twi, Fon (Gbe / Tano)**: closely related; transfer among these is generally strong.
+- **Ewe and Fon (both Gbe)** are closely related, so transfer between them should be strong. **Twi** (Akan, a Tano language) is a more distant Kwa relative; expect weaker transfer to or from the Gbe languages.
 - **Diacritic handling is a major technical pitfall**: for Yorùbá–English translation, diacritics measurably change the quality of pre-trained models' output, and automatic diacritic restoration helps with noisy input ([MENYO-20k, 2021](../references.md#menyo-2021)). A pivot model trained on text with diacritics stripped may handle a diacritically-faithful target corpus poorly; check for this in your evaluation.
 
 ### Cushitic (Horn of Africa)
@@ -118,13 +158,14 @@ Tonal, Latin script for most (some N'Ko for Manding languages), varied word orde
 **Pivots:** Bambara (bam) is covered in MasakhaNER 2 and NLLB-200.
 
 Sub-branch transfer patterns:
-- **Bambara → other Manding (Mandinka, Malinke, Dyula, Susu)**: moderate to strong; the Manding continuum has substantial mutual intelligibility, and Bambara is a defensible pivot for Manding targets.
-- **Bambara → other Mande (Soninke, Vai, Mende)**: weak; the Mande–Manding split is deep.
+
+- **Bambara → other Manding (Mandinka, Malinke, Dyula)**: moderate to strong; the Manding continuum has substantial mutual intelligibility, and Bambara is a defensible pivot for Manding targets.
+- **Bambara → other Mande outside Manding (Soninke, Susu, Vai, Mende)**: weak; these languages are outside the Manding continuum, and some (such as Soninke and Mende) belong to distant Mande branches.
 - **N'Ko script for Manding**: as with Ajami and Ge'ez, cross-script transfer needs an explicit approach; it is not solved.
 
 ### Senegambian / Atlantic (West Africa)
 
-Latin script (Wolof) or Ajami (Fulfulde). Complex noun-class systems.
+Mostly Latin script, with Ajami (Arabic script) also used, notably for Fulfulde and Wolof. Complex noun-class systems.
 
 **Pivots:** Wolof (wol) is covered in MasakhaNER 2 and NLLB-200. Fulfulde (ful) has partial NLLB-200 coverage.
 
@@ -144,7 +185,7 @@ Sub-branch transfer patterns:
 Even a genealogically-close, script-shared, typologically-similar pivot can fail. Watch for:
 
 - **Systematic entity mis-recognition**: the target-language equivalent of the same entity type is being missed at a higher rate than the pivot. Suggests morphology differences the pivot model was not exposed to.
-- **Diacritic-error clusters**: errors concentrate on words carrying diacritics the pivot's normalization stripped.
+- **Diacritic-error clusters**: errors concentrate on words carrying diacritics the pivot's normalisation stripped.
 - **Code-switching artefacts**: the pivot handles code-switching one way (say, Kiswahili-English), the target's code-switching pattern is different (say, Kikuyu-Kiswahili-English), and the model over-fits to the pivot's pattern.
 - **Domain mismatch masquerading as language mismatch**: the pivot was trained on news; your evaluation set is social media; the "cross-language" failure is actually a domain failure.
 - **Reverse transfer looks worse than forward**: if fine-tuning your target back onto the pivot's benchmark hurts its scores substantially, the two are further apart than they looked.
@@ -173,6 +214,8 @@ This is the same framework as the fork-or-fresh decision trees in the [Before Yo
 - [Adelani et al. (2021)](../references.md#adelani-2021): MasakhaNER, the first participatory NER dataset for ten African languages.
 - [Joshi et al. (2020)](../references.md#joshi-2020): the language-resourcedness taxonomy that frames why cross-language transfer matters for the bottom tiers of the world's languages.
 
----
+:::note[Contributor's note]
 
-**Contributor's note.** This chapter is deliberately hedged. Cross-language transfer for African languages is a genuinely research-grade problem, and any page that claims "transfer from X to Y works" without citing an empirical result is claiming more than it knows. If you are adding to this chapter (for a family, a script issue, a specific target-language pivot), cite what you know from published results, and mark what you are inferring. Uncited claims will be removed on next review.
+This chapter is deliberately hedged. Cross-language transfer for African languages is a genuinely research-grade problem, and any page that claims "transfer from X to Y works" without citing an empirical result is claiming more than it knows. If you are adding to this chapter (for a family, a script issue, a specific target-language pivot), cite what you know from published results, and mark what you are inferring. Uncited claims will be removed on next review.
+
+:::

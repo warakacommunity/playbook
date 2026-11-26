@@ -16,6 +16,17 @@ This chapter is practical guidance for scoping the legal and consent architectur
 
 Every question in this chapter should be answered *before* data collection begins, not after. Trying to retrofit consent, community IP, or a defensible licence onto a corpus that already exists is expensive, sometimes impossible, and always damaging to community trust. This is the operational reason [Step 0 of long-tail language onboarding](../long-tail-language/index.md#step-0-before-any-data-collection) is where it is.
 
+:::tip[Key points]
+
+- Settle ownership, licence and re-use decisions in writing, with the community, before any data is collected.
+- Get both individual and community consent, ask separately for each purpose, and keep a versioned, append-only consent record.
+- Check the data-protection law of every country your contributors are in; treat voice and handwriting as personal data.
+- Release openly under CC BY 4.0 by default. Use CC BY-NC or stricter terms only by deliberate exception, where the community or the consent terms require it, and record why in the dataset card.
+- Choose the licence as a policy decision with the community, not out of habit or a platform default.
+- Name a steward for the released corpus, and be ready to decline extractive requests.
+
+:::
+
 ## The three questions every project must answer
 
 Before scoping data collection, agree (in writing, with the community whose language and voices are being recorded) on the answers to three questions. Do not assume answers. Do not defer them.
@@ -30,7 +41,7 @@ The licence choice is not primarily a technical decision; it is a policy choice 
 
 ### 3. Who decides if a re-use request comes in later?
 
-A commercial actor asks to train a model on the corpus. A foreign university asks to remix it into a larger multilingual release. A government asks for a filtered version. Who has the standing to say yes or no? The answer should be knowable before the request arrives. In practice this means naming the decision-making body (community council, project steering group, named stewards) and its process (majority vote, unanimous consent, consultation timelines) in the release documentation.
+When someone asks to re-use the corpus after release, who has the standing to say yes or no? Name the decision body and its process in the release documentation before a request arrives; see [Governance models](../data-governance/index.md#governance-models) for the options.
 
 ## Consent
 
@@ -40,7 +51,7 @@ Consent for NLP data collection is not a checkbox. It is a workflow, and its qua
 
 Both are needed for most projects. **Individual consent** is the informed agreement of each specific person contributing a recording, a transcription, an annotation, or an image of their handwriting. **Community consent** is the agreement of the collective whose language is the subject of the collection. Neither substitutes for the other. A community that agrees to a project does not authorise you to record any specific individual without their consent; a specific individual who agrees cannot authorise the project on behalf of the community.
 
-Community consent is often the harder of the two to get right, because it requires identifying whose consent matters, in what capacity. Elders? Language custodians? Elected representatives? Diaspora communities? The [Nekoto et al. (2020) participatory approach](https://aclanthology.org/2020.findings-emnlp.195/) provides the standing template Masakhane uses.
+Community consent is often the harder of the two to get right, because you must first work out whose consent matters, and in what capacity: elders, language custodians, elected representatives, diaspora communities? The participatory approach Masakhane used for machine translation, which treats native speakers as co-creators of data and models, is a useful model ([Nekoto et al., 2020](../references.md#nekoto-2020)).
 
 ### Consent from non-literate speakers
 
@@ -66,7 +77,9 @@ Specific wording is only half of purpose limitation. The other half is giving co
 
 A contributor who says no to one purpose can still take part in the others. If a purpose is a condition of taking part at all, it is not an opt-in: say so plainly in the description of the contribution, and do not offer a box that cannot be unticked. Store the answer to each purpose per contributor, in the [consent record](#keeping-consent-records), not only on the paper form. How those answers are checked before data leaves the project is covered in [From consent record to release metadata](#from-consent-record-to-release-metadata).
 
-Treat optional speaker-profile release as its own purpose. Ask for separate, versioned consent before attaching age band, gender or language varieties to released utterance rows. GDPR Recital 32 states that silence, pre-ticked boxes or inactivity should not constitute consent ([European Union, 2016](../references.md#gdpr-2016)). Without this consent, omit the profile fields entirely rather than exporting empty placeholders. Apply a later revocation from the next export, never attach one speaker's profile to a row that contains several speakers, and default public reporting to aggregates unless the speaker opted into row-level release.
+**Optional speaker profiles.** For speech projects, offer a speaker-profile step before the first recording, with nothing preselected. Every field may be left blank or answered "prefer not to say", and declining does not block contribution. Keep the fields coarse: an age band rather than a birthdate, gender, and the language varieties the speaker uses, strongest first. Do not ask reviewers who only correct clips to fill in a profile.
+
+Treat releasing a speaker profile as its own purpose. Ask for separate, versioned consent before attaching age band, gender or language varieties to released utterance rows. GDPR Recital 32 states that silence, pre-ticked boxes or inactivity should not constitute consent ([European Union, 2016](../references.md#gdpr-2016)). Without this consent, leave the profile fields out entirely rather than exporting empty placeholders. Apply a later revocation from the next export. Never attach one speaker's profile to a row that contains several speakers, and report demographics only in aggregate unless the speaker opted into row-level release.
 
 ### Contributors under the applicable age of consent
 
@@ -152,33 +165,46 @@ A starting point for your project's consent process: a written consent form, an 
 
 ## Data protection laws in Africa: quick country reference
 
-African data protection legislation has expanded rapidly. The list below is a starting reference: laws change, enforcement varies, and this is not a substitute for jurisdiction-specific legal advice. For most projects, three questions matter for each country: **does a general data protection law exist**, **does it require a data protection officer or notification**, **and does it restrict cross-border data transfer**.
+By 2026, 44 African countries had enacted data-protection legislation, and most had a functioning authority to enforce it ([Tech In Africa, 2026](../references.md#techinafrica-2026)). The table below is a starting reference only: laws change, enforcement varies, and it is not a substitute for advice on a specific jurisdiction. For each country, three questions usually matter:
 
-- **[Nigeria: Nigeria Data Protection Act 2023 (NDPA)](https://ndpc.gov.ng/).** General data protection framework administered by the Nigeria Data Protection Commission. Requires data protection officer registration for controllers processing above defined thresholds; cross-border transfer requires adequacy or contractual safeguards. Superseded the NDPR 2019 regulation.
-- **[Kenya: Data Protection Act 2019](https://www.odpc.go.ke/).** Administered by the Office of the Data Protection Commissioner. Registration of data controllers and processors is required. Cross-border transfer requires appropriate safeguards or adequacy.
-- **[South Africa: Protection of Personal Information Act (PoPIA), 2013 (in force 2020)](https://popia.co.za/).** Administered by the Information Regulator. Broad application; strict rules on processing "special personal information" (which includes many kinds of research data). Cross-border transfer restricted to jurisdictions with comparable protection.
-- **[Ghana: Data Protection Act 2012](https://dataprotection.org.gh/).** One of the older African data protection laws. Administered by the Data Protection Commission. Registration of data controllers required.
-- **[Rwanda: Law 058/2021 on the Protection of Personal Data and Privacy](https://www.rura.rw/index.php?id=139).** Recent and comparatively strict. Localisation and cross-border transfer requirements are notable.
-- **[Uganda: Data Protection and Privacy Act 2019](https://www.pdpo.go.ug/).** Administered by the Personal Data Protection Office.
-- **[Egypt: Personal Data Protection Law 2020 (Law No. 151 of 2020)](https://www.pdpc.gov.eg/).** General framework; enforcement developing.
-- **[Morocco: Law 09-08](https://www.cndp.ma/).** Administered by the CNDP; older framework, still in force.
-- **[Tunisia: Organic Act No. 63 of 2004](https://www.inpdp.tn/).** One of the earliest African data protection laws.
+- Does a general data-protection law exist?
+- Does it require a data protection officer, registration or notification?
+- Does it restrict moving data across borders?
 
-At the continental level, the **[African Union Convention on Cyber Security and Personal Data Protection (Malabo Convention, 2014)](https://au.int/en/treaties/african-union-convention-cyber-security-and-personal-data-protection)** entered into force in 2023 and provides a framework member states are progressively aligning with. It does not replace national law; it complements it.
+| Country | Law | Regulator | Points to check |
+| --- | --- | --- | --- |
+| Nigeria | [Nigeria Data Protection Act 2023](https://ndpc.gov.ng/) (NDPA) ([Federal Republic of Nigeria, 2023](../references.md#ndpa-2023)) | Nigeria Data Protection Commission | Controllers and processors "of major importance" must register; cross-border transfer needs adequacy or other safeguards. Builds on the earlier Nigeria Data Protection Regulation (NDPR) 2019. |
+| Kenya | [Data Protection Act 2019](https://www.odpc.go.ke/) ([Republic of Kenya, 2019](../references.md#kenya-dpa-2019)) | Office of the Data Protection Commissioner | Data controllers and processors must register; cross-border transfer needs appropriate safeguards or adequacy. |
+| South Africa | [Protection of Personal Information Act 4 of 2013](https://popia.co.za/) (POPIA; most provisions in force from 1 July 2020) ([Republic of South Africa, 2013](../references.md#popia-2013)) | Information Regulator | Broad scope; strict rules on "special personal information" such as health, religious beliefs, race or ethnic origin, and biometric information. Cross-border transfer limited to places with comparable protection. |
+| Ghana | [Data Protection Act 2012](https://dataprotection.org.gh/) (Act 843) ([Republic of Ghana, 2012](../references.md#ghana-dpa-2012)) | Data Protection Commission | One of the older African laws; data controllers must register. |
+| Rwanda | Law 058/2021 on the Protection of Personal Data and Privacy ([Republic of Rwanda, 2021](../references.md#rwanda-dpl-2021)) | National Cyber Security Authority | Recent and comparatively strict; storage-location and cross-border transfer rules are notable. |
+| Uganda | [Data Protection and Privacy Act 2019](https://www.pdpo.go.ug/) | Personal Data Protection Office | |
+| Egypt | [Personal Data Protection Law (Law No. 151 of 2020)](https://www.pdpc.gov.eg/) | Personal Data Protection Center | General framework; enforcement still developing. |
+| Morocco | [Law 09-08](https://www.cndp.ma/) | CNDP | Older framework, still in force. |
+| Tunisia | [Organic Act No. 63 of 2004](https://www.inpdp.tn/) | INPDP | One of the earliest African data-protection laws. |
 
-Countries with no comprehensive data protection statute at the time of writing include several in Central Africa and the Sahel; the safe default in those jurisdictions is to follow the strictest applicable framework of any of the countries whose residents are in the corpus, plus the framework of the country where the data is stored.
+At the continental level, the **[African Union Convention on Cyber Security and Personal Data Protection](https://au.int/en/treaties/african-union-convention-cyber-security-and-personal-data-protection)** (Malabo Convention, adopted 2014) entered into force in 2023 ([Malabo Convention, 2023](../references.md#malabo-2023)). Member states are progressively aligning with it. It complements national law; it does not replace it.
 
-For voice recordings, transcriptions of private conversations, or any content identifying an individual, treat the material as personal data by default. "The data is anonymised" is not a licence to skip the analysis. Anonymisation of voice is difficult and rarely complete.
+The practical demands are similar across these laws:
+
+- Collect on a lawful basis, usually informed consent.
+- Use the data only for the purpose you stated.
+- Honour contributors' rights to access, correct and delete their data.
+- Be ready to assess the impact of anything that feeds automated decisions.
+
+Check the law of every country your contributors are in, not only your own. African Next Voices shows why: it gathered roughly 9,000 hours of speech across Kenya, Nigeria and South Africa ([African Next Voices, 2025](../references.md#african-next-voices)), which placed one project under three data-protection regimes at once.
+
+Several countries, including some in Central Africa and the Sahel, had no comprehensive data-protection statute at the time of writing. There, the safe default is to follow the strictest framework of any country whose residents are in the corpus, plus the framework of the country where the data is stored.
+
+:::warning[Treat voice as personal data]
+Voice recordings, transcriptions of private conversations, and any content that identifies a person are personal data by default. "The data is anonymised" is not a reason to skip the analysis: anonymising voice is difficult and rarely complete.
+:::
 
 ## Community IP frameworks
 
 ### CARE and FAIR
 
-The **[FAIR principles](https://www.go-fair.org/fair-principles/)** (Findable, Accessible, Interoperable, Reusable) have been the operational default for open research data. They are the values built into the Hugging Face Hub, Zenodo, and most academic repositories.
-
-The **[CARE Principles for Indigenous Data Governance](https://www.gida-global.org/care)** (Collective benefit, Authority to control, Responsibility, Ethics) were developed by and for indigenous communities to address the fact that FAIR alone does not protect community interests in data derived from indigenous knowledge, language, or cultural practice. CARE does not replace FAIR; the two are meant to operate in tension, and every project involving community-owned language data has to decide how the tension is resolved.
-
-For African-language corpora, the practical implication is that the community whose language is the subject of the corpus should have authority to control how the corpus is used, benefit collectively from downstream uses, and be treated as a rights-holder rather than a data source. **FAIR + CARE**, rather than FAIR alone, is the workable model.
+FAIR (Findable, Accessible, Interoperable, Reusable) makes data usable, and the CARE principles (Collective benefit, Authority to control, Responsibility, Ethics) add the community's authority over and benefit from its data, so community-derived language corpora should follow both ([Wilkinson et al., 2016](../references.md#wilkinson-2016); [Carroll et al., 2020](../references.md#carroll-2020)). For African-language corpora this means the community whose language it is keeps authority over use, shares in the benefit, and is treated as a rights-holder rather than a data source; how each principle maps to project decisions is in [FAIR and CARE, together](../data-governance/index.md#fair-and-care-together).
 
 ### Traditional knowledge and cultural expression
 
@@ -186,16 +212,24 @@ Language recordings often include content that is not neutral text: traditional 
 
 ## Licence selection
 
-Common choices, and when each is defensible:
+The basics of each licence type, including why software licences such as MIT or Apache-2.0 do not fit data, are in [Licensing and Compliance](../6_documentation/licensing.md#common-licence-types-for-nlp-datasets). Use version 4.0 of the Creative Commons licences: it also covers database rights ([Creative Commons, n.d.-b](../references.md#cc-faq)). License the data separately from any code. Common choices, and when each is defensible ([Creative Commons, n.d.-a](../references.md#cc-licenses)):
 
-- **[CC0 (Public Domain Dedication)](https://creativecommons.org/publicdomain/zero/1.0/)**: no rights reserved. Maximal openness; no protection against commercial re-use, no attribution requirement, no community control. Rarely appropriate for community-derived language data. Use with caution and only after explicit community agreement to maximum openness.
-- **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)**: attribution required, everything else permitted including commercial use. The de-facto open-research default. Defensible when the community has explicitly agreed to unrestricted commercial re-use with attribution.
-- **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**: attribution required, derivatives must carry the same licence. Protects against enclosure: a downstream model or corpus that includes this data must itself be openly re-shared. Useful when the community wants the corpus to remain in the open commons.
-- **[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)**: attribution required, non-commercial use only. This is the licence MasakhaNER 2 and many Masakhane-lineage corpora ship under, and it is the honest default for community-derived African-language data unless the community has explicitly consented to commercial use. The tradeoff is that some downstream research is inhibited by the "non-commercial" clause; the tradeoff is deliberate.
-- **[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)**: non-commercial and share-alike combined. The strictest of the standard CC options; use when protection against both commercial enclosure and downstream re-licensing matters.
-- **Custom community licences**: some projects draft bespoke terms (e.g., requiring a community-approval workflow for commercial use, requiring downstream benefit-sharing, restricting use in surveillance applications). These are legally viable but are much less well-understood by downstream users and can inhibit legitimate research. Draft with legal counsel and expect to spend effort explaining them.
+- **[CC0 (Public Domain Dedication)](https://creativecommons.org/publicdomain/zero/1.0/)**: no rights reserved ([Creative Commons, n.d.-c](../references.md#cc0)). Maximal openness: no protection against commercial re-use, no attribution requirement, no community control. Rarely appropriate for community-derived language data. Use it with caution, and only after the community has explicitly agreed to maximum openness.
+- **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)**: attribution required; everything else permitted, including commercial use. Widely used for open research data. This is the playbook's default for open release, provided the community and the consent terms allow commercial re-use with attribution.
+- **[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**: attribution required, and adaptations must carry the same or a compatible licence. This protects against enclosure: anyone who shares an adapted corpus must release it under the same or a compatible licence. Useful when the community wants the corpus to stay in the open commons.
+- **[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)**: attribution required, non-commercial use only. The licensing text on [MasakhaNER 2's dataset card](https://huggingface.co/datasets/masakhane/masakhaner2) describes CC 4.0 non-commercial terms. Use it by exception: when the community requires it, when consent covered non-commercial use only, or when the material is sacred or sensitive. The trade-off is that the non-commercial clause limits reuse, including some downstream research ([Ball, 2014](../references.md#ball-2014)), so choose it deliberately and record the reason in the dataset card.
+- **[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)**: non-commercial and share-alike combined. The strictest of the standard CC options; use it when protection against both commercial enclosure and downstream re-licensing matters.
+- **Custom community licences**: some projects draft bespoke terms, for example requiring community approval for commercial use, requiring downstream benefit-sharing, or restricting use in surveillance. These can be legally viable, but downstream users understand them much less well, and they can inhibit legitimate research. Draft them with legal counsel and expect to spend effort explaining them.
 
-**Editorial opinion.** For community-derived African-language corpora where extraction is a real concern (which is most of them), CC BY-NC 4.0 or CC BY-NC-SA 4.0 is the honest default. Move to a more permissive licence only if the community has explicitly consented and the consent was informed about the specific commercial-use scenarios the community was agreeing to. Move to a stricter custom licence only if you can afford to explain it to every downstream user.
+:::note[The playbook's default]
+CC BY 4.0 is the default for open release. Use CC BY-NC 4.0, CC BY-NC-SA 4.0 or stricter terms by exception, where one of these holds:
+
+- the community requires it, for example because extraction is a real concern;
+- the consent you collected covers non-commercial use only;
+- the material includes sacred or culturally sensitive content.
+
+Make the exception deliberately, with the community, and record the reason in the dataset card. CC BY only fits if the consent covered the commercial uses it permits. Move to a stricter custom licence only if you can afford to explain it to every downstream user.
+:::
 
 ## Anti-extraction release patterns
 
@@ -211,7 +245,7 @@ There are requests you should decline:
 
 - **Requests for the corpus without a stated use case.** Legitimate research use has a stated purpose. Vague "we would like a copy for future work" requests should be pushed back on until the use case is stated.
 - **Commercial re-use requests that skip the community.** If a commercial actor asks the project team but not the community, the answer defaults to no until the community has been consulted.
-- **Requests to include the corpus in a larger release where the licence would be weakened.** Do not agree to have your CC BY-NC 4.0 corpus repackaged under CC BY 4.0 in a downstream release.
+- **Requests to include the corpus in a larger release where the licence would be weakened.** If your corpus carries a non-commercial or share-alike term, do not agree to have it repackaged under a more permissive licence, such as CC BY 4.0, in a downstream release.
 - **Requests to strip community attribution.** No matter how technically convenient.
 - **Requests from surveillance-adjacent applications** (border enforcement, predictive policing, extractive government-monitoring applications). Even if legally permitted, the community's original consent almost certainly did not contemplate these uses.
 
@@ -223,20 +257,20 @@ Declining is a valid outcome. Not every request must be granted.
 2. **A single generic consent form** used across languages, countries, and contribution types. Consent for a five-minute interview is different from consent for a hundred hours of speech.
 3. **Assuming the corpus is not "personal data" because it is language.** Voice is biometric; handwritten samples identify individuals; even textual annotations can be identifying in context.
 4. **Skipping the community-consent conversation** because individual consent was obtained. Individual consent does not authorise community re-use.
-5. **Choosing a licence out of habit or platform default.** Hugging Face defaults, university repository defaults, and academic-project defaults do not automatically fit community-derived data.
-6. **Publishing without a named steward.** An unstewarded corpus attracts extractive re-use because there is no one to challenge it.
+5. **Choosing a licence out of habit or platform default.** The licence a hosting platform, university repository or earlier project suggests does not automatically fit community-derived data.
+6. **Publishing without a named steward** (see [Anti-extraction release patterns](#anti-extraction-release-patterns)).
 7. **Treating "the data is anonymised" as a licence to skip the analysis.** Anonymisation of speech is difficult and rarely complete; anonymisation of textual annotation is not automatic; identifying features can survive both.
 
 ## Further reading
 
-- [Nekoto et al., 2020, participatory approach](https://aclanthology.org/2020.findings-emnlp.195/): the reference for how Masakhane structures community involvement, consent, and IP in practice.
-- [CARE Principles for Indigenous Data Governance (GIDA)](https://www.gida-global.org/care): the reference for community authority over community-derived data.
-- [FAIR Principles](https://www.go-fair.org/fair-principles/): the open-research default; read alongside CARE to understand the tension.
+- [Nekoto et al., 2020, participatory research for low-resourced machine translation](https://aclanthology.org/2020.findings-emnlp.195/): how Masakhane involved native speakers as co-creators of data and models.
+- [CARE Principles for Indigenous Data Governance (GIDA)](https://www.gida-global.org/careprinciples): community authority over community-derived data.
+- [FAIR Principles](https://www.go-fair.org/fair-principles/): the open-research default; read alongside CARE.
 - [African Union Malabo Convention (2014, in force 2023)](https://au.int/en/treaties/african-union-convention-cyber-security-and-personal-data-protection): the continental framework member states are progressively aligning with.
-- [WIPO: Traditional Knowledge](https://www.wipo.int/tk/en/): the international framework for protection of traditional cultural expressions.
-- [Data Nutrition Project](https://datanutrition.org/): a template for structured dataset documentation that includes the legal and ethical dimensions.
-- [Datasheets for Datasets (Gebru et al., 2018)](https://arxiv.org/abs/1803.09010): the widely-adopted dataset documentation standard.
-- [Bird, 2020, decolonising speech and language technology](https://aclanthology.org/2020.coling-main.313/): the ethical framing that makes explicit whose data is being processed and on whose terms.
+- [WIPO: Traditional Knowledge](https://www.wipo.int/tk/en/): the international framework for protecting traditional knowledge and cultural expressions.
+- [Data Nutrition Project](https://datanutrition.org/): structured dataset labels that cover legal and ethical dimensions.
+- [Datasheets for Datasets (Gebru et al., 2021)](https://dl.acm.org/doi/10.1145/3458723): a widely adopted dataset documentation standard.
+- [Bird, 2020, decolonising speech and language technology](https://aclanthology.org/2020.coling-main.313/): whose data is being processed, and on whose terms.
 
 ---
 

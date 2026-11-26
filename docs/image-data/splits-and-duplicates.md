@@ -3,7 +3,7 @@ title: Splits and near-duplicates
 sidebar_position: 10
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -12,6 +12,15 @@ last_update:
 An image test set only measures generalisation if the model has not, in effect, already seen it. In vision this fails in two ways. The same picture can sit on both sides of the split as a resized, recompressed or slightly cropped copy. Or the test images can be new pictures of something the model already knows: the same field, the same camera, the same person, the same afternoon. Both inflate scores, and both are invisible in a random split.
 
 The general rule is in [Data integrity](../8_model-building/data-integrity.md#prevent-train-test-leakage): deduplicate first, then split by group, and check that no group crosses the boundary. Speech applies it with speakers and prompts ([Read speech: keep speakers and prompts apart](../8_model-building/data-integrity.md#read-speech-keep-speakers-and-prompts-apart)). This page is the image and video version: how to find near-duplicate pictures, which grouping key to split on, and why video must be split by video and not by frame.
+
+:::tip[Key points]
+
+- Remove or group near-duplicates first, using file hashes, perceptual hashes and embeddings, and review pairs by hand.
+- Split by a grouping key (site, device, photographer, session, subject), not at random.
+- Split video by whole video, never by frame.
+- Release the split file, freeze the test set, and report results per group.
+
+:::
 
 ## How image splits leak
 
@@ -102,7 +111,11 @@ def leakage_safe_split(records, group_key="site_id", max_distance=8,
     return [records[i] for i in train_idx], [records[i] for i in test_idx], pairs
 ```
 
-Three things to know when using it. `max_distance=8` is only an example; set it from your own review as described above. `test_size` is a share of clusters, not of images, so with a few large groups the test set can end up much smaller or larger than intended; check the counts and try other seeds. And a near-duplicate that bridges two sites merges both sites into one cluster, which is correct but can surprise you, so read the `pairs` list before trusting the split.
+Three things to know when using it:
+
+- **`max_distance=8` is only an example.** Set it from your own review, as described above.
+- **`test_size` is a share of clusters, not of images.** With a few large groups the test set can end up much smaller or larger than intended. Check the counts and try other seeds.
+- **Near-duplicates can merge sites.** A near-duplicate that bridges two sites merges both into one cluster. This is correct but can surprise you, so read the `pairs` list before trusting the split.
 
 ## Record and release the split
 

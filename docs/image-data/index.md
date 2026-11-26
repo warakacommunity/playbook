@@ -2,13 +2,23 @@
 ready: true
 title: Image Data
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Tadesse Destaw
 ---
 
 # Image Data
 
-Image data covers the vision tasks where the input is a still picture: deciding what an image shows, locating objects within it, and outlining their exact shapes. Computer vision is less language-dependent than the rest of this playbook, but it is no less African, because the questions that matter on the continent are specific to it. A survey of computer-vision research in Africa found the field concentrated in a few high-impact areas, above all agriculture and health, and constrained by the same data scarcity that limits African NLP ([State of CV in Africa, 2024](../references.md#cv-africa-2024)).
+Image data covers the vision tasks where the input is a still picture: deciding what an image shows, locating objects within it, and outlining their exact shapes. Computer vision is less language-dependent than the rest of this playbook, but it is no less African, because the questions that matter on the continent are specific to it. A survey of computer-vision research in Africa found forests, plants and agriculture to be the most prominent applications, with medical imaging also among the recurring topics. Researchers named limited access to African datasets as one of the main barriers, the same data scarcity that limits African NLP ([State of CV in Africa, 2024](../references.md#cv-africa-2024)).
+
+:::tip[Key points]
+
+- Image tasks differ in how finely they label, but share one pipeline: rights, capture, scheme, agreement, licence.
+- Agriculture, health and the environment are the high-value African domains, and open labelled data there is scarce.
+- Widely used image collections under-represent Africa, so models trained on them do worse on African images.
+- Choose the cheapest annotation shape that still gives the measurement you need; changing it later means re-annotating.
+- Name one shape per class, and check that it survives export to your release format.
+
+:::
 
 This chapter covers three image tasks, plus keypoint annotation:
 
@@ -19,11 +29,25 @@ This chapter covers three image tasks, plus keypoint annotation:
 
 ## What the three tasks share
 
-The tasks differ in how finely they label an image, but the pipeline around them is shared: source images you have the right to use, with attention to consent where people are identifiable; capture or scan to a consistent standard; annotate with a clear scheme and locally knowledgeable annotators; measure agreement; and release under a clear licence. The [Vision overview](../sections/vision.md), [Annotation Design](../3_annotation-design/annotation-task-design.md), and [Data Governance](../data-governance/index.md) chapters cover these. Two African realities run through all three tasks. The high-value domains are agriculture, health, and the environment, where open labelled data has been scarce. The LacunaLabels crop-field boundary set was built because annual maps of African crop fields did not exist ([Estes et al., 2024](../references.md#estes-2024)), and the first release of the LandCoverNet land-cover set covered the African continent, in response to a lack of open training data that represents the geographic diversity of land cover ([Alemohammad and Booth, 2020](../references.md#alemohammad-2020)). Widely used image collections are also skewed towards North America and Europe, and recognition systems trained on them do worse on images from poorer and African households ([Shankar et al., 2017](../references.md#shankar-2017); [DeVries et al., 2019](../references.md#devries-2019)). And images of people carry the same likeness and consent obligations as voices do, so faces, locations, and identifiable settings need the same governance care as any personal data.
+The tasks differ in how finely they label an image, but the pipeline around them is the same:
+
+1. Source images you have the right to use, with attention to consent where people are identifiable.
+2. Capture or scan to a consistent standard.
+3. Annotate with a clear scheme and locally knowledgeable annotators.
+4. Measure agreement.
+5. Release under a clear licence.
+
+The [Vision overview](../sections/vision.md), [Annotation Design](../3_annotation-design/annotation-task-design.md) and [Data Governance](../data-governance/index.md) chapters cover these steps. Three African realities run through all three tasks:
+
+- **The high-value domains lack open data.** Agriculture, health and the environment matter most, and open labelled data there has been scarce. The LacunaLabels crop-field boundary set was built because annual maps of African crop fields did not exist ([Estes et al., 2024](../references.md#estes-2024)). The first release of the LandCoverNet land-cover set covered the African continent, in response to a lack of open training data that represents the geographic diversity of land cover ([Alemohammad and Booth, 2020](../references.md#alemohammad-2020)).
+- **Common image collections are skewed.** Widely used collections lean towards North America and Europe, and recognition systems trained on them do worse on images from poorer and African households ([Shankar et al., 2017](../references.md#shankar-2017); [DeVries et al., 2019](../references.md#devries-2019)).
+- **Images of people are personal data.** They carry the same likeness and consent obligations as voices do, so faces, locations and identifiable settings need the same governance care as any personal data.
 
 ## Choosing the annotation shape
 
-Before any of the three tasks starts, decide what shape annotators will draw. The shape fixes what the dataset can measure, and it is expensive to change: a polygon can always be reduced to a box later, but a box can never be turned back into the outline it skipped, so switching to a richer shape after annotation means annotating again. Choose the cheapest shape that still carries the measurement your downstream task needs, write it into the guidelines, and test it in the pilot.
+Before any of the three tasks starts, decide what shape annotators will draw. The shape fixes what the dataset can measure, and it is expensive to change. A polygon can always be reduced to a box later, but a box can never be turned back into the outline it skipped. Switching to a richer shape after annotation therefore means annotating again.
+
+Choose the cheapest shape that still carries the measurement your downstream task needs, write it into the guidelines, and test it in the pilot.
 
 | Shape | Use it for | Precision | Effort |
 |---|---|---|---|
@@ -44,7 +68,12 @@ A few questions settle most choices:
 - **How crowded are the images?** In dense scenes, such as a herd seen from a drone, boxes overlap heavily and a single point or a small keypoint set per object can be faster and less ambiguous.
 - **What does your evaluation expect?** The [object detection](./object-detection.md) page scores boxes with mAP, the [segmentation](./segmentation.md) page scores masks with mean IoU (mIoU), and keypoints are scored with a size-normalised distance such as Object Keypoint Similarity (see [Keypoints and pose](./keypoints-pose.md#agreement-and-evaluation)). Pick the shape whose standard metric matches the claim you want to make, and record it in the dataset card.
 
-Two practical cautions. Not every annotation tool supports every shape, and some export rotated boxes, ellipses or polylines in their own formats, so confirm that the shape survives export to the format you will release before the pilot rather than after. And mixing shapes for the same class (boxes from one annotator, polygons from another) makes agreement and evaluation incomparable, so the guidelines should name one shape per class.
+:::warning[Two practical cautions]
+
+- **Check export before the pilot.** Not every annotation tool supports every shape, and some export rotated boxes, ellipses or polylines in their own formats. Confirm that the shape survives export to your release format before the pilot, not after.
+- **One shape per class.** Mixing shapes for the same class (boxes from one annotator, polygons from another) makes agreement and evaluation incomparable. The guidelines should name one shape per class.
+
+:::
 
 ## More on image data
 

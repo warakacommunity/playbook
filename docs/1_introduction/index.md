@@ -3,7 +3,7 @@ sidebar_position: 1
 slug: /
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -18,11 +18,21 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 This is the website of the **AfriPlaybook**, an open guide to building datasets for African languages. It follows a dataset from first idea to public release: deciding what to collect and from whom, designing the annotation task, recruiting and paying the people who do it, checking their work, documenting the result, and publishing it so that others can build on it.
 
-Africa is home to roughly a third of the world's languages, yet most of them have almost none of the text and speech that language technology depends on. The reason is that building good data is expensive, careful work, and few people are ever taught how to do it. Most guidance on dataset creation assumes English, a comfortable budget, and a task someone has solved before. This playbook assumes instead the conditions most African-language projects face: modest funding, volunteer or part-time teams, several languages and scripts at once, and communities who should remain the owners of what they help to create.
+Africa is home to roughly a third of the world's languages, yet most of them have almost none of the text and speech that language technology depends on. The reason is that building good data is expensive, careful work, and few people are ever taught how to do it. This playbook is written for the conditions most African-language projects actually face: modest funding, part-time teams and several languages at once.
 
 ## Who this playbook is for
 
-The playbook is written for anyone who builds, or wants to build, a dataset for an African language, and for NLP researchers working on any language where data is scarce. It draws its examples from African projects, but the problems it deals with are not unique to Africa: little usable text online, several scripts or dialects within one language, small budgets, and communities whose consent and ownership must be respected. Most of its advice applies wherever those conditions hold. Among its readers we expect students, researchers, linguists and language activists who want their language to be usable by machines, community organisers running a collection drive, and engineers who have discovered that the data they need does not exist. No background in machine learning is assumed. What is assumed is a language you care about and a willingness to do careful work.
+The playbook is for anyone who builds, or wants to build, a dataset for an African language. It is also for NLP researchers working on any language where data is scarce.
+
+Its examples come from African projects, but the problems are not unique to Africa: little usable text online, several scripts or dialects within one language, small budgets, and communities whose consent and ownership must be respected. Most of its advice applies wherever those conditions hold.
+
+We expect readers such as:
+
+- students, researchers, linguists and language activists who want their language to be usable by machines;
+- community organisers running a collection drive;
+- engineers who have discovered that the data they need does not exist.
+
+No background in machine learning is assumed. What is assumed is a language you care about and a willingness to do careful work.
 
 ## What you will learn
 
@@ -41,7 +51,12 @@ Each of the task parts explains what changes when you build data for that kind o
 
 ## How to read it
 
-You do not have to read the playbook in order. If you are starting a project from nothing, begin with the [Introduction](./introduction.md), which explains why African languages lack data and why scraping the web will not fix it, and then read the Foundations chapters in sequence. If you already know your task, go to [Before You Start](../before-you-start/index.md), which lists existing resources for common tasks and helps you decide whether to extend an existing dataset or build a new one. [How to read this playbook](./how-to-read.mdx) suggests other routes through the book, and the [glossary](../glossary.md) defines its terms. If you work offline or on a slow connection, the whole playbook is available as a single PDF from the **AfriPlaybook** menu at the top of the page.
+You do not have to read the playbook in order.
+
+- **Starting a project from nothing?** Begin with the [Introduction](./introduction.md), which explains why African languages lack data and why scraping the web will not fix it. Then read the Foundations chapters in sequence.
+- **Already know your task?** Go to [Before You Start](../before-you-start/index.md). It shows you how to find existing datasets and decide whether to reuse or extend one, or build your own.
+- **Want another route?** [How to read this playbook](./how-to-read.mdx) suggests more, and the [glossary](../glossary.md) defines the terms.
+- **Offline or on a slow connection?** Download the whole playbook as a single PDF from the **AfriPlaybook** menu at the top of the page.
 
 ## Free and open
 

@@ -4,13 +4,23 @@ sidebar_label: Dialogue
 sidebar_position: 5
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
 # Dialogue and Multi-Turn Annotation
 
 Dialogue annotation labels a conversation, one of its turns, or a span inside a turn. The central rule is to preserve context: an intent, dialogue act or response judgement can change when earlier turns are hidden. Dialogue-act models have long used the sequence of preceding acts, not each utterance on its own, to decide a label ([Stolcke et al., 2000](../references.md#stolcke-2000)).
+
+:::tip[Key points]
+
+- Store each conversation as an ordered list of turns with pseudonymous speaker roles.
+- Show earlier turns as context, label only the target turn, and keep the context window fixed.
+- Keep turn-level and span-level labels separate, and reuse existing schemas such as ISO 24617-2 where you can.
+- Keep code-switching as it is; do not translate or normalise it away.
+- Report agreement separately for turn labels and spans, and release the context-window convention with the data.
+
+:::
 
 ## Store the conversation structure
 
@@ -29,11 +39,18 @@ Store each record as an ordered array of turns. Every turn needs a speaker role 
 }
 ```
 
-Show earlier turns as read-only context and make only the target turn labelable. Fix the context window, whether the full history or a stated number of preceding turns, and keep it constant within an evaluation. Record that choice in every export.
+Show earlier turns as context that annotators can read but not label, and open only the target turn for labelling. Fix the context window, either the full history or a stated number of preceding turns, and keep it constant within an evaluation. Record that choice in every export.
 
 ## Choose the annotation unit
 
-Turn-level labels include intent, dialogue act, toxicity and response quality. Span-level labels identify slots, entities or other evidence inside a turn. A project can use both, but their scopes must remain distinct: a slot belongs to its turn, while an intent may depend on the whole context. For dialogue acts, consider adapting the ISO 24617-2 standard, which defines dialogue act types and how to annotate them, before inventing a new taxonomy ([Bunt et al., 2020](../references.md#bunt-2020)). For intents and slots, existing datasets that cover African languages offer schemas to start from ([FitzGerald et al., 2023](../references.md#massive-2023); [Yu et al., 2025](../references.md#injongo-2025)).
+Dialogue labels come at two levels:
+
+| Level | Examples | Scope |
+| --- | --- | --- |
+| Turn | Intent, dialogue act, toxicity, response quality | May depend on the whole conversation so far |
+| Span | Slots, entities or other evidence inside a turn | Belongs to its own turn |
+
+A project can use both, but keep their scopes distinct. For dialogue acts, consider adapting the ISO 24617-2 standard, which defines dialogue act types and how to annotate them, before inventing a new taxonomy ([Bunt et al., 2020](../references.md#bunt-2020)). For intents and slots, existing datasets that cover African languages offer schemas to start from ([FitzGerald et al., 2023](../references.md#massive-2023); [Yu et al., 2025](../references.md#injongo-2025)).
 
 The guideline must cover code-switching across and within turns. Language models still handle many kinds of code-switching poorly, partly because little training data captures it ([Doğruöz et al., 2021](../references.md#dogruoz-2021)). Do not translate or normalise it away; use the language-identification conventions in [Sequence Labelling](../sequence-labelling/index.md#language-identification-of-code-switched-text) and the deployment considerations in [Multilingual switching within a session](../deployment/multilingual-switching.md).
 

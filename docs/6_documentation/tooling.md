@@ -3,13 +3,22 @@ sidebar_position: 8
 title: Tooling and Infrastructure
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 
 # Tooling and Infrastructure
 
-The tools a project uses shape what it can do and how reliably it can do it. For African-language data work, tooling choices are constrained by real conditions, namely tight budgets, intermittent connectivity, and distributed teams, so the right tool is rarely the most powerful one but the one the team can actually run.
+The tools a project uses shape what it can do and how reliably it can do it. African-language data work runs under real constraints: tight budgets, intermittent connectivity and distributed teams. So the right tool is rarely the most powerful one. It is the one the team can actually run.
+
+:::tip[Key points]
+
+- Judge annotation tools against your task, team and conditions, not a feature list.
+- Check script rendering, offline and mobile use, per-annotator exports and data access before you commit.
+- Pilot a tool on real, hard items with your own annotators before adopting it.
+- Keep your own regular exports outside the tool, so the dataset outlives the tool.
+
+:::
 
 ## Annotation tools
 
@@ -40,11 +49,19 @@ Then add the checks that decide whether a tool works for African-language data i
 
 ### Verify before you commit
 
-Treat feature claims as claims until you have seen them work. Check each one in the edition and version you will actually use, since hosted, free, and paid editions of the same tool often differ. Then pilot the tool on a small set of real items from your corpus (for example, 20 to 50), including mixed-script and hardest-case items, with your real annotators on their own devices and connections. Export the pilot data and open it to confirm that everything you need came out. Whatever you choose, keep your own regular exports outside the tool, so that the dataset survives a lapsed subscription, a closed service, or a failed server.
+Treat feature claims as claims until you have seen them work:
+
+1. **Check the right edition.** Test each feature in the edition and version you will actually use, since hosted, free and paid editions of the same tool often differ.
+2. **Pilot on real items.** Use a small set of real items from your corpus (for example, 20 to 50), including mixed-script and hardest-case items, with your real annotators on their own devices and connections.
+3. **Open the export.** Export the pilot data and confirm that everything you need came out.
+
+Whatever you choose, keep your own regular exports outside the tool, so that the dataset survives a lapsed subscription, a closed service, or a failed server.
 
 ## Pipelines, deployment, and access
 
-Automate the repetitive parts of the pipeline, such as cleaning, formatting, and validation, so they are consistent and reproducible rather than redone by hand each time. One such step is converting audio and video into formats that play smoothly in a browser or on a phone before annotators see them (see [Preparing media for annotation](../2_data-collection/7_data-cleaning-preprocessing.md#preparing-media-for-annotation)). Decide between cloud and local deployment by weighing cost, connectivity, and data sensitivity, since sensitive or restricted data may be safer on local infrastructure under the community's control than on a foreign cloud. Throughout, apply sensible security and access control so that personal and sensitive data is seen only by those who should see it, which is part of the governance obligation, not separate from it. [Securing data during annotation](../data-governance/index.md#securing-data-during-annotation) suggests settings matched to how sensitive the data is.
+- **Automate repetitive steps.** Cleaning, formatting and validation should be scripted, so they are consistent and reproducible rather than redone by hand each time. One such step is converting audio and video into formats that play smoothly in a browser or on a phone before annotators see them (see [Preparing media for annotation](../2_data-collection/7_data-cleaning-preprocessing.md#preparing-media-for-annotation)).
+- **Choose cloud or local deliberately.** Weigh cost, connectivity and data sensitivity. Sensitive or restricted data may be safer on local infrastructure under the community's control than on a foreign cloud.
+- **Control access throughout.** Personal and sensitive data should be seen only by those who need to see it. This is part of the governance obligation, not separate from it. [Securing data during annotation](../data-governance/index.md#securing-data-during-annotation) suggests settings matched to how sensitive the data is.
 
 ### Getting data into the tool
 

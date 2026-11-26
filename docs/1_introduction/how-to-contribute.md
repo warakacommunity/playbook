@@ -2,13 +2,22 @@
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # How to Contribute
 
-You do not need to be an NLP researcher, and you do not need to write a whole chapter. Fixing a typo, sharing what worked on a real project, or translating a page all count. This page walks you through every way to contribute, from a one-line fix to a full chapter, step by step.
+You do not need to be a researcher: volunteers, students, community organisers and professionals all contribute. You also do not need to write a whole chapter. Fixing a typo, sharing what worked on a real project, or translating a page all count. This page walks you through every way to contribute, from a one-line fix to a full chapter, step by step.
+
+:::tip[Key points]
+
+- Anyone can contribute: a typo fix, a case study, an example or a translation all count.
+- Small edits: use the online editor or GitHub's web editor; no setup needed.
+- New chapters or multi-file changes: open an issue, then fork, build locally and open a pull request.
+- Write plainly and cite only real, verifiable sources.
+
+:::
 
 ## Ways to contribute
 
@@ -62,7 +71,7 @@ Best for a small change when you would rather work on GitHub directly.
 
 ## Path 3: Fork and pull request (for chapters and larger changes)
 
-Best for adding a new chapter or editing several files at once. This needs [git](https://git-scm.com/) and [Node.js 18+](https://nodejs.org/) on your computer. Even if you are new to git, you can follow these steps.
+Best for adding a new chapter or editing several files at once. This needs [git](https://git-scm.com/) and [Node.js 22](https://nodejs.org/) on your computer. Even if you are new to git, you can follow these steps.
 
 ### Step 1: Open an issue first
 
@@ -155,7 +164,7 @@ A few things every contribution should follow:
 - **Write plainly.** Short sentences, active voice, one idea per paragraph. Explain jargon the first time you use it.
 - **Cite real sources.** Every claim and example must point to a real, verifiable paper, dataset, or project, never an invented or unchecked citation.
 
-For how to structure a page, add sections and subsections, and use the colored callout boxes (in **Markdown or Word**), see [How to Write the Document](./how-to-write). For the full style rules and deeper repository details, see [CONTRIBUTING.md](https://github.com/warakacommunity/playbook/blob/main/CONTRIBUTING.md).
+For how to structure a page, add sections and subsections, and use the coloured callout boxes (in **Markdown or Word**), see [How to Write a Chapter](./how-to-write.md). For the full style rules and deeper repository details, see [CONTRIBUTING.md](https://github.com/warakacommunity/playbook/blob/main/CONTRIBUTING.md).
 
 ## Translating a page
 

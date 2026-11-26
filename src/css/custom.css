@@ -1560,3 +1560,207 @@ main[itemtype="https://schema.org/Blog"] .blog-card:hover {
    Does not touch the Algolia DocSearch button, which is a separate element. */
 .navbar__search-container,
 .navbar__search { display: none !important; }
+
+/* ==========================================================================
+   Readability pass (2026-11)
+   Goal: calmer, easier reading of the playbook chapters on laptops and
+   phones, in light and dark mode. Brand colours and the page layout are
+   unchanged; everything below only adjusts spacing, type and surfaces
+   inside the doc content (.markdown) plus a few Infima table variables.
+   ========================================================================== */
+
+/* --- 1. Comfortable line length -------------------------------------------
+   With the right-hand TOC the doc column is already ~800px wide, so this
+   cap only matters on wide screens where the column grows (e.g. pages
+   without a TOC). Only running prose is capped (~80 characters per line);
+   tables, code, figures and callouts keep the full column width. */
+.markdown > :is(p, ul, ol, blockquote, dl),
+.markdown > .pb-new > :is(p, ul, ol, blockquote, dl) {
+  max-width: 48rem;
+}
+
+/* Long URLs, file paths and unbroken words wrap instead of pushing the
+   page sideways on phones. (Does not affect table column sizing.) */
+.markdown {
+  overflow-wrap: break-word;
+}
+
+/* --- 2. Paragraph and list rhythm ------------------------------------------ */
+.markdown li + li {
+  margin-top: 0.3rem;               /* small gap between list items */
+}
+.markdown li > ul,
+.markdown li > ol {
+  margin-top: 0.3rem;               /* nested list sits close to its parent */
+}
+/* Numbered steps are easier to follow with slightly stronger numbers. */
+.markdown ol > li::marker {
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* --- 3. Heading spacing and hierarchy --------------------------------------
+   More air above sections than below them, so each heading clearly belongs
+   to the text that follows. A hairline under h2 marks major sections. */
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  letter-spacing: -0.01em;
+}
+.markdown h2 {
+  margin-top: 2.6rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+.markdown h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.7rem;
+}
+.markdown h4 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+/* No extra gap when a heading directly follows the page title or another
+   heading. */
+.markdown header + h2,
+.markdown h1 + h2,
+.markdown h2 + h3,
+.markdown h3 + h4 {
+  margin-top: 1rem;
+}
+
+/* --- 4. Tables -------------------------------------------------------------
+   Tinted header row, soft zebra striping in the brand hue, top-aligned
+   cells. Infima already renders tables as a horizontally scrollable block,
+   so wide tables scroll on phones instead of squashing. */
+:root {
+  --ifm-table-head-background: rgba(var(--brand-rgb), 0.09);
+  --ifm-table-stripe-background: rgba(var(--brand-rgb), 0.035);
+  --ifm-table-cell-padding: 0.6rem 0.8rem;
+}
+[data-theme='dark'] {
+  --ifm-table-head-background: rgba(var(--brand-rgb), 0.14);
+  --ifm-table-stripe-background: rgba(255, 255, 255, 0.04);
+}
+.markdown table {
+  font-size: 0.95rem;
+  -webkit-overflow-scrolling: touch;
+}
+.markdown table th {
+  color: var(--ifm-heading-color);
+  font-weight: 700;
+  text-align: left;
+  vertical-align: bottom;
+}
+.markdown table td {
+  vertical-align: top;
+}
+/* Body text rules above set p/li to 1.05rem; inside tables let them follow
+   the table's smaller size and a slightly tighter line height. */
+.markdown table p,
+.markdown table li {
+  font-size: inherit;
+  line-height: 1.55;
+}
+
+/* --- 5. Code ----------------------------------------------------------------
+   Slightly smaller monospace with more line height in code blocks, a
+   hairline frame, and rounded corners matching the callouts. */
+.markdown .theme-code-block {
+  --ifm-code-font-size: 0.86rem;
+  --ifm-pre-line-height: 1.6;
+  --ifm-pre-border-radius: 9px;     /* inner <pre> corners match the frame */
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  box-shadow: none;
+}
+/* Inline code: allow long identifiers to wrap on narrow screens. */
+.markdown :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+
+/* --- 6. Callouts (admonitions) ----------------------------------------------
+   Docusaurus 3 renders the title in a CSS-module class (admonitionHeading_*),
+   so the older `.admonition-heading h5` rule above no longer matches. This
+   restores its intent: sentence-case titles instead of ALL CAPS. */
+.theme-admonition [class*='admonitionHeading'] {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 1rem;
+}
+.theme-admonition [class*='admonitionContent'] p,
+.theme-admonition [class*='admonitionContent'] li {
+  font-size: 1rem;
+}
+
+/* "Key points" box (:::tip[Key points]) — the one summary box near the top
+   of each chapter. Calm teal wash with a teal left rule so it stands apart
+   from notes and warnings; body text stays in the normal text colour for
+   easy reading. Applies to every :::tip (most tips are Key points boxes). */
+.theme-admonition.theme-admonition-tip {
+  --ifm-alert-background-color: color-mix(in srgb, var(--brand-green) 7%, var(--ifm-background-color));
+  --ifm-alert-background-color-highlight: color-mix(in srgb, var(--brand-green) 14%, transparent);
+  --ifm-alert-border-color: var(--brand-green);
+  --ifm-alert-foreground-color: #0f766e;   /* teal-700: AA on the light wash */
+  border-left: 4px solid var(--brand-green);
+  box-shadow: none;
+  padding: 1rem 1.25rem 1rem 1.15rem;
+}
+[data-theme='dark'] .theme-admonition.theme-admonition-tip {
+  --ifm-alert-background-color: color-mix(in srgb, var(--brand-green) 9%, var(--ifm-background-color));
+  --ifm-alert-foreground-color: var(--brand-green);   /* teal-400 on dark */
+}
+.theme-admonition.theme-admonition-tip [class*='admonitionContent'] {
+  color: var(--ifm-font-color-base);
+}
+.theme-admonition.theme-admonition-tip a {
+  color: var(--ifm-link-color);
+}
+.theme-admonition.theme-admonition-tip ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+.theme-admonition.theme-admonition-tip li + li {
+  margin-top: 0.25rem;
+}
+.theme-admonition.theme-admonition-tip li::marker {
+  color: var(--brand-green);
+}
+
+/* --- 7. Images --------------------------------------------------------------
+   Never wider than the column; keep aspect ratio when a width is set. */
+.markdown img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- 8. Phones --------------------------------------------------------------
+   Smaller display headings so titles do not wrap into four lines, slightly
+   tighter body leading, compact callouts, and a minimum cell width so table
+   columns stay legible (the table scrolls sideways instead). */
+@media (max-width: 600px) {
+  .markdown h1 { font-size: 1.85rem; }
+  .markdown h2 { font-size: 1.45rem; margin-top: 2.1rem; }
+  .markdown h3 { font-size: 1.2rem; margin-top: 1.7rem; }
+  .markdown h4 { font-size: 1.05rem; }
+
+  article p,
+  .markdown p,
+  .markdown li {
+    line-height: 1.65;
+  }
+
+  .theme-admonition {
+    padding: 0.85rem 0.95rem;
+  }
+
+  .markdown table th,
+  .markdown table td {
+    min-width: 7.5rem;
+  }
+  /* The stacked phone layout of .decision-table must keep full width. */
+  .decision-table td {
+    min-width: 0;
+  }
+}

@@ -2,7 +2,7 @@
 ready: true
 title: Speaker Diarization
 last_update:
-  date: 2026-11-23
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -11,6 +11,16 @@ last_update:
 Speaker diarization answers "who spoke when", segmenting an audio recording by speaker. It is the task that makes multi-speaker audio usable, turning a recording of a conversation, meeting, radio panel, or interview into labelled turns that can be transcribed and analysed per speaker. For African languages it is both useful and under-resourced, and the conditions of real African audio make it harder than the benchmarks suggest.
 
 This page is the practical guide to building diarization data and evaluation for African contexts: what the data actually looks like, the collection sources that yield useful diarization ground truth, the annotation conventions that determine whether the corpus is trainable, the evaluation choices that surface where a model fails, and the deployment realities. For transcription-based tasks see [ASR](../asr/index.md); for audio classification and event detection see [Audio Understanding](../audio-understanding/index.md).
+
+:::tip[Key points]
+
+- Collect audio that matches where the model will be used: overlap, noise and code-switching belong in the corpus.
+- Get consent from every speaker in a recording, not only from the person who recorded it.
+- Write down annotation conventions (short turns, backchannels, overlap, non-speech, speaker IDs) before labelling starts.
+- Report DER per source, per condition and on overlap regions, not only one overall number.
+- Start from a pretrained pipeline and spend annotation effort on its failures.
+
+:::
 
 ![Who spoke when: speaker turns with an overlap region, and the three components of Diarization Error Rate](images/diarization-der.svg)
 
@@ -60,45 +70,50 @@ A multi-speaker recording has as many data subjects as it has speakers. Consent 
 
 ## Annotation
 
-Annotating diarization is a careful listening-and-marking task: the annotator marks each speaker change in time and assigns a consistent label to each distinct voice across the whole recording. The hard parts are overlapping speech, where two labels apply at once, and deciding whether a brief sound is a new speaker or just noise, so the guidelines must cover both.
+Annotating diarization is a careful listening-and-marking task. The annotator marks each speaker change in time and gives each distinct voice a consistent label across the whole recording. The hard parts are:
 
-The Label Studio config pairs an audio timeline with speaker labels the annotator drags across the regions where each voice is talking:
+- **overlapping speech**, where two labels apply at once;
+- **brief sounds**, where the annotator must decide whether it is a new speaker or just noise.
 
-```xml
-<View>
-  <Labels name="speaker" toName="audio">
-    <Label value="Speaker 1" background="#C66A3D"/>
-    <Label value="Speaker 2" background="#1F5B3F"/>
-    <Label value="Speaker 3" background="#E0A458"/>
-    <Label value="Overlap"   background="#9C4F2B"/>
-  </Labels>
-  <Audio name="audio" value="$audio"/>
-</View>
-```
+The guidelines must cover both. A simple task specification looks like this:
 
-The `Overlap` label gives annotators an explicit way to mark the two-voices-at-once case rather than guessing which single speaker to assign. The exported regions, each with a start time, an end time, and a label, map directly onto the RTTM lines above.
+**Task specification: speaker diarization**
+
+| Setting | Value |
+|---|---|
+| Annotator sees | The audio on a timeline (waveform) |
+| Annotator gives | Time regions, each with a start, an end and one speaker label |
+| Choice | Exactly one label per region, from: Speaker 1, Speaker 2, Speaker 3, Overlap |
+| Notes | Add speaker labels as needed for recordings with more voices. Use Overlap where two or more voices talk at once. |
+
+The `Overlap` label gives annotators an explicit way to mark two voices at once, instead of guessing which single speaker to assign. Each exported speaker region (start time, end time, label) maps directly onto an RTTM line like those above. RTTM has no overlap speaker: overlap appears as two speakers' lines that overlap in time, as described earlier. An `Overlap` region does not say who is talking, so resolve it before export, for example with a second pass that assigns the speakers in it, or let annotators draw overlapping regions, one per speaker, instead.
 
 **Six annotation conventions to fix in writing before starting:**
 
-- **Minimum turn length.** How brief can a "speaker turn" be before it counts as noise or a backchannel (`mhm`, `yeah`) rather than a genuine turn? Sub-500ms utterances are the grey zone. Fix a threshold and apply it consistently.
-- **Backchannel handling.** A listener saying `mhm` while another speaker holds the floor: is that a separate turn (creating an overlap) or discarded (keeping the main speaker's turn intact)? Both conventions are defensible; document which and apply consistently.
-- **Overlap onset and offset precision.** Annotators disagree on where overlap starts and ends by 100–300 ms routinely. Decide on a precision tolerance and reflect it in the collar during evaluation.
-- **Speaker-count uncertainty.** In community-meeting audio, distinguishing a fourth speaker from a re-appearance of an earlier speaker is genuinely hard. Guidelines should document how to flag uncertain speaker-count decisions for adjudication rather than forcing annotators to commit.
-- **Non-speech marking.** Music, silence, background noise, laughter: mark as distinct labels or as absence of any speaker label? Absence is simpler but loses the information that "there is nothing happening" is different from "there is background noise here"; a formal `Music` or `Noise` label is often worth the extra annotation work.
-- **Named speakers vs anonymous labels.** In broadcast panels with public figures, are speakers labelled by name or by anonymous ID? Publishing a corpus with named speakers has consent implications; the safer default is anonymous IDs and a separate mapping table that only the project team holds.
+- **Minimum turn length.** How short can a speaker turn be before it counts as noise or a backchannel (`mhm`, `yeah`) rather than a real turn? Very short utterances, under about half a second, are the grey zone. Fix a threshold and apply it consistently.
+- **Backchannel handling.** A listener says `mhm` while another speaker holds the floor. Is that a separate turn (creating an overlap), or is it discarded (keeping the main speaker's turn intact)? Both conventions are defensible; document which one you use.
+- **Overlap onset and offset precision.** Annotators often disagree by a few hundred milliseconds on where an overlap starts and ends. Decide on a precision tolerance and reflect it in the collar used for evaluation.
+- **Speaker-count uncertainty.** In community-meeting audio, telling a fourth speaker apart from an earlier speaker who returns is genuinely hard. Guidelines should say how to flag uncertain cases for adjudication, rather than forcing annotators to commit.
+- **Non-speech marking.** Music, silence, background noise, laughter: give them their own labels, or leave them without any speaker label? Leaving them unlabelled is simpler, but it loses the difference between "nothing is happening" and "there is background noise here". A `Music` or `Noise` label is often worth the extra work.
+- **Named speakers vs anonymous labels.** In broadcast panels with public figures, are speakers labelled by name or by anonymous ID? Publishing named speakers has consent implications. The safer default is anonymous IDs, with a separate mapping table that only the project team holds.
 
-The diarization interface should provide keyboard-controlled playback, a zoomable timeline, precise segment boundaries, speaker labels and explicit overlap handling. Exports should preserve segment times, speaker identifiers, overlap and annotator identities.
+Whatever tool you use, check that it supports the basics of this task: keyboard-controlled playback, a zoomable timeline, precise segment boundaries, speaker labels and a clear way to mark overlap. Check also that its export keeps segment times, speaker labels, overlap and the identity of the annotator who made each region.
 
 ## Quality assurance during annotation
 
-- **Per-batch second-pass review.** A second annotator, independent of the first, re-diarises a random 5–10% sample of each batch. Compute per-file Diarization Error Rate between the two annotations; anything above a threshold (typically DER > 0.10 with reasonable collar) is flagged for adjudication. This is the cheapest quality signal for diarization corpora.
+- **Per-batch second-pass review.** A second annotator, working independently, re-diarises a random sample of each batch (for example 5–10%). Compute the Diarization Error Rate (DER) per file between the two annotations, and flag files above a threshold you set in advance (for example a DER above 0.10 with a reasonable collar) for adjudication. This is the cheapest quality signal for a diarization corpus.
 - **Overlap-region focused review.** Overlap regions are where annotator disagreement is highest. Sample-audit overlap regions separately from clean-turn regions; the disagreement rate in overlaps sets the effective ceiling on downstream model performance.
 - **Speaker-consistency checks.** Verify that the same speaker gets the same label across the entire recording. A speaker who is re-labelled halfway through as a "new" voice invalidates the recording. Automated voice-embedding similarity across annotator-labelled turns is a cheap catch for this.
-- **Per-condition inter-annotator agreement.** Track IAA separately for broadcast, community-meeting, and phone-recorded segments. A corpus whose IAA is 0.85 overall but 0.55 on community-meeting audio has a systematic weakness that aggregate IAA hides.
+- **Per-condition inter-annotator agreement (IAA).** Track IAA separately for broadcast, community-meeting and phone-recorded segments. A corpus whose IAA is 0.85 overall but 0.55 on community-meeting audio has a systematic weakness that the overall figure hides.
 
 ## Evaluation
 
-Diarization is evaluated with the [Diarization Error Rate (DER)](https://pyannote.github.io/pyannote-metrics/reference.html), which combines missed speech, false speech, and speaker-confusion errors into one figure ([Bredin, 2017](../references.md#bredin-2017)), and the Jaccard Error Rate (JER), introduced for the DIHARD II challenge, which averages a per-speaker error and so weights every speaker equally regardless of how much they talk ([Ryant et al., 2019](../references.md#ryant-2019)). As elsewhere, a human review of a sample catches systematic problems that a single aggregate number cannot.
+Two metrics are standard:
+
+- **[Diarization Error Rate (DER)](https://pyannote.github.io/pyannote-metrics/reference.html)** combines missed speech, false speech and speaker-confusion errors into one figure ([Bredin, 2017](../references.md#bredin-2017)).
+- **Jaccard Error Rate (JER)**, introduced for the DIHARD II challenge, averages an error per speaker, so every speaker counts equally however much they talk ([Ryant et al., 2019](../references.md#ryant-2019)).
+
+As elsewhere, a human review of a sample catches systematic problems that a single aggregate number cannot.
 
 `pyannote.metrics` reads RTTM files and computes DER directly, so scoring a system is a matter of loading the reference and the prediction:
 
@@ -127,7 +142,7 @@ print(f"  speaker confusion: {components['confusion']:.2f}s")
 
 The `collar` forgives small timing differences at speaker boundaries, which are rarely what you care about. Reading the breakdown is the useful part: in noisy phone-recorded community audio, a high false-alarm component usually points at background noise being mistaken for speech, while high confusion points at the overlap and code-switching that make African conversational audio hard, telling you which collection or annotation problem to fix next.
 
-**Beyond aggregate DER.** DER is single-number-summarising in the same way ASR CER is; the aggregate hides where the model fails. Additional reporting to include:
+**Beyond aggregate DER.** Like character error rate in ASR, DER sums everything into one number, and that number hides where the model fails. Also report:
 
 - **Per-source DER.** Split evaluation by source (broadcast / community meeting / phone / call-centre) and report separately. A model whose overall DER is 15% and whose community-meeting DER is 40% has a source-specific problem the aggregate hides.
 - **Per-condition DER.** Split by acoustic condition (studio / phone / outdoor) and report separately. Same reasoning: the aggregate flatters models that fail on the condition you actually deploy in.

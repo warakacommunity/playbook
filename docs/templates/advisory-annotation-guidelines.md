@@ -68,7 +68,10 @@ Type the farmer's question in their words, in [LANGUAGE]. If the farmer is not p
 
 ### Daily sync
 
-The app works without signal. Captures wait in the outbox on your phone and upload in order when you connect. Sync every evening. A capture that has not synced within [N, e.g. 3] days is flagged, and a lost phone loses everything in the outbox.
+You can capture without a signal. Captures are stored on your phone and upload when you connect. Sync every evening:
+
+- A capture that has not synced within [N, e.g. 3] days is flagged.
+- A lost phone loses every capture that has not synced.
 
 ### What gets an image rejected
 
@@ -259,7 +262,7 @@ You see one photo, its diagnosis, and two advisories, A and B. Pick the one a fa
    | Usable here: inputs, measures and names farmers in [REGION] use | the locally usable one |
    | Language: clear, natural, right register | the clearer one |
 
-3. Choose `A`, `B` or `tie`, and mark the strength: `slight`, `clear` or `strong`.
+3. Choose `A`, `B` or `tie`. Unless you chose `tie`, mark the strength: `slight`, `clear` or `strong`.
 4. Tick every reason that applies. At least one reason is required unless you chose `tie`.
 5. Do not guess which advisory a person wrote. The source is no reason to prefer it.
 
@@ -291,19 +294,19 @@ A batch holds [N, e.g. 30] pairs. Finish a batch in one sitting and rest before 
 
 ## 7. Weekly agreement report
 
-Filled every Monday by the language lead from the platform's agreement export and coverage dashboard, per language, and sent to the partner. The fields follow the Monday report in [Quality, Consent and Release](../agri-advisory/quality-consent-release.md#the-monday-report).
+The language lead fills this in every Monday, one per language, from the project's agreement and coverage figures, and sends it to the partner. The fields follow the Monday report in [Quality, Consent and Release](../agri-advisory/quality-consent-release.md#the-monday-report). Thresholds are explained under [Thresholds](../agri-advisory/quality-consent-release.md#thresholds).
 
 | Field | Source | Threshold |
 | --- | --- | --- |
 | Pairs captured, labelled, authored, reviewed, adjudicated, accepted | Project counts | Coverage matrix target for the week |
 | Cohen's κ on ontology labels | Double-labelled sample (30% rolling, 100% on weak cells), per crop and per annotator | ≥ 0.75 |
-| Advisory agreement, round one and round two | Share of advisories accepted by the linguistic reviewer without a rewrite; then after one rewrite | ≥ 90% by round two |
+| Advisory review acceptance, round one and round two | Share of advisories accepted by the linguistic reviewer without a rewrite; then after one rewrite (a yield measure, not agreement) | ≥ 90% by round two |
 | Speech items validated first pass | Validation vote outcomes | ≥ 95% |
 | Preference ratings: rater agreement and share of A choices | Double-rated pairs; choices per rater, ties excluded from the A share | Agreement reported, no floor; A share near 50% per rater; gold accuracy at or above [FLOOR] |
 | Speakers by age band and gender | Consented speaker profiles | Recruitment target for the language |
 | Open review queue | Items waiting at each QA stage | Under [N] days old |
 | Coverage gaps | Crop × issue family × growth stage cells below 50% of target | Plan to fill each |
-| Annotators paused | Ground-truth accuracy below floor | Reason and retraining status |
+| Annotators paused | Accuracy on hidden gold items below the floor | Reason and retraining status |
 | Consent and withdrawals | Acceptances this week (written / oral), opt-outs received and applied | All opt-outs applied before next export |
 | Payment | Ledger credits and payouts per role, local currency | Matches accepted counts |
 | Actions and risks | One line per cell below threshold | Owner and date |

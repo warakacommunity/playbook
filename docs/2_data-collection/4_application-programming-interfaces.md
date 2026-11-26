@@ -3,7 +3,7 @@ title: Application Programming Interfaces (APIs)
 description: How to collect data through official APIs, and why building a project's data plan around any single platform's API is riskier than it looks.
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -11,13 +11,22 @@ last_update:
 
 Learn how API-based collection differs from scraping, what it's well suited for, and why API access is one of the least stable foundations a data collection plan can be built on.
 
+:::tip[Key points]
+
+- An API gives structured, documented data, but access is a privilege the platform can reprice or revoke.
+- Read the terms of service first; they decide what you may store and redistribute.
+- Archive every raw response at once, and log endpoint, parameters, version and date.
+- Respect rate limits, and never build a whole data plan on one platform's API.
+
+:::
+
 ## How this differs from scraping
 
 An API (Application Programming Interface) is a structured, sanctioned channel a platform provides for accessing its data, as opposed to extracting it from rendered web pages. Where scraping takes what's publicly visible and infers structure from a page's HTML, an API hands you already-structured data (a tweet object, a Wikipedia article's wikitext, a government dataset's rows) directly, usually with documentation, authentication, and explicit rate limits.
 
 This makes APIs more reliable to build a pipeline around in the short term: the data is cleaner, the schema is documented, and you're not fighting page-layout changes. It does not make them more reliable in the long term, for reasons worth taking seriously before you commit a project's collection plan to one.
 
-## A cautionary, very real example
+## A cautionary example: AfriSenti and the Twitter API
 
 AfriSenti, the sentiment dataset behind SemEval-2023's first Afrocentric shared task, was built on more than 110,000 tweets across 14 African languages, gathered through Twitter's then-free API access for academic research ([Muhammad et al., 2023a](../references.md#muhammad-2023); [Muhammad et al., 2023b](../references.md#afrisenti-semeval-2023)). That access model no longer exists. In 2023, Twitter (now X) ended free academic API access and introduced paid tiers, with small-enterprise access priced at about \$42,000 per month, far beyond what most academic projects can pay ([Brown et al., 2024](../references.md#brown-2024)). A project planned today that assumed it could reproduce AfriSenti's collection process, on the same terms, simply could not.
 
@@ -27,10 +36,12 @@ This isn't a story about one platform behaving badly. It's the generic risk of a
 
 ## What APIs are well suited for
 
-- **Open and public-data APIs**, where governments or international bodies expose structured datasets (census, agricultural, health, climate data) under an explicit open license. These tend to be the most stable category, since the publishing motivation (transparency, compliance) doesn't depend on platform monetization.
-- **Wikimedia APIs** (Wikipedia, Wiktionary, Wikidata), which cover a surprising number of African languages, even some with otherwise very little written presence online, and are explicitly built for reuse.
-- **National broadcaster and library APIs**, where they exist, often as the structured counterpart to the broadcast archives discussed in [Data Sources](./data-sources).
-- **Social media APIs**, with eyes open: useful for register and topical diversity that's hard to get elsewhere, but the category most exposed to the pricing and access risk described above.
+| Kind of API | What it offers | How stable |
+|---|---|---|
+| **Open and public-data APIs** | Governments or international bodies publish structured datasets (census, agricultural, health, climate data) under an explicit open licence. | Usually the most stable, because the reason to publish (transparency, compliance) does not depend on making money from the platform. |
+| **Wikimedia APIs** (Wikipedia, Wiktionary, Wikidata) | Cover a surprising number of African languages, even some with very little other written presence online; built explicitly for reuse. | Stable, and designed for reuse. |
+| **National broadcaster and library APIs** | Where they exist, often the structured counterpart to the broadcast archives discussed in [Data Sources](./data-sources). | Varies by institution. |
+| **Social media APIs** | Register and topic diversity that is hard to get elsewhere. | The least stable: most exposed to the pricing and access risk described above. |
 
 ## Practical guidance
 
@@ -42,10 +53,11 @@ This isn't a story about one platform behaving badly. It's the generic risk of a
 
 ## A worked example: pulling from a Wikimedia API
 
-Of the categories above, the Wikimedia APIs are the safest to learn on: they are built for reuse, cover many African languages, and are not going to reprice overnight. The example below pulls article extracts from a language edition of Wikipedia, archives the raw response exactly as received, and records provenance for each article. Swap `lang` for any Wikipedia language code, such as `yo` (Yorùbá), `sw` (Swahili), `ha` (Hausa), or `am` (Amharic).
+Of the categories above, the Wikimedia APIs are the safest to learn on: they are built for reuse, cover many African languages, and are run by the non-profit Wikimedia Foundation. The example below pulls article extracts from a language edition of Wikipedia, archives each raw response exactly as received, and records provenance for each article. For full-article extracts the API returns one page per request, so the script asks for one title at a time and pauses between requests. Swap `lang` for any Wikipedia language code, such as `yo` (Yorùbá), `sw` (Swahili), `ha` (Hausa), or `am` (Amharic).
 
 ```python
 import json
+import time
 from datetime import datetime, timezone
 
 import requests
@@ -53,16 +65,16 @@ import requests
 USER_AGENT = "AfriPlaybook-collector/1.0 (+contact: you@example.org)"
 
 
-def pull_extracts(lang: str, titles: list[str]) -> list[dict]:
-    """Fetch plain-text extracts for given article titles from one
-    Wikipedia language edition, archiving raw responses and provenance."""
+def pull_extract(lang: str, title: str, n: int) -> dict | None:
+    """Fetch the plain-text extract of one article from one Wikipedia
+    language edition, archiving the raw response and its provenance."""
     endpoint = f"https://{lang}.wikipedia.org/w/api.php"
     params = {
         "action": "query",
         "format": "json",
         "prop": "extracts",
         "explaintext": "1",          # plain text, not HTML
-        "titles": "|".join(titles),
+        "titles": title,             # full extracts: one page per request
         "formatversion": "2",
     }
     response = requests.get(
@@ -72,33 +84,36 @@ def pull_extracts(lang: str, titles: list[str]) -> list[dict]:
     pulled_at = datetime.now(timezone.utc).isoformat()
 
     # Archive the raw response first, before any processing.
-    with open(f"raw_{lang}_response.json", "w", encoding="utf-8") as raw:
+    with open(f"raw_{lang}_{n:05d}.json", "w", encoding="utf-8") as raw:
         json.dump(response.json(), raw, ensure_ascii=False, indent=2)
 
-    records = []
-    for page in response.json()["query"]["pages"]:
-        if "extract" not in page:       # missing or redirected pages
-            continue
-        records.append({
-            "title": page["title"],
-            "text": page["extract"],
-            "language": lang,
-            "source_url": f"https://{lang}.wikipedia.org/wiki/{page['title'].replace(' ', '_')}",
-            "license": "CC BY-SA 4.0",  # Wikipedia text license
-            "api_endpoint": endpoint,
-            "pulled_at": pulled_at,
-        })
-    return records
+    page = response.json()["query"]["pages"][0]
+    if "extract" not in page:           # missing or redirected page
+        return None
+    return {
+        "title": page["title"],
+        "text": page["extract"],
+        "language": lang,
+        "source_url": f"https://{lang}.wikipedia.org/wiki/{page['title'].replace(' ', '_')}",
+        "license": "CC BY-SA 4.0",      # Wikipedia text license
+        "api_endpoint": endpoint,
+        "pulled_at": pulled_at,
+    }
 
 
 if __name__ == "__main__":
-    records = pull_extracts(lang="yo", titles=["Nàìjíríà", "Èkó"])
+    titles = ["Nàìjíríà", "Èkó"]
     with open("wikipedia_yo.jsonl", "w", encoding="utf-8") as out:
-        for record in records:
-            out.write(json.dumps(record, ensure_ascii=False) + "\n")
+        for n, title in enumerate(titles):
+            record = pull_extract(lang="yo", title=title, n=n)
+            if record:
+                out.write(json.dumps(record, ensure_ascii=False) + "\n")
+            time.sleep(1)               # one request at a time, with a pause
 ```
 
-The order of operations matters here. The raw response is written to disk before anything is extracted from it, so that if the schema turns out to differ from what was expected, or access changes later, the original pull is preserved and the parsing can be redone offline. Each record carries its license (`CC BY-SA 4.0` for Wikipedia text, which means downstream reuse must attribute and share alike; Wikipedia text is also available under the GFDL), the exact endpoint, and the pull time ([Wikimedia Foundation, 2023](../references.md#wikimedia-terms-2023)). That is the provenance discipline from [Data Provenance and Traceability](./data-provenance-traceability) applied at the point of collection, where it is cheap, rather than reconstructed afterwards, where it is often impossible. The script also sends a `User-Agent` with contact details: Wikimedia asks every script to identify itself this way and may block clients that use a generic or empty one ([Wikimedia Foundation, n.d.](../references.md#wikimedia-user-agent-policy)).
+The order of operations matters here. The raw response is written to disk before anything is extracted from it, so that if the schema turns out to differ from what was expected, or access changes later, the original pull is preserved and the parsing can be redone offline. Each record carries its license (`CC BY-SA 4.0` for Wikipedia text, which means downstream reuse must attribute and share alike; Wikipedia text is also available under the GFDL), the exact endpoint, and the pull time ([Wikimedia Foundation, 2023](../references.md#wikimedia-terms-2023)).
+
+That is the provenance discipline from [Data Provenance and Traceability](./data-provenance-traceability) applied at the point of collection, where it is cheap, rather than reconstructed afterwards, where it is often impossible. The script also sends a `User-Agent` with contact details: Wikimedia asks every script to identify itself this way and may block clients that use a generic or empty one ([Wikimedia Foundation, n.d.](../references.md#wikimedia-user-agent-policy)).
 
 ## The bigger pattern
 

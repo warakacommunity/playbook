@@ -3,7 +3,7 @@ title: Dataset Lifecycle
 sidebar_position: 0
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -12,6 +12,15 @@ last_update:
 Most datasets are not lost to disasters. They fade. The download link moves when a student graduates. The only copy sits on a laptop that is replaced. A paper cites a URL that now returns a login page. Nobody knows who may fix an error, so nobody does. Two years after release, a corpus that cost a year of community effort is a rumour.
 
 This chapter is about the part of the work that starts when the release checklist is done. It covers where the data should live, how to give it an identity that outlasts any single website, how to make sure the people who need it can find it, and who looks after it once the grant that paid for it has ended. Each of these is cheap to get right at release and expensive to repair later.
+
+:::tip[Key points]
+
+- A released dataset needs a version, a citation, a change record and a named steward.
+- Keep a working repository plus an archival deposit, and give the dataset a persistent identifier.
+- Apply the FAIR principles for reuse and the CARE principles for the community's rights.
+- Plan maintenance, corrections and consent withdrawal before the grant ends.
+
+:::
 
 ![The dataset lifecycle after release, from release through hosting, identification, stewardship, and retirement, looping back to a new version](images/lifecycle-loop.svg)
 

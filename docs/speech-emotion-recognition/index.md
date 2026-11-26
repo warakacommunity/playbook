@@ -2,7 +2,7 @@
 ready: true
 title: Speech Emotion Recognition
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -11,6 +11,16 @@ last_update:
 Speech emotion recognition (SER) reads emotion from how something is said rather than what is said, from pitch, energy, and rhythm. It is one of the most subjective and culturally variable tasks in the playbook, and dedicated African speech-emotion data is still scarce, which makes how you design the annotation more important than the size of the dataset.
 
 This page is the practical guide to building SER data and models where the community's own understanding of emotional expression is load-bearing on the corpus. For the shared recording and consent groundwork see the [Speech overview](../sections/speech.md); for text-side emotion detection see the [emotion analysis](../11_text-classification/emotion-analysis.md) chapter under text classification.
+
+:::tip[Key points]
+
+- An SER corpus records how listeners from a community hear emotion, so recruit annotators from that community.
+- Build the emotion taxonomy with the community; Western category sets can miss emotions that matter locally.
+- Keep every annotator's label: disagreement is signal, not noise.
+- Use speaker-independent splits and report balanced accuracy or macro F1, per emotion and per subgroup.
+- Protect annotators from distress, and never deploy SER as automatic escalation without human review.
+
+:::
 
 ![Speech emotion labelled as categories or along continuous dimensions, with disagreement kept as signal](images/ser-approaches.svg)
 
@@ -24,7 +34,11 @@ Unlike ASR or diarization, SER is not extracting an objective property of the au
 
 ## What the data looks like
 
-SER data is audio clips labelled with an emotion, either as categories such as anger, joy, or sadness, or along continuous dimensions such as how positive and how aroused the speaker sounds. The shortage of African speech-emotion corpora means most work starts from scratch or borrows from related text-emotion efforts: the BRIGHTER and AfriEmo datasets behind SemEval-2025's emotion task cover emotion in text across more than a dozen African languages and are a useful reference for taxonomy and culture, even though they are text rather than speech ([Muhammad et al., 2025b](../references.md#brighter-2025)). The deeper difficulty is that emotional expression is cultural. The vocal cues that read as anger or as respect vary across communities, and an emotion taxonomy built for English speakers may not fit how a given African language and culture expresses feeling. Decide the taxonomy with the community, not for it.
+SER data is audio clips labelled with an emotion. The label is either a category, such as anger, joy or sadness, or a position on continuous dimensions, such as how positive and how aroused the speaker sounds.
+
+African speech-emotion corpora are scarce, so most work starts from scratch or borrows from text-emotion efforts. The BRIGHTER dataset behind SemEval-2025's emotion task covers emotion in text across more than a dozen African languages. It is a useful reference for taxonomy and culture, even though it is text rather than speech ([Muhammad et al., 2025b](../references.md#brighter-2025)).
+
+The deeper difficulty is that emotional expression is cultural. The vocal cues that read as anger or as respect vary across communities, and an emotion taxonomy built for English speakers may not fit how a given African language and culture expresses feeling. Decide the taxonomy with the community, not for it.
 
 Dedicated African speech-emotion corpora do exist, but they are few and small. The Amharic Speech Emotion Dataset (ASED), for example, has 2,474 short clips from 65 native speakers across four dialects, labelled with five classes (neutral, fear, happy, sad, angry). Eight judges, two per dialect, confirmed the labels with high agreement ([Retta et al., 2022](../references.md#retta-2022)). A corpus like ASED is a useful starting point and benchmark for a related language, but it reflects one language, one taxonomy and one collection set-up, so check that its classes and recording conditions match your deployment before reusing it.
 
@@ -61,28 +75,23 @@ The pragmatic hybrid is to build an initial corpus from acted recordings for cov
 
 ## Annotation: disagreement is part of the signal
 
-Because emotion is subjective, SER is the clearest case for the perspectivist approach from [Annotation Design](../3_annotation-design/workflow-adjudication.md). Several annotators from the relevant community should label each clip, and when they disagree, that disagreement often reflects genuine variation in how people hear emotion rather than error ([Plank, 2022](../references.md#plank-2022)). Recruit annotators across the dialects and backgrounds of the speaker community, record their context where consented, and consider preserving the spread of labels rather than collapsing it to a single emotion. Annotator wellbeing matters here too, since some emotional audio is distressing to label.
+Because emotion is subjective, SER is the clearest case for the perspectivist approach from [Annotation Design](../3_annotation-design/workflow-adjudication.md). Several annotators from the relevant community should label each clip, and when they disagree, that disagreement often reflects genuine variation in how people hear emotion rather than error ([Plank, 2022](../references.md#plank-2022)). Recruit annotators across the dialects and backgrounds of the speaker community, record their context where consented, and consider preserving the spread of labels rather than collapsing it to a single emotion.
 
-The labelling config is deliberately simple, one emotion per listener, so that several annotators each contribute one label per clip and the spread is preserved across their submissions rather than within one:
+The task is deliberately simple: one emotion per listener. Several annotators each give one label per clip, so the spread of opinion is kept across their submissions rather than inside one.
 
-```xml
-<View>
-  <Audio name="audio" value="$audio"/>
-  <Header value="Which emotion best fits how this is said?"/>
-  <Choices name="emotion" toName="audio" choice="single" required="true">
-    <Choice value="Anger"   hotkey="1"/>
-    <Choice value="Joy"     hotkey="2"/>
-    <Choice value="Sadness" hotkey="3"/>
-    <Choice value="Fear"    hotkey="4"/>
-    <Choice value="Neutral" hotkey="5"/>
-    <Choice value="Other, not listed" hotkey="9"/>
-  </Choices>
-</View>
-```
+**Task specification: speech emotion (one label per listener)**
 
-The `Other, not listed` choice is a safety valve while the taxonomy is still being settled with the community: a cluster of clips landing there is a sign the label set is missing an emotion that matters in this language.
+| Setting | Value |
+|---|---|
+| Annotator sees | The audio clip and the question "Which emotion best fits how this is said?" |
+| Annotator gives | One emotion: Anger, Joy, Sadness, Fear, Neutral, or Other, not listed |
+| Choice | Exactly one; required |
+| Shortcuts | 1 = Anger, 2 = Joy, 3 = Sadness, 4 = Fear, 5 = Neutral, 9 = Other, not listed |
+| Notes | Several annotators label each clip independently; keep every label. |
 
-**Annotator wellbeing during SER labelling.** Repeated listening to emotionally intense audio (distress, grief, fear, anger) is harmful to annotators in a way that is well-documented from content-moderation labour ([Roberts, 2019](https://search.worldcat.org/oclc/1103320164)). SER projects should apply the same wellbeing safeguards set out in [annotator safety and well-being](../11_text-classification/annotation.md#annotator-safety--well-being) for harmful-content labelling: bounded exposure per day, access to counselling, team debriefs, rotation and opt-out without penalty, fair pay reflecting the harm of the work. Skipping these because SER is not obviously as harmful as hate-speech labelling is a mistake: emotional-audio annotation at scale is distress-adjacent labour.
+The `Other, not listed` choice is a safety valve while the taxonomy is still being settled with the community. A cluster of clips landing there is a sign that the label set is missing an emotion that matters in this language.
+
+**Annotator wellbeing during SER labelling.** Repeated listening to emotionally intense audio (distress, grief, fear, anger) is distress-adjacent labour, a harm well documented for content moderation ([Roberts, 2019](https://search.worldcat.org/oclc/1103320164)). Do not skip safeguards because SER looks less harmful than hate-speech labelling: apply those in [Protect annotators from harmful content](../3_annotation-design/annotation-task-design.md#protect-annotators-from-harmful-content).
 
 **Four annotation conventions to fix in writing:**
 
@@ -121,7 +130,7 @@ print(f"balanced accuracy:   {balanced_accuracy_score(y_true, y_pred):.3f}")
 print(f"macro F1:            {f1_score(y_true, y_pred, average='macro'):.3f}")
 ```
 
-Here plain accuracy looks respectable while balanced accuracy and macro F1 fall sharply, because the model labels almost everything neutral and is right only on the class that dominates the data. Reporting the unweighted number alongside the weighted one keeps that failure visible, which matters most for the strong but rare emotions a useful SER system actually needs to catch.
+Here plain accuracy is 0.667, while balanced accuracy drops to 0.500 and macro F1 to about 0.44, because the model labels almost everything neutral and misses two of the three rarer emotions. Reporting the unweighted number alongside the weighted one keeps that failure visible, which matters most for the strong but rare emotions a useful SER system actually needs to catch.
 
 **Beyond aggregate metrics.** Aggregate F1 hides where a model fails; SER is unusually susceptible because emotion recognition performance varies steeply across subgroups.
 
@@ -141,8 +150,8 @@ Here plain accuracy looks respectable while balanced accuracy and macro F1 fall 
 
 - **Out-of-community annotators produce a corpus that fits nobody.** Model trained on the corpus performs poorly on the community's own users. Fix: recruit annotators from the specific community.
 - **Ekman-taxonomy corpus that misses culturally distinct emotions.** Cluster of "Other, not listed" flags in the corpus reveals categories the community distinguishes that the taxonomy didn't include. Fix: iterate the taxonomy with the community as annotation surfaces its limits.
-- **Aggregate accuracy hiding rare-emotion collapse.** A model can report 80% weighted accuracy while its balanced accuracy is 45%, because it is right on the frequent neutral class and wrong on the rare ones. Fix: balanced accuracy or macro F1 as the headline metric.
-- **Gender and age imbalance in training data.** A model trained mostly on male speakers can score many F1 points lower on female voices (for example, 15 points), and the aggregate hides it. Fix: track and enforce demographic balance in the training set; report per-demographic F1.
+- **Aggregate accuracy hiding rare-emotion collapse.** A model can report, for example, 80% weighted accuracy while its balanced accuracy is 45%, because it is right on the frequent neutral class and wrong on the rare ones. Fix: balanced accuracy or macro F1 as the headline metric.
+- **Gender and age imbalance in training data.** A model trained mostly on male speakers can score noticeably lower F1 on female voices, and the aggregate hides it. Fix: track and enforce demographic balance in the training set; report per-demographic F1.
 - **Cultural marker collapsed into a Western category.** A distinct respectful-address register the community recognises gets labelled as "neutral" by out-of-community annotators. Fix: distinct category in the taxonomy from the start.
-- **Annotator distress accumulating silently.** Repeated exposure to emotionally intense audio produces stress in annotators nobody is tracking. Fix: same wellbeing infrastructure hate-speech projects use (bounded exposure, counselling, opt-out, fair pay).
+- **Annotator distress accumulating silently.** Repeated exposure to emotionally intense audio produces stress in annotators nobody is tracking. Fix: the same safeguards as any harmful-content annotation; see [Protect annotators from harmful content](../3_annotation-design/annotation-task-design.md#protect-annotators-from-harmful-content).
 - **Deployed as automated escalation without human review.** SER flags "angry" call, system auto-escalates; user experiences the flag as accusatory. Fix: SER-based automated action needs human-in-the-loop review, appeal process, and disaggregated false-positive tracking.

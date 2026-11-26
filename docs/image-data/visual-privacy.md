@@ -3,7 +3,7 @@ title: Visual privacy
 sidebar_position: 9
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -12,6 +12,16 @@ last_update:
 A photo of a diseased cassava leaf can still identify a person. The farmer's face may be at the edge of the frame, a child may be standing behind the plant, a motorbike's number plate may be readable, and the file itself may record the exact spot where the phone stood and which phone it was. Images and video capture far more than the thing you meant to photograph, and most of that extra content is personal data.
 
 This page covers privacy for image and video datasets: what in a frame can identify someone, how to keep it out at capture, how to strip metadata, how to redact what remains and where redaction fails, and how to decide what to release. The general rules on consent, lawful basis, access control and licensing are in [Data Governance](../data-governance/index.md) and [Legal, consent, and community IP](../legal-consent/index.md); this page applies them to pixels and files.
+
+:::tip[Key points]
+
+- Faces are only one risk: bodies, plates, screens, signs, metadata and audio can all identify people.
+- Keep people out of frame at capture; it is cheaper and safer than redaction.
+- Strip metadata at ingest, after applying orientation, and verify every batch.
+- Automatic redaction misses things and weak blur can be defeated: check by hand, and use strong masks.
+- Decide the release tier per image or subset, from consent records and redaction checks.
+
+:::
 
 ## What can identify someone
 
@@ -27,7 +37,7 @@ Faces are the obvious case, but they are not the only one. Plan for every row in
 | Embedded metadata (EXIF, XMP, maker notes, video container tags) | Exact GPS position, time, device model, sometimes the device serial number | Strip at ingest |
 | Audio track in a video | Voices, names spoken aloud, background conversations | Remove the track or treat it as speech data |
 
-Under the GDPR, a facial image counts as biometric data only when it goes through specific technical processing that allows or confirms unique identification; ordinary photographs are not automatically in that category ([European Union, 2016](../references.md#gdpr-2016)). Do not read this as permission. A clear face is still personal data, and a dataset of faces is exactly what someone else can later run face recognition on. Check the law in every country where you collect; the [African data-protection regimes](../data-governance/index.md#the-law-that-applies-african-data-protection-regimes) and the [country reference](../legal-consent/index.md#data-protection-laws-in-africa-quick-country-reference) are the starting point.
+Under the GDPR, a facial image counts as biometric data only when it goes through specific technical processing that allows or confirms unique identification; ordinary photographs are not automatically in that category (Article 4(14) and Recital 51; [European Union, 2016](../references.md#gdpr-2016)). Do not read this as permission. A clear face is still personal data, and a dataset of faces is exactly what someone else can later run face recognition on. Check the law in every country where you collect; the [African data-protection regimes](../data-governance/index.md#the-law-that-applies-african-data-protection-regimes) and the [country reference](../legal-consent/index.md#data-protection-laws-in-africa-quick-country-reference) are the starting point.
 
 ## Keep it out at capture
 
@@ -96,7 +106,7 @@ Once metadata is gone, the remaining risk is in the pixels. The usual pipeline i
 
 Three findings set the limits of what redaction can promise:
 
-- **Detectors miss things.** Even a system built for this at scale, the one that blurs faces and plates in street-level imagery, reported blurring more than 89% of faces and 94–96% of plates in its evaluation sets, and its authors found that off-the-shelf face detectors alone did not reach the recall they needed ([Frome et al., 2009](../references.md#frome-2009)). Automatic redaction needs a human check, and it should be tuned for recall: a false alarm costs a little blur, a miss exposes a person.
+- **Detectors miss things.** Even a system built for this at scale, the one that blurs faces and plates in street-level imagery, reported blurring more than 89% of faces and 94–96% of plates in its evaluation sets, and its authors found that state-of-the-art face detectors alone did not reach the recall they needed ([Frome et al., 2009](../references.md#frome-2009)). Automatic redaction needs a human check, and it should be tuned for recall: a false alarm costs a little blur, a miss exposes a person.
 - **Weak obfuscation can be defeated.** Neural networks trained on mosaiced or blurred images recognised faces and objects despite the obfuscation ([McPherson et al., 2016](../references.md#mcpherson-2016)). Use strong blur or solid masks, and mask the whole head rather than a tight box around the eyes.
 - **People are recognisable without faces.** With only a handful of tagged images of a person, a recognition system could identify them from body, clothing and context even when their head was obfuscated ([Oh et al., 2016](../references.md#oh-2016)). For high-risk subjects, mask or replace the whole figure; full-body synthetic replacement exists for this purpose ([Hukkelås and Lindseth, 2023](../references.md#hukkelas-2023)).
 
@@ -110,7 +120,13 @@ Some tasks need the face. Sign language uses facial expression and mouthing as g
 
 ## Video
 
-Video adds three problems. A face redacted in one frame may be clear in the next, because detectors miss frames during motion, turning and occlusion; track each redacted region across frames and check the frames between detections, not just keyframes. A long clip can expose much more than any single frame: a route, a routine, the inside of a home. And the audio track records voices and names. Remove the audio when the task does not need it; when it does, treat it as speech data under [Personally identifiable information](../data-governance/index.md#personally-identifiable-information). Large video collections built with consenting participants pair consent with de-identification procedures where relevant ([Grauman et al., 2022](../references.md#grauman-2022)); plan both together.
+Video adds three problems:
+
+- **Faces reappear between frames.** A face redacted in one frame may be clear in the next, because detectors miss frames during motion, turning and occlusion. Track each redacted region across frames, and check the frames between detections, not just keyframes.
+- **A clip shows more than a frame.** A long clip can expose a route, a routine or the inside of a home.
+- **The audio track records voices and names.** Remove the audio when the task does not need it. When it does, treat it as speech data under [Personally identifiable information](../data-governance/index.md#personally-identifiable-information).
+
+Large video collections built with consenting participants pair consent with de-identification procedures where relevant ([Grauman et al., 2022](../references.md#grauman-2022)); plan both together.
 
 ## Release decisions
 

@@ -3,13 +3,22 @@ title: Advisory Authoring
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Advisory Authoring
 
 An advisory is the text a model will learn to say to a farmer: what the plant has, why, and what to do about it. It is the part of the dataset farmers will hear back, so its quality decides whether the model is useful or merely fluent. This page covers how to get advisories written in the language by people who can talk to farmers, and how to check them before they count.
+
+:::tip[Key points]
+
+- Native speakers write each advisory directly in the language, in the register of an extension visit; nothing is translated from English.
+- Every advisory has five parts in a fixed order, 60 to 180 words, and a safety line whenever it names a chemical.
+- Name only inputs a farmer in that country can buy, and use the vernacular names from the term list.
+- An agronomist checks faithfulness and safety first, then a native speaker checks the language; a draft gets at most one rewrite.
+
+:::
 
 The advisory attaches to a diagnosed image on the same pair ID. The diagnosis comes from [Diagnosis Labelling](./diagnosis-labelling.md); the spoken version of the advisory is recorded in the [Speech Layer](./speech-layer.md).
 
@@ -55,13 +64,11 @@ What makes it usable: the pest has its local name, the product is one sold in Ni
 
 Authors are native speakers who can write the way an extension officer talks to a farmer: extension agents, agricultural teachers, radio farm-programme presenters. Fluency alone does not qualify an author. One who writes in a newspaper register produces text a farmer would not say and a model should not learn.
 
-Plan on 6 to 10 authors per language, with 3 to 5 linguistic reviewers and 1 to 2 agronomists behind them. Authors work in the platform's text-authoring task with the image, the agronomist's diagnosis, the national extension recommendation, and the collector's captured farmer question on one screen. Before the first batch each author is briefed on the vernacular term list, the style guide, and the five-part structure, with the language lead's worked examples for the common classes.
+Plan on 6 to 10 authors per language, with 3 to 5 linguistic reviewers and 1 to 2 agronomists behind them. Before the first batch, brief each author on the vernacular term list, the style guide and the five-part structure, using the language lead's worked examples for the common classes.
+
+**What the author sees.** One screen shows the photo, the agronomist's diagnosis, the national extension recommendation and the farmer's question captured in the field, beside the writing area. The screen should keep the five-part structure visible, save drafts and revisions, and record the rubric version. One text field or one field per part both work; the exact layout does not matter.
 
 Authors write in the language from the start. Nothing is translated from English. The diagnosis and the recommendation reach the author as facts; the job is to say those facts to a farmer in that district.
-
-## Authoring interface
-
-The authoring interface should show the photo, diagnosis, extension recommendation and farmer's question beside the writing area. It should preserve the five-part advisory structure, save drafts and revisions, and record the rubric version. A single structured text field or several fields can both work; the exact layout is not a requirement.
 
 ## Guidelines that matter
 
@@ -84,7 +91,7 @@ Expect most rewrite requests to name one of four faults: an English sentence str
 
 Every advisory passes two independent reviews before it counts, agronomist first. The agronomist checks that the advisory follows from the diagnosis, matches the national extension recommendation, and is safe where it names a chemical. A native-speaker linguistic reviewer, never the author, then checks register, vernacular terms, and whether a farmer would understand it. Either reviewer can return the draft with a rewrite request; a returned draft gets at most one rewrite before it goes to the language lead for adjudication. The general pattern of review and logged adjudication is in [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md); this page only adds the two domain checks.
 
-The number to track is advisory review acceptance: the share of advisories the linguistic reviewer accepts without a rewrite request. This is a first-pass yield measure, not inter-annotator agreement. The target is 90% by round two, reported every Monday per language. A language still below that after two rounds has a briefing or recruitment problem: re-brief the authors with the specific rewrite reasons, then replace anyone still returning calques. The safety line is also checked mechanically, by an export check that refuses any accepted advisory naming a listed product with `safety_line_present` false.
+The number to track is advisory review acceptance: the share of advisories the linguistic reviewer accepts without a rewrite request. The target and how it is reported are on [Quality, Consent and Release](./quality-consent-release.md#thresholds). A language still below target after two rounds has a briefing or recruitment problem: re-brief the authors with the specific rewrite reasons, then replace anyone still returning calques. The safety line is also checked mechanically, by an export check that refuses any accepted advisory naming a listed product with `safety_line_present` false.
 
 ## Known limitations
 

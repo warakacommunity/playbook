@@ -3,7 +3,7 @@ title: "Case Study: Multimodal Data Collection"
 description: How ArtELingo-28, a 28-language cross-cultural image-emotion benchmark, was actually collected, and the decisions that don't show up in the Modalities, Sources, or API sections until you try to combine them.
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -21,15 +21,21 @@ This is a genuinely multimodal collection problem: the image layer and the text 
 
 The images themselves weren't newly photographed or scraped for this project; they're drawn from WikiArt, an existing public art archive, the same source used by the predecessor projects it extends, ArtEmis and ArtELingo ([Mohamed et al., 2024](../references.md#artelingo28-2024)). This illustrates a point from [Data Modalities](./data-modalities): not every modality in a multimodal project needs to be collected the same way, or even collected at all. Here, the image modality was sourced from an existing, curated archive; the text/annotation modality was the part that genuinely needed new collection. Recognizing which layer is "already solved" and which layer is the actual collection problem saves significant time and budget.
 
-Reusing existing images instead of collecting new ones doesn't remove the licensing question; it relocates it. Any project building on a third-party image archive has to work out, separately from its annotation collection plan, what redistribution rights it has for the images once they're bundled into a newly released dataset alongside new captions and labels. That question sits squarely in the territory covered later in [Documentation, Data Release, and Governance](https://afriplaybook.waraka.org/category/6-documentation-data-release-and-governance), but it has to be answered during the collection-planning stage, not discovered after annotation is finished.
+Reusing existing images instead of collecting new ones doesn't remove the licensing question; it relocates it. Any project building on a third-party image archive has to work out, separately from its annotation collection plan, what redistribution rights it has for the images once they're bundled into a newly released dataset alongside new captions and labels. That question is covered in [Licensing and Compliance](../6_documentation/licensing.md), but it has to be answered during the collection-planning stage, not discovered after annotation is finished.
 
 ## Decision 2: cross-cultural comparison sets a constraint before annotation starts
 
-The entire scientific premise, that you can compare how different language communities respond to "the same" artwork, depends on every language annotating the same underlying image set. That sounds obvious, but it has to be designed into the collection plan from day one. If a future, larger version of this kind of project draws its images from sources with looser licensing rather than a fixed, pre-cleared set, it has to confirm that image availability is consistent across every language's split *before* annotation begins, not after. A test set that's accidentally missing a handful of images in one language's annotation batch quietly breaks the comparison the whole project is built to support. This is a collection-stage decision masquerading as an annotation-stage problem. By the time annotators are working, it's too late to fix cheaply.
+The entire scientific premise, that you can compare how different language communities respond to "the same" artwork, depends on every language annotating the same underlying image set. That sounds obvious, but it has to be designed into the collection plan from day one.
+
+If a future, larger version of this kind of project draws its images from sources with looser licensing rather than a fixed, pre-cleared set, it has to confirm that image availability is consistent across every language's split *before* annotation begins, not after. A test set that's accidentally missing a handful of images in one language's annotation batch quietly breaks the comparison the whole project is built to support.
+
+This is a collection-stage decision masquerading as an annotation-stage problem. By the time annotators are working, it's too late to fix cheaply.
 
 ## Decision 3: cost and labor planning had to scale by language, not just by image
 
-For a single-language captioning dataset, the unit of collection cost is roughly "per image." Here, the unit is "per image, per language": 2,000 images annotated independently in each of 25 new languages is a fundamentally different scale of labor than 2,000 images annotated once. Annotators were found through a data vendor for some languages and through personal networks for the rest, with Amazon Mechanical Turk used as the collection interface rather than for recruitment. They were paid \$0.10 per annotation (about \$8/hour, given an average of about 45 seconds per annotation), and the project received institutional review board approval, which required informed consent ([Mohamed et al., 2024](../references.md#artelingo28-2024)). None of those numbers would have been knowable without first deciding the multiplier (28 languages) at the collection-planning stage, which is exactly the work described in [Cost and Resource Planning](./cost-resource-planning).
+For a single-language captioning dataset, the unit of collection cost is roughly "per image." Here, the unit is "per image, per language": 2,000 images annotated independently in each of 25 new languages is a fundamentally different scale of labor than 2,000 images annotated once.
+
+Annotators were found through a data vendor for some languages and through personal networks for the rest, with Amazon Mechanical Turk used as the collection interface rather than for recruitment. They were paid \$0.10 per annotation (about \$8/hour, given an average of about 45 seconds per annotation), and the project received institutional review board approval, which required informed consent ([Mohamed et al., 2024](../references.md#artelingo28-2024)). None of those numbers would have been knowable without first deciding the multiplier (25 new languages) at the collection-planning stage, which is exactly the work described in [Cost and Resource Planning](./cost-resource-planning).
 
 ## Takeaways for your own multimodal project
 
@@ -38,6 +44,8 @@ For a single-language captioning dataset, the unit of collection cost is roughly
 - **Reusing existing assets, like an image archive, doesn't remove licensing work; it moves the question** from "can I collect this" to "can I redistribute this bundled with what I add on top."
 - **When a project multiplies across many languages, the cost driver isn't the dataset size; it's the multiplier.** Plan budget and timeline around that multiplier explicitly, rather than as a vague "and then do it for the other languages too" afterthought.
 
-:::tip Contribute your own case study
+:::tip[Contribute your own case study]
+
 This page covers one published example. If you've run a multimodal or cross-lingual collection effort, successful or not, [write it up](https://github.com/warakacommunity/playbook/blob/main/README.md#ways-to-contribute) as an additional case study. What went wrong is often more useful to the next person than what went right.
+
 :::

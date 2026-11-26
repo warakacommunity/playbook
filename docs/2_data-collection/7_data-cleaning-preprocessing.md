@@ -1,37 +1,53 @@
 ---
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 # Data Cleaning and Preprocessing
 
 Learn how to prepare raw data for use in language AI systems by improving quality, consistency, and usability.
 
-## Why Data Cleaning Matters
+:::tip[Key points]
 
-Raw data often contains noise, inconsistencies, and errors. Proper cleaning and preprocessing ensure that datasets are reliable, accurate, and suitable for downstream tasks such as training and evaluation.
+- Keep an untouched raw copy; clean a separate copy and log every step.
+- Identify languages with identifiers built for African languages, such as AfroLID or GlotLID.
+- Remove exact and near-duplicates before you split data into train, dev and test sets.
+- Freeze text before span annotation, and prepare light, browser-friendly copies of media.
+- Report what each cleaning step dropped, and why.
 
-## Key Steps in Data Cleaning
+:::
 
-### Deduplication, Normalization, and Filtering
+## Why data cleaning matters
+
+Raw data often contains noise, inconsistencies and errors. Cleaning and preprocessing make a dataset reliable, accurate and fit for training and evaluation. Web-crawled African-language text needs particular care: an audit of large multilingual web corpora found the poorest quality for African languages, with many samples in the wrong language or not language at all ([Kreutzer et al., 2022](../references.md#kreutzer-2022)).
+
+Keep a raw copy and never overwrite it; clean a separate copy (see [Formats, metadata, and versioning](../6_documentation/data-storage.md#formats-metadata-and-versioning)).
+
+## Key steps in data cleaning
+
+### Deduplication, normalisation, and filtering {#deduplication-normalization-and-filtering}
 
 - **Deduplication** – Remove duplicate entries to avoid bias and overrepresentation  
-- **Normalization** – Standardize text (e.g., casing, punctuation, encoding)  
+- **Normalisation** – Standardise text (e.g., casing, punctuation, encoding)  
 - **Filtering** – Remove irrelevant, low-quality, or out-of-scope data  
 
-### Language Detection and Formatting
+Remove exact and near-duplicates before you split the data into train, dev and test sets, so the same text cannot leak across splits.
+
+### Language detection and formatting
 
 - **Language detection** – Identify and verify the language of each data instance  
 - **Formatting** – Ensure consistent structure (e.g., JSON, CSV, text fields)  
 - **Encoding consistency** – Maintain uniform character encoding (e.g., UTF-8)  
 
-### Noise and Toxicity Handling
+For language detection, use identifiers built for African languages rather than general-purpose detectors, which often misread them. AfroLID covers 517 African languages and varieties ([Adebara et al., 2022](../references.md#afrolid-2022)), and GlotLID, used in the pipeline below, covers 1,665 languages ([Kargaran et al., 2023](../references.md#glotlid-2023)).
+
+### Noise and toxicity handling
 
 - **Noise removal** – Clean unwanted artifacts such as HTML tags, emojis (if not needed), or corrupted text  
 - **Toxicity handling** – Detect and manage harmful, offensive, or unsafe content depending on project goals  
 
-### Missing and Corrupted Data Handling
+### Missing and corrupted data handling
 
 - **Missing data** – Identify incomplete entries and decide whether to fill, ignore, or remove them  
 - **Corrupted data** – Detect broken or unreadable content and clean or discard it  
@@ -39,9 +55,16 @@ Raw data often contains noise, inconsistencies, and errors. Proper cleaning and 
 
 ### Freeze the text before span annotation
 
-Span labels are character offsets into the exact string the annotator saw. Before import, normalise line endings from CRLF to LF and Unicode to NFC; never do this after annotation, because every offset after a changed character would shift. Do not let the tool or pipeline trim or collapse whitespace, and read files with consistent newline handling. Store the annotated text, or its hash, with each result so you can prove the text has not changed. On export, assert that `text[start:end]` equals the stored span text, with offsets counted in the same unit as your code (web tools often count UTF-16 code units, Python counts code points). The script-specific rules, including that unit difference, are in [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets), and the same check applies to [extractive question answering](../text-generation/question-answering.md).
+Span labels are character offsets into the exact string the annotator saw, so any later change to the text breaks them. Before you import the text:
 
-### Preparing Media for Annotation
+- Normalise line endings from CRLF to LF and Unicode to NFC. Never do this after annotation, because every offset after a changed character would shift.
+- Run any cleaning, such as the `normalize()` step in [A cleaning pipeline, end to end](#a-cleaning-pipeline-end-to-end), before this point. After that, do not let the annotation tool or any later step trim or collapse whitespace, and read files with consistent newline handling.
+- Store the annotated text, or its hash, with each result so you can prove the text has not changed.
+- On export, assert that `text[start:end]` equals the stored span text, with offsets counted in the same unit as your code (web tools often count UTF-16 code units, Python counts code points).
+
+The script-specific rules, including that unit difference, are in [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets), and the same check applies to [extractive question answering](../text-generation/question-answering.md).
+
+### Preparing media for annotation
 
 Audio and video usually reach annotators through a web browser or a phone. Files that play fine on the collector's laptop can fail there: some codecs do not play in every browser, large files stall on slow links, and a video whose index sits at the end starts slowly and can waste mobile data. Prepare a copy of each file for annotation and keep the original (the master) unchanged.
 
@@ -88,9 +111,13 @@ def normalize(text: str) -> str:
 
 def clean(in_path: str, out_path: str, expected_lang: str,
           min_words: int = 5) -> None:
-    from glotlid import GlotLID
+    # GlotLID is a fastText model published on the Hugging Face Hub.
+    import fasttext
+    from huggingface_hub import hf_hub_download
 
-    identifier = GlotLID()
+    identifier = fasttext.load_model(
+        hf_hub_download(repo_id="cis-lmu/glotlid", filename="model.bin")
+    )
     seen: set[str] = set()
     dropped = Counter()
     kept = 0
@@ -111,7 +138,9 @@ def clean(in_path: str, out_path: str, expected_lang: str,
                 continue
             seen.add(fingerprint)
 
-            label, score = identifier.predict(text)
+            labels, scores = identifier.predict(text)
+            label = labels[0].replace("__label__", "")   # e.g. "hau_Latn"
+            score = float(scores[0])
             if not label.startswith(expected_lang) or score < 0.7:
                 dropped[f"wrong_language:{label}"] += 1
                 continue

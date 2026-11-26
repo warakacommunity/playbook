@@ -11,7 +11,7 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-*A Datasheets-for-Datasets-derived template extended with the African-context questions the playbook considers non-negotiable. Fork this file, rename it to your dataset's slug (`docs/case-studies/afrisenti-datacard.md` or `datacard.md` in your project repo), fill in every section honestly, and ship it alongside the corpus. A dataset without a card is not open science; it is a dump.*
+*A template based on Datasheets for Datasets, extended with the African-context questions the playbook considers non-negotiable. Copy this file, name it after your dataset (for example `my-dataset-datacard.md`, or `datacard.md` in your project repository), fill in every section honestly, and ship it with the corpus. A dataset without a card is not open science; it is a dump.*
 
 ## How to use this template
 
@@ -21,7 +21,7 @@ last_update:
 4. Keep the section structure and the header text unchanged, so downstream readers can search across dataset cards for the same field.
 5. Add a `last-reviewed` date at the top so future readers know when the card was current.
 
-Motivated by [Datasheets for Datasets (Gebru et al., 2018)](https://arxiv.org/abs/1803.09010), [Data Statements for NLP (Bender & Friedman, 2018)](https://aclanthology.org/Q18-1041/), and the [legal, consent, and community IP](../legal-consent/index.md) chapter of this playbook.
+Based on Datasheets for Datasets ([Gebru et al., 2021](../references.md#gebru-2021)), Data Statements for NLP ([Bender and Friedman, 2018](../references.md#bender-friedman-2018)), and the [legal, consent, and community IP](../legal-consent/index.md) chapter of this playbook.
 
 ---
 
@@ -35,7 +35,7 @@ Short one-line description: **[ONE LINE]**
 - **Release date:** [YYYY-MM-DD]
 - **Last reviewed:** [YYYY-MM-DD]
 - **Canonical URL:** [DATASET PAGE]
-- **Licence:** [SPDX identifier, e.g., CC BY-NC 4.0]
+- **Licence:** [SPDX identifier, e.g., `CC-BY-4.0`]
 - **DOI / preferred citation:** [BibTeX or plain-text]
 
 ## 1. Motivation
@@ -69,26 +69,35 @@ Beyond the standard datasheet questions, this section is where the playbook's Af
 - **Over what timeframe was the data collected?** [Start and end dates.]
 - **Was the collection process reviewed by any board or committee?** [IRB, ethics review, community steering committee. Name the body and the review date.]
 - **What was the informed consent process?** [Individual + community consent. If contributors are non-literate, what specific pattern was used (see [legal-consent chapter](../legal-consent/index.md#consent-from-non-literate-speakers)).]
-- **Does the dataset relate to people?** [If yes, the sub-questions below all apply.]
+- **Does the dataset relate to people?** [If yes, say how, and make sure the consent and withdrawal questions in this section are fully answered.]
 - **How is consent withdrawn?** [The stable ID, the contact channel, the practical mechanics.]
 - **What script and orthographic convention is used?** [If the language uses more than one script or orthographic convention, which one, and what was the community consultation that led to that choice.]
 - **What dialect(s), variety(ies), and register(s) are represented?** [Do NOT write "[LANGUAGE]" and stop; every African language of any size has internal variation that matters.]
 - **What is the code-switching profile of the data?** [Monolingual? Percentage code-switched with English/French/Arabic/Kiswahili? What was mixed with what?]
-- **What steps were taken to ensure the data reflects the community's own voice?** [Native-speaker involvement in guidelines, annotation, and adjudication; participatory workflow (see [Nekoto et al., 2020](https://aclanthology.org/2020.findings-emnlp.195/)).]
+- **What steps were taken to ensure the data reflects the community's own voice?** [Native-speaker involvement in guidelines, annotation, and adjudication; participatory workflow (see [Nekoto et al., 2020](../references.md#nekoto-2020)).]
 
-## 4. Preprocessing, cleaning, labeling
+## 4. Preprocessing, cleaning, labelling {#4-preprocessing-cleaning-labeling}
 
-- **Was any preprocessing / cleaning / labeling of the data done?** [Tokenisation, normalisation, diacritic handling, script conversion, deduplication, filtering.]
+### Preprocessing
+
+- **Was any preprocessing, cleaning or labelling of the data done?** [Tokenisation, normalisation, diacritic handling, script conversion, deduplication, filtering.]
 - **Was the raw data saved in addition to the preprocessed data?** [If not, why not.]
 - **What software was used to preprocess?** [Specific libraries and versions, or a link to the preprocessing code.]
 
-- **What was used to label the data, and which version?** [The annotation tool, spreadsheet or custom script, with its version or commit. If the version changed during the project, say which batches were labelled with which version. Link the labelling configuration (label set, task layout, any pre-filled model suggestions) and add a screenshot of the labelling screen, so readers can see what annotators saw.]
+### Labelling tool and agreement
 
+- **What was used to label the data, and which version?** [The annotation tool, spreadsheet or custom script, with its version or commit. If the version changed during the project, say which batches were labelled with which version. Link the labelling configuration (label set, task layout, any pre-filled model suggestions) and add a screenshot of the labelling screen, so readers can see what annotators saw.]
 - **Was there inter-annotator agreement measurement?** [What score, on what proportion of the corpus.]
 - **What was the adjudication process for annotator disagreements?** [Second-pass by senior annotator? Consensus vote? Discard?]
+
+### Review
+
 - **What share of the work was reviewed?** [The review sampling rate, for example "20% of ordinary items, 100% of a new annotator's first batch". Say whether "reviewed" means every item or a sample.]
 - **How was each item chosen for review?** [The per-item rule and its seed, for example a hash of the item ID with a fixed seed, so that others can rerun it. See [Decide what gets reviewed](../3_annotation-design/workflow-adjudication.md#decide-what-gets-reviewed-a-sample-plus-escalations).]
 - **Which flags sent an item to review regardless of the sample?** [Low agreement, a lone dissenting annotator, a failed gold item, an automated check, a manual flag. List the rules in force.]
+
+### Annotators and released labels
+
 - **How many items did each annotator label?** [The distribution of items per annotator, and any cap on one annotator's share (see [Cap each annotator's share](../3_annotation-design/workflow-adjudication.md#cap-each-annotators-share)).]
 - **How were skips and unfinished items handled?** [The reason codes, reassignment or retirement policy, and the share of items skipped or excluded. Keep "nothing to label" separate from "skipped". See [Track skips and unfinished items](../3_annotation-design/workflow-adjudication.md#track-skips-and-unfinished-items).]
 - **How are annotator identities handled in the release?** [Pseudonymised or removed? Method (for example a keyed hash per project), whether the key stays the same across versions, whether a mapping to real people is kept and who can access it, and which annotator attributes (region, dialect, gender) are released. See [Personally identifiable information](../data-governance/index.md#personally-identifiable-information).]
@@ -105,7 +114,7 @@ Beyond the standard datasheet questions, this section is where the playbook's Af
 ## 6. Distribution
 
 - **Under what licence is the dataset distributed?** [SPDX identifier + one-sentence rationale for the choice. See the [legal-consent chapter's licence-selection guidance](../legal-consent/index.md#licence-selection).]
-- **Is the dataset restricted to non-commercial use?** [Yes or no, with the rationale.]
+- **Is the dataset restricted to non-commercial use?** [Yes or no. CC BY 4.0 is the playbook's default for open release. If yes, state the exception that justifies it: the community requires it, consent covers non-commercial use only, or the material is sacred or sensitive.]
 - **How can the dataset be accessed?** [Direct download, request-and-review, Zenodo, Hugging Face Hub, etc.]
 - **Are there any fees or access restrictions?**
 - **Who is the named steward for re-use requests?** [Named person or body, with contact. See the [anti-extraction release patterns](../legal-consent/index.md#anti-extraction-release-patterns) in the legal-consent chapter.]
@@ -131,7 +140,7 @@ Beyond the standard datasheet questions, this section is where the playbook's Af
 
 Preferred citation:
 
-```
+```text
 [BibTeX or plain-text]
 ```
 

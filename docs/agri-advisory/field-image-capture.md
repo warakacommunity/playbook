@@ -3,13 +3,23 @@ title: Field Image Capture
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Field Image Capture
 
 Field image capture is the first task in the pipeline and the one that sets the ceiling for everything after it. An agronomist cannot label a blurred leaf, and an author cannot write a grounded advisory for a photo with no crop or growth stage recorded. This page covers who takes the photos, what they record with each one, how the season shapes the plan, and what happens to an image between the phone and the annotation project.
+
+:::tip[Key points]
+
+- Every photo needs a structured form: crop, suspected issue, growth stage, plant part, district and the farmer's question.
+- Take two shots per plant, a close-up of the affected part and the whole plant, in natural light.
+- Capture must work offline, or the dataset quietly favours fields near towns.
+- Agree a coverage matrix and a cropping calendar before capture, and fill the gaps with licence-compatible open images.
+- Ingest is the first quality gate: privacy steps, de-duplication and the pair ID come before any annotator sees the image.
+
+:::
 
 ![The capture form a collector fills for every photo, and the ingest pipeline that strips EXIF, coarsens GPS to district, blurs faces, removes near-duplicates and mints the pair ID](images/capture-form.svg)
 
@@ -50,25 +60,47 @@ Two fields deserve attention. `suspected_issue` is the collector's own guess, fr
 
 **Collectors.** Recruit 5–10 per language through the language lead, from the farming communities where the crops grow. Extension agents, agricultural students and lead farmers make good collectors because they already know a diseased leaf when they see one and they have a reason to be in the field. Each collector captures 100–300 accepted images over a season. The worked example collects about 10,000 field images across ten languages this way.
 
-**Two shots per plant.** Take a plant-level shot that shows the whole plant and its neighbours, then a close-up of the affected part. Under natural light, no flash, the affected area in focus and filling most of the frame. The agronomist needs the close-up to name the issue and the plant-level shot to judge stage and spread. In-app guidance cards show a good and a bad example of each.
+**Two shots per plant.** Take a plant-level shot that shows the whole plant and its neighbours, then a close-up of the affected part. Use natural light and no flash, with the affected area in focus and filling most of the frame. The agronomist needs the close-up to name the issue, and the plant-level shot to judge stage and spread. Give collectors guidance cards on the phone that show a good and a bad example of each.
 
-**The form.** Every photo carries crop, suspected issue (with "not sure" allowed), growth stage, plant part, district and the farmer's question. The form takes under a minute once a collector is used to it, and it is what turns a folder of photos into a dataset. A photo with no form is rejected at ingest.
+**The form.** Every photo carries crop, suspected issue ("not sure" is allowed), growth stage, plant part, district and the farmer's question. The form takes under a minute once a collector is used to it, and it is what turns a folder of photos into a dataset. A photo with no form is rejected at ingest.
 
-**Offline first.** Most fields have no signal. One suitable architecture downloads the project, form and guidance cards to the phone, places each capture in an on-device outbox, replays uploads in order when a network returns, and holds rejected writes for review. Other tools can meet the same requirement with a different sync design. What matters is that a collector does not lose a day's work and that an app requiring a constant connection does not quietly select for images taken near towns. [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) sets out the general practice.
+**Offline first.** Most fields have no signal, so the capture app must work without one. In practice it needs to:
 
-**Consent at capture.** Before the first photo on a farm, the collector plays the recorded oral consent script in the language, or hands over the written form, and logs the farmer's agreement against an opaque contributor ID. This project requires a consent record before capture; implement and test that gate in the chosen workflow rather than assuming the tool supplies it. An oral consent record stays provisional until the language lead has listened to the recording, and the images from that farm remain outside the accepted dataset before then; see [Quality, consent and release](./quality-consent-release.md).
+- keep the form, the guidance cards and the project settings on the phone;
+- let the collector photograph the plant, fill the form, and type or record the farmer's question with no connection;
+- keep each capture on the device until it uploads, and resume uploads when a network returns;
+- show clearly what has and has not synced;
+- keep any upload the server refuses, so someone can review it instead of losing it.
 
-## Capture interface
+A collector should never lose a day's work. An app that needs a constant connection also selects, without anyone noticing, for images taken near towns. [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) sets out the general practice.
 
-The capture interface should let the collector photograph the plant, complete the structured form (crop, suspected issue, growth stage and plant part), and record or type the farmer's question. It should preserve unfinished captures offline, show sync status clearly, and retain rejected uploads for review.
+**Consent at capture.** Before the first photo on a farm, the collector plays the recorded oral consent script in the language, or hands over the written form, and logs the farmer's agreement against an opaque contributor ID. Images from that farm stay out of the accepted dataset until the consent record is verified ([Quality, consent and release](./quality-consent-release.md#consent)).
 
 ## Planning coverage
 
 **The coverage matrix.** Agree a target matrix of crop by issue family by growth stage with the agronomist partner before capture starts, and make it the live dashboard. Per crop, target four issue families (pest damage, disease lesions, nutrient stress, abiotic stress) plus a healthy reference class of the same crop at the same stage. Each language's priority staples come from the national extension partner: for example, maize, sorghum, millet, rice, cowpea, groundnut and tomato for Hausa in northern Nigeria, or teff, wheat, maize, barley, faba bean, enset and coffee for Amharic in Ethiopia. A matrix that is only checked at delivery will have empty cells you can no longer fill.
 
-**The cropping calendar.** You photograph what is in the field. In northern Nigeria and Senegal a November to May window covers dry-season irrigated crops (rice, tomato, onion, wheat) and storage and pest issues; rainy-season staples (millet, sorghum, groundnut, cowpea) need a June to July push or the open seed. Write the calendar for each country into the plan at kick-off and set collector targets per window.
+**The cropping calendar.** You photograph what is in the field. As an illustration, in northern Nigeria and Senegal a November to May window roughly covers dry-season irrigated crops (rice, tomato, onion, wheat) and storage and pest issues; rainy-season staples (millet, sorghum, groundnut, cowpea) need a June to July push or the open seed. Take the actual dates for each country from the national extension partner, write the calendar into the plan at kick-off and set collector targets per window.
 
-**The open-data seed.** Open plant-disease image sets fill the cells the season cannot: PlantVillage ([Hughes and Salathé, 2015](../references.md#plantvillage-2015)), PlantDoc ([Singh et al., 2020](../references.md#plantdoc-2020)), CCMT ([Mensah et al., 2023](../references.md#ccmt-2023)), iCassava ([Mwebaze et al., 2019](../references.md#icassava-2019)) and PlantWild ([Wei et al., 2024](../references.md#plantwild-2024)). Check the published licence of every source before you keep a single image. As of September 2026: PlantDoc and CCMT are CC BY 4.0 and the Makerere cassava set ([Tusubira et al., 2022](../references.md#makerere-cassava-2022)) is CC0, so all three can go into a CC BY 4.0 release; PlantVillage is CC BY-SA 3.0, iCassava 2019 is under non-commercial competition rules, and PlantWild is CC BY-NC-ND 4.0, so none of those three can, unless the owner gives written permission. Keep only what is compatible with your release licence and attribute each image. Then filter: crop in the target list, minimum resolution, perceptual-hash near-duplicate removal, and a visual sanity pass by an agronomist. The worked example keeps about 5,000 seed images this way.
+**The open-data seed.** Open plant-disease image sets fill the cells the season cannot. Check the published licence of every source before you keep a single image. As of September 2026:
+
+| Source | Licence | Usable in a CC BY 4.0 release? |
+| --- | --- | --- |
+| PlantDoc ([Singh et al., 2020](../references.md#plantdoc-2020)) | CC BY 4.0 | Yes |
+| CCMT ([Mensah et al., 2023](../references.md#ccmt-2023)) | CC BY 4.0 | Yes |
+| Makerere cassava set ([Tusubira et al., 2022](../references.md#makerere-cassava-2022)) | CC0 | Yes |
+| PlantVillage ([Hughes and Salathé, 2015](../references.md#plantvillage-2015)) | CC BY-SA 3.0 | No, unless the owner gives written permission |
+| iCassava 2019 ([Mwebaze et al., 2019](../references.md#icassava-2019)) | Non-commercial competition rules | No, unless the owner gives written permission |
+| PlantWild ([Wei et al., 2024](../references.md#plantwild-2024)) | CC BY-NC-ND 4.0 | No, unless the owner gives written permission |
+
+Keep only what is compatible with your release licence, and attribute each image. Then filter what is left:
+
+1. Keep crops on the target list only.
+2. Apply a minimum resolution.
+3. Remove near-duplicates with a perceptual hash.
+4. Ask an agronomist for a quick visual check.
+
+The worked example keeps about 5,000 seed images this way.
 
 :::warning[Seed images get fresh advisories]
 A seed image contributes pixels only. It goes through the same form, the same ontology label and the same native-authored advisory as a field image, tagged `source.kind = open_seed`.
@@ -86,7 +118,7 @@ A seed image contributes pixels only. It goes through the same form, the same on
 
 ## Quality control
 
-Ingest is the first quality gate and it runs before any annotator sees the image. The EXIF orientation is applied to the pixels first, and only then are EXIF and device metadata stripped, so later annotation coordinates refer to the image as displayed ([Coordinates and image orientation](../image-data/object-detection.md#coordinates-and-image-orientation)). Device GPS is read once to derive the district name, and the coordinates are discarded. Faces are detected and blurred automatically, images flagged as containing people get a human check, and any image where a person cannot be blurred is dropped. A perceptual hash rejects near-duplicates within the batch and against the seed. Then the pair ID is minted and the image is tagged with its source: field or open seed.
+Ingest is the first quality gate, and it runs before any annotator sees the image. EXIF orientation is applied to the pixels before the metadata is stripped, so annotation coordinates refer to the image as displayed ([Coordinates and image orientation](../image-data/object-detection.md#coordinates-and-image-orientation)). The privacy steps (face blurring, GPS reduced to district, metadata stripping) are in [Anonymisation at ingest](./quality-consent-release.md#anonymisation-at-ingest). A perceptual hash rejects near-duplicates within the batch and against the seed. Then the pair ID is minted and the image is tagged with its source: field or open seed.
 
 The second gate is the agronomist at diagnosis time, who can reject an image for quality with a reason that goes back to the collector in the app. The language lead watches rejection rates per collector and the coverage matrix each week, pauses and retrains a collector whose rejections stay high, and steers capture targets while the season is still open.
 

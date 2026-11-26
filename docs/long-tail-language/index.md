@@ -10,9 +10,19 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-You have a language with a speaker community and essentially no digital resources. There is no MasakhaNER split for it ([Adelani et al., 2021](../references.md#adelani-2021)), no NLLB-200 pair ([NLLB Team, 2022](../references.md#nllb-2022)), no Meta MMS adapter ([Pratap et al., 2023](../references.md#pratap-2023)), no HF Hub dataset card. The [cross-language transfer](../cross-language-transfer/index.md) chapter told you which resourced language to transfer from as a starting point; this chapter is about what comes next: how to build the first real dataset for a language that has none.
+You have a language with a speaker community and almost no digital resources. There is no MasakhaNER split for it ([Adelani et al., 2021](../references.md#adelani-2021)), no NLLB-200 pair ([NLLB Team, 2022](../references.md#nllb-2022)), no Meta MMS adapter ([Pratap et al., 2023](../references.md#pratap-2023)), and no dataset on the Hugging Face Hub. The [cross-language transfer](../cross-language-transfer/index.md) chapter told you which resourced language to transfer from as a starting point. This chapter is about what comes next: how to build the first real dataset for a language that has none.
 
-This chapter is written for the reader who is often the source of the language itself: a native speaker, a community leader, a linguist working with a community, or a small research group. It is not written for a big lab. Big labs already have their own playbooks. **What this chapter tries not to do is let anyone start a long-tail language project with unrealistic timelines or an extractive plan.**
+It is written for readers who are often the source of the language themselves: a native speaker, a community leader, a linguist working with a community, or a small research group. It is not written for a big lab; big labs already have their own playbooks. **Its aim is that nobody starts a long-tail language project with unrealistic timelines or an extractive plan.**
+
+:::tip[Key points]
+
+- Settle orthography, use case, and community IP and consent before collecting any data.
+- Staff the project with at least two native speakers, a community liaison, a linguist, a technical lead and a coordinator.
+- Plan for years, not months: going from no data to a task benchmark usually takes two years or more.
+- Prefer community-produced content; use religious text only as a bootstrap and machine translation only as a last resort.
+- A small corpus that native speakers vouch for beats a large, noisy scrape.
+
+:::
 
 ## What "long-tail" means here
 
@@ -46,7 +56,7 @@ The use case shapes everything: what genres to record, what vocabulary to priori
 
 Who owns what the project produces? Under whose licence is it released? Who has the right to re-license it if a commercial actor asks? Who decides if a foreign lab wants to use the data to train a commercial model? These questions belong at the start, in writing, agreed with the community whose language is being recorded, not left to be figured out at release time.
 
-The [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference for what needs to be agreed and how, including consent workflows for non-literate contributors, licence selection (why CC BY-NC 4.0 is the honest default for community-derived African-language data), and the anti-extraction release patterns that keep the community in control after release. The participatory model of [Nekoto et al. (2020)](../references.md#nekoto-2020) is the reference for how Masakhane handles this end-to-end; adopt it or something equivalent, but do not skip it. See also the [core principles](../1_introduction/core-principles.md): consent and community ownership are load-bearing here.
+The [legal, consent, and community IP](../legal-consent/index.md) chapter is the operational reference for what needs to be agreed and how, including consent workflows for non-literate contributors, licence selection (CC BY 4.0 is the default for open release, with CC BY-NC or stricter terms used by exception where the community or the consent terms require it), and the anti-extraction release patterns that keep the community in control after release. The participatory model of [Nekoto et al. (2020)](../references.md#nekoto-2020) is the reference for how Masakhane handles this end-to-end; adopt it or something equivalent, but do not skip it. See also the [core principles](../1_introduction/core-principles.md): consent and community ownership are load-bearing here.
 
 ## Step 1: the team
 
@@ -62,7 +72,15 @@ In our experience, under-staffing any of the first three roles is one of the mos
 
 ## Step 2: realistic milestones
 
-The end-to-end arc from "no data" to "releasable resource" is two to three years. Anyone selling you a shorter timeline has either done this before under unusual circumstances or has not done it before at all. Realistic milestones:
+Going from "no data" to a releasable task benchmark takes years, not months: the milestone ranges below add up to roughly two to five years. Anyone selling you a much shorter timeline has either done this before under unusual circumstances or has not done it before at all.
+
+| Milestone | What you have at the end | Typical duration |
+|---|---|---|
+| 0. Community agreement | Orthography, use case and IP settled; team and consent in place; no data yet | 3 to 12 months |
+| 1. 100 clean sentences | A pilot corpus that tests orthography, workflow and guidelines | 1 to 3 months |
+| 2. 1,000 clean sentences | First public release: corpus plus tokeniser and normaliser | 3 to 6 more months |
+| 3. 5,000 to 10,000 sentences | A first transfer experiment, published (speech: 20 to 50 hours) | 6 to 12 more months |
+| 4. Task-specific benchmark | Benchmark, model and model card, released | 12 to 24 more months |
 
 ### Milestone 0: Community agreement (3 to 12 months)
 
@@ -90,7 +108,7 @@ Choose the task your use case pointed to (NER, MT, sentiment, ASR, TTS, question
 
 You now have a language with a public corpus, a public tokeniser, a public benchmark, and at least one public model. The language is no longer long-tail for that task. Downstream deployment is a separate project.
 
-**Total: 24 to 45 months from Step 0 to Milestone 4.** Faster than three years is unusual; slower than four years often means the project has stalled and needs intervention. Grant proposals promising a 12-month "0 to model" arc for a genuinely long-tail language are describing an unrealistic scope; read them accordingly.
+**Total: about 25 to 57 months from Step 0 to Milestone 4**, if you add up the ranges above. Finishing in under two years is unusual. A project that has run well past four years has often stalled and needs intervention. Grant proposals that promise a 12-month "zero to model" arc for a genuinely long-tail language describe an unrealistic scope; read them accordingly.
 
 ## Source selection
 
@@ -98,7 +116,7 @@ Where should the sentences come from? In order of preference:
 
 1. **Community-produced original content.** Interviews, radio, storytelling, community-generated text. Highest quality, highest community buy-in, most representative.
 2. **Existing translated texts, once vetted.** Government publications, health materials, textbooks. Domain-restricted (formal, written register) but useful. Vet each source with the community, since some may be poorly translated and worse than nothing.
-3. **Bible translations and similar religious content.** Available for many long-tail African languages; JW300, for example, covered over 300 languages ([Agić and Vulić, 2019](../references.md#agic-2019)). Check the rights before use: JW300's source website bars text and data mining, a request for permission was refused, and Masakhane stopped using it ([Cashdan, 2025](../references.md#cashdan-2025)). Where the rights are clear, religious text is useful as a bootstrap corpus, dangerous as a *sole* corpus because it locks the model into a single narrow domain. Never build only on this.
+3. **Bible translations and similar religious content.** Available for many long-tail African languages and useful as a bootstrap, but never as the sole corpus, because it locks the model into one narrow, formal domain. Check the rights first: JW300, for example, is no longer a safe option, and Masakhane stopped using it ([Cashdan, 2025](../references.md#cashdan-2025)). See [Religious and literary texts](../2_data-collection/2_data-sources.md#religious-and-literary-texts). Never build only on this.
 4. **Elicited translations from a lingua franca.** Ask native speakers to translate a defined set of sentences. Controllable, expensive, prone to "translationese": sentences that read like translations, not native language. Use in moderation.
 5. **Machine-translated bootstrap.** Very last resort. Machine translation into a low-resource language produces low-quality output that then contaminates every downstream model trained on it; machine-translated text already makes up a large share of web content in lower-resource languages ([Thompson et al., 2024](../references.md#thompson-2024)). If you must use it, mark it clearly and never mix it with human-produced content without a flag.
 

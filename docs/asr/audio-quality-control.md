@@ -3,7 +3,7 @@ title: Audio Quality Control
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -11,7 +11,25 @@ last_update:
 
 A speech corpus is only as good as its worst clips. A clipped, silent or truncated recording costs a contributor a few seconds to re-record on the day, and a team weeks if the problem surfaces during training. Automated quality control (QC) catches these problems as each clip arrives, before a human validator spends time on it and long before it reaches a model.
 
-This page is the shared home for audio QC across the speech chapters. It covers deciding what the corpus is for, the cheap signal checks every clip should pass, optional model-based checks, the short list of failures that always block, and what should happen when a check fails. The [ASR](./index.md) and [Text-to-Speech](../text-to-speech/index.md) chapters cover the rest of each pipeline, and the [agri-advisory speech layer](../agri-advisory/speech-layer.md#quality-control) shows automated QC and human validation working together on field recordings.
+This page is the shared home for audio QC across the speech chapters. It covers:
+
+- deciding what the corpus is for;
+- cheap signal checks that every clip should pass;
+- optional model-based checks;
+- the short list of failures that always block a clip;
+- what should happen when a check fails, and how to tune the thresholds.
+
+The [ASR](./index.md) and [Text-to-Speech](../text-to-speech/index.md) chapters cover the rest of each pipeline. The [agri-advisory speech layer](../agri-advisory/speech-layer.md#quality-control) shows automated QC and human validation working together on field recordings.
+
+:::tip[Key points]
+
+- Decide whether the corpus is for robust ASR or clean TTS before you set any threshold.
+- Run cheap signal checks on every clip at upload, and store the measured values, not just pass or fail.
+- Treat model-based scores as triage for a human, never as an automatic rejection.
+- Block only clips no one could use; give every other failure a graded response.
+- Give validators the same criteria as the automated checks, and tune every number on pilot data.
+
+:::
 
 ## Decide the corpus purpose first
 
@@ -29,13 +47,21 @@ The same recording can be good data for one corpus and bad data for another. Bac
 
 **Clean TTS.** A synthetic voice reproduces whatever is in its training audio, noise included; the [TTS recording pipeline](../text-to-speech/index.md#recording-pipeline) covers the studio side.
 
-**Capture processing.** Browsers and phone apps can apply noise suppression, echo cancellation and automatic gain control to the microphone signal before your code ever sees it. Noise suppression removes the very ambience a robust ASR corpus is meant to keep, and automatic gain control makes loudness measurements meaningless. Whether these are on by default varies by browser and device, so do not assume. In a web recorder, request each one explicitly in the capture constraints (`noiseSuppression`, `echoCancellation` and `autoGainControl`, set to false), then read back the settings actually applied with `getSettings()` and store them with each clip, because a browser may not honour a request ([MDN Web Docs, 2026e](../references.md#mdn-media-track-constraints)). The one exception is when deployment audio passes through the same processing, for example a voice-note app that always suppresses noise: then capturing through it matches the deployment condition.
+**Capture processing.** Browsers and phone apps can apply noise suppression, echo cancellation and automatic gain control to the microphone signal before your code ever sees it.
+
+- Noise suppression removes the very ambience a robust ASR corpus is meant to keep.
+- Automatic gain control changes the level as the speaker talks, so loudness measurements stop meaning anything.
+- Whether these are on by default varies by browser and device, so do not assume.
+
+In a web recorder, request each one explicitly in the capture constraints (`noiseSuppression`, `echoCancellation` and `autoGainControl`, set to false). Then read back the settings actually applied with `getSettings()` and store them with each clip, because a browser may not honour a request ([MDN Web Docs, 2026e](../references.md#mdn-media-track-constraints)).
+
+The one exception is when deployment audio passes through the same processing, for example a voice-note app that always suppresses noise. Capturing through it then matches the deployment condition.
 
 **One threshold table.** Write the chosen thresholds in a single table and hand the same criteria to the automated checks, the recording instructions and the human validators (the validators' criteria card is in [Peer validation of crowd recordings](./index.md#peer-validation-of-crowd-recordings)). If the machines warn on noise but the validators were told to reject noisy clips, validators will throw away exactly the audio that makes an ASR model robust. Record the chosen purpose, the thresholds and the capture settings in the [dataset card](../templates/dataset-card.md), so users know what kind of audio they are getting.
 
 ## Tier 1: signal checks on every clip
 
-These checks are cheap. They need only the waveform, typically take a fraction of a second per minute of audio, and should run on every clip at upload. The values below are starting points to tune on your own pilot data, not standards.
+These checks are cheap. They need only the waveform, run quickly on an ordinary CPU, and should run on every clip at upload. The example values below are illustrative starting points to tune on your own pilot data ([Tuning the thresholds](#tuning-the-thresholds)). Only the true-peak and loudness references come from a published standard.
 
 | Check | What it measures | Example starting point |
 |---|---|---|
@@ -126,7 +152,7 @@ These checks cost far more than tier 1, usually need a GPU at scale, and rest on
 
 ## Tier 3: failures that always block
 
-A few failures are not a matter of policy, because no reviewer could use the clip whatever the corpus is for. Keep them on one short list, and block these clips regardless of how lenient the rest of the configuration is:
+A few failures are not a matter of policy, because no reviewer could use the clip whatever the corpus is for. Keep them on one short list, and block these clips however lenient the rest of your QC policy is:
 
 - **Near-empty audio**: a clip below the minimum duration, or with no decodable audio at all.
 - **Almost no speech**: a speech ratio so low the clip is effectively silence (for example, under 20% of frames).
@@ -137,16 +163,22 @@ Keep this list short. Every item added here removes a decision from human valida
 
 ## What happens when a check fails
 
-A failed check should not have a single fixed consequence. Choose one of four graded responses for each check, or for each group of checks:
+A failed check does not need one fixed consequence. Choose one of four graded responses for each check, or for each group of checks:
 
 | Response | What happens | Use it for |
 |---|---|---|
 | Accept with a warning | The clip enters the pool; the warning is logged | Findings that are expected in this corpus, such as low SNR in robust ASR |
-| Accept and send to review | The clip is kept but a human must sign it off | A sensible default for most tier 1 and all tier 2 failures |
-| Reject and ask for a re-record | The contributor sees which check failed and records again | Clean TTS corpora, and clips a re-record would clearly fix |
-| Block submission with live feedback | The recorder shows the problem before the contributor submits | Problems the contributor can fix on the spot, such as clipping or a long silent start |
+| Accept and send to review | The clip is kept, but a person must sign it off | A sensible default for most tier 1 and all tier 2 failures |
+| Reject and ask for a re-record | The contributor learns which check failed and records again | Clean TTS corpora, and clips a re-record would clearly fix |
+| Hold submission until fixed | The recorder shows the problem, and the contributor fixes it before submitting | Problems the contributor can fix on the spot, such as clipping or a long silent start |
 
-Whatever the response, each failure should carry three things: the diagnostic value (the measured loudness or clip share, not just "failed"), a plain-language message the contributor can act on ("too quiet: move closer to the phone"), and an audit record of which clip failed which check, when, and what happened next. The audit trail is what lets you tune thresholds that turn out to be wrong, and show reviewers and dataset users how the corpus was filtered.
+Whatever the response, each failure should carry three things:
+
+- **The diagnostic value**: the measured loudness or clipped share, not just "failed".
+- **A plain-language message** the contributor can act on, such as "too quiet: move closer to the phone", ideally in the contributor's own language.
+- **An audit record**: which clip failed which check, when, and what happened next.
+
+The audit trail lets you fix thresholds that turn out to be wrong. It also shows reviewers and dataset users how the corpus was filtered.
 
 Clips that the automated checks hard-blocked should never be served to human validators ([Peer validation of crowd recordings](./index.md#peer-validation-of-crowd-recordings)). Validators' time is the scarcest resource in a speech project, and it should go to the judgements machines cannot make: whether every word is intelligible, whether the clip matches the prompt, and whether the tone is right.
 

@@ -59,8 +59,6 @@ Uku daga cikin abubuwan da aka tsara a sama an tilasta su kai tsaye a cikin wann
 
 Wannan tsarin yana bayyana, ga mai sanya lakabi, a matsayin tsaftataccen allon aiki guda ɗaya inda ainihin rubutun ya fito daban da tambayar:
 
-![Aikin sanya lakabi guda ɗaya na yanayin zuciya a cikin manhajar sanya lakabi ta AfriAnnotate](/afriannotate-demo/01-text-nlp/01-sentiment-classification/3-label-selected.png)
-
 Ga aikin matakin tsayi (span-level) kamar gano sunaye (named-entity recognition), tsari iri ɗaya yana bayyana aiki mai wahala ta hanyar canza `<Choices>` zuwa `<Labels>`, wanda ke ba mai sanya lakabi damar zaɓar wani yanki na rubutu ya yi masa alama:
 
 ```xml
@@ -79,10 +77,6 @@ Filin `$text` a cikin duka tsare-tsaren biyu yana dacewa kai tsaye da filin `tex
 
 Zaɓar wani yanki na rubutu da yi masa alama a matsayin suna (entity), a cikin manhajar AfriAnnotate:
 
-![Yi wa suna alama a cikin AfriAnnotate](/afriannotate-demo/gifs/ner.gif)
-
 ## Daga tsari (config) zuwa aikin da ke gudana {#from-a-config-to-a-running-project}
 
 Bayyana tsarin (config) shine kawai matakin farko; ɗora bayanai da sanya musu lakabi shine sauran aikin. Ƙaramin bayanin da ke ƙasa yana nuna cikakken tsarin, ƙirƙirar aiki, ɗora fayil ɗin CSV na ayyuka, zaɓar samfurin sanya lakabi, da sanya lakabi ga kowane aiki:
-
-<video controls width="100%" style={{borderRadius: '10px', border: '1px solid var(--ifm-color-emphasis-200)'}} src="/afriannotate-demo/00-workflow/project-creation/process.mp4"></video>

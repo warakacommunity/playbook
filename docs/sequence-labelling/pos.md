@@ -4,7 +4,7 @@ sidebar_label: Part-of-Speech Tagging
 sidebar_position: 3
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -13,6 +13,16 @@ last_update:
 Part-of-speech (POS) tagging gives every token in a sentence its grammatical category: noun, verb, adposition, pronoun and so on. It is rarely the end product, but it feeds lemmatisers, morphological analysers, spell and grammar checkers, chunkers, parsers and terminology tools, and it is often the first annotated resource a language community builds after a corpus. For African languages it is also where the question "what counts as a word?" has to be answered explicitly, and that answer shapes every later resource.
 
 The tagging scheme, tokenisation issues and evaluation choices that POS shares with NER are explained in the [Sequence Labelling overview](./index.md). This page covers the tagset, existing resources, the annotation decisions specific to POS, and evaluation.
+
+:::tip[Key points]
+
+- Use the 17-tag Universal POS tagset (UPOS); put noun class and other detail in `FEATS` or `XPOS`.
+- Write and apply word-segmentation rules before tagging starts.
+- Hand-tag a small seed, then let annotators correct a model's suggestions.
+- Settle hard cases (verb or adjective, verb or conjunction, adverb or particle) once per language, with examples.
+- Report per-tag and out-of-vocabulary accuracy, not only overall accuracy.
+
+:::
 
 ## What the data looks like
 
@@ -45,7 +55,7 @@ The cost is that UPOS is coarse. Noun class, which drives agreement in Bantu lan
 ## Existing resources
 
 - **MasakhaPOS** is the largest POS dataset for African languages: about 1,500 news sentences in each of twenty languages (Bambara, Ghomala, Ewe, Fon, Hausa, Igbo, Kinyarwanda, Luganda, Luo, Mossi, Chichewa, Nigerian Pidgin, chiShona, Kiswahili, Setswana, Twi, Wolof, isiXhosa, Yorùbá and isiZulu), annotated with UPOS ([Dione et al., 2023](../references.md#masakhapos-2023)). Twelve of the languages reuse MAFAND-MT news text ([Adelani et al., 2022b](../references.md#mafand-2022)), so for those languages the same sentences carry both NER (in MasakhaNER 2) and POS annotation. It is on the [Hugging Face Hub](https://huggingface.co/datasets/masakhane/masakhapos) and in the [MasakhaPOS repository](https://github.com/masakhane-io/masakhane-pos). The dataset card states a non-commercial Creative Commons licence, so check it before commercial use.
-- **NCHLT annotated text corpora** for the South African languages are lemmatised, POS-tagged and morphologically analysed, with one token per line followed by its lemma, morphological analysis and tag ([Eiselen & Puttkammer, 2014](../references.md#eiselen-puttkammer-2014)). They come from the same project as the NCHLT NER and chunking data and are distributed through the SADiLaR repository; the [NCHLT isiZulu Annotated Text Corpora](https://hdl.handle.net/20.500.12185/315), for example, hold about 46,000 tokens. Check which tagset each corpus uses and map it to UPOS before combining it with other data, and read the licence on each record before downloading.
+- **NCHLT annotated text corpora** for the South African languages are lemmatised, POS-tagged and morphologically analysed, with one token per line followed by its lemma, morphological analysis and tag ([Eiselen and Puttkammer, 2014](../references.md#eiselen-puttkammer-2014)). They come from the same project as the NCHLT NER and chunking data and are distributed through the SADiLaR repository; the [NCHLT isiZulu Annotated Text Corpora](https://hdl.handle.net/20.500.12185/315), for example, hold about 44,000 annotated tokens ([Eiselen and Puttkammer, 2014](../references.md#eiselen-puttkammer-2014), Table 2). Check which tagset each corpus uses and map it to UPOS before combining it with other data, and read the licence on each record before downloading.
 - **Universal Dependencies treebanks** exist for a growing number of African languages; see the next section.
 
 ### Universal Dependencies treebanks
@@ -68,22 +78,31 @@ Write the segmentation rules into the guideline with examples, apply them with a
 
 POS annotation is slow, because every token needs a decision. Two practices from MasakhaPOS make it manageable ([Dione et al., 2023](../references.md#masakhapos-2023)):
 
-1. **Hand-annotate a seed, then correct predictions.** The team annotated 100 sentences per language by hand, fine-tuned a model on them, and had annotators correct the model's tags on the remaining 1,400. Punctuation, numbers and symbols were predicted almost perfectly, and proper nouns well, which removed much of the effort.
-2. **Restrict the choices.** Annotators picked from a drop-down of the seventeen UPOS tags, which prevented typos and invented tags.
+1. **Hand-annotate a seed, then correct predictions.** The team annotated 100 sentences per language by hand, fine-tuned a model on them, and had annotators correct the model's tags on the remaining 1,400. Punctuation, numbers and symbols were predicted almost perfectly, and proper nouns well (helped by capitalisation), which removed much of the effort.
+2. **Restrict the choices.** Annotators chose each tag from a fixed list of the seventeen UPOS tags rather than typing it, which prevented typos and invented tags.
 
-Each language had three native-speaker annotators with a linguistics background and a language coordinator. Annotators worked independently and the coordinator led the resolution of disagreements, in some languages by discussing every sentence on a call.
+Each language had three native-speaker annotators with a linguistics background, and a language coordinator. Annotators worked independently. The coordinator then led the resolution of disagreements, in seven languages by going through every word of every sentence together, on a call or in person.
 
-Expect hard cases where a word sits between two categories. The common ones in African languages, all discussed in the MasakhaPOS paper, are:
+### Hard cases
 
-- **Verb or adjective.** In Wolof and Yorùbá, most concepts that English expresses with adjectives are expressed with verbs, and Igbo and Ewe have only a handful of underived adjectives. Decide whether property words are VERB or ADJ, per language, and give examples.
-- **Verb or subordinating conjunction.** A form of the verb "say" often introduces reported clauses, as Yorùbá *pé* does. Decide on syntactic tests (can it be reduplicated like a verb? can it start a sentence like a conjunction?) and record them.
-- **Adverb or particle.** Ideophones, words that depict a sound, manner or intensity, behave sometimes like adverbs and sometimes like particles bound to one verb.
+Expect words that sit between two categories. The common ones in African languages, all discussed in the MasakhaPOS paper, are:
 
-Each of these decisions should be made once per language, written down with examples, and applied by the coordinator during adjudication.
+| Boundary | Why it is hard | What to decide |
+|---|---|---|
+| **Verb or adjective** | In Wolof and Yorùbá, most concepts that English expresses with adjectives are expressed with verbs. Igbo and Ewe have only a handful of underived adjectives. | Whether property words are VERB or ADJ, per language, with examples. |
+| **Verb or subordinating conjunction** | A form of the verb "say" often introduces reported clauses, as Yorùbá *pé* does. | Syntactic tests and their outcome: can it be reduplicated like a verb? Can it start a sentence like a conjunction? |
+| **Adverb or particle** | Ideophones (words that convey an idea through sound, often reduplicated) sometimes modify verbs like adverbs and sometimes act as particles of a single verb, as Wolof *jërr* does in *tàng jërr*, "very hot". | Whether ideophones are ADV or PART, per language. |
+
+Make each of these decisions once per language, write it down with examples, and have the coordinator apply it during adjudication.
 
 ## Agreement and quality assurance
 
-Report agreement at two levels: tag-level (Cohen's or Fleiss' kappa over tokens, once segmentation is fixed) and sentence-level (the fraction of sentences on which annotators agreed on every tag). Sentence-level agreement is harsh but easy to interpret. In MasakhaPOS it varied widely: of the thirteen language teams whose annotators worked independently, seven agreed on more than 75% of sentences, while four agreed on fewer than half before adjudication ([Dione et al., 2023](../references.md#masakhapos-2023)). Low first-pass agreement is normal for POS in a new language; what matters is that every disagreement is resolved and the resolution is written into the guideline.
+Report agreement at two levels:
+
+- **Tag level:** Cohen's or Fleiss' kappa over tokens, once segmentation is fixed.
+- **Sentence level:** the fraction of sentences on which annotators agreed on every tag. This is harsh but easy to interpret.
+
+In MasakhaPOS, sentence-level agreement varied widely. Of the thirteen language teams whose annotators worked independently, seven agreed on more than 75% of sentences, while four agreed on fewer than half before adjudication ([Dione et al., 2023](../references.md#masakhapos-2023)). Low first-pass agreement is normal for POS in a new language. What matters is that every disagreement is resolved and the resolution is written into the guideline.
 
 Automatic checks catch what agreement misses:
 

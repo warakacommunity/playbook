@@ -3,17 +3,36 @@ title: Formats and merging
 sidebar_position: 7
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
 # Formats and merging
 
-Two steps sit between finished annotation and a usable vision dataset, and both can damage labels without raising an error. The first is conversion: the annotation tool's records become COCO, YOLO, PASCAL VOC, a mask image or a tracking file, and each format counts coordinates differently. The second is merging: when two or three people boxed or painted the same image, someone decides whether the release carries all of their shapes or one combined shape per object. This page covers both. How to draw boxes and masks is on the [object detection](./object-detection.md) and [segmentation](./segmentation.md) pages; how to check any export before release is in [Verify the export before you release](../9_dataset-lifecycle/release.md#verify-the-export-before-you-release).
+Two steps sit between finished annotation and a usable vision dataset, and both can damage labels without raising an error:
+
+- **Conversion.** The annotation records become COCO, YOLO, PASCAL VOC, a mask image or a tracking file, and each format counts coordinates differently.
+- **Merging.** When two or three people boxed or painted the same image, someone decides whether the release carries all of their shapes or one combined shape per object.
+
+This page covers both. How to draw boxes and masks is on the [object detection](./object-detection.md) and [segmentation](./segmentation.md) pages. How to check any export before release is in [Verify the export before you release](../9_dataset-lifecycle/release.md#verify-the-export-before-you-release).
+
+:::tip[Key points]
+
+- Keep the most complete export as the copy of record and generate every other format from it.
+- Formats differ in anchor point, units and 0- or 1-based counting; a wrong convention still loads but lands in the wrong place.
+- Convert a sample there and back, and draw the shapes on the images, before trusting a converter.
+- Keep every annotator's original shapes; release a merged label only as a derived view.
+- Record formats, conventions, merge rules and thresholds in the dataset card.
+
+:::
 
 ## Keep one copy of record
 
-Keep the tool's most complete export as the copy of record and generate every other format from it, never by hand-editing a converted file ([Exporting from your annotation tool](../6_documentation/data-storage.md#exporting-from-your-annotation-tool)). Converter formats are narrow: a detection format usually carries only the boxes, so text answers, relations, review outcomes and skipped items are left behind. A good annotation tool tells you before download which results a format will drop; if yours does not, count them yourself. The same applies to merging: keep every annotator's original shapes in the copy of record, and release the merged label as a derived view, so that the merge can be redone with a different rule later.
+Keep the most complete export as the copy of record and generate every other format from it, never by hand-editing a converted file ([Exporting from your annotation tool](../6_documentation/data-storage.md#exporting-from-your-annotation-tool)).
+
+Converter formats are narrow. A detection format usually carries only the boxes, so text answers, relations, review outcomes and skipped items are left behind. Before you convert, list which results the target format cannot hold and count them, so you know exactly what the converted file leaves out.
+
+The same applies to merging. Keep every annotator's original shapes in the copy of record, and release the merged label as a derived view, so that the merge can be redone with a different rule later.
 
 ## The formats at a glance
 
@@ -29,8 +48,8 @@ Keep the tool's most complete export as the copy of record and generate every ot
 
 The details behind each row:
 
-- **COCO** stores each object with an enclosing box measured from the top-left image corner and 0-indexed. A single object (`iscrowd` 0) is outlined with one or more polygons, while a crowd region (`iscrowd` 1) is stored as run-length encoding (RLE) ([COCO Consortium, n.d.](../references.md#coco-format)).
-- **YOLO** detection labels hold one row per object; an image with no objects may have no label file, so count images and objects rather than files ([Ultralytics, n.d.](../references.md#ultralytics-detect-format)). The segmentation variant replaces the box with a polygon of at least three points and does not take RLE ([Ultralytics, n.d.](../references.md#ultralytics-segment-format)).
+- **COCO** stores each object with an enclosing box measured from the top-left image corner and 0-indexed. A single object (`iscrowd` 0) is outlined with one or more polygons, while a crowd region (`iscrowd` 1) is stored as run-length encoding (RLE) ([COCO Consortium, n.d.-a](../references.md#coco-format)).
+- **YOLO** detection labels hold one row per object; an image with no objects may have no label file, so count images and objects rather than files ([Ultralytics, n.d.-a](../references.md#ultralytics-detect-format)). The segmentation variant replaces the box with a polygon of at least three points; the documented format has no RLE option ([Ultralytics, n.d.-b](../references.md#ultralytics-segment-format)).
 - **PASCAL VOC** marks an object as truncated when the box does not cover its full extent, occluded when much of it is hidden, and difficult when it cannot be recognised without context; difficult objects are left out of evaluation ([Everingham and Winn, 2012](../references.md#voc2012-devkit)). The thresholds annotators applied for these flags are in [Box and region rules](./region-guidelines.md#occlusion-and-truncation-flags). Converting VOC to YOLO drops all three flags, which matters if your guidelines use them.
 - **MOT** ground-truth rows give the frame, the track identity, the box, a flag saying whether the row counts in evaluation (1) or is ignored (0), the object class and a visibility ratio from 0 to 1. Frame numbers, track identities and box coordinates are all 1-based, so the top-left pixel is (1, 1) ([Milan et al., 2016](../references.md#milan-2016)).
 - **Keyframe track XML**, such as the CVAT-style format, stores each track as an id and a label with shapes on some frames. Each shape carries `keyframe`, `outside` and `occluded` flags, and the shapes between keyframes may not be written out at all ([CVAT.ai, n.d.](../references.md#cvat-xml-format)).
@@ -109,7 +128,15 @@ When several people annotate the same image, decide first whether to merge at al
 3. **Settle the class.** Take the majority class within the group; send ties and groups where the classes disagree to adjudication rather than averaging them away.
 4. **Combine the coordinates.** Average each coordinate (corners for VOC-style boxes) across the group, or take the median, which resists one careless box.
 
-Weighted boxes fusion (WBF) is the best-known method of this kind. It was designed to combine the outputs of several detection models: it clusters boxes above an IoU threshold, sets each fused corner to the confidence-weighted average of the boxes in the cluster, and lowers the fused confidence when fewer models contributed to it ([Solovyev et al., 2021](../references.md#solovyev-2021)). It can be applied to human annotators by giving each annotator a confidence, either equal or based on their score against gold items, and the lowered confidence then reflects how many annotators drew the box. Because it was built for model ensembles, report it as an adaptation, run it per class, and keep the support count for each fused box so that users can filter on it. Unlike non-maximum suppression, which keeps one box and discards the rest, WBF uses every box in the cluster.
+Weighted boxes fusion (WBF) is the best-known method of this kind. It was designed to combine the outputs of several detection models ([Solovyev et al., 2021](../references.md#solovyev-2021)):
+
+- it clusters boxes above an IoU threshold;
+- it sets each fused corner to the confidence-weighted average of the boxes in the cluster;
+- it lowers the fused confidence when fewer models contributed to it.
+
+Unlike non-maximum suppression, which keeps one box and discards the rest, WBF uses every box in the cluster.
+
+WBF can be applied to human annotators by giving each annotator a confidence, either equal or based on their score against gold items. The lowered confidence then reflects how many annotators drew the box. Because the method was built for model ensembles, report it as an adaptation, run it per class, and keep the support count for each fused box so that users can filter on it.
 
 Merging is for geometry, not for meaning. If annotators disagree on whether something is an object at all, or which class it belongs to, the disagreement may come from the guideline or from genuine differences in interpretation ([Plank, 2022](../references.md#plank-2022)). Read it before you merge it away.
 
@@ -132,7 +159,11 @@ def majority_mask(masks, min_votes=None):
 # min_votes=1 gives the union. State which one you used.
 ```
 
-A plain vote trusts every annotator equally. STAPLE (Simultaneous Truth and Performance Level Estimation) instead uses an expectation-maximisation algorithm to estimate, at the same time, a probability map of the true segmentation and each rater's sensitivity and specificity, so that more reliable raters count for more ([Warfield et al., 2004](../references.md#warfield-2004)). Open implementations exist for binary masks and for multi-class label maps, for example the [STAPLE](https://simpleitk.org/doxygen/latest/html/classitk_1_1simple_1_1STAPLEImageFilter.html), [multi-label STAPLE](https://simpleitk.org/doxygen/latest/html/classitk_1_1simple_1_1MultiLabelSTAPLEImageFilter.html) and [label voting](https://simpleitk.org/doxygen/latest/html/classitk_1_1simple_1_1LabelVotingImageFilter.html) filters in SimpleITK. STAPLE returns probabilities; thresholding them, for example at 0.5, gives a binary mask, and the threshold belongs in the dataset card. The per-rater estimates are also a quality signal, to be read with the same care as any annotator score ([Act on annotator signals fairly](../4_data-quality/index.md#act-on-annotator-signals-fairly)).
+A plain vote trusts every annotator equally. STAPLE (Simultaneous Truth and Performance Level Estimation) instead uses an expectation-maximisation algorithm to estimate two things at once: a probability map of the true segmentation, and each rater's sensitivity and specificity. More reliable raters then count for more ([Warfield et al., 2004](../references.md#warfield-2004)).
+
+- **Implementations.** Open implementations exist for binary masks and for multi-class label maps, for example the [STAPLE](https://simpleitk.org/doxygen/latest/html/classitk_1_1simple_1_1STAPLEImageFilter.html), [multi-label STAPLE](https://simpleitk.org/doxygen/latest/html/classitk_1_1simple_1_1MultiLabelSTAPLEImageFilter.html) and [label voting](https://simpleitk.org/doxygen/latest/html/classitk_1_1simple_1_1LabelVotingImageFilter.html) filters in SimpleITK.
+- **Thresholds.** STAPLE returns probabilities. Thresholding them, for example at 0.5, gives a binary mask, and the threshold belongs in the dataset card.
+- **Rater estimates.** The per-rater estimates are also a quality signal, to be read with the same care as any annotator score ([Act on annotator signals fairly](../4_data-quality/index.md#act-on-annotator-signals-fairly)).
 
 Three cautions apply to both methods:
 

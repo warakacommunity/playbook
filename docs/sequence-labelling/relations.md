@@ -4,7 +4,7 @@ sidebar_label: Relations and Coreference
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -15,6 +15,16 @@ Named entity recognition says *what* the spans in a sentence are. Relation annot
 This page covers the design decisions, the workflow, agreement, and the release format. Span selection, tokenisation and offsets are explained in the Sequence Labelling overview, under [Tokenisation and morphology](./index.md#tokenisation-and-morphology) and [Scripts, spans and offsets](./index.md#scripts-spans-and-offsets), and entity types and guidelines in [Named Entity Recognition](./ner.md).
 
 Annotated relation and coreference data for African languages is scarce. At the time of writing (2026), we know of no openly released, multi-language relation or coreference corpus for African languages comparable to MasakhaNER for entities, so most projects will be building from scratch and should plan a longer pilot than for NER.
+
+:::tip[Key points]
+
+- Annotate in two passes: adjudicate the entity spans first, then draw relations or coreference links on the fixed spans.
+- Define every relation type with its direction and allowed entity types, and keep the inventory small.
+- Decide the scope rules up front: within or across sentences, stated or inferred, and how "no relation" is recorded.
+- Score relations with pairwise F1 on (head, tail, type) triples, and use the standard metrics for coreference.
+- Release offsets plus a relation or chain list; flat BIO files cannot hold these layers.
+
+:::
 
 :::tip[Contribute]
 If you have built or know of a relation-extraction or coreference dataset for an African language, add it to this page with a pull request.
@@ -78,26 +88,16 @@ Keep the inventory small. Every extra type adds pairs that annotators can confus
 
 A relation needs both of its endpoint spans to exist. Annotators draw the entities, then the relation between them. If a span is later deleted or changed, every relation that pointed to it must be deleted or re-checked, and the validation script below checks for relations left pointing at nothing.
 
-A minimal labelling configuration, in the same XML format used elsewhere in the playbook, puts the relation types and the entity labels side by side:
+The annotation task can be specified like this, with the entity labels and relation types side by side:
 
-```xml
-<View>
-  <Relations>
-    <Relation value="child_of"/>
-    <Relation value="grows"/>
-    <Relation value="based_in"/>
-    <Relation value="reported_in"/>
-    <Relation value="other"/>
-  </Relations>
-  <Labels name="entity" toName="text">
-    <Label value="PER"/>
-    <Label value="LOC"/>
-    <Label value="CROP"/>
-    <Label value="DISEASE"/>
-  </Labels>
-  <Text name="text" value="$text" granularity="word"/>
-</View>
-```
+**Task specification: entity relations**
+
+| Setting | Value |
+|---|---|
+| Annotator sees | One sentence (or document) of text; in the second pass, the adjudicated entity spans are already marked |
+| Annotator gives | Entity spans with one label each: PER, ORG, LOC, CROP, DISEASE (first pass); directed links between two spans, each with one relation type: `child_of`, `grows`, `based_in`, `reported_in`, `other` (second pass) |
+| Choice | Exactly one label per span and one type per link; relations optional, since many pairs have none |
+| Notes | Spans snap to whole words. Each link runs from head to tail as defined in the inventory table. |
 
 If your annotation tool's relation feature cannot restrict which entity types a relation may join, the allowed head and tail types from the inventory table must be checked after export.
 
@@ -111,9 +111,22 @@ For coreference, the same split applies: fix the mentions first, then link them 
 
 ## Agreement and automatic checks
 
-Report entity agreement and relation agreement separately. Entity agreement is measured as for NER. For relations, the Linguistic Data Consortium's approach for its entity, relation and event annotation is to map the two annotators' entity mentions onto each other first, then compare relations only through that mapping, and to classify each pair of relations as, among other categories, an exact match, a match on its arguments with a different type, or no match at all ([Kulick et al., 2014](../references.md#kulick-2014)). The two-pass workflow makes the mapping trivial: after adjudication, both annotators work on the same spans.
+Report entity agreement and relation agreement separately. Entity agreement is measured as for NER.
 
-Score relations as (head, tail, type) triples with pairwise F1, treating one annotator as reference and the other as prediction. Kappa needs a count of the cases both annotators left unmarked. For relations that count (every pair of spans no one connected) is either undefined or so large and arbitrary that kappa then depends on how you chose to count it, and approaches F1 as the count grows. Pairwise F1, which equals positive specific agreement, does not need it ([Hripcsak and Rothschild, 2005](../references.md#hripcsak-2005)). If you labelled explicit candidate pairs, including "none", kappa over those pairs is also meaningful. The general treatment of agreement statistics is in [Data Quality](../4_data-quality/index.md#measure-inter-annotator-agreement).
+For relations, the Linguistic Data Consortium (LDC) compares two annotators in two steps for its entity, relation and event annotation ([Kulick et al., 2014](../references.md#kulick-2014)):
+
+1. Map the two annotators' entity mentions onto each other.
+2. Compare relations only through that mapping, classifying each pair of relations as, among other categories, an exact match, a match on its arguments with a different type, or no match at all.
+
+The two-pass workflow makes the mapping trivial: after adjudication, both annotators work on the same spans.
+
+Score relations as (head, tail, type) triples with pairwise F1, treating one annotator as reference and the other as prediction. Kappa is a poor fit here:
+
+- Kappa needs a count of the cases both annotators left unmarked. For relations, that count (every pair of spans no one connected) is either undefined or so large and arbitrary that kappa depends on how you chose to count it, and approaches F1 as the count grows.
+- Pairwise F1, which equals positive specific agreement, does not need that count ([Hripcsak and Rothschild, 2005](../references.md#hripcsak-2005)).
+- If you labelled explicit candidate pairs, including "none", kappa over those pairs is also meaningful.
+
+The general treatment of agreement statistics is in [Data Quality](../4_data-quality/index.md#measure-inter-annotator-agreement).
 
 ```python
 def relation_agreement(rels_a, rels_b):

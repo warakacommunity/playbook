@@ -2,20 +2,20 @@
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # How to Write a Chapter
 
-The [How to Contribute](./how-to-contribute) section covers the requirements to make contributions, namely editing on the site, forking, opening a pull request. In this Section, we cover the writing itself, how to structure a page, add sections and subsections, and use the colored callout boxes (admonitions) that make a page easy to read.
+[How to Contribute](./how-to-contribute.md) covers the mechanics of making a change: editing on the site, forking, and opening a pull request. This page covers the writing itself: how to structure a page, add sections and subsections, and use the coloured callout boxes (admonitions) that make a page easy to read.
 
-You can write in **two ways**, but there are more options (see the [How to Contribute](./how-to-contribute) section):
+You can write in one of **two formats**:
 
-- **Markdown**: This is the native format of the playbook. What you type is what gets published, but using the markdown syntx. If you are new to markdown, it is not complicated, we provided basics below, but you can also get started [here](https://www.markdownguide.org/getting-started/). This is the best option if you are comfortable editing text files or using the online editor.
-- **Microsoft Word**: This is a familiar editor for you to draft your chapter, then we have an internal  maintainer that converts it to Markdown. Best for long chapters or contributors who do not work with Markdown.
+- **Markdown**: the native format of the playbook. What you type is what gets published. Markdown is not complicated: the basics are below, and the [Markdown Guide](https://www.markdownguide.org/getting-started/) is a good place to start. Choose this if you are comfortable editing text files or using the online editor.
+- **Microsoft Word**: draft your chapter in a familiar editor, and a maintainer converts it to Markdown. Best for long chapters or for contributors who do not work with Markdown.
 
-Both produce the same published page. The rules below are written so a Word draft and a Markdown draft turn into identical output.
+Both produce the same published page. The rules below are written so that a Word draft and a Markdown draft turn into identical output.
 
 :::tip[The golden rule]
 **One title, then sections.** Each page has exactly one title: a single `#` heading on the first line after the front matter (`# Speaker Diarization`). A `title:` field in the front matter is optional; if you add one, keep it identical to the `#` heading. Never type a chapter number; the sidebar shows the page's place in the playbook. Everything after the title is a section, starting at `##`. In Word, the title uses the **Title** style and sections start at **Heading 1**.
@@ -40,7 +40,6 @@ Headings build the structure of the page and the table of contents on the right.
 #### A sub-subsection   ← use sparingly; deep nesting is hard to read
 ```
 
-
 Rules that keep pages clean:
 
 - **Use a single `#` exactly once**, for the title. Don't number it (`# 3. Data Quality`); the sidebar shows the order, and numbers break when chapters move.
@@ -51,10 +50,9 @@ Rules that keep pages clean:
 
 ### Citing sources
 
-Cite in the text with the author and year inside parentheses, linked to the work's entry on the [References](../references.md) page: `([Adelani et al., 2022a](../references.md#adelani-2022))`. Use the first author's surname, `et al.` for three or more authors, and a comma before the year. For two authors, name both (`Fort & Sagot, 2010`). If the work is not yet on the References page, add an entry there in the same pull request.
+Cite in the text with the author and year inside parentheses, linked to the work's entry on the [References](../references.md) page: `([Adelani et al., 2022a](../references.md#adelani-2022))`. Use the first author's surname, `et al.` for three or more authors, and a comma before the year. For two authors, name both and join them with "and" (`Fort and Sagot, 2010`). If the work is not yet on the References page, add an entry there in the same pull request.
 
-
-### Admonitions: the colored callout boxes
+### Admonitions: the coloured callout boxes
 
 Admonitions are the boxed callouts (like the green "golden rule" box above) that pull a reader's eye to something important. Wrap text in `:::` fences:
 
@@ -104,9 +102,24 @@ You don't need to write a whole chapter to help.
 | `warning` | Common mistakes, gotchas |
 | `danger` | Data loss, irreversible steps, consent, security |
 
+### The Key points box
+
+Every chapter page opens with one **Key points** box, placed right after its introduction paragraph. It gives a reader on a phone the page's main takeaways before they scroll:
+
+```markdown
+:::tip[Key points]
+
+- Three to five bullets, each one line.
+- Each states one main takeaway of the page.
+
+:::
+```
+
+Use only one per page. A chapter's landing page gets one when it gives guidance of its own. Templates, the glossary, the references, case studies, section overview pages and landing pages that only list a chapter's pages do not need one.
+
 ### Other things that make a page nicer
 
-- **Code blocks**: always set the language (such as **python**, **java**) so it gets highlighted, and add a title if helpful:
+- **Code blocks**: always set the language (such as **python** or **bash**) so it gets highlighted, and add a title if helpful. This matters most in technical chapters, such as those on data cleaning or visualisation:
 
   ````markdown
   ```python title="train.py"
@@ -114,7 +127,6 @@ You don't need to write a whole chapter to help.
   ```
   ````
 
-This is important specially for chapters that talks about technical aspects such as data cleaning, visualization and so on.
 - **Images**: put them in the chapter's **`images/`** folder and always write alt text describing the figure:
 
   ```markdown
@@ -160,17 +172,16 @@ So: put the title once at the top in the **Title** style, without a chapter numb
 ### Admonitions in Word
 
 Word has no built-in admonition, so use the convention below. The simplest, most reliable way is to **type the `:::` fences as plain text**, each on its own line, in a normal (Body) paragraph, *not* styled as a heading:
+
+```text
+:::tip[Contribute]
+
+You don't need to write a whole chapter to help.
+
+:::
 ```
 
- :::tip[Contribute]
-
- You don't need to write a whole chapter to help.
-
- :::
-
-```
-
-When the document is converted, those lines survive as-is and the playbook renders them as a real colored box. Keep a blank paragraph before and after the fences, exactly as in Markdown.
+When the document is converted, those lines survive as-is and the playbook renders them as a real coloured box. Keep a blank paragraph before and after the fences, exactly as in Markdown.
 
 ### A few more Word tips
 
@@ -182,10 +193,10 @@ When the document is converted, those lines survive as-is and the playbook rende
 
 ## Preview before you submit
 
-Whichever format you write in, check how it looks before opening a pull request. The most accurate preview is the live site itself:
+Whichever format you write in, check how it looks before opening a pull request. The most accurate preview is the live site itself (see [How to Contribute](./how-to-contribute.md) for the one-time setup with Node.js 22 and Yarn):
 
 ```bash
-npm start        # opens a live preview at http://localhost:3000
+yarn start       # opens a live preview at http://localhost:3000
 ```
 
 The preview reloads as you edit, so admonitions, headings, and images appear exactly as they will once published. Read the page on a narrow window too, since most readers are on a phone.

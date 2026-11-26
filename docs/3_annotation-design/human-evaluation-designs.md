@@ -3,7 +3,7 @@ title: Human Evaluation Designs
 sidebar_position: 6
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -12,6 +12,15 @@ last_update:
 Many datasets are not labels on raw material but human judgements about outputs that already exist: which of two translations is better, how natural a synthesised voice sounds, which ASR hypothesis matches the audio, whether a chatbot's reply fits the conversation. The same judgements serve two purposes. They evaluate systems, and they become training data in their own right, as preference data for tuning a generation model. For African languages they are often the only trustworthy measure, because the automatic metrics are weakest exactly where these languages live (see [Open-ended generation](../text-generation/generation.md) and [Machine Translation](../machine-translation/index.md#evaluate-translation)).
 
 This page covers the choice of design and the controls that keep judgements honest, whatever the modality. The [Preference Data](../agri-advisory/preference-data.md) page of the agri-advisory case study is the worked example of a pairwise design from start to finish; this page generalises its method and adds what it does not cover.
+
+:::tip[Key points]
+
+- Compare outputs when you need a winner or preference data; score them when you need a level or a release check.
+- For pairwise designs, offer an explicit tie, an optional strength and short reason codes.
+- Randomise order, hide system identity, use the same inputs, seed gold items, and check each rater for position bias.
+- Match the agreement measure to the judgement (nominal, ordinal or rank), and keep every rater's judgement in the release.
+
+:::
 
 ## Compare or score?
 
@@ -101,7 +110,13 @@ Where rating proves inconsistent in the pilot, a relative design can help. RankM
 
 ## Judging responses in a dialogue
 
-For a chatbot or dialogue system, a reply can be judged only in its context. Show the conversation before the reply, read-only, before any candidate. Either show the full history for every item or, for long conversations, a fixed window of the last few turns. State which in the guideline and record it in the export, because raters who see three earlier turns and raters who see ten are judging different things. Then present the candidate replies in random order with their sources hidden, as in any comparison. The guideline should say what a good reply does here: answers the last turn, stays consistent with what was said earlier, matches the language and register the user chose (including code-switching), and avoids harm. Ask raters to judge the reply as a response to this conversation, not as a stand-alone text.
+For a chatbot or dialogue system, a reply can be judged only in its context.
+
+1. **Show the conversation first.** Display the conversation before the reply, read-only, before any candidate.
+2. **Fix how much history raters see.** Either show the full history for every item or, for long conversations, a fixed window of the last few turns. State which in the guideline and record it in the export, because raters who see three earlier turns and raters who see ten are judging different things.
+3. **Present candidates fairly.** Show the candidate replies in random order with their sources hidden, as in any comparison.
+
+The guideline should say what a good reply does here: it answers the last turn, stays consistent with what was said earlier, matches the language and register the user chose (including code-switching), and avoids harm. Ask raters to judge the reply as a response to this conversation, not as a stand-alone text.
 
 ## Controls for every design
 

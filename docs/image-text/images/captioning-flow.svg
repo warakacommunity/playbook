@@ -7,7 +7,7 @@
 
   <!-- heading -->
   <text x="30" y="48" font-size="22" font-weight="700" fill="#2B2218">Writing image captions for African languages</text>
-  <text x="30" y="72" font-size="13" fill="#8A7D6E">One image &#8594; several reference captions in the target language &#183; AfriCaption paradigm</text>
+  <text x="30" y="72" font-size="13" fill="#8A7D6E">One image &#8594; several reference captions in the target language</text>
 
   <!-- IMAGE placeholder -->
   <g>

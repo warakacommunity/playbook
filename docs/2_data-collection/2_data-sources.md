@@ -3,13 +3,23 @@ title: Data Sources
 description: A map of where raw data for African-language AI systems actually comes from, and how to weigh one source against another before choosing a collection method.
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Data Sources
 
 Learn the main categories of places raw data comes from, what each is good and bad at, and how to choose between them before committing to a collection method.
+
+:::tip[Key points]
+
+- *Where* data comes from (the source) and *how* you get it (the method) are separate decisions.
+- The open web is where most projects look first, and where African-language text most often disappoints.
+- Archives, broadcasters, communities and existing datasets often give cleaner, more relevant data.
+- Religious text covers many languages but is narrow in register, and some of it, such as JW300, is no longer safe to use.
+- Check licence, consent, register, cleaning effort and stability for every candidate source.
+
+:::
 
 ## Why "source" and "method" are different questions
 
@@ -27,7 +37,7 @@ Court records, parliamentary proceedings, census documents, ministry publication
 
 ### Community and oral sources
 
-Interviews, recorded proverbs, folktales, radio call-in shows, community meetings: sources that exist because people are talking, not because someone wrote something down. This is often the *only* viable source for languages without a strong written tradition, and it's where the playbook's core principle bites hardest: this data cannot be collected well by people outside the language community ([Nekoto et al., 2020](../references.md#nekoto-2020); [Bird, 2020](../references.md#bird-2020)). Recruiting through tools like [AfriFinder](https://afriplaybook.waraka.org/afrifinder) is built for exactly this category.
+Interviews, recorded proverbs, folktales, radio call-in shows, community meetings: sources that exist because people are talking, not because someone wrote something down. This is often the *only* viable source for languages without a strong written tradition, and it's where the playbook's core principle bites hardest: this data cannot be collected well by people outside the language community ([Nekoto et al., 2020](../references.md#nekoto-2020); [Bird, 2020](../references.md#bird-2020)). Recruit speakers and collectors through the community's own networks, such as language associations, community leaders and local radio.
 
 ### Broadcast and media archives
 
@@ -39,7 +49,7 @@ Don't discount work that's already been done. Datasets like AfriSenti for sentim
 
 ### Religious and literary texts
 
-Bible translations, hymnals, and similar texts (distributed through corpora like JW300 or the BibleNLP eBible corpus) cover an unusually large number of low-resource languages, often more than any other parallel-text source: JW300 covered over 300 languages ([Agić and Vulić, 2019](../references.md#agic-2019)) and the eBible corpus covers 833 ([Akerman et al., 2023](../references.md#ebible-2023)). They're genuinely useful, especially as a bootstrap, but come with a well-documented register problem: religious text is formal, archaic, and topically narrow, and translation models trained on JW300 and the Bible do not generalise well to domains such as news and everyday conversation ([MENYO-20k, 2021](../references.md#menyo-2021)). Treat it as a starting point, not a representative sample.
+Bible translations, hymnals, and similar texts (distributed through corpora like JW300 or the BibleNLP eBible corpus) cover an unusually large number of low-resource languages, often more than any other parallel-text source: JW300 covered over 300 languages ([Agić and Vulić, 2019](../references.md#agic-2019)) and the eBible corpus covers 833 ([Akerman et al., 2023](../references.md#ebible-2023)). They're genuinely useful, especially as a bootstrap, but come with a well-documented register problem: religious text is formal, archaic, and topically narrow, and translation models trained on JW300 and the Bible do not generalise well to domains such as news and everyday conversation ([MENYO-20k, 2021](../references.md#menyo-2021)). Treat it as a starting point, not a representative sample or the sole corpus: a model trained only on religious text is locked into one narrow, formal domain.
 
 Check the rights, too. JW300 is no longer a safe option: the copyright notice on its source website bars text and data mining, a request for permission was refused, and Masakhane stopped using it ([Cashdan, 2025](../references.md#cashdan-2025)).
 

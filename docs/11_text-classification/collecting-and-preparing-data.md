@@ -4,7 +4,7 @@ title: Collecting & Preparing Data
 sidebar_label: "Collecting & preparing data"
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -12,15 +12,30 @@ last_update:
 
 This page walks through the data stages of a text-classification project end to end: choosing **where** the data comes from, **how** to select and sample it, how to **clean and standardise** it before annotation, and how to keep **quality** under control throughout.
 
+:::tip[Key points]
+
+- Choose sources that naturally contain the phenomenon you want to label, and record their metadata.
+- Combine selection methods: keyword or location filters find rare cases, random samples keep the true distribution visible.
+- Clean, identify the language and remove duplicates before annotation and before splitting the data.
+- Keep the raw collection untouched and work on a processed copy.
+- Check class balance and data quality as well as annotation quality.
+
+:::
+
 ## Data sources
 
-Data source is the place where we get the data (text, audio, image or any of the combinations) to be annotated. The best data source depends on the task, language, domain, and cultural context. Product reviews are often useful for sentiment analysis because they contain explicit evaluative language. Social media posts are especially useful for emotion analysis and hate speech analysis because they capture spontaneous expression, disagreement, and interactional language. Forums, blogs, and comment sections can provide longer and more context-rich texts, while survey responses can be useful when researchers need cleaner data or want to target a specific population.
+The best data source depends on the task, language, domain and cultural context. Choose sources that are relevant, ethical and representative of the people whose language you are studying:
 
-**Common Data Sources**: Selecting data sources that are relevant, ethical, and representative is essential for building high-quality text classification datasets such as sentiment, emotion, and hate speech datasets. Common sources include social media platforms such as Twitter (X), Facebook, Reddit, YouTube, TikTok, Telegram, and WhatsApp, which provide rich and real-time user opinions but often contain noisy and informal language. Product review platforms such as Amazon typically offer clearer sentiment signals, while forums, blogs, and news comment sections provide diverse viewpoints and discussions. Researchers may also collect data through surveys or controlled studies, which generally produce cleaner but smaller datasets. Additionally, existing benchmark datasets can accelerate research and enable comparison with prior work, although they may not always align with the target domain, language, or cultural context.
+| Source | Best suited to | Caveat |
+|---|---|---|
+| Social media (X, Facebook, Reddit, YouTube, TikTok, Telegram, WhatsApp) | Emotion and hate speech: spontaneous, real-time expression, disagreement and interaction | Noisy, informal language; platform terms of use apply |
+| Product reviews | Sentiment: explicit evaluative language | Limited to products and services; may not transfer to other domains |
+| Forums, blogs and news comment sections | Longer, context-rich texts with diverse viewpoints | A few very active users may write much of the content; check how many distinct authors you have |
+| Surveys and controlled studies | Cleaner data from a specific target population | Smaller and more costly to collect |
 
 ![Data sources](images/data-sources.svg)
 
-:::info[Tips ]
+:::tip[Tip]
 When selecting a source, prefer data that naturally contains the phenomenon of interest. For example, if the goal is to study offensive speech, choose platforms where interpersonal conflict or public debate is common. If the goal is to study sentiment, choose sources where opinions, reviews, and evaluations are frequent.
 :::
 
@@ -32,7 +47,7 @@ Benchmark datasets are useful for comparison, but they may not reflect the targe
 
 Data can be collected through APIs, web scraping (with permission), manual collection, or surveys, while preserving useful metadata such as source, time, language, and identifiers for future analysis. Data sources should be relevant to the target domain, language, and cultural context, with careful attention to dataset quality, class balance, and representativeness. Throughout the process, researchers must also address ethical and legal requirements, including privacy, consent, and compliance with platform policies. Data samples can be collected using one of the approaches below.
 
-:::info[Tips ]
+:::tip[Tip]
 Data collection should be guided by the annotation objective and the expected label distribution. For example, if a dataset is likely to contain too few hateful texts, keyword-based filtering or distant supervision can be used to enrich the sample. If the goal is to estimate natural distribution, random sampling or stratified sampling is more appropriate.
 :::
 
@@ -53,7 +68,7 @@ print(len(selected), "candidate texts enriched for the task")
 
 ![Keyword based selection](images/keyword-based.svg)
 
-**Location-based Selection:** Is a data collection approach where texts are gathered based on the geographic location associated with users or posts. For example, when collecting social media data from X (formerly Twitter), researchers can filter posts originating from specific locations such as Ethiopia, Nigeria, or Kenya. This method is useful for studying regional language variation, local opinions, cultural expressions, or location-specific events, as it helps ensure that the collected data represents the target geographic area. Only a small share of posts carry a location, though. Sloan and Morgan (2015) cite estimates that about 0.85% of tweets are geotagged, and found statistically significant demographic differences between users who share their location and those who do not ([Sloan and Morgan, 2015](../references.md#sloan-morgan-2015)). A location filter therefore returns a small and skewed sample, so combine it with other signals such as language or user profile location.
+**Location-based Selection:** Gather texts based on the geographic location associated with users or posts. For example, when collecting social media data from X (formerly Twitter), researchers can filter posts originating from specific locations such as Ethiopia, Nigeria, or Kenya. This method is useful for studying regional language variation, local opinions, cultural expressions, or location-specific events, as it helps ensure that the collected data represents the target geographic area. Only a small share of posts carry a location, though. Sloan and Morgan (2015) cite estimates that about 0.85% of tweets are geotagged, and found statistically significant demographic differences between users who share their location and those who do not ([Sloan and Morgan, 2015](../references.md#sloan-morgan-2015)). A location filter therefore returns a small and skewed sample, so combine it with other signals such as language or user profile location.
 
 ```python
 # Location-based filtering of collected posts (place / bounding box)
@@ -69,7 +84,7 @@ print(len(geo), "geotagged posts (note: only a small share of posts are geotagge
 
 ![Location based selection](images/location-based.svg)
 
-**Distant supervision:** Is a method for automatically creating labeled training data by using existing knowledge sources instead of manual annotation. For example, for emotion classification, social media posts containing hashtags such as **#happy**, **#joy**, or **#sad** can be automatically labeled with the corresponding emotions. Mohammad (2012) built an emotion-labelled Twitter corpus this way from emotion-word hashtags and found that the hashtag labels were consistent with those of trained judges ([Mohammad, 2012](../references.md#mohammad-2012)). This approach enables the creation of large training datasets quickly and cheaply, although some automatically assigned labels may be incorrect or noisy.
+**Distant supervision:** Create labelled training data automatically from existing knowledge sources instead of manual annotation. For example, for emotion classification, social media posts containing hashtags such as **#happy**, **#joy**, or **#sad** can be automatically labeled with the corresponding emotions. Mohammad (2012) built an emotion-labelled Twitter corpus this way from emotion-word hashtags and found that the hashtag labels were consistent with those of trained judges ([Mohammad, 2012](../references.md#mohammad-2012)). This approach enables the creation of large training datasets quickly and cheaply, although some automatically assigned labels may be incorrect or noisy.
 
 ```python
 # Distant supervision: weak labels from emotion hashtags
@@ -96,9 +111,11 @@ from sklearn.model_selection import train_test_split
 # Pure random (unbiased estimate of the true distribution)
 rand = df.sample(n=2000, random_state=42)
 
-# Stratified by a known column (guarantees rare classes appear)
-strat, _ = train_test_split(df, train_size=2000,
-                          stratify=df["weak"], random_state=42)
+# Stratified by a known column (guarantees rare classes appear);
+# drop rows without a weak label first, because stratify cannot handle missing values
+labelled = df.dropna(subset=["weak"])
+strat, _ = train_test_split(labelled, train_size=2000,
+                            stratify=labelled["weak"], random_state=42)
 print(strat["weak"].value_counts(normalize=True))
 ```
 
@@ -122,47 +139,44 @@ print("Send these to annotators next:", to_label)
 
 ![Stratified sample selection](images/stratified-sampling.svg)
 
-#### Collection strategy guide
-- Use keyword/dictionary-based selection when you need to target specific phenomena such as hate-related expressions or emotion lexicons.
-- Use location-based selection when the research question involves dialect, region, or location-specific discourse.
-- Use distant supervision when you need large amounts of weakly labeled data and can tolerate some label noise.
-- Use random sampling when you want unbiased estimates of class prevalence.
-- Use active learning when annotation budget is limited and model uncertainty can help choose informative examples.
-- Use stratified sampling when you want to preserve balance across classes, sources, time periods, or demographic groups.
-Any combination of the above also works well to filter quality data.
+### Choosing a selection method
 
-#### Comparisons of data selection methods
+| Method | Use when | Cost | Label noise | Bias risk |
+|--------|----------|------|-------------|-----------|
+| Keyword / lexicon | You need specific phenomena such as hate-related expressions or emotion words | Low | n/a | High (toward the keywords) |
+| Location-based | The question involves dialect, region or location-specific discourse | Low | n/a | Medium |
+| Distant supervision | You need large amounts of weakly labelled data and can tolerate some noise | Low | High | Medium |
+| Random sampling | You want an unbiased estimate of class prevalence | Low | n/a | None |
+| Stratified sampling | You want balance across classes, sources, time periods or groups | Medium | n/a | Low |
+| Active learning | The budget is limited and model uncertainty can pick informative items | High setup | n/a | Toward the decision boundary |
 
-| Method | Cost | Label noise | Bias risk | Best for |
-|--------|------|-------------|-----------|----------|
-| Keyword / lexicon | Low | n/a | High (toward keywords) | Hate speech, rare phenomena |
-| Location-based | Low | n/a | Medium | Dialect / regional studies |
-| Distant supervision | Low | High | Medium | Large weakly-labelled emotion sets |
-| Random sampling | Low | n/a | None | Estimating true distribution |
-| Stratified | Medium | n/a | Low | Guaranteeing rare-class coverage |
-| Active learning | High setup | n/a | Toward decision boundary | Maximising labels-per-dollar |
+The methods combine well: for example, a keyword-enriched pool mixed with a random sample.
 
-:::info[Tips ]
+:::tip[Tip]
 Always store metadata such as source, timestamp, language, and collection method. This makes later analysis, error inspection, and dataset documentation much easier.
 :::
 
 ## Processing & sampling
 
-After collection, texts should be cleaned and standardized before annotation. Remove obvious noise such as HTML tags, duplicate items, extra whitespace, URLs, and non-textual tokens. Apply language identification to filter out non-target languages (for African languages, AfroLID covers 517 languages and varieties; see [Adebara et al., 2022](../references.md#afrolid-2022)), and remove exact or near duplicates to reduce annotation waste and leakage across splits. Finish this cleaning before annotation starts: if annotators will also mark spans in the text, any later change shifts the stored offsets (see [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets)).
+After collection, prepare the texts before annotation:
 
-Once the data source has been identified, several preprocessing and sampling steps are required to ensure the quality and representativeness of the dataset. First, texts should be carefully selected to reflect the diversity of the target population and minimize potential biases. For tasks such as hate speech and emotion analysis, keyword-based filtering can be useful for identifying relevant content. Data cleaning involves removing irrelevant elements such as HTML tags, URLs, special characters, and excessive whitespace using text-processing tools. Applying language identification and de-duplication helps eliminate non-target language and repeated content. The overall dataset size should be determined based on factors such as research objectives, available resources, annotation budget, human capacity, and project timelines.
+1. **Select** texts that reflect the diversity of the target population, to limit bias.
+2. **Clean** obvious noise such as HTML tags, URLs, extra whitespace and non-text tokens.
+3. **Identify the language** and filter out non-target languages, using identifiers built for African languages rather than general-purpose detectors; AfroLID covers 517 African languages and varieties ([Adebara et al., 2022](../references.md#afrolid-2022)).
+4. **Remove exact and near duplicates** before splitting into training, development and test sets, to reduce wasted annotation and leakage across splits.
+5. **Freeze the text** before annotation starts: if annotators will also mark spans, any later change shifts the stored offsets (see [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets)).
+6. **Size the dataset** to the research goal, budget, people available and timeline.
 
-:::info[Tips ]
-Keep a copy of the raw data and a separate processed version. Never overwrite the original collection, because later decisions may need to be audited or reversed.
-:::
+For the general cleaning steps, see [Data Cleaning and Preprocessing](../2_data-collection/7_data-cleaning-preprocessing.md#key-steps-in-data-cleaning). Keep the raw collection and work on a separate processed copy; never overwrite the original ([Formats, metadata, and versioning](../6_documentation/data-storage.md#formats-metadata-and-versioning)).
 
 ![Data processing pipeline](images/data-processing.svg)
 
-:::info[Tips ]
+:::tip[Tip]
 For hate speech and emotion tasks, keyword filtering can help find likely positive cases, but it should never replace careful annotation, because keywords often miss indirect, ironic, or context-dependent expressions.
 :::
 
-#### Cleaning pipeline example
+### Cleaning pipeline example
+
 ```python
 import re, hashlib, html
 
@@ -176,43 +190,19 @@ def clean(text):
 def dedup_key(text):
     return hashlib.md5(text.lower().encode()).hexdigest()
 
-df["text"]  = df["raw"].apply(clean)
-df = df.drop_duplicates(subset=df["text"].apply(dedup_key))   # dedup BEFORE splitting
+df["text"] = df["raw"].apply(clean)
+df["key"] = df["text"].apply(dedup_key)
+df = df.drop_duplicates(subset="key")   # exact duplicates; dedup BEFORE splitting
 ```
 
 ## Quality control
 
-Quality control should begin before full-scale annotation and continue throughout the process. Start with a pilot phase, then refine the guidelines, then monitor annotator performance using gold-standard items, disagreement review, and periodic feedback.
+Annotation quality control (pilot, guideline revision, main annotation, gold checks, disagreement review, adjudication and release) is covered in [Annotation: Quality control](./annotation.md#quality-control). On the data side, check two things throughout:
 
-A practical quality-control workflow is:
+- **Data cleaning:** remove duplicates, irrelevant content, spam and noisy text.
+- **Class balance:** check that the label classes are not heavily skewed (for example, far more positive than negative texts), or account for the imbalance during modelling.
 
-Pilot annotation → guideline revision → main annotation → gold checks → disagreement review → adjudication → final dataset release.
-
-Data quality control ensures that your sentiment labels are accurate, consistent, and reliable.
-
-- Clear annotation guidelines: Provide precise definitions of sentiment classes (positive, negative, neutral) with examples, including tricky cases like sarcasm, negation, and mixed opinions. This reduces confusion and inconsistency.
-- Multiple annotators & agreement: Assign each item to at least 2–3 annotators and measure how much they agree (e.g., using kappa or Krippendorff's alpha; see [Artstein and Poesio, 2008](../references.md#artstein-2008)). High agreement indicates reliable labels.
-- Gold-standard checks: Include a small set of pre-labeled (trusted) examples during annotation to evaluate annotator performance continuously.
-- Disagreement resolution: Use majority voting or expert review to finalize labels when annotators disagree. Models such as MACE can also estimate which annotators are trustworthy and the most likely correct label from redundant annotations ([Hovy et al., 2013](../references.md#hovy-2013)).
-- Data cleaning: Remove duplicates, irrelevant content, spam, and noisy text to improve overall dataset quality.
-- Class balance: Check that sentiment categories are not overly skewed (e.g., too many positives), or account for imbalance during modeling.
-- Ongoing monitoring: Track annotator behavior over time to detect inconsistency or fatigue and take corrective action.
-
-In short: combine good guidelines, multiple reviews, and continuous checks to maintain high-quality sentiment data.
-
-#### Quality-control policy
-- Use at least three annotators per item, and preferably more when feasible.
-- Include gold-standard examples to monitor accuracy over time.
-- Review items with persistent disagreement.
-- Remove annotators whose responses are random, careless, or systematically inconsistent.
-- Record adjudication decisions for transparency.
-
-Example how to make majority voting:
-```python
-from collections import Counter
-def majority_vote(labels):
-    return Counter(labels).most_common(1)[0][0]
-```
+Track annotator behaviour over time as well, to catch inconsistency or fatigue early ([Close the feedback loop](../4_data-quality/index.md#close-the-feedback-loop)).
 
 ## Further reading
 

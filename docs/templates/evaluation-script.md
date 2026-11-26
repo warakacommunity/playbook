@@ -11,13 +11,24 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-*A Python starting point that enforces the playbook's editorial policies for you: per-language reporting, per-class reporting, chrF-primary for translation, CER-primary for morphology-rich speech, and a mandatory hook for human-evaluation sampling. Fork it, plug in your metric of choice, ship the compliance for free.*
+A Python starting point that builds the playbook's evaluation positions into your results:
+
+- per-language reporting;
+- per-class reporting for classification;
+- chrF first for translation, and CER (character error rate) first for speech;
+- a hook that samples outputs for human evaluation.
+
+Fork it, plug in your metric, and the reporting rules come with it.
 
 ## Why this template exists
 
-The playbook takes strong positions on evaluation ([core principles](../1_introduction/core-principles.md)): report per-language and per-class, prefer character-level metrics for morphology-rich languages, never let an automatic score stand alone for generative output. It is easier to say those things than to enforce them across every project.
+The playbook takes clear positions on evaluation (see [What this playbook is not](../1_introduction/scope-and-strategy.md#what-this-playbook-is-not)):
 
-This template makes the compliance the default. The output has per-language and per-class breakdowns by construction; the primary metric for translation is chrF; the primary metric for speech is CER; a human-evaluation sampling hook is scaffolded in. Fork it, adapt the task-specific metric plug-in point, and any project using it inherits the policy without needing to remember it.
+- report scores per language and per class, not as one average;
+- prefer character-level metrics for morphology-rich languages;
+- never let an automatic score stand alone for generated output.
+
+These rules are easier to state than to follow on every project. This template makes them the default. Its output has per-language and per-class breakdowns by construction, chrF is the first translation metric, CER is the first speech metric, and a human-evaluation sampling hook is already in place. Adapt the task-specific metric functions, and your project follows the rules without having to remember them.
 
 ## The skeleton
 
@@ -149,7 +160,7 @@ def eval_translation(records: list[dict[str, Any]]) -> dict[str, Any]:
 
     out: dict[str, Any] = {"per_language": {}}
     for lang, d in sorted(by_lang.items()):
-        # chrF is primary: playbook editorial policy (see core-principles).
+        # chrF is primary: playbook editorial policy (see scope-and-strategy).
         chrf = sacrebleu.corpus_chrf(d["hyps"], [d["refs"]])
         # BLEU is secondary, kept for comparison with prior work only.
         bleu = sacrebleu.corpus_bleu(d["hyps"], [d["refs"]])
@@ -270,7 +281,7 @@ if __name__ == "__main__":
 
 - **It does not run the model.** The script assumes you have a JSONL of predictions and references already; the training loop and inference are project-specific.
 - **It does not enforce evaluation on the whole test set.** Sampling is legitimate for compute-poor iteration (see the [compute-poor chapter's evaluation section](../compute-poor/index.md#evaluation-under-a-compute-budget)); the harness reports what you feed it.
-- **It does not replace task-specific tooling.** For NER, use `seqeval`; for QA, use the AfriQA companion repo scoring scripts; for TTS, use human MOS collection tooling. Plug the task-specific metric into the `TASKS` dictionary; keep the per-language and per-class scaffolding.
+- **It does not replace task-specific tooling.** For NER, use `seqeval`. For QA, use the scoring code released with the benchmark you report on, such as the AfriQA repository. For TTS, collect human MOS (mean opinion score) ratings. Plug the task-specific metric into the `TASKS` dictionary and keep the per-language and per-class scaffolding.
 - **It does not enforce reproducibility.** Every project that ships evaluation numbers should also commit the exact predictions JSONL, the metric library versions, and the random seed. Add those as commit artifacts alongside your evaluation script.
 
 ## Extending the template
@@ -295,7 +306,7 @@ The pattern for adding a new task is:
 - [jiwer documentation](https://github.com/jitsi/jiwer): CER and WER implementations.
 - [scikit-learn classification report](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html): per-class F1 with support.
 - [seqeval](https://github.com/chakki-works/seqeval): the standard NER-specific evaluation library, useful reference for how sequence tagging is scored.
-- [AfriQA companion repo](https://github.com/masakhane-io/afriqa): the QA-specific scoring reference; alias handling and multi-answer scoring are subtle enough to defer to this rather than reimplement.
+- [AfriQA repository](https://github.com/masakhane-io/afriqa): the data and code released with the AfriQA benchmark. Answer matching for QA (aliases, several correct answers) is subtle, so reuse the benchmark's own scoring rather than writing your own.
 
 ---
 

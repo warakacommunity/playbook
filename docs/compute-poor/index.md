@@ -10,22 +10,34 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-Most published NLP work assumes a compute budget that most African research teams do not have. A single fine-tune of a 7B model with the recipes in the flagship papers can burn thousands of dollars of GPU time; those papers are not written for someone whose whole project budget is a Colab Pro subscription. This chapter is the practical guide for teams whose compute constraint is real: what to use, what to avoid, and how to make the small budget count.
+Most published NLP work assumes a compute budget that most African research teams do not have. A single fine-tune of a 7B model with the recipes in the flagship papers can burn thousands of dollars of GPU time. Those papers are not written for someone whose whole project budget is a Colab Pro subscription.
 
-The chapter does not tell you to want less. It tells you how to get more out of what you have.
+This chapter is the practical guide for teams whose compute constraint is real: what to use, what to avoid, and how to make a small budget count. It does not tell you to want less. It tells you how to get more out of what you have.
+
+:::tip[Key points]
+
+- Never train from scratch: fine-tune a strong existing checkpoint.
+- Use LoRA by default, and QLoRA when GPU memory is the limit.
+- Quantise for serving (INT8 first), and always measure the quality drop on your own language.
+- APIs are fine for prototypes, but check data sovereignty, terms of use and reproducibility.
+- Save compute on evaluation by caching and sampling, never by skipping human evaluation.
+
+:::
 
 ## What "compute-poor" actually means in practice
 
 Four resource profiles cover most African-language NLP work. Every technique in this chapter is discussed with the profile it fits in mind.
 
-The GPU-hour figures below are the authors' rough estimates for planning, not measured averages, and platform quotas and prices change often.
+The GPU-hour figures below are the authors' rough estimates for planning, not measured averages. Platform quotas and prices change often.
 
-- **Grad student / individual researcher.** Personal laptop, free Colab, occasional Kaggle notebook. Effective GPU-hours per week: 10–30.
-- **Community research team.** Shared Colab Pro (a low-cost monthly subscription; check current pricing), Kaggle accounts (each with a free weekly GPU quota, around 30 hours at the time of writing), occasional access to a shared institutional GPU. Effective GPU-hours per week: 40–150.
-- **Small NGO or early-stage startup.** ~\$50–500/month cloud budget on GCP, AWS, or Runpod; occasional grant credits (Google TRC, Microsoft AI for Good). Effective GPU-hours per month: 200–1,500.
-- **University lab.** Shared cluster with a small pool of A100 or H100 GPUs; competition for time is the real constraint, not the dollar cost. Effective GPU-hours: highly variable.
+| Profile | Typical resources | Effective GPU-hours |
+|---|---|---|
+| **1. Grad student / individual researcher** | Personal laptop, free Colab, occasional Kaggle notebook | 10–30 per week |
+| **2. Community research team** | Shared Colab Pro (a low-cost monthly subscription; check current pricing), Kaggle accounts (each with a free weekly GPU quota, around 30 hours at the time of writing), occasional access to a shared institutional GPU | 40–150 per week |
+| **3. Small NGO or early-stage startup** | About \$50–500 per month of cloud budget on GCP, AWS or Runpod; occasional grant credits (Google TRC, Microsoft AI for Good) | 200–1,500 per month |
+| **4. University lab** | Shared cluster with a small pool of A100 or H100 GPUs; competition for time is the real constraint, not the dollar cost | Highly variable |
 
-Recognise which profile you are in. Techniques that make sense at profile 4 are wasteful at profile 1, and vice versa.
+Recognise which profile you are in. Techniques that make sense at profile 4 are wasteful at profile 1, and the reverse.
 
 ## Method selection: the shortest path
 
@@ -56,14 +68,14 @@ Practical guidance:
 
 ## Quantisation: the deployment lever
 
-For inference-time compute reduction:
+Quantisation stores a model's weights with fewer bits, so the model takes less memory and often runs faster. For inference-time compute reduction:
 
 - **INT8 quantisation** with libraries like [bitsandbytes](https://github.com/TimDettmers/bitsandbytes) roughly halves weight memory, and the LLM.int8() method behind it was shown to run models up to 175B parameters without loss of quality on the authors' benchmarks ([Dettmers et al., 2022](../references.md#dettmers-2022)). Speed gains vary with hardware and model size, so measure throughput rather than assume it. Default to INT8 for serving unless you have measured a quality problem.
 - **INT4 quantisation** is more aggressive: weight memory is about a quarter of 16-bit. Quality loss varies by language; a study of multilingual LLMs found non-Latin-script languages hit hardest, and found that automatic metrics understated the damage that human raters noticed ([Marchisio et al., 2024](../references.md#marchisio-2024)). Always measure the drop on your target language, with some human checking, before deploying.
-- **Quantisation-aware training** (QAT) preserves quality better than post-training quantisation for aggressive levels but requires more compute. Rarely worth it at profiles 1–2; sometimes worth it at 3–4.
-- **On-device deployment** (see [Deployment for African contexts](../deployment/offline.md)) essentially requires quantised inference. Plan for it from the training stage. A model trained without quantisation in mind may fail its accuracy target after quantisation and require retraining.
+- **Quantisation-aware training** (QAT) simulates quantisation during training so that accuracy survives it ([Jacob et al., 2017](../references.md#jacob-2017)). It preserves quality better than post-training quantisation at aggressive levels, but it requires more compute. Rarely worth it at profiles 1–2; sometimes worth it at 3–4.
+- **On-device deployment** (see [Edge devices and cheap-hardware inference](../deployment/edge-devices.md)) essentially requires quantised inference. Plan for it from the training stage. A model trained without quantisation in mind may fail its accuracy target after quantisation and need retraining.
 
-For ASR specifically, [whisper.cpp](https://github.com/ggerganov/whisper.cpp) and MLC-based on-device runtimes are the reference implementations for quantised deployment on constrained hardware.
+For device-specific choices (dynamic versus static INT8, mixed precision, which phone tiers can take what), see [Quantisation revisited: the deployment-tuned view](../deployment/edge-devices.md#quantisation-revisited-the-deployment-tuned-view). For ASR specifically, [whisper.cpp](https://github.com/ggerganov/whisper.cpp) and MLC-based on-device runtimes are widely used for quantised deployment on constrained hardware.
 
 ## Distillation: when it earns its cost
 
@@ -77,11 +89,12 @@ Distillation is training a smaller model to reproduce a larger model's outputs (
 
 For prototyping, small-scale evaluation, or targets where the community explicitly consents to API-mediated processing:
 
-- **[Cohere](https://cohere.com/)**: strong multilingual coverage including some African languages; competitive pricing for embedding and classification tasks.
-- **[OpenAI](https://platform.openai.com/), [Anthropic](https://www.anthropic.com/api), [Google (Gemini)](https://ai.google.dev/), [Mistral](https://mistral.ai/)**: general-purpose LLMs with varying African-language coverage. Measure per language; the published multilingual claims are marketing-broad, not accuracy-guaranteed.
-- **[Hugging Face Inference API](https://huggingface.co/inference-api)** and Inference Endpoints: access community-hosted models without provisioning infrastructure. Excellent for one-off runs, expensive at production scale.
+- **Commercial LLM APIs** such as [Cohere](https://cohere.com/), [OpenAI](https://platform.openai.com/), [Anthropic](https://www.anthropic.com/api), [Google (Gemini)](https://ai.google.dev/) and [Mistral](https://mistral.ai/): general-purpose and embedding models with varying African-language coverage. Measure per language; published multilingual claims are broad and do not guarantee accuracy on your language.
+- **[Hugging Face](https://huggingface.co/docs/inference-providers/) hosted inference** (serverless inference and Inference Endpoints): run community-hosted models without provisioning infrastructure. Good for one-off runs, expensive at production scale.
 
-Cost is measured in tokens or characters, not GPU-hours. As a rough guide only, a single evaluation pass of ten thousand short test examples with a mid-tier commercial API has tended to cost in the range of \$5–\$50, depending on model and prompt length; check the provider's current per-token prices. The same content can take many more tokens, and so cost more, in some languages than in English ([Ahia et al., 2023](../references.md#ahia-2023)). Compare this against the amortised cost of provisioning your own GPU before deciding.
+Cost is measured in tokens or characters, not GPU-hours. As a rough guide only, a single evaluation pass of ten thousand short test examples with a mid-tier commercial API has tended to cost in the range of \$5–\$50, depending on model and prompt length. Check the provider's current per-token prices.
+
+The same content can take many more tokens, and so cost more, in some languages than in English ([Ahia et al., 2023](../references.md#ahia-2023)). Compare this against the amortised cost of provisioning your own GPU before deciding.
 
 Warnings that always apply:
 
@@ -104,13 +117,15 @@ Quotas, prices and programmes on these platforms change often; treat the details
 
 ## Realistic budgets
 
-Rough end-to-end budgets, all figures order-of-magnitude. These are the authors' planning estimates, not measured benchmarks; record what your own runs cost and share it (see the note at the end of this page).
+Rough end-to-end budgets, all figures order-of-magnitude. These are the authors' planning estimates, not measured benchmarks. Record what your own runs cost and share it (see the note at the end of this page).
 
-- **A LoRA fine-tune of AfroXLMR-large on a MasakhaNER-2 language.** Under 24 GPU-hours on a T4 or better. Feasible on Colab free tier if the run is chunked into checkpointed segments. Total cost: \$0–\$10.
-- **A LoRA fine-tune of NLLB-200-distilled on LAFAND-MT for one language pair.** 24–72 GPU-hours on a V100 or better. Colab Pro or Kaggle. Total cost: \$10–\$50.
-- **A QLoRA fine-tune of a 7B multilingual base model.** 100–300 GPU-hours; needs a solid Colab Pro+ or a modest cloud budget. Total cost: \$50–\$300.
-- **Fine-tuning an MMS adapter on 20 hours of speech.** 40–100 GPU-hours; Kaggle + Colab combined can do it, or ~\$40–\$120 in cloud spend.
-- **Full-scale pretraining of a new African-language base model** (rare; do not do this without a compelling reason). 10,000+ GPU-hours; explicitly out of scope for profiles 1–2, sits at the edge of what a well-credited profile-3 team can attempt.
+| Job | GPU-hours | Where it runs | Total cost |
+|---|---|---|---|
+| LoRA fine-tune of AfroXLMR-large on one MasakhaNER 2 language | Under 24, on a T4 or better | Colab free tier, if the run is split into checkpointed segments | \$0–\$10 |
+| LoRA fine-tune of NLLB-200-distilled on LAFAND-MT, one language pair | 24–72, on a V100 or better | Colab Pro or Kaggle | \$10–\$50 |
+| QLoRA fine-tune of a 7B multilingual base model | 100–300 | Colab Pro+ or a modest cloud budget | \$50–\$300 |
+| MMS adapter fine-tune on 20 hours of speech | 40–100 | Kaggle and Colab combined, or cloud | About \$40–\$120 in cloud spend |
+| Full pretraining of a new African-language base model (rare; do not do this without a compelling reason) | 10,000+ | Out of scope for profiles 1–2; at the edge of what a well-credited profile-3 team can attempt | Not a budget item for most teams |
 
 If the budgets above look too tight for what you want to do, that is often a signal that the [cross-language transfer](../cross-language-transfer/index.md) approach or an API-based prototype is a better fit than a full training run.
 
@@ -146,6 +161,8 @@ Evaluation costs GPU-hours too, and evaluation quality is where compute-poor wor
 - [Google TPU Research Cloud programme](https://sites.research.google/trc/about/): free TPU time for accepted research projects.
 - [Hugging Face community GPU grants](https://huggingface.co/docs/hub/spaces-gpus#community-gpu-grants): grants of GPU hardware for Spaces built by the community.
 
----
+:::note[Contributor's note]
 
-**Contributor's note.** If you have shipped a fine-tuned model on a genuinely compute-constrained setup (Colab Pro, Kaggle, community GPU, small cloud budget), the most useful thing you can contribute here is a per-project note describing what you used, what it cost, what worked, and what did not. General guidance is only as good as the concrete projects it is drawn from. Consider a [Case Studies](../case-studies/index.md) entry.
+If you have shipped a fine-tuned model on a genuinely compute-constrained setup (Colab Pro, Kaggle, community GPU, small cloud budget), the most useful thing you can contribute here is a per-project note describing what you used, what it cost, what worked, and what did not. General guidance is only as good as the concrete projects it is drawn from. Consider a [Case Studies](../case-studies/index.md) entry.
+
+:::

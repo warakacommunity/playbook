@@ -3,7 +3,7 @@ sidebar_position: 99
 sidebar_label: References
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -70,9 +70,7 @@ African voice datasets of its kind. [up.ac.za/afridsai](https://www.up.ac.za/afr
 
 ### AfriCaption (2025) {#africaption-2025}
 
-*AfriCaption: Establishing a New Paradigm for Image Captioning in African Languages.* arXiv:2510.17405.
-Native (non-translated) image captions across linguistically diverse African languages (Igbo, Hausa,
-Yorùbá, Ewe, Luganda, Kinyarwanda, and more). [arxiv.org/abs/2510.17405](https://arxiv.org/abs/2510.17405)
+Oduwole, M., Mireku, P., Adebanjo, F., Olajide, O., Aliyu, M. A., & Novikova, J. *AfriCaption: Establishing a New Paradigm for Image Captioning in African Languages.* arXiv:2510.17405. Flickr8k captions machine-translated (NLLB-200, M2M-100 and Azure Translate) into 20 African languages, including Hausa, Igbo, Yorùbá, Ewe, Luganda and Kinyarwanda, filtered by back-translation similarity, with native-speaker adequacy ratings for Yorùbá, Igbo, Hausa and Ewe and a 0.5B-parameter SigLIP + NLLB-200 captioning model. [arxiv.org/abs/2510.17405](https://arxiv.org/abs/2510.17405)
 
 ### AfriDoc-MT (2025) {#afridocmt-2025}
 
@@ -372,15 +370,15 @@ Cheng, B., Misra, I., Schwing, A. G., Kirillov, A., & Girdhar, R. *Masked-attent
 
 *Cloud Optimized GeoTIFF.* cogeo.org. Describes the COG as a regular GeoTIFF organised so that clients can fetch only the parts they need with HTTP range requests; the format is published as an OGC standard (OGC 21-026). [cogeo.org](https://www.cogeo.org/)
 
-### COCO Consortium (n.d.) {#coco-format}
+### COCO Consortium (n.d.-a) {#coco-format}
 
 *COCO data format.* Common Objects in Context (COCO) dataset documentation. Defines the JSON layout of images, annotations, and categories; object boxes are `[x, y, width, height]` measured from the top-left image corner, and segmentation is stored as polygons or run-length encoding. [cocodataset.org/#format-data](https://cocodataset.org/#format-data) (source: [github.com/cocodataset/cocodataset.github.io](https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/dataset/format-data.htm))
 
-### COCO Consortium (n.d.) {#coco-eval}
+### COCO Consortium (n.d.-b) {#coco-eval}
 
 *COCO detection evaluation.* Common Objects in Context (COCO) dataset documentation. Defines the metrics used to score detection on COCO, including separate AP and AR for small (area under 32 × 32 pixels), medium and large (over 96 × 96 pixels) objects. [cocodataset.org/#detection-eval](https://cocodataset.org/#detection-eval) (source: [github.com/cocodataset/cocodataset.github.io](https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/dataset/detection-eval.htm))
 
-### COCO Consortium (n.d.) {#coco-keypoints-eval}
+### COCO Consortium (n.d.-c) {#coco-keypoints-eval}
 
 *Keypoint evaluation.* Common Objects in Context (COCO) dataset documentation. Defines Object Keypoint Similarity (OKS), with per-keypoint constants estimated from 5,000 redundantly annotated validation images (κ = 2σ), averaged over labelled keypoints (v greater than 0) and AP averaged over OKS 0.50 to 0.95; notes that small objects (area under 32²) and crowds carry no keypoints, and names left/right confusion as an error source. [cocodataset.org/#keypoints-eval](https://cocodataset.org/#keypoints-eval) (source: [github.com/cocodataset/cocodataset.github.io](https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/dataset/keypoints-eval.htm))
 
@@ -441,6 +439,10 @@ Davidson, T., Bhattacharya, D., & Weber, I. *Racial Bias in Hate Speech and Abus
 *Deep Learning Indaba and IndabaX.* The annual gathering of Africa's machine-learning community, founded
 2017, with a mission for Africans to be owners and shapers of AI. Its local IndabaX events grew from 13
 in 2018 to 47 countries by 2024–2025, aiming for every African country by 2027. [deeplearningindaba.com](https://deeplearningindaba.com/)
+
+### Deep Learning Indaba (2026) {#indaba-datasets-2026}
+
+*African Datasets: Deep Learning Indaba 2026.* A call for datasets that come from, relate to or focus on Africa (text, audio, video, multimodal, geospatial and medical imaging data, among others), in domains including language and culture, health, agriculture, environment, education and infrastructure. Applications were open from 20 February to 20 March 2026. [deeplearningindaba.com/2026/african-datasets](https://deeplearningindaba.com/2026/african-datasets/)
 
 ### Deitke, M., et al. (2024) {#deitke-2024-molmo}
 
@@ -700,6 +702,10 @@ Somali, Swahili, Tigrinya, Yorùbá, and more). [aclanthology.org/2021.findings-
 ACL 2023. 6,022 English question-answer pairs over 1,555 Visual Genome images, human-translated to Hausa.
 [aclanthology.org/2023.findings-acl.646](https://aclanthology.org/2023.findings-acl.646/)
 
+### Hessel, J., et al. (2021) {#hessel-2021-clipscore}
+
+Hessel, J., Holtzman, A., Forbes, M., Le Bras, R., & Choi, Y. *CLIPScore: A Reference-free Evaluation Metric for Image Captioning.* Proceedings of EMNLP 2021. [arxiv.org/abs/2104.08718](https://arxiv.org/abs/2104.08718)
+
 ### Hinton, G., Vinyals, O., & Dean, J. (2015) {#hinton-2015}
 
 Hinton, G., Vinyals, O., & Dean, J. *Distilling the Knowledge in a Neural Network.* NIPS 2014 Deep Learning Workshop; arXiv:1503.02531. Introduces knowledge distillation: training a smaller model to reproduce the outputs of a larger model or ensemble. [arxiv.org/abs/1503.02531](https://arxiv.org/abs/1503.02531)
@@ -730,10 +736,6 @@ conditions. Released under CC BY-SA 3.0, so it cannot be relicensed into a CC BY
 ### Hukkelås, H., & Lindseth, F. (2023) {#hukkelas-2023}
 
 *DeepPrivacy2: Towards Realistic Full-Body Anonymization.* Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV 2023). Extends GAN-based anonymisation from faces to whole human figures. [arxiv.org/abs/2211.09454](https://arxiv.org/abs/2211.09454)
-
-### HumanSignal (n.d.) {#labelstudio-choice-tag}
-
-*Choice tag.* Label Studio documentation. Documents the `value` and optional `alias` parameters of a choice; when an alias is set it replaces the choice value in the annotation results and is not shown in the interface. [labelstud.io/tags/choice](https://labelstud.io/tags/choice)
 
 ### Ignat, O., et al. (2022) {#ignat-2022}
 
@@ -955,16 +957,16 @@ Longpre, S., Mahari, R., Lee, A., Lund, C., et al. *Consent in Crisis: The Rapid
 
 Lowell, D., Lipton, Z. C., & Wallace, B. C. *Practical Obstacles to Deploying Active Learning.* Proceedings of EMNLP-IJCNLP 2019, Hong Kong, China, 21–30. Finds that active-learning gains are inconsistent across models and tasks, and that actively acquired data is coupled to the model that selected it: successor models trained on it do not reliably beat models trained on random samples. [aclanthology.org/D19-1003](https://aclanthology.org/D19-1003/) (DOI: [10.18653/v1/D19-1003](https://doi.org/10.18653/v1/D19-1003))
 
-### Luiten, J., et al. (2020) {#luiten-2020}
-
-Luiten, J., Osep, A., Dendorfer, P., Torr, P., Geiger, A., Leal-Taixé, L., & Leibe, B. *HOTA: A Higher Order Metric for Evaluating Multi-Object Tracking.* International Journal of Computer Vision, 129(2), 548–578 (published online 2020, in print 2021). HOTA balances detection, association and localisation, with sub-metrics for analysing those error sources separately. [doi.org/10.1007/s11263-020-01375-2](https://doi.org/10.1007/s11263-020-01375-2) (arXiv: [2009.07736](https://arxiv.org/abs/2009.07736))
-
 ### Luccioni, A. S., et al. (2022) {#luccioni-2022}
 
 *A Framework for Deprecating Datasets: Standardizing Documentation, Identification, and Communication.*
 Proceedings of FAccT 2022, 199–212. Studies how machine-learning datasets are withdrawn, documents cases
 where deprecated datasets kept circulating without their documentation, and proposes a deprecation
 framework covering risk assessment, notice, and persistent identifiers. [doi.org/10.1145/3531146.3533086](https://dl.acm.org/doi/10.1145/3531146.3533086)
+
+### Luiten, J., et al. (2020) {#luiten-2020}
+
+Luiten, J., Osep, A., Dendorfer, P., Torr, P., Geiger, A., Leal-Taixé, L., & Leibe, B. *HOTA: A Higher Order Metric for Evaluating Multi-Object Tracking.* International Journal of Computer Vision, 129(2), 548–578 (published online 2020, in print 2021). HOTA balances detection, association and localisation, with sub-metrics for analysing those error sources separately. [doi.org/10.1007/s11263-020-01375-2](https://doi.org/10.1007/s11263-020-01375-2) (arXiv: [2009.07736](https://arxiv.org/abs/2009.07736))
 
 ### Maier-Hein, L., et al. (2024) {#maier-hein-2024}
 
@@ -1072,6 +1074,10 @@ Meraner, A., Ebel, P., Zhu, X. X., & Schmitt, M. *Cloud removal in Sentinel-2 im
 ### Meta AI (2022) {#meta-nllb-2022}
 
 Meta AI. *200 languages within a single AI model: A breakthrough in high-quality machine translation.* Blog post announcing NLLB-200, July 2022. States that NLLB-200 supports 55 African languages. [ai.meta.com/blog/nllb-200-high-quality-machine-translation](https://ai.meta.com/blog/nllb-200-high-quality-machine-translation/)
+
+### Meta AI (2023) {#meta-mms-coverage-2023}
+
+Meta AI. *MMS: Massively Multilingual Speech, language coverage table.* Lists, for each ISO 639-3 code, whether the language has MMS speech recognition (ASR), text-to-speech and language identification support. Checked 26 November 2026: ASR is listed for Dholuo (luo), Acholi (ach), Alur (alz), Lango (laj), Nuer (nus), Shilluk (shk), Ateso (teo) and two Dinka varieties (dik, dip); Maasai (mas), Anuak (anu) and three other Dinka varieties (dib, dks, diw) have language identification only. [dl.fbaipublicfiles.com/mms/misc/language_coverage_mms.html](https://dl.fbaipublicfiles.com/mms/misc/language_coverage_mms.html)
 
 ### Meta (n.d.-a) {#meta-whatsapp-pricing}
 
@@ -1202,6 +1208,10 @@ by the Makerere AI Lab for a Kaggle competition. The competition data is limited
 
 Nakov, P., Ritter, A., Rosenthal, S., Sebastiani, F., & Stoyanov, V. *SemEval-2016 Task 4: Sentiment Analysis in Twitter.* Proceedings of the 10th International Workshop on Semantic Evaluation (SemEval-2016), 1–18. Added a five-point ordinal version of tweet sentiment classification to the earlier positive/negative/neutral subtasks. [aclanthology.org/S16-1001](https://aclanthology.org/S16-1001/)
 
+### Naseem, U., et al. (2025) {#naseem-2025}
+
+Naseem, U., Geislinger, R., Ren, J., Kohail, S., Garrido Veliz, R. A., et al. *POLAR: A Benchmark for Multilingual, Multicultural, and Multi-Event Online Polarization.* arXiv:2505.20624 (2025; v3, 2026); published in Findings of the Association for Computational Linguistics: ACL 2026, 28699–28720. More than 110,000 instances of online polarization in 22 languages, including Amharic, Hausa and Swahili. [arxiv.org/abs/2505.20624](https://arxiv.org/abs/2505.20624); [aclanthology.org/2026.findings-acl.1433](https://aclanthology.org/2026.findings-acl.1433/)
+
 ### Nekoto, W., et al. (2020) {#nekoto-2020}
 
 *Participatory Research for Low-resourced Machine Translation: A Case Study in African Languages.*
@@ -1227,6 +1237,10 @@ Niyongabo, R. A., Hong, Q., Kreutzer, J., & Huang, L. *KINNEWS and KIRNEWS: Benc
 *No Language Left Behind: Scaling Human-Centered Machine Translation* (with the FLORES-200 benchmark).
 Meta AI; arXiv:2207.04672. Translation and evaluation across 200 languages, including many African ones.
 [arxiv.org/abs/2207.04672](https://arxiv.org/abs/2207.04672)
+
+### Northcutt, C. G., Athalye, A., & Mueller, J. (2021) {#northcutt-2021}
+
+*Pervasive Label Errors in Test Sets Destabilize Machine Learning Benchmarks.* NeurIPS 2021 Datasets and Benchmarks Track. Estimates test-set label errors in ten widely used benchmarks, from 0.15% (MNIST) to 10.12% (QuickDraw), an average of at least 3.3%. [arxiv.org/abs/2103.14749](https://arxiv.org/abs/2103.14749)
 
 ### Novikova, J., Dušek, O., & Rieser, V. (2018) {#novikova-2018}
 
@@ -1377,7 +1391,7 @@ Pont-Tuset, J., Uijlings, J., Changpinyo, S., Soricut, R., & Ferrari, V. *Connec
 
 ### Pontiki, M., et al. (2014) {#pontiki-2014}
 
-Pontiki, M., Galanis, D., Pavlopoulos, J., Papageorgiou, H., Androutsopoulos, I., & Manandhar, S. *SemEval-2014 Task 4: Aspect Based Sentiment Analysis.* Proceedings of the 8th International Workshop on Semantic Evaluation (SemEval 2014), 27–35. Restaurant and laptop reviews annotated with aspect terms, aspect categories and a polarity for each (positive, negative, neutral or conflict). [aclanthology.org/S14-2004](https://aclanthology.org/S14-2004/)
+Pontiki, M., Galanis, D., Pavlopoulos, J., Papageorgiou, H., Androutsopoulos, I., & Manandhar, S. *SemEval-2014 Task 4: Aspect Based Sentiment Analysis.* Proceedings of the 8th International Workshop on Semantic Evaluation (SemEval 2014), 27–35. Restaurant and laptop reviews annotated with aspect terms and their polarity (positive, negative, neutral or conflict); aspect categories and their polarity were annotated for the restaurant reviews only. [aclanthology.org/S14-2004](https://aclanthology.org/S14-2004/)
 
 ### Popović, M. (2015) {#popovic-2015}
 
@@ -1561,14 +1575,15 @@ Yazdani, S., Hamidullah, Y., España-Bonet, C., & van Genabith, J. *Seeing, Sign
 
 Ahene, et al. A Ghanaian Sign Language dataset for healthcare: 9,879 videos of 4,031 sentences from 5 signers, about 60% of the source sentences generated with an LLM. Scientific Reports, 2026. [doi.org/10.1038/s41598-026-43478-9](https://doi.org/10.1038/s41598-026-43478-9)
 
-### Sikasote, C., et al. (2023) {#bigc-2023}
+### Sikasote, C., et al. (2023a) {#bigc-2023}
 
 *BIG-C: a Multimodal Multi-Purpose Dataset for Bemba.* Proceedings of ACL 2023. Over 180 hours of image-grounded Bemba conversational speech with transcripts and English translations, supporting ASR, MT and speech translation. [aclanthology.org/2023.acl-long.115](https://aclanthology.org/2023.acl-long.115)
 
-### Sikasote, C., et al. (2023) {#zambezi-2023}
+### Sikasote, C., et al. (2023b) {#zambezi-2023}
 
-*Zambezi Voice: A Multilingual Speech Corpus for Zambian Languages.* Interspeech 2023. 79 hours labelled
-across Bemba, Nyanja, Tonga, and Lozi, plus 525 hours of unlabelled radio audio. [arxiv.org/abs/2306.04428](https://arxiv.org/abs/2306.04428)
+*Zambezi Voice: A Multilingual Speech Corpus for Zambian Languages.* Interspeech 2023. Over 80 hours of
+labelled read speech in Bemba, Nyanja, Tonga and Lozi, plus 160 hours of unlabelled radio audio (news and
+talk shows). [arxiv.org/abs/2306.04428](https://arxiv.org/abs/2306.04428)
 
 ### SIL International (n.d.) {#iso-639-3}
 
@@ -1725,11 +1740,11 @@ Tseng, G., Zvonkov, I., Nakalembe, C., & Kerner, H. *CropHarvest: A global datas
 under CC0 1.0.
 [doi.org/10.7910/DVN/T4RB0B](https://doi.org/10.7910/DVN/T4RB0B)
 
-### Ultralytics (n.d.) {#ultralytics-detect-format}
+### Ultralytics (n.d.-a) {#ultralytics-detect-format}
 
 *Object Detection Datasets Overview.* Ultralytics documentation. Specifies the YOLO label format: one text file per image, one row per object as `class x_center y_center width height`, with zero-indexed classes and coordinates normalised to 0–1 by image size. [docs.ultralytics.com/datasets/detect](https://docs.ultralytics.com/datasets/detect/)
 
-### Ultralytics (n.d.) {#ultralytics-segment-format}
+### Ultralytics (n.d.-b) {#ultralytics-segment-format}
 
 *Instance Segmentation Datasets.* Ultralytics documentation. Specifies the YOLO segmentation label format: one text file per image, one row per object as the class index followed by polygon `x y` pairs normalised to 0–1, with at least three points per polygon. [docs.ultralytics.com/datasets/segment](https://docs.ultralytics.com/datasets/segment/)
 
@@ -1904,6 +1919,10 @@ Yu, H., Xu, Y., Zhang, J., Zhao, W., Guan, Z., & Tao, D. *AP-10K: A Benchmark fo
 ### Zech, J. R., et al. (2018) {#zech-2018}
 
 Zech, J. R., Badgeley, M. A., Liu, M., Costa, A. B., Titano, J. J., & Oermann, E. K. *Variable generalization performance of a deep learning model to detect pneumonia in chest radiographs: A cross-sectional study.* PLOS Medicine, 15(11), e1002683. CNNs identified which hospital system a chest X-ray came from with near-perfect accuracy, letting models exploit site-specific confounds rather than pathology. [doi.org/10.1371/journal.pmed.1002683](https://doi.org/10.1371/journal.pmed.1002683)
+
+### Zhang, T., et al. (2020) {#zhang-2020-bertscore}
+
+Zhang, T., Kishore, V., Wu, F., Weinberger, K. Q., & Artzi, Y. *BERTScore: Evaluating Text Generation with BERT.* ICLR 2020. [arxiv.org/abs/1904.09675](https://arxiv.org/abs/1904.09675)
 
 ### Zhong, X., et al. (2019) {#zhong-2019-publaynet}
 

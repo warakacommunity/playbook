@@ -11,7 +11,23 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-Code-switching is not an edge case in African-language deployment; it is an everyday interaction pattern. It is well documented in African data: Nigerian tweets in Hausa, Igbo, Nigerian Pidgin and Yorùbá include a significant fraction of code-mixed text ([Muhammad et al., 2022](../references.md#naijasenti-2022)), South African soap-opera speech mixes English with isiZulu, isiXhosa, Setswana and Sesotho ([van der Westhuizen and Niesler, 2018](../references.md#westhuizen-2018)), and Swahili-English switching has its own language-identification work ([Piergallini et al., 2016](../references.md#piergallini-2016)). Real users routinely mix two or three languages within a single sentence, and switch again in the next turn. Kiswahili and English drift together in a single WhatsApp reply; Hausa and English trade off across sentences in the same voice note; French, Wolof, and Arabic braid through the same market conversation. An NLP system that assumes each user speaks one language at a time will systematically fail its intended audience. This page is the practical guide to designing the model *and* the UI for the code-switched reality African users bring.
+Code-switching is not an edge case in African-language deployment; it is an everyday interaction pattern. It is well documented in African data:
+
+- Nigerian tweets in Hausa, Igbo, Nigerian Pidgin and Yorùbá include a significant fraction of code-mixed text ([Muhammad et al., 2022](../references.md#naijasenti-2022)).
+- South African soap-opera speech mixes English with isiZulu, isiXhosa, Setswana and Sesotho ([van der Westhuizen and Niesler, 2018](../references.md#westhuizen-2018)).
+- Swahili-English switching has its own language-identification work ([Piergallini et al., 2016](../references.md#piergallini-2016)).
+
+Real users routinely mix two or three languages within a single sentence, and switch again in the next turn. Kiswahili and English drift together in a single WhatsApp reply; Hausa and English trade off across sentences in the same voice note; French, Wolof and Arabic braid through the same market conversation. A system that assumes each user speaks one language at a time will systematically fail its intended audience. This page is a practical guide to designing the model *and* the user interface (UI) for that reality.
+
+:::tip[Key points]
+
+- Users mix languages across turns, sentences, words and scripts; plan for all four.
+- Identify the language per message, sentence or span, never once per user or session.
+- Reply in the user's dominant session language, matching their register and script.
+- Train on real code-switched data, do not "clean" it, and report results on a code-switched test set.
+- Show the detected language unobtrusively and let users correct it, instead of a language gate at launch.
+
+:::
 
 ## What in-session multilingual switching actually is
 
@@ -28,8 +44,8 @@ The four cases compound. A production African-language chatbot has to handle all
 
 The pattern that ships in most consumer NLP products (pick a language at first launch, use it for everything until the user changes it) is unusable for code-switched African users. It fails in predictable ways:
 
-- **Users abandon the language picker.** A picker that lists 15 African languages plus English and French sees many users tapping "English" or "French" and switching to their own language mid-conversation anyway, at which point the model breaks.
-- **Users switch languages faster than the setting can be changed.** In a WhatsApp reply, the user typed in Hausa, then in English, then in Hausa again in the space of one exchange. A per-user language setting cannot follow that.
+- **Users bypass the language picker.** Faced with a picker that lists 15 African languages plus English and French, many users tap "English" or "French" and then switch to their own language mid-conversation anyway, at which point the model breaks.
+- **Users switch languages faster than the setting can be changed.** A user may type in Hausa, then English, then Hausa again within one WhatsApp exchange. A per-user language setting cannot follow that.
 - **Users write in whatever language happens to be easiest at that moment.** Sometimes that is the language with the shortest phrasing for what they mean. Sometimes it is the one their keyboard is currently on. Sometimes it is the language of the last message they read. A locked "user language" does not model this.
 - **Auto-detection based on the first turn is wrong.** The first message in a session is often the least representative: a greeting in a lingua franca ("Hi", "Bonjour"), or a copy-pasted URL. Locking the session language based on that message locks in the wrong language for most of the interaction.
 
@@ -40,15 +56,17 @@ The design implication is that **language identification must be a per-message, 
 Reliable in-session language identification for African languages needs to handle short inputs, mixed inputs, and inputs that are legitimately ambiguous. Practical patterns:
 
 - **Multi-granularity LID.** Run identification at both the sentence and the word level, and reconcile. Sentence-level LID captures the dominant language; word-level LID catches embedded terms in another language. Neither on its own is sufficient.
-- **Trained on real code-switched data, not clean corpora.** LID trained only on Wikipedia or clean news is optimistic: it recognises the languages it was trained on in the register it was trained on, and mis-classifies short SMS-style or WhatsApp-style code-switched input often. Language-ID models that score well on clean held-out test sets can fail badly on real web text in lower-resource languages, through domain mismatch and confusion between similar languages ([Caswell et al., 2020](../references.md#caswell-2020)). The LinCE benchmark ([Aguilar et al., 2020](../references.md#aguilar-2020)) and the MixMT shared task ([Srivastava and Singh, 2022](../references.md#srivastava-2022)) are useful references for how code-switched LID and translation are evaluated. For African languages, AfroLID covers 517 languages and varieties and was also tested on Twitter text ([Adebara et al., 2022](../references.md#afrolid-2022)), but African code-switched evaluation data is thinner and often has to be assembled per project.
+- **Trained on real code-switched data, not clean corpora.** LID trained only on Wikipedia or clean news is optimistic: it recognises its languages in the register it was trained on, and often mis-classifies short SMS-style or WhatsApp-style code-switched input. Language-ID models that score well on clean held-out test sets can fail badly on real web text in lower-resource languages, through domain mismatch and confusion between similar languages ([Caswell et al., 2020](../references.md#caswell-2020)). See the note on evaluation resources below this list.
 - **Context accumulation.** Use the last N turns of the conversation as prior evidence. If the user has been writing in Kiswahili for the last four turns, a short next message in ambiguous script is more likely Kiswahili than English. A simple Bayesian update over turn-level LID scores is one way to do this.
 - **User metadata as a soft prior, not a hard rule.** The user's location, prior language preferences, or platform locale can bias detection toward likely languages without overriding actual signal.
 - **Graceful failure under uncertainty.** When LID confidence is low, respond in a lingua franca (usually English or French) with a short "which language would you prefer?" fallback, but do NOT hard-lock the response language to whichever one the user picks. Return to per-message detection on the next turn.
 - **A confidence threshold below which the system falls back to a smaller, safer response** (a static clarification prompt in the two most likely languages) rather than confidently answering in the wrong language.
 
+**Evaluation resources.** The LinCE benchmark ([Aguilar et al., 2020](../references.md#aguilar-2020)) and the MixMT shared task ([Srivastava and Singh, 2022](../references.md#srivastava-2022)) show how code-switched LID and translation are evaluated. For African languages, AfroLID covers 517 languages and varieties and was also tested on Twitter text ([Adebara et al., 2022](../references.md#afrolid-2022)), but African code-switched evaluation data is thinner and often has to be assembled per project.
+
 ## Response strategies
 
-Once the input language is understood, the response has to be chosen. This is not always the same as the input language, and the rules that work:
+Once the input language is understood, the system has to choose the response language. This is not always the input language. Rules that work:
 
 - **Default to matching the user's dominant language in the session, not the language of their latest message.** A user who has been writing in Hausa for four turns and sends one English question probably still expects a Hausa-adjacent reply, or at least a bilingual reply that carries the same information in both.
 - **Do not over-correct.** If the user consistently writes English words for technical terms while responding in a local language, the system should mirror that pattern rather than translating the English terms into the local language every time.
@@ -58,7 +76,7 @@ Once the input language is understood, the response has to be chosen. This is no
 
 ## Model training implications
 
-The training data + evaluation set determine whether the model can handle code-switching at all. Practical requirements:
+The training data and evaluation set determine whether the model can handle code-switching at all. Practical requirements:
 
 - **Include real code-switched examples in training data.** Models trained only on monolingual data have no examples of the mixed input real users send, and surveys of the field name the lack of code-switched training data as one reason models handle code-switching poorly ([Doğruöz et al., 2021](../references.md#dogruoz-2021)). How much code-switched data you need depends on the task and language pair, so measure the effect on a code-switched test set.
 - **Evaluate on a code-switched test set specifically.** Reporting a headline BLEU/CER/F1 on monolingual test data hides catastrophic failure on mixed input. Split evaluation into monolingual and code-switched subsets, and report both. This is a per-language and per-modality decision (see [core principles](../1_introduction/core-principles.md)).
@@ -75,11 +93,11 @@ The training data + evaluation set determine whether the model can handle code-s
 
 ## Anti-patterns to avoid
 
-1. **A "select your language" gate at first launch.** Nearly always ignored, and locks users out of the app when the switch happens.
+1. **A "select your language" gate at first launch.** Often ignored, and it locks users out when they switch language.
 2. **Locking session language based on the first user message.** The first message is the least representative.
 3. **Treating code-switched input as noise to be cleaned.** It is not noise; it is the target register.
 4. **Rejecting or asking the user to rephrase code-switched input.** This is the failure mode that trains users to distrust the system fastest.
-5. **Assuming all users of a given language write with the same character set.** Ajami-writing Hausa users and Latin-writing Hausa users are the same demographic; the system must handle both.
+5. **Assuming all users of a given language write with the same character set.** Hausa speakers write in both Ajami and Latin script, sometimes the same person; the system must handle both.
 6. **Publishing headline metrics only on monolingual test sets.** The published number bears no relation to real-user experience.
 7. **Delegating language handling entirely to the model** and skipping the UI-side design. The best model in the world cannot recover from a UI that forces users into a monolingual choice.
 

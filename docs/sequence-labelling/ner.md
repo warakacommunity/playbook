@@ -4,7 +4,7 @@ sidebar_label: Named Entity Recognition
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -13,6 +13,16 @@ last_update:
 Named entity recognition (NER) finds the spans of text that name people, organisations, places and similar things, and labels each span with its type. It is the most studied sequence-labelling task for African languages, and usually the first one a new language gets, because entities are what search, news monitoring, de-identification and question answering need first.
 
 This page covers how to build NER data well. The decision of whether to build at all is covered in [Before You Start: NER](../before-you-start/ner.mdx), which judges MasakhaNER against a reuse checklist, and the history of how MasakhaNER itself was built is in the [MasakhaNER case study](../case-studies/masakhaner.md). Tagging schemes, tokenisation and span-level scoring, which NER shares with the other tasks, are explained in the [Sequence Labelling overview](./index.md).
+
+:::tip[Key points]
+
+- Check MasakhaNER, the NCHLT corpora and other existing sets, and their licences, before collecting anything.
+- Start from a small label set (PER, ORG, LOC, DATE) and add a type only when you can write a decision rule for it.
+- Write explicit rules for affixes and clitics, titles, dates written as words, and names that are also common words.
+- Measure agreement on entities, not tokens, and report it before and after adjudication.
+- Report per-type, per-language and seen versus unseen scores, never only one average.
+
+:::
 
 ## What the data looks like
 
@@ -66,7 +76,9 @@ Read the [MasakhaNER annotation guideline](https://github.com/masakhane-io/masak
 - **Names that are also common words.** Many African personal names are ordinary words or phrases. Annotators tag them only when they refer to a person, which needs the context of the sentence, and the guideline should give contrasting examples.
 - **Entities in another language.** English or French organisation names inside a Hausa or Wolof sentence are still entities. Tag them by type, whatever their language.
 
-Titles can also be a type of their own rather than part of PER. An early Amharic NER dataset labelled six classes: person, location, organisation, time, title and other ([Gambäck and Sikdar, 2017](../references.md#gamback-2017)). In Amharic, honorifics such as አቶ (Mr), ወ/ሮ (Mrs), ወ/ሪት (Miss) and ዶክተር (Dr) come before the name. A separate title class tags them apart from the name instead of folding them into the PER span. That choice has a cost later. When EthioLLM combined this dataset with a four-class Amharic corpus into one benchmark, the authors dropped the time and title classes to make the label sets match ([Tonja et al., 2024](../references.md#tonja-2024-ethiollm)). Whichever way you decide, record the choice and the reason in the label-set rationale of the guideline and the dataset card, so that anyone merging your data with another corpus knows how titles were handled.
+Titles can also be a type of their own rather than part of PER. An early Amharic NER dataset labelled six classes: person, location, organisation, time, title and other ([Gambäck and Sikdar, 2017](../references.md#gamback-2017)). In Amharic, honorifics such as አቶ (Mr), ወ/ሮ (Mrs), ወ/ሪት (Miss) and ዶክተር (Dr) come before the name. A separate title class tags them apart from the name instead of folding them into the PER span.
+
+That choice has a cost later. When EthioLLM combined this dataset with a four-class Amharic corpus into one benchmark, the authors dropped the time and title classes to make the label sets match ([Tonja et al., 2024](../references.md#tonja-2024-ethiollm)). Whichever way you decide, record the choice and the reason in the label-set rationale of the guideline and the dataset card, so that anyone merging your data with another corpus knows how titles were handled.
 
 Keep the guideline as a living document. Every adjudication decision that sets a precedent goes into it with an example, and the version number goes into the dataset card.
 
@@ -94,7 +106,7 @@ Each sentence should be annotated independently by at least two native speakers,
 
 Measure agreement on entities, not on tokens, for the same reason the model is scored on entities: most tokens are `O`, so token-level agreement looks high even when annotators disagree on most entities. Two measures are common:
 
-- **Entity-level Fleiss' or Cohen's kappa**, as reported by both MasakhaNER papers.
+- **Entity-level kappa**: Cohen's kappa for two annotators, Fleiss' kappa for three or more. Both MasakhaNER papers report entity-level Fleiss' kappa.
 - **Pairwise entity F1**, treating one annotator's spans as gold and the other's as predictions. It needs no chance correction and reads directly against model scores.
 
 ```python

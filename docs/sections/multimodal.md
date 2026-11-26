@@ -3,7 +3,7 @@ title: Multimodal
 sidebar_label: Overview
 ready: true
 last_update:
-  date: 2026-09-30
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -20,6 +20,6 @@ tasks share the challenge of **aligning and jointly labelling** more than one si
 - Licensing across combined sources
 
 ## Tasks
-- **Image–text** – (visual question answering, image captioning)
-- **Agricultural advisory data** – (field images, diagnosis labels, native-language advisories, a spoken layer, preference data)
-- **LLM-assisted & synthetic data** – (generation, augmentation, distillation)
+- **Image–text**: visual question answering, image captioning
+- **Agricultural advisory data**: field images, diagnosis labels, native-language advisories, a spoken layer, preference data
+- **LLM-assisted & synthetic data**: generation, augmentation, distillation

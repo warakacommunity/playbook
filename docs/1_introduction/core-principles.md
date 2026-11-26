@@ -2,7 +2,7 @@
 sidebar_position: 5
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 
@@ -10,9 +10,21 @@ last_update:
 
 A handful of beliefs run through every chapter of this playbook. They are the reason it gives the advice it does. If you remember nothing else, remember these.
 
+:::tip[Key points]
+
+- Build datasets with the speakers of a language, not just for them.
+- Get informed consent first, and keep the community the owner of its data.
+- A small, clean, well-documented dataset beats a large, noisy one.
+- Document and openly license your data so others can find, trust and reuse it.
+- Protect the people in the data and the people who build it.
+
+:::
+
 ## Build with speakers, not just for them
 
-The people who speak a language know what is correct, what sounds natural, and what is offensive. They belong at the centre of dataset work, not at the end of a pipeline as cheap labellers. The participatory model that this playbook grows out of treats native speakers as co-creators ([Nekoto et al., 2020](../references.md#nekoto-2020)), and it is the approach we recommend throughout. Bird makes the wider case for centring the communities whose languages are at stake rather than treating them as sources of data ([Bird, 2020](../references.md#bird-2020)).
+The people who speak a language know what is correct, what sounds natural, and what is offensive. They belong at the centre of dataset work, not at the end of a pipeline as cheap labellers.
+
+The participatory model that this playbook grows out of treats native speakers as co-creators ([Nekoto et al., 2020](../references.md#nekoto-2020)), and it is the approach we recommend throughout. Bird makes the wider case for centring the communities whose languages are at stake rather than treating them as sources of data ([Bird, 2020](../references.md#bird-2020)).
 
 ## Consent and ownership come first
 
@@ -20,7 +32,12 @@ Data comes from people, and those people keep a stake in it. Ask for informed co
 
 ## Quality over scale
 
-A small, clean, well-documented dataset is worth more than a large, noisy one. An audit of web-crawled multilingual corpora found that many lower-resource corpora have systematic problems: some contain no usable text, many have wrong language labels, and a significant fraction have fewer than half of their sentences at acceptable quality ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). Small, high-quality data goes a long way: a few thousand human-translated sentences were enough to adapt large pre-trained models to new African languages and domains ([Adelani et al., 2022b](../references.md#mafand-2022)). It is better to label a thousand examples well than a million badly. The whole [data quality](../4_data-quality/index.md) chapter exists because this principle is easy to say and hard to keep.
+A small, clean, well-documented dataset is worth more than a large, noisy one. It is better to label a thousand examples well than a million badly.
+
+- **Scale does not guarantee quality.** An audit of web-crawled multilingual corpora found that many lower-resource corpora have systematic problems: some contain no usable text, many have wrong language labels, and a significant fraction have fewer than half of their sentences at acceptable quality ([Kreutzer et al., 2022](../references.md#kreutzer-2022)).
+- **Small, high-quality data goes a long way.** A few thousand human-translated sentences were enough to adapt large pre-trained models to new African languages and domains ([Adelani et al., 2022b](../references.md#mafand-2022)).
+
+The whole [data quality](../4_data-quality/index.md) chapter exists because this principle is easy to say and hard to keep.
 
 ## Context travels with the data
 

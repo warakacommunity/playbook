@@ -3,21 +3,31 @@ sidebar_position: 10
 sidebar_label: "Emotion Analysis"
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 
 # Emotion Analysis
 
-**What is Emotion Analysis?**
+Emotion analysis (also called emotion detection or emotion classification) identifies the emotions expressed in a piece of text. Sentiment analysis usually sorts text into positive, negative or neutral. Emotion analysis goes further and names specific emotional states, such as anger, disgust, fear, joy, sadness and surprise, with neutral for text that shows none of them.
 
-Emotion detection or emotion classification is a task that aims to identify and classify the emotions expressed in a piece of text. Unlike sentiment analysis, which usually categorizes text as positive, negative, or neutral, emotion analysis seeks to recognize more specific emotional states such as anger, joy, sadness, fear, surprise, disgust, and neutral. Label sets like this follow discrete models of emotion such as Ekman's basic emotions ([Ekman, 1992](../references.md#ekman-1992)). The BRIGHTER datasets, which cover 28 languages including many African languages, use these six emotions and treat a text with none of them as neutral. Their annotators label the emotions they *perceive* in the text, rather than guessing what the writer felt ([Muhammad et al., 2025b](../references.md#brighter-2025)). State in your guideline which of the two you want.
+Label sets like this follow discrete models of emotion such as Ekman's basic emotions ([Ekman, 1992](../references.md#ekman-1992)). The BRIGHTER datasets, which cover 28 languages including many African languages, use these six emotions and treat a text with none of them as neutral. Their annotators label the emotions they *perceive* in the text, rather than guessing what the writer felt ([Muhammad et al., 2025b](../references.md#brighter-2025)). State in your guideline which of the two you want.
 
-Emotion annotation goes a step further than sentiment analysis by analyzing specific emotions and classifying the text into categories such as joy, anger, sadness, fear, or surprise. By recognizing these, companies can better understand customer responses, which helps them respond to specific issues accordingly. For example, if you can identify any frustration in a customer complaint, you can address the issue immediately and prevent escalation. Emotion can be annotated into one of the following approaches.
+Specific emotions are more informative than polarity alone. For example, a service team that can spot frustration in a complaint can respond before the problem escalates. Emotion can be annotated in one of the approaches below.
 
-### Single-label Emotion Analysis
+:::tip[Key points]
 
-In single-label annotation, a text has either no emotion or only one of the emotions for the given list of emotions; each text is assigned one dominant emotion.
+- Decide whether annotators label the emotion they *perceive* in the text or the emotion they think the writer felt, and say so in the guideline.
+- Choose single-label (one dominant emotion) or multi-label (all emotions present) before you write the guideline.
+- For multi-label data, consider rating each emotion's intensity (0 to 3); the aggregation rule uses it to settle ties between annotators.
+- Aggregate with a rule that uses both agreement and intensity, not a bare majority vote.
+- Release intensity labels only when enough people annotated each item, ideally five or more.
+
+:::
+
+## Single-label Emotion Analysis
+
+In single-label annotation, each text gets exactly one label: either the one dominant emotion from the list, or neutral if it expresses none.
 
 | Id | Text | Emotion |
 |----|------|---------|
@@ -27,62 +37,41 @@ In single-label annotation, a text has either no emotion or only one of the emot
 | sample_04 | None of us did. | Neutral |
 | sample_05 | I can't believe it! I won the scholarship! This is amazing! | Joy |
 
+## Multi-label Emotion Analysis
 
-### Multi-label Emotion Analysis
+In multi-label annotation, a text may express no emotion, one emotion, or several emotions at once. Annotators select every emotion that applies.
 
-In multi-label emotion analysis, a text may express no emotion, a single emotion, two emotions, or multiple emotions simultaneously. A sample multi-label emotion annotation interface is shown below. The use of checkboxes allows annotators to select one or more emotion categories, along with the corresponding intensity level for each selected emotion. In multi-label emotion annotation, recording emotion intensities is common practice because different emotions may be expressed with varying degrees of strength within the same text. Therefore, intensity annotations provide additional information beyond the mere presence or absence of an emotion. Shared tasks such as SemEval-2018 Task 1 ([Mohammad et al., 2018](../references.md#mohammad-2018)) and SemEval-2025 Task 11 ([Muhammad et al., 2025c](../references.md#semeval-2025-task11)) included both emotion labels and intensity, and BRIGHTER asks annotators to select all emotions that apply and rate each on a 0 to 3 scale ([Muhammad et al., 2025b](../references.md#brighter-2025)).
+It is common to also record an intensity for each selected emotion, because emotions in the same text can differ in strength. Intensity adds information beyond the presence or absence of an emotion. Shared tasks such as SemEval-2018 Task 1 ([Mohammad et al., 2018](../references.md#mohammad-2018)) and SemEval-2025 Task 11 ([Muhammad et al., 2025c](../references.md#semeval-2025-task11)) included both emotion labels and intensity. BRIGHTER asks annotators to select all emotions that apply and rate each on a 0 to 3 scale ([Muhammad et al., 2025b](../references.md#brighter-2025)).
 
-![Multi-label emotion](images/multi-label-emotion.png)
+**Task specification: multi-label emotion with intensity**
 
+| Setting | Value |
+|---|---|
+| Annotator sees | One text (a post, sentence or short paragraph) |
+| Annotator gives | An intensity for each emotion: anger, disgust, fear, joy, sadness, surprise |
+| Choice | One rating per emotion on a 0 to 3 scale: 0 = not present, 1 = low, 2 = medium, 3 = high; an item with all six at 0 is neutral |
+| Notes | Rating every emotion, including 0, makes "not present" an explicit decision rather than a missed field |
 
-Given annotations from multiple annotators, the final emotion labels can be determined through an aggregation process. When only binary emotion labels are available, a majority-vote approach can be used to determine the final label for each emotion category. However, when emotion intensity ratings are also collected, both the emotion labels and their intensities can be considered when making the final decision.
+Each emotion's final label is binary: 1 if the emotion is present, 0 if it is not. With presence-only labels, a majority vote per emotion works. With intensities, or with an even number of annotators where a vote can tie (for example, scores 0, 0, 3, 3), use the rule in [Conditions for Determining the Final Emotion Label](#conditions-for-determining-the-final-emotion-label).
 
-The following rule can be used to determine the final emotion label based on ratings from multiple annotators. The final label is binary, where 1 indicates the presence of the emotion, and 0 indicates the absence of a significant emotional expression.
+## Conditions for Determining the Final Emotion Label
 
-For datasets annotated without considering intensities, decisions can be made by a simple majority vote. For emotion with intensity annotation, the following decision rule can be applied:
+An emotion is present (final label = 1) only if both conditions hold:
 
-The majority vote works for simple cases. However, It may not work if you have an even number of annotators.  For example, given four annotator scores (0,0,3,3): 0 (no-anger), 3 (high-anger), there is no majority vote in this case. IF (at least two annotators assign a non-zero intensity score, e.g., 1, 2, or 3) AND (the average intensity score exceeds a predefined threshold), THEN the final emotion label = 1. ELSE the final emotion label = 0.
+1. **Agreement:** at least two annotators give it a non-zero intensity (1 low, 2 medium or 3 high). This ensures a basic level of agreement that the emotion is there.
+2. **Strength:** the average score across all annotators is above a set threshold. This ensures the emotion is strong enough to count as present.
 
-This approach combines annotator agreement and emotion intensity, resulting in a more reliable representation of the emotional content of the text.
+This is the rule used to build the BRIGHTER emotion datasets, with the threshold set to 0.5 ([Muhammad et al., 2025b](../references.md#brighter-2025)). The examples below apply it.
 
-### Conditions for Determining the Final Emotion Label
+| Example | Annotator scores | Non-zero scores | Average | Final label |
+|---|---|:---:|---|:---:|
+| 1 | 0, 0, 3, 3 | 2 | (0 + 0 + 3 + 3) / 4 = 1.5 | 1 (present) |
+| 2 | 1, 2, 1 | 3 | (1 + 2 + 1) / 3 = 1.33 | 1 (present) |
+| 3 | 1, 1, 0 | 2 | (1 + 1 + 0) / 3 = 0.67 | 1 (present) |
+| 4 | 1, 1, 0, 0, 0 | 2 | (1 + 1 + 0 + 0 + 0) / 5 = 0.4 | 0 (not present) |
+| 5 | 1, 2, 3, 2 | 4 | (1 + 2 + 3 + 2) / 4 = 2.0 | 1 (present) |
 
-1. At least 2 people must select 1(low), 2(medium), or 3(high): This ensures that there is a basic level of agreement among the annotators that the content contains some level of emotion (low, medium, or high).
-2. Avg score > threshold: The average score given by all annotators must be greater than a predefined threshold. This ensures that the intensity of the emotion is significant enough to be considered present.
-
-Since we have a scale from 0 to 3, a threshold of 0.5 can be a good choice. This is the rule used to build the BRIGHTER emotion datasets: an emotion is present if at least two annotators give it an intensity of 1, 2 or 3 and the average score exceeds a threshold set to 0.5 ([Muhammad et al., 2025b](../references.md#brighter-2025)). The below are example scenarios.
-
-#### Example 1
-
-- Annotator scores: 0, 0, 3,3
-- Average score: (0+ 0 + 3+3) / 4 =  1.5
-- Result: Since 1.5 > 0.5, final label = 1 (emotion present).
-
-#### Example 2
-
-- Annotator scores: 1, 2, 1
-- Average score: (1 + 2 + 1) / 3 = 1.33
-- Result: Since 1.33 > 0.5, final label = 1 (emotion present).
-
-#### Example 3
-
-- Annotator scores: 1, 1, 0
-- Average score: (1 + 1 + 0) / 3 = 0.666
-- Result: Since 0.66 >  0.5, final label = 1 (emotion present).
-
-#### Example 4
-
-- Annotator scores: 1, 1, 0, 0,0
-- Average score: (1 + 1+ 0 + 0+0) / 5 =  0.4
-- Result: Since 0.4  <  0.5, the final label =0 ( no emotion present).
-
-#### Example 5
-
-- Annotator scores: 1, 2, 3, 2
-- Average score = (1 + 2 + 3 + 2) / 4 = 8 / 4 = 2.0
-- Result: Since 2.0 > 0.5, final label = 1 (emotion present).
-
-This method combines both agreement among annotators and the intensity of the emotion, providing a balanced evaluation. Majority vote does not consider the intensity and may miss out on subtle emotional content. A sample format of the multi-label emotion dataset is shown below. The final binary emotion labels are then derived using the aggregation procedure described above.
+Majority vote ignores intensity and can miss subtle emotion. A sample of a multi-label emotion dataset with the final binary labels is shown below.
 
 | Id | Text | Anger | Fear | Joy | Sadness | Surprise |
 |----|------|:-----:|:----:|:---:|:-------:|:--------:|
@@ -92,37 +81,29 @@ This method combines both agreement among annotators and the intensity of the em
 | sample_04 | None of us did. | 0 | 0 | 0 | 0 | 0 |
 | sample_05 | I can't believe it! I won the scholarship! This is amazing! | 0 | 0 | 1 | 0 | 1 |
 
-### Emotion Intensity
+## Emotion Intensity
 
-Annotators indicate the emotions that are likely conveyed in the text and their intensity levels, i.e., low (1), medium (2) or high (3). The scores that are associated to the different intensity levels (0 [no emotion] to 3 [high emotion]) are then averaged. This average score is used to classify the emotion intensity based on its proximity to the predefined values corresponding to the intensity (i.e., 0 (no emotion), 1 (low), 2 (medium), and 3 (high)). BRIGHTER derives its intensity labels in a similar way, averaging the annotators' intensity scores and rounding up to a whole level. It assigns intensity only to datasets where most items were annotated by at least five people, so that the average is robust ([Muhammad et al., 2025b](../references.md#brighter-2025)). With only two or three annotators, consider releasing presence labels only.
+Annotators mark the emotions they think the text conveys and rate each one: 0 (no emotion), 1 (low), 2 (medium) or 3 (high). To get one intensity class per emotion:
 
-The following examples show how to turn intensity ratings on a 0 to 3 scale (0 no emotion, 1 low intensity, 2 medium intensity, 3 high intensity) into one intensity class by averaging and rounding to the nearest level, with a value exactly halfway rounded up.
+1. Average the annotators' scores for that emotion.
+2. Round the average to the nearest level (0, 1, 2 or 3). A value exactly halfway between two levels is rounded up.
 
-Example 1: Give an example of an emotion and a post [e.g., angry].
+BRIGHTER also averages the annotators' intensity scores to get one level per emotion, but its rounding step differs from the one above. The paper's main text says the average is rounded up to a whole level, while its appendix formula maps the average down to the level below it (for example, 1.5 becomes 1). Check which rule a released dataset used before you compare your labels with it, and state your own rule in your dataset documentation. BRIGHTER assigns intensity only to datasets where most items were annotated by at least five people, so that the average is robust ([Muhammad et al., 2025b](../references.md#brighter-2025)).
 
-- Annotator scores = [1, 2, 2, 3]
-- Average score = (1 + 2 + 2 + 3) / 4 = 2.0
-- Intensity class = 2 (Moderate amount of emotion)
+:::warning
 
-Example 2:
+With only two or three annotators per item, the average is unstable. Consider releasing presence labels only.
 
-- Annotator scores = [0, 0, 1, 1]
-- Average score = (0 + 0 + 1 + 1) / 4 = 0.5
-- Intensity class = 1 (Low amount of emotion)
+:::
 
-Example 3:
+| Example | Annotator scores | Average | Intensity class |
+|---|---|---|---|
+| 1 | 1, 2, 2, 3 | (1 + 2 + 2 + 3) / 4 = 2.0 | 2 (medium) |
+| 2 | 0, 0, 1, 1 | (0 + 0 + 1 + 1) / 4 = 0.5 | 1 (low) |
+| 3 | 3, 3, 3, 2 | (3 + 3 + 3 + 2) / 4 = 2.75 | 3 (high) |
+| 4 | 0, 0, 0, 1 | (0 + 0 + 0 + 1) / 4 = 0.25 | 0 (no emotion) |
 
-- Annotator scores = [3, 3, 3, 2]
-- Average score = (3 + 3 + 3 + 2) / 4 = 2.75
-- Intensity class = 3 (High amount of emotion)
-
-Example 4:
-
-- Annotator scores = [0, 0, 0, 1]
-- Average score = (0 + 0 + 0 + 1) / 4 = 0.25
-- Intensity class = 0 (No emotion)
-
-A sample format of the multi-label emotion intensities dataset is shown below. Each emotion is assigned an intensity score ranging from 0 (not present) to 3 (high intensity). 
+A sample of a multi-label emotion intensity dataset is shown below. Each emotion has an intensity from 0 (not present) to 3 (high).
 
 | Id | Text | Anger | Fear | Joy | Sadness | Surprise |
 |----|------|:-----:|:----:|:---:|:-------:|:--------:|

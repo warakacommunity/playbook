@@ -3,13 +3,23 @@ title: Preference Data
 sidebar_position: 5
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Preference Data
 
 A preference pair takes one image and its diagnosis, shows two candidate advisories for it as A and B, and asks a native speaker (the rater, or ranker) which one a farmer should receive and why. The resulting set records which advisory speakers of the language prefer, and the reasons they gave.
+
+:::tip[Key points]
+
+- Preference data records which of two advisories native speakers would give a farmer, and why.
+- Decide where the second candidate comes from first: writing a second advisory costs as much as writing the first.
+- Raters never see the source of a candidate, and the A/B order is randomised and recorded.
+- Check correctness, then safety, then local usability, then language; the first check that separates the two decides.
+- Disagreements between raters are kept and flagged, not adjudicated.
+
+:::
 
 ![One accepted pair feeds two candidate advisories, A and B, with sources hidden and order randomised; two raters each give a choice, a strength, reason codes and a note; the record stores both ratings with a raters_agree flag, and a disagreement is kept and flagged](images/preference-pair.svg)
 
@@ -21,7 +31,7 @@ The other pages in this chapter create new material: photos, labels, advisory te
 | --- | --- | --- | --- |
 | What is collected | photos, labels, advisory text | recordings, transcripts | judgements on two existing advisories |
 | Who does it | collectors, agronomists, authors | speakers, transcribers | native-speaker raters |
-| Where | the field, then the platform | facilitated sessions | a phone or laptop, anywhere |
+| Where | the field, then the annotation workflow | facilitated sessions | a phone or laptop, anywhere |
 | Unit of work | one accepted pair | one validated item | one judgement |
 | What QC measures | errors to correct: label agreement, rewrite rate | whether each clip is usable | rater reliability; disagreement is reported and kept |
 

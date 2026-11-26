@@ -3,17 +3,31 @@ title: Data Integrity and Contamination Control
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 
 # Data Integrity and Contamination Control
 
-A benchmark only measures what it claims to if the test data is genuinely unseen. Data integrity is the discipline of keeping it that way, and it has become harder and more important in the age of large models trained on everything.
+A benchmark only measures what it claims to if the test data is genuinely unseen. Data integrity is the discipline of keeping it that way. It has become harder, and more important, now that large models are trained on huge amounts of web text.
+
+:::tip[Key points]
+
+- Deduplicate first, including near-duplicates, then split.
+- Split by group (speaker, document, prompt, source) so no source appears on both sides.
+- Fix the splits and add a check that fails loudly if anything leaks.
+- Check new data for overlap with existing benchmarks and report it.
+- Keep part of the test set private to guard against contamination of large models.
+
+:::
 
 ## Prevent train-test leakage
 
-The most basic failure is leakage: the same or near-identical examples appearing in both training and test. It inflates scores and hides real weakness, and it is easy to introduce when deduplication happens after splitting rather than before. Deduplicate first, including near-duplicates, then split, and keep the splits fixed so that no one accidentally trains on the test set later. Watch for subtler leakage too, such as the same speaker or document spanning splits in speech and document tasks, which lets a model recognise the source rather than learn the task.
+The most basic failure is **leakage**: the same or near-identical examples appear in both training and test data. Leakage inflates scores and hides real weaknesses. It is easy to introduce when you deduplicate after splitting rather than before.
+
+- **Deduplicate first**, including near-duplicates, then split.
+- **Keep the splits fixed**, so that no one trains on the test set by accident later.
+- **Watch for subtler leakage.** In speech and document tasks, the same speaker or document can span splits. The model then learns to recognise the source rather than the task.
 
 For images and video, where duplicates are resized or recompressed copies and the grouping key is usually a site, device, subject or source video, see [Splits and near-duplicates](../image-data/splits-and-duplicates.md).
 
@@ -100,7 +114,13 @@ def speaker_prompt_disjoint_split(records, fractions=(0.8, 0.1, 0.1), seed=0):
     return splits, dropped
 ```
 
-Report the split sizes, the number of speakers and prompts in each split, and every dropped row in the [dataset card](../templates/dataset-card.md). The fractions in the example are a placeholder, not a norm. If one component swallows most of the corpus, because many speakers read the same small set of prompts, no clean split exists after the fact. You then have to drop the rows that connect the component and report them, or, better, assign each prompt to a split before recording starts, so the graph never joins up.
+Report the split sizes, the number of speakers and prompts in each split, and every dropped row in the [dataset card](../templates/dataset-card.md). The fractions in the example are a placeholder, not a norm.
+
+:::warning[When no clean split exists]
+
+If many speakers read the same small set of prompts, one component can swallow most of the corpus. No clean split exists after the fact. You then have to drop the rows that connect the component and report them. Better: assign each prompt to a split **before recording starts**, so the graph never joins up.
+
+:::
 
 ## Watch for benchmark overlap
 
@@ -108,7 +128,13 @@ A new dataset can quietly overlap with existing ones, sharing source texts or ex
 
 ## Guard against LLM contamination
 
-The hardest modern problem is contamination: large language models are trained on enormous web crawls that may already contain your test set, so a model can score well by memorisation rather than ability. For African languages this cuts both ways, since the same scarcity that limits training data also means a public benchmark is more likely to have been swept up wholesale. Where you can, keep a portion of the test set private, note the cut-off date of your data, and treat suspiciously high scores from a large model on a public benchmark with caution.
+The hardest modern problem is **contamination**. Large language models (LLMs) are trained on enormous web crawls that may already contain your test set, so a model can score well by memorisation rather than ability. For African languages, the same scarcity that limits training data also makes a public benchmark more likely to have been swept up whole.
+
+Where you can:
+
+- keep a portion of the test set private;
+- record the cut-off date of your data;
+- treat suspiciously high scores from a large model on a public benchmark with caution.
 
 A simple n-gram overlap check gives an early signal of whether your test set already appears in a corpus a model may have trained on:
 
@@ -128,4 +154,4 @@ def contamination_rate(test_texts: list[str], corpus_texts: list[str],
     return hits / len(test_texts) if test_texts else 0.0
 ```
 
-A non-trivial overlap means an evaluation on that set partly measures memorisation rather than ability. For African languages the same scarcity that makes data precious also makes a public benchmark more likely to have been swept up whole, so a private held-out portion, which this check cannot be run around, is the stronger guarantee. Contamination control is now part of building a credible evaluation, not an afterthought.
+A non-trivial overlap means an evaluation on that set partly measures memorisation rather than ability. The check only covers corpora you can inspect, so a private held-out portion remains the stronger guarantee. Contamination control is now part of building a credible evaluation, not an afterthought.

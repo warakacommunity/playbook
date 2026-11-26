@@ -1,9 +1,10 @@
 ---
 sidebar_position: 2
-title: NER
+title: Named Entity Recognition
+sidebar_label: NER
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -12,6 +13,16 @@ last_update:
 *Worked example. Last reviewed: 2026-07-07.*
 
 This page applies the [four steps from Before You Start](./index.md) to named entity recognition (NER): finding people, organisations, places, and dates in text. It uses **MasakhaNER** as the example because it is the best-documented NER effort for African languages. If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
+
+:::tip[Key points]
+
+- MasakhaNER 2 covers 20 African languages; MasakhaNER 1 is still the source for Amharic.
+- Its licence is non-commercial: check it first if you are building a product.
+- It is news text in Latin script, so expect lower accuracy on other domains, scripts, and code-switched text.
+- Its released guidelines are a good starting point even if your language is not covered.
+- Keep tone marks and other diacritics in your text processing.
+
+:::
 
 ## Step 1: What a search turns up
 
@@ -48,7 +59,7 @@ Find the row that matches your situation, then follow it across. The first quest
 | Your language is **covered** by MasakhaNER 2, and its labels (person, organisation, location, date) are enough for your task | **Reuse MasakhaNER 2** | Do not build a new corpus for these labels. |
 | Your language is **covered**, but you need **extra entity types** (money, products, culture-specific) | **Extend it** | Annotate the extra types on the existing splits and reuse the guidelines. Do not re-annotate person, organisation, and location; merge. |
 | Your language is **not covered**, but it is **related** to one of the 20 (same family or script) | **Borrow, then build small** | Try [cross-language transfer](/cross-language-transfer) from the closest covered language, then build a small evaluation set in your own language using the MasakhaNER guidelines. |
-| Your language is **not covered** and **not related** to any of the 20 | **Build from scratch** | Start with the [long-tail language onboarding](/long-tail-language) chapter, then [Data Collection](/data-collection/Overview), [Annotation Design](/annotation-design/annotation-task-design), and [Data Quality](/data-quality). Read the MasakhaNER guidelines before writing your own, and plan for several thousand sentences: MasakhaNER 2 annotated between about 4,800 and 11,000 sentences per language. |
+| Your language is **not covered** and **not related** to any of the 20 | **Build from scratch** | Start with the [long-tail language onboarding](/long-tail-language) chapter, then [Data Collection](/data-collection/Overview), [Annotation Design](/annotation-design/annotation-task-design), and [Data Quality](/data-quality). Read the MasakhaNER guidelines before writing your own, and plan for several thousand sentences: MasakhaNER 2 annotated between about 4,800 and 11,000 sentences per language ([Adelani et al., 2022a](../references.md#adelani-2022)). |
 
 </div>
 

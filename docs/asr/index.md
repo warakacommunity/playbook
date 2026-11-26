@@ -2,21 +2,55 @@
 title: Automatic Speech Recognition (ASR)
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Automatic Speech Recognition (ASR)
 
-ASR turns spoken audio into text. It is the most developed speech task for African languages and the gateway to the rest, because transcription is the bridge from a recording to something a machine can read. This page covers the deeper how-to: what the data actually looks like, the collection and transcription pipeline, the language-family constraints that shape recording decisions, the quality-assurance workflow, evaluation, and deployment realities.
+Automatic speech recognition (ASR) turns spoken audio into text. It is the most developed speech task for African languages and the gateway to the rest, because transcription is the bridge from a recording to something a machine can read.
 
-Before building an ASR corpus, check what already exists with [Before You Start](../before-you-start/index.md). That chapter helps you decide whether to reuse, extend, or build; this page details how to carry out the path you choose. The shared recording, consent, and transcription groundwork sits in the [Speech overview](../sections/speech.md), and the general pipeline in the Foundations chapters.
+This page covers the practical how-to:
+
+- what ASR data looks like;
+- the recording and transcription pipeline;
+- the language features that shape recording decisions;
+- quality assurance, evaluation and deployment.
+
+Before building an ASR corpus, check what already exists with [Before You Start](../before-you-start/index.md). That chapter helps you decide whether to reuse, extend or build; this page shows how to carry out the path you choose. The shared recording, consent and transcription groundwork is in the [Speech overview](../sections/speech.md), and the general pipeline is in the Foundations chapters.
+
+:::tip[Key points]
+
+- Write the transcription conventions (script, tone marks, code-switching, disfluencies) down before anyone transcribes.
+- Keep the original recording at a high sample rate and derive 16 kHz training copies from it.
+- Split train, dev and test by speaker and, for read speech, by prompt sentence.
+- Report character error rate (CER) next to word error rate (WER), and break both down by speaker group, dialect and condition.
+- Match the recording conditions to where the model will be used.
+
+:::
 
 ![The ASR data concept: audio to faithful transcription to model, evaluated with WER and CER](images/asr-pipeline.svg)
 
 ## What the data looks like
 
-ASR learns from audio paired with accurate transcripts. The kind of audio matters: read speech, where people read prepared sentences, is clean and easy to collect but does not match how people actually talk, while spontaneous speech is realistic but harder to record and transcribe. African ASR now has both, and the recent surge in purpose-built corpora is the main reason the task has moved fastest. African Next Voices recorded roughly 9,000 hours of everyday speech across eighteen languages in Kenya, Nigeria, and South Africa ([African Next Voices, 2025](../references.md#african-next-voices)), NaijaVoices added 1,800 hours of Igbo, Hausa, and Yorùbá ([Emezue et al., 2025](../references.md#emezue-2025)), and Google's WAXAL released a large multilingual African speech set for ASR and TTS ([WAXAL, 2026](../references.md#waxal-2026)). Domain- and accent-focused sets fill the gaps: AfriSpeech-200 gathered 200 hours of accented English for clinical and general use across thirteen countries ([Olatunji et al., 2023](../references.md#afrispeech-2023)), Kallaama covers agricultural speech in three Senegalese languages ([Gauthier et al., 2024](../references.md#kallaama-2024)), Zambezi Voice covers four Zambian languages ([Sikasote et al., 2023](../references.md#zambezi-2023)), and Mozilla's Common Voice crowdsources read speech for several African languages. Self-supervised models like AfriHuBERT now let a little labelled data go further by pretraining on raw audio first ([Alabi et al., 2025](../references.md#afrihubert-2025)).
+ASR learns from audio paired with accurate transcripts. The kind of audio matters:
+
+- **Read speech**: people read prepared sentences. It is clean and easy to collect, but it does not match how people actually talk.
+- **Spontaneous speech**: natural talk, interviews or radio. It is realistic but harder to record and transcribe.
+
+African ASR now has both. A recent surge in purpose-built corpora is the main reason the task has moved fastest:
+
+| Corpus | What it covers |
+|---|---|
+| African Next Voices | Roughly 9,000 hours of everyday speech in eighteen languages across Kenya, Nigeria and South Africa ([African Next Voices, 2025](../references.md#african-next-voices)) |
+| NaijaVoices | 1,800 hours of Igbo, Hausa and Yorùbá ([Emezue et al., 2025](../references.md#emezue-2025)) |
+| WAXAL | A large multilingual African speech set for ASR and TTS, released by Google ([WAXAL, 2026](../references.md#waxal-2026)) |
+| AfriSpeech-200 | 200 hours of African-accented English, clinical and general, from thirteen countries ([Olatunji et al., 2023](../references.md#afrispeech-2023)) |
+| Kallaama | Agricultural speech in three Senegalese languages ([Gauthier et al., 2024](../references.md#kallaama-2024)) |
+| Zambezi Voice | Labelled read speech in four Zambian languages (Bemba, Nyanja, Tonga and Lozi), plus unlabelled radio audio ([Sikasote et al., 2023b](../references.md#zambezi-2023)) |
+| Mozilla Common Voice | Crowdsourced read speech, including several African languages ([Ardila et al., 2020](../references.md#ardila-2020)) |
+
+Self-supervised models such as AfriHuBERT let a little labelled data go further, because they are first pretrained on raw, untranscribed audio ([Alabi et al., 2025](../references.md#afrihubert-2025)).
 
 ASR datasets are usually distributed as a manifest: one record per utterance pointing at an audio file and its transcript, with the metadata a trainer needs. Keeping duration and sample rate in the manifest lets you filter and batch without re-reading every file. Each record is one line in the file, shown indented here for readability:
 
@@ -55,16 +89,16 @@ The last group of fields records where the clip came from and how it was checked
 
 Recording `speaker_id` is what lets you split train and test by speaker, which matters more than it looks: if the same voice appears in both, the reported error rate flatters the model, because it has heard that speaker before.
 
-The `speaker_profile` fields above are optional and illustrative. Include them only where the speaker deliberately supplied them and accepted the named, versioned row-level release consent. Otherwise omit the whole profile object and its consent field, rather than exporting empty values. Use coarse categories, allow "prefer not to say", and never copy one speaker's profile onto a multi-speaker clip. See [Make speaker profiles optional and deliberate](../sections/speech.md#make-speaker-profiles-optional-and-deliberate).
+The `speaker_profile` fields above are optional and illustrative. Include them only where the speaker deliberately supplied them and accepted the named, versioned row-level release consent; otherwise omit the whole profile object and its consent field, rather than exporting empty values. Never copy one speaker's profile onto a multi-speaker clip. How to collect profiles (coarse fields, "prefer not to say", no preselection, separate release consent) is in [Purpose limitation and downstream use](../legal-consent/index.md#purpose-limitation-and-downstream-use).
 
 ## What "African-language speech" actually varies on
 
-Every ASR corpus decision cascades through the model. The variation African languages carry, and that generic ASR pipelines routinely under-serve, sits along four axes.
+Every corpus decision carries through to the model. African-language speech varies along four axes that generic ASR pipelines often under-serve.
 
-- **Tone and diacritics carry lexical meaning.** In Yorùbá, Igbo, Ewe, Fon, Twi, and most Bantu languages, dropping a tone diacritic on the reference transcript teaches the model to drop it on inference, and downstream users end up with technically-correct-looking text that mispronounces or mis-parses the intended word. Establish the tone convention in the annotation guidelines, verify it against a linguistic reference, and enforce it in evaluation normalisation.
-- **Code-switching is the rule, not the exception.** Real African-language speech mixes local languages with English, French, Arabic, or a regional lingua franca. A monolingual corpus produces a model that fails immediately on code-switched input; a mixed corpus needs explicit code-switch marking or the model learns confused acoustic-to-orthographic mappings.
-- **Dialect and variety matter more than the language name suggests.** Kiswahili in Tanzania differs from Kiswahili in Uganda and Kenyan coastal; Nigerian English is not South African English. Corpora built in one variety and deployed in another degrade in ways that per-language error rates miss.
-- **Recording environment sets the ceiling.** Studio-recorded corpora produce models that fail on phone-microphone input; Common Voice-style community recordings are closer to real-world audio and generalise better despite being noisier. Match the training recording condition to the deployment condition.
+- **Tone and diacritics carry meaning.** Yorùbá, Igbo, Ewe, Fon, Twi and most Bantu languages are tonal. If the reference transcripts drop tone marks, the model learns to drop them too, and users get text that looks right but can be read as a different word. Set the tone convention in the annotation guidelines, check it against a linguistic reference, and apply it in evaluation normalisation.
+- **Code-switching is common, not an exception.** Everyday speech often mixes a local language with English, French, Arabic or a regional lingua franca. A monolingual corpus gives a model that fails on mixed input. A mixed corpus needs consistent code-switch marking, or the model learns confused mappings from sound to spelling.
+- **Dialect and variety matter more than the language name suggests.** Kiswahili differs between Tanzania, Uganda and the Kenyan coast; Nigerian English is not South African English. A model built on one variety and used on another degrades in ways that a single per-language error rate hides.
+- **The recording environment sets the ceiling.** Models trained only on studio audio tend to fail on phone-microphone input. Community recordings made on contributors' own devices are noisier but closer to real-world audio. Match the training recording conditions to the deployment conditions.
 
 ## Recording pipeline
 
@@ -72,7 +106,7 @@ Two broad recording modes serve ASR: read speech (speakers reading prepared prom
 
 **Read speech** is the fastest path to a corpus and the cheapest to transcribe (the transcript is the prompt). It is the right choice when the deployment target is broadcast-adjacent (announcements, prepared speeches, formal contexts) or when the project is early and needs any usable model quickly. Prompts must be curated for phonetic coverage: every phoneme in every position, including tone contrasts. See [TTS · Phonetic coverage](../text-to-speech/index.md#phonetic-coverage-what-enough-means-per-language-family) for the per-family constraints.
 
-**Spontaneous speech** matches how people actually talk and produces models that generalise to real deployment surfaces (voice notes, phone calls, market conversations). It is 3–5x more expensive to transcribe per hour of audio than read speech, and requires a code-switching-aware transcription convention. Use when the deployment target is anything other than prepared speech.
+**Spontaneous speech** matches how people actually talk and gives models that generalise to real use (voice notes, phone calls, market conversations). It costs several times more to transcribe per hour of audio than read speech, because there is no prompt to start from, and it needs a transcription convention that handles code-switching. Use it when the deployment target is anything other than prepared speech.
 
 **Session structure.** For read-speech recording, sessions of 60 to 90 minutes with breaks work better than four-hour marathons; vocal fatigue produces silent quality drift. For spontaneous speech, capture in natural chunks (interview turns, broadcast segments) and cut them into utterance-level clips afterwards (see [Segmenting long recordings](#segmenting-long-recordings)). Train ASR on 16 kHz mono copies: for the training copy, higher sample rates buy nothing for speech recognition and inflate storage. Capture and archive the originals at a higher rate, though, and derive the 16 kHz copies from them (see [Capture high, derive down](#capture-high-derive-down)).
 
@@ -142,31 +176,16 @@ For ASR the annotation is transcription, and its conventions decide the dataset'
 
 Cut long recordings into clips first ([Segmenting long recordings](#segmenting-long-recordings)); for word or phoneme timestamps inside a clip, see [Time alignment](#time-alignment-word-and-phoneme-timestamps).
 
-A transcription config plays the audio and gives the transcriber a text box, plus tick-boxes for the conditions that the conventions above need to be applied to consistently. Capturing those conditions as structured labels, rather than leaving them implicit in the text, lets you measure how much of your data is spontaneous, code-switched, or noisy:
+The transcription task plays the audio and gives the transcriber a text box, plus tick-boxes for the conditions the conventions need to handle consistently. Capturing these conditions as structured labels, rather than leaving them implicit in the text, lets you measure how much of your data is spontaneous, code-switched or noisy.
 
-```xml
-<View>
-  <Audio name="audio" value="$audio"/>
-  <TextArea name="transcript" toName="audio" rows="3"
-            editable="true" required="true"
-            placeholder="Transcribe exactly what is said, following the guidelines"/>
-  <Choices name="languages_present" toName="audio" choice="multiple">
-    <!-- Populate these choices from the project's controlled ISO 639-3 list. -->
-    <Choice value="hau"/>
-    <Choice value="eng"/>
-    <Choice value="other_language_needs_review"/>
-  </Choices>
-  <Choices name="conditions" toName="audio" choice="multiple">
-    <Choice value="Code-switching"/>
-    <Choice value="Overlapping speech"/>
-    <Choice value="Background noise"/>
-    <Choice value="Disfluency or false start"/>
-    <Choice value="Unclear, needs review"/>
-  </Choices>
-</View>
-```
+**Task specification: Transcription with conditions**
 
-The `$audio` value is the `audio_filepath` from the manifest above, so the same file feeds collection, transcription, and training without reformatting.
+| Setting | Value |
+|---|---|
+| Annotator sees | One audio clip, loaded from the manifest's `audio_filepath`, so the same file feeds collection, transcription and training |
+| Annotator gives | (1) A verbatim transcript, following the guidelines; (2) the languages present; (3) any conditions heard |
+| Choice | Transcript: free text, required. Languages present: one or more, required, from the project's controlled ISO 639-3 list (for example `hau`, `eng`), plus `other_language_needs_review`. Conditions: one or more, optional: code-switching, overlapping speech, background noise, disfluency or false start, unclear (needs review) |
+| Notes | The text box must accept the target script and its diacritics |
 
 ### Use drafts without losing the reference
 
@@ -212,11 +231,17 @@ Decide whether the corpus is for robust ASR or clean TTS before setting any thre
 
 ### Batch review checks
 
-- **Per-clip second-pass review.** A second transcriber, independent of the first, listens to a random 5–10% sample of each batch and re-transcribes. Compute per-clip character error rate between the two transcripts; anything above a threshold (typically CER > 0.05) is flagged for adjudication. This is the single cheapest quality signal.
-- **Per-condition sampling.** The `conditions` labels in the transcription config are not just for the trainer's benefit. Sample the flagged clips separately (all "code-switching" flagged, all "background noise" flagged) and review them together. Systematic transcription errors surface in these focused reviews that random sampling misses.
+- **Per-clip second-pass review.** A second transcriber, independent of the first, listens to a random 5–10% sample of each batch and re-transcribes it. Compute the per-clip character error rate between the two transcripts, and flag anything above a project threshold (for example, CER above 0.05) for adjudication. This is the cheapest quality signal you have.
+- **Per-condition sampling.** The condition labels from the transcription task are not just for the trainer's benefit. Sample the flagged clips separately (all "code-switching" flagged, all "background noise" flagged) and review them together. Systematic transcription errors surface in these focused reviews that random sampling misses.
 - **Per-speaker balance.** Track cumulative recorded minutes per speaker and flag imbalances. A corpus where three speakers account for 40% of the data will produce a model that flatters those voices and fails on others.
 - **Duration and audio-quality checks at ingest.** Automated per-clip duration checks, clipping detection and loudness measurement, judged against the [threshold table](./audio-quality-control.md#tier-1-signal-checks-on-every-clip) for the corpus purpose. Loudness normalisation and silence trimming run on the derived training copies, never on the archived original ([Capture high, derive down](#capture-high-derive-down)). A clip that is clipped badly enough to fail the table should be re-recorded, not "fixed" in post.
-- **Weekly IAA measurement**: inter-annotator agreement on the sample second-pass reviewed batch. Falling IAA over time is the earliest signal that transcription guidelines are drifting or annotator fatigue is setting in. Two human transcripts have no true reference, and CER or WER changes depending on which one you treat as the reference, because it divides the edit distance by the reference length. For a symmetric score, divide the character or word edit distance by the length of the longer transcript instead. That score is never higher than CER or WER on the same pair, so state which normalisation you use and calibrate the adjudication threshold for it rather than carrying over the CER threshold from the second-pass check.
+- **Weekly inter-annotator agreement (IAA).** Measure agreement on the second-pass sample each week. Falling agreement is the earliest sign that the guidelines are drifting or that annotators are tired.
+
+:::note[Scoring agreement between two transcribers]
+
+Two human transcripts have no true reference. CER and WER divide the edit distance by the reference length, so the score changes depending on which transcript you treat as the reference. For a symmetric score, divide the character or word edit distance by the length of the longer transcript instead. That score is never higher than CER or WER on the same pair, so state which normalisation you use and set the adjudication threshold for it, rather than reusing the CER threshold from the second-pass check.
+
+:::
 
 ### Keep prompt and speaker diversity at assignment time
 
@@ -273,11 +298,11 @@ import jiwer
 references = ["ina kwana yaya gida"]
 hypotheses = ["ina kwana yaya gidda"]   # one doubled letter
 
-print(f"WER: {jiwer.wer(references, hypotheses):.3f}")  # 0.25: one word marked wrong
-print(f"CER: {jiwer.cer(references, hypotheses):.3f}")  # 0.05: one character wrong
+print(f"WER: {jiwer.wer(references, hypotheses):.3f}")  # 0.250: one word of four marked wrong
+print(f"CER: {jiwer.cer(references, hypotheses):.3f}")  # 0.053: one extra character in 19
 ```
 
-One spelling slip turns into a quarter of the words being "wrong" under WER but only a twentieth of the characters under CER, which is exactly why CER is the fairer headline number for morphologically rich and tonal languages. Normalize the reference and hypothesis the same way before scoring, and make that normalization match your transcription conventions: if the guidelines keep diacritics, the scorer must keep them too, or it will reward the model for dropping the tone marks the dataset worked to capture.
+One spelling slip turns into a quarter of the words being "wrong" under WER but only about a twentieth of the characters under CER, which is exactly why CER is the fairer headline number for morphologically rich and tonal languages. Normalize the reference and hypothesis the same way before scoring, and make that normalization match your transcription conventions: if the guidelines keep diacritics, the scorer must keep them too, or it will reward the model for dropping the tone marks the dataset worked to capture.
 
 **Beyond aggregate error rate.** Aggregate CER hides where a model fails. Report per-speaker, per-domain (read vs. spontaneous), per-code-switching-condition, and per-dialect CER separately, and flag any subgroup with a materially higher error rate. A model whose overall CER is 12% but whose women-speakers CER is 22% is a model that will silently under-serve half its users.
 
@@ -287,11 +312,11 @@ One spelling slip turns into a quarter of the words being "wrong" under WER but 
 
 ## Deployment realities
 
-For a language covered by [Meta MMS](https://huggingface.co/facebook/mms-1b-all), the out-of-the-box model is usually the fastest path to a usable system. Fine-tune the language-specific MMS adapter on your best available in-domain speech data; measure on a 200-500-utterance native-speaker-verified in-domain evaluation set. For high-resource languages with domain match, Whisper large-v3-turbo is often the production default for its size class.
+For a language covered by [Meta MMS](https://huggingface.co/facebook/mms-1b-all), the ready-made model is usually the fastest path to a usable system. Fine-tune its language-specific adapter on your best in-domain speech, and measure on an in-domain evaluation set of 200 to 500 utterances verified by native speakers. For languages that Whisper already handles well in your domain, Whisper large-v3-turbo is a common choice for its size class.
 
-**On-device deployment.** For phone-tier deployment (edge devices, offline apps), on-device ASR runtimes matter. [whisper.cpp](https://github.com/ggerganov/whisper.cpp) is the reference for Whisper-family models across CPU, ARM, and Apple Silicon with quantised model support. On Android Go and mid-range phones, whisper-tiny quantised or a distilled MMS adapter is the achievable target. See the [edge devices](../deployment/edge-devices.md) chapter for the phone-tier map and runtime choices.
+**On-device deployment.** For phones and offline apps, the on-device runtime matters. [whisper.cpp](https://github.com/ggerganov/whisper.cpp) runs Whisper-family models on CPU, ARM and Apple Silicon, with support for quantised (reduced-precision) models. On low-end and mid-range Android phones, aim for a small quantised model and test it on the actual device. See the [edge devices](../deployment/edge-devices.md) chapter for the phone-tier map and runtime choices.
 
-**WhatsApp voice notes** are an increasingly common African deployment surface: users voice-note more comfortably than they type in complex diacritics or Ajami/Ge'ez scripts. ASR on voice notes is often more useful than a keyboard input for the same user population. See the [SMS, USSD, and WhatsApp](../deployment/sms-ussd-whatsapp.md) chapter for the deployment integration details.
+**WhatsApp voice notes** are a common way to reach users. Many people find it easier to send a voice note than to type complex diacritics or Ajami or Ge'ez script, so ASR on voice notes can serve them better than a keyboard. See the [SMS, USSD, and WhatsApp](../deployment/sms-ussd-whatsapp.md) chapter for the deployment integration details.
 
 **Streaming vs. batch.** Real-time transcription (streaming) is a different engineering problem from batch transcription. Whisper and MMS are batch-first; streaming ASR needs either a streaming-native architecture (Conformer, RNN-T) or a chunked-and-stitched approximation with the accuracy tradeoff that implies. Decide streaming vs. batch at project scoping, not after model training.
 
@@ -299,8 +324,8 @@ For a language covered by [Meta MMS](https://huggingface.co/facebook/mms-1b-all)
 
 - **Diacritic-flat transcripts, tone-flat model.** Transcribers dropped diacritics inconsistently and the model learned to omit them. Fix: audit tone marks in a batch review before continuing collection.
 - **Speaker or prompt leakage across splits.** Same speaker, or for read speech the same prompt sentence, in train and test; error rate flatters. Fix: split by `speaker_id` and `prompt_id`, not by clip, and assert that neither crosses a split (see [Evaluation](#evaluation)).
-- **Corpus-domain vs. deployment-domain gap.** Model trained on read speech, deployed on spontaneous WhatsApp voice notes; error rate triples. Fix: match training recording condition to deployment condition, or budget a domain-adaptation fine-tune.
-- **Systematic dialect blindness.** Aggregate CER looks acceptable; per-dialect breakdown shows one variety at 3x the average error. Fix: per-dialect evaluation is not optional; if your target deployment covers multiple varieties, the corpus needs to too.
+- **Corpus-domain vs. deployment-domain gap.** Model trained on read speech, deployed on spontaneous WhatsApp voice notes; the error rate rises sharply. Fix: match training recording condition to deployment condition, or budget a domain-adaptation fine-tune.
+- **Systematic dialect blindness.** Aggregate CER looks acceptable; a per-dialect breakdown shows one variety far above the average error. Fix: per-dialect evaluation is not optional; if your target deployment covers multiple varieties, the corpus needs to too.
 - **Code-switching collapse.** Monolingual corpus, model fails immediately on real user code-switched input. Fix: include a proportion of code-switched examples in training, marked consistently.
 - **Post-quantisation degradation on-device.** Fine-tuned in float16, deployed at INT8: accuracy drops sharply. Fix: measure at deployment precision from the start; see [compute-poor training](../compute-poor/index.md) for the quantisation discipline.
-- **Gender or age imbalance in speaker mix.** Corpus skews to one demographic; model under-serves the others in deployment. Fix: track speaker demographics in the manifest and enforce balance at collection time.
+- **Gender or age imbalance in speaker mix.** Corpus skews to one demographic; model under-serves the others in deployment. Fix: recruit for balance at collection time, and track coarse speaker demographics where speakers chose to provide them.

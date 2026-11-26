@@ -3,12 +3,22 @@ title: Offline Field Operations
 sidebar_position: 10
 ready: true
 last_update:
-  date: 2026-11-22
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 # Offline Field Operations
 
 Learn how to run data collection and annotation when contributors work away from a reliable connection: what to settle before fieldwork, how work moves from a device to the server, and what to test before you scale.
+
+:::tip[Key points]
+
+- Decide whether data may be stored on devices, and check it against consent and the law, before fieldwork.
+- Do sign-in, contributor consent and work-packet downloads while connected.
+- Never lose work: give each item a device-made ID, keep refused work, and avoid last-writer-wins.
+- Protect unsent work from storage clean-up, and show contributors plainly what has synced.
+- Test offline in the pilot, and budget for data bundles and regular check-ins.
+
+:::
 
 ## Why plan for offline work
 
@@ -71,7 +81,12 @@ Offline work can arrive after the item already has the number of annotations it 
 
 ## Manage device storage
 
-Phones fill up, and when they do, the system or the browser may delete stored data to make room. Browser-based tools are especially exposed: under storage pressure a browser can delete all of a site's stored data at once, which can include work that has not been sent ([MDN Web Docs, 2026a](../references.md#mdn-storage-quotas)). Safari also deletes a site's stored data if the site has not been used for seven days of browser use. Ask contributors to open the tool and sync at least weekly, and if your tool is browser-based, check that it asks the browser for persistent storage, which exempts it from eviction under storage pressure ([MDN Web Docs, 2026a](../references.md#mdn-storage-quotas)). Three habits protect unsent work:
+Phones fill up, and when they do, the system or the browser may delete stored data to make room. Browser-based tools are especially exposed:
+
+- Under storage pressure, a browser can delete all of a site's stored data at once, which can include work that has not been sent ([MDN Web Docs, 2026a](../references.md#mdn-storage-quotas)).
+- Safari can also delete a site's stored data if the site has not been used for seven days of browser use ([MDN Web Docs, 2026a](../references.md#mdn-storage-quotas)).
+
+Ask contributors to open the tool and sync at least weekly. If your tool is browser-based, check that it asks the browser for persistent storage, which exempts it from eviction under storage pressure ([MDN Web Docs, 2026a](../references.md#mdn-storage-quotas)). Three habits protect unsent work:
 
 - **Cap the media cache.** Keep media the device can download again (images, audio, video) under a size limit, and clear only that media when space runs low. Never clear queued work or drafts to save space.
 - **Set a minimum free-storage requirement** in the device survey and check it again before each new work packet.

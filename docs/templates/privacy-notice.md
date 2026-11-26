@@ -4,7 +4,7 @@ sidebar_label: Privacy notice
 description: Template for explaining how a language-data project handles contributor and annotator personal data.
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -42,7 +42,14 @@ Do not infer sensitive attributes or add new purposes merely because a field is 
 
 ## Who can see the data
 
-Describe visibility by role: contributors, annotators, reviewers, project managers, technical administrators, processors and the public. State whether annotators can see only assigned work, who can see identifiable profiles or quality records, and who may approve exports or support access. Do not publish member lists or individual quality records.
+Describe who can see what, by role:
+
+- contributors and annotators;
+- reviewers and project managers;
+- technical administrators and processors;
+- the public.
+
+State whether annotators see only the work assigned to them, who can see identifiable profiles or quality records, who may approve exports, and who may give technical staff access to project data. Do not publish lists of team members or individual quality records.
 
 ## Storage and international transfers
 

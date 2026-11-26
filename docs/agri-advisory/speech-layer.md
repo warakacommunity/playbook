@@ -3,7 +3,7 @@ title: Speech Layer
 sidebar_position: 4
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -12,6 +12,16 @@ last_update:
 Most farmers who use an advisory model will talk to it, and it will talk back. The speech layer gives the model both sides of that exchange in the target language: a farmer asking about a plant in their own words, and the advisory for that plant read aloud. This page covers how to record, transcribe, and validate that layer on top of an existing set of image-advisory pairs.
 
 This is not a standalone speech corpus. Every clip attaches to a pair ID, so the question and the advisory a model hears are about the image it sees. General practice for recording and transcribing African-language speech is in the [ASR chapter](../asr/index.md); this page covers only what changes when the audio must stay tied to a diagnosed image and its advisory.
+
+:::tip[Key points]
+
+- One speech item is two recordings on one image-advisory pair: a spontaneous farmer question and the advisory read aloud by a different speaker.
+- Record people, never synthesised audio, in facilitated sessions at 48 kHz.
+- Track age, gender and region balance from the first week; a skewed pool cannot be fixed late without new recordings.
+- Automated checks run first, then two native-speaker votes with a reviewer for splits; aim for 95% validated on the first pass.
+- Voice is biometric data, so speakers give separate consent before their first recording.
+
+:::
 
 ![One speech item on one pair: a spontaneous farmer question and a read-aloud advisory, each with 48 kHz original, 16 kHz derivative, transcript, timestamps and consent-gated speaker metadata, passing automated QC and two-vote validation](images/speech-item.svg)
 
@@ -33,7 +43,7 @@ One speech item is two recordings on one pair. The farmer question is spontaneou
                     "verbatim": true, "timestamps": { "level": "word", "segments": ["..."] } },
     "speaker": { "speaker_id": "spk-hau-0412", "metadata_shared": true,
                  "age_band": "45-59", "gender": "male", "region": "Kano" },
-    "validation": { "mode": "hybrid", "votes_yes": 2, "votes_no": 0, "outcome": "validated" }
+    "validation": { "mode": "two_votes_with_review", "votes_yes": 2, "votes_no": 0, "outcome": "validated" }
   },
   "advisory": {
     "role": "spoken_advisory",
@@ -43,7 +53,7 @@ One speech item is two recordings on one pair. The farmer question is spontaneou
     "transcript": { "text": "Wannan tsutsar sojoji ce ta masara. ...", "verbatim": true,
                     "matches_prompt": true, "deviations": [] },
     "speaker": { "speaker_id": "spk-hau-0088", "metadata_shared": false },
-    "validation": { "mode": "hybrid", "votes_yes": 2, "votes_no": 0, "outcome": "validated" }
+    "validation": { "mode": "two_votes_with_review", "votes_yes": 2, "votes_no": 0, "outcome": "validated" }
   },
   "qa": { "status": "validated" }
 }
@@ -59,7 +69,7 @@ Speakers are recruited through regional facilitators, at least three regions per
 
 Recording happens in facilitated sessions: a facilitator brings a group of speakers together, works through the consent script, and records at 48 kHz with live metering. A cooperative office or a classroom with the door closed and the generator off is enough. Outdoor recording is acceptable only when every word remains intelligible and the clip passes the same loudness, clipping, silence and noise checks as an indoor recording.
 
-Prompts follow a one-speaker-one-prompt rule: no advisory is read by the same person twice, and no speaker records enough of a language's items to dominate it. This project assigns prompts automatically to enforce that rule; another implementation can use a checked assignment sheet if it provides the same guarantees.
+Prompts follow a one-speaker-one-prompt rule: no advisory is read by the same person twice, and no speaker records enough of a language's items to dominate it. Enforce the rule where prompts are assigned, either automatically or with a coordinator's checked assignment sheet.
 
 ## Recording interface
 
@@ -88,7 +98,7 @@ For transcribers and validators:
 
 Automated QC runs on every clip at upload: clipping, loudness, signal-to-noise ratio, silence ratio, duration, and speech ratio. Set and validate thresholds on a pilot that includes the intended recording environments. Natural field ambience is acceptable when speech remains intelligible; clipping, corruption, empty audio and unusable noise are not. Corrupt or empty clips never reach a validator.
 
-Validation then runs in hybrid mode. Two native-speaker votes that agree validate a clip. A split vote goes to a reviewer, who can override in either direction, and the outcome is recorded on the item. The target is at least 95% of clips validated on first pass, per language, in the weekly report. A language below that usually has a session problem (a noisy venue, a facilitator not watching the meter), and the fix is in the next session.
+Validation then combines votes with a reviewer. Two native-speaker votes that agree validate a clip. A split vote goes to a reviewer, who can override in either direction, and the outcome is recorded on the item. The target is at least 95% of clips validated on first pass, per language, in the weekly report. A language below that usually has a session problem (a noisy venue, a facilitator not watching the meter), and the fix is in the next session.
 
 Transcription differs by recording type. For a read advisory the prompt text is the transcript, and the validator confirms the read matches it. For a spontaneous question a native transcriber writes the verbatim transcript and a second transcriber checks a 20% sample; a transcriber whose sample shows errors gets the whole batch re-checked. Transcripts are scanned for spoken names and numbers, which are replaced with a redaction tag and counted on the record. Word-level timestamps come from forced alignment where it succeeds, utterance-level otherwise, and the record says which.
 
@@ -96,16 +106,14 @@ The vote-and-adjudicate pattern is the one in [Workflow and Adjudication](../3_a
 
 ## Consent and release
 
-Speaker consent is taken at the session, before the first recording, on a separate speaker template.
-
 :::danger[Voice is biometric data]
-A voice recording can identify a person on its own, so the speaker consent form names the recording as biometric data and asks separately whether the voice may be used for training, evaluation and publication, whether it may be released publicly under CC-BY-4.0, and whether age band, gender and region may be attached. A speaker can say yes to the first and no to the others; a refused metadata share leaves `metadata_shared` false and the fields absent. The 60-day opt-out applies to speech as to everything else. See [Legal and Consent](../legal-consent/index.md) for the framework and [Quality, Consent and Release](./quality-consent-release.md) for this chapter's templates.
+A voice recording can identify a person, so speaker consent is taken at the recording session, before the first recording, names the voice as biometric data, and asks separately about public release and about attaching age band, gender and region. The full design, including the 60-day opt-out and what happens when a speaker refuses the profile, is in [Quality, Consent and Release](./quality-consent-release.md#consent), with the framework in [Legal and Consent](../legal-consent/index.md).
 :::
 
 ## Known limitations
 
 - **Read speech has read prosody.** The spoken advisory is a person reading a text. That suits text-to-speech training, and it sounds different from an extension officer talking at a field visit. Do not train a conversational response model on it and expect natural prosody.
-- **The cued question is not a field question.** Speakers ask in a session, looking at a photo, prompted by the collector's captured question. It is closer to how farmers ask than a read prompt, and further than a recording made at the plant. Kallaama, which recorded spontaneous agricultural speech in Senegal, is the closer reference for the field register ([Gauthier et al., 2024](../references.md#kallaama-2024)).
+- **The cued question is not a field question.** Speakers ask in a session, looking at a photo, prompted by the collector's captured question. It is closer to how farmers ask than a read prompt, and further than a recording made at the plant. Kallaama, which transcribed mostly spontaneous agricultural speech from radio programmes, interviews and focus groups in Senegal, is the closer reference for the field register ([Gauthier et al., 2024](../references.md#kallaama-2024)).
 - **Tracking balance does not guarantee it.** The 60+ band and remote regions fill last in every language. Report the achieved balance per cell in the datasheet, alongside the target.
 - **Word-level timestamps depend on an aligner for the language.** Where none exists the record falls back to utterance level; check the `level` field before assuming word timing.
 

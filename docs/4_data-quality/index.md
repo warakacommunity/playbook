@@ -4,26 +4,75 @@ sidebar_label: Overview
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 
-# Data Quality Assurance
+# Data Quality
 
-Quality is not a final inspection you run before release. It is a discipline you keep up from the pilot to the last item. For low-resource African data the stakes are higher than usual, because every example is expensive to produce and there is no vast pool of clean data to dilute mistakes. When a large web crawl was audited, a striking share of the low-resource text turned out to be mislabelled, machine-translated, or not the target language at all ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). A small, carefully assured dataset is worth far more than a large one nobody checked. This page covers the assurance side: measuring agreement, using gold data, auditing by hand, and closing the loop.
+Quality is not a final inspection you run before release. It is a discipline you keep up from the pilot to the last item. For low-resource African data the stakes are higher than usual, because every example is expensive to produce and there is no vast pool of clean data to dilute mistakes. When five large web-crawled multilingual datasets were audited by hand, many low-resource corpora turned out to be mislabelled with the wrong language code, to be less than half acceptable text, or to contain no usable text at all ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). A small, carefully assured dataset is worth far more than a large one nobody checked. This page covers the assurance side: measuring agreement, using gold data, auditing by hand, and closing the loop.
+
+:::tip[Key points]
+
+- Measure agreement with a chance-corrected coefficient, and report how it was computed.
+- Break disagreement down by label, annotator and item before you retrain anyone or rewrite the guideline.
+- Mix hidden gold items into the work, and act on low scores through a fair, staged process.
+- Read samples by hand: metrics miss systemic problems.
+- Treat quality as a loop: monitor drift, feed findings back into the guideline, and report readiness as separate measures.
+
+:::
 
 ![Quality assurance as a continuous loop: agreement, gold checks, hand audits, and feedback](images/quality-assurance.svg)
 
 ## Measure inter-annotator agreement
 
-When several people label the same items, agreement tells you whether the labels are reliable or just one person's opinion repeated. Raw percentage agreement is easy to read but misleading, because some agreement happens by chance, so use a chance-corrected measure: [Cohen's kappa](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html) for two annotators, [Fleiss' kappa](https://www.statsmodels.org/stable/generated/statsmodels.stats.inter_rater.fleiss_kappa.html) for three or more, and [Krippendorff's alpha](https://pypi.org/project/krippendorff/) when annotations are missing or the labels are ordinal. Production-grade work often targets an alpha above 0.8, though the right threshold depends on how subjective the task is. African datasets show the full range in practice. MasakhaNER reached high agreement by training annotators in workshops where they discussed disagreements ([Adelani et al., 2022a](../references.md#adelani-2022)), AfriSenti held sentiment agreement above 0.70 ([Muhammad et al., 2023a](../references.md#muhammad-2023)), the Thiomi multimodal corpus kept Fleiss' kappa above 0.82 ([Thiomi Dataset, 2026](../references.md#thiomi-2026)), and AfriHate reported Randolph's kappa between 0.46 and 0.81 across its hate-speech datasets ([Muhammad et al., 2025a](../references.md#afrihate-2025)). Lower numbers are not automatically a failure: on genuinely subjective tasks they can reflect real interpretive variation rather than sloppiness ([Plank, 2022](../references.md#plank-2022)). The worked formulas and code live in the task chapters; here the point is to choose the right metric and read it honestly.
+When several people label the same items, agreement tells you whether the labels are reliable or just one person's opinion repeated. Raw percentage agreement is easy to read but misleading, because some agreement happens by chance. Use a chance-corrected measure instead.
 
-Once you have chosen the metric, computing it on an exported annotation file is short. Tools using the Label Studio configuration format export annotations as JSON, so a task carries the labels every annotator gave it. The script below builds the annotator-by-item matrix from that export and reports the right statistic for the number of annotators, using established libraries rather than a hand-rolled formula.
+| Situation | Measure |
+|---|---|
+| Two annotators | [Cohen's kappa](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html) |
+| Three or more annotators, the same number of labels on every item | [Fleiss' kappa](https://www.statsmodels.org/stable/generated/statsmodels.stats.inter_rater.fleiss_kappa.html) |
+| Missing annotations, or ordered labels | [Krippendorff's alpha](https://pypi.org/project/krippendorff/) |
+
+All three compare the agreement you observed with the agreement you would expect by chance. Cohen's kappa is $\kappa = (P_o - P_e)/(1 - P_e)$, where $P_o$ is the share of items the two annotators agreed on and $P_e$ is the agreement expected by chance from each annotator's own label distribution. Fleiss' kappa follows the same idea but pools all annotators' labels into one chance distribution. Krippendorff's alpha compares observed disagreement with the disagreement expected by chance, which lets it handle missing labels and ordered scales.
+
+This section covers how to choose the metric, compute it and read it honestly. The basic Cohen and Fleiss code, with checks against textbook answers, is below. Code for ordinal and multi-label tasks is in [Ordinal and continuous scales](../11_text-classification/annotation.md#ordinal-and-continuous-scales) and the sections after it.
+
+On an ordered scale, such as emotion intensity from 0 to 3, give partial credit for near misses with ordinal alpha or weighted kappa, and say which weighting you used. [Ordinal and continuous scales](../11_text-classification/annotation.md#ordinal-and-continuous-scales) has the options and code.
+
+### How to read the score
+
+Two sets of conventions are widely quoted. Both are rules of thumb, not evidence that a dataset is good ([Artstein and Poesio, 2008](../references.md#artstein-2008)).
+
+| Kappa | Landis and Koch label |
+|---|---|
+| Below 0 | Poor |
+| 0.00 to 0.20 | Slight |
+| 0.21 to 0.40 | Fair |
+| 0.41 to 0.60 | Moderate |
+| 0.61 to 0.80 | Substantial |
+| 0.81 to 1.00 | Almost perfect |
+
+The table is the Landis and Koch (1977) scale from medical research, summarised by Artstein and Poesio. Computational linguistics more often follows Krippendorff's stricter advice: 0.8 or above for reliable data, with values between 0.667 and 0.8 allowing only tentative conclusions. Krippendorff himself later treated 0.8 as the minimum for any serious use ([Artstein and Poesio, 2008](../references.md#artstein-2008)). The right target still depends on how subjective the task is.
+
+African datasets show the full range in practice:
+
+- MasakhaNER 2.0 trained its language coordinators in online workshops. Agreement rose once coordinators discussed disagreements with their annotators: for Nigerian Pidgin, Fleiss' kappa went from 0.648 to 0.966 ([Adelani et al., 2022a](../references.md#adelani-2022)).
+- AfriSenti reported Randolph's free-marginal kappa between 0.40 and 0.75 for its sentiment datasets, with lower agreement for Afaan Oromo, where annotation was hardest ([Muhammad et al., 2023a](../references.md#muhammad-2023)).
+- The Thiomi multimodal corpus kept Fleiss' kappa above 0.82 ([Thiomi Dataset, 2026](../references.md#thiomi-2026)).
+- AfriHate reported Randolph's kappa between 0.46 and 0.81 across its hate-speech datasets ([Muhammad et al., 2025a](../references.md#afrihate-2025)).
+
+Lower numbers are not automatically a failure. On genuinely subjective tasks they can reflect real differences in interpretation rather than sloppiness ([Plank, 2022](../references.md#plank-2022)).
+
+### Compute agreement from an export
+
+Most annotation tools can export annotations as JSON, with each item listing the labels every annotator gave it. The script below builds the annotator-by-item matrix from such an export and reports the right statistic for the number of annotators. It uses established libraries rather than a hand-rolled formula.
+
+The field names in the loader (`annotations`, `completed_by`, `from_name`, `ground_truth`, `was_cancelled`, `was_skipped`) follow one common export layout. Your tool may use different names, so adapt them and write down the mapping.
 
 ```python
 import json
 from collections import defaultdict
-
 from itertools import combinations
 
 import krippendorff                       # pip install krippendorff
@@ -34,10 +83,11 @@ from sklearn.metrics import cohen_kappa_score   # pip install scikit-learn
 def load_labels(export_path: str, from_name: str = "sentiment") -> dict:
     """Return {task_id: {annotator: label}} for independent human labels.
 
-    This example assumes the export marks gold with `ground_truth`, cancelled
-    annotations with `was_cancelled`, and skips with `was_skipped` or an empty
-    result. Adapt these field names to your export and document the mapping.
-    Model drafts belong in `predictions`, which this loader never reads.
+    The field names below are one example export layout: gold items are
+    marked with `ground_truth`, cancelled annotations with `was_cancelled`,
+    and skips with `was_skipped` or an empty result. Rename them to match
+    your export and document the mapping. Model drafts should be stored
+    separately (here, under `predictions`), which this loader never reads.
     """
     by_task = defaultdict(dict)
     with open(export_path, encoding="utf-8") as f:
@@ -107,9 +157,21 @@ if __name__ == "__main__":
     agreement(load_labels("annotations_export.json"))
 ```
 
-Each pairwise figure uses only the items that pair actually shared; it never drops items merely because a third annotator missed them. Report the shared-item count beside every coefficient. Krippendorff's alpha uses the incomplete multi-rater matrix directly. If you report Fleiss' kappa instead, first define a fixed-rater complete subset explicitly and report its size; do not silently turn a sampled-overlap design into a complete-case subset. Empty inputs, pairs with no shared items, and degenerate one-label inputs need an explicit "undefined" result rather than a misleading number.
+How the script treats missing data:
 
-Before you trust any agreement code on project data, run it on a textbook example whose answer is published, and pin the library versions you used. Implementations differ in small ways that change the number: whether the chance term uses each annotator's own label distribution (Cohen) or one pooled distribution (Scott, Fleiss), and whether it counts every category the scheme offers or only the ones observed ([Artstein and Poesio, 2008](../references.md#artstein-2008)). The two checks below use the worked examples from the Wikipedia articles on [Cohen's kappa](https://en.wikipedia.org/wiki/Cohen%27s_kappa) (50 items: 20 yes-yes, 5 yes-no, 10 no-yes, 15 no-no, giving observed agreement 0.70, chance agreement 0.50 and kappa 0.40) and [Fleiss' kappa](https://en.wikipedia.org/wiki/Fleiss%27_kappa) (10 subjects, 14 raters each, 5 categories, giving kappa 0.210). Keep them as a test next to your script and rerun them after every library upgrade.
+- Each pairwise figure uses only the items that pair actually shared. It never drops items just because a third annotator missed them. Report the shared-item count beside every coefficient.
+- Krippendorff's alpha uses the incomplete multi-rater matrix directly.
+- If you report Fleiss' kappa instead, first define a complete subset with a fixed set of annotators, and report its size. Do not silently turn a design with sampled overlap into a complete-case subset.
+- Empty inputs, pairs with no shared items, and inputs where only one label was used need an explicit "undefined" result, not a misleading number.
+
+### Check the code against a textbook answer
+
+Before you trust any agreement code on project data, run it on a textbook example whose answer is published, and pin the library versions you used. Implementations differ in small ways that change the number ([Artstein and Poesio, 2008](../references.md#artstein-2008)):
+
+- whether the chance term uses each annotator's own label distribution (Cohen) or one pooled distribution (Scott, Fleiss);
+- whether it counts every category the scheme offers, or only the ones observed.
+
+The two checks below use the worked examples from the Wikipedia articles on [Cohen's kappa](https://en.wikipedia.org/wiki/Cohen%27s_kappa) (50 items: 20 yes-yes, 5 yes-no, 10 no-yes, 15 no-no, giving observed agreement 0.70, chance agreement 0.50 and kappa 0.40) and [Fleiss' kappa](https://en.wikipedia.org/wiki/Fleiss%27_kappa) (10 subjects, 14 raters each, 5 categories, giving kappa 0.210). Keep them as a test next to your script and rerun them after every library upgrade.
 
 ```python
 import numpy as np
@@ -129,13 +191,44 @@ table = np.array([[0, 0, 0, 0, 14], [0, 2, 6, 4, 2], [0, 0, 3, 5, 6],
 assert round(fleiss_kappa(table, method="fleiss"), 3) == 0.210
 ```
 
-Decide what enters the score before comparing batches or languages. Include only independent human annotations, not model drafts, gold checks, cancelled work or skips. The loader treats an empty result as no label; if blank is a substantive answer in your task, represent it with an explicit label instead. State whether two blanks count as agreement, whether a one-sided skip removes that pair-item or counts as disagreement, and how pairs with no shared items are handled. This example drops skipped and blank annotations and reports pairs without overlap as unscorable. Keep those conventions fixed and publish them with the score. To evaluate a model, add its output as a separate annotator in a dedicated comparison; draft acceptance alone is not evidence that the model is trustworthy.
+### Decide what enters the score
 
-A dominant label can produce high raw agreement but low kappa, because the annotators' label margins inflate the agreement expected by chance. This is the prevalence paradox ([Feinstein and Cicchetti, 1990](../references.md#feinstein-1990)). Kappa still usefully discounts easy agreement on the dominant class, so do not replace it with raw agreement. Report observed agreement, per-class agreement and the number of scored items alongside it. Gwet's AC1, or AC2 for ordered labels, is an optional additional coefficient when prevalence makes kappa difficult to interpret; compute it using every category the scheme offers, including unused ones ([Gwet, 2014](../references.md#gwet-2014)). AfriHate reports Randolph's free-marginal kappa, which its authors chose because it suits tasks with several annotators per item; like AC1, its chance term depends on the number of categories, so state the count you used ([Muhammad et al., 2025a](../references.md#afrihate-2025)). On a small overlap sample, any coefficient can be unstable: report `n` and, where possible, a confidence interval rather than treating a few dozen items as a precise estimate.
+Fix these conventions before comparing batches or languages, and publish them with the score:
 
-Reading agreement once at the end hides the drift this chapter warns about. The same export carries an annotation timestamp, so the same matrix can be split by batch or by time and scored separately, which is exactly how the Setswana sentiment corpus surfaced annotators slowly diverging across its eight batches ([Abdulmumin et al., 2026](../references.md#abdulmumin-2026)). For ordinal labels, use ordinal alpha or weighted kappa rather than the nominal measures above.
+- **Include only independent human annotations.** Leave out model drafts, gold checks, cancelled work and skips.
+- **Blanks.** The loader treats an empty result as no label. If blank is a real answer in your task, give it an explicit label instead, and state whether two blanks count as agreement.
+- **One-sided skips.** State whether a skip by one annotator removes that pair-item or counts as disagreement.
+- **Pairs with no shared items.** State how they are handled. The example above drops skipped and blank annotations and reports pairs without overlap as unscorable.
 
-On an ordered scale, such as emotion intensity from 0 to 3, give partial credit for near misses with ordinal alpha or weighted kappa, and say which weighting you used; [Ordinal and continuous scales](../11_text-classification/annotation.md#ordinal-and-continuous-scales) has the options and code.
+To evaluate a model, add its output as a separate annotator in a dedicated comparison. The fact that annotators accepted a model's drafts is not, on its own, evidence that the model is trustworthy.
+
+### Watch for a dominant label
+
+A dominant label can produce high raw agreement but low kappa, because the annotators' label distributions inflate the agreement expected by chance. This is the prevalence paradox ([Feinstein and Cicchetti, 1990](../references.md#feinstein-1990)). Kappa still usefully discounts easy agreement on the dominant class, so do not replace it with raw agreement. Report observed agreement, per-class agreement and the number of scored items alongside it.
+
+Two other coefficients can help:
+
+- **Gwet's AC1** (or AC2 for ordered labels) is an optional extra coefficient when prevalence makes kappa hard to interpret. Compute it using every category the scheme offers, including unused ones ([Gwet, 2014](../references.md#gwet-2014)).
+- **Randolph's free-marginal kappa** is what AfriHate reports; its authors chose it because it suits tasks with several annotators per item. Like AC1, its chance term depends on the number of categories, so state the count you used ([Muhammad et al., 2025a](../references.md#afrihate-2025)).
+
+On a small overlap sample, any coefficient can be unstable. Report `n` and, where possible, a confidence interval, rather than treating a few dozen items as a precise estimate.
+
+### What to report
+
+When you publish agreement, report:
+
+1. The number of annotators per item.
+2. The guideline and its version.
+3. How final labels were aggregated, for example majority vote.
+4. The coefficient, its variant or weighting, and the number of items behind each score.
+5. Observed and per-class agreement, and the class distribution.
+6. The adjudication process used to resolve disagreements.
+7. Whether annotator-level labels are released, for research on subjectivity and disagreement.
+8. Which annotations entered the score: how drafts, gold items, blanks, skips and pairs without shared items were handled (see [Decide what enters the score](#decide-what-enters-the-score)).
+
+### Track agreement over time
+
+Score agreement per batch or time window, not only once at the end, so drift shows up while it can still be fixed (see [Close the feedback loop](#close-the-feedback-loop)).
 
 ### Match the metric to the annotation shape
 
@@ -272,13 +365,34 @@ When you have many annotators per item and no gold set, a statistical model can 
 
 ## Use gold data and control checks
 
-A gold standard is a set of items whose correct labels you already trust. Mixed into the annotation stream without being flagged, gold items give a continuous, per-annotator read on who is still applying the guideline and who has drifted, so you can retrain or remove an annotator before their errors spread through the data. Build the gold set carefully, because it becomes your reference for everything else, and remember that even gold is imperfect: audits of benchmark datasets find error rates from under one percent to over ten, depending on the task. Screen annotators the same way you check them, by having candidates pass a short annotation test before the main task and by re-showing a few items to measure each person's self-consistency.
+A gold standard is a set of items whose correct labels you already trust. Mix gold items into the annotation stream without flagging them. They then give a continuous, per-annotator view of who is still applying the guideline and who has drifted, so you can act before errors spread through the data (see [Act on annotator signals fairly](#act-on-annotator-signals-fairly)).
 
-When an applicant is someone you do not know, for example through an open call (see [Build the team](../project-management/index.md#5-build-the-team)), judge them on checked evidence rather than self-reported skills. Useful evidence includes how much of their past work a reviewer validated, how often reviewers accepted it, and how they scored on gold items. Quote a rate only when it rests on enough items; below the minimum you set, say "insufficient data" and show the raw counts, because three accepted items out of three should not be shown as a 100% acceptance rate. Leave out unresolved disputes and departures caused by a change in pay rate: they are one-sided or say more about the project than the person. Share a contributor's track record with another project only if the contributor opts in, and without naming the organisations they worked for, since that can itself be sensitive.
+Build the gold set carefully, because it becomes your reference for everything else. Even gold is imperfect: an audit of ten widely used benchmark test sets estimated label error rates from 0.15% to about 10% ([Northcutt et al., 2021](../references.md#northcutt-2021)).
 
-Score each annotator against gold with per-class precision, recall and F1, and report macro-F1 across classes. Overall accuracy can hide repeated errors on a rare but important class, such as abusive posts or an uncommon disease. Put the score, minimum support and threshold that trigger retraining or a pause in the guideline, then follow the staged review below rather than acting on one small sample.
+Screen annotators the same way you check them:
 
-Replenish the gold pool regularly: items become less useful once annotators have seen or memorised them. When an adjudicated item becomes gold, record its source item, adjudicator, decision and guideline version. Never score someone against gold derived from their own label; use an independent adjudication or another item instead.
+- have candidates pass a short annotation test before the main task;
+- re-show a few items later to measure each person's self-consistency.
+
+### Judge new applicants on checked evidence
+
+When an applicant is someone you do not know, for example through an open call (see [Build the team](../project-management/index.md#5-build-the-team)), judge them on checked evidence rather than self-reported skills. Useful evidence includes:
+
+- how much of their past work a reviewer validated;
+- how often reviewers accepted it;
+- how they scored on gold items.
+
+Quote a rate only when it rests on enough items. Below the minimum you set, say "insufficient data" and show the raw counts: three accepted items out of three should not be shown as a 100% acceptance rate. Leave out unresolved disputes, which are one-sided, and departures after a project changed its pay, which say more about the project than the person. Share a person's track record outside your project only with their consent, and without naming the organisations they worked for, since that can itself be sensitive.
+
+### Score against gold per class
+
+Score each annotator against gold with per-class precision, recall and F1, and report macro-F1 across classes. Overall accuracy can hide repeated errors on a rare but important class, such as abusive posts or an uncommon disease. Write into the guideline the score, the minimum number of items and the threshold that trigger retraining or a pause. Then follow the staged review below rather than acting on one small sample.
+
+Keep the gold pool fresh:
+
+- **Replenish it regularly.** Items become less useful once annotators have seen or memorised them.
+- **Record where gold came from.** When an adjudicated item becomes gold, record its source item, adjudicator, decision and guideline version.
+- **Never score people against their own labels.** If a gold item was derived from someone's label, score them on an independent adjudication or another item instead.
 
 ### Act on annotator signals fairly
 
@@ -311,25 +425,53 @@ The [agri-advisory case study](../agri-advisory/quality-consent-release.md#thres
 
 ## Audit and spot-check by hand
 
-Aggregate agreement can look healthy while something systemic is quietly wrong, so do not trust the numbers alone. Pull a sample and read it. Spend the time on the places problems hide: the edge cases, the items where annotators clustered into disagreement, and any subset from a single source or annotator. The web-crawl audit is the cautionary tale here, since a brief human look at a sample exposed whole languages that automated pipelines had passed as clean ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). A few hours of careful reading catches failures that no metric will surface on its own. This audit of the finished data is separate from the review of each submission during annotation; for how to sample that review and which flagged items always enter it, see [Decide what gets reviewed](../3_annotation-design/workflow-adjudication.md#decide-what-gets-reviewed-a-sample-plus-escalations).
+Aggregate agreement can look healthy while something systemic is quietly wrong, so do not trust the numbers alone. Pull a sample and read it. Spend the time on the places problems hide: the edge cases, the items where annotators clustered into disagreement, and any subset from a single source or annotator. The web-crawl audit is the cautionary tale here, since a brief human look at a sample exposed whole languages that automated pipelines had passed as clean ([Kreutzer et al., 2022](../references.md#kreutzer-2022)). A few hours of careful reading catches failures that no metric will surface on its own.
+
+This audit of the finished data is separate from the review of each submission during annotation; for how to sample that review and which flagged items always enter it, see [Decide what gets reviewed](../3_annotation-design/workflow-adjudication.md#decide-what-gets-reviewed-a-sample-plus-escalations).
 
 For speech, many problems can be caught automatically before anyone listens: clipped, silent, truncated or very noisy clips. The checks, thresholds and what to do when a clip fails are collected in [Audio Quality Control](../asr/audio-quality-control.md), the shared home for audio QC across the speech chapters.
 
 ## Machines filter, humans judge
 
-Automated checks can reject a file that is demonstrably corrupt, but a borderline quality score, language identification or model pre-screen is a reason for human review, not a silent rejection. The same applies to contestable crowd verdicts. Keep the original item and the check's reason available to the reviewer.
+Automated checks can reject a file that is clearly corrupt. A borderline quality score, a language-identification result or a model pre-screen is different: it is a reason for human review, not a silent rejection. The same applies to crowd verdicts that could be contested. Keep the original item and the check's reason available to the reviewer.
 
-A bulk acceptance must skip flagged items, report the exact number skipped, and leave them in the review queue. Bulk acceptance is hard to undo and can release payment for work nobody checked. Make bulk or destructive actions deliberate: show what will change and require explicit confirmation. When a flag closes, record whether a person confirmed the problem or marked it as a false alarm. Closing a flag must not change the label. Review false-alarm rates for each check and use them to tune thresholds; a check that cries wolf too often stops being useful. The [agri-advisory speech workflow](../agri-advisory/speech-layer.md#quality-control) shows how automated checks, peer decisions and reviewer escalation can work together. For model drafts specifically, see [Reviewing drafts without rubber-stamping](../7_llm-assisted-task/index.md#reviewing-drafts-without-rubber-stamping).
+Design the review steps so flagged work cannot slip through:
+
+- **Bulk actions skip flagged items.** If reviewers can accept many items at once, flagged items should stay in the review queue, and the number skipped should be reported. Bulk acceptance is hard to undo and can release payment for work nobody checked.
+- **Destructive actions are deliberate.** Show what will change and ask for explicit confirmation.
+- **Closing a flag records the outcome.** Note whether a person confirmed the problem or marked it as a false alarm. Closing a flag should not change the label.
+- **Checks are tuned.** Review the false-alarm rate of each check and adjust its threshold; a check that cries wolf too often stops being useful.
+
+The [agri-advisory speech workflow](../agri-advisory/speech-layer.md#quality-control) shows how automated checks, peer decisions and reviewer escalation can work together. For model drafts specifically, see [Reviewing drafts without rubber-stamping](../7_llm-assisted-task/index.md#reviewing-drafts-without-rubber-stamping).
 
 ## Close the feedback loop
 
-Quality assurance is a loop, not a checkpoint. Track agreement over the life of the project rather than only at the end, feed every recurring error back into the guidelines and the next round of training, and re-calibrate when annotators drift apart. Include confirmed and false-alarm outcomes from automated flags in that feedback, so the checks improve as well as the annotations. Drift is real and measurable, and a single end-of-project agreement score can hide it. In a Setswana sentiment corpus, overall agreement looked healthy at κ = 0.76, yet items labelled within a minute of each other reached κ = 0.98 while items labelled more than a day apart fell to κ = 0.65, a clear sign that annotators slowly diverged across the eight batches of the project ([Abdulmumin et al., 2026](../references.md#abdulmumin-2026)). The reason to monitor continuously is economic as well as statistical: a problem caught in week two costs a fraction of the same problem discovered at release, when it has already contaminated the whole dataset ([Sambasivan et al., 2021](../references.md#sambasivan-2021)).
+Quality assurance is a loop, not a checkpoint:
 
-Alongside the shared group chat, keep questions and feedback in a thread attached to the item, and to the specific span, box or field where useful. Annotators can ask for clarification or explain a borderline call, and reviewers answer in the same place. Track open threads so questions do not disappear in chat history, and close a thread only once it has an answer. At a fixed interval, such as each weekly review, harvest recurring questions into the guideline FAQ and worked examples, with the guideline version in which each answer appeared, and announce the change in the group chat so everyone sees it, not only the person who asked.
+- Track agreement over the life of the project, not only at the end.
+- Feed every recurring error back into the guidelines and the next round of training.
+- Re-calibrate when annotators drift apart.
+- Include confirmed and false-alarm outcomes from automated flags, so the checks improve as well as the annotations.
+
+Drift is real and measurable, and a single end-of-project agreement score can hide it. In a Setswana sentiment corpus, overall agreement looked healthy at κ = 0.76, yet items labelled within a minute of each other reached κ = 0.98 while items labelled more than a day apart fell to κ = 0.65, a clear sign that annotators slowly diverged across the eight batches of the project ([Abdulmumin et al., 2026](../references.md#abdulmumin-2026)). The reason to monitor continuously is economic as well as statistical: data problems compound downstream and are often noticed late, so a problem caught early costs far less than one found at release, when it has already spread through the dataset ([Sambasivan et al., 2021](../references.md#sambasivan-2021)).
+
+Keep questions and answers where they can be found again. A group chat is good for quick announcements, but questions get lost in its history. Where your tool allows it, attach each question or comment to the item, and to the specific span, box or field where useful; otherwise keep a shared log that records the item ID. Annotators can ask for clarification or explain a borderline call, and reviewers answer in the same place. Track open questions and close each one only once it has an answer.
+
+At a fixed interval, such as each weekly review, move recurring questions into the guideline's FAQ and worked examples. Note the guideline version in which each answer appeared, and announce the change in the group chat so everyone sees it, not only the person who asked.
 
 ## Report readiness as separate measures
 
-Do not collapse readiness into one score. Report coverage against the planned items and language or domain cells, mean agreement with its support, the share of items verified by a reviewer, and label balance per field. Where gold labels exist, add per-class precision, recall and F1 plus macro-F1, with class support and the gold-set version. Keep "not yet scored" distinct from zero.
+Do not collapse readiness into one score. Report each of these on its own:
+
+| Measure | What to report |
+|---|---|
+| Coverage | Items done against the plan, per language or domain cell |
+| Agreement | Mean agreement, with the number of items behind it |
+| Verification | The share of items a reviewer has checked |
+| Balance | Label balance per field (formula below) |
+| Accuracy against gold | Where gold exists: per-class precision, recall and F1, macro-F1, class support and the gold-set version |
+
+Keep "not yet scored" distinct from zero.
 
 For a categorical field with $k$ planned categories and observed proportions $p_i$, normalised Shannon entropy is:
 

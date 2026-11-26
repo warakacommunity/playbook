@@ -1,37 +1,46 @@
 ---
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 # Data Provenance and Traceability
 
 Learn how to track the origin, history, and transformations of your data to ensure transparency, reproducibility, and accountability.
 
-## Why Provenance Matters
+:::tip[Key points]
+
+- Record the source, licence and collection context of every item when you collect it.
+- Log every transformation, including model pre-labelling and tool versions, in an append-only log.
+- Version labels instead of overwriting them, but still honour withdrawal and erasure requests.
+- Keep a short, versioned dataset card next to the data, with unambiguous language and script codes.
+
+:::
+
+## Why provenance matters
 
 Understanding where data comes from and how it has been processed is essential for building trustworthy datasets. Provenance is information about the entities, activities and people involved in producing data, and it helps others judge the data's quality, reliability and trustworthiness ([Groth and Moreau, 2013](../references.md#w3c-prov-2013)). It supports reproducibility, enables auditing, and helps identify potential issues in data quality and bias.
 
 The gap is real in practice. An audit of more than 1,800 text datasets found licence omission rates above 70% and licence error rates above 50% on popular dataset hosting sites; it also found that low-resource language datasets tend to carry restrictive licences ([Longpre et al., 2024a](../references.md#longpre-2024)). Recording the source and licence of every item at collection time is far easier than reconstructing them later.
 
-## Key Components of Provenance
+## Key components of provenance
 
-### Source Tracking
+### Source tracking
 
 - **URLs and references** – Record links or original sources of the data  
 - **Contributors** – Track who collected, created, or provided the data  
 - **Collection context** – Document when, where, and how the data was obtained  
 
-### Data Lineage
+### Data lineage
 
 - **Data evolution** – Track how data changes over time  
 - **Versioning** – Maintain different versions of datasets  
 - **Pipeline tracking** – Document each stage of data processing  
 
-### Transformation Logs
+### Transformation logs
 
-- **Preprocessing steps** – Record cleaning, normalization, and filtering operations  
-- **Annotation processes** – Track labeling methods and guidelines used, including any model that pre-labeled items or chose which items to label (see [Record what the model did](../3_annotation-design/model-assisted-annotation.md#record-what-the-model-did))
+- **Preprocessing steps** – Record cleaning, normalisation, and filtering operations  
+- **Annotation processes** – Track labelling methods and guidelines used, including any model that pre-labelled items or chose which items to label (see [Record what the model did](../3_annotation-design/model-assisted-annotation.md#record-what-the-model-did))
 - **Modifications** – Log any changes made to the data after collection  
 - **Audit trails** – Maintain records for reproducibility and verification  
 

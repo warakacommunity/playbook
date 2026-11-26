@@ -11,20 +11,35 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-Most African languages that use a non-Latin script are also languages the mainstream OS-and-app ecosystem has not fully caught up with. Fonts do not ship by default, keyboards are not installed by default, text rendering is inconsistent across devices, and search does not know how to normalise across the writing systems the user actually uses. This page is the practical guide to shipping a UI that respects Ajami, Ge'ez, N'Ko, Tifinagh, and other African-script users, not just the model behind it.
+Most African languages that use a non-Latin script are also languages the mainstream operating systems and apps have not fully caught up with. Fonts do not ship by default, keyboards are not installed by default, text rendering is inconsistent across devices, and search does not know how to normalise across the writing systems users actually use.
+
+This page is a practical guide to shipping a user interface (UI) that respects users of Ajami, Ge'ez, N'Ko, Tifinagh and other African scripts, not just the model behind it.
+
+:::tip[Key points]
+
+- Treat each script as its own problem: direction, word separation, font and keyboard support all differ.
+- Ship the fonts with your app; do not rely on the operating system's defaults.
+- Check which keyboards your users really have; many type a Latin transliteration instead.
+- Normalise text to NFC on storage, and offer diacritic-insensitive and cross-script search as fallbacks.
+- Test on users' real devices, with native-script users, including copy-and-paste round trips.
+
+:::
 
 ## The scripts to design for
 
-Practical African-language deployment usually intersects one of the following. Each has its own quirks; do not treat them as one problem.
+Practical African-language deployment usually meets one of the following. Each has its own quirks; do not treat them as one problem.
 
-- **Ge'ez (Ethiopic) script**: Amharic, Tigrinya, Tigre, and Ge'ez liturgical. Fully supported in Unicode (block U+1200–U+137F plus the Ethiopic Supplement and Extended blocks) ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)); base + vowel-order composed characters give a large glyph inventory. Font coverage and keyboard availability vary by platform and OS version, so check them on your users' devices.
-- **Ajami (Arabic script) for African languages**: Hausa Ajami, Wolof Ajami, Fulfulde Ajami, Kanuri Ajami, Mandinka Ajami. Uses the standard Arabic Unicode block plus extended Arabic (U+0600–U+06FF, U+0750–U+077F). Right-to-left. Font support is generally good (any Arabic-script font renders the base characters), but the specific letter forms and diacritics used in each Ajami tradition vary, and no single font handles every convention well.
-- **N'Ko**: used for Manding languages (Bambara, Mandinka, Malinke). Fully supported in Unicode (U+07C0–U+07FF) and written right to left ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). Font support is thin: dedicated N'Ko fonts exist but do not ship by default on most OS platforms.
-- **Adlam**: an alphabet created in the late 1980s for Fulani (Pular, Fulfulde) and encoded in Unicode; written right to left ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). As with N'Ko, plan to ship the font.
-- **Tifinagh (Neo-Tifinagh)**: Berber / Tamazight languages, including Kabyle and Tamasheq. Unicode block U+2D30–U+2D7F. Modern text is mostly written left to right ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). Font support is limited.
-- **Vai**: Vai language of Liberia and Sierra Leone. Unicode block U+A500–U+A63F. A syllabary written without spaces between words ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)). Font support is thin.
-- **Osmanya, Kaddare, Borama**: Somali script systems developed at various times, rarely used today; mentioned here for completeness. Osmanya is encoded in Unicode; Kaddare and Borama are not among the scripts in the Unicode Standard's chapter on African scripts ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)).
-- **Latin with special characters**: Yorùbá (tone-mark diacritics), Igbo (dots below), Hausa (hooked ɓ, ɗ, ƙ, ƴ), Fon (ɔ, ɛ, ɖ), Ewe (ɖ, ƒ), and many others. Not "non-Latin" strictly, but load-bearing enough that a UI that mangles the diacritics is unusable for exactly the same reasons.
+| Script | Languages | Unicode | Direction and layout | Fonts and support |
+| --- | --- | --- | --- | --- |
+| **Ge'ez (Ethiopic)** | Amharic, Tigrinya, Tigre, liturgical Ge'ez | Fully encoded: U+1200–U+137F plus the Ethiopic Supplement and Extended blocks ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)) | Base consonant + vowel order gives a large inventory of syllable characters | Font coverage and keyboard availability vary by platform and OS version; check on your users' devices |
+| **Ajami (Arabic script)** | Hausa, Wolof, Fulfulde, Kanuri and Mandinka Ajami | Standard Arabic block plus extended Arabic (U+0600–U+06FF, U+0750–U+077F) | Right to left | Generally good: any Arabic-script font renders the base characters. But letter forms and diacritics vary between Ajami traditions, and no single font handles every convention well |
+| **N'Ko** | Manding languages (Bambara, Mandinka, Malinke) | Fully encoded: U+07C0–U+07FF ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)) | Right to left | Thin: dedicated N'Ko fonts exist but do not ship by default on most OS platforms |
+| **Adlam** | Fulani (Pular, Fulfulde); an alphabet created in the late 1980s | Encoded ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)) | Right to left | As with N'Ko, plan to ship the font |
+| **Tifinagh (Neo-Tifinagh)** | Berber / Tamazight languages, including Kabyle and Tamasheq | U+2D30–U+2D7F | Modern text mostly left to right ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)) | Limited |
+| **Vai** | Vai (Liberia and Sierra Leone) | U+A500–U+A63F | A syllabary written without spaces between words ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)) | Thin |
+| **Osmanya, Kaddare, Borama** | Somali; developed at various times, rarely used today, listed for completeness | Osmanya is encoded; Kaddare and Borama are not among the scripts in the Unicode Standard's chapter on African scripts ([Unicode Consortium, 2026a](../references.md#unicode-ch19-africa)) | – | – |
+
+**Latin with special characters** also belongs on this list: Yorùbá (tone-mark diacritics), Igbo (dots below), Hausa (hooked ɓ, ɗ, ƙ, ƴ), Fon (ɔ, ɛ, ɖ), Ewe (ɖ, ƒ) and many others. These are not strictly "non-Latin", but the characters carry meaning, so a UI that mangles them is unusable for exactly the same reasons.
 
 ## Unicode support: a starting inventory
 
@@ -84,7 +99,7 @@ If your app searches over text (knowledge base, message history, contact list), 
 
 ## Testing methodology
 
-- **Test on the actual devices your users use**: Android Go on a mid-range MediaTek chipset, older iPhone models, mid-2010s desktop browsers. Test with the fonts your users actually have loaded, which for most non-default African scripts means testing with your app-bundled font as the exclusive source.
+- **Test on the actual devices your users use**: entry-level Android (Go edition) phones, older iPhone models, mid-2010s desktop browsers. Test with the fonts your users actually have loaded, which for most non-default African scripts means testing with your app-bundled font as the exclusive source.
 - **Test with users, in the wild**, not with English-speaking QA. Have native-script users type real content, search real content, edit real content. The bugs your QA process will not find are the ones native users will find in the first ten minutes.
 - **Test copy/paste round-trips.** Text typed into your app, copied out, pasted into another app (WhatsApp, SMS, browser), and copied back must survive round-trip without character corruption.
 - **Test span selection in annotation tools.** If people will label spans in this script, check that a selection on screen is stored as the right character offsets and survives export; see [Scripts, spans and offsets](../sequence-labelling/index.md#scripts-spans-and-offsets) for a pilot procedure.

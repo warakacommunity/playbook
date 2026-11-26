@@ -3,7 +3,7 @@ sidebar_position: 9
 title: Data Storage and Release Infrastructure
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Idris Abdulmumin
 ---
 
@@ -11,9 +11,18 @@ last_update:
 
 Where and how a dataset is stored decides whether others can find and trust it, and whether it survives. The aim is simple: keep the data safe while you build it, and publish it somewhere stable and discoverable when it is ready.
 
+:::tip[Key points]
+
+- Never overwrite the raw collection; keep processed versions and splits separately.
+- Keep an inventory of every copy of the data, with its location, access and deletion date.
+- Archive the annotation tool's most complete export as the copy of record; build every other format from it.
+- Release a working copy and an archival copy with a DOI, never only on a personal site.
+
+:::
+
 ## Hosting the release
 
-Release on a platform the community will actually look on. Hugging Face is the de facto home for datasets and models and supports versioning and documentation; Zenodo gives a permanent archival identifier (a DOI); institutional repositories and the Lanfrica catalogue add discoverability for African work. Avoid releasing only on a personal site or a link that will rot, which is how datasets disappear.
+Release on a stable platform the community already searches. Keep a working copy (for example on Hugging Face) and an archival copy with a DOI, a permanent identifier (for example on Zenodo), and list the dataset in African catalogues such as Lanfrica. Never release only on a personal site or a link that can rot. How to choose platforms and publish in both places is in [Hosting and Preservation](../9_dataset-lifecycle/hosting.md#choosing-where-the-data-lives).
 
 ## Formats, metadata, and versioning
 
@@ -33,13 +42,19 @@ hausa-news-2026/
 └── CHANGELOG.md              # human-readable version history
 ```
 
-Version every release with a number and a changelog, so that results stay reproducible and users can cite the exact data they used, which is the same versioning discipline the [Data Quality](../4_data-quality/index.md) and [Dataset Lifecycle](../9_dataset-lifecycle/maintenance.md) chapters require.
+Version every release with a number and a changelog, so that results stay reproducible and users can cite the exact data they used. The numbering rules and changelog format are in [Versioning for datasets](../9_dataset-lifecycle/discoverability.md#versioning-for-datasets).
 
 Keep larger media collections in storage controlled by the project or community, in a separate folder per project and close enough to annotators for reliable access. Let the annotation tool reference those files rather than making uncontrolled copies. Treat referenced media as immutable: labels and timestamps may point into a particular file. Store a checksum with each item, and give a corrected file a new ID and a new import rather than replacing it underneath existing labels. How to prepare the import itself is covered in [Getting data into the tool](./tooling.md#getting-data-into-the-tool).
 
 ## Know where every copy lives, and for how long
 
-Keep an inventory of tool storage, project buckets, export snapshots, backups and authorised personal downloads. For every copy, record the provider, system, location and country, its purpose, who can access it, and its retention and deletion dates. Check these entries against the storage and retention promises in the consent form and privacy notice.
+Keep an inventory of every copy of the data: the annotation tool's storage, project storage buckets, export snapshots, backups and authorised personal downloads. For every copy, record:
+
+- the provider, system, location and country;
+- its purpose and who can access it;
+- its retention and deletion dates.
+
+Check these entries against the storage and retention promises in the consent form and privacy notice.
 
 Schedule deletion of expired working exports and other data whose retention has ended. Run the deletion as a dry run first, inspect what it would remove, and confirm that the real job is scheduled and monitored. Copies outside the project's own storage are the hardest to track, which is another reason to keep media where the project or community controls it, as described above. The inventory also makes withdrawal, erasure and exit exports tractable; see [Release and hand over](../project-management/index.md#8-release-and-hand-over).
 
@@ -49,7 +64,7 @@ The annotation tool holds more about your data than any single export format sho
 
 ### Keep a copy of record
 
-Archive the tool's most complete export, usually its full, nested JSON, as the copy of record. It should hold every annotator's labels, not only a merged answer, together with timestamps, time spent per item, skipped items, review outcomes, and which items were gold. This is the file from which agreement, annotator quality, and calibration can be recomputed if a question comes up after release. It also keeps the disagreement between annotators, which is often information rather than noise ([Plank, 2022](../references.md#plank-2022)), even if the release keeps only one label per item. Keep it in `raw/` in the layout above (for example `raw/annotation-export-2026-11-22.json`), and never overwrite it.
+Archive the tool's most complete export (often a nested JSON file) as the copy of record. It should hold every annotator's labels, not only a merged answer, together with timestamps, time spent per item, skipped items, review outcomes, and which items were gold. This is the file from which agreement, annotator quality, and calibration can be recomputed if a question comes up after release. It also keeps the disagreement between annotators, which is often information rather than noise ([Plank, 2022](../references.md#plank-2022)), even if the release keeps only one label per item. Keep it in `raw/` in the layout above (for example `raw/annotation-export-2026-11-22.json`), and never overwrite it.
 
 ### Treat other formats as derived views
 
@@ -61,7 +76,7 @@ Some records the project depends on are not in any annotation export. Agreement 
 
 ### Decide which annotations you release
 
-When several people labelled the same item, decide which annotations go into the release: all of them, only the first or the latest, or only the adjudicated label. Each choice suits a different use, and users cannot tell which one you made unless you say so. Record the choice and the reason in the [dataset card](../templates/dataset-card.md).
+When several people labelled the same item, decide which annotations go into the release: all of them, one annotator's label per item, or only the reviewed or adjudicated label. Each choice suits a different use, and users cannot tell which one you made unless you say so. Record the choice and the reason in the [dataset card](../templates/dataset-card.md).
 
 ### Package deliveries before release
 

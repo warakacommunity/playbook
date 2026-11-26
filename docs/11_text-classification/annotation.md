@@ -4,7 +4,7 @@ title: Annotation
 sidebar_label: "Annotation"
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -12,15 +12,23 @@ last_update:
 
 This page covers the human side of building a text-classification dataset: **who** annotates (recruitment and well-being), **with what** (tools), and how to keep labels trustworthy (**agreement** and **quality control**).
 
+:::tip[Key points]
+
+- Put annotator quality before numbers: recruit fluent speakers who know the cultural context and can apply the guidelines consistently.
+- Warn annotators about harmful content, ask for opt-in, and let them skip or withdraw without penalty.
+- Choose the tool by task, team size, data sensitivity and language support; there is no single best tool.
+- Report a chance-corrected agreement measure, and read low scores on subjective tasks in context.
+- Pilot first, mix in gold items, and send ties and hard cases to adjudication rather than to code.
+
+:::
+
 ## Choosing annotators
 
-Annotator quality is more important than annotator quantity. Recruit annotators who are fluent in the target language, familiar with the cultural context, and, when needed, knowledgeable about the topic domain. For emotion and hate speech tasks, it is especially important that annotators understand informal language, sarcasm, euphemism, and context-dependent expressions.
-
-Effective annotation relies more on the quality and consistency of annotators than on their number. Annotators should be fluent in the target language, familiar with the relevant cultural context, and, when necessary, possess domain-specific knowledge. They should also be detail-oriented and able to apply annotation guidelines consistently to ensure reliable, high-quality labels.
+The quality and consistency of annotators matter more than their number. Recruit people who are fluent in the target language, familiar with the cultural context and, where needed, with the topic domain. For emotion and hate speech tasks, they must also understand informal language, sarcasm, euphemism and context-dependent expressions. Look for people who are detail-oriented and able to apply the guidelines consistently.
 
 ![Annotator selection](images/annotator-selection.svg)
 
-:::info[Tips ]
+:::tip[Tip]
 Use a short qualification round before the main task. The goal is not only to select competent annotators, but also to identify whether the guidelines are clear enough to be applied consistently.
 :::
 
@@ -31,21 +39,11 @@ Use a short qualification round before the main task. The goal is not only to se
 - Comfort with sensitive or harmful content.
 - Availability for training and calibration.
 
+For how to run the recruitment funnel (call, screen, onboard), see [Build the team](../project-management/index.md#5-build-the-team); for recruiting a diverse pool on purpose, see [Recruit for diversity, deliberately](../3_annotation-design/inclusive-bias-aware.md#recruit-for-diversity-deliberately).
+
 ## Annotator safety & well-being
 
-Protecting annotator well-being is essential, particularly when working with harmful, offensive, or emotionally distressing content. Annotators should be informed about potential risks before participation, allowed to opt out of sensitive tasks, and given the freedom to skip items or withdraw without penalty. Exposure to harmful content should be carefully managed through content filtering, workload limits, regular breaks, and task rotation. Projects should provide appropriate training, clear safety protocols, and access to psychological support resources when needed. Continuous monitoring of annotator well-being, respectful communication, protection of privacy, fair compensation, and adherence to ethical and legal standards are also critical for maintaining a safe and sustainable annotation environment.
-
-Protecting annotators through informed consent, controlled exposure, breaks, and support systems improves both well-being and annotation quality. Record skips and their operational reasons without asking anyone to disclose personal details publicly; [Track skips and unfinished items](../3_annotation-design/workflow-adjudication.md#track-skips-and-unfinished-items) explains how to reassign or review them and how to report their effect on the dataset.
-
-![](images/annotator-safety-and-mental-health-1ijc2ov5oy4.svg)
-
-For any data annotation such as hate speech, we should create a content warning + opt-in (show before any harmful-content task) like below.
-:::warning[CONTENT WARNING]
-This task contains hate speech, offensive, or distressing material.
-• You may skip any item, take breaks at any time, or withdraw with no penalty.
-• If you feel distressed, stop and contact the support team.
-[ ] I understand and choose to participate in this task.
-:::
+Emotion and hate speech tasks expose annotators to offensive and distressing material, so screen for comfort with it (see the checklist above) and show a content warning with an opt-in before the task starts. The full set of safeguards (opt-out, exposure limits, breaks, support and recording skips without personal disclosure) is in [Protect annotators from harmful content](../3_annotation-design/annotation-task-design.md#protect-annotators-from-harmful-content).
 
 ## Annotation tools
 
@@ -55,7 +53,7 @@ There is no single best tool. Judge candidates against your task, team, and cond
 
 Based on how annotators are sourced and where the data is hosted, annotation tools can be broadly grouped into two categories: crowdsourcing platforms and in-house (self-hosted) tools. The most common options for text classification are described below.
 
-#### Crowdsourcing platforms
+### Crowdsourcing platforms
 
 Crowdsourcing platforms give you access to a large, on-demand pool of remote annotators who are recruited and paid through the platform. Annotators are typically selected based on profile attributes (language, location, demographics, prior approval rating, or qualification tests) rather than being known to you personally. This makes crowdsourcing well suited to large volumes of data and widely spoken languages, where a broad annotator pool is readily available.
 
@@ -64,19 +62,18 @@ Common platforms include:
 - Toloka AI: [https://toloka.ai](https://toloka.ai/)
 - Prolific: [https://www.prolific.com](https://www.prolific.com/)
 - Appen: [https://www.appen.com](https://www.appen.com/)
-- Label Studio Enterprise: [https://labelstud.io](https://labelstud.io/)
 
 Amazon Mechanical Turk (MTurk), which much of the older crowdsourcing literature describes, closed permanently on 30 September 2026 ([Amazon Mechanical Turk, 2026](../references.md#mturk-closure-2026)). Its guidance on task design and quality control still applies, but it can no longer be used to run new work.
 
-Many of these platforms support multiple data modalities (text, image, audio, video) and increasingly offer AI-assisted features such as pre-labeling, model-in-the-loop suggestions, and automated quality checks.
+Many of these platforms support multiple data modalities (text, image, audio, video) and increasingly offer AI-assisted features such as pre-labelling, model-in-the-loop suggestions, and automated quality checks.
 
-Trade-offs. Crowdsourcing scales easily and reduces recruitment overhead, but it offers less direct control over annotators and may make it difficult to source native speakers of low-resource languages or specific dialects. It also requires careful task design, qualification filters, and it raises data-privacy considerations because the data is sent to an external platform.
+**Trade-offs.** Crowdsourcing scales easily and reduces recruitment overhead, but it offers less direct control over annotators and may make it difficult to source native speakers of low-resource languages or specific dialects. It also requires careful task design and qualification filters, and it raises data-privacy concerns because the data is sent to an external platform.
 
 Check what a marketplace can actually filter on before you rely on it for an African language. A filter for your language or dialect may not exist, and the profile filters that do exist are mostly based on answers workers give about themselves. A location filter describes where someone lives now, not which variety they speak. Plan to write and run your own short screening test in the target language, scored against items a trusted native speaker has checked, and pay people for the time it takes. Prolific, for example, offers a custom screening step for groups its built-in filters do not cover, and pays screened-out participants a fixed reward that the researcher sets ([Prolific, 2026b](../references.md#prolific-screening-2026)).
 
 Budget for the platform's fee as well as for worker pay. Some marketplaces calculate a service fee on top of the rewards paid to workers, at a rate that can differ between academic and commercial customers ([Prolific, 2026a](../references.md#prolific-pricing-2026)). Check the current price page when you draw up the budget, because rates change.
 
-#### In-house (self-hosted) tools
+### In-house (self-hosted) tools
 
 In-house tools are typically open-source applications that can be customized, deployed, and hosted on your own machine or server. You create accounts for a hand-picked set of annotators (often colleagues, domain experts, or recruited native speakers), giving you full control over who labels the data and where the data lives. This category is preferred for sensitive data, specialized domains, and low-resource languages, where annotator expertise matters more than raw scale.
 
@@ -88,167 +85,95 @@ Common self-hosted tools include:
 - INCEpTION (the successor to WebAnno): [https://inception-project.github.io](https://inception-project.github.io/)
 - brat: [https://brat.nlplab.org](https://brat.nlplab.org/)
 
-Trade-offs. Self-hosted tools keep data fully under your control and can be tailored to bespoke label schemes and guidelines, but they require setup, hosting, and maintenance effort, and the annotation throughput is limited by the size of your recruited team.
+**Trade-offs.** Self-hosted tools keep data fully under your control and can be tailored to bespoke label schemes and guidelines, but they require setup, hosting, and maintenance effort, and the annotation throughput is limited by the size of your recruited team.
 
-#### Lightweight tools for small datasets
+### Lightweight tools for small datasets
 
 For small annotation efforts, a dedicated platform may be unnecessary. Spreadsheets (Google Sheets or Microsoft Excel) are a practical, zero-setup option: one column holds the text, and one or more columns capture the label(s), with data validation or dropdown lists used to constrain inputs to the allowed label set. Spreadsheets are easy to share and require no technical onboarding, which makes them convenient for pilot studies, guideline development, and very small in-house tasks.
 
-However, these tools lack the quality-control and management features; they are not recommended beyond small or exploratory datasets.
+However, spreadsheets lack quality-control and project-management features, so they are not recommended beyond small or exploratory datasets.
 
 ![Annotation tools](images/annotation-tools.svg)
 
-The annotation tool should match the size and sensitivity of the project. For small pilot studies, spreadsheets may be enough. For medium-sized projects that require labeling workflows, Doccano or INCEpTION are often suitable. For large projects with distributed workers, crowdsourcing platforms can offer scale, but they require stronger quality control and privacy planning.
+The annotation tool should match the size and sensitivity of the project. For small pilot studies, spreadsheets may be enough. For medium-sized projects that require labelling workflows, Doccano or INCEpTION are often suitable. For large projects with distributed workers, crowdsourcing platforms can offer scale, but they require stronger quality control and privacy planning.
 
-#### A labeling configuration
+### Specifying the labelling task
 
-Whichever self-hosted tool you choose, the labeling task is defined by a small configuration. The examples here use the Label Studio configuration format, an open XML format supported by several tools, so the same config is portable. The design points above (constrained inputs, keyboard shortcuts, an explicit skip route) are expressed directly in it. A single-label sentiment task looks like this:
+Whichever tool you choose, write down exactly what the annotator sees and what they may enter, then set the tool up to match. A single-label sentiment specification is shown in [Annotation Task Design](../3_annotation-design/annotation-task-design.md#a-task-specification). Emotion with intensities needs one rating per emotion, as specified in [Multi-label Emotion Analysis](./emotion-analysis.md#multi-label-emotion-analysis): six emotions, each rated from 0 (absent) to 3 (high), with every emotion rated.
 
-```xml
-<View>
-  <View style="background:#FBF7F0; border:1px solid #E7DDCB; border-radius:8px; padding:14px 16px; margin-bottom:18px;">
-    <Text name="text" value="$text"/>
-  </View>
-  <Choices name="sentiment" toName="text" choice="single" required="true">
-    <Choice value="Positive" hotkey="1"/>
-    <Choice value="Neutral"  hotkey="2"/>
-    <Choice value="Negative" hotkey="3"/>
-  </Choices>
-</View>
-```
-
-Emotion analysis is usually multi-label, since one sentence can carry several emotions at once, and each emotion present has its own intensity (see [Emotion Analysis](./emotion-analysis.md)). The cleanest way to capture both is one intensity rating per emotion, so each instance gets several single annotations at once. A rating of zero stars means the emotion is absent:
-
-```xml
-<View>
-  <View style="background:#FBF7F0; border:1px solid #E7DDCB; border-radius:8px; padding:14px 16px; margin-bottom:18px;">
-    <Text name="text" value="$text"/>
-  </View>
-  <Header value="Rate each emotion's intensity (no stars = absent, 1 low, 2 medium, 3 high)"/>
-  <Header value="Joy"/>
-  <Rating name="joy" toName="text" maxRating="3"/>
-  <Header value="Sadness"/>
-  <Rating name="sadness" toName="text" maxRating="3"/>
-  <Header value="Anger"/>
-  <Rating name="anger" toName="text" maxRating="3"/>
-  <Header value="Fear"/>
-  <Rating name="fear" toName="text" maxRating="3"/>
-  <Header value="Surprise"/>
-  <Rating name="surprise" toName="text" maxRating="3"/>
-  <Header value="Disgust"/>
-  <Rating name="disgust" toName="text" maxRating="3"/>
-</View>
-```
-
-The data you import is one JSON object per task, with a `data` field whose keys match the `value="$..."` references in the config:
+Keep the imported data simple: one JSON object per item, with a stable identifier and the text.
 
 ```json
-{"data": {"text": "Na gode sosai, wannan labari ya faranta min rai."}}
-{"data": {"text": "Ban gamsu da yadda aka gudanar da zaben ba."}}
+{"id": "ha-0001", "text": "Na gode sosai, wannan labari ya faranta min rai."}
+{"id": "ha-0002", "text": "Ban gamsu da yadda aka gudanar da zaben ba."}
 ```
 
-After annotation, the tool exports each task with the labels attached. For the per-emotion intensity config above, an exported record carries one rating per emotion (zero meaning absent), ready to flow into the agreement script in [Data Quality](../data-quality) or into training:
+Make sure the export keeps each annotator's labels separately, with the item identifier, rather than only a merged label. For the emotion-intensity task, one exported record per annotator and item could look like this (0 means absent). Field names differ between tools, so map them to this shape before you compute [agreement](../4_data-quality/index.md#measure-inter-annotator-agreement) or train a model:
 
 ```json
 {
-  "data": {"text": "Na gode sosai, wannan labari ya faranta min rai."},
-  "annotations": [
-    {"completed_by": "annotator_03",
-     "result": [
-       {"from_name": "joy",   "to_name": "text", "type": "rating", "value": {"rating": 3}},
-       {"from_name": "anger", "to_name": "text", "type": "rating", "value": {"rating": 0}}
-     ]}
-  ]
+  "id": "ha-0001",
+  "text": "Na gode sosai, wannan labari ya faranta min rai.",
+  "annotator": "annotator_03",
+  "labels": {"joy": 3, "sadness": 0, "anger": 0, "fear": 0, "surprise": 1, "disgust": 0}
 }
 ```
 
-The task list should show assignment status and per-task annotation progress without exposing other annotators' labels. Coordinators need filters for incomplete, skipped, reviewed and exported items, plus an export that preserves each annotator's labels and the source identifiers.
+Whatever tool you use, coordinators should be able to see each item's progress without annotators seeing one another's labels, to filter items that are incomplete, skipped or already reviewed, and to export every annotator's labels together with the source identifiers.
 
 ## Inter-annotator agreement
 
-Annotation agreement measures the extent to which multiple annotators assign the same labels to the same data instances. In text classification tasks, agreement is one of the most important indicators of dataset quality because it reflects the clarity of the annotation guidelines, the complexity of the task, and the consistency of the annotators. High agreement suggests that the labels are reliable and reproducible, while low agreement may indicate ambiguous definitions, insufficient annotator training, or inherently subjective phenomena.
+Agreement shows whether the guidelines and labels are reproducible, or just one person's opinion repeated. Read it against the difficulty and subjectivity of the task. For choosing a metric, interpreting scores and what to report, see [Measure inter-annotator agreement](../4_data-quality/index.md#measure-inter-annotator-agreement) in Data Quality; this section gives the worked formulas for text classification.
 
-Annotation agreement should be reported because it provides evidence that the guidelines are understandable and that the labels are reproducible. Agreement values should always be interpreted together with the task difficulty and the degree of subjectivity involved.
+### Percentage agreement
 
-#### Why agreement matters
+The simplest measure is percentage agreement: the share of items to which the annotators gave the same label.
 
-Annotation agreement serves various purposes:
+```text
+Agreement % = (number of items agreed on / total number of items) × 100
 
-- Evaluates the reliability of the annotated dataset.
-- Identifies ambiguities in the annotation guidelines.
-- Detects inconsistencies among annotators.
-- Provides evidence of dataset quality for publications and benchmark releases.
-- Helps determine whether a task is objectively measurable or highly subjective.
-
-Agreement should be calculated and reported for every dataset that involves human annotation if the data is annotated by two and more annotators.
-
-#### Percentage agreement
-
-The simplest measure of agreement is percentage agreement, which calculates the proportion of instances for which annotators assigned the same label.
-
-```
-Agreement %= (Number of Agreed instances / Total Number of Instances) * 100
-*For example, if two annotators label 1,000 texts and agree on 850 of them:*
-Agreement % = (850 / 1000) * 100 = 85%
-
+Example: two annotators label 1,000 texts and agree on 850 of them.
+Agreement % = (850 / 1,000) × 100 = 85%
 ```
 
-Although easy to understand, percentage agreement does not account for agreement occurring by chance and should not be the only metric reported.
+Percentage agreement is easy to understand, but it does not account for agreement that happens by chance, so do not report it on its own.
 
-#### Agreement between two annotators
+### Agreement between two annotators
 
-When exactly two annotators label each instance, Cohen's Kappa is the most commonly used agreement metric. Cohen's Kappa adjusts for the amount of agreement that could occur purely by chance.
+When exactly two annotators label each item, Cohen's kappa is the most common measure. It corrects for the agreement expected by chance:
 
-```
-Kappa = (Observed Agreement - Expected Agreement) / (1 - Expected Agreement)
-Or
-Kappa = (Po - Pe) / (1 - Pe)
-Where:
-Observed agreement (Po) is the proportion of instances where the annotators actually agreed.
-Po​=Total number of items/Number of agreements​
-Expected Agreement (Pe) represents the level of agreement that would be expected to occur purely by chance, given the distribution of labels assigned by each annotator. It is calculated by determining the probability that both annotators independently select the same category and then summing these probabilities across all categories.
+$$
+\kappa = \frac{P_o - P_e}{1 - P_e}
+$$
 
-```
+- $P_o$ (observed agreement) is the number of items the annotators agreed on divided by the total number of items.
+- $P_e$ (expected agreement) is the agreement expected by chance, given how often each annotator used each label: for each category, multiply the two annotators' proportions for that category, then add these products over all categories.
 
-Cohen's Kappa is widely used in sentiment analysis, hate speech detection, topic classification, emotion classification, and many other NLP tasks involving two annotators.
+Cohen's kappa is widely used for sentiment, emotion, hate speech, topic and many other two-annotator classification tasks. For tested Python code (scikit-learn's `cohen_kappa_score`) checked against a published textbook answer, see [Check the code against a textbook answer](../4_data-quality/index.md#check-the-code-against-a-textbook-answer) in Data Quality.
 
-```
-from sklearn.metrics import cohen_kappa_score
-annotator1 = [0, 1, 1, 0, 2]
-annotator2 = [0, 1, 0, 0, 2]
-kappa = cohen_kappa_score(annotator1, annotator2)
-print(kappa)
-```
+### Agreement among three or more annotators
 
-#### Agreement among three or more annotators
+Many datasets use three or more annotators per item to improve reliability and reduce the influence of any one person.
 
-Many NLP datasets use three or more annotators per instance to improve reliability and reduce the influence of individual biases.
+**Fleiss' kappa** extends chance-corrected agreement to three or more annotators. Strictly, it generalises Scott's pi rather than Cohen's kappa, because it uses one pooled label distribution for the chance term ([Artstein and Poesio, 2008](../references.md#artstein-2008)). It fits when every item receives the same number of annotations:
 
-When more than two annotators are involved, commonly used agreement measures include:
+$$
+\kappa = \frac{\bar{P} - \bar{P}_e}{1 - \bar{P}_e}
+$$
 
-**Fleiss' Kappa** extends Cohen's Kappa to multiple annotators and is one of the most widely reported agreement measures in NLP datasets. It is appropriate when:
+Here $\bar{P}$ is the mean observed agreement over all items, and $\bar{P}_e$ is the agreement expected if labels were assigned at random in the overall label proportions.
 
-- Three or more annotators label each instance.
-- Every instance receives the same number of annotations.
+The same Data Quality section has tested code for Fleiss' kappa (statsmodels' `fleiss_kappa`). It takes an items × categories table of counts. If your data has one row per item and one column per annotator, convert it first with `aggregate_raters` from the same module.
 
-```
-Fleiss kappa (k) = P−Pe)/(1-Pe)
-Where
-p is the mean of the agreement probability over all raters and
-Pe is the mean agreement probability over all raters if they were randomly assigned.
-
-```
-
-**Krippendorff's Alpha** is a more flexible agreement measure that:
+**Krippendorff's alpha** is more flexible. It:
 
 - Supports any number of annotators.
 - Handles missing annotations.
-- Works with nominal, ordinal, interval, and ratio labels.
-- Is increasingly recommended for modern annotation studies.
+- Works with nominal, ordinal, interval and ratio labels.
 
-For complex annotation projects, Krippendorff's Alpha is often considered the most robust agreement metric.
+This flexibility makes it a good default for complex designs, for example when not every annotator labels every item ([Artstein and Poesio, 2008](../references.md#artstein-2008)).
 
-#### Ordinal and continuous scales
+### Ordinal and continuous scales
 
 Some labels are ordered: emotion intensity from 0 to 3, a 1-to-5 quality score, or a Likert item from "strongly disagree" to "strongly agree". Plain kappa treats every disagreement the same, so a rating of 2 against 3 counts as badly as 0 against 3. That understates agreement on an ordered scale and hides the difference between annotators who are close and annotators who are far apart. Use a measure that gives partial credit for near misses:
 
@@ -278,105 +203,52 @@ krippendorff.alpha(reliability_data=data, level_of_measurement="interval")  # co
 
 Whatever you choose, report the measure together with its weighting or tolerance, for example "quadratic-weighted kappa" or "ordinal alpha", because the same ratings give quite different numbers under each. For agreement on other shapes of annotation, such as spans, multi-label sets or free text, see [Match the metric to the annotation shape](../4_data-quality/index.md#match-the-metric-to-the-annotation-shape).
 
-#### Multi-label and hierarchical labels
+### Multi-label and hierarchical labels
 
 Exact match gives no partial credit. If one annotator chooses `{anger, sadness}` and another chooses `{anger}`, exact match calls it a complete disagreement. For multi-label items, compute Jaccard overlap instead: the intersection size divided by the union size, here $1/2 = 0.5$. Average the per-item Jaccard scores over the dataset, or report kappa separately for each label's presence or absence. Decide in advance how to score an item where both annotators chose no label (Jaccard is undefined there; counting it as full agreement is common) and state the choice. Mean Jaccard is not corrected for chance, so read it like percentage agreement, not like kappa.
 
 For hierarchical labels, expand each selected path to include its ancestors before computing Jaccard. Two sibling leaves then receive more credit than leaves in different branches. Alternatively, report agreement separately at each level. These diagnostics complement, rather than replace, exact full-path agreement when the downstream task requires the complete path.
 
-#### Deciding the final labels
+### Reading and reporting the scores
 
-When multiple annotators label the same instance, the final label is usually determined through majority voting.
+Kappa bands such as "moderate" or "substantial" are conventions, not proof of quality, and what counts as acceptable depends on how subjective the task is. On subjective tasks such as emotion, sarcasm or offensiveness, lower agreement can reflect genuine differences in interpretation rather than error ([Plank, 2022](../references.md#plank-2022)); see [Resolve disagreement, but read it first](../3_annotation-design/workflow-adjudication.md#resolve-disagreement-but-read-it-first). A dominant class can also give high raw agreement but low kappa, because chance agreement is high ([Feinstein and Cicchetti, 1990](../references.md#feinstein-1990)). Data Quality covers the [conventional bands](../4_data-quality/index.md#how-to-read-the-score) and this [prevalence paradox](../4_data-quality/index.md#watch-for-a-dominant-label).
 
-For example, in three annotators, at least two annotators must agree on a label for it to become the final label. Similarly, with five annotators, at least three annotators must agree on a label for it to become the final label. Using an odd number of annotators (3, 5, or 7) avoids ties and simplifies majority voting.
-
-#### Interpreting agreement scores
-
-Although interpretation varies slightly across fields, the following ranges are commonly used for Kappa-based agreement measures:
-
-```
-< 0.00 Poor Agreement
-0.00 - 0.20 Slight Agreement
-0.21 - 0.40 Fair Agreement
-0.41 - 0.60 Moderate Agreement
-0.61 - 0.80 Substantial Agreement
-0.81 - 1.00 Almost Perfect / Excellent Agreement
-
-*As a general guideline:*
-< 0.40: dataset quality should be carefully reviewed.
-0.40-0.60: acceptable for difficult or subjective tasks.
-0.60-0.80: considered good agreement.
-Above 0.80: considered very strong agreement.
-```
-
-For highly subjective tasks such as emotion classification, sarcasm detection, or offensiveness annotation, lower agreement scores may still be acceptable due to genuine differences in human interpretation.
-
-A dominant class can also produce high percentage agreement but low kappa, because expected chance agreement is high. Report raw and per-class agreement, the class distribution and the number of scored items alongside kappa rather than discarding the chance correction. See [the prevalence paradox](../4_data-quality/index.md#measure-inter-annotator-agreement) ([Feinstein and Cicchetti, 1990](../references.md#feinstein-1990)).
-
-#### What to report
-
-When publishing a dataset, researchers should report:
-
-1. Number of annotators.
-2. Annotation procedure/guideline.
-3. Final label aggregation method (e.g., majority voting).
-4. Cohen's Kappa (for two annotators) or Fleiss' Kappa/Krippendorff's Alpha (for three or more annotators) agreement score.
-5. Any adjudication process used to resolve disagreements.
-6. Annotator-level dataset for further annotator subjectivity and disagreement research.
-7. Which annotations entered the agreement calculation: how model drafts, gold checks, blanks, skips, cancellations and pairs without overlap were handled, plus the number of items supporting each score.
-
-Transparent reporting of annotation agreement improves the credibility, reproducibility, and scientific value of the dataset.
-
-**Agreement metric guidance:**
-- Use percentage agreement only as a simple descriptive measure.
-- Use Cohen's kappa when there are exactly two annotators.
-- Use Fleiss' kappa when there are three or more annotators and each item has the same number of labels.
-- Use Krippendorff's alpha when annotations may be missing or when you want a more flexible reliability measure.
-
-Note that agreement metrics are not only those listed above. Explore more agreement metrics that suit the targeted task.
-
-```python
-from sklearn.metrics import cohen_kappa_score
-from statsmodels.stats.inter_rater import fleiss_kappa, aggregate_raters
-import krippendorff, numpy as np
-
-# Cohen's kappa: exactly two annotators
-# Cohen's κ = (Pₒ − Pₑ) / (1 − Pₑ) where Pₒ = observed agreement, Pₑ = Σₙ pₙ₁·pₙ₂ (chance agreement)
-cohen_kappa_score(a1, a2)
-
-# Fleiss' kappa: items x raters matrix, equal number of raters each
-# Fleiss' κ = (P̄ − P̄ₑ) / (1 − P̄ₑ) over n raters, k categories
-
-table, _ = aggregate_raters(ratings)      # -> items x categories counts
-fleiss_kappa(table)
-
-# Krippendorff's alpha: raters x items, np.nan for missing
-# Krippendorff's α = 1 − Dₒ / Dₑ (Dₒ observed disagreement, Dₑ expected; handles missing data & any #raters)
-
-krippendorff.alpha(reliability_data=data, level_of_measurement="nominal")
-```
-
-:::info[📚 Tips]
-For subjective tasks such as emotion and offensiveness annotation, lower agreement is not always a failure; it can reflect real ambiguity in human interpretation.
-So, lower scores can still be valid: genuine human disagreement is signal, not just noise.
-:::
+When you publish the dataset, follow the reporting checklist in [What to report](../4_data-quality/index.md#what-to-report): number of annotators, guideline version, aggregation method, the metric and its weighting with the number of items behind each score, observed and per-class agreement with the class distribution, adjudication, which annotations entered the score, and the release of annotator-level labels.
 
 ## Quality control
 
-Annotation quality can be controlled before and during the annotation process using various mechanisms. The following are some of the annotation quality control methods.
+Control annotation quality before and during annotation, in this order: pilot annotation, guideline revision, main annotation, gold checks, disagreement review, adjudication, and release.
 
-#### Pilot annotation
+### Pilot annotation
 
-Before starting large-scale annotation, dataset creators should conduct a pilot study to evaluate both the annotation guidelines and the annotators. The pilot phase helps identify unclear instructions, difficult cases, and annotators whose labeling patterns differ substantially from the rest of the group. Annotators who consistently provide random, low-quality, or highly inconsistent annotations should be identified and excluded before the main annotation process begins.
+Before large-scale annotation, run a pilot on a small, representative subset to test both the guidelines and the annotators. It shows unclear instructions, colliding labels and annotators who need more calibration while fixes are still cheap; see [Pilot, then iterate the design](../3_annotation-design/training_guidlines.md#pilot-then-iterate-the-design). Add worked examples of the tricky cases the pilot surfaces to the guidelines, such as sarcasm, negation and mixed opinions in sentiment.
 
-#### Control (gold-standard) questions
+### Control (gold-standard) questions
 
-A common quality-control mechanism is to include control questions, also known as gold-standard items, whose correct labels are already known. These items are randomly inserted into the annotation workflow without informing the annotators. Annotators who repeatedly fail to label these control items correctly may be removed from the project, and their previously annotated data should be reviewed and, if necessary, excluded from the final dataset.
+Mix items with known, trusted labels into the stream without flagging them, so each annotator's accuracy can be tracked continuously (see [Use gold data and control checks](../4_data-quality/index.md#use-gold-data-and-control-checks), which also explains how to score gold items per class).
 
-Decide how you will act on these results before annotation starts: how many control items a person must complete before they are judged, whether a low score leads to a warning, a pause and retraining before any removal, and who makes the final decision. [Act on annotator signals fairly](../4_data-quality/index.md#act-on-annotator-signals-fairly) sets out a staged process, and [Diagnose where disagreement comes from](../4_data-quality/index.md#diagnose-where-disagreement-comes-from) shows how to find the labels and annotators behind low agreement before you have a gold set. For each annotator, [score gold items per class](../4_data-quality/index.md#use-gold-data-and-control-checks) with precision, recall and F1, and use macro-F1 so rare-class errors are not hidden by overall accuracy.
+Decide before annotation starts how you will act on the results: how many control items a person must complete before they are judged, whether a low score leads to a warning, a pause and retraining, with human review before any removal, and who makes the final decision. If someone is removed, re-check their earlier work. [Act on annotator signals fairly](../4_data-quality/index.md#act-on-annotator-signals-fairly) sets out this staged process, and [Diagnose where disagreement comes from](../4_data-quality/index.md#diagnose-where-disagreement-comes-from) shows how to find the labels and annotators behind low agreement before you have a gold set.
 
-#### Determining the number of annotators
+### Number of annotators and final labels
 
-Full redundancy with three or more annotators per instance is one design choice, not a universal requirement. An odd number of annotators (e.g., 3, 5, or 7) enables majority voting when the design calls for it. More independent labels can reduce individual bias, but cost and annotator availability matter. A sampled overlap with independent review or adjudication may be more appropriate; choose the design using [Workflow and Adjudication](../3_annotation-design/workflow-adjudication.md#overlap-a-sample-not-everything).
+For a single-choice label, an odd number of annotators (3, 5 or 7) allows a strict majority: 2 of 3, or 3 of 5. With three or more classes a vote can still tie (for example 1-1-1), so send ties to adjudication rather than letting code pick a winner. With only two annotators, either adjudicate disagreements (by discussion or by an expert) or keep only the items both agree on; if you keep only agreed items, report how many you dropped, because the hardest items leave the dataset. Record every adjudication decision and its reason, for transparency.
 
-When human resources are limited, annotation can be performed by two annotators. In such cases, dataset creators may either retain only the instances on which both annotators agree or introduce an adjudication process, where disagreements are resolved through discussion or by an expert annotator who makes the final decision.
+```python
+from collections import Counter
+
+def majority_vote(labels):
+    """Return the majority label, or None if the top labels tie (send to adjudication)."""
+    counts = Counter(labels).most_common()
+    if len(counts) > 1 and counts[0][1] == counts[1][1]:
+        return None
+    return counts[0][0]
+
+majority_vote(["pos", "pos", "neg"])   # -> "pos"
+majority_vote(["pos", "neg", "neu"])   # -> None
+```
+
+`Counter.most_common` breaks ties by the order in which labels first appear, so without the check a tie would be settled silently by annotator order.
+
+For choosing between full and sampled overlap, see [Overlap a sample, not everything](../3_annotation-design/workflow-adjudication.md#overlap-a-sample-not-everything).
+
+With redundant labels, a model such as MACE can also estimate how reliable each annotator is ([Hovy et al., 2013](../references.md#hovy-2013)); see [Diagnose where disagreement comes from](../4_data-quality/index.md#diagnose-where-disagreement-comes-from). Keep tracking annotator behaviour over time to catch fatigue and drift ([Close the feedback loop](../4_data-quality/index.md#close-the-feedback-loop)).

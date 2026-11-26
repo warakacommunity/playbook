@@ -11,49 +11,66 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-Most published NLP benchmarks are run on hardware nobody in the target African-language deployment context owns. A 200 ms latency claim on an A100 GPU is not a claim about what your user experiences on a \$50 phone. This page is the practical guide to making models run on the hardware that actually reaches African users: Android Go, mid-range Android, single-board computers running as village-scale servers, and everything in between. The [offline chapter](./offline.md) is about *what the app does* when connectivity is bad; this chapter is about *how the model runs* on hardware that is cheap.
+Most published NLP benchmarks run on hardware that nobody in the target African-language deployment context owns. A 200 ms latency claim on an A100 GPU says nothing about what your user experiences on a \$50 phone.
+
+This page is a practical guide to making models run on the hardware that actually reaches African users: Android Go, mid-range Android, single-board computers used as village-scale servers, and everything in between. The [offline chapter](./offline.md) is about *what the app does* when connectivity is bad; this chapter is about *how the model runs* on cheap hardware.
+
+:::tip[Key points]
+
+- Design for the lowest device tier your users actually have, not for the phone your team owns.
+- Each tier has a disk and RAM budget; a model must fit, run in tolerable time, and stay within the battery and heat limits.
+- Plan for quantisation from the start, and evaluate the quantised model, not the training checkpoint.
+- Pick a portable on-device runtime: whisper.cpp for speech, llama.cpp or MLC-LLM for generation, ONNX Runtime Mobile for classification.
+- Measure latency, battery drain and thermal throttling on the target device itself.
+
+:::
 
 ## The phone tier map: the deployment surface
 
-There is no single "African phone" any more than there is a single European phone; but the practical device mix is heavily skewed toward the low end of what the ML press treats as normal. Design against the real distribution, not the median press review.
+There is no single "African phone", any more than there is a single European phone. But the practical device mix leans heavily toward the low end of what the ML press treats as normal. Design against the real distribution, not the median press review.
 
-The inference budgets below are this playbook's rules of thumb for planning, not measured limits; replace them with numbers from your own target devices.
+The budgets below are this playbook's rules of thumb for planning, not measured limits. Replace them with numbers from your own target devices.
 
-- **Android (Go edition) phones (up to about 2 GB RAM, ARM Cortex-A53 class, CPU only).** Entry-level handsets, often under \$80. Android (Go edition) is the configuration of Android for low-RAM phones; its minimum RAM is 2 GB from Android 13 and was 512 MB to 1 GB on earlier releases still in use ([Android Developers, n.d.-a](../references.md#android-go)). Inference budget: under 100 MB in RAM, under 200 MB on disk, no acceleration.
-- **Mid-range Android (4-6 GB RAM, ARM Cortex-A75 class).** Roughly \$80-\$300 handsets. Inference budget: under 400 MB in RAM, under 800 MB on disk, GPU or on-device NPU on some chipsets. Do not plan around Android's Neural Networks API (NNAPI): it is deprecated as of Android 15, and Google points developers to LiteRT (formerly TensorFlow Lite) with a GPU delegate instead ([Android Developers, n.d.-b](../references.md#android-nnapi)).
-- **High-end Android and modern iOS.** \$300+. The tier commercial products target, but only a part of the African deployment surface if reach matters. Inference budget: multi-GB models feasible, GPU or on-device NPU available.
-- **KaiOS feature phones.** As little as 256 MB RAM on 3G models and 512 MB on 4G models, with a 240 by 320 screen ([KaiOS Technologies, n.d.](../references.md#kaios-hardware)). Suitable for text-only NLP use cases via a web app. Inference budget: send-to-server, essentially no on-device NLP.
+- **Android (Go edition) phones (up to about 2 GB RAM, ARM Cortex-A53 class, CPU only).** Entry-level handsets, often under \$80. Android (Go edition) is the configuration of Android for low-RAM phones, and it turns off some features by default. Its minimum RAM is 2 GB from Android 13, and was 512 MB to 1 GB on earlier releases still in use ([Android Developers, n.d.-a](../references.md#android-go)).
+  - *Budget:* under 200 MB on disk, under 100 MB in RAM, no acceleration; aim for tens to hundreds of milliseconds per short sentence.
+  - *Practical models:* sub-100M-parameter models quantised to INT8. Examples: distilled encoder-only models such as multilingual DistilBERT (distillation made BERT 40% smaller and 60% faster while keeping about 97% of its performance ([Sanh et al., 2019](../references.md#sanh-2019))), fine-tuned with small LoRA adapters ([Hu et al., 2021](../references.md#hu-2021)); quantised TrOCR-small; distilled TTS voice models. Full-scale Whisper is out; Whisper-tiny (39M parameters), quantised, is in ([Radford et al., 2023](../references.md#radford-2023)).
+- **Mid-range Android (4-6 GB RAM, ARM Cortex-A75 class).** Roughly \$80-\$300 handsets, with a GPU or on-device NPU on some chipsets. Do not plan around Android's Neural Networks API (NNAPI): it is deprecated as of Android 15, and Google points developers to LiteRT (formerly TensorFlow Lite) with a GPU delegate instead ([Android Developers, n.d.-b](../references.md#android-nnapi)).
+  - *Budget:* under 800 MB on disk, under 400 MB in RAM.
+  - *Practical models:* distilled models of up to about 600M parameters with careful INT8 quantisation. Examples: the distilled 600M-parameter NLLB-200 model at INT8 ([NLLB Team, 2022](../references.md#nllb-2022)), AfroXLMR-base ([Alabi et al., 2022](../references.md#alabi-2022)) with LoRA adapters, MMS ASR adapters ([Pratap et al., 2023](../references.md#pratap-2023)), and Whisper-small (244M parameters), quantised ([Radford et al., 2023](../references.md#radford-2023)).
+- **High-end Android and modern iOS (\$300 and up).** The tier commercial products target, but only part of the African deployment surface if reach matters. A GPU or on-device NPU is available.
+  - *Budget:* multi-GB models are feasible.
+  - *Practical models:* size is rarely the limit here; the download becomes the binding constraint. See [model download UX](./offline.md#model-download-ux-the-part-that-gets-ignored) in the offline chapter.
+- **KaiOS feature phones.** As little as 256 MB RAM on 3G models and 512 MB on 4G models, with a 240 by 320 screen ([KaiOS Technologies, n.d.](../references.md#kaios-hardware)). Suitable for text-only NLP through a web app.
+  - *Budget:* send to a server; essentially no on-device NLP.
 - **Basic feature phones (no smart OS).** Text via SMS or USSD only; the [SMS/USSD/WhatsApp chapter](./sms-ussd-whatsapp.md) is the design reference.
 
 For non-phone edge deployment (village-scale or clinic-scale server workloads):
 
-- **Raspberry Pi 4 / 5 (4-8 GB RAM, no GPU).** ~\$50-\$100. Widely deployed as edge servers where mains power is intermittent but not absent.
-- **Jetson Nano / Orin Nano (4-8 GB RAM, small NVIDIA GPU).** ~\$150-\$500. The workhorse for on-device speech and vision at a village or clinic scale.
-- **Old laptops (i5/i7 with 8-16 GB RAM, no GPU).** The de-facto edge-server hardware for many community projects; almost free at second-hand market rates.
+| Hardware | RAM and accelerator | Approximate cost | Typical role |
+|---|---|---|---|
+| Raspberry Pi 4 / 5 | 4-8 GB, no GPU | \$50-\$100 | Edge server where mains power is intermittent but not absent |
+| Jetson Nano / Orin Nano | 4-8 GB, small NVIDIA GPU | \$150-\$500 | Workhorse for on-device speech and vision at village or clinic scale |
+| Old laptop (i5/i7) | 8-16 GB, no GPU | Almost free second-hand | De-facto edge server for many community projects |
 
 Deployment code that targets one tier will not run acceptably on the others. Decide up front which tiers the deployment must support, and design against the lowest one that matters.
 
-## Model-size budgets, restated
-
-Reproducing the numbers from the [offline chapter](./offline.md#model-size-budget) because they are the load-bearing part of edge design, with elaboration on how to hit them.
-
-- **Android Go**: model on disk under 200 MB, in RAM under 100 MB, inference in tens to hundreds of milliseconds per short sentence. Sub-100M-parameter models quantised to INT8. Practical: distilled encoder-only models (for example multilingual DistilBERT; distillation made BERT 40% smaller and 60% faster while keeping about 97% of its performance ([Sanh et al., 2019](../references.md#sanh-2019))), fine-tuned with small LoRA adapters ([Hu et al., 2021](../references.md#hu-2021)), quantised TrOCR-small, distilled TTS voice models. Full-scale Whisper is out; Whisper-tiny (39M parameters) quantised is in ([Radford et al., 2023](../references.md#radford-2023)).
-- **Mid-range Android**: under 800 MB on disk, under 400 MB in RAM. Distilled models of up to about 600M parameters with careful INT8 quantisation. Practical: the distilled 600M-parameter NLLB-200 model at INT8 ([NLLB Team, 2022](../references.md#nllb-2022)), AfroXLMR-base ([Alabi et al., 2022](../references.md#alabi-2022)) with LoRA adapters, MMS ASR adapters ([Pratap et al., 2023](../references.md#pratap-2023)), Whisper-small (244M parameters) quantised ([Radford et al., 2023](../references.md#radford-2023)).
-- **High-end phones**: multi-GB feasible but the download UX becomes the binding constraint. See the model-download UX section in the [offline chapter](./offline.md#model-download-ux-the-part-that-gets-ignored).
-
-The right question at any tier is not "will it fit"; it is "will it fit, run in a user-tolerable time, and stay under the thermal + battery envelope." All three tests must pass; passing only "will it fit" is a common failure.
+At any tier, the right question is not "will it fit?". It is "will it fit, run in a time the user tolerates, and stay within the thermal and battery envelope?" All three tests must pass; passing only "will it fit" is a common failure.
 
 ## Quantisation revisited: the deployment-tuned view
 
-The [compute-poor chapter](../compute-poor/index.md#quantisation-the-deployment-lever) covers quantisation as a training-and-deployment technique in general. Here are the edge-specific choices:
+The [compute-poor chapter](../compute-poor/index.md#quantisation-the-deployment-lever) covers quantisation in general. These are the edge-specific choices:
 
-- **INT8 dynamic quantisation**: the safe default for on-device inference of transformer models on Android and iOS; ONNX Runtime recommends dynamic quantisation for transformer-based models ([Microsoft, n.d.-b](../references.md#onnxruntime-quantization)). INT8 weights take a quarter of the space of FP32 weights, though the saving on the whole model is smaller when some layers stay in floating point. Speed-up and quality loss depend on the model, task and device, so measure both on your target language before and after.
-- **INT8 static (per-channel) quantisation**: requires a calibration pass on representative data to fix activation scales in advance; ONNX Runtime recommends it mainly for CNNs, and per-channel quantisation can recover accuracy for models with large weight ranges ([Microsoft, n.d.-b](../references.md#onnxruntime-quantization)). Worth trying for production deployments on mid-range and up when dynamic quantisation is too slow.
-- **INT4 quantisation**: aggressive; weights take half the space of INT8. Quality loss is uneven across languages: in a study of multilingual LLMs, non-Latin-script languages were hurt most, and automatic metrics greatly underestimated the damage that human evaluators found ([Marchisio et al., 2024](../references.md#marchisio-2024)). Test extensively on target-language content, with native-speaker checks, before deploying; do not rely on English-language benchmark numbers to predict impact.
-- **Mixed-precision (FP16 activations, INT8 weights)**: a compromise that can work well on newer devices with a capable GPU or NPU. Usually not worth the complexity on Android Go.
-- **Quantisation-aware training (QAT)**: simulates quantisation during training so that accuracy survives it ([Jacob et al., 2017](../references.md#jacob-2017)); better than post-training quantisation for aggressive levels but requires re-training. Rarely worth it below the small-NGO compute profile.
+| Option | When to use it on devices |
+|---|---|
+| **INT8 dynamic** | The safe default for on-device transformer inference on Android and iOS; ONNX Runtime recommends dynamic quantisation for transformer-based models ([Microsoft, n.d.-b](../references.md#onnxruntime-quantization)). |
+| **INT8 static (per-channel)** | Needs a calibration pass on representative data to fix activation scales in advance. ONNX Runtime recommends it mainly for CNNs, and per-channel quantisation can recover accuracy for models with large weight ranges ([Microsoft, n.d.-b](../references.md#onnxruntime-quantization)). Worth trying in production on mid-range and up when dynamic quantisation is too slow. |
+| **INT4** | Halves INT8 size but harms some languages far more than others, non-Latin scripts most ([Marchisio et al., 2024](../references.md#marchisio-2024)); test with native speakers first (see [compute-poor](../compute-poor/index.md#quantisation-the-deployment-lever)). |
+| **Mixed precision** (FP16 activations, INT8 weights) | A compromise that can work well on newer devices with a capable GPU or NPU. Usually not worth the complexity on Android Go. |
+| **Quantisation-aware training (QAT)** | Simulates quantisation during training so that accuracy survives it ([Jacob et al., 2017](../references.md#jacob-2017)). Rarely worth it below the small-NGO compute profile; see [compute-poor](../compute-poor/index.md#quantisation-the-deployment-lever). |
 
-For deployment on phones, **plan for quantisation from the start**. An unquantised model often does not fit in an entry-level phone's memory at all, and where it does, it runs slower and uses more battery. Every training decision made without quantisation in the eventual deployment stack in mind is a decision that may have to be re-made.
+On size: INT8 weights take a quarter of the space of FP32 weights, though the saving on the whole model is smaller when some layers stay in floating point. Speed-up and quality loss depend on the model, task and device, so measure both on your target language before and after quantising.
+
+For phones, **plan for quantisation from the start**: an unquantised model often does not fit in an entry-level phone's memory at all, and where it does, it runs slower and drains the battery.
 
 ## Inference runtimes: what actually runs on-device
 
@@ -81,13 +98,13 @@ Real device deployment fails at least as often on power and thermal issues as on
 
 ## Edge-server deployment: single-board computers and old laptops
 
-For village-scale or clinic-scale deployments (a health post, a school computer lab, a community radio station serving a district) the edge is a small server, not a phone. Practical guidance:
+For village-scale or clinic-scale deployments (a health post, a school computer lab, a community radio station serving a district), the edge is a small server, not a phone. Practical guidance:
 
-- **Raspberry Pi 5 with 8 GB RAM** can run small quantised models via llama.cpp or whisper.cpp for offline chat or transcription workloads with small user counts; larger models (around 7B parameters) fit in memory but generate slowly, so measure tokens per second for your model before promising interactive use. Treat it as a real deployment target, not a demo platform.
-- **Jetson Orin Nano** is the workhorse for speech and vision workloads at village scale: small NVIDIA GPU, well-supported by ONNX Runtime and TensorRT.
-- **Old laptops running Linux** are the de-facto edge-server for many community projects; almost free at second-hand market rates, easier to service than embedded hardware, no vendor lock-in.
-- **Solar + battery power budgets** matter more than raw compute for many rural deployments. A model that runs but requires 40 W of continuous power will not survive on solar + battery in dry-season use. Measure idle + inference power draw at deployment scoping time, not after.
-- **OS + software stack drift** is the medium-term maintenance concern. A Raspberry Pi image that works today will be a security-patch nightmare in two years. Plan for update cadence at deployment scoping time.
+- **Raspberry Pi 5 with 8 GB RAM** can run small quantised models via llama.cpp or whisper.cpp for offline chat or transcription with small user counts. Larger models (around 7B parameters) fit in memory but generate slowly, so measure tokens per second for your model before promising interactive use. Treat it as a real deployment target, not a demo platform.
+- **Jetson Orin Nano** is the workhorse for speech and vision workloads at village scale: a small NVIDIA GPU, well supported by ONNX Runtime and TensorRT.
+- **Old laptops running Linux** are the de-facto edge server for many community projects: almost free second-hand, easier to service than embedded hardware, and free of vendor lock-in.
+- **Solar and battery power budgets** matter more than raw compute for many rural deployments. A model that needs 40 W of continuous power will not survive on solar and battery through the dry season. Measure idle and inference power draw when you scope the deployment, not after.
+- **Operating-system and software drift** is the medium-term maintenance concern. A Raspberry Pi image that works today will need security patches and updates for years. Plan the update schedule when you scope the deployment.
 
 ## Evaluation methodology for edge deployment
 

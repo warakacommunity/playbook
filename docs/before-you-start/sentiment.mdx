@@ -1,9 +1,10 @@
 ---
 sidebar_position: 5
-title: Sentiment
+title: Sentiment analysis
+sidebar_label: Sentiment
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -12,6 +13,16 @@ last_update:
 *Worked example. Last reviewed: 2026-07-07.*
 
 This page applies the [four steps from Before You Start](./index.md) to sentiment analysis: deciding whether a text is positive, negative, or neutral. It uses **AfriSenti** and **NaijaSenti** as the examples because they are the largest community-built sentiment datasets for African languages, annotated by native speakers. If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
+
+:::tip[Key points]
+
+- AfriSenti covers 14 African languages and NaijaSenti covers 4 Nigerian languages, both from Twitter/X.
+- Copies of the data on the Hub carry different licences: check the copy you download.
+- Build an evaluation set from your own domain, because tweets differ from most other text.
+- Sentiment depends on culture and transfers weakly between languages; measure before you rely on transfer.
+- Write clear rules for the neutral class, and report results per class.
+
+:::
 
 ## Step 1: What a search turns up
 
@@ -33,7 +44,7 @@ You will also find **copies of the same data** uploaded by other accounts, and s
 - **Code-switching.** Normal, not an edge case. Tweets in the covered languages often mix in English, French, Arabic, or a regional lingua franca. In NaijaSenti, 43% of Igbo, 23% of Hausa, and 19% of Yorùbá tweets were code-mixed ([Muhammad et al., 2022](../references.md#naijasenti-2022)). Your data will likely mix languages too.
 - **Script.** Amharic and Tigrinya are in Ge'ez script. Algerian and Moroccan Arabic tweets may appear in Arabic or Latin script. Check that your text processing handles both.
 - **Labels.** Three classes: positive, negative, neutral. Neutral is often the hardest class. Sarcasm, mixed feelings, indirect expression, and plain facts can all end up there unless the guidelines say otherwise. NaijaSenti used separate mixed and indeterminate labels during annotation, and the AfriSenti teams discarded many sarcastic tweets that annotators could not agree on ([Muhammad et al., 2022](../references.md#naijasenti-2022); [Muhammad et al., 2023a](../references.md#muhammad-2023)). For a list of sentence types that are hard to label, see [Mohammad (2016)](../references.md#mohammad-2016). Report results per class, not only an overall score (see [core principles](../1_introduction/core-principles.md)).
-- **Label scope.** Polarity is not emotion, stance, polarization, or harm. If you need emotion labels, see [emotion analysis](../11_text-classification/emotion-analysis.md). If you need content moderation, see [hate speech analysis](../11_text-classification/hate-speech-analysis.md). If you need to detect hostility between groups, look at polarization data such as [POLAR](https://arxiv.org/abs/2505.20624). Do not reuse AfriSenti labels for these tasks.
+- **Label scope.** Polarity is not emotion, stance, polarization, or harm. If you need emotion labels, see [emotion analysis](../11_text-classification/emotion-analysis.md). If you need content moderation, see [hate speech analysis](../11_text-classification/hate-speech-analysis.md). If you need to detect hostility between groups, look at polarization data such as [POLAR](https://arxiv.org/abs/2505.20624) ([Naseem et al., 2025](../references.md#naseem-2025)). Do not reuse AfriSenti labels for these tasks.
 - **Splits.** Fixed train, development, and test splits for every language, so results are comparable across papers. The test sets have been public since 2023.
 - **Guidelines.** Partial. The repository has a guidelines file for Algerian Arabic only. The paper describes the annotation process for each language.
 - **Quality.** Annotated by native speakers. Individual annotator labels are released for several languages, so you can measure agreement yourself.

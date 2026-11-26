@@ -2,7 +2,7 @@
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -19,6 +19,16 @@ This happens because African-language datasets are hard to find, and the same la
 All three mean Swahili, but a computer treats them as three different labels, and projects do not agree on which to use. The Masakhane benchmarks (AfriMMLU, AfriXNLI, AfriMGSM) use `swa` ([Adelani et al., 2024](../references.md#irokobench-2024)). FLORES and Belebele use `swh` ([NLLB Team, 2022](../references.md#nllb-2022); [Bandarkar et al., 2024](../references.md#belebele-2024)). Many Hugging Face datasets and web-crawled corpora use `sw`. If you search for one code, you miss the data filed under the others.
 
 A complete list of African-language datasets would not solve this, because new datasets appear every month and no list stays current for long. Instead, this chapter describes four steps to take before you build: search for what exists, check whether it fits your needs, decide whether to reuse, extend, or build, and learn from the people who made it.
+
+:::tip[Key points]
+
+- Search before you build: the data you need may already exist under another language name or code.
+- Search with every name and ISO code your language goes by (for Swahili: `sw`, `swa`, `swh`).
+- Check each dataset's licence, access, fit, labels, splits, guidelines, quality, and documentation.
+- Prefer reusing or extending existing data over building new data; it usually costs less.
+- Read the papers and guidelines, then talk to the people who built the data.
+
+:::
 
 ## Step 1: Search for prior work
 

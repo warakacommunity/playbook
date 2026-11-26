@@ -3,13 +3,29 @@ title: Box and region rules
 sidebar_position: 6
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
 # Box and region rules
 
-Drawing a box looks like the easiest annotation in this playbook, and that is why it goes wrong. Two careful annotators given the same photo of a goat behind a fence will draw different boxes unless someone has decided, in writing, whether the box covers only the visible goat or the whole animal, whether the half-hidden goat counts at all, and what to do about the herd in the background. The [object detection](./object-detection.md#annotation-and-evaluation) page names these rules; this page gives them, for boxes and other regions on still images, so you can copy them into your [annotation guidelines](../templates/annotation-guidelines.md). For objects that move across video frames, see [Tracking objects across frames](../sign-language-video/video.md#tracking-objects-across-frames).
+Drawing a box looks like the easiest annotation in this playbook, and that is why it goes wrong. Give two careful annotators the same photo of a goat behind a fence, and they will draw different boxes unless someone has decided, in writing:
+
+- whether the box covers only the visible goat or the whole animal;
+- whether the half-hidden goat counts at all;
+- what to do about the herd in the background.
+
+The [object detection](./object-detection.md#annotation-and-evaluation) page names these rules; this page gives them, for boxes and other regions on still images, so you can copy them into your [annotation guidelines](../templates/annotation-guidelines.md). For objects that move across video frames, see [Tracking objects across frames](../sign-language-video/video.md#tracking-objects-across-frames).
+
+:::tip[Key points]
+
+- Box only the visible extent of an object, and show annotators a perfect box and a common mistake for every class.
+- Replace "use your discretion" with numbers: a minimum size in pixels, a trigger for group boxes.
+- Prefer flagging hard objects (difficult, occluded, truncated) to skipping them.
+- Give ignore regions and image-level flags their own export values, and keep "checked and empty" apart from "unusable" and "not done".
+- Pilot the rules, score agreement, and log every rule change.
+
+:::
 
 You do not need to invent the rules from scratch. The large public detection datasets each wrote and published theirs, and their choices are a tested starting point. The table summarises them; the sections below explain each rule and where you will need to change it.
 
@@ -22,7 +38,7 @@ You do not need to invent the rules from scratch. The large public detection dat
 | Many touching objects | Not specified | After 10 to 15 instances, one "crowd" region for the rest | One "group-of" box over more than 5 heavily overlapping instances |
 | Whole-image problems | Mark the image bad (heavy blur, collages, too many objects) | Not specified | Not specified |
 
-Sources: [PASCAL VOC, 2011](../references.md#voc-guidelines-2011); [Everingham et al., 2010](../references.md#everingham-2010); [Lin et al., 2014](../references.md#lin-2014); [COCO Consortium, n.d.](../references.md#coco-format); [Kuznetsova et al., 2020](../references.md#kuznetsova-2020).
+Sources: [PASCAL VOC, 2011](../references.md#voc-guidelines-2011); [Everingham et al., 2010](../references.md#everingham-2010); [Lin et al., 2014](../references.md#lin-2014); [COCO Consortium, n.d.-a](../references.md#coco-format); [Kuznetsova et al., 2020](../references.md#kuznetsova-2020).
 
 ## How tight the box should be
 
@@ -32,7 +48,7 @@ Allow one exception and write it down. VOC lets the box leave out a few thin pix
 
 The harder question is what counts as part of the object. Open Images found that a simple definition still left many class-specific corner cases, such as whether straps belong to a camera, and even cultural differences: in some places annotators boxed a "hand" as the whole arm. Their fix was to show annotators two perfect boxes for every class, plus common mistakes for the classes where pilots exposed them ([Kuznetsova et al., 2020](../references.md#kuznetsova-2020)). Do the same for each class in your label set. Decide, with a picture, whether a load carried on the head belongs to the person, whether the cart belongs to the donkey, and whether mud on a leaf is part of the leaf. VOC's rule is that a close-fitting occluder such as clothing, mud or snow is treated as part of the object ([PASCAL VOC, 2011](../references.md#voc-guidelines-2011)).
 
-When something in front splits an object into two visible parts, for example a fence post across a goat, draw one box over the whole visible extent, not two boxes. For polygons and masks, one object may need several polygons in the same annotation ([COCO Consortium, n.d.](../references.md#coco-format)); keep them under one object identifier.
+When something in front splits an object into two visible parts, for example a fence post across a goat, draw one box over the whole visible extent, not two boxes. For polygons and masks, one object may need several polygons in the same annotation ([COCO Consortium, n.d.-a](../references.md#coco-format)); keep them under one object identifier.
 
 ## Occlusion and truncation flags
 
@@ -137,9 +153,22 @@ Short rules written as imperatives are easier to follow than paragraphs. A block
 - If you cannot identify the objects in the image, flag it unusable and pick a reason.
 ```
 
-VOC reached unusually consistent boxes by discussing the guidelines in detail with annotators, observing them during annotation, and having an organiser check every image for missed objects ([Everingham et al., 2010](../references.md#everingham-2010)). You will rarely have that much control, but the same loop works at smaller scale: pilot the rules on a shared set, score agreement, and read the disagreement types. Loose boundaries point to the box-extent rule, missed objects to the minimum-size and occlusion rules, and wrong labels to the class definitions ([Agreement when an image has many objects](./object-detection.md#agreement-when-an-image-has-many-objects)). Add what you learn to the corner cases and the [training material](../3_annotation-design/training_guidlines.md), and log each rule change in the guideline's change log, since boxes drawn before and after a change are not directly comparable.
+### Pilot, measure and revise
 
-Two last habits save rework. If annotators start from model-drawn boxes, the drafts pull them towards the model's choices, and a box that is nearly right is easy to accept, so check box fit on a sample drawn from scratch (see [Treat drafts as drafts](../3_annotation-design/model-assisted-annotation.md#treat-drafts-as-drafts)). And the way boxes are drawn matters: clicking the four extreme points of an object (top, bottom, left-most and right-most) was about five times faster than dragging corners in its authors' study, at about 7 seconds per box ([Papadopoulos et al., 2017](../references.md#papadopoulos-2017)), and Open Images drew 90% of its boxes this way, finding it easier to deploy and more accurate than its earlier box-verification method ([Kuznetsova et al., 2020](../references.md#kuznetsova-2020)). If your tool supports it, pilot it.
+VOC reached unusually consistent boxes by discussing the guidelines in detail with annotators, observing them during annotation, and having an organiser check every image for missed objects ([Everingham et al., 2010](../references.md#everingham-2010)). You will rarely have that much control, but the same loop works at a smaller scale:
+
+1. Pilot the rules on a shared set of images.
+2. Score agreement and read the disagreement types ([Agreement when an image has many objects](./object-detection.md#agreement-when-an-image-has-many-objects)):
+   - loose boundaries point to the box-extent rule;
+   - missed objects point to the minimum-size and occlusion rules;
+   - wrong labels point to the class definitions.
+3. Add what you learn to the corner cases and the [training material](../3_annotation-design/training_guidlines.md).
+4. Log each rule change in the guideline's change log, since boxes drawn before and after a change are not directly comparable.
+
+### Two habits that save rework
+
+- **Check model-drawn boxes against boxes drawn from scratch.** If annotators start from model-drawn boxes, the drafts pull them towards the model's choices, and a box that is nearly right is easy to accept. Check box fit on a sample drawn from scratch (see [Treat drafts as drafts](../3_annotation-design/model-assisted-annotation.md#treat-drafts-as-drafts)).
+- **Try extreme-point clicking.** How boxes are drawn matters. Clicking the four extreme points of an object (top, bottom, left-most and right-most) was about five times faster than dragging corners in its authors' study, at about 7 seconds per box ([Papadopoulos et al., 2017](../references.md#papadopoulos-2017)). Open Images drew 90% of its boxes this way, and found it easier to deploy and more accurate than its earlier box-verification method ([Kuznetsova et al., 2020](../references.md#kuznetsova-2020)). If your annotation tool supports it, pilot it.
 
 ## Further reading
 

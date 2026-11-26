@@ -11,16 +11,23 @@ last_update:
 
 *Last reviewed: 2026-07-07.*
 
-*A Model-Cards-derived template ([Mitchell et al., 2019](https://arxiv.org/abs/1810.03993)) extended with the deployment-realism sections the playbook's [deployment chapter](../deployment/index.md) argues are non-optional: target-tier latency, quantised quality drop, code-switched evaluation, script-variant coverage. Fork it, fill it in, ship it alongside the model release.*
+A template based on Model Cards ([Mitchell et al., 2019](../references.md#mitchell-2019)), with extra sections on how the model behaves where it will actually run. The [deployment chapter](../deployment/index.md) argues these are essential:
+
+- latency on the target device tier;
+- quality lost to quantisation;
+- evaluation on code-switched input;
+- coverage of each script the language is written in.
+
+Fork it, fill it in, and publish it with the model.
 
 ## How to use this template
 
 1. Copy everything below the divider into a new file (`docs/model-card.md` in your project repo, or a `README.md` on the Hugging Face Hub model page).
 2. Replace every `[BRACKETED FIELD]` with a real answer.
 3. Delete any section that genuinely does not apply and add `Not applicable: [why]` in its place. Do not silently skip.
-4. Publish it alongside the model, not separately. A model without a card is a model that will be misused.
+4. Publish it alongside the model, not separately. A model without a card is easy to misuse.
 
-Motivated by [Mitchell et al., 2019](https://arxiv.org/abs/1810.03993), the playbook's [Before You Start](../before-you-start/index.md) checklist, the [deployment chapter](../deployment/index.md), and the [legal-consent chapter](../legal-consent/index.md).
+Motivated by Model Cards ([Mitchell et al., 2019](../references.md#mitchell-2019)), the playbook's [Before You Start](../before-you-start/index.md) checklist, the [deployment chapter](../deployment/index.md), and the [legal-consent chapter](../legal-consent/index.md).
 
 ---
 
@@ -64,7 +71,7 @@ Motivated by [Mitchell et al., 2019](https://arxiv.org/abs/1810.03993), the play
 
 ## 4. Evaluation
 
-Per the [core principles](../1_introduction/core-principles.md), evaluation must be per-language and per-class. See the [evaluation script template](./evaluation-script.md) for the compliant harness.
+The playbook asks for evaluation per language and per class (see [What this playbook is not](../1_introduction/scope-and-strategy.md#what-this-playbook-is-not)). The [evaluation script template](./evaluation-script.md) produces results in this shape.
 
 - **Evaluation set(s) used:** [Named benchmarks + splits + preprocessing.]
 - **Primary metric:** [chrF for translation, CER for speech, per-class F1 for classification, top-k retrieval for QA. State the choice and the reasoning.]
@@ -85,7 +92,7 @@ For classification: add a per-class F1 breakdown per language.
 
 Mandatory for generative output (translation, TTS, generative QA, LLM-based tasks).
 
-- **Number of evaluators:** [MIN 2 for statistical stability; MIN 5 for MOS.]
+- **Number of evaluators:** [How many people rated, and how many rated each item. Use at least two per item so agreement can be checked; listening tests for MOS (mean opinion score) usually need more listeners.]
 - **Number of items evaluated:** [Per language.]
 - **Scale used:** [1-5 MOS, direct assessment, adequacy + fluency, etc.]
 - **Result:** [Score + confidence interval + how disagreements were resolved.]
@@ -139,7 +146,7 @@ For any model shipped as part of an offline-capable deployment. See the [offline
 
 - **Known limitations:** [Specific to this model + task + languages. The Step 2 checklist on the relevant [Before You Start](../before-you-start/index.md) worked example is a good starting point.]
 - **Known systematic errors:** [Where the model reliably gets things wrong, from the evaluation data.]
-- **What the metrics do NOT show:** [Per the [core principles](../1_introduction/core-principles.md), the playbook's editorial position is that metric blind spots must be named on the card.]
+- **What the metrics do NOT show:** [Name the blind spots of your metrics, for example errors in tone marking or diacritics that a character-level score barely penalises, or a variety that is missing from the test set.]
 - **Populations under-served:** [Dialects, registers, demographics where the model performs worse.]
 - **Recommendations for downstream users encountering an issue:** [Named contact + expected response time.]
 
@@ -176,7 +183,7 @@ For any model shipped as part of an offline-capable deployment. See the [offline
 
 Preferred citation:
 
-```
+```text
 [BibTeX or plain-text]
 ```
 

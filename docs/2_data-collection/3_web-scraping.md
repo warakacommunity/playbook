@@ -3,13 +3,23 @@ title: Web Scraping
 description: What web scraping can and can't deliver for African-language data, the legal and ethical considerations, and the access landscape as it stands.
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Web Scraping
 
 Learn what web scraping is actually good for, where it falls short for African languages, and the legal, ethical, and practical considerations that should shape any scraping plan.
+
+:::tip[Key points]
+
+- Scraping is cheap to start, but it cannot create volume or quality that a source does not have.
+- Access rules keep changing: re-check `robots.txt`, terms of service and the law during the project, not only at the start.
+- Check the legal, ethical, institutional and scientific questions before you scrape.
+- Never scrape behind logins or around anti-bot measures; prefer official archives and bulk exports.
+- Check the language of everything you keep, and spot-check a sample with a native speaker.
+
+:::
 
 ## What scraping is, and what it isn't
 
@@ -19,7 +29,12 @@ It's also, by itself, the weakest tool in this chapter for the playbook's core p
 
 ## The access landscape keeps shifting
 
-Scraping plans that assume the open web behaves the way it did five years ago should be reconsidered. An audit of the web sources behind widely used training corpora found that, between 2023 and 2024, a fast-growing share of them began restricting AI crawlers through their `robots.txt` files and terms of service, often inconsistently between the two ([Longpre et al., 2024b](../references.md#longpre-2024-consent)). Several major platforms have also restricted access through official channels or moved to paid tiers, and the legal rules on scraping, especially for training AI models, are still being tested in court ([Brown et al., 2024](../references.md#brown-2024)). None of this makes scraping impossible, but it means:
+Scraping plans that assume the open web behaves the way it did five years ago should be reconsidered.
+
+- An audit of the web sources behind widely used training corpora found that, between 2023 and 2024, a fast-growing share of them began restricting AI crawlers through their `robots.txt` files and terms of service, often inconsistently between the two ([Longpre et al., 2024b](../references.md#longpre-2024-consent)).
+- Several major platforms have also restricted access through official channels or moved to paid tiers, and the legal rules on scraping, especially for training AI models, are still being tested in court ([Brown et al., 2024](../references.md#brown-2024)).
+
+None of this makes scraping impossible, but it means:
 
 - A scraping plan written today may not work the same way in a year. Budget time to re-check access periodically through a project, not just at the start.
 - `robots.txt` and a site's terms of service aren't just etiquette; they're the basis on which a site operator, or a court, will judge whether your collection was legitimate. Read and respect them.
@@ -36,7 +51,7 @@ Brown et al. lay out a four-part framework for research scraping, covering legal
 
 ## Practical guidance
 
-- **Respect `robots.txt` and rate limits.** Aggressive crawling can get your IP blocked, and for a site already wary of AI scraping, it confirms exactly the behavior they were trying to keep out. Note that `robots.txt` (now an internet standard) states a site's crawling preferences; it is not a form of access authorization, so following it does not by itself make a collection lawful ([Koster et al., 2022](../references.md#rfc9309-2022)).
+- **Respect `robots.txt` and rate limits.** Aggressive crawling can get your IP blocked, and for a site already wary of AI scraping, it confirms exactly the behavior they were trying to keep out. Note that `robots.txt` (standardised by the IETF in 2022 as RFC 9309) states a site's crawling preferences; it is not a form of access authorization, so following it does not by itself make a collection lawful ([Koster et al., 2022](../references.md#rfc9309-2022)).
 - **Prefer official archives and bulk-export options over scraping live pages**, where they exist. They're more stable, less likely to break your pipeline mid-collection, and easier to defend later as a collection method.
 - **Document everything as you go**: the exact URL pattern, the date of collection, the scraper version, and any filtering applied. This becomes the backbone of [Data Provenance and Traceability](./data-provenance-traceability). Provenance is much harder to reconstruct after the fact than to log at the time.
 - **Don't scrape behind logins or around anti-bot measures.** In the United States, for example, accessing password-protected pages without authorization can fall under computer-misuse law, and courts are less willing to accept scraping of content protected by technical safeguards ([Brown et al., 2024](../references.md#brown-2024)). It is also hard to justify to an ethics review board, regardless of the research value.

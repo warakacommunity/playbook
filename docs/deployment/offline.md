@@ -7,25 +7,40 @@ last_update:
   author: Shamsuddeen Hassan Muhammad
 ---
 
-# Offline and patchy-connectivity NLP
+# Offline and patchy connectivity
 
 *Last reviewed: 2026-07-07.*
 
-The offline case is not exotic. On ITU figures for 2025, more than a quarter of the world's population is still offline, and average Internet use in Africa is just 36% ([ITU, 2025](../references.md#itu-ff-2025)). Connectivity within Africa is also heavily unequal: urban fibre coexists with rural mobile connections that are metered by the megabyte and can drop repeatedly within a session. Any deployment that assumes a steady round-trip to a cloud region will fail invisibly for a large share of its intended users. The failure mode is silent: the app opens, the user tries to interact, nothing happens, and the user closes the app and does not come back. This page is about designing so that does not happen.
+The offline case is not exotic. On ITU figures for 2025, more than a quarter of the world's population is still offline, and average Internet use in Africa is just 36% ([ITU, 2025](../references.md#itu-ff-2025)). Connectivity within Africa is also very unequal: urban fibre sits next to rural mobile connections that are metered by the megabyte and can drop several times in one session.
+
+Any deployment that assumes a steady round-trip to a cloud server will fail for a large share of its intended users, and it fails silently. The app opens, the user tries to use it, nothing happens, and the user closes the app and does not come back. This page is about designing so that this does not happen.
+
+:::tip[Key points]
+
+- Decide at kickoff which connectivity class your users are in: steady, metered, or patchy and offline.
+- For patchy or offline users, build local-first: the model runs on the device and every core action works with no network.
+- Treat model downloads as a design surface: Wi-Fi first, resumable, cancellable and checked before use.
+- Evaluate the quantised model on the target phone, with native speakers, and with the network switched off.
+
+:::
 
 ## The three connectivity classes to design for
 
-Every African-language deployment has to answer this question up-front: *which of these three classes is my product actually going to serve?*
+Every African-language deployment has to answer this question up front: *which of these three classes is my product actually going to serve?*
 
-1. **Steady, unmetered connectivity.** Urban fibre, campus Wi-Fi, home broadband. Design as you would for any cloud-hosted app.
-2. **Metered mobile connectivity.** 3G/4G/5G paid per megabyte, often prepaid, often bundled cheaply for specific apps (Free Basics, MTN Ayoba, WhatsApp bundles) but expensive for everything else. The user is intensely aware of data cost. Design for **small payloads, cached models, and no background refresh**.
-3. **Patchy or offline.** Connectivity comes and goes multiple times per hour, or the user has no connectivity for hours or days at a time. Design for **local-first**: the model runs on-device, the app is fully usable offline, and sync happens opportunistically.
+| Class | What it looks like | Design for |
+| --- | --- | --- |
+| **1. Steady, unmetered** | Urban fibre, campus Wi-Fi, home broadband. | A normal cloud-hosted app. |
+| **2. Metered mobile** | 3G/4G/5G paid per megabyte, often prepaid. Often cheap for specific bundled apps (Free Basics, MTN Ayoba, WhatsApp bundles) but expensive for everything else. The user watches every megabyte. | **Small payloads, cached models, no background refresh.** |
+| **3. Patchy or offline** | The connection comes and goes several times an hour, or is absent for hours or days. | **Local-first**: the model runs on the device, the app works fully offline, and sync happens when it can. |
 
-Deciding this correctly at project kickoff shapes every downstream decision: model size, evaluation targets, UI patterns, error messages. In our experience, getting it wrong is one of the most common causes of "great in the lab, dead in the field" African NLP products.
+This decision, made at project kickoff, shapes everything after it: model size, evaluation targets, UI patterns and error messages. In our experience, getting it wrong is one of the most common reasons African NLP products are "great in the lab, dead in the field".
 
 ## The local-first design pattern
 
-The pattern that consistently ships in low-connectivity deployments is **local-first**: the model is bundled with the app or downloaded once when connectivity is good, and every subsequent interaction runs locally. Sync (of new data, updated models, or logs) is opportunistic and never blocks a user action. The term comes from software research, where local-first apps treat the copy of the data on the device as the primary copy and servers hold secondary copies that help sync between devices ([Kleppmann et al., 2019](../references.md#kleppmann-2019)). The same pattern underlies data collection and annotation tools that work offline; for the project-side decisions that go with it (whether data may stay on devices, conflicts, work that arrives late), see [Offline Field Operations](../2_data-collection/10_offline-field-operations.md).
+The pattern that consistently ships in low-connectivity deployments is **local-first**. The model is bundled with the app, or downloaded once when the connection is good, and every later interaction runs locally. Sync (of new data, updated models or logs) happens when it can and never blocks a user action.
+
+The term comes from software research, where local-first apps treat the copy of the data on the device as the primary copy and servers hold secondary copies that help sync between devices ([Kleppmann et al., 2019](../references.md#kleppmann-2019)). The same pattern underlies data collection and annotation tools that work offline; for the project-side decisions that go with it (whether data may stay on devices, conflicts, work that arrives late), see [Offline Field Operations](../2_data-collection/10_offline-field-operations.md).
 
 ### What "local-first" means in practice
 
@@ -44,19 +59,16 @@ The pattern that consistently ships in low-connectivity deployments is **local-f
 
 ## Model size budget
 
-For on-device inference on the phones actually used in African contexts, budget roughly as follows. These are rules of thumb from practice, not vendor specifications; check them on your own target devices:
+On-device budgets by phone tier (disk, RAM and the models that fit) are on [Edge devices](./edge-devices.md#the-phone-tier-map-the-deployment-surface). What matters here is the connection the model travels over:
 
-- **Android (Go edition) / entry-level Android** (about 2 GB of RAM or less, ARM Cortex-A53 class): under 200 MB model on disk, under 100 MB in RAM, no GPU, inference in tens to hundreds of milliseconds per short sentence. Distilled sub-100M-parameter models, quantised to INT8, are the target. Android (Go edition) is the configuration of Android for these low-RAM phones, and it turns off some features by default ([Android Developers, n.d.-a](../references.md#android-go)).
-- **Mid-range Android** (4-6 GB RAM, ARM Cortex-A75 class): under 800 MB model on disk, under 400 MB in RAM. Distilled 600M-parameter models are feasible with careful quantisation. For hardware acceleration, do not build on Android's Neural Networks API (NNAPI): it is deprecated as of Android 15, and Android now points developers to TensorFlow Lite in Google Play Services with its GPU delegate ([Android Developers, n.d.-b](../references.md#android-nnapi)).
-- **High-end Android and modern iOS**: models over 1 GB are possible but the download itself becomes a UX problem. Consider streaming download over Wi-Fi only, and never over a metered connection without explicit consent.
-
-The right question is not "will it fit"; it is "how do we tell the user how much data they are about to spend, and on what". Every download over Wi-Fi is close to free; every download over metered mobile is a decision the user should make consciously.
+- **Download large models over Wi-Fi by default.** Never download over a metered connection without the user's explicit consent.
+- **Say what it will cost.** For a connectivity-constrained user, the right question is not "will it fit"; it is "how do we tell the user how much data they are about to spend, and on what". A download over Wi-Fi is close to free; a download over metered mobile data is a decision the user should make consciously.
 
 ## Model download UX: the part that gets ignored
 
-In our experience, model downloads are one of the most under-designed surfaces in African-context NLP apps. The pattern that works:
+In our experience, model downloads are one of the most under-designed parts of African-context NLP apps. The pattern that works:
 
-- **Ask for Wi-Fi before starting.** Detect connection type; if the user is on metered mobile, warn about data cost in absolute terms ("This model is 340 MB, which is roughly the cost of 2 hours of YouTube video on your plan"), and default to "not now".
+- **Ask for Wi-Fi before starting.** Detect the connection type. If the user is on metered mobile data, state the cost in absolute terms ("This model is 340 MB; downloading it now will use 340 MB of your mobile data"), and make "not now" the default.
 - **Show a progress bar with an accurate ETA.** Not a spinner. Users on slow connections need to know whether to leave the phone downloading or come back later.
 - **Make it resumable.** A dropped connection at 80% of a 340 MB download must not restart from zero. Range-request support is not optional: the server must accept HTTP range requests, which it advertises with an `Accept-Ranges` header ([MDN Web Docs, 2026b](../references.md#mdn-range-requests)).
 - **Make it cancellable.** Without penalty. A user who cancels a download should be able to try again later with no state to clean up.
@@ -67,7 +79,7 @@ In our experience, model downloads are one of the most under-designed surfaces i
 The evaluation set for an offline deployment should include:
 
 - **A model-on-device latency measurement** on the target hardware class. Not a laptop benchmark. Run inference on the actual phone tier you are targeting; publish the p50 and p95 latency separately.
-- **A test on the actual quantised model**, not the un-quantised training checkpoint. Quantisation can degrade quality, and unevenly across languages: in a study of multilingual LLMs it hurt non-Latin-script languages most, and automatic metrics severely underestimated the damage that human evaluation found ([Marchisio et al., 2024](../references.md#marchisio-2024)). Measure it on your languages, including with native-speaker review, do not assume it.
+- **A test on the actual quantised model**, not the training checkpoint, on your languages and with native-speaker review. Quantisation damage is uneven across languages ([Marchisio et al., 2024](../references.md#marchisio-2024); see [compute-poor](../compute-poor/index.md#quantisation-the-deployment-lever)).
 - **A round-trip test with the sync pipeline off.** Complete a task, close the app, reopen it a day later with no network, confirm the queued write is still there and drains cleanly on next connection.
 - **A battery-and-heat measurement.** On-device inference on entry-level phones is thermally noticeable. If your app runs the model 50 times per session and drains 30% battery, users will notice and stop opening it.
 
@@ -90,4 +102,4 @@ The evaluation set for an offline deployment should include:
 
 ---
 
-**Contributor's note.** This is the first real page in the deployment chapter. If you are adding SMS/USSD, edge-device, multilingual-switching, or non-Latin-script pages, mirror the structure (*the class(es) to design for / the pattern that works / the anti-patterns to avoid*) and keep the practical, opinionated stance. Deployment guidance that fails to take a position is not useful.
+**Contributor's note.** If you add a page to the deployment chapter, mirror this page's structure (*the classes to design for / the pattern that works / the anti-patterns to avoid*) and keep the practical, opinionated stance. Deployment guidance that does not take a position is not useful.

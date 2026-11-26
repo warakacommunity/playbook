@@ -2,23 +2,40 @@
 title: Text-to-Speech
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Text-to-Speech
 
-Text-to-speech (TTS) is the reverse of ASR: it turns written text into spoken audio. A good TTS voice makes a language usable by people who cannot read it or cannot see a screen, which matters enormously where literacy and connectivity vary widely. TTS is data-hungry in a particular way, because it needs not just a lot of speech but very clean, consistent speech from voices you have the right to reproduce. This chapter covers the deeper how-to: the data shape, the recording pipeline, the text preparation, the annotation and consent choices, the quality assurance during collection, and evaluation.
+Text-to-speech (TTS) is the reverse of automatic speech recognition (ASR): it turns written text into spoken audio. A good TTS voice makes a language usable by people who cannot read it or cannot see a screen. This matters a great deal where literacy and connectivity vary widely.
 
-Before building a TTS corpus, check what already exists with [Before You Start](../before-you-start/index.md). That chapter helps you decide whether to reuse, extend, or build; this page details how to carry out the path you choose.
+TTS is data-hungry in a particular way. It needs not just a lot of speech, but very clean, consistent speech from voices you have the right to reproduce. This chapter covers the data shape, the recording pipeline, text preparation, annotation and consent, quality assurance during collection, and evaluation.
+
+:::tip[Key points]
+
+- Record clean, consistent, single-speaker audio from a voice you have the right to reproduce.
+- Choose prompts for phonetic coverage, tone included, and audit that coverage before recording.
+- Normalise every prompt so it is written exactly as it is spoken, with correct tone marks.
+- Make voice-cloning risk an explicit part of the speaker's consent.
+- Judge the voice with native-speaker listening tests; automatic scores are only proxies.
+
+:::
+
+Before building a TTS corpus, check what already exists with [Before You Start](../before-you-start/index.md). That chapter helps you decide whether to reuse, extend or build; this page details how to carry out the path you choose.
 
 ![What a text-to-speech corpus needs: clean single-speaker audio, phonetic coverage, tone labelling, and consent](images/tts-data.svg)
 
 ## What the data looks like
 
-A TTS corpus is text paired with high-quality recordings of that text being read, usually by a single speaker for a single voice. Two things set it apart from ASR data. The recordings must be studio-clean, since any background noise or inconsistency is baked into the synthetic voice, and the script must be chosen for phonetic coverage, so that every sound and sound-combination in the language appears often enough for the model to learn it. BibleTTS is the model African resource here, offering up to 86 hours of clean single-speaker audio per language under an open CC-BY-SA licence across several language families ([Meyer et al., 2022](../references.md#bibletts-2022)), and broader corpora such as NaijaVoices and WAXAL support TTS as well as ASR ([Emezue et al., 2025](../references.md#emezue-2025); [WAXAL, 2026](../references.md#waxal-2026)).
+A TTS corpus is text paired with high-quality recordings of that text being read, usually by a single speaker for a single voice. Two things set it apart from ASR data:
 
-The common layout, popularised by LJSpeech, is a folder of single-speaker WAV files and one metadata file linking each clip to its text. A pipe-separated file holds the original text and a normalized, spoken-form version side by side, because numbers, dates, and abbreviations must be written as they are actually said before the model ever sees them:
+- **Studio-clean audio.** Any background noise or inconsistency is baked into the synthetic voice.
+- **A script chosen for phonetic coverage.** Every sound and sound combination in the language must appear often enough for the model to learn it.
+
+BibleTTS is the model African resource here. It offers up to 86 hours of clean single-speaker audio per language under an open CC-BY-SA licence, across several language families ([Meyer et al., 2022](../references.md#bibletts-2022)). Broader corpora such as NaijaVoices and WAXAL support TTS as well as ASR ([Emezue et al., 2025](../references.md#emezue-2025); [WAXAL, 2026](../references.md#waxal-2026)).
+
+The common layout, popularised by the LJSpeech dataset, is a folder of single-speaker WAV files and one metadata file linking each clip to its text. A pipe-separated file holds the original text and a normalised, spoken-form version side by side. Numbers, dates and abbreviations must be written as they are actually said before the model ever sees them:
 
 ```text
 # metadata.csv:  clip_id | original text | normalized (spoken) text
@@ -26,19 +43,34 @@ yor_0001|Ó dé ní aago 8.|Ó dé ní aago mẹ́jọ.
 yor_0002|Ẹ kú àárọ̀, ẹ jọ̀wọ́ jókòó.|Ẹ kú àárọ̀, ẹ jọ̀wọ́ jókòó.
 ```
 
-Keep the audio itself consistent: a single speaker, one sample rate (22.05 kHz is common for TTS), mono, and a quiet recording environment. The diacritics in the example are not decoration. For a tone language they carry the pitch, so the metadata must preserve them exactly, since this text is what teaches the voice how to sound.
+Keep the audio itself consistent:
+
+- a single speaker;
+- one sample rate (22.05 kHz is common for TTS);
+- mono;
+- a quiet recording environment.
+
+The diacritics in the example are not decoration. In a tone language they carry the pitch, so the metadata must preserve them exactly: this text is what teaches the voice how to sound.
 
 ## Phonetic coverage: what "enough" means per language family
 
-Phonetic coverage is the reason a TTS corpus cannot be assembled from whatever text is convenient. The prompts must contain every phoneme of the target language, and every phoneme in every position (word-initial, medial, word-final) enough times for the model to learn it. What "enough" means depends on the language.
+Phonetic coverage is the reason a TTS corpus cannot be assembled from whatever text is convenient. The prompts must contain every phoneme (distinct sound) of the target language, in every position (word-initial, medial and word-final), enough times for the model to learn it. Set a minimum count per phoneme and position, and raise it for tone contrasts. What to watch for depends on the language family.
 
-- **Bantu languages** (Kiswahili, Kinyarwanda, isiZulu, Chishona and relatives) have relatively small consonant inventories but rich vowel-length and tone contrasts. Aim for at least twenty-five instances of every phoneme in every position; more is safer for the tone contrasts, which sit on top of the segmental phonemes and need their own coverage.
-- **Volta-Niger languages** (Yorùbá, Igbo, Ewe, Twi, Fon) carry lexical tone and vowel harmony. Prompts must exercise every tone-vowel combination; a script that covers the segments but not the tone patterns produces a voice that reads words correctly but wrongly.
-- **Chadic languages** (Hausa, and its Ajami-written variants) mix tone with implosive and ejective consonants (`ɓ`, `ɗ`, `ƙ`, `ƴ`) that many text sources drop or misspell. Verify prompts against a linguistic reference before recording; typographic hooks are load-bearing.
-- **Ethiopic Semitic** (Amharic, Tigrinya) has gemination and pharyngeal or ejective consonants that Latin transliteration mangles. Prompts should be in Ge'ez script from the start; converting from Latin transliterations at read time introduces inconsistency.
-- **Nilotic and other tonal languages** (Dholuo, Luganda, Setswana with implosives): treat as with Volta-Niger: tone-vowel coverage is a separate constraint from segmental coverage.
+| Language group | Examples | What the prompts must cover |
+|---|---|---|
+| Bantu | isiZulu, Kinyarwanda, Luganda, chiShona, Setswana, Kiswahili | Most Bantu languages use tone, and many also contrast vowel length. Tone sits on top of the consonants and vowels and needs its own coverage. isiZulu and isiXhosa add click consonants. Kiswahili is an exception: it has no lexical tone, so segmental coverage matters most. |
+| Kwa and Volta-Niger | Yorùbá, Igbo, Ewe, Twi, Fon | Lexical tone, and vowel harmony in many of these languages. Prompts must exercise every tone-vowel combination. A script that covers the sounds but not the tone patterns produces a voice that reads words correctly but sounds wrong. |
+| Chadic | Hausa (Latin or Ajami script) | Tone and vowel length, which standard Latin-script Hausa does not mark, plus glottalised consonants (`ɓ`, `ɗ`, `ƙ`, `ƴ`) that many text sources drop or misspell. Check prompts against a linguistic reference before recording; the hooked letters matter. |
+| Ethiopian Semitic | Amharic, Tigrinya | Gemination (doubled consonants) and ejective consonants, plus pharyngeals in Tigrinya, which Latin transliteration mangles. Write prompts in Ge'ez script from the start. Ge'ez script does not mark gemination, so record it in the normalised text or a pronunciation lexicon. |
+| Nilotic | Dholuo, Dinka, Nuer | Tone and, in some languages, vowel-length contrasts. As with Kwa and Volta-Niger languages, tone-vowel coverage is a separate constraint from segmental coverage. |
 
-A phonetic-coverage audit before recording begins is the single cheapest quality-control step. Run each candidate prompt through a phonemiser (a language-specific G2P if you have one, an educated approximation via IPA otherwise), tally per-phoneme frequency, and add prompts to fill gaps. The audit takes days; the alternative is discovering after a hundred hours of recording that half the phonemes are under-represented.
+A phonetic-coverage audit before recording begins is the cheapest quality-control step you have:
+
+1. Run each candidate prompt through a phonemiser: a language-specific grapheme-to-phoneme (G2P) tool if you have one, or a careful approximation in IPA otherwise.
+2. Count how often each phoneme appears in each position.
+3. Add prompts to fill the gaps.
+
+The audit takes days. The alternative is discovering, after a hundred hours of recording, that half the phonemes are under-represented.
 
 ## Choosing the voice
 
@@ -49,7 +81,7 @@ Practical criteria for a first-voice speaker:
 - **Native speaker of the target variety**: no one else should be the primary voice. Non-native competence, even at high proficiency, produces a voice the community will not recognise as their own.
 - **Vocal consistency across sessions**: the model learns the speaker's voice, and drift in tone, energy, or accent across recording sessions produces an unstable synthetic voice. Some speakers are naturally more consistent than others; audition candidates over multiple short sessions before committing.
 - **Prosodic clarity**: clear enunciation, natural sentence-level rhythm, moderate speech rate. Broadcasters, teachers, and voice actors often meet this bar; casual speakers may not.
-- **Stamina**: a full TTS recording effort is 20 to 100 hours of studio time spread over months. A speaker who tires quickly or whose voice varies with fatigue changes the effective quality after hour three of each session.
+- **Stamina**: a full TTS recording effort can take tens of hours of studio time spread over weeks or months. A speaker who tires quickly, or whose voice changes with fatigue, records lower-quality clips late in each session.
 - **Availability for a long project**: retaining the same speaker for the full corpus is cheaper than switching mid-way and re-recording.
 
 If the community's preference is to build a multi-voice corpus (multiple speakers rather than one), the same criteria apply per speaker, plus a design decision about whether the released model produces per-speaker voices or a single averaged voice. Multi-voice TTS is a more research-grade path and needs a proportional data budget.
@@ -64,9 +96,9 @@ The recording pipeline is where most quality problems start, and where the cheap
 
 **Prompt delivery.** The speaker reads from a prompt display (a screen, a tablet, or printed cards) that shows one prompt at a time. Auto-advancing displays that require the speaker to keep pace add stress; speaker-controlled advancement is calmer. Between prompts, wait for silence to end (roughly one second of room tone) before starting the next clip; splicing on speech onset without room tone produces artefacts.
 
-**Take management.** Every prompt gets one clean take. Second takes on the same prompt lose the original's rhythm and are hard to blend; better to re-record the clip in a later session if the first is bad. Log per-clip decisions (kept, rejected, needs re-record) at recording time; post-hoc quality review across a hundred hours of audio is exhausting.
+**Take management.** Every prompt gets one clean take. Second takes on the same prompt lose the original's rhythm and are hard to blend; better to re-record the clip in a later session if the first is bad. Log per-clip decisions (kept, rejected, needs re-record) at recording time; reviewing tens of hours of audio after the fact is exhausting.
 
-**Quality gate.** At the end of each session, listen back to a random 5% of the day's clips against the prompt text. If clip content matches the prompt, tone is preserved, and there are no environmental artefacts, keep the session. If any fail, understand why before recording continues.
+**Quality gate.** At the end of each session, listen back to a random sample of the day's clips (for example, 5%) against the prompt text. If clip content matches the prompt, tone is preserved, and there are no environmental artefacts, keep the session. If any fail, understand why before recording continues.
 
 ## Text preparation and normalisation
 
@@ -76,20 +108,30 @@ TTS models learn to pronounce whatever is written; garbage in, garbage out is li
 - **Abbreviations and symbols** (`Dr.`, `Mrs.`, `USD`, `%`): expand every one. A model that has never seen "percent" spelled out will not know what to say when it sees `%`.
 - **Homographs**: words that are spelled the same but pronounced differently (English `read` past vs. present is the canonical example; African languages have their own). Mark the intended pronunciation in the normalised column, often via a phonemic transcription or a language-specific convention.
 - **Tone marks**: for tone languages, verify that every prompt in the corpus has correct tone marking before recording. A prompt with dropped diacritics teaches the model a wrong pronunciation that later inference will reproduce.
-- **Script switching**: Hausa Ajami vs. Latin, Amharic Ge'ez vs. Latin transliteration, Mandinka Latin vs. N'Ko. Fix the script for the corpus at Step 0; do not mix within a single voice. See the [non-Latin scripts in real UIs](../deployment/non-latin-scripts.md) chapter for the deployment implications.
+- **Script switching**: Hausa Ajami vs. Latin, Amharic Ge'ez vs. Latin transliteration, Mandinka Latin vs. N'Ko. Fix the script for the corpus before recording starts; do not mix scripts within a single voice. See the [non-Latin scripts in real UIs](../deployment/non-latin-scripts.md) chapter for the deployment implications.
 - **Loanwords and code-mixed content**: real user text mixes English, French, or Arabic terms with the local language. A monolingual TTS corpus produces a model that stumbles on real user input; include a proportion of realistic code-mixed prompts, and mark the switch points explicitly in normalisation.
 
 ## Distinctive annotation and consent
 
-Beyond transcription, TTS data often needs pronunciation or phoneme labelling, especially for tone languages where the same spelling carries different pitches and meanings, and getting tone right is the difference between a natural voice and an unintelligible one. The consent question is also sharper here than anywhere else in the playbook, because a TTS dataset reproduces a specific person's voice. A speaker must understand and agree that their voice will be synthesised, and the licence should constrain misuse such as impersonation or voice cloning. The Kaitiakitanga model from the [data governance](../data-governance/index.md) chapter, which forbids harmful uses outright, is a good template for voice data.
+Beyond transcription, TTS data often needs pronunciation or phoneme labelling. This matters most for tone languages, where the same spelling can carry different pitches and meanings. Getting tone right is the difference between a natural voice and an unintelligible one.
 
-The consent conversation for a TTS speaker must specifically cover **voice-cloning risk**: modern TTS models can be adapted from a released voice to say arbitrary content, and once a model is public, that risk cannot be revoked. Frame this explicitly at consent time, in the speaker's own language, and record the acknowledgement as part of the consent artefact. The [legal, consent, and community IP](../legal-consent/index.md) chapter and the [consent form template](../templates/consent-form.md) cover the operational patterns.
+Consent is sharper here than anywhere else in the playbook, because a TTS dataset reproduces a specific person's voice:
+
+- The speaker must understand and agree that their voice will be synthesised.
+- The licence should constrain misuse such as impersonation or voice cloning.
+- Licences in the Kaitiakitanga tradition, discussed in the [data governance](../data-governance/index.md) chapter, treat data as held in guardianship and forbid uses such as surveillance ([Te Hiku Media](../references.md#tehiku-kaitiakitanga)). They are a good template for voice data.
+
+:::warning[Voice-cloning risk cannot be withdrawn]
+
+Modern TTS models can be adapted from a released voice to say arbitrary content, and once a model is public that risk cannot be revoked. Explain this at consent time, in the speaker's own language, and record the acknowledgement as part of the consent record. The [legal, consent, and community IP](../legal-consent/index.md) chapter and the [consent form template](../templates/consent-form.md) cover the practical patterns.
+
+:::
 
 ## Quality assurance during collection
 
 Quality problems caught in the studio cost minutes. The same problems caught during model training cost weeks. Build a per-session review workflow before recording begins.
 
-A TTS corpus needs clean audio: require a quiet background and a strict noise floor, turn off the recorder's noise suppression and gain control, and ask for a re-record when a clip's signal-to-noise ratio is marginal. [Audio quality control](../asr/audio-quality-control.md#decide-the-corpus-purpose-first) compares the ASR and TTS settings and explains how to share one threshold table across the automated checks, the recording instructions and the reviewers.
+A TTS corpus needs cleaner audio than an ASR corpus. Ask for a quiet background, hold clips to a strict noise floor, and switch off any automatic noise suppression or gain control on the recorder, since both alter the voice. When a clip's signal-to-noise ratio is borderline, re-record it rather than keep it. [Audio quality control](../asr/audio-quality-control.md#decide-the-corpus-purpose-first) compares ASR and TTS settings and explains how to use one set of thresholds for the automated checks, the recording instructions and the reviewers.
 
 - **Per-clip listening review**: a reviewer independent of the speaker listens to every kept clip, matches it against the intended prompt text, and flags mismatches (dropped words, misread numbers, tone errors, environmental noise). Random-sample verification catches statistical drift; full listening catches the individual bad clip.
 - **Technical audio checks**: run automated signal checks on every clip as it arrives (duration, clipping, true peak, loudness, signal-to-noise ratio, silence), with strict thresholds for a TTS voice. A clip that peaks at digital zero is unusable and should be re-recorded, not "fixed" in post. The tiered checks and what to do when one fails are on the [Audio quality control](../asr/audio-quality-control.md) page. Model-based checks, such as predicted quality scores, can help triage, but they are optional and cannot decide whether a voice is fit for release; see [tier 2 on Audio quality control](../asr/audio-quality-control.md#tier-2-model-based-checks-optional).
@@ -98,23 +140,24 @@ A TTS corpus needs clean audio: require a quiet background and a strict noise fl
 
 ## Evaluation
 
-TTS quality is judged mostly by people. The standard measure is the [Mean Opinion Score (MOS)](https://en.wikipedia.org/wiki/Mean_opinion_score), where listeners rate samples for naturalness, supported by intelligibility tests that check whether listeners can actually understand the output. Objective measures such as Mel-Cepstral Distortion exist and help track progress during development, but they correlate only loosely with what a human ear hears, so native-speaker listening tests remain the real measure of a voice. For how to design those tests (anchored rating scales, A/B comparisons, and the controls that keep judgements honest), see [Human Evaluation Designs](../3_annotation-design/human-evaluation-designs.md).
+TTS quality is judged mostly by people. The standard measure is the [Mean Opinion Score (MOS)](https://en.wikipedia.org/wiki/Mean_opinion_score): listeners rate samples for naturalness, usually on a 1 to 5 scale. Intelligibility tests then check whether listeners can actually understand the output.
 
-Because MOS is collected from listeners, the listening test is an annotation task a labeling tool can run. The config below plays a synthesized clip, asks for a naturalness rating, and runs an intelligibility check by asking the listener to type what they heard, which catches a voice that sounds smooth but is hard to understand:
+Objective measures such as Mel-Cepstral Distortion exist and help track progress during development. They correlate only loosely with what a human ear hears, so native-speaker listening tests remain the real measure of a voice. For how to design those tests (anchored rating scales, A/B comparisons, and the controls that keep judgements honest), see [Human Evaluation Designs](../3_annotation-design/human-evaluation-designs.md).
 
-```xml
-<View>
-  <Audio name="sample" value="$audio"/>
-  <Header value="How natural does this voice sound?"/>
-  <Rating name="naturalness" toName="sample" maxRating="5"
-          required="true"/>
-  <Header value="Type the sentence you heard"/>
-  <TextArea name="heard" toName="sample" rows="2" required="true"
-            placeholder="Write exactly what you understood"/>
-</View>
-```
+Because MOS is collected from listeners, the listening test is an annotation task in its own right. The design below plays a synthesised clip and asks for two things: a naturalness rating, and the sentence the listener heard. The typed sentence catches a voice that sounds smooth but is hard to understand.
 
-Give the same clips to several listeners so a mean opinion score is an average of real opinions rather than one person's, and check their agreement with the [Data Quality](../4_data-quality/index.md) script. The naturalness rating is ordinal, so Krippendorff's alpha is the right agreement measure. The typed-back sentence gives a second, objective signal: compare it to the intended text with the same Character Error Rate from the [ASR](../asr/index.md) page, and a low error rate confirms the voice is not just pleasant but actually intelligible.
+**Task specification: TTS listening test**
+
+| Setting | Value |
+|---|---|
+| Annotator sees | One synthesised audio clip with a player |
+| Annotator gives | A naturalness rating ("How natural does this voice sound?") and the sentence they heard, typed exactly as understood |
+| Choice | Rating: exactly one value on a 1 to 5 scale, required. Typed sentence: free text, required |
+| Notes | Give each clip to several listeners so that the mean opinion score averages real opinions |
+
+Check listener agreement with the [Data Quality](../4_data-quality/index.md) script. The naturalness rating is ordinal (ordered), so Krippendorff's alpha with ordinal weighting is the right agreement measure.
+
+The typed-back sentence gives a second, objective signal. Compare it to the intended text with the same Character Error Rate (CER) used on the [ASR](../asr/index.md) page. A low error rate confirms the voice is not just pleasant but actually intelligible.
 
 Alongside MOS, run one or more of the automatic proxies during development, remembering that they are proxies, not verdicts:
 
@@ -124,7 +167,13 @@ Alongside MOS, run one or more of the automatic proxies during development, reme
 
 ## Deployment realities
 
-For a language covered by [Meta MMS-TTS](https://huggingface.co/facebook/mms-tts), the out-of-the-box model is often good enough for a first deployment. Measure MOS with native listeners on your target text style (not on Common Voice sentences) before committing to a full fine-tune. When MMS-TTS quality is inadequate, VITS or XTTS fine-tuning on 5–20 hours of studio-quality single-speaker audio is the practical next step.
+For a language covered by [Meta MMS-TTS](https://huggingface.co/facebook/mms-tts), the out-of-the-box model is often good enough for a first deployment. Before committing to a full fine-tune, measure MOS with native listeners on your target text style, not on generic read-speech sentences. When MMS-TTS quality is inadequate, fine-tuning an open architecture such as VITS or XTTS on several hours of studio-quality single-speaker audio is the practical next step.
+
+:::note[Check model licences]
+
+Pretrained weights carry their own licences. The MMS-TTS checkpoints are released for non-commercial use (CC-BY-NC 4.0), and the [XTTS-v2](https://huggingface.co/coqui/XTTS-v2) weights are under the non-commercial Coqui Public Model License. Check the licence on the model card before you build a product on either.
+
+:::
 
 For deployment on constrained hardware (phones, low-power edge servers), quantisation matters as much as it does for other modalities. The [edge devices](../deployment/edge-devices.md) chapter covers the phone-tier map, runtime choices, and the model-size budgets you have to design against. Voice-note replies over WhatsApp, an increasingly common African deployment surface, are covered in the [SMS, USSD, and WhatsApp](../deployment/sms-ussd-whatsapp.md) chapter.
 

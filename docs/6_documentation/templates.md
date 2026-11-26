@@ -2,24 +2,16 @@
 sidebar_position: 1
 ready: true
 last_update:
-  date: 2026-09-28
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Templates & Artifacts
 
-This page lists all governance toolkit templates available in the playbook. Each template is a standalone document you can download, adapt, and use directly in your project.
+All forkable templates, such as the consent form, privacy notice, contributor agreement, annotator contract, project charter, annotation guidelines, dataset card, model card, sustainability plan, evaluation script and search log, are collected in [Templates you can fork](../templates/index.md).
 
-| Template | Who uses it | When |
-|----------|-------------|------|
-| [Consent Form](../templates/consent-form.md) | Project leads, coordinators | Before data collection begins |
-| [Contributor Agreement](../templates/contributor-agreement.md) | Project leads | When onboarding annotators or chapter authors |
-| [Data Ownership Documentation](./data-ownership.md) | Project leads, legal reviewers | At project setup and dataset release |
-| [Sustainability Plan](../templates/sustainability-plan.md) | Project leads, funders | At project design and end-of-grant stage |
-| [Licensing Agreement](./licensing.md) | Project leads, legal reviewers | Before dataset publication |
+## Also in this chapter
 
-## Other Artifacts
-
-- [Annotation guidelines template](../templates/annotation-guidelines.md)
-- [Dataset card template](../templates/dataset-card.md), for the datasheet you release with your data
-- Data collection plan template → see [Cost and Resource Planning](../2_data-collection/6_cost-resource-planning.md)
+- [Data ownership record](./data-ownership.md): who owns and controls a dataset, who contributed, and what may be done with it.
+- [Licensing agreement template](./licensing.md#licensing-agreement-template): the terms for a formal dataset release.
+- For a data collection plan, see [Cost and Resource Planning](../2_data-collection/6_cost-resource-planning.md).

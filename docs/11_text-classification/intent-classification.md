@@ -4,17 +4,25 @@ sidebar_position: 12
 sidebar_label: "Intent Classification"
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
 # Intent Classification
 
-**What is Intent Classification?**
-
-Intent classification (also called intent detection) assigns a short user utterance to the action the user wants a system to take: check a balance, send money, book a ticket, set an alarm. It is the first step of every voice assistant, chatbot, USSD menu replacement and customer-service bot. Intent classification is almost always paired with **slot filling**, which finds the pieces of information the action needs, such as the amount, the recipient or the date. Slot filling is a sequence-labelling task, tagged and scored like named entity recognition (see [Sequence Labelling](../sequence-labelling/index.md)).
+Intent classification (also called intent detection) assigns a short user utterance to the action the user wants a system to take: check a balance, send money, book a ticket, set an alarm. It is a core step in most voice assistants, chatbots, customer-service bots and replacements for USSD menus. Intent classification is almost always paired with **slot filling**, which finds the pieces of information the action needs, such as the amount, the recipient or the date. Slot filling is a sequence-labelling task, tagged and scored like named entity recognition (see [Sequence Labelling](../sequence-labelling/index.md)).
 
 Intent differs from the other example tasks in this chapter. Sentiment, emotion and hate speech describe what the writer feels or does to others; intent describes what the writer wants the system to do next. The label set is therefore defined by the application, not by psychology or policy, and a dataset built for one assistant rarely fits another without revisiting the labels.
+
+:::tip[Key points]
+
+- Intent labels name actions the system supports (verb plus object); slots mark the details each action needs.
+- Include an out-of-scope label and collect out-of-scope examples on purpose.
+- Prefer eliciting utterances from many native writers with local scenarios over translating English data.
+- Write a decision rule for every pair of intents annotators could confuse, and boundary rules for slots.
+- Report intent accuracy, slot F1 and exact match for each language.
+
+:::
 
 ## Intent and slot labels definition
 
@@ -34,7 +42,7 @@ Examples of intent decisions are as follows:
 | transaction_history | The user asks about past transactions, not the current balance. | "What did I pay last week?" |
 | out_of_scope | No supported action fits, even partially. | "Will it rain in Kisumu tomorrow?" |
 
-Write a rule for every pair of intents that annotators could confuse, such as `check_balance` and `transaction_history` above. Most disagreement in intent data comes from a few such pairs, not from the whole label set.
+Write a rule for every pair of intents that annotators could confuse, such as `check_balance` and `transaction_history` above. In practice, disagreement tends to concentrate in a few such pairs rather than spread across the whole label set.
 
 ## What the data looks like
 

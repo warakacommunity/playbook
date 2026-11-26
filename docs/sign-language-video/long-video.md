@@ -11,9 +11,26 @@ last_update:
 
 *Last reviewed: 2026-11-24.*
 
-A broadcast programme, a recorded lecture, a community meeting or a sign-language conversation can run for an hour or more, and annotation wants short pieces. This page covers what changes when the source is long: deciding what is labelled, cutting the video into chunks that can be traced back to the source, choosing how many frames to look at, using shot boundaries, and checking that sound and picture still line up. It is the video counterpart of [Segmenting long recordings](../asr/index.md#segmenting-long-recordings) on the ASR page.
+A broadcast programme, a recorded lecture, a community meeting or a sign-language conversation can run for an hour or more, but annotation works best on short pieces. This page covers what changes when the source is long:
 
-Start from a normalised annotation copy, not the master. [Preparing video for annotation](./video.md#preparing-video-for-annotation) covers constant frame rate, keyframe spacing and probing; everything below assumes that copy exists and that its conversion command is logged.
+- deciding what is labelled;
+- cutting the video into chunks that can be traced back to the source;
+- using shot boundaries;
+- choosing how many frames to look at;
+- checking that sound and picture still line up.
+
+It is the video counterpart of [Segmenting long recordings](../asr/index.md#segmenting-long-recordings) on the ASR page.
+
+:::tip[Key points]
+
+- Decide between clip-level and event-level labels before you cut anything.
+- Cut at natural breaks, record each chunk's real start time, and store all event times on the source timeline.
+- Keep every chunk and frame from one source in the same data split.
+- Check sound-picture sync at both ends of each recording before chunking.
+
+:::
+
+Start from a normalised annotation copy, not the master. [Preparing video for annotation](./video.md#preparing-video-for-annotation) covers constant frame rate, keyframe spacing and probing. Everything below assumes that copy exists and that its conversion command is logged.
 
 :::danger[Minimum requirements]
 
@@ -30,13 +47,19 @@ The choice between clip-level and event-level labels decides how to chunk the vi
 - **Clip-level labels** give one label (or a caption) to a whole clip: "this clip shows harvesting". They are cheap, and a model trained on them learns from weak supervision: it is told that something happens in the clip, not when.
 - **Event-level labels** mark the start and end of each occurrence inside a longer video: "harvesting from 312.4 s to 351.0 s". They cost more per minute of video, and annotators disagree on boundaries (see the boundary point under [Known limitations to watch for](./video.md#known-limitations-to-watch-for)), so agree a boundary tolerance before you measure agreement.
 
-ActivityNet shows that both can come from the same untrimmed videos: it offers untrimmed video classification, trimmed activity classification and activity detection over 849 hours from 203 classes ([Caba Heilbron et al., 2015](../references.md#caba-heilbron-2015)). If you can afford event labels on a sample, collect them; clip labels can be derived from events later, but not the other way round. If you derive clip labels from events, write down the rule (for example, "a clip is labelled harvesting when an event covers at least half of it") and store it with the release.
+Both kinds can come from the same untrimmed videos. ActivityNet offers untrimmed video classification, trimmed activity classification and activity detection over 849 hours of video in 203 classes ([Caba Heilbron et al., 2015](../references.md#caba-heilbron-2015)).
+
+:::tip
+
+If you can afford event labels on a sample, collect them. Clip labels can be derived from events later, but not the other way round. If you derive clip labels from events, write down the rule (for example, "a clip is labelled harvesting when an event covers at least half of it") and store it with the release.
+
+:::
 
 Keep "nothing of interest happens here" distinct from "not yet annotated". Give annotators an explicit label for empty stretches, so that a gap in the event list means unannotated, not negative.
 
 ## Chunk long videos with provenance
 
-Annotators on phones or metered data cannot load a two-hour file, and many annotation tools become slow on long timelines. Cut the annotation copy into chunks, but keep the source as the reference timeline.
+Annotators on phones or metered data cannot load a two-hour file, and long timelines are slow to work with in most annotation tools. Cut the annotation copy into chunks, but keep the source as the reference timeline.
 
 **Choose where to cut.** In rough order of preference:
 
@@ -46,9 +69,29 @@ Annotators on phones or metered data cannot load a two-hour file, and many annot
 
 As with audio, let a detector suggest cuts and let a person confirm them. Set a minimum and maximum chunk length for the project and merge fragments that fall below the minimum.
 
-**Make cuts exact.** Cutting without re-encoding (stream copy) cannot start a chunk between keyframes. When FFmpeg seeks in stream-copy mode, it seeks to the closest seek point before the requested position and keeps the extra stretch ([FFmpeg Developers, n.d.-a](../references.md#ffmpeg-cli)), and its segment muxer starts every segment on a keyframe of the reference stream, so splits are only exact if keyframes sit at the requested times ([FFmpeg Developers, n.d.-c](../references.md#ffmpeg-formats)). A chunk can therefore start up to one keyframe interval early. Either re-encode with a keyframe forced at each cut, or keep stream-copy chunks and record the start time they actually have, measured with `ffprobe`, rather than the time you asked for.
+**Make cuts exact.** Cutting without re-encoding (stream copy) cannot start a chunk between keyframes:
 
-**Store provenance on every chunk.** At minimum: the source video ID and a hash of the exact source file, the chunk index, the chunk's start and end in seconds within the source, the overlap with its neighbours, the frame rate, how the cut was chosen (pause, shot boundary, fixed length) and the command and tool version that made it. Record the cutting step in the [transformation log](../2_data-collection/8_data-provenance-traceability.md#a-transformation-log-that-travels-with-the-data), so that anyone can trace a chunk back through its [lineage](../2_data-collection/8_data-provenance-traceability.md#data-lineage).
+- When FFmpeg seeks in stream-copy mode, it goes to the closest seek point before the requested position and keeps the extra stretch ([FFmpeg Developers, n.d.-a](../references.md#ffmpeg-cli)).
+- Its segment muxer starts every segment on a keyframe of the reference stream, so splits are only exact if keyframes sit at the requested times ([FFmpeg Developers, n.d.-c](../references.md#ffmpeg-formats)).
+
+A chunk can therefore start up to one keyframe interval early. You have two options:
+
+1. re-encode, forcing a keyframe at each cut; or
+2. keep stream-copy chunks, and record the start time each one actually has (measured with `ffprobe`), not the time you asked for.
+
+**Store provenance on every chunk.** At minimum, record:
+
+| Field | Why |
+|---|---|
+| Source video ID and a hash of the exact source file | Traces the chunk to one file |
+| Chunk index | Orders chunks within the source |
+| Start and end in seconds within the source | Maps chunk time back to source time |
+| Overlap with its neighbours | Lets duplicated events be merged |
+| Frame rate | Converts between frames and seconds |
+| How the cut was chosen (pause, shot boundary, fixed length) | Explains where boundaries fall |
+| Command and tool version that made it | Makes the cut reproducible |
+
+Record the cutting step in the [transformation log](../2_data-collection/8_data-provenance-traceability.md#a-transformation-log-that-travels-with-the-data), so that anyone can trace a chunk back through its [lineage](../2_data-collection/8_data-provenance-traceability.md#data-lineage).
 
 ```json
 {
@@ -85,7 +128,7 @@ for f in chunks/*.mp4; do
 done
 ```
 
-The `-force_key_frames expr:gte(t,n_forced*60)` form forces a keyframe every 60 seconds, and the segment list's CSV format writes each segment's file name, start and end in seconds ([FFmpeg Developers, n.d.-a](../references.md#ffmpeg-cli); [FFmpeg Developers, n.d.-c](../references.md#ffmpeg-formats)). The listed times can differ slightly from the probed chunk durations (by a few hundredths of a second in a test run), so store the probed values in the manifest. This simple run has no overlap; for overlapping chunks, cut each one separately with `-ss` and `-to` and re-encode.
+The `-force_key_frames expr:gte(t,n_forced*60)` form forces a keyframe every 60 seconds, and the segment list's CSV format writes each segment's file name, start and end in seconds ([FFmpeg Developers, n.d.-a](../references.md#ffmpeg-cli); [FFmpeg Developers, n.d.-c](../references.md#ffmpeg-formats)). The listed times can differ slightly from the probed chunk durations, so store the probed values in the manifest. This simple run has no overlap; for overlapping chunks, cut each one separately with `-ss` and `-to` and re-encode.
 
 ## Shot boundaries and keyframes
 

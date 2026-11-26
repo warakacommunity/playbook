@@ -3,13 +3,23 @@ title: Quality, Consent and Release
 sidebar_position: 6
 ready: true
 last_update:
-  date: 2026-11-23
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Quality, Consent and Release
 
 This page describes the loop that every record passes through whatever its type: consent before contribution, anonymisation at ingest, three review stages before acceptance, a weekly quality report, and a release that waits for the last opt-out window to close. The worked example runs ten languages with three-stage QA, Cohen's kappa at or above 0.75, a 60-day opt-out, and a CC-BY-4.0 release 60 days after delivery to the partner (the funder or organisation that commissioned the dataset).
+
+:::tip[Key points]
+
+- Every pair passes three separate review stages: agronomist, native speaker, then the language lead's adjudication.
+- Two different numbers gate progress: kappa of at least 0.75 on labels, and 90% advisory review acceptance by round two.
+- Consent is versioned, given in the contributor's language, and treats voice as biometric data.
+- Faces, GPS and device metadata are removed before any annotator sees a file; spoken names and numbers are redacted from transcripts.
+- The public CC-BY-4.0 release waits 60 days after partner delivery, until the last opt-out window closes.
+
+:::
 
 ![Consent gates each contribution; anonymisation runs at ingest; three review stages lead to acceptance, with rework loops back; a Monday report reads the quality metrics; the release timeline runs from batch exports to embargoed partner delivery to public CC-BY-4.0 release after the last opt-out window closes.](images/qa-consent-loop.svg)
 
@@ -29,7 +39,7 @@ A rejected image returns to the capture workflow with a reason, and a rewrite re
 
 Two numbers gate progress, but they measure different things.
 
-- **Cohen's kappa at or above 0.75 on ontology labels.** This is an agreement measure, computed per language, per crop and per annotator on the double-labelled sample: a rolling 30% of images, rising to 100% for any crop or annotator whose cell falls below the threshold.
+- **Cohen's kappa at or above 0.75 on ontology labels.** This is an agreement measure, computed per language, per crop and per annotator on the double-labelled sample. The sampling and escalation rules, and the kappa method (exact-path matching, per-level diagnostics), are in [Diagnosis Labelling](./diagnosis-labelling.md#quality-control).
 - **Advisory review acceptance at or above 90% by round two.** This is a project-specific first-pass yield measure: the share of advisories the linguistic reviewer accepts without a rewrite request, after at most one revision. It is not inter-annotator agreement.
 
 Speech has its own bar (95% of clips validated on the first pass; see [Speech Layer](./speech-layer.md)). Annotators whose accuracy on hidden gold items falls below the floor the language lead sets in the rubric are paused automatically and retrained before they resume. For the general practice, including warnings, grace periods and human review before anyone is removed, see [Act on annotator signals fairly](../4_data-quality/index.md#act-on-annotator-signals-fairly).
@@ -58,7 +68,7 @@ From month 3, a batch export every two weeks gives the partner a sample to check
 
 ## Consent
 
-This project requires a versioned consent record before a contributor enters its labelling stream, and refuses annotation or draft submission after consent is withdrawn. Those are project workflow requirements, not capabilities to assume in every tool. Other gates, such as capture, authoring, review or recording, must be specified and tested separately if the project needs them. Every acceptance is logged with the user, template version, purposes ticked and timestamp. A change to the text creates a new version, and existing contributors are asked again.
+The project takes a versioned consent record from every contributor before their first contribution, and stops accepting their annotations or drafts once consent is withdrawn. Specify and test each consent gate the project needs (capture, labelling, authoring, review, recording); do not assume a tool enforces it. Log every acceptance with the contributor ID, template version, purposes ticked and timestamp. A change to the text creates a new version, and existing contributors are asked again.
 
 | Contributor | Form | Covers |
 | --- | --- | --- |
@@ -66,9 +76,13 @@ This project requires a versioned consent record before a contributor enters its
 | Author, reviewer, transcriber | Written annotator agreement | Licensing of authored text under CC-BY-4.0; credit choice |
 | Speaker | Written or recorded oral, plus a separate speaker-profile consent | Voice use for training, evaluation and publication; named as biometric data; explicit opt-in to public release; whether age band, gender and region may attach; 60-day opt-out |
 
-Consent is given in the contributor's language. For contributors who cannot read the form comfortably, the language lead has the script translated and recorded once by a native speaker; in the field the collector plays it, asks five yes-or-no questions, and records the answers against the contributor's reference number with no names spoken. Consent status is set only after the language lead has listened to the recording.
+**Consent in the field.** Consent is given in the contributor's language. Before the first photo on each farm, the collector plays the recorded oral consent script or hands over the written form. Consent is per farmer and logged per farm, never once for a whole village. Images from a farm stay outside the accepted dataset until its consent record is verified.
 
-Voice is biometric data, and the speaker template says so in plain words. It asks separately for the opt-in to public release under CC-BY-4.0 and for permission to attach age band, gender and region; a speaker may say no to the profile and still contribute. Every contributor receives a reference number and a contact, and an opt-out within 60 days removes their items before the next export, with the removal logged and counted in the datasheet. After 60 days, published items cannot be recalled, and the form says so. Where national law requires it, the contracting host registers as data controller (Nigeria NDPC, Kenya ODPC, Rwanda NCSA); plan the registration with the ethics review. The forms are in the [consent form template](../templates/consent-form.md), and the legal background is in [Legal and Consent](../legal-consent/index.md).
+**Oral consent.** For contributors who cannot read the form comfortably, the language lead has the script translated and recorded once by a native speaker. The collector plays it, asks five yes-or-no questions, and records the answers against the contributor's reference number, with no names spoken. Consent status is set only after the language lead has listened to the recording.
+
+**Speaker consent.** Speakers consent at the session, before the first recording, on a separate speaker template. A voice recording can identify a person on its own, so the template names voice as biometric data in plain words. It asks separately about use for training, evaluation and publication, about public release under CC-BY-4.0, and about attaching age band, gender and region. A speaker may agree to the first while refusing public release, the profile, or both, and still contribute. A refused profile leaves `metadata_shared` false and the profile fields absent.
+
+**Opt-out and registration.** Every contributor receives a reference number and a contact. An opt-out within 60 days removes their items before the next export, with the removal logged and counted in the datasheet. After 60 days, published items cannot be recalled, and the form says so. Where national law requires it, the contracting host registers as data controller (Nigeria NDPC, Kenya ODPC, Rwanda NCSA); plan the registration with the ethics review. The forms are in the [consent form template](../templates/consent-form.md), and the legal background is in [Legal and Consent](../legal-consent/index.md).
 
 ## Anonymisation at ingest
 
@@ -76,11 +90,11 @@ Anonymisation runs before an image or clip enters any annotation project, so no 
 
 | Step | Method |
 | --- | --- |
-| Faces | Automatic detection and blur on every image, then a human check on the flagged sample. Images where a person cannot be blurred well are dropped. |
+| Faces | Automatic detection and blur on every image; images flagged as containing people get a human check. Images where a person cannot be blurred well are dropped. |
 | GPS | Device coordinates are read once to derive the district name, then discarded. |
-| EXIF | All EXIF and device metadata stripped from released images. |
+| EXIF | EXIF orientation is applied to the pixels first; only then are all EXIF and device metadata stripped, so annotation coordinates refer to the image as displayed (see [Coordinates and image orientation](../image-data/object-detection.md#coordinates-and-image-orientation)). |
 | Identifiers | Collector and speaker IDs are opaque. Names, phone numbers and addresses stay in access-controlled administrative records and never enter the dataset. Transcripts are checked for spoken names and numbers, which are replaced with a tag. |
-| Speaker profile | Age band, gender and region attach to a clip only when that speaker granted profile consent. Otherwise the fields are absent. |
+| Speaker profile | Age band, gender and region attach to a clip only when that speaker granted profile consent. Otherwise `metadata_shared` is false and the fields are absent. |
 
 ## Licence and release
 
@@ -92,7 +106,7 @@ The timeline has two release events. The final delivery (month 7 in the worked e
 
 ## The per-language datasheet
 
-One datasheet per language, following the Datasheets for Datasets structure ([Gebru et al., 2021](../references.md#gebru-2021)). Counts are generated from the platform's provenance and consent exports; the language lead writes the narrative and the quality lead reviews it. It contains:
+One datasheet per language, following the Datasheets for Datasets structure ([Gebru et al., 2021](../references.md#gebru-2021)). Counts are generated from the project's provenance and consent exports; the language lead writes the narrative and the quality lead reviews it. It contains:
 
 - **Composition**: pairs (field versus seed), speech items and distinct speakers, items withdrawn; the coverage matrix, districts, speaker balance from consented profiles only; the train, dev and test splits; known gaps and why.
 - **Collection process**: who collected, where, when, on what devices; seed sources, licences and counts kept and dropped; author cohort and rubric version; speech recruitment, set-up and QC profile.

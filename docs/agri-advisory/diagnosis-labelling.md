@@ -3,13 +3,23 @@ title: Diagnosis Labelling
 sidebar_position: 2
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Diagnosis Labelling
 
 Diagnosis labelling is where an agronomist looks at the image and the collector's form and says what is wrong with the plant, in the terms the national extension service uses. It is the most expert step in the pipeline and the slowest, because there are far fewer agronomists than native speakers, and the label they give decides what advisory gets written and what a model learns to say. This page covers the ontology, the label record, the double-labelling loop that keeps labels honest, and how to plan around the agronomist bottleneck.
+
+:::tip[Key points]
+
+- A label is a path through a versioned ontology (crop, issue family, specific issue) plus a confidence and an append-only reviewer chain.
+- `uncertain` and low confidence are honest answers; never force a label to clear the queue.
+- A rolling 30% of images is double-labelled blind, and Cohen's kappa is checked weekly against a floor of 0.75.
+- A cell below the floor moves to 100% double labelling; a class that fails twice needs an ontology fix.
+- Hidden gold images give a faster, per-annotator signal than the weekly kappa.
+
+:::
 
 ![The diagnosis ontology (crop, issue family, specific issue, with an uncertain node and a confidence field) and the rolling 30% double-label loop with its kappa floor of 0.75](images/diagnosis-ontology.svg)
 
@@ -41,21 +51,25 @@ A label is a path through a versioned ontology plus a confidence, and a chain of
 
 **The ontology.** Three levels: crop, then issue family (pest, disease, nutrient, abiotic, healthy), then the specific issue as the leaf. `healthy` has no leaf; it means the same crop at the same stage with no issue. `uncertain` is a real node an agronomist can choose at any level, and `confidence` (high, medium, low) is recorded on every label. `secondary_labels` holds a second issue visible in the same image, common in the field where a nitrogen-starved plant also has armyworm damage. The ontology is versioned, and the version is written into every label, because the ontology will change during the project and a label from version 1.0 must not be read as if it came from 1.2.
 
-**The reviewer chain.** Every action on the label is appended, never overwritten: the first label, the second label if the image was sampled, the reviewer's decision, and adjudication if the two disagreed. `reviewer_id` is opaque. `rubric_version` records which version of the language's rubric document applied, so a reviewer's decision can be read against the rules they actually had. `qa.double_labelled` and `qa.label_agreement` are what the weekly kappa is computed from.
+**The reviewer chain.** Every action on the label is appended, never overwritten: the first label, the second label if the image was sampled, the reviewer's decision, and adjudication if the two disagreed. `reviewer_id` is opaque. `rubric_version` records which version of the language's rubric document applied, so a reviewer's decision can be read against the rules they actually had. `qa.double_labelled` marks the items in the double-labelled sample, and `qa.label_agreement` records whether the two labels matched. The weekly kappa is computed from the two `label_given` values in the chain, because kappa needs the labels themselves, not only whether they matched.
 
 ## Who does it and how
 
-**Agronomists.** One agronomist partner per language, aligned with the national extension service, and enough agronomists under that partner to carry the throughput. The label must match what the extension service tells farmers, so the partner brings the standard: the Federal Ministry of Agriculture and Rural Development (FMARD) and state Agricultural Development Programme (ADP) guidelines with the Institute for Agricultural Research (IAR) Zaria for Hausa, the Kenya Agricultural and Livestock Research Organization (KALRO) and the Ministry of Agriculture and Livestock Development (MoALD) for Kiswahili in Kenya, and Ethiopian Institute of Agricultural Research (EIAR) packages for Amharic and Afaan Oromo. Ask the partner to confirm the ontology's leaf nodes against that standard before labelling starts.
+**Agronomists.** Each language needs one agronomist partner aligned with the national extension service, and enough agronomists under that partner to carry the work. The label must match what the extension service tells farmers, so the partner brings the standard. In the worked example:
 
-**The interface.** The agronomist sees both shots, the collector's form with the suspected issue and the farmer's question, and the ontology as a hierarchical picker with the uncertain node and the confidence choice. The vernacular name of each node sits beside the English one. The agronomist can reject the image for quality, with a reason that goes back to the collector.
+| Language | Extension standard |
+| --- | --- |
+| Hausa (Nigeria) | Federal Ministry of Agriculture and Food Security (formerly FMARD) and state Agricultural Development Programme (ADP) guidelines, with the Institute for Agricultural Research (IAR), Zaria |
+| Kiswahili (Kenya) | Kenya Agricultural and Livestock Research Organization (KALRO) and the Ministry of Agriculture and Livestock Development (MoALD) |
+| Amharic and Afaan Oromo (Ethiopia) | Ethiopian Institute of Agricultural Research (EIAR) packages |
+
+Ask the partner to confirm the ontology's leaf nodes against that standard before labelling starts.
+
+**What the agronomist sees.** One screen shows both shots, the farmer's question and the collector's form, including the suspected issue. Beside them are the fields to fill: crop, the ontology label (a hierarchical picker with the `uncertain` node), growth stage, plant part, confidence and image quality. The vernacular name of each node sits beside the English one. The agronomist can reject the image for quality, with a reason that goes back to the collector. Export every field with the ontology and rubric versions, so the saved label can be read correctly later.
 
 **Double labelling.** A rolling 30% of images goes to a second agronomist, blind to the first label. Disagreements go to adjudication by the language lead, who consults the agronomist partner on the label and escalates to the quality lead when the two cannot settle it. The worked example labels about 15,000 images this way, so roughly 4,500 get two labels.
 
 **Rubric ownership.** The language lead owns one versioned rubric for the language: the ontology term list in the vernacular, worked examples per node, and the review checklist. A corner case that two agronomists read differently becomes a worked example in the next version.
-
-## Task interface
-
-The task interface should show the photo and farmer's question beside the crop, ontology diagnosis, growth stage, plant part, confidence and image-quality fields. Export each field with the ontology and rubric versions so the saved label can be interpreted later.
 
 ## Guidelines that matter
 
@@ -65,7 +79,7 @@ The task interface should show the photo and farmer's question beside the crop, 
 4. Record a secondary label when two issues are visible. Do not pick the one you think matters more and drop the other.
 5. Reject the image, with a reason, when it cannot be labelled: out of focus, wrong plant part, too far away. A rejected image is one lost photo; a mislabelled one leads to an advisory and a speech item built on a wrong diagnosis.
 6. Use the vernacular term list from the rubric, and flag a node whose vernacular name does not match what farmers in your district say. The advisory author will reuse it.
-7. Do not review your own labels. Configure assignments to prevent self-review where the tool supports it; otherwise, the language lead must enforce the separation.
+7. Do not review your own labels. Assign work so that nobody reviews their own; if the tool cannot block self-review, the language lead checks for it.
 
 ## Quality control
 
@@ -89,7 +103,7 @@ Adjudicating each disagreement as it arrives spreads the language lead's attenti
 - **Kappa on a rolling sample lags.** A drift that starts on Tuesday shows up the following Monday, with a week of labels already in the queue. Gold images shorten the lag.
 - **A photo is not a field visit.** Some diagnoses need the root, the soil or the weather. The `uncertain` node and `confidence: low` are the honest answers, and a model trained on this data inherits the same limit.
 - **Agronomists disagree for real reasons.** Two experts trained under different services can both be right about an ambiguous lesion. Keep the disagreement in the chain, as the [adjudication page](../3_annotation-design/workflow-adjudication.md) recommends.
-- **Throughput numbers are averages.** A hundred actions a day assumes a good queue and a familiar crop. Plan for a slower pace in the first two weeks and for rare crops.
+- **Throughput numbers are averages.** A planning figure such as the [guidelines template's](../templates/advisory-annotation-guidelines.md) hundred actions a day assumes a good queue and a familiar crop. Plan for a slower pace in the first two weeks and on rare crops.
 
 ## Further reading
 

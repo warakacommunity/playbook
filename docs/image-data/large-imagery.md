@@ -3,7 +3,7 @@ title: Large and geo-referenced imagery
 sidebar_position: 8
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Seid Muhie Yimam
 ---
 
@@ -12,6 +12,16 @@ last_update:
 Some images are too large to annotate the way the rest of this chapter assumes. A satellite scene, a drone orthomosaic of a farm, or a scanned slide can run to tens of thousands of pixels on each side, far more than a browser can display at once or a model can take as input. Aerial and satellite images also carry a second layer of meaning: every pixel corresponds to a place on the ground. This page covers how to cut large images into workable pieces, how to annotate them without losing objects at the seams, how to keep labels tied to real-world coordinates, and how to respect the licences that come with satellite data.
 
 These images matter for African work. Agriculture is one of the areas where computer-vision research in Africa is most concentrated ([State of CV in Africa, 2024](../references.md#cv-africa-2024)), and much of it, along with settlement and land-cover mapping, starts from imagery taken from above. The annotation shape choices in [Image Data](./index.md#choosing-the-annotation-shape) still apply; this page adds what changes when the image is very large or geo-referenced.
+
+:::tip[Key points]
+
+- Record the ground resolution and the smallest object size in pixels before the pilot.
+- Annotate at full resolution with zoom and pan and a systematic sweep; never on a shrunken copy.
+- Tile with an overlap wider than the largest object, keep a tile manifest, and merge duplicates.
+- Store the CRS, transform and imagery date with every label, and split data by area, not by tile.
+- Check the imagery licence before annotating; it decides whether you can release the pixels.
+
+:::
 
 ## When an image counts as large
 
@@ -29,7 +39,12 @@ Before you plan anything, write down the ground sample distance (how many centim
 
 Never downscale a large image so that it fits the screen and then annotate the small version. The small objects disappear, and boxes drawn on the shrunken image are scaled back up with an error of several pixels. Annotators should work on the full-resolution pixels and move around with zoom and pan.
 
-Tools handle this in one of two ways. Some load the whole image and let the annotator zoom; that works up to a size the browser can hold in memory. Beyond that, the image is served as a tile pyramid: the full-resolution image plus a stack of progressively smaller overview copies, cut into small tiles, so the viewer fetches only the tiles in view at the current zoom. A Cloud Optimized GeoTIFF is a regular GeoTIFF arranged so that clients can fetch only the parts they need over HTTP, and is now an OGC standard ([Cloud Optimized GeoTIFF, n.d.](../references.md#cogeo)). Confirm in the pilot that your annotation tool can display your largest image at full resolution before you import the rest.
+Viewers handle this in one of two ways:
+
+- **Load the whole image** and let the annotator zoom. This works up to a size the browser can hold in memory.
+- **Serve a tile pyramid**: the full-resolution image plus a stack of progressively smaller overview copies, cut into small tiles. The viewer fetches only the tiles in view at the current zoom.
+
+A Cloud Optimized GeoTIFF is a regular GeoTIFF arranged so that clients can fetch only the parts they need over HTTP, and is now an OGC standard ([Cloud Optimized GeoTIFF, n.d.](../references.md#cogeo)). Confirm in the pilot that your annotation tool can display your largest image at full resolution before you import the rest.
 
 Write zoom into the guidelines. State the zoom level at which annotators must check each object, and ask them to sweep the image systematically, for example row by row in a grid, rather than wandering. Unsystematic panning is the main reason objects are missed in large images, and missed objects are the hardest error to detect in review, because the reviewer sees only what was drawn.
 
@@ -112,7 +127,10 @@ Record the licence and the required attribution text in the dataset card, and ke
 
 ## Building and settlement mapping
 
-Open building datasets show both the promise and the limits of large-scale labelling in Africa. The Open Buildings dataset was produced by a model trained on about 1.75 million manually labelled building instances and applied to 50 cm satellite imagery of the whole continent ([Sirko et al., 2021](../references.md#sirko-2021)). Its current release offers footprint polygons with a confidence score per building under CC BY 4.0 or ODbL, and warns that accuracy drops for small structures, contiguous buildings, rural and desert areas, and places with rocks or vegetation ([Google Research, n.d.](../references.md#open-buildings)). Microsoft's global building footprints, released under CDLA Permissive 2.0, report lower recall than precision for Africa, meaning more real buildings are missed than false ones added, and advise checking quality locally before importing into OpenStreetMap ([Microsoft, n.d.-a](../references.md#ms-building-footprints)).
+Open building datasets show both the promise and the limits of large-scale labelling in Africa:
+
+- **Open Buildings.** Produced by a model trained on about 1.75 million manually labelled building instances and applied to 50 cm satellite imagery of the whole continent ([Sirko et al., 2021](../references.md#sirko-2021)). Its current release offers footprint polygons with a confidence score per building under CC BY 4.0 or ODbL. It warns that accuracy drops for small structures, contiguous buildings, rural and desert areas, and places with rocks or vegetation ([Google Research, n.d.](../references.md#open-buildings)).
+- **Microsoft's global building footprints.** Released under CDLA Permissive 2.0. They report lower recall than precision for Africa, meaning more real buildings are missed than false ones added, and advise checking quality locally before importing into OpenStreetMap ([Microsoft, n.d.-a](../references.md#ms-building-footprints)).
 
 These datasets are useful starting points, but they are model output, not ground truth. If you use them as pre-annotations, follow [model-assisted annotation](../3_annotation-design/model-assisted-annotation.md): have annotators correct them on imagery of a known date, measure how often they add missed buildings and delete false ones, and report that rate. Measure accuracy on a sample from your own area before relying on any published figure.
 

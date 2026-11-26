@@ -3,7 +3,7 @@ ready: true
 title: Vision
 sidebar_label: Overview
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -20,7 +20,7 @@ it is labelled.
 - Capture devices & standards (camera or phone, scanner, resolution, format, lighting, frame rate)
 - Consent for images of people, who are identifiable from their face, body and surroundings
 - Privacy: faces, locations and identifiable settings handled as personal data
-- Preprocessing (deskew, denoise, normalization, encoding)
+- Preprocessing (deskew, denoise, normalisation, encoding)
 - Annotation (labels, bounding boxes, segmentation masks, transcriptions, temporal spans)
 - Annotation tools & inter-annotator agreement
 - Metadata, dataset formatting & splits

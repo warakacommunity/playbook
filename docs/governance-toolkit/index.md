@@ -3,13 +3,22 @@ title: Governance Toolkit
 sidebar_position: 0
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
 # Governance Toolkit
 
 The [Data Governance](../data-governance/index.md) and [Legal, consent, and community IP](../legal-consent/index.md) chapters explain why a dataset needs a licence, agreements with the people who build it, and a plan for its life after the grant. This toolkit is the set of documents that puts those chapters into practice. Each one is a file you can copy, fill in, and sign.
+
+:::tip[Key points]
+
+- The toolkit turns the governance and consent chapters into documents you copy, fill in and sign.
+- Work in order: consent first, then the licence, then the agreements, then the sustainability plan.
+- No licence or agreement can grant more than the contributors consented to.
+- The templates are not legal advice and do not replace the conversation with the community.
+
+:::
 
 ## What is in the toolkit
 
@@ -31,7 +40,7 @@ The documents constrain each other, and the order matters.
 3. **Then the agreements.** The contributor agreement and the annotator contract grant the project exactly the rights it needs to release under that licence, and no more. They also carry the project's promises back: credit, pay, and the right to withdraw.
 4. **Then the plan.** The sustainability plan costs the steward's time, corrections, and hosting, and says who pays. Its business model section must respect the licence chosen in step 2.
 
-The three experts who drafted these documents worked from different disciplines, intellectual property law, labour law and research ethics, and development economics, and reviewed each other's drafts until the rules agreed. Where the documents state a shared rule, such as how a project may or may not change its licence later, that rule is the same in every file.
+The documents were cross-checked so that the rules they share agree. Where the documents state a shared rule, such as how a project may or may not change its licence later, that rule is the same in every file.
 
 ## What the toolkit is not
 

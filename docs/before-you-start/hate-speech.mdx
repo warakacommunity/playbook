@@ -3,7 +3,7 @@ sidebar_position: 6
 title: Hate speech and content safety
 ready: true
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -13,7 +13,21 @@ last_update:
 
 This page applies the [four steps from Before You Start](./index.md) to hate speech and abusive language detection. It uses **AfriHate** as the example because it is the largest community-built hate speech collection for African languages, with native-speaker annotators and a published paper. Many smaller, single-language datasets exist, and new ones appear often. If your language is not mentioned here, go back to [Step 1](./index.md#step-1-search-for-prior-work) and search.
 
-This task is different from the others in this chapter in three ways. Annotators read harmful content for hours, so they need support from the first day ([Steiger et al., 2021](../references.md#steiger-2021); [Kirk et al., 2022](../references.md#kirk-2022)). A classifier used for automated moderation can cause the same harm it is meant to reduce: models trained on biased labels can flag a minority group's way of speaking as offensive up to twice as often ([Sap et al., 2019](../references.md#sap-2019)). And what counts as hate is contested, culturally and politically, so annotators can disagree for good reasons ([Röttger et al., 2022](../references.md#rottger-2022)).
+This task is different from the others in this chapter in three ways:
+
+- **Annotators need protection.** They read harmful content for hours, so they need support from the first day ([Steiger et al., 2021](../references.md#steiger-2021); [Kirk et al., 2022](../references.md#kirk-2022)).
+- **Models can cause harm.** A classifier used for automated moderation can cause the same harm it is meant to reduce: models trained on biased labels can flag a minority group's way of speaking as offensive up to twice as often ([Sap et al., 2019](../references.md#sap-2019)).
+- **The labels are contested.** What counts as hate is contested, culturally and politically, so annotators can disagree for good reasons ([Röttger et al., 2022](../references.md#rottger-2022)).
+
+:::tip[Key points]
+
+- AfriHate covers 15 African languages with hate, abusive, and normal labels on Twitter/X posts.
+- Check fit carefully: platform, period, script, and code-switching all change what hate speech looks like.
+- What counts as hate is local and changes over time; involve affected communities in label design.
+- Report results per class, because hate is rare in real content.
+- Put counselling and support for annotators in place before annotation starts.
+
+:::
 
 ## Step 1: What a search turns up
 
@@ -23,7 +37,7 @@ Search Hugging Face, Lanfrica, or the ACL Anthology for hate speech in a major A
 
 The data is on the [Hugging Face Hub](https://huggingface.co/datasets/afrihate/afrihate). The [GitHub repository](https://github.com/AfriHate/AfriHate) lists the language coordinators, who are good people to contact.
 
-You will also find datasets for **nearby tasks** that look useful: emotion data such as [BRIGHTER](https://arxiv.org/abs/2502.11926) (28 languages, with labels that include anger and disgust; [Muhammad et al., 2025b](../references.md#brighter-2025)), or polarization data such as [POLAR](https://arxiv.org/abs/2505.20624) (22 languages, including Amharic, Hausa, and Swahili).
+You will also find datasets for **nearby tasks** that look useful: emotion data such as [BRIGHTER](https://arxiv.org/abs/2502.11926) (28 languages, with labels that include anger and disgust; [Muhammad et al., 2025b](../references.md#brighter-2025)), or polarization data such as [POLAR](https://arxiv.org/abs/2505.20624) (22 languages, including Amharic, Hausa, and Swahili; [Naseem et al., 2025](../references.md#naseem-2025)).
 
 ## Step 2: Judging AfriHate against the checklist
 

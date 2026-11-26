@@ -2,7 +2,7 @@
 ready: true
 sidebar_position: 1
 last_update:
-  date: 2026-11-24
+  date: 2026-11-26
   author: Shamsuddeen Hassan Muhammad
 ---
 
@@ -27,7 +27,15 @@ This is the whole reason Case Studies is worth building. The lightweight, honest
 
 ## The reference retrospectives
 
-Five projects are the initial reference set. Each is chosen because it is either a flagship community-lineage project, or the annotation and workforce decisions it embodies are directly relevant to a large number of downstream teams.
+Five projects are the initial reference set. Each was chosen because it is a flagship community-lineage project, or because its annotation and workforce decisions are directly relevant to many downstream teams.
+
+| Project | Task | Languages | Status |
+|---|---|---|---|
+| [MasakhaNER 1 → 2](./masakhaner.md) | Named entity recognition | 10, then 20 | Public-record draft |
+| [AfriSenti](#afrisenti) | Sentiment analysis | 14 | Draft pending |
+| [MAFAND-MT](#mafand-mt) | Machine translation (news) | 16 | Draft pending |
+| [AfroBench](#afrobench) | LLM evaluation benchmark | 64 | Draft pending |
+| [AfriQA](#afriqa) | Cross-lingual question answering | 10 | Draft pending |
 
 ### [MasakhaNER 1 → 2](./masakhaner.md)
 
@@ -64,14 +72,7 @@ Cross-lingual open-retrieval QA benchmark with over 12,000 questions in 10 Afric
 
 The list above is the initial reference set, not the ceiling. Any Masakhane-lineage or adjacent African-language NLP project with a shipped release is a candidate.
 
-To add or claim one:
-
-1. Copy the [retrospective template](./retrospective-template.md).
-2. Rename it to the project slug (`docs/case-studies/afrisenti.md`, `docs/case-studies/mafand-mt.md`, etc.) and set the `title` field in its front matter. Do not set `last_update` by hand; it is generated automatically from git history.
-3. Fill in the short list of project facts and answer the same seventeen questions. It is more valuable to answer honestly and briefly than to write a polished narrative. If a question is not applicable, say so and why.
-4. Add the new page to the Case Studies entry in `sidebars.js`; the chapter's pages are listed there explicitly, so a page that is not added will not appear in the navigation.
-5. Open a pull request. Tag the original project leads for review before merging.
-
+To add a case study, copy the [retrospective template](./retrospective-template.md) and follow its [How to use this template](./retrospective-template.md#how-to-use-this-template) steps: name the file after the project, answer the seventeen questions, add the page to the sidebar and open a pull request tagging the project leads.
 
 To **claim** an existing public-record draft (e.g., MasakhaNER above): open a pull request rewriting the sections you have first-hand knowledge of. Partial rewrites are welcome. A project-lead's answer on the three or four questions that most surprised the team is worth more than a whole page of public-record inference.
 
@@ -87,4 +88,4 @@ Case studies do not include unpublished information (funder names withheld by re
 
 ---
 
-*See also [**What this playbook is (and isn't)**](../1_introduction/scope-and-strategy.md) for why case studies were prioritised as the second Phase-1 addition to the playbook.*
+*See also [**What this playbook is (and isn't)**](../1_introduction/scope-and-strategy.md) for the playbook's scope.*

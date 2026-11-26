@@ -13,9 +13,26 @@ last_update:
 
 Image classification assigns a label, or several, to a whole image: this leaf has this disease, this land parcel is this crop, this scan is normal or not. It is the simplest vision task and often the most immediately useful in African settings, where a phone photograph and a classifier can put expert-level screening in a farmer's or a health worker's hands.
 
+:::tip[Key points]
+
+- Collect images under the conditions the model will face: same phones, lighting, seasons and places.
+- Domain shift is the main failure mode; lab-quality images do not predict field performance.
+- Labels need domain experts, and experts disagree; measure and report their agreement.
+- Keep an explicit "unsure" label, and report per-class F1, not only overall accuracy.
+- Record the capture device and balance it across classes so the model cannot learn the phone instead of the disease.
+
+:::
+
 ## What the data looks like
 
-A classification dataset is images paired with labels. For African work the images usually need collecting rather than scraping, because the relevant subjects, a specific local crop disease, a regional skin condition, a particular landscape, are under-represented in existing datasets, which draw most of their geolocatable images from North America and Europe ([Shankar et al., 2017](../references.md#shankar-2017)). Single-label classification gives each image one category, while multi-label allows several, which fits messy real-world photos better. The defining challenge is domain shift: a classifier trained on clean images from elsewhere degrades on photos taken on cheap phones in African field conditions, with poor lighting, cluttered backgrounds, and unfamiliar varieties. In one well-known case, plant-disease classifiers that scored over 99% on held-out PlantVillage leaf images, photographed under controlled conditions, scored about 31% on leaf images from other sources ([Mohanty et al., 2016](../references.md#mohanty-2016)); object recognisers show a similar drop on household images from low-income and African homes ([DeVries et al., 2019](../references.md#devries-2019)). The data therefore has to be collected under the conditions the model will actually face.
+A classification dataset is images paired with labels. There are two kinds:
+
+- **Single-label** classification gives each image one category.
+- **Multi-label** classification allows several, which fits messy real-world photos better.
+
+For African work the images usually need collecting rather than scraping. The relevant subjects (a specific local crop disease, a regional skin condition, a particular landscape) are under-represented in existing datasets, which draw most of their geolocatable images from North America and Europe ([Shankar et al., 2017](../references.md#shankar-2017)).
+
+The defining challenge is **domain shift**: a classifier trained on clean images from elsewhere degrades on photos taken on cheap phones in African field conditions, with poor lighting, cluttered backgrounds and unfamiliar varieties. In one well-known case, plant-disease classifiers that scored over 99% on held-out PlantVillage leaf images, photographed under controlled conditions, scored about 31% on leaf images from other sources ([Mohanty et al., 2016](../references.md#mohanty-2016)). Object recognisers show a similar drop on household images from low-income and African homes ([DeVries et al., 2019](../references.md#devries-2019)). The data therefore has to be collected under the conditions the model will actually face.
 
 The simplest format is a table pairing each image path with its label, which CSV handles well for this purely tabular case:
 
@@ -30,21 +47,25 @@ Recording the capture device alongside the label is worth the extra column here:
 
 ## Annotation and evaluation
 
-Labelling is choosing the category, and it is only as good as the expertise behind it: a crop-disease label needs an agronomist, a medical label a clinician, and local knowledge throughout. Write clear definitions with example images for each class, use several annotators on a shared sample to measure agreement, and watch class balance, since rare diseases or land types are often exactly the ones that matter and the ones with fewest examples. Evaluation uses accuracy, but on imbalanced data report per-class [F1](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) and, for many-class problems, top-k accuracy, so that strong performance on common classes does not hide failure on rare ones.
+Labelling is choosing the category, and it is only as good as the expertise behind it: a crop-disease label needs an agronomist, a medical label a clinician, and local knowledge throughout. Three practices keep labels sound:
 
-The labeling config presents the image and a fixed set of classes, with an explicit unsure option so a doubtful photo is flagged rather than forced into a wrong class:
+- **Define each class** clearly, with example images.
+- **Measure agreement** by having several annotators label a shared sample.
+- **Watch class balance.** Rare diseases or land types are often exactly the ones that matter, and the ones with fewest examples.
 
-```xml
-<View>
-  <Image name="image" value="$image"/>
-  <Choices name="label" toName="image" choice="single" required="true">
-    <Choice value="Healthy"     hotkey="1"/>
-    <Choice value="Leaf blight" hotkey="2"/>
-    <Choice value="Rust"        hotkey="3"/>
-    <Choice value="Unsure, needs an expert" hotkey="9"/>
-  </Choices>
-</View>
-```
+Evaluation uses accuracy, but on imbalanced data also report per-class [F1](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) and, for many-class problems, top-k accuracy. Then strong performance on common classes cannot hide failure on rare ones.
+
+The task shows the image and a fixed set of classes, with an explicit unsure option so that a doubtful photo is flagged rather than forced into a wrong class:
+
+**Task specification: crop-disease classification**
+
+| Setting | Value |
+|---|---|
+| Annotator sees | One leaf or plant photo |
+| Annotator gives | One class: Healthy, Leaf blight, Rust, or Unsure (needs an expert) |
+| Choice | Exactly one; required |
+| Shortcuts | Keys 1, 2 and 3 for the three classes; 9 for Unsure |
+| Notes | Send every Unsure item to an expert reviewer. Keep the Unsure label in the records, even if those items are later left out of training |
 
 For evaluation, `classification_report` gives the per-class breakdown in one call, which is what surfaces a model coasting on the common class:
 
@@ -62,21 +83,35 @@ The point of reading the full report rather than a single accuracy figure is tha
 
 ## The 2026 modelling landscape
 
-Image classification in 2026 has largely converged on a small number of workable open backbones. In the playbook's experience, fine-tuning one of them on a few thousand target-domain images (1,000-5,000 is a reasonable first target) is a sensible starting point for most African-context use cases; your own held-out set, collected in target conditions, is what tells you whether it is enough:
+Image classification in 2026 has largely converged on a small number of workable open backbones. A sensible starting point for most African-context use cases is to fine-tune one of them on a few thousand target-domain images. The 1,000-5,000 image first target used on this page is a rule of thumb from practitioner experience, not a measured threshold: your own held-out set, collected in target conditions, is what tells you whether it is enough.
+
+The main options are:
 
 - **ConvNeXt V2** (Meta, 2023; [Woo et al., 2023](../references.md#woo-2023)): the modern convolutional successor to ResNet, workable on modest GPUs. Its code is MIT-licensed, but the released ImageNet pre-trained weights are CC-BY-NC, so check the weights' licence before commercial use. The defensible default for a new classification project.
 - **EVA-02** (BAAI, 2023; [Fang et al., 2023](../references.md#fang-2023)) and **DINOv2 / [DINOv3](https://github.com/facebookresearch/dinov3)** (Meta, 2023-2025; [Oquab et al., 2023](../references.md#oquab-2023); [Siméoni et al., 2025](../references.md#simeoni-2025)): vision-transformer foundation models with strong transfer to downstream classification with modest fine-tuning data. DINOv3's authors report that its features beat specialised methods in many settings without fine-tuning; it is released under its own DINOv3 License rather than a standard open licence, so read the terms.
 - **EfficientNet V2** (Google, 2021; [Tan and Le, 2021](../references.md#tan-2021)) and **MobileNetV4** (Google, 2024; [Qin et al., 2024](../references.md#qin-2024)): the workable edge-deployable backbones for on-device classification (phone-based crop-disease screening, agricultural extension apps). Check the licence of the implementation and weights you use. See the [edge devices chapter](../deployment/edge-devices.md) for the on-device deployment discipline.
 - **SigLIP 2** (Google, 2025; [Tschannen et al., 2025](../references.md#tschannen-2025)): the CLIP-lineage joint-embedding model with strong zero-shot classification and multilingual training. Useful when the classification task has few labelled examples or a growing vocabulary.
-- **General MLLMs.** **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)**, **[Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs)**, **[GPT-4o](https://openai.com/index/hello-gpt-4o/)**: capable of zero-shot open-vocabulary classification from natural-language descriptions. Useful when the deployment permits a large inference call and the vocabulary is not fixed.
+- **General MLLMs.** Open multimodal models such as **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)**, and current commercial multimodal models offered through closed APIs, can do zero-shot open-vocabulary classification from natural-language descriptions. Useful when the deployment permits a large inference call and the vocabulary is not fixed.
 
-**Editorial opinion.** For a new African-context classification project (agriculture, health, environment), the shortest defensible path is: fine-tune ConvNeXt V2 or DINOv3 on 1,000-5,000 target-domain images collected in target conditions (same phones, same lighting, same seasons), evaluate on a held-out set collected the same way, and report per-class F1 alongside accuracy. For on-device deployment, distil to MobileNetV4 after training. For domains with few labelled examples but growing vocabulary, evaluate SigLIP 2 few-shot before committing to fine-tuning.
+:::note[Editorial opinion]
+
+For a new African-context classification project (agriculture, health, environment), the shortest defensible path is:
+
+1. Fine-tune ConvNeXt V2 or DINOv3 on 1,000-5,000 target-domain images collected in target conditions (same phones, same lighting, same seasons).
+2. Evaluate on a held-out set collected the same way, and report per-class F1 alongside accuracy.
+3. For on-device deployment, distil to MobileNetV4 after training.
+
+For domains with few labelled examples but a growing vocabulary, evaluate SigLIP 2 few-shot before committing to fine-tuning.
+
+:::
 
 ## What it will actually cost you
 
-Classification is the cheapest vision modality per-record but expensive when the collection has to happen in target conditions and the labels require expertise. Rough order-of-magnitude:
+Classification is the cheapest vision modality per record, but it becomes expensive when the collection has to happen in target conditions and the labels require expertise.
 
-- **Fine-tuning ConvNeXt V2 or DINOv3 on an existing classification corpus.** One to two person-weeks; five to twenty GPU-hours. Colab Pro is enough for most backbones at the small-image-size, small-corpus scale.
+The figures below are rough, order-of-magnitude planning estimates from practitioner experience, not measured or published figures. Use them to start a budget conversation, then replace them with your own quotes and pilot numbers.
+
+- **Fine-tuning ConvNeXt V2 or DINOv3 on an existing classification corpus.** One to two person-weeks; five to twenty GPU-hours. A single rented or cloud GPU is enough for most backbones at the small-image-size, small-corpus scale.
 - **Building a new classification corpus** for a specific African context (2,000-10,000 images collected in target conditions). Four to nine months elapsed; three to seven person-months. Field collection is the constraint; the labelling itself is fast when the taxonomy is clear.
 - **Collecting for edge-deployable classifiers** (multi-device, multi-lighting, multi-season). Add 30-100% to the collection budget for coverage across the deployment population; a corpus taken in one season, on one phone model, at one time of day produces a classifier that fails on the other combinations.
 - **Evaluation-only classification sets** (500-2,000 images). Two to four months; two to four person-months.

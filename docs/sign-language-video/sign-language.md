@@ -11,7 +11,19 @@ last_update:
 
 *Last reviewed: 2026-10-01.*
 
-Sign languages are full natural languages expressed in the hands, face and body, and they are the languages of Deaf communities across Africa. They have been almost entirely absent from language technology: sign languages from high-income countries now have substantial datasets, African sign languages had next to none until recently, and the gap is one of the starkest in the field. This page is a practical guide to building a sign-language corpus: which languages are involved, how to work with Deaf communities, how to record, how to annotate the way established corpora do, how to check and release the data, and what modelling it supports.
+Sign languages are full natural languages expressed in the hands, face and body. They are the languages of Deaf communities across Africa. Sign languages from high-income countries now have substantial datasets, but African sign languages had next to none until recently, and the gap is one of the starkest in language technology.
+
+This page is a practical guide to building a sign-language corpus. It covers which languages are involved, how to work with Deaf communities, how to record, how to annotate the way established corpora do, how to check and release the data, and what modelling the data supports.
+
+:::tip[Key points]
+
+- Design and run the project with the Deaf community; fluent signers, ideally Deaf, annotate and check.
+- Video of signing cannot be anonymised: build consent and access terms around that.
+- Annotate on parallel time-aligned tiers, with ID-glosses from one shared lexicon, in staged passes.
+- Record every signer's identifier and split train and test sets by signer.
+- Budget for slow, expert annotation: it is the largest cost, not compute.
+
+:::
 
 ![Signing video to gloss and translation, built with the Deaf community across many signers](images/sign-language-data.svg)
 
@@ -33,7 +45,7 @@ Africa has several dozen sign languages; published counts differ and are incompl
 
 - **National sign languages shaped by American Sign Language.** Andrew Foster, a Deaf African-American missionary, opened the first school for Deaf children in West Africa in Accra in 1957 and went on to found 31 schools in 13 African countries. ASL-based signing spread through these schools and is, in Nyst's words, beyond doubt the most widespread non-African sign language in Africa; Ghanaian Sign Language, for example, is ASL-based. In francophone countries a variety of ASL adapted to French is used, which Kamei called Langue des Signes Franco-Africaine (LSAF).
 - **National sign languages of other origins.** Not every national sign language descends from ASL, and the histories of many are documented unevenly. Check what is known about a language's history with its Deaf community rather than assuming it.
-- **Local and village sign languages** that arose in particular communities. Adamorobe Sign Language in Ghana is used in a village with hereditary deafness and is endangered as younger Deaf people learn ASL-based Ghanaian Sign Language at school. Hausa Sign Language (Maganar Hannu), used in Kano in northern Nigeria, has a published grammatical description ([Schmaling, 2000](../references.md#schmaling-2000)); Bura Sign Language in north-eastern Nigeria is a village sign language ([Blench & Warren, 2003](../references.md#blench-warren-2003)).
+- **Local and village sign languages** that arose in particular communities. Adamorobe Sign Language in Ghana is used in a village with hereditary deafness and is endangered as younger Deaf people learn ASL-based Ghanaian Sign Language at school. Hausa Sign Language (Maganar Hannu), used in Kano in northern Nigeria, has a published grammatical description ([Schmaling, 2000](../references.md#schmaling-2000)); Bura Sign Language in north-eastern Nigeria is a village sign language ([Blench and Warren, 2003](../references.md#blench-warren-2003)).
 
 Several countries recognise their sign language in law ([WFD, legal recognition](../references.md#wfd-recognition)):
 
@@ -74,7 +86,7 @@ This is work that cannot be done without the Deaf community. Annotation, whether
 - **Agree terms of reference.** Harris, Holmes and Mertens propose Sign Language Communities' Terms of Reference for research ethics with signing communities ([Harris et al., 2009](../references.md#harris-2009)): research is done with the community, in its language, to its benefit.
 - **Give consent information in sign language.** The Sign Language Linguistics Society recommends offering informed consent either as a video in the relevant sign language or in writing in the surrounding spoken language. In the BSL Corpus, fieldworkers explained the information sheet and consent form to each participant in BSL ([Schembri et al., 2013](../references.md#schembri-2013)). A written form alone is not enough for signers whose first language is not written.
 - **Use Deaf fieldworkers** to recruit and record where you can. Fieldworkers who are fluent members of the community can explain the project in its language, put signers at ease, and notice when signing is being adjusted for an outsider.
-- **Be careful with synthesis.** The World Federation of the Deaf and the World Association of Sign Language Interpreters caution against signing avatars as a replacement for human signers, especially for live, complex or important information such as news or emergencies, and accept them for pre-recorded static content only when Deaf people have advised on the signing ([WFD & WASLI, 2018](../references.md#wfd-wasli-2018)). The European Union of the Deaf has published a wider position on sign language and AI ([EUD, 2025](../references.md#eud-2025)). A project that plans sign-language generation **should** discuss it with the community first.
+- **Be careful with synthesis.** The World Federation of the Deaf and the World Association of Sign Language Interpreters caution against signing avatars as a replacement for human signers, especially for live, complex or important information such as news or emergencies, and accept them for pre-recorded static content only when Deaf people have advised on the signing ([WFD and WASLI, 2018](../references.md#wfd-wasli-2018)). The European Union of the Deaf has published a wider position on sign language and AI ([EUD, 2025](../references.md#eud-2025)). A project that plans sign-language generation **should** discuss it with the community first.
 
 ## Plan the corpus before filming
 
@@ -97,9 +109,20 @@ Established corpora use a mix of tasks, so that the corpus covers both careful a
 
 Stories and pictures **should** be adapted to the local context where needed, and checked with Deaf collaborators for anything that does not make sense locally.
 
-For phone or browser elicitation, plan three prompt types: a written sentence, a picture and an open question. A written prompt assumes the signer reads the surrounding written language well; a picture does not, so use pictures where literacy varies among signers. Open questions draw out spontaneous, continuous signing and need a longer recording cap than a single sign or a prepared sentence (see [Recording on a phone or in a browser](#recording-on-a-phone-or-in-a-browser)).
+When signers record themselves on a phone or in a browser, mix three kinds of prompt:
 
-Allocate prompts on purpose. For lexical-variation work, ask each signer for each concept once and collect the same concept from many signers, as the BSL Corpus did with its 102 concepts ([Schembri et al., 2013](../references.md#schembri-2013)). Cap how much of the corpus any one signer contributes, so no single signer dominates it; the [agri-advisory speech layer](../agri-advisory/speech-layer.md#who-does-it-and-how) applies the same rule to speakers. Record the signer metadata listed under [Recording](#recording), and the signer's consent, before their first clip, not afterwards. Prompts written or generated in a spoken language shape the signing, so check them with Deaf collaborators before filming (see [Known limitations to watch for](#known-limitations-to-watch-for)).
+| Prompt | What it draws out | Watch for |
+|---|---|---|
+| A written sentence | A signed rendering of a fixed sentence | Assumes the signer reads the surrounding written language well |
+| A picture | A sign or description without written input | Works where literacy varies among signers |
+| An open question | Spontaneous, continuous signing | Needs a longer recording limit than a single sign or a sentence (see [Recording on a phone or in a browser](#recording-on-a-phone-or-in-a-browser)) |
+
+Allocate prompts on purpose:
+
+- **Spread concepts across signers.** For lexical-variation work, ask each signer for each concept once and collect the same concept from many signers, as the BSL Corpus did with its 102 concepts ([Schembri et al., 2013](../references.md#schembri-2013)).
+- **Cap each signer's share.** Limit how much of the corpus any one signer contributes, so no single signer dominates it; the [agri-advisory speech layer](../agri-advisory/speech-layer.md#who-does-it-and-how) applies the same rule to speakers.
+- **Collect metadata and consent first.** Record the signer metadata listed under [Recording](#recording), and the signer's consent, before their first clip, not afterwards.
+- **Check prompts with Deaf collaborators.** Prompts written or generated in a spoken language shape the signing (see [Known limitations to watch for](#known-limitations-to-watch-for)).
 
 ### Staged annotation
 
@@ -126,16 +149,21 @@ Converting recordings to a constant frame rate, and applying these encoding sett
 
 ### Recording on a phone or in a browser
 
-Recording in the browser or on a phone works for elicitation: a signer sees a written prompt or a picture and signs a response to the device's camera, with no camera operator. The signer then has to check framing and light themselves, so the recording tool has to make that easy. Whatever tool you use, check that it does the following:
+Self-recording on a phone or in a browser works for elicitation. A signer sees a written prompt or a picture and signs a response to the device's camera, with no camera operator. The signer then has to check framing and light themselves, so the recording set-up has to make that easy. Good practice for self-recorded signing:
 
-- **Live, mirrored preview.** The signer sees themselves before and during the take, mirrored like a selfie, and can check that they are framed head to waist with both hands in view and the face lit. Mirror only the preview, never the saved clip: a flipped clip makes a right-handed signer look left-handed.
-- **A maximum length per prompt type.** A single sign needs a few seconds; a sentence or a spontaneous answer needs more. Set a cap for each kind of prompt (for example, a few seconds for a single sign and up to about half a minute for a sentence) and stop the recording automatically when it is reached, so one take cannot fill a phone.
-- **Play back, discard, re-record.** The signer watches the take and can throw it away and record again before submitting. Keep only the take the signer submits; discarded takes **should not** be stored.
-- **Technical metadata with every clip.** Store the resolution, frame rate and duration as measured from the saved file, not the values the tool asked the camera for, because a phone often delivers less than was requested. These values feed the frame-rate check in [Check recorded clips first](#check-recorded-clips-first).
-- **Saved on the device first.** Write each clip to the device as soon as it is recorded, tell the signer it is saved, and upload it when a connection is available. Large clips **should** upload in resumable chunks, so a dropped connection does not restart the whole file. [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) covers sync, storage and conflicts, and [Offline and patchy connectivity](../deployment/offline.md) the local-first pattern behind it. The [Field Image Capture](../agri-advisory/field-image-capture.md) case study runs phone collection this way.
-- **Audio kept on purpose, or not at all.** Mouthing and other non-manual features are read from the face in the video, so the audio track is rarely needed to annotate signing. It can also record bystanders' voices and conversations in the room, which is personal data nobody consented to. Decide before collection whether to keep it; if you do, the consent **must** say so, and if you do not, drop the audio track at capture or at ingest.
+- **Show a live, mirrored preview.** Signers should see themselves before and during the take, mirrored like a selfie, to check that they are framed head to waist with both hands in view and the face lit. Mirror only the preview, never the saved clip: a flipped clip makes a right-handed signer look left-handed.
+- **Limit the length for each kind of prompt.** A single sign needs a few seconds; a sentence or a spontaneous answer needs more. Set a limit for each kind of prompt (for example, a few seconds for a single sign and up to about half a minute for a sentence) and stop recording when it is reached, so one take cannot fill a phone.
+- **Let signers play back, discard and re-record.** The signer watches the take and can record again before submitting. Keep only the take the signer submits; discarded takes **should not** be stored.
+- **Store technical metadata with every clip.** Record the resolution, frame rate and duration as measured from the saved file, not the values requested from the camera: a phone often delivers less than was requested. These values feed the frame-rate check in [Check recorded clips first](#check-recorded-clips-first).
+- **Save on the device first.** Write each clip to the device as soon as it is recorded, tell the signer it is saved, and upload it when a connection is available. Large clips **should** upload in resumable chunks, so a dropped connection does not restart the whole file. [Offline Field Operations](../2_data-collection/10_offline-field-operations.md) covers sync, storage and conflicts, and [Offline and patchy connectivity](../deployment/offline.md) the local-first pattern behind it. The [Field Image Capture](../agri-advisory/field-image-capture.md) case study runs phone collection this way.
+- **Keep audio on purpose, or not at all.** Mouthing and other non-manual features are read from the face in the video, so the audio track is rarely needed to annotate signing. It can also capture bystanders' voices, which is personal data nobody consented to. Decide before collection whether to keep it. If you keep it, the consent **must** say so; if not, drop the audio track at capture or when the clip arrives.
 
-**Pose at recording time.** A lightweight pose tracker can draw a skeleton over the preview, so the signer sees at once when a hand leaves the frame. If you keep the keypoints, save them as a separate file next to each clip, with the tracking rate actually achieved. Track only what the task needs (hands, face or body). Tracking **must** stay optional and **must not** block a take: on a weak phone, lower the tracking rate, turn the overlay off or record a plain clip, but do not lower the video's own frame rate for it. Choose the camera for the signing, not for the tracker. Keypoints are not anonymous (see [Releasing the data](#releasing-the-data)).
+**Pose tracking while recording.** A lightweight pose tracker can draw a skeleton over the preview, so the signer sees at once when a hand leaves the frame.
+
+- Tracking **must** stay optional and **must not** block a take. On a weak phone, lower the tracking rate, hide the skeleton or record a plain clip, but do not lower the video's own frame rate for it.
+- Choose the camera that films the signing best, not the one that suits the tracker.
+- Track only what the task needs (hands, face or body).
+- If you keep the keypoints, save them as a separate file next to each clip, with the tracking rate actually achieved. Keypoints are not anonymous (see [Releasing the data](#releasing-the-data)).
 
 Clips recorded this way still need checking before anyone annotates them (see [Check recorded clips first](#check-recorded-clips-first)), and a normalised copy for frame-accurate work (see [Preparing video for annotation](./video.md#preparing-video-for-annotation)).
 
@@ -205,25 +233,32 @@ When a project records the form of signs (handshape, location, movement, orienta
 
 A simpler alternative for a recognition dataset is a controlled vocabulary of handshape names and locations; the KSL Dataset transcribes 4,000 words in HamNoSys ([Wanzare et al., 2024](../references.md#ksl-dataset-2024)).
 
-## Annotating in an ELAN-style workspace
+## Setting up the annotation workspace
 
-Most sign-language corpora are annotated in ELAN, or in a workspace laid out like ELAN's annotation mode, with the video above and the time-aligned tiers below ([Wittenburg et al., 2006](../references.md#wittenburg-2006)). Annotators who know ELAN can then start without retraining. Whichever tool you use, declare the tier structure once for the project, so that every annotator works with the same tiers. A basic corpus template has three:
+Most sign-language corpora are annotated in ELAN, with the video above and the time-aligned tiers below ([Wittenburg et al., 2006](../references.md#wittenburg-2006)). Using ELAN, or a tool that reads and writes its files, lets annotators who already know it start without retraining.
 
-- **RH-IDgloss** and **LH-IDgloss**: ID-glosses for the right and the left hand, on a gloss tier type linked to the project lexicon.
-- **Free Translation**: a free translation of each utterance into the written language, on a free-text tier type.
+Fix the tier structure once for the whole project, so that every annotator works with the same tiers. Start from one of the [published templates](#templates-that-follow-published-conventions), such as the BSL Corpus's three tiers (right-hand ID-gloss, left-hand ID-gloss, free translation). Then add tiers only as the project needs them, for example:
 
-Grow the template as the project needs. Common additions are an utterance tier for a first pass, grammatical class, a second signer for conversation, non-manual features, phonology (handshape, location, movement, orientation), fingerspelling, and isolated signs for a lexicon. Treat each template as a starting point to edit, and version it with the guidelines.
+- an utterance tier for the first pass;
+- grammatical class under each gloss;
+- a second signer's hand tiers, for conversation;
+- non-manual features;
+- phonology (handshape, location, movement, orientation);
+- fingerspelling;
+- isolated signs, for a lexicon.
 
-Whatever tool you choose, the workspace should support:
+Version the template together with the annotation guidelines.
 
-- **ELAN templates and files.** A project can start from an existing ELAN template (`.etf`) or annotation file, so that its tier types, controlled vocabularies and tiers carry over.
-- **A shared lexicon.** Gloss tiers suggest ID-glosses from the project lexicon as the annotator types, and store each entry's identifier. A sign not yet in the lexicon is added as a provisional entry, for a curator to confirm or merge. A gloss typed without a lexicon entry is flagged, so the gaps are easy to find.
-- **Locked project tiers.** Annotators cannot rename or delete the project's tiers, which keeps the corpus consistent. Personal tiers for notes or a one-off feature are useful, as long as they stay apart from the project tiers until a manager adopts them.
-- **ELAN interchange.** Annotations export to ELAN's `.eaf` format with their tier types, vocabularies, participants and lexicon identifiers, and `.eaf` files can be imported.
+Whichever tool you use, check that the set-up supports these practices:
 
-:::info
-A good workspace measures the video's frame rate as it plays and snaps every boundary to a frame. Annotators step one frame at a time to find a sign's onset, as in ELAN.
-:::
+| Practice | Why it matters |
+|---|---|
+| Tier types and controlled vocabularies carry over from an ELAN template (`.etf`) or annotation file | The project starts from a tested scheme instead of rebuilding it by hand |
+| Gloss tiers draw their values from the shared lexicon and keep each entry's identifier | The same sign gets the same ID-gloss everywhere, and the corpus can be searched by sign |
+| A sign missing from the lexicon is recorded as a provisional entry for the curator to confirm or merge | Gaps in the lexicon are visible instead of hidden in free text |
+| Annotators cannot rename or delete the project's tiers; any personal note tiers are kept apart from them | The tier structure stays the same across the corpus |
+| Annotations export to and import from ELAN's `.eaf` format with tier types, vocabularies, participants and lexicon identifiers | Linguists can open the data, and nothing is lost between tools |
+| Annotators can step through the video one frame at a time, and boundaries fall on frames | Sign onsets and offsets are set frame by frame (see [Recording](#recording)) |
 
 ## Checking quality
 
@@ -233,22 +268,27 @@ Sign-language annotation is slow and expert, so quality checks **should** be pla
 
 A clip that is empty, cut short or badly framed wastes an annotator's time, so check every clip before it reaches annotation. Only clips that pass go on.
 
-**Automated checks at upload.** These are cheap and catch broken files:
+**Automated checks on arrival.** These are cheap, and a short script over the uploads can run them all. The basic checks catch broken files:
 
 - the file exists and is not empty;
 - it really is a video, which you know by decoding a video stream from it, not from the file extension;
 - its duration can be read; when the container does not record one, as often happens with browser-recorded WebM, decode the file to measure it (see [Preparing video for annotation](./video.md#preparing-video-for-annotation));
-- it is no longer than the cap set for its prompt.
+- it is no longer than the limit set for its prompt.
 
-The same check-on-arrival pattern for speech is in [Audio quality control](../asr/audio-quality-control.md).
-
-**Further checks worth adding.** Your annotation tool may not run these, but a short script over the uploads can:
+Further checks catch clips that play but are not usable:
 
 - resolution and frame rate at or above the project's minimum (see [Recording](#recording));
 - black or frozen stretches, which mean a covered lens, a camera that never started, or an app that went into the background; FFmpeg's `blackdetect` and `freezedetect` filters find both ([FFmpeg Developers, n.d.-b](../references.md#ffmpeg-filters));
 - the measured frame rate against the declared one: a large gap means the phone dropped frames, which hurts fingerspelling first.
 
-**When a check fails or cannot run.** If a check cannot run, for example because the server lacks a decoder for the clip's codec, skip that particular check, mark the clip unchecked for it, and hold the clip for human review. Do not open it for annotation until a person clears it. A clip that fails a check also goes to the human review queue; it is never dropped silently. Rejecting borderline clips automatically is likely to fall hardest on signers with older phones or poor light, and so to skew the corpus towards better-equipped signers.
+The same check-on-arrival pattern for speech is in [Audio quality control](../asr/audio-quality-control.md).
+
+**When a check fails or cannot run.** Send the clip to people, not to the bin:
+
+- If a check cannot run (for example, no decoder is available for the clip's codec), mark the clip as unchecked for that test and hold it for human review. Do not release it for annotation until a person clears it.
+- If a clip fails a check, it also goes to human review; never drop it silently.
+
+Rejecting borderline clips automatically is likely to fall hardest on signers with older phones or poor light, and so to skew the corpus towards better-equipped signers.
 
 **Human validation.** Fluent signers, ideally Deaf, then watch each clip against a criteria sheet written for signing. Criteria written for speech (every word audible, one main speaker) do not carry over. A sign-specific sheet asks:
 
@@ -267,7 +307,6 @@ Use two or more independent judgements per clip and send disagreements to an adj
 - **Review the lexicon, not only the annotations.** Provisional lexicon entries and unmatched glosses **should** be reviewed regularly by a curator who merges duplicates (HOUSE and HOME-1 for the same sign) and confirms new signs.
 - **Check timing logic.** Dependent annotations **must** sit inside their parent (a mouthing inside its sign). A check that lists every annotation outside its parent catches errors after boundaries are edited.
 - **Watch for drift.** Annotators' boundary decisions shift over weeks. Re-annotating a few early clips later in the project shows whether the convention is still being applied the same way.
-
 - **Treat machine proposals as drafts.** Segment boundaries proposed by a model, or pose overlays drawn from pre-computed keypoints, give annotators a first draft only. Fluent signers check every proposed boundary, and the data records which segments the machine proposed and which a person drew or changed. Pre-annotation pulls annotators towards the model's choices ([Fort and Sagot, 2010](../references.md#fort-sagot-2010)), so double-annotate a sample from scratch, with no draft shown. The general rules are in [Treat drafts as drafts](../3_annotation-design/model-assisted-annotation.md#treat-drafts-as-drafts) and [Reviewing drafts without rubber-stamping](../7_llm-assisted-task/index.md#reviewing-drafts-without-rubber-stamping); speaker diarization applies the same pattern in [Starting from a pretrained pipeline](../speaker-diarization/index.md#starting-from-a-pretrained-pipeline).
 
 ## Releasing the data
@@ -310,16 +349,21 @@ BLEU-4 is the usual translation metric because the field's reference work used i
 
 ## The 2026 modelling landscape
 
-Sign-language modelling for African sign languages is research-grade in 2026; every deployment on the continent is a first-of-its-kind release. The workable references:
+Sign-language modelling for African sign languages is still at research stage in 2026, and few systems have been deployed. The workable references:
 
-- **General video encoders (I3D, SlowFast, VideoMAE, TimeSformer).** Not built for sign, but the standard starting points for continuous-sign recognition (video to gloss) as a sequence-labelling problem.
+- **General video encoders (I3D, SlowFast, VideoMAE, TimeSformer).** Not built for sign, but common backbones for isolated-sign recognition, and feature extractors for continuous-sign recognition (video to gloss sequence).
 - **Pose-based models.** Pose keypoints reduce video to the hands, face and body, which cuts compute and is less sensitive to background and clothing. A common route for isolated-sign recognition with little data, and the form the Kenyan word-level dataset is released in.
 - **[SignCLIP](https://arxiv.org/abs/2407.01264)** (EMNLP 2024). Connects signing video and text by contrastive learning; useful for retrieval and cross-lingual work.
 - **[Sign2GPT](https://arxiv.org/abs/2405.04164)** (ICLR 2024). Uses a large language model for translation without glosses; the workable frontier for translation as opposed to recognition.
 - **Sign Language Transformers** ([Camgöz et al., 2020](../references.md#camgoz-2020)). The academic baseline for joint recognition and translation, measured on RWTH-PHOENIX-Weather-2014T, German Sign Language weather forecasts with glosses and German translations ([Camgöz et al., 2018](../references.md#camgoz-2018)). Not an African benchmark, but the reference architecture.
-- **General multimodal LLMs with video.** Weak on African sign languages given the lack of training data. Useful as a ceiling reference, not as a deployment surface without fine-tuning on the target language.
+- **General multimodal LLMs with video.** Weak on African sign languages given the lack of training data. Useful as a quick comparison point, not for deployment without fine-tuning on the target language.
 
-**Editorial opinion.** For a new African sign-language project, the shortest defensible path is: start from AfriSign or JWSign if the target language is covered and their terms allow your use, fine-tune a video or pose backbone on the target-language subset, and evaluate on signer-independent splits with review by native signers. For an uncovered sign language, the project is data collection first and modelling second, and collection **must** be led by the Deaf community, not extracted from it. This is not a two-week task: a first deployable model for a new African sign language is realistically a multi-year effort. Read the [long-tail language chapter](../long-tail-language/index.md) before scoping, and be prepared for "we should not build this" to be the honest answer if the community has not agreed to it.
+**Editorial opinion.** For a new African sign-language project, the shortest defensible path depends on whether the language is already covered:
+
+- **Covered by AfriSign or JWSign**, and their terms allow your use: fine-tune a video or pose backbone on the target-language subset, and evaluate on signer-independent splits with review by native signers.
+- **Not covered:** the project is data collection first and modelling second, and collection **must** be led by the Deaf community, not extracted from it.
+
+This is not a two-week task: a first deployable model for a new African sign language is realistically a multi-year effort. Read the [long-tail language chapter](../long-tail-language/index.md) before scoping, and be prepared for "we should not build this" to be the honest answer if the community has not agreed to it.
 
 ## What it will actually cost you
 
@@ -357,7 +401,7 @@ The following are planning estimates from the editors, not measured figures. Fin
 - [ELAN](../references.md#wittenburg-2006): the annotation tool, and its `.eaf` format.
 - [Schembri et al., 2013](../references.md#schembri-2013): how the BSL Corpus was built, from recruitment and consent to elicitation tasks.
 - [MPI video guidelines](../references.md#mpi-video-guidelines): encoding settings for frame-accurate annotation.
-- [WFD & WASLI, 2018](../references.md#wfd-wasli-2018): the statement on signing avatars.
+- [WFD and WASLI, 2018](../references.md#wfd-wasli-2018): the statement on signing avatars.
 - [Camgöz et al., 2020](../references.md#camgoz-2020): the reference recognition-and-translation architecture.
 - [Müller et al., 2023](../references.md#muller-2023): what gloss-based translation can and cannot show.
 - [WLASL](../references.md#wlasl-2020): 2,000 American Sign Language words in 21,083 videos from 119 signers, the reference isolated-sign benchmark.

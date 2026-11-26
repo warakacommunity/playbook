@@ -15,9 +15,27 @@ General video understanding covers the tasks that read meaning from ordinary mov
 
 ![Video-understanding tasks: clip classification, temporal event detection, and target-language captioning](images/video-tasks.svg)
 
+:::tip[Key points]
+
+- Keep clips short and the label set small: video is heavy to store, stream and annotate.
+- Annotate a normalised, constant-frame-rate copy, and tie every timestamp to that exact file.
+- Write captions directly in the target language, not translated from English.
+- Split train and test by whole video, never by frame.
+- Models trained on Western benchmarks transfer poorly to African activities; build target-domain data.
+
+:::
+
 ## What the data looks like
 
-Video data is clips paired with labels, which can be a single class for the whole clip, time-stamped events within it, or a caption describing it. The raw material is plentiful in one sense, since African broadcast, social, and community video is abundant, but labelled African video is scarce, and captioning in particular needs descriptions written in the target language rather than translated from English. The cost and weight of video, large files, slow annotation, and intermittent bandwidth for distributed teams, shape every decision, so most projects work with short clips and a tightly scoped label set rather than long-form video.
+Video data is clips paired with labels. A label can be:
+
+- **a single class** for the whole clip;
+- **time-stamped events** within the clip; or
+- **a caption** describing the clip in words.
+
+Unlabelled African video is plentiful: broadcast, social and community video is everywhere. Labelled African video is scarce.
+
+Video is also heavy. Large files, slow annotation and intermittent bandwidth for distributed teams shape every decision. Most projects therefore work with short clips and a tightly scoped label set rather than long-form video.
 
 A whole-clip record is one clip with its label or caption:
 
@@ -32,7 +50,7 @@ A whole-clip record is one clip with its label or caption:
 }
 ```
 
-For captions, write them in the target language directly rather than translating from English, so the descriptions carry how the language actually describes a scene.
+Write captions directly in the target language rather than translating them from English. The descriptions then carry how the language actually describes a scene.
 
 ## Preparing video for annotation
 
@@ -70,22 +88,54 @@ For recordings longer than a few minutes (cutting them into chunks that trace ba
 
 ## Annotation and evaluation
 
-Video annotation is labelling across time: a whole-clip label is cheap, but marking when actions happen, or captioning, is slow and needs clear rules on event boundaries and on the level of detail a caption should capture. Use tools built for timeline annotation, keep clips short (see [Long video](./long-video.md) for cutting long recordings into traceable chunks), and measure agreement on a shared set. For marking when an action happens, the config places labels on the video timeline, and the annotator drags each label across the span where that action occurs:
+Video annotation is labelling across time. A whole-clip label is cheap. Marking when actions happen, or writing captions, is slow, and needs clear rules on:
 
-```xml
-<View>
-  <Video name="video" value="$video"/>
-  <Labels name="actions" toName="video">
-    <Label value="Planting"   background="#1F5B3F"/>
-    <Label value="Harvesting" background="#C66A3D"/>
-    <Label value="Speaking"   background="#E0A458"/>
-  </Labels>
-</View>
-```
+- where an event starts and ends; and
+- how much detail a caption should capture.
 
-For a single label per clip, swap `<Labels>` for `<Choices>`, exactly as in the [audio understanding](../audio-understanding) page. Evaluation depends on the task: accuracy and [F1](https://en.wikipedia.org/wiki/F-score) for classification, [mean Average Precision](https://lightning.ai/docs/torchmetrics/stable/detection/mean_average_precision.html) for temporal detection, and the text-generation metrics from the [Text Generation](../text-generation/index.md) chapter for captioning, where, as with all generation, native-speaker human evaluation is the dependable measure.
+Use a tool built for timeline annotation, keep clips short (see [Long video](./long-video.md) for cutting long recordings into traceable chunks), and measure agreement on a shared set of clips.
 
-The video annotation interface should provide frame-accurate seeking, playback-speed control, timeline boundaries and constrained event labels. Exports should preserve the video identifier, frame rate, start and end times or frames, labels and annotator.
+### Task specifications
+
+For marking when an action happens, the annotator drags each label across the stretch of the timeline where that action occurs:
+
+**Task specification: temporal action labelling**
+
+| Setting | Value |
+|---|---|
+| Annotator sees | The video clip with a timeline |
+| Annotator gives | Time spans (start and end) on the timeline, each with one action label: Planting, Harvesting, Speaking |
+| Choice | One label per span; spans may overlap when actions co-occur; optional (a clip may contain none) |
+| Notes | Agree boundary rules before annotation starts (see [Known limitations](#known-limitations-to-watch-for)) |
+
+For a single label per clip, use one choice for the whole clip instead of spans:
+
+**Task specification: clip classification**
+
+| Setting | Value |
+|---|---|
+| Annotator sees | The video clip |
+| Annotator gives | One class for the whole clip, from the project's label set |
+| Choice | Exactly one; required |
+
+### What the annotation tool should support
+
+- Frame-accurate seeking.
+- Playback-speed control.
+- Clear event boundaries on a timeline.
+- A fixed list of event labels, so annotators cannot type free variants.
+
+Exports should keep the video identifier, frame rate, start and end times (or frames), labels and annotator.
+
+### Evaluation metrics
+
+| Task | Metric |
+|---|---|
+| Clip classification | Accuracy and [F1](https://en.wikipedia.org/wiki/F-score) |
+| Temporal action detection | Mean average precision (mAP) at several temporal IoU (intersection over union of time spans) thresholds |
+| Captioning | The text-generation metrics in the [Text Generation](../text-generation/index.md) chapter |
+
+For captioning, as with all text generation, human evaluation by native speakers is the dependable measure.
 
 ### Tracking objects across frames
 
@@ -95,37 +145,58 @@ Evaluate identity as well as detection. IDF1 measures the agreement between grou
 
 ## The 2026 modelling landscape
 
-Video understanding in 2026 is split between short-clip classification (dominated by video-transformer backbones), long-form video captioning and reasoning (dominated by multimodal LLMs), and temporal detection (a mix of both).
+Video understanding in 2026 splits three ways:
 
-- **Short-clip classification and action detection.** **[VideoMAE v2](https://arxiv.org/abs/2303.16727)** (2023), **[TimeSformer](https://arxiv.org/abs/2102.05095)** (Meta, 2021), **[SlowFast](https://github.com/facebookresearch/SlowFast)** (Meta, 2019), **[X-CLIP](https://arxiv.org/abs/2208.02816)**: the workable open video-transformer backbones. Fine-tuning on 1,000-5,000 target-vocabulary clips is the standard path for a new classification task.
-- **Long-form video reasoning and captioning.** **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)** and **[InternVL 3](https://github.com/OpenGVLab/InternVL)**: 2025-2026 MLLMs that handle multi-minute video with reasoning across scenes; the workable open frontier. Purpose-built video-LLM releases like **[LLaVA-Video](https://arxiv.org/abs/2410.02713)** and **[VideoLLaMA 3](https://github.com/DAMO-NLP-SG/VideoLLaMA3)** are competitive on the video-QA and captioning benchmarks specifically.
-- **Temporal action detection.** **[ActionFormer](https://arxiv.org/abs/2202.07925)** (2022) and **[TriDet](https://arxiv.org/abs/2303.07347)** are the workable open baselines for start-and-stop temporal detection of action classes within continuous video.
-- **Open-vocabulary retrieval and search.** **[VideoCLIP](https://arxiv.org/abs/2109.14084)** and **[InternVideo 2](https://arxiv.org/abs/2403.15377)** provide the joint-embedding models that make video corpora searchable by natural-language query, critical for African-context deployments where a labelled search interface is out of scope but retrieval by text description is workable.
+- short-clip classification, led by dedicated video backbones;
+- long-form captioning and reasoning, led by multimodal large language models (MLLMs); and
+- temporal detection, which uses a mix of both.
 
-**Editorial opinion.** For a new African-context video project, the shortest defensible path is: for classification and action detection, fine-tune VideoMAE v2 or SlowFast on 1,000-5,000 target-vocabulary clips; for captioning, prompt or LoRA-fine-tune Qwen2.5-VL on target-language captions (with the target-language-writing discipline of the [captioning page](../image-text/captioning.md)); for retrieval, use InternVideo 2 embeddings against a natural-language query. Skip end-to-end video captioning training in favour of MLLM fine-tuning; the training data required for competitive end-to-end results is out of reach for most African-language projects.
+| Task | Open models to start from |
+|---|---|
+| Short-clip classification and action detection | **[VideoMAE v2](https://arxiv.org/abs/2303.16727)** (2023), **[TimeSformer](https://arxiv.org/abs/2102.05095)** (Facebook AI, 2021), **[SlowFast](https://github.com/facebookresearch/SlowFast)** (Facebook AI, 2019), **[X-CLIP](https://arxiv.org/abs/2208.02816)** (2022) |
+| Long-form video reasoning and captioning | **[Qwen2.5-VL](https://qwenlm.github.io/blog/qwen2.5-vl/)** and **[InternVL 3](https://github.com/OpenGVLab/InternVL)**, general MLLMs that accept multi-minute video; purpose-built video-LLMs **[LLaVA-Video](https://arxiv.org/abs/2410.02713)** and **[VideoLLaMA 3](https://github.com/DAMO-NLP-SG/VideoLLaMA3)** |
+| Temporal action detection | **[ActionFormer](https://arxiv.org/abs/2202.07925)** (2022) and **[TriDet](https://arxiv.org/abs/2303.07347)** (2023), for finding the start and end of actions in continuous video |
+| Open-vocabulary retrieval and search | **[VideoCLIP](https://arxiv.org/abs/2109.14084)** and **[InternVideo 2](https://arxiv.org/abs/2403.15377)**, joint video-text embeddings that make a collection searchable by a plain-language query |
+
+Retrieval is often the practical choice for African-language video archives: it needs no fixed label set, only a text description to search with.
+
+**Editorial opinion.** For a new African-context video project, the shortest defensible path is:
+
+- **Classification and action detection:** fine-tune VideoMAE v2 or SlowFast on your own target-vocabulary clips. A pilot of a few thousand clips is a common starting scale; check it on your task.
+- **Captioning:** prompt Qwen2.5-VL, or fine-tune it with LoRA (a low-cost fine-tuning method), on captions written in the target language (see the [captioning page](../image-text/captioning.md)). Skip end-to-end video captioning training: the data it needs is out of reach for most African-language projects.
+- **Retrieval:** use InternVideo 2 embeddings with a plain-language query.
 
 ## What it will actually cost you
 
-Video corpora are the most storage-and-annotation heavy of any modality in the playbook. Rough order-of-magnitude:
+Video corpora are the heaviest modality in the playbook for both storage and annotation. The figures below are rough planning estimates, not measured benchmarks; run a small pilot to calibrate them for your team.
 
-- **Fine-tuning VideoMAE v2 or SlowFast on an existing classification corpus.** One to two person-weeks; ten to fifty GPU-hours.
-- **Building a new short-clip classification corpus** (1,000-5,000 clips × 10-30 second duration). Three to six months elapsed; three to seven person-months. Clip sourcing, consent for identifiable people, and storage are the constraints.
-- **Adding temporal event annotation** (start/stop times) to a video corpus. Two to four months additional; adds ~100-200% to annotation effort per clip depending on event density.
-- **Building a video captioning corpus** natively in the target language (500-2,000 clips × 3-5 captions each). Six to twelve months elapsed; five to twelve person-months. Native captioning throughput is slower than translation.
-- **Evaluation-only video sets** (200-500 clips). Two to four months; two to four person-months.
-- **Human evaluation of video-model output.** Two to three person-weeks per evaluator per 200 items. Video evaluation is slow because the evaluator must watch every clip end-to-end.
-- **Storage and bandwidth.** Non-trivial. A 5,000-clip corpus at 720p averaging 15 seconds is ~100-300 GB. Distributed teams with intermittent bandwidth cannot download the whole corpus for annotation. Build a streaming annotation workflow from the start.
+| Activity | Elapsed time | Effort |
+|---|---|---|
+| Fine-tune VideoMAE v2 or SlowFast on an existing classification corpus | — | One to two person-weeks; ten to fifty GPU-hours |
+| Build a new short-clip classification corpus (1,000 to 5,000 clips, 10 to 30 seconds each) | Three to six months | Three to seven person-months |
+| Add temporal event annotation (start and end times) to a corpus | Two to four months more | Roughly doubles to triples annotation effort per clip, depending on how many events each clip has |
+| Build a captioning corpus natively in the target language (500 to 2,000 clips, 3 to 5 captions each) | Six to twelve months | Five to twelve person-months |
+| Build an evaluation-only set (200 to 500 clips) | Two to four months | Two to four person-months |
+| Human evaluation of video-model output | — | Two to three person-weeks per evaluator per 200 items |
+
+What drives these costs:
+
+- **New corpus:** sourcing clips, getting consent from identifiable people, and storage.
+- **Native captioning:** it is slower than translation.
+- **Human evaluation:** the evaluator must watch every clip from start to end.
+
+**Storage and bandwidth.** File size is roughly bitrate × duration. A 5,000-clip corpus averaging 15 seconds is about 21 hours of video. Encoded as 720p H.264 at 2 to 5 Mbit/s, that is roughly 20 to 50 GB; keeping phone or broadcast masters at their original bitrate can multiply this several times. Distributed teams with intermittent bandwidth cannot download the whole corpus, so plan a streaming annotation workflow from the start.
 
 ## Known limitations to watch for
 
-- **Western action benchmarks over-transfer.** A model trained on Kinetics-700 knows how to recognise skiing and coffee-making; it does not know how to recognise cassava-processing, palm-wine tapping, or maize-shelling by hand. Domain-transfer from Western benchmarks is much weaker than the numbers suggest.
+- **Western action benchmarks transfer poorly.** A model trained on Kinetics-700 recognises classes such as skiing, but activities like cassava processing, palm-wine tapping or shelling maize by hand are unlikely to be well covered. Transfer to African activities can be much weaker than benchmark scores suggest.
 - **Storage and bandwidth constrain corpus size more than annotation cost.** A team that can afford to annotate 10,000 clips may not be able to store and stream them. Design for constrained infrastructure.
 - **Frame-rate and resolution normalisation is load-bearing.** Broadcast video, phone-camera video, and drone video have different frame rates, aspect ratios, and resolutions. A model trained on a mixed corpus without normalisation learns to distinguish by source, not by content.
 - **Consent is heavier for video than for photos.** A photo shows an identifiable person at one moment; a video shows the same person over time, revealing more about behaviour, movement, and context. Consent frameworks must be video-specific.
 - **Face-visibility trade-off.** Blurring faces during preprocessing degrades models that need the face, such as those for signing, gesture, emotion or speaking-person tasks; for object and scene tasks the cost can be small. Blurring for release is often required. Decide per task, as described in [Redact for training, or only for release?](../image-data/visual-privacy.md#redact-for-training-or-only-for-release)
 - **Copyright of broadcast and social media video.** Community-produced and consented material is safe; commercial broadcast, YouTube, and other social platforms have terms of service that constrain redistribution and often training use. Read the terms before scraping.
 - **Temporal detection boundary annotation is subjective.** Where does "harvesting" begin and end? Two annotators produce systematically different boundaries. Report boundary agreement (temporal IoU at multiple thresholds), not just detection F1.
-- **Long-form video reasoning is genuinely hard.** Even 2026 MLLMs handle 5-15 minute video reasoning shakily. Report video-length distribution in every evaluation; averaging across it hides where the model actually breaks.
+- **Long-form video reasoning is hard.** Models that perform well on short clips can be much less reliable on videos several minutes long. Report the distribution of video lengths in every evaluation, and results by length band; a single average hides where the model breaks.
 
 For the normalisation steps behind the frame-rate point above, see [Preparing video for annotation](#preparing-video-for-annotation). Clips that contributors record themselves also need checks before annotation: that the duration can be read, that there are no black or frozen stretches, and that the measured frame rate matches the declared one. [Check recorded clips first](./sign-language.md#check-recorded-clips-first) on the sign-language page sets these out, and most of them apply to any recorded video.
 
@@ -133,17 +204,17 @@ Frames from one video are near-copies of each other, so split by whole video, ne
 
 ## Further reading
 
-- [VideoMAE v2 paper (Wang et al., 2023)](https://arxiv.org/abs/2303.16727): the workable open video-transformer backbone; the reference fine-tuning starting point for short-clip classification and action detection.
-- [Qwen2.5-VL blog (Alibaba, 2025)](https://qwenlm.github.io/blog/qwen2.5-vl/): the current strongest open MLLM for long-form video reasoning and captioning; the workable frontier for African-context deployments.
-- [InternVideo 2 (Wang et al., 2024)](https://arxiv.org/abs/2403.15377): the joint video-text embedding model; the workable reference for open-vocabulary video retrieval.
+- [VideoMAE v2 (Wang et al., 2023)](https://arxiv.org/abs/2303.16727): an open video backbone and a common starting point for fine-tuning short-clip classification and action detection.
+- [Qwen2.5-VL blog (Qwen team, Alibaba, 2025)](https://qwenlm.github.io/blog/qwen2.5-vl/): a strong open MLLM for long-form video reasoning and captioning.
+- [InternVideo 2 (Wang et al., 2024)](https://arxiv.org/abs/2403.15377): a joint video-text embedding model, useful for open-vocabulary video retrieval.
 
 <details>
 <summary>Additional references</summary>
 
-- [SlowFast (Feichtenhofer et al., 2019)](https://github.com/facebookresearch/SlowFast): the reference two-stream video backbone.
-- [TimeSformer (Bertasius et al., 2021)](https://arxiv.org/abs/2102.05095): transformer-based video backbone; useful comparison to VideoMAE.
-- [LLaVA-Video (Zhang et al., 2024)](https://arxiv.org/abs/2410.02713): purpose-built video-LLM release; competitive on video QA benchmarks.
-- [ActionFormer (Zhang et al., 2022)](https://arxiv.org/abs/2202.07925): the workable temporal-action-detection baseline.
-- [Kinetics-700](https://github.com/cvdfoundation/kinetics-dataset): the reference action-classification benchmark; useful for calibration.
+- [SlowFast (Feichtenhofer et al., 2019)](https://github.com/facebookresearch/SlowFast): a two-pathway video backbone (a slow, detailed pathway and a fast, motion pathway).
+- [TimeSformer (Bertasius et al., 2021)](https://arxiv.org/abs/2102.05095): a transformer video backbone; a useful comparison to VideoMAE.
+- [LLaVA-Video (Zhang et al., 2024)](https://arxiv.org/abs/2410.02713): a purpose-built video-LLM, competitive on video question-answering benchmarks.
+- [ActionFormer (Zhang et al., 2022)](https://arxiv.org/abs/2202.07925): an open baseline for temporal action detection.
+- [Kinetics-700](https://github.com/cvdfoundation/kinetics-dataset): a widely used action-classification benchmark; useful for calibration.
 
 </details>

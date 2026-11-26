@@ -23,7 +23,7 @@
   <text x="110" y="225" font-size="13" fill="#2B2218">clip</text>
   <rect x="186" y="211" width="96" height="20" rx="10" fill="#1F5B3F"/>
   <text x="234" y="225" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">harvesting</text>
-  <text x="50" y="262" font-size="12.5" fill="#8A7D6E">Config: &lt;Choices&gt;</text>
+  <text x="50" y="262" font-size="12.5" fill="#8A7D6E">Task: one choice per clip</text>
 
   <!-- Card 2: Temporal detection (terracotta) -->
   <rect x="322" y="100" width="276" height="184" rx="12" fill="#FBEDE3" stroke="#C66A3D" stroke-width="1.5"/>
@@ -35,7 +35,7 @@
   <!-- inline note instead of timeline (full timeline below) -->
   <rect x="340" y="204" width="240" height="34" rx="8" fill="#FFFFFF" stroke="#C66A3D" stroke-width="1.5"/>
   <text x="354" y="225" font-size="12.5" fill="#2B2218">Slow; needs clear event boundaries.</text>
-  <text x="340" y="262" font-size="12.5" fill="#8A7D6E">Config: &lt;Labels&gt; on timeline</text>
+  <text x="340" y="262" font-size="12.5" fill="#8A7D6E">Task: labelled spans on a timeline</text>
 
   <!-- Card 3: Captioning (gold) -->
   <rect x="612" y="100" width="276" height="184" rx="12" fill="#F8ECD6" stroke="#B97F37" stroke-width="1.5"/>
